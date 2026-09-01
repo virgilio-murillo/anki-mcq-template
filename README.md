@@ -97,11 +97,16 @@ keep files ASCII-safe, or just write UTF-8 directly — both work.
 
 ## Card-writing best practices
 
-Baked into the design, but worth stating:
+Baked into the design, but worth stating (full list in
+[DECK_STANDARDS.md](DECK_STANDARDS.md) — MANDATORY reading):
 
 - **One concept per card** (minimum information principle).
 - **Prefix the topic** in the question so it reads well when reviews are interleaved.
-- **Make distractors plausible**, and explain *why each is wrong* on the back.
+- **Self-explanatory on first read:** define each term before using it, connect
+  the scenario's symptom to why the answer fixes it.
+- **Refute every distractor, one by one** on the back — not just justify the correct one.
+- **Technically complete** correct option (not "least wrong").
+- **Make distractors plausible.**
 - **Keep 10–20 new cards/day** in Anki's deck settings to avoid review pileup.
 
 ## Updating a deck WITHOUT losing review progress
@@ -134,10 +139,25 @@ Always back up first: File -> Export -> Anki Collection Package (`.colpkg`).
 |---|---|
 | `anki_mcq.py` | The reusable engine: model, CSS, `card()`, `build_deck()` (stable GUIDs) |
 | `sync_deck.py` | Update a deck in place via AnkiConnect, preserving review progress |
-| `example_deck.py` | Minimal 3-card example |
+| `verify_deck.py` | Quality gate — run before importing (enforces the standards) |
+| `example_deck.py` | Minimal 3-card example (passes `verify_deck.py`) |
 | `import_to_anki.py` | Import a `.apkg` via AnkiConnect |
+| `DECK_STANDARDS.md` | MANDATORY quality standards every deck must follow |
 | `PRESERVING_PROGRESS.md` | How to update decks without losing scheduling |
 | `requirements.txt` | `genanki` |
+
+## Quality gate (run before importing)
+
+Every deck must pass `verify_deck.py`, which enforces [DECK_STANDARDS.md](DECK_STANDARDS.md):
+front does not leak the answer, verdict letter matches the highlighted option,
+no leftover `{{L}}`, 4 options per card, each card has a verdict, and each back
+refutes its distractors.
+
+```bash
+./.venv/bin/python verify_deck.py my_deck.apkg   # must print "OK (0 problemas)"
+```
+
+Do not import a deck that fails verification.
 
 ## Requirements
 

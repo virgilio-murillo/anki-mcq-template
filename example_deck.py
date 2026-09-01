@@ -33,6 +33,7 @@ cards = [
             '<p><b>DynamoDB</b> is a fully managed <b>NoSQL</b> database with a flexible '
             'schema, single-digit-millisecond latency and horizontal scaling. RDS and Aurora '
             'are relational (rigid schema); Redshift is an OLAP data warehouse.</p>'
+            '<p><b>Why NOT the others:</b> RDS and Aurora are relational (rigid schema); Redshift is for OLAP analytics, not an operational key-value store.</p>'
             '<div class="extra"><span class="h">Exam tip</span>"Global" scale is a strong '
             'DynamoDB signal via <b>Global Tables</b> (multi-region, active-active).</div>'
             '<div class="links"><span class="h">Links</span>'
@@ -48,6 +49,7 @@ cards = [
             '<div class="verdict">Correct: {{L}} - 300 seconds.</div>'
             '<p>API Gateway cache TTL defaults to <b>300s</b>, with a max of <b>3600s</b>. '
             'Setting <code>TTL=0</code> disables caching.</p>'
+            '<p><b>Why NOT the others:</b> 60s and 3600s are valid values but not the default; the cache does expire, so "never expires" is false.</p>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html">docs.aws apigateway caching</a></div>'
         ),
@@ -67,6 +69,7 @@ cards = [
             '<p>This tells API Gateway to bypass the cache and fetch a fresh response from the '
             'backend, replacing the stale cached entry. The documented value is exactly '
             '<code>max-age=0</code>.</p>'
+            '<p><b>Why NOT the others:</b> <code>max-age=1</code> keeps it fresh 1s (no refresh); <code>X-Cache</code> and <code>Pragma: refresh</code> are not recognized by API Gateway.</p>'
             '<div class="warn"><span class="h">Gotcha</span>Only <b>authorized</b> clients can do '
             'this if you enable "Require Authorization" (IAM <code>execute-api:InvalidateCache</code>).</div>'
         ),
