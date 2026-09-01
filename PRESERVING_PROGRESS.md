@@ -74,6 +74,17 @@ you can restore it.
 |---|---|
 | `updateNoteFields` / `sync_deck.py` | Yes |
 | `.apkg` re-import, same GUID + same note type, no learning-progress import | Yes |
+| `changeDeck` (move card to another deck) | Yes — moving decks does NOT reset scheduling |
 | `deleteNotes` then re-add | No — resets scheduling |
 | Change note type / model structure | No — can regenerate cards |
 | Import with "Import any learning progress" checked | Adopts author's intervals (usually not what you want) |
+
+## Do NOT move cards by broad text query
+
+When placing a new deck, import it straight into the target subdeck (see
+`create_deck.py` and DECK_STANDARDS.md #8). Do **not** import into a generic
+deck and then move "the new cards" with a query like `-deck:"X"`: that once
+matched 85 cards from an unrelated deck and moved them by mistake. Moving cards
+does not lose scheduling, but moving the WRONG cards still disrupts the user.
+If you must move cards, select them by an exact unique property (their
+`mcqkey:` tag or specific note-type name), never a broad text search.

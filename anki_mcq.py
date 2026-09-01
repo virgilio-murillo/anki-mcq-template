@@ -33,6 +33,7 @@ Usage:
 
 Then import my_deck.apkg into Anki (double-click) or use import_to_anki.py.
 """
+import hashlib
 import random
 import genanki
 
@@ -153,10 +154,26 @@ def card(question, options, correct, answer, key=None):
             "answer": answer, "key": key}
 
 
+def _stable_deck_id(deck_name):
+    """Derive a stable, unique deck id from the deck name.
+
+    Anki treats two imported decks with the SAME deck id as the same internal
+    deck. Deriving the id from the name means each named deck (e.g.
+    'DVA-C02::01' vs 'DVA-C02::02') gets its own id and imports cleanly to the
+    right place — no post-import card moving (which is what caused a mishap).
+    """
+    h = hashlib.sha1(("anki-mcq-deck::" + deck_name).encode("utf-8")).hexdigest()
+    return int(h[:12], 16)
+
+
 def build_deck(deck_name, cards, out_path,
-               deck_id=DEFAULT_DECK_ID, model_id=DEFAULT_MODEL_ID,
+               deck_id=None, model_id=DEFAULT_MODEL_ID,
                model_name="MCQ (didactic)", shuffle_seed_base=1, verbose=True):
     """Build an .apkg from a list of card() dicts.
+
+    `deck_name` may be a subdeck path like 'DVA-C02::02'; the .apkg will import
+    directly into that (sub)deck. Leave `deck_id=None` to derive a stable, unique
+    id from the name (recommended) so subdecks don't collide on import.
 
     Options are shuffled per card using (shuffle_seed_base + index) so the layout
     is stable across reviews but the correct letter is not predictable deck-wide.
@@ -171,6 +188,8 @@ def build_deck(deck_name, cards, out_path,
     keeps your scheduling. Do NOT change the model structure, and when importing
     leave "Import any learning progress" unchecked. See PRESERVING_PROGRESS.md.
     """
+    if deck_id is None:
+        deck_id = _stable_deck_id(deck_name)
     model = make_model(model_id, model_name)
     deck = genanki.Deck(deck_id, deck_name)
     for i, c in enumerate(cards):

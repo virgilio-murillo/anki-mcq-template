@@ -80,7 +80,22 @@ matches the highlighted option, no leftover `{{L}}`, 4 options per card, each
 card has a verdict, and each back appears to refute distractors. Do NOT import
 a deck that fails verification. This prevents shipping the bugs we already hit.
 
-## 8. Language & formatting
+## 8. Import straight into the target (sub)deck — never move cards by query
+
+Build the `.apkg` with the **full subdeck path** as the deck name (e.g.
+`"DVA-C02::02"`) and let `build_deck` derive a **unique deck id from the name**
+(pass `deck_id=None`, the default). Then import; Anki places the notes directly
+into that subdeck. Use `create_deck.create(...)` for the whole flow
+(build -> verify -> import).
+
+**Never** import into a generic deck and then "move the new cards" with a text
+query like `-deck:"X"`. That once matched 85 cards from an unrelated SAP-C02
+deck and dragged them into the wrong subdeck. If you ever must move cards,
+select them by an exact, unique property (their `mcqkey:` tag or their specific
+note-type name), never by a broad text search.
+
+
+## 9. Language & formatting
 
 - Explanations in the user's language (Spanish here).
 - No em dashes (use commas, colons, parentheses, or " - ").

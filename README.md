@@ -137,7 +137,8 @@ Always back up first: File -> Export -> Anki Collection Package (`.colpkg`).
 
 | File | Purpose |
 |---|---|
-| `anki_mcq.py` | The reusable engine: model, CSS, `card()`, `build_deck()` (stable GUIDs) |
+| `anki_mcq.py` | The reusable engine: model, CSS, `card()`, `build_deck()` (stable GUIDs + per-name deck id) |
+| `create_deck.py` | Recommended flow: build -> verify -> import straight into the target (sub)deck |
 | `sync_deck.py` | Update a deck in place via AnkiConnect, preserving review progress |
 | `verify_deck.py` | Quality gate — run before importing (enforces the standards) |
 | `example_deck.py` | Minimal 3-card example (passes `verify_deck.py`) |
@@ -145,6 +146,24 @@ Always back up first: File -> Export -> Anki Collection Package (`.colpkg`).
 | `DECK_STANDARDS.md` | MANDATORY quality standards every deck must follow |
 | `PRESERVING_PROGRESS.md` | How to update decks without losing scheduling |
 | `requirements.txt` | `genanki` |
+
+## Recommended flow for a NEW deck
+
+Use `create_deck.create`, which builds, runs the quality gate, and imports the
+package **directly into the target subdeck** (no card-moving, no ambiguous
+queries):
+
+```python
+from anki_mcq import card
+from create_deck import create
+
+cards = [ card(question="...", options=[...], correct=1, answer="...",
+               key="dva02-q1") ]
+create(deck_name="DVA-C02::02", cards=cards, out_path="DVA-C02_02.apkg")
+```
+
+`build_deck` derives a unique deck id from the name, so each subdeck imports
+cleanly to its own place.
 
 ## Quality gate (run before importing)
 
