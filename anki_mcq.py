@@ -135,13 +135,22 @@ def render_options(options, correct_index, seed):
     return "".join(neutral), "".join(marked), correct_letter
 
 
-def card(question, options, correct, answer):
+def card(question, options, correct, answer, key=None):
     """Define one MCQ card. `correct` is a 0-based index into `options`.
-    Returns a plain dict consumed by build_deck().
+
+    `key` is an OPTIONAL stable identifier used to derive the note's GUID so that
+    re-importing an updated deck UPDATES the same note in place (preserving your
+    Anki review progress) instead of creating a duplicate. If omitted, the GUID
+    is derived from the question text.
+
+    IMPORTANT: keep `key` (or the question, if no key) stable across regenerations.
+    If it changes, Anki treats the card as brand new and you lose its scheduling.
+    Best practice: pass an explicit immutable `key` (e.g. "dva-c02-01-lambda-envvars").
     """
     if not (0 <= correct < len(options)):
         raise ValueError(f"correct index {correct} out of range for {len(options)} options")
-    return {"question": question, "options": options, "correct": correct, "answer": answer}
+    return {"question": question, "options": options, "correct": correct,
+            "answer": answer, "key": key}
 
 
 def build_deck(deck_name, cards, out_path,
@@ -156,13 +165,19 @@ def build_deck(deck_name, cards, out_path,
     because the shuffle reassigns letters. Instead write the placeholder ``{{L}}`` and
     this function substitutes the real shuffled letter automatically:
         '<div class="verdict">Correct: {{L}} - Amazon DynamoDB</div>'
+
+    PRESERVING PROGRESS: each note gets a STABLE GUID (from card["key"] or the
+    question). Re-importing with the SAME note type updates notes in place and
+    keeps your scheduling. Do NOT change the model structure, and when importing
+    leave "Import any learning progress" unchecked. See PRESERVING_PROGRESS.md.
     """
     model = make_model(model_id, model_name)
     deck = genanki.Deck(deck_id, deck_name)
     for i, c in enumerate(cards):
         neutral, marked, letter = render_options(c["options"], c["correct"], seed=shuffle_seed_base + i)
         answer = c["answer"].replace("{{L}}", letter)  # inject the real shuffled letter
-        deck.add_note(genanki.Note(model=model, fields=[c["question"], neutral, marked, answer]))
+        guid = genanki.guid_for(c.get("key") or c["question"])  # STABLE guid -> update-in-place
+        deck.add_note(genanki.Note(model=model, fields=[c["question"], neutral, marked, answer], guid=guid))
     genanki.Package(deck).write_to_file(out_path)
     if verbose:
         print(f">> Wrote {len(cards)} cards -> {out_path}", flush=True)

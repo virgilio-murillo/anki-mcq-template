@@ -27,6 +27,7 @@ cards = [
             "Amazon Aurora",
         ],
         correct=1,
+        key="ex-dynamodb-nosql",
         answer=(
             '<div class="verdict">Correct: {{L}} - Amazon DynamoDB.</div>'
             '<p><b>DynamoDB</b> is a fully managed <b>NoSQL</b> database with a flexible '
@@ -42,6 +43,7 @@ cards = [
         question="What is the default TTL of an Amazon API Gateway cache?",
         options=["60 seconds", "300 seconds", "3600 seconds", "It never expires"],
         correct=1,
+        key="ex-apigw-cache-ttl",
         answer=(
             '<div class="verdict">Correct: {{L}} - 300 seconds.</div>'
             '<p>API Gateway cache TTL defaults to <b>300s</b>, with a max of <b>3600s</b>. '
@@ -59,6 +61,7 @@ cards = [
             "<code>Pragma: refresh</code>",
         ],
         correct=1,
+        key="ex-apigw-invalidate-header",
         answer=(
             '<div class="verdict">Correct: {{L}} - <code>Cache-Control: max-age=0</code>.</div>'
             '<p>This tells API Gateway to bypass the cache and fetch a fresh response from the '

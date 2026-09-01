@@ -104,13 +104,39 @@ Baked into the design, but worth stating:
 - **Make distractors plausible**, and explain *why each is wrong* on the back.
 - **Keep 10–20 new cards/day** in Anki's deck settings to avoid review pileup.
 
+## Updating a deck WITHOUT losing review progress
+
+This is critical: **do not delete + re-import to update a studied deck** — it
+resets each card's scheduling (due/interval/ease/reps and history).
+
+Two safe options:
+
+1. **In-place sync (recommended, Anki running):** use `sync_deck.py`, which
+   edits existing notes via AnkiConnect `updateNoteFields` (progress kept) and
+   only adds genuinely new cards. It never deletes.
+   ```python
+   from anki_mcq import card
+   from sync_deck import sync
+   cards = [ card(question="...", options=[...], correct=1, answer="...",
+                  key="my-deck-q1") ]   # stable key
+   sync(deck_name="DVA-C02::01", cards=cards)
+   ```
+2. **Re-import an `.apkg`:** `build_deck` writes stable GUIDs, so re-importing
+   updates matched notes in place **if the note type is unchanged** and you
+   leave "Import any learning progress" unchecked in the import dialog.
+
+Full rules and rationale: see [PRESERVING_PROGRESS.md](PRESERVING_PROGRESS.md).
+Always back up first: File -> Export -> Anki Collection Package (`.colpkg`).
+
 ## Files
 
 | File | Purpose |
 |---|---|
-| `anki_mcq.py` | The reusable engine: model, CSS, `card()`, `build_deck()` |
+| `anki_mcq.py` | The reusable engine: model, CSS, `card()`, `build_deck()` (stable GUIDs) |
+| `sync_deck.py` | Update a deck in place via AnkiConnect, preserving review progress |
 | `example_deck.py` | Minimal 3-card example |
 | `import_to_anki.py` | Import a `.apkg` via AnkiConnect |
+| `PRESERVING_PROGRESS.md` | How to update decks without losing scheduling |
 | `requirements.txt` | `genanki` |
 
 ## Requirements
