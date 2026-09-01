@@ -19,7 +19,7 @@ Usage:
             options=["wrong A", "correct B", "wrong C", "wrong D"],
             correct=1,                      # 0-based index into `options`
             answer=(
-                '<div class="verdict">Correct: B</div>'
+                '<div class="verdict">Correct: {{L}} - option B</div>'   # {{L}} -> real letter
                 '<p>Because ...</p>'
                 '<div class="extra"><span class="h">Exam tip</span>...</div>'
                 '<div class="links"><span class="h">Links</span>'
@@ -151,12 +151,18 @@ def build_deck(deck_name, cards, out_path,
 
     Options are shuffled per card using (shuffle_seed_base + index) so the layout
     is stable across reviews but the correct letter is not predictable deck-wide.
+
+    IMPORTANT: never hardcode the correct letter in the answer text (e.g. "Correct: C"),
+    because the shuffle reassigns letters. Instead write the placeholder ``{{L}}`` and
+    this function substitutes the real shuffled letter automatically:
+        '<div class="verdict">Correct: {{L}} - Amazon DynamoDB</div>'
     """
     model = make_model(model_id, model_name)
     deck = genanki.Deck(deck_id, deck_name)
     for i, c in enumerate(cards):
-        neutral, marked, _ = render_options(c["options"], c["correct"], seed=shuffle_seed_base + i)
-        deck.add_note(genanki.Note(model=model, fields=[c["question"], neutral, marked, c["answer"]]))
+        neutral, marked, letter = render_options(c["options"], c["correct"], seed=shuffle_seed_base + i)
+        answer = c["answer"].replace("{{L}}", letter)  # inject the real shuffled letter
+        deck.add_note(genanki.Note(model=model, fields=[c["question"], neutral, marked, answer]))
     genanki.Package(deck).write_to_file(out_path)
     if verbose:
         print(f">> Wrote {len(cards)} cards -> {out_path}", flush=True)

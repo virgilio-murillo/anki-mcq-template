@@ -28,7 +28,7 @@ cards = [
         ],
         correct=1,
         answer=(
-            '<div class="verdict">Correct: Amazon DynamoDB.</div>'
+            '<div class="verdict">Correct: {{L}} - Amazon DynamoDB.</div>'
             '<p><b>DynamoDB</b> is a fully managed <b>NoSQL</b> database with a flexible '
             'schema, single-digit-millisecond latency and horizontal scaling. RDS and Aurora '
             'are relational (rigid schema); Redshift is an OLAP data warehouse.</p>'
@@ -43,7 +43,7 @@ cards = [
         options=["60 seconds", "300 seconds", "3600 seconds", "It never expires"],
         correct=1,
         answer=(
-            '<div class="verdict">Correct: 300 seconds.</div>'
+            '<div class="verdict">Correct: {{L}} - 300 seconds.</div>'
             '<p>API Gateway cache TTL defaults to <b>300s</b>, with a max of <b>3600s</b>. '
             'Setting <code>TTL=0</code> disables caching.</p>'
             '<div class="links"><span class="h">Links</span>'
@@ -60,7 +60,7 @@ cards = [
         ],
         correct=1,
         answer=(
-            '<div class="verdict">Correct: <code>Cache-Control: max-age=0</code>.</div>'
+            '<div class="verdict">Correct: {{L}} - <code>Cache-Control: max-age=0</code>.</div>'
             '<p>This tells API Gateway to bypass the cache and fetch a fresh response from the '
             'backend, replacing the stale cached entry. The documented value is exactly '
             '<code>max-age=0</code>.</p>'

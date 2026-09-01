@@ -55,7 +55,7 @@ cards = [
         options=["wrong A", "correct B", "wrong C", "wrong D"],
         correct=1,                       # 0-based index into options
         answer=(
-            '<div class="verdict">Correct: B</div>'
+            '<div class="verdict">Correct: {{L}} - option B</div>'
             '<p>Because ...</p>'
             '<div class="extra"><span class="h">Exam tip</span>...</div>'
             '<div class="links"><span class="h">Links</span>'
@@ -68,13 +68,25 @@ cards = [
 build_deck("My Deck Name", cards, "my_deck.apkg")
 ```
 
+### The correct letter: use `{{L}}`, never hardcode it
+
+Options are **shuffled**, so the correct answer's letter changes. **Never** write
+`Correct: C` in the answer text (it will drift out of sync with the shuffled
+options). Instead, write the placeholder `{{L}}` and `build_deck` substitutes the
+real shuffled letter:
+
+```python
+'<div class="verdict">Correct: {{L}} - Amazon DynamoDB</div>'
+# renders as e.g. "Correct: A - Amazon DynamoDB", always matching the highlighted option
+```
+
 ### The `answer` field is HTML
 
 Anki renders fields as HTML. Useful building blocks (all styled by the template CSS):
 
 | Snippet | Purpose |
 |---|---|
-| `<div class="verdict">Correct: X</div>` | Green verdict line (put it first) |
+| `<div class="verdict">Correct: {{L}} - ...</div>` | Green verdict line (`{{L}}` becomes the real letter; put it first) |
 | `<div class="extra"><span class="h">Exam tip</span> ...</div>` | Amber callout |
 | `<div class="warn"><span class="h">Heads up</span> ...</div>` | Red callout |
 | `<div class="links"><span class="h">Links</span><a href="...">...</a></div>` | Links block |
