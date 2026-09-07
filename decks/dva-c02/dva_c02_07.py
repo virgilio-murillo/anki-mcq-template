@@ -66,7 +66,7 @@ cards = [
             '<p><b>S3 Object Lambda</b> ejecuta tu c&oacute;digo durante un <b>GET</b> para transformar el objeto <b>al momento de recuperarlo</b>, sin guardar copias transformadas. La arquitectura: creas un <b>S3 Access Point por rol</b>, y encima un <b>Object Lambda Access Point por rol</b> asociado a la Lambda <code>RedactPII-[role]</code> correspondiente. Cada usuario hace un GetObject a su propio Object Lambda Access Point y recibe la redacci&oacute;n adecuada a su rol. As&iacute; hay <b>una sola copia</b> en el bucket.</p>'
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>Access Point compartido con l&oacute;gica interna:</b> el patr&oacute;n dise&ntilde;ado es un Object Lambda Access Point por rol; el aislamiento por rol se logra con endpoints y permisos IAM separados, no metiendo toda la l&oacute;gica en una Lambda.</li>'
+            '<li><b>Access Point compartido con l&oacute;gica interna:</b> t&eacute;cnicamente un solo Object Lambda Access Point con una Lambda que ramifica seg&uacute;n la identidad IAM del caller <b>tambi&eacute;n funcionar&iacute;a</b>. Pero el patr&oacute;n que pide el escenario (un endpoint y permisos por rol, con una Lambda RedactPII-[role] por rol) da un aislamiento por rol m&aacute;s limpio y directo v&iacute;a Access Points separados, y es la combinaci&oacute;n correcta entre las opciones dadas.</li>'
             '<li><b>S3 Replication:</b> crea <b>copias adicionales</b>, contradice el requisito de una sola copia.</li>'
             '<li><b>S3 Event Notification:</b> notifica en creaci&oacute;n de objetos (ObjectCreated), <b>no</b> se dispara en GET para transformar la respuesta.</li>'
             '</ul>'
@@ -108,9 +108,10 @@ cards = [
         key="dva07-q6-gsi-capacity",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; del propio GSI.</div>'
-            '<p>Un <b>GSI</b> tiene su <b>propia capacidad provisionada</b> (RCU/WCU) separada de la tabla base. Las queries y scans sobre el &iacute;ndice consumen capacidad <b>del &iacute;ndice</b>. Igual, cuando escribes en la tabla y eso actualiza el GSI, esa escritura consume WCU <b>del &iacute;ndice</b>, no de la tabla.</p>'
-            '<p><b>Por qu&eacute; NO las otras:</b> no se consume de la tabla base (esa es la confusi&oacute;n t&iacute;pica con LSI, que s&iacute; usa la capacidad de la tabla). No se reparte 50/50. Y s&iacute; consume capacidad: leer de un &iacute;ndice no es gratis.</p>'
-            '<div class="extra"><span class="h">Truco de examen</span>GSI = capacidad <b>propia</b>. LSI = comparte la capacidad de la <b>tabla base</b>.</div>'
+            '<p>Un <b>GSI</b> tiene su <b>propia capacidad provisionada</b> (RCU/WCU) separada de la tabla base. Las <b>queries y scans sobre el &iacute;ndice</b> consumen capacidad <b>del &iacute;ndice</b> (no de la tabla base): esto es lo que pregunta la carta.</p>'
+            '<p><b>Ojo con las escrituras (matiz importante):</b> cuando escribes en la tabla y eso actualiza el GSI, la escritura consume WCU de la <b>tabla base</b> Y <b>adicionalmente</b> WCU del <b>&iacute;ndice</b>. Es la <b>suma</b> de ambos, no "&iacute;ndice en vez de tabla". El "del &iacute;ndice, no de la tabla" aplica solo a <b>lecturas</b> (query/scan) sobre el GSI.</p>'
+            '<p><b>Por qu&eacute; NO las otras:</b> para lecturas sobre el &iacute;ndice, la capacidad sale del GSI, no de la tabla base (esa es la confusi&oacute;n t&iacute;pica con LSI, que s&iacute; usa la capacidad de la tabla). No se reparte 50/50. Y s&iacute; consume capacidad: leer de un &iacute;ndice no es gratis.</p>'
+            '<div class="extra"><span class="h">Truco de examen</span>Lectura sobre GSI &rarr; capacidad del <b>&iacute;ndice</b>. Escritura que toca el GSI &rarr; <b>tabla base + &iacute;ndice</b> (suma). LSI &rarr; comparte la capacidad de la <b>tabla base</b>.</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html">docs.aws GSI</a><br>'
             '<a href="https://tutorialsdojo.com/global-secondary-index-vs-local-secondary-index/">tutorialsdojo GSI vs LSI</a></div>'
@@ -308,7 +309,7 @@ cards = [
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
             '<li><b>Solo una pol&iacute;tica IAM:</b> no integra LDAP; necesitas SAML, STS o un broker.</li>'
-            '<li><b>IAM Identity Center:</b> se apoya en federaci&oacute;n <b>SAML</b>; el escenario dice que el store <b>no</b> es SAML-compatible.</li>'
+            '<li><b>IAM Identity Center:</b> su conexi&oacute;n a un <b>IdP externo de terceros</b> se hace v&iacute;a <b>SAML 2.0</b>; el escenario dice que el store <b>no</b> es SAML-compatible, as&iacute; que no lo puedes conectar como IdP externo. (Identity Center tambi&eacute;n tiene un store propio y puede usar AWS Managed Microsoft AD, pero eso no aplica a un LDAP externo no-SAML.)</li>'
             '<li><b>Rotar IAM credentials manualmente:</b> no es una integraci&oacute;n real ni &oacute;ptima; se resuelve con STS/broker.</li>'
             '</ul>'
             '<div class="extra"><span class="h">Truco de examen</span>&iquest;"no compatible con SAML" + on-prem? &rarr; <b>custom identity broker + STS</b>.</div>'
@@ -364,10 +365,10 @@ cards = [
 
     # ================= Q29: X-Ray annotations in subsegment =================
     card(
-        question="Quieres registrar en X-Ray las llamadas a RDS (incluida la <b>query SQL</b>) para poder <b>buscarlas con filter expressions</b>. &iquest;D&oacute;nde y qu&eacute; agregas en el segment document?",
+        question="En X-Ray quieres que la <b>llamada downstream a RDS</b> (incluida la <b>query SQL</b>) quede registrada como una unidad de trabajo propia y adem&aacute;s <b>buscable con filter expressions</b>. &iquest;D&oacute;nde la registras y con qu&eacute; tipo de dato?",
         options=[
             "Annotations en el subsegment del segment document",
-            "Annotations en el segment (nivel del request principal)",
+            "Annotations en el segment (el request principal de tu app)",
             "Metadata en el subsegment",
             "Metadata en el segment",
         ],
@@ -375,13 +376,15 @@ cards = [
         key="dva07-q29-annotations-subsegment",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; annotations en el subsegment.</div>'
-            '<p>Dos decisiones: <b>annotations vs metadata</b> y <b>segment vs subsegment</b>. Como quieres <b>buscar/filtrar</b>, necesitas <b>annotations</b> (pares clave-valor <b>indexados</b> por X-Ray). Y como lo que trazas es la <b>llamada downstream a RDS</b> (no el request principal a tu app), va en el <b>subsegment</b>, que es donde se registran las llamadas a AWS, HTTP y SQL.</p>'
+            '<p>Dos decisiones: <b>d&oacute;nde</b> (segment vs subsegment) y <b>qu&eacute; dato</b> (annotation vs metadata).</p>'
+            '<p><b>D&oacute;nde:</b> las llamadas <b>downstream</b> (a AWS, HTTP y bases SQL) se registran en <b>subsegments</b>. Como la llamada a RDS es downstream, va en un <b>subsegment</b>, que es donde vive el objeto <code>sql</code> con la query. Registrarla en el segment (el request principal) no captura la llamada a RDS como unidad de trabajo propia.</p>'
+            '<p><b>Qu&eacute; dato:</b> para poder <b>buscar/filtrar</b> necesitas <b>annotations</b> (indexadas). La metadata no se indexa, as&iacute; que no se puede filtrar.</p>'
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>Annotations en el segment:</b> annotation es correcto, pero el nivel es el request de tu app, no la llamada a RDS. La query SQL vive en el <b>subsegment</b>.</li>'
+            '<li><b>Annotations en el segment:</b> una annotation en el segment tambi&eacute;n ser&iacute;a buscable (X-Ray indexa annotations en segment o subsegment), pero el segment representa el <b>request principal de tu app</b>, no la llamada a RDS. Para registrar la llamada downstream como unidad propia debes usar su <b>subsegment</b>.</li>'
             '<li><b>Metadata (subsegment o segment):</b> la metadata <b>no</b> se indexa, as&iacute; que no se puede buscar con filter expressions. Sirve para datos que quieres guardar pero no filtrar.</li>'
             '</ul>'
-            '<div class="extra"><span class="h">Truco de examen</span>Buscar/filtrar &rarr; <b>annotation</b> (indexada). Solo guardar &rarr; metadata. Llamada downstream &rarr; <b>subsegment</b>.</div>'
+            '<div class="extra"><span class="h">Truco de examen</span>Buscar/filtrar &rarr; <b>annotation</b> (indexada, sea en segment o subsegment). Llamada downstream (RDS/HTTP/SQL) &rarr; su <b>subsegment</b>.</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-concepts.html#xray-concepts-annotations">docs.aws annotations vs metadata</a><br>'
             '<a href="https://tutorialsdojo.com/aws-x-ray/">tutorialsdojo X-Ray</a></div>'
@@ -423,7 +426,7 @@ cards = [
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
             '<li><b>binpack:</b> coloca por menor CPU/memoria disponible para usar menos instancias; requiere especificar el campo (CPU o memory), o sea m&aacute;s config.</li>'
-            '<li><b>spread con instanceId/host:</b> distribuye uniformemente pero exige indicar el atributo, m&aacute;s configuraci&oacute;n que random.</li>'
+            '<li><b>spread con instanceId/host:</b> distribuye uniformemente pero exige indicar el atributo, m&aacute;s configuraci&oacute;n que random. Ojo: spread across-AZ es el <b>default impl&iacute;cito de un servicio</b> (CreateService), pero como <b>estrategia elegida expl&iacute;citamente</b> necesita un campo, as&iacute; que sigue siendo m&aacute;s config que random.</li>'
             '<li><b>spread con constraints personalizadas:</b> a&ntilde;ade reglas extra, todav&iacute;a m&aacute;s configuraci&oacute;n.</li>'
             '</ul>'
             '<div class="extra"><span class="h">Truco de examen</span>&iquest;"menor configuraci&oacute;n"? &rarr; <b>random</b>. &iquest;"menos instancias / optimizar recursos"? &rarr; binpack. &iquest;"alta disponibilidad"? &rarr; spread.</div>'
@@ -476,7 +479,7 @@ cards = [
             '<p><b>Optimistic locking</b>: cada item tiene un atributo de <b>versi&oacute;n</b>. Al leer, guardas la versi&oacute;n; al escribir, la operaci&oacute;n solo tiene &eacute;xito si la versi&oacute;n en el servidor <b>no cambi&oacute;</b>. Si otro la modific&oacute; antes, tu update falla y reintentas. As&iacute; evitas sobrescribir cambios ajenos.</p>'
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>Pessimistic locking:</b> DynamoDB no bloquea items as&iacute;; el mecanismo del DynamoDBMapper para esto se llama <b>optimistic</b> locking (con versi&oacute;n).</li>'
+            '<li><b>Pessimistic locking:</b> DynamoDB no tiene un <b>bloqueo de item nativo integrado</b>; el mecanismo del DynamoDBMapper para este caso se llama <b>optimistic</b> locking (con versi&oacute;n). Se puede emular un patr&oacute;n pessimistic con <code>TransactWriteItems</code> o un lock client, pero no es lo que aplica aqu&iacute;.</li>'
             '<li><b>Global tables (con cualquiera de las dos):</b> las global tables usan reconciliaci&oacute;n <b>"last writer wins"</b>; con ellas el locking por versi&oacute;n <b>no</b> funciona como esperas.</li>'
             '</ul>'
             '<div class="extra"><span class="h">Truco de examen</span>Concurrencia sobre el mismo item &rarr; <b>optimistic locking + versi&oacute;n</b>. Y ojo: global tables = last-writer-wins.</div>'
@@ -550,7 +553,8 @@ cards = [
             '<li><b>AWSXrayFullAccess:</b> da acceso amplio (incluye configuraci&oacute;n), pero viola el principio de m&iacute;nimo privilegio y no es la usada por Beanstalk para el daemon.</li>'
             '<li><b>AWSXRayElasticBeanstalkWriteAccess:</b> no existe como managed policy.</li>'
             '</ul>'
-            '<div class="extra"><span class="h">Truco de examen</span>Daemon = <b>escribir</b> trazas &rarr; <b>...DaemonWriteAccess</b>. Ver en consola = ReadOnly.</div>'
+            '<div class="extra"><span class="h">Truco de examen</span>Daemon = <b>escribir</b> trazas &rarr; <b>...DaemonWriteAccess</b>. Ver en consola = ReadOnly. Ojo con las may&uacute;sculas: la policy del daemon es "X<b>R</b>ay" (R may&uacute;scula), mientras ReadOnly/FullAccess usan "X<b>r</b>ay" (min&uacute;scula). AWS es inconsistente aqu&iacute;.</div>'
+            '<div class="warn"><span class="h">Matiz Elastic Beanstalk</span>La respuesta del examen es <code>AWSXRayDaemonWriteAccess</code> (correcta para el daemon en EC2/general). Pero la doc espec&iacute;fica de Elastic Beanstalk referencia <code>AWSXrayWriteOnlyAccess</code>, que su instance profile ya incluye. Si ves ambas en un examen de EB, la de Beanstalk documentada es <code>AWSXrayWriteOnlyAccess</code>.</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/xray/latest/devguide/xray-permissions.html">docs.aws X-Ray permissions</a><br>'
             '<a href="https://tutorialsdojo.com/aws-x-ray/">tutorialsdojo X-Ray</a></div>'
@@ -644,7 +648,7 @@ cards = [
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
             '<li><b>SSE-S3:</b> las claves las gestiona <b>AWS</b> (S3), no tu empresa. No cumple.</li>'
-            '<li><b>SSE-KMS:</b> aunque subas tu material, KMS gestiona las claves, no tu empresa. Adem&aacute;s el escenario pide clave <b>propia gestionada por ti</b>.</li>'
+            '<li><b>SSE-KMS:</b> aunque uses una KMS key tuya (incluso con material importado), las claves las <b>gestiona KMS</b>, no directamente tu empresa. El escenario pide una clave <b>provista y gestionada por ti</b>, as&iacute; que SSE-KMS no cumple ese matiz.</li>'
             '<li><b>SSL/TLS:</b> protege datos <b>en tr&aacute;nsito</b>, no en reposo (y la app ya usa HTTPS).</li>'
             '<li><b>Pre-signed URLs:</b> control de acceso temporal, no cifrado en reposo.</li>'
             '</ul>'
