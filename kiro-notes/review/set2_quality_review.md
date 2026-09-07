@@ -78,3 +78,35 @@ FIX: retighten the stem to ask WHERE the downstream RDS call is recorded (subseg
 All marked-correct ANSWERS remain correct. Fixes are explanation precision + one stem tightening.
 
 ## v2 investigation: v2-371a06 (judge report pending; 6-pair findings captured above)
+
+## ROUND 2 — Deck expanded 27 -> 45 cards, full quality process repeated
+
+The 13 single-card questions were expanded to 2-3 atomic cards each (per user's
+"2 or 3 per question" instruction), reaching 45 cards. Then the ENTIRE quality
+process was rerun on the 18 newly added cards:
+- v2 investigation v2-f36961 (6 investigator-contrarian pairs)
+- 18 per-card docs-investigator agents (verified against official AWS docs)
+- direct review (option b)
+
+### Result: ZERO factual errors in the 18 new cards. All 18 marked answers are the single strictly-correct option.
+High-risk facts all CONFIRMED against AWS docs:
+- Transactional read/write = 2x cost (2x a STRONG read, 4x an eventual). CONFIRMED.
+- RCU 4KB-block vs WCU 1KB-block; 17KB -> 5 read blocks / 17 write blocks. CONFIRMED.
+- STS AssumeRole + GetFederationToken return temp creds w/ session token; GetCallerIdentity does not; AssumeRoleWithSAML needs SAML. CONFIRMED.
+- sam publish = Serverless Application Repository (not a deploy). CONFIRMED.
+- Code (CFN AWS::Lambda::Function) vs CodeUri/InlineCode (SAM AWS::Serverless::Function). CONFIRMED.
+- Global tables last-writer-wins. CONFIRMED.
+- ECS binpack=minimize instances, spread=high availability (AZ), random=least config. CONFIRMED.
+- X-Ray ReadOnly (view) vs FullAccess (config encryption/sampling) vs DaemonWriteAccess (upload). CONFIRMED.
+- GSI can have different PK; LSI same PK. Object Lambda on GET; Event Notification on write. CONFIRMED.
+- CloudFront signed URL = 1 file, signed cookies = many files. WAF blocks, GuardDuty detects, Firewall Manager manages. CONFIRMED.
+
+### Round-2 fixes applied
+- q10-why-not-nacl-cors: reworded refutation to include "Por que NO las otras, una por una" (passes quality gate structure).
+- q7-proxy-vs-custom: expanded "VTL" -> "plantillas VTL (Velocity Template Language)" (DECK_STANDARDS term-definition polish).
+
+### Round-2 MINOR notes (not applied; optional)
+- q34 spread "high availability" is documented on the AZ-rebalancing page, not the strategies page (both cite-able). Card is accurate.
+- GSI sort key is optional (can be PK-only); LSI must be composite. Card q6-gsi-vs-lsi-pk not contradicted.
+
+Final deck: 45 cards, quality gate OK (0 problemas). All answers verified correct.
