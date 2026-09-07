@@ -1,0 +1,62 @@
+# DVA-C02 practice set 2 — raw questions (pasted 2026-09-07)
+# Mark per question: Correct / Incorrect (Incorrect = needs practice -> becomes cards)
+
+Q1  [Correct]   EC2 instance metadata endpoint http://169.254.169.254/latest/meta-data/ for public/private IP
+Q2  [Incorrect] DynamoDB ReturnConsumedCapacity = INDEXES (subtotals for table + secondary indexes)
+Q3  [Correct]   Lambda concurrency: 2000 limit, 400+200 reserved -> 1400 shared among 8; can set max 1300 (unreserved floor 100)
+Q4  [Incorrect] S3 Object Lambda: S3 Access Point per role + Object Lambda Access Point + RedactPII Lambda + GetObject
+Q5  [Correct]   X-Ray: SDK generates segment docs w/ subsegments -> X-Ray daemon buffers -> uploads in batches
+Q6  [Incorrect] DynamoDB GSI: consumes capacity from index (not base table); eventual consistency only
+Q7  [Incorrect] API Gateway Lambda custom (non-proxy) integration: maps request/response data
+Q8  [Correct]   SQS durable + no duplicates: FIFO queue + producer sets deduplication IDs
+Q9  [Correct]   Lambda execution context reuses DB connections (init outside handler)
+Q10 [Incorrect] CloudFront signed URLs / signed cookies to stop hotlinking (referrer via CF Functions)
+Q11 [Correct]   Cognito user pool MFA as second auth factor
+Q12 [Correct]   KMS envelope encryption: GenerateDataKey, encrypt locally, erase plaintext key, store encrypted key
+Q13 [Correct]   EventBridge (CloudWatch Events) to trigger Lambda after CodePipeline success
+Q14 [Correct]   AWS CLI named profile + --profile to switch IAM roles (not instance profile)
+Q15 [Incorrect] X-Ray: filter expressions in console + GetTraceSummaries API (IDs + annotations)
+Q16 [Correct]   S3 Event Notification on ObjectCreated:Put triggers Lambda (watermark on upload)
+Q17 [Incorrect] AWS WAF mitigates SQL injection + XSS
+Q18 [Correct]   API Gateway Lambda Authorizers (TOKEN type) for OAuth/SAML bearer token
+Q19 [Incorrect] S3 + CloudFront for low-latency global static content
+Q20 [Correct]   Write-through caching: UPDATE db then cache.set(item, ttl)
+Q21 [Incorrect] AWS SAM for serverless stack (Lambda+APIGW+DynamoDB) as single versioned entity
+Q22 [Correct]   ECS secrets: AWS Secrets Manager + enable rotation
+Q23 [Incorrect] Non-SAML LDAP -> custom identity broker + STS (AssumeRole/GetFederationToken)
+Q24 [Correct]   AppSync for cross-device sync + real-time multi-user collaboration
+Q25 [Correct]   RDS Enhanced Monitoring (per-process CPU/mem from agent on instance)
+Q26 [Incorrect] DynamoDB LSI: same partition key, alt sort key, supports strong consistency; must create with table -> new table + migrate
+Q27 [Correct]   DynamoDB conditional writes (condition-expression) for concurrent updates
+Q28 [Correct]   Lambda: memory increase -> proportional CPU; concurrency limit = sum across all functions
+Q29 [Incorrect] X-Ray: annotations in SUBSEGMENT of segment doc (indexed, filterable; SQL query in subsegment)
+Q30 [Correct]   Elastic Beanstalk multicontainer Docker (uses ECS under the hood) — easiest
+Q31 [Correct]   Lambda perf: init outside handler + /tmp cache for the 20MB file
+Q32 [Correct]   DynamoDB GSI provisioned WCU >= base table WCU to avoid throttling
+Q33 [Correct]   DynamoDB Streams -> Lambda: event source mapping + AWSLambdaDynamoDBExecutionRole
+Q34 [Incorrect] ECS random task placement strategy (least config, honors constraints)
+Q35 [Correct]   Lambda 15-min (900s) max timeout -> terminated invocations
+Q36 [Correct]   Lambda Custom Runtime (bootstrap) to change setup + read invocation events
+Q37 [Incorrect] SAM deploy workflow: build local -> package -> deploy from S3
+Q38 [Correct]   Elastic Beanstalk Blue/Green: least impact + fast rollback (swap CNAMEs)
+Q39 [Correct]   Lambda in private subnet RDS: configure Lambda to connect to VPC
+Q40 [Correct]   API Gateway cache invalidation: Cache-Control: max-age=0 header
+Q41 [Incorrect] DynamoDB optimistic locking (version number); NOT global tables (last-writer-wins)
+Q42 [Correct]   sam deploy zips + uploads to S3 + packaged template + deploys
+Q43 [Correct]   API Gateway is HTTPS-only (Connection refused when using http://)
+Q44 [Correct]   Lambda custom runtime for Rust (bootstrap)
+Q45 [Incorrect] DynamoDB RCU calc: 320 strong reads/s of 17KB item = 1600 RCU (ceil(17/4)=5, x320)
+Q46 [Correct]   Kinesis KCL: max instances = number of open shards (20)
+Q47 [Incorrect] Elastic Beanstalk X-Ray daemon: AWSXRayDaemonWriteAccess managed policy
+Q48 [Incorrect] CloudFormation AWS::Lambda::Function inline code: ZipFile parameter (under Code)
+Q49 [Correct]   Amazon Athena: serverless SQL queries directly on S3 data
+Q50 [Incorrect] DynamoDB capacity calc: 10 writes/s 2KB=20 WCU; 20 eventual reads/s 2KB = 10 RCU
+Q51 [Correct]   API Gateway CacheHitCount/CacheMissCount missing => API caching not enabled
+Q52 [Correct]   DynamoDB partition key: use most-unique (Item ID / GUID) to avoid hot partitions
+Q53 [Correct]   RDS SQL Server Transparent Data Encryption (TDE) — encrypt at rest at DB level
+Q54 [Correct]   AWS Step Functions to orchestrate multiple AWS services into serverless workflows
+Q55 [Correct]   Kinesis: merge COLD shards to reduce cost/capacity
+Q56 [Correct]   Amazon Cognito Sync for cross-device user profile sync
+Q57 [Incorrect] S3 at-rest w/ company-managed AES-256 key: SSE-C + client-side encryption w/ own master key
+Q58 [Correct]   AWS Secrets Manager to store+encrypt+rotate DB credentials
+Q59 [Correct]   CloudFormation: license key as Secrets Manager secret + secretsmanager dynamic reference
