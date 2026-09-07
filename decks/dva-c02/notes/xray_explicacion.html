@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Report</title>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #fff; }
+h1 { color: #232f3e; font-size: 22pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color: #0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 2em; }
+h3 { color: #232f3e; font-size: 13pt; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt; }
+th { background-color: #232f3e; color: white; padding: 8px; text-align: left; }
+td { border: 1px solid #ddd; padding: 6px 8px; }
+tr:nth-child(even) { background-color: #f8f8f8; }
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 10pt; color: #c7254e; }
+pre { background: #1e1e2e; padding: 16px; border-radius: 8px; font-size: 9.5pt; white-space: pre-wrap; word-break: break-word; overflow-x: auto; }
+pre code { background: none; color: #cdd6f4; padding: 0; font-size: inherit; }
+blockquote { border-left: 4px solid #0073bb; margin: 12px 0; padding: 8px 16px; background: #f0f7fc; }
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+.mermaid { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0; text-align: center; }
+.code-wrapper { position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: #3498db; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: 8pt; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { background: #27ae60; }
+</style>
+</head>
+<body>
+<h1
+id="aws-x-ray-a-fondo-segments-subsegments-daemon-y-puttracesegments">AWS
+X-Ray a fondo: segments, subsegments, daemon y
+<code>PutTraceSegments</code></h1>
+<p>Explicación visual de la pregunta:</p>
+<blockquote>
+<p><strong>Debes trazar en X-Ray todas las peticiones de tu app,
+incluyendo las llamadas a recursos AWS aguas abajo. ¿Qué acción
+implementas?</strong></p>
+<p><strong>Respuesta correcta: B</strong> — usar el X-Ray SDK para
+generar <em>segment documents</em> con <em>subsegments</em> y enviarlos
+al <em>daemon</em> de X-Ray, que los agrupa y sube a la API en
+lotes.</p>
+</blockquote>
+<hr />
+<h2 id="qué-problema-resuelve-x-ray">1. ¿Qué problema resuelve
+X-Ray?</h2>
+<p>Cuando una petición entra a tu aplicación, esa petición casi nunca se
+resuelve en un solo lugar. Tu app llama a una base de datos, a otra API,
+a S3, a DynamoDB… <strong>cada salto añade latencia y puede
+fallar</strong>. Sin trazado, cuando algo va lento o falla, no sabes
+<em>en qué salto</em> ocurrió.</p>
+<p><strong>AWS X-Ray</strong> graba lo que pasa en cada salto y lo une
+en un <strong>mapa de servicios</strong> (service map) y una
+<strong>traza</strong> (trace) por petición, para que veas el recorrido
+completo de punta a punta.</p>
+<div class="mermaid">
+flowchart LR
+    U(Usuario) --> A(Tu App)
+    A --> DB[(Base de datos)]
+    A --> S3[(Amazon S3)]
+    A --> API(Otra API)
+    A -.traza cada salto.-> XR(AWS X-Ray)
+    DB -.-> XR
+    S3 -.-> XR
+    API -.-> XR
+    XR --> MAP(Mapa de servicios + trazas)
+</div>
+<hr />
+<h2 id="el-vocabulario-trace-segment-y-subsegment">2. El vocabulario:
+trace, segment y subsegment</h2>
+<p>Estos tres términos son el corazón de la pregunta. Defínelos bien y
+todo lo demás encaja.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Término</th>
+<th>Qué es</th>
+<th>Analogía</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Trace</strong> (traza)</td>
+<td>Todo el recorrido de <strong>una</strong> petición a través de todos
+los servicios. Agrupa varios segments.</td>
+<td>El viaje completo de un paquete de origen a destino.</td>
+</tr>
+<tr>
+<td><strong>Segment</strong></td>
+<td>El trabajo que hace <strong>tu propia aplicación</strong> para
+servir esa petición (tu servicio).</td>
+<td>Lo que hace <strong>una</strong> oficina de correos con el
+paquete.</td>
+</tr>
+<tr>
+<td><strong>Subsegment</strong></td>
+<td>El trabajo de las <strong>llamadas aguas abajo</strong>: a otra API,
+a un recurso AWS (DynamoDB, S3), a una consulta SQL. Va <strong>anidado
+dentro</strong> de un segment.</td>
+<td>Cada gestión concreta dentro de esa oficina (pesar, sellar, enviar
+al camión).</td>
+</tr>
+</tbody>
+</table>
+<div class="mermaid">
+flowchart TB
+    subgraph TRACE["TRACE (una petición completa)"]
+        direction TB
+        SEG["SEGMENT — trabajo de TU app"]
+        SEG --> SUB1["subsegment: llamada a DynamoDB"]
+        SEG --> SUB2["subsegment: llamada a S3"]
+        SEG --> SUB3["subsegment: consulta SQL"]
+    end
+</div>
+<blockquote>
+<p><strong>Clave de la pregunta:</strong> para capturar las
+<strong>llamadas aguas abajo</strong> (a recursos AWS), esas llamadas se
+registran como <strong>subsegments</strong> dentro del segment de tu
+app. Por eso NO instalas X-Ray “en cada servicio por separado”: los
+subsegments ya capturan esos saltos dentro de la misma traza.</p>
+</blockquote>
+<hr />
+<h2 id="el-segment-document-el-json-que-se-envía">3. El <em>segment
+document</em>: el JSON que se envía</h2>
+<p>Lo que realmente viaja a X-Ray es un <strong>segment
+document</strong>: un <strong>JSON</strong> que describe el trabajo de
+la petición.</p>
+<ul>
+<li>Es una <strong>cadena JSON</strong> con formato definido.</li>
+<li>Puede pesar <strong>hasta 64 kB</strong>.</li>
+<li>Contiene un <strong>segment completo con sus subsegments</strong> (o
+un fragmento, o un subsegment suelto enviado aparte).</li>
+</ul>
+<pre class="json"><code>{
+  &quot;name&quot;: &quot;mi-app&quot;,
+  &quot;id&quot;: &quot;70de5b6f19ff9a0a&quot;,
+  &quot;trace_id&quot;: &quot;1-5e1b4151-5ac6c58dc...&quot;,
+  &quot;start_time&quot;: 1727980800.0,
+  &quot;end_time&quot;: 1727980800.9,
+  &quot;subsegments&quot;: [
+    {
+      &quot;name&quot;: &quot;DynamoDB&quot;,
+      &quot;namespace&quot;: &quot;aws&quot;,
+      &quot;start_time&quot;: 1727980800.1,
+      &quot;end_time&quot;: 1727980800.3
+    },
+    {
+      &quot;name&quot;: &quot;consulta-SQL&quot;,
+      &quot;start_time&quot;: 1727980800.4,
+      &quot;end_time&quot;: 1727980800.6
+    }
+  ]
+}</code></pre>
+<blockquote>
+<p><strong>Ojo con los nombres:</strong> la API se llama
+<code>PutTraceSegments</code> y su parámetro es
+<strong><code>TraceSegmentDocuments</code></strong> (una <strong>lista
+de documentos JSON</strong>), no “trace segments” sueltos. Este detalle
+es justo lo que hace que las opciones A y D sean incorrectas.</p>
+</blockquote>
+<hr />
+<h2 id="cómo-llegan-los-datos-a-x-ray-dos-caminos">4. ¿Cómo llegan los
+datos a X-Ray? Dos caminos</h2>
+<p>Aquí está el núcleo de la respuesta B. Hay <strong>dos</strong>
+formas de mandar los segment documents a X-Ray:</p>
+<h3 id="camino-1-recomendado-sdk-daemon-api-en-lotes">Camino 1
+(recomendado): SDK → daemon → API en lotes</h3>
+<p>El <strong>X-Ray SDK</strong> instrumenta tu código y genera los
+segment documents. En vez de llamar a AWS directamente, se los pasa al
+<strong>daemon de X-Ray</strong>, un pequeño proceso que corre junto a
+tu app. El daemon <strong>almacena en búfer</strong> los documentos y
+los <strong>sube en lotes</strong> (batches) llamando a
+<code>PutTraceSegments</code> por ti.</p>
+<div class="mermaid">
+flowchart LR
+    APP["Tu app + X-Ray SDK<br/>genera segment documents"] -->|UDP puerto 2000| D["X-Ray daemon<br/>buffer + agrupa en lotes"]
+    D -->|PutTraceSegments en lotes| XR["API de AWS X-Ray"]
+    XR --> MAP["Service map + trazas"]
+</div>
+<p><strong>Por qué se prefiere:</strong> el SDK <strong>no</strong> hace
+llamadas a AWS directamente en el hilo de tu petición; solo manda el
+documento al daemon (rápido, local, por UDP). El daemon agrupa muchos
+documentos y hace menos llamadas a la API. Menos latencia para tu app,
+menos llamadas a AWS.</p>
+<h3 id="camino-2-directo-tú-mismo-llamas-a-puttracesegments">Camino 2
+(directo): tú mismo llamas a <code>PutTraceSegments</code></h3>
+<p>También puedes saltarte el daemon y <strong>llamar tú mismo</strong>
+a la API <code>PutTraceSegments</code>, enviando la lista
+<code>TraceSegmentDocuments</code>. Es válido, pero cargas con las
+llamadas a AWS en tu propio código.</p>
+<div class="mermaid">
+flowchart LR
+    APP2["Tu código<br/>construye los JSON"] -->|PutTraceSegments<br/>param: TraceSegmentDocuments| XR2["API de AWS X-Ray"]
+</div>
+<blockquote>
+<p><strong>Dato de examen:</strong> el daemon existe precisamente
+<strong>para agrupar</strong> los documentos y <strong>evitar que el SDK
+llame a AWS directamente</strong>. Ambos caminos terminan en la misma
+API <code>PutTraceSegments</code>.</p>
+</blockquote>
+<hr />
+<h2 id="el-flujo-completo-de-principio-a-fin">5. El flujo completo, de
+principio a fin</h2>
+<div class="mermaid">
+flowchart TB
+    A["1. Llega una petición a tu app"] --> B["2. El SDK abre un SEGMENT (trabajo de tu app)"]
+    B --> C["3. Tu app llama a DynamoDB / S3 / otra API"]
+    C --> D["4. El SDK registra cada llamada como SUBSEGMENT"]
+    D --> E["5. El SDK arma el SEGMENT DOCUMENT (JSON, hasta 64 kB)"]
+    E --> F["6. Lo envía al X-Ray daemon (UDP 2000)"]
+    F --> G["7. El daemon agrupa en lotes"]
+    G --> H["8. El daemon sube con PutTraceSegments a la API de X-Ray"]
+    H --> I["9. X-Ray arma la traza y el mapa de servicios"]
+</div>
+<hr />
+<h2 id="por-qué-b-es-correcta-y-las-demás-no">6. Por qué B es correcta y
+las demás no</h2>
+<div class="mermaid">
+flowchart TB
+    Q{"¿Cómo trazo la petición<br/>y sus llamadas aguas abajo?"}
+    Q --> B["B. SDK genera segment documents<br/>con subsegments y los envía al daemon<br/>que agrupa y sube en lotes"]
+    Q --> A["A. Pasar varios trace segments<br/>como parámetro de PutTraceSegments"]
+    Q --> C["C. Instalar X-Ray en cada<br/>servicio y recurso AWS"]
+    Q --> D["D. Subir un trace segment<br/>ejecutando PutTraceSegments"]
+    B --> OK["CORRECTA"]
+    A --> KO1["El parámetro es TraceSegmentDocuments<br/>(lista de JSON), no trace segments"]
+    C --> KO2["Las llamadas aguas abajo se capturan<br/>como subsegments; no se instala<br/>en cada servicio por separado"]
+    D --> KO3["Se suben segment DOCUMENTS con<br/>subsegments, no un segment suelto"]
+</div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Veredicto</th>
+<th>Razón</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B</strong></td>
+<td>✅ Correcta</td>
+<td>El SDK genera <em>segment documents</em> con <em>subsegments</em>
+(que capturan las llamadas aguas abajo) y los manda al <em>daemon</em>,
+que agrupa y sube en lotes a la API. Es el patrón recomendado.</td>
+</tr>
+<tr>
+<td><strong>A</strong></td>
+<td>❌</td>
+<td>El parámetro de <code>PutTraceSegments</code> es
+<strong><code>TraceSegmentDocuments</code></strong> (lista de documentos
+JSON), no “trace segments” sueltos. Nombre incorrecto del concepto.</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>❌</td>
+<td>No trazas la app y cada servicio por separado esperando un único
+resultado. Las llamadas aguas abajo se capturan como
+<strong>subsegments</strong> dentro de la traza de tu app.</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>❌</td>
+<td>Lo que se sube son <strong>segment documents con
+subsegments</strong>, no un “trace segment” suelto. Confunde el objeto
+que viaja.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="resumen-en-una-frase">7. Resumen en una frase</h2>
+<blockquote>
+<p>Instrumentas con el <strong>X-Ray SDK</strong>, que produce
+<strong>segment documents</strong> (JSON de hasta 64 kB) donde tu app es
+el <strong>segment</strong> y cada llamada aguas abajo es un
+<strong>subsegment</strong>; esos documentos van al
+<strong>daemon</strong>, que los <strong>agrupa y sube en lotes</strong>
+con <code>PutTraceSegments</code>. La alternativa directa es llamar tú a
+<code>PutTraceSegments</code> con la lista
+<code>TraceSegmentDocuments</code>.</p>
+</blockquote>
+<p><strong>Enlaces oficiales:</strong></p>
+<ul>
+<li>Enviar datos a X-Ray (SDK y daemon):
+https://docs.aws.amazon.com/xray/latest/devguide/xray-api-sendingdata.html</li>
+<li>Segment documents (estructura JSON, 64 kB, subsegments):
+https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html</li>
+<li>API <code>PutTraceSegments</code>:
+https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html</li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({ startOnLoad: true, theme: 'default' });
+// Add copy buttons to ALL pre blocks
+document.querySelectorAll('pre').forEach(pre => {
+  if (pre.closest('.mermaid')) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'code-wrapper';
+  pre.parentNode.insertBefore(wrapper, pre);
+  wrapper.appendChild(pre);
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy';
+  btn.onclick = function() {
+    const code = pre.querySelector('code') || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  };
+  wrapper.appendChild(btn);
+});
+</script>
+</body>
+</html>

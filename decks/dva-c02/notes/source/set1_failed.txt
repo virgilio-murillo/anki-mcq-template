@@ -1,0 +1,131 @@
+DVA-C02::05 SOURCE - Questions failed in the FIRST set (Tutorials Dojo).
+Failed (Incorrect) questions: Q4, Q7, Q11, Q12, Q13, Q14, Q17, Q18, Q21.
+
+=== Q4: CodePipeline manual approval + SNS ===
+Requirement: someone performs a code review before a revision moves to the next
+stage; if approved the pipeline resumes, if not it stops.
+CORRECT: Implement a manual approval action configuration in CodePipeline. Send the
+approval request to an Amazon SNS Topic.
+Key facts:
+- CodePipeline manual approval action stops the pipeline at that point until someone
+  with IAM permission approves or rejects.
+- If rejected OR no one approves/rejects within 7 days -> treated as failed, pipeline
+  does NOT continue.
+- Approval action can publish to an SNS topic (topic must be in the same region as the pipeline).
+Distractors:
+- Step Functions Wait state = unnecessary complexity; built-in manual approval suffices.
+- SQS = no integration with manual approval actions (use SNS).
+- AWS SAM = a framework for building serverless apps, not a CI/CD replacement.
+
+=== Q7: X-Ray segment documents + daemon ===
+Requirement: trace all requests including downstream calls to AWS resources.
+CORRECT: Use the X-Ray SDK to generate segment documents WITH subsegments and send
+them to the X-Ray daemon, which buffers them and uploads to the X-Ray API in batches.
+Key facts:
+- Segment document = JSON string describing work done for a request; up to 64 kB.
+- Your app records its own work in SEGMENTS, and downstream service/resource work in SUBSEGMENTS.
+- You can send segment documents directly via PutTraceSegments API, OR send to the
+  X-Ray daemon which buffers and batches uploads. The SDK sends to the daemon to avoid
+  calling AWS directly.
+Distractors:
+- "upload a trace segment via PutTraceSegments" = you upload segment DOCUMENTS with subsegments, not a bare trace segment.
+- "install X-Ray on the different services + resources" = you cannot trace app and services separately and expect one result; send subsegments instead.
+- "pass multiple trace segments as a parameter of PutTraceSegments" = the param is TraceSegmentDocuments (a list of JSON segment documents), not trace segments.
+
+=== Q11: RDS Enhanced Monitoring ===
+Requirement: monitor how different PROCESSES on a DB instance use CPU (percentage of
+CPU bandwidth, total memory consumed by each process).
+CORRECT: Use Enhanced Monitoring in RDS.
+Key facts:
+- Enhanced Monitoring gathers OS metrics from an AGENT ON the instance (real time),
+  showing per-process/per-thread CPU and memory. Stored in CloudWatch Logs (RDSOSMetrics
+  log group), default 30 days retention.
+- CloudWatch gathers CPU from the HYPERVISOR (less detailed, can differ slightly).
+Distractors:
+- shell script publishing custom metrics = you have no direct OS access to RDS instances; not as detailed.
+- CloudWatch CPUUtilization = no per-process % or per-process memory; hypervisor-level.
+- "CPU% and MEM% readily available in RDS console" = false, not readily available.
+
+=== Q12: Write-through caching pseudocode ===
+Requirement: cached data always up-to-date; stale records auto-deleted (TTL); avoid stale build-up.
+CORRECT pseudocode (write-through + TTL):
+  save_item(item_id, item_value):
+    ttl = 500
+    db.query("UPDATE Customers SET value=%s WHERE id=%s", item_value, item_id)
+    cache.set(item_id, item_value, ttl)
+    return 'ok'
+Key facts:
+- Write-through = update/add to cache whenever data is written to the DB; cache never stale.
+- Downside: wastes space on rarely-read data; mitigate with TTL.
+Distractors:
+- SELECT then cache.set = does not update the DB; cache holds stale data.
+- only cache.set = never updates the DB.
+- UPDATE then cache.delete = updates DB but deletes from cache, so next read misses (slower), not write-through.
+
+=== Q13: AppSync vs Cognito Sync (real-time collaborative sync) ===
+Requirement: sync app preferences & game state across devices AND allow MULTIPLE users
+to synchronize and collaborate on shared data in REAL TIME.
+CORRECT: Integrate AWS AppSync.
+Key facts:
+- AppSync = managed GraphQL service; real-time updates, offline local data access, data
+  sync with conflict resolution; multiple users collaborate on shared data in real time.
+- Cognito Sync also syncs app data across devices (per-identity datasets) BUT does not
+  allow multiple users to collaborate in real time.
+Distractors:
+- Amplify = framework to build/deploy web/mobile apps; not for cross-device data sync.
+- Cognito Sync = single-user cross-device sync, no multi-user real-time collaboration.
+- Pinpoint = customer engagement (push, email, SMS, voice), not data sync.
+
+=== Q14: sam deploy (zip + upload to S3 + package template + deploy) ===
+CORRECT: sam deploy.
+Key facts:
+- sam deploy zips code artifacts, uploads to S3, produces the packaged template, and
+  deploys via CloudFormation (SAM uses CloudFormation underneath).
+- For nested apps include CAPABILITY_AUTO_EXPAND.
+Distractors:
+- aws cloudformation deploy = expects artifacts already packaged/uploaded; no implicit packaging.
+- sam package = only zips + uploads + generates template; does NOT deploy.
+- sam publish = publishes to the Serverless Application Repository; does not generate template/deploy.
+
+=== Q17: TDE for SQL Server on RDS ===
+Requirement: automatically encrypt the actual data before it is written to storage and
+decrypt when read; SQL Server 2019 Enterprise on RDS.
+CORRECT: Enable Transparent Data Encryption (TDE).
+Key facts:
+- RDS supports TDE for SQL Server (2019 Std & Enterprise; 2012-2017 Enterprise).
+- TDE encrypts data & log files at the DB level; two-tier key architecture (cert from DB
+  master key protects the data encryption key). Enable via TDE option in an RDS option group.
+Distractors:
+- RDS Encryption (encryption at rest on the storage volume) = does not encrypt the data itself at the DB level the way TDE does (per this question's framing).
+- IAM DB Authentication = auth to the DB via IAM, not data encryption.
+- Windows Authentication = auth via AWS Managed Microsoft AD, not encryption.
+
+=== Q18: GSI WCU >= base table WCU (provisioned) ===
+Requirement: creating a GSI on a provisioned table storing large data; specify WCU for
+expected workload on base table AND index; avoid throttling.
+CORRECT: Ensure the GSI's provisioned WCU is EQUAL OR GREATER than the base table's WCU.
+Key facts:
+- GSI has its own provisioned throughput separate from the base table. Writes to the base
+  table also update the GSI, consuming the GSI's WCU. If the GSI has insufficient WCU, the
+  WRITE ACTIVITY ON THE TABLE is throttled.
+- So GSI WCU should be >= base table WCU to avoid throttling.
+Distractors:
+- GSI WCU <= base WCU = wrong direction (would throttle).
+- RCU >= base RCU / RCU <= base RCU = the concern is WCU, not RCU, for this write scenario.
+
+=== Q21 (== randomized-test Q3): S3 Object Lambda Access Points for role-based PII redaction ===
+Requirement: keep PII records 5 years in S3; RedactPII-[role] Lambda functions; varying
+redaction per role; each user sees only necessary data; only ONE copy of records.
+CORRECT (Select THREE):
+- Create an S3 Access Point for each user role.
+- Configure an S3 Object Lambda Access Point for each S3 Access Point; associate the
+  matching RedactPII-[role] Lambda with each Object Lambda Access Point.
+- Use the GetObject API to retrieve the redacted data.
+Key facts:
+- S3 Object Lambda adds your code to S3 GET requests to transform/redact data on the fly,
+  no second stored copy. Users call GetObject against their Object Lambda Access Point ->
+  role-specific redaction. Single copy maintained.
+Distractors:
+- S3 event notification to invoke on GET = event notifications are for object-created events, not GET.
+- S3 Replication = creates extra copies (violates single-copy).
+- GetObjectLegalHold API = returns legal hold status, not redacted data.

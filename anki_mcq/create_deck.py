@@ -29,8 +29,8 @@ import json
 import os
 import urllib.request
 
-from anki_mcq import build_deck
-from verify_deck import verify_cards, verify_apkg
+from .engine import build_deck
+from .verify_deck import verify_cards, verify_apkg
 
 ANKICONNECT = "http://localhost:8765"
 

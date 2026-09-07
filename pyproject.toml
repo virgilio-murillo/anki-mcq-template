@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "anki-mcq"
+version = "0.2.0"
+description = "Reusable engine for building didactic multiple-choice Anki decks with genanki."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT" }
+dependencies = ["genanki"]
+
+[project.scripts]
+mcq-verify = "anki_mcq.verify_deck:_cli"
+mcq-import = "anki_mcq.import_to_anki:main"
+
+[tool.setuptools]
+packages = ["anki_mcq"]

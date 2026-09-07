@@ -1,0 +1,103 @@
+DVA-C02::06 SOURCE - Questions failed in the RANDOMIZED TEST (Tutorials Dojo).
+Failed (Incorrect) questions: Q1, Q2, Q3, Q7, Q9, Q10, Q17, Q18, Q19.
+NOTE: randomized Q3 (S3 Object Lambda Access Points) is the SAME as set1 Q21, so it
+is built in DVA-C02::05, NOT duplicated here.
+
+=== Q1: CloudFormation drift detection ===
+Requirement: IAM roles for Lambda were manually modified; identify unauthorized changes
+and ensure resources are in sync with the CloudFormation stack.
+CORRECT: Run a drift detection check on the CloudFormation stack.
+Key facts:
+- Drift detection compares a stack's ACTUAL resource config vs the EXPECTED config in the
+  template; reports discrepancies ("drift"); detects out-of-band/unauthorized changes.
+Distractors:
+- AWS Config = tracks config changes/compliance but lacks the stack-sync context; wouldn't show deviation from the stack template directly.
+- CloudTrail = records API calls (who changed the role) but doesn't tell authorized vs not, nor sync-with-stack.
+- CloudWatch Logs = log collection/monitoring; doesn't track IAM permission changes vs the stack.
+
+=== Q2: Export in Outputs + Fn::ImportValue ===
+Requirement: reference a newly created API endpoint from OTHER stacks.
+CORRECT: Include the Export property in the original template's Outputs section, then use
+Fn::ImportValue in other templates to retrieve the exported value.
+Key facts:
+- Cross-stack references (same account + region): export output values with Export field
+  in Outputs; import with Fn::ImportValue.
+Distractors:
+- Export + Ref = Ref cannot return values from other templates.
+- "specify HelloWorldApi as parameter of Fn::ImportValue" = Fn::ImportValue is not standalone; you must first declare an Export name.
+- AWS::Include transform = for reusing template snippets stored in S3, not for exporting an endpoint.
+
+=== Q7 (randomized): DynamoDB RCU cost optimization -> 1600 ===
+Requirement: Lambda sends 320 STRONGLY consistent reads/sec to a table with provisioned
+RCU=5440; avg item size 17 KB. Lower cost while keeping performance.
+CORRECT: Set the provisioned RCU to 1600.
+Method (AWS):
+- Round item size up to next 4 KB: 17 KB -> ceil(17/4)=5 (so 5 x 4KB = 20 KB block; 5 read units per strong read).
+- Strong reads: reads/sec x units-per-read = 320 x 5 = 1600 RCU.
+- 5440 was WRONG: 320 x 17 = 5440 is a WCU-style calc, not RCU.
+Distractors:
+- 800 = would be eventual-consistency math; fails the strong-consistency requirement.
+- exponential backoff = for error retries, not capacity sizing.
+- on-demand mode = better for unpredictable traffic; here traffic is known, so provisioned is cheaper/suitable.
+
+=== Q9: Projection expression ===
+Requirement: queries return all attributes by default; only fetch specific attributes
+(course_id and price) per request.
+CORRECT: Use a projection expression.
+Key facts:
+- Projection expression = comma-separated string of attribute names to return on GetItem/Query/Scan.
+- Attribute names must start a-z/A-Z; use expression attribute names (#placeholder) if a name is invalid/reserved.
+Distractors:
+- condition expression = determines which items are modified on Put/Update/Delete.
+- expression attribute names = a #placeholder for a real name, used WITHIN a projection expression; not the mechanism itself.
+- filter expression = filters which ITEMS are returned (post-Query/Scan), not which ATTRIBUTES.
+
+=== Q10: One IAM Role per ECS task (Fargate) ===
+Requirement: 4 ECS tasks (Fargate), each needs access to DIFFERENT AWS resources; most
+efficient way to grant access.
+CORRECT: Create 4 different IAM Roles with the required permissions and attach one to each of the 4 ECS tasks (task roles).
+Key facts:
+- ECS task IAM role: attach an IAM role per task definition so each task gets its own permissions.
+Distractors:
+- IAM Group = you cannot attach an IAM Group to an ECS task; groups are for IAM users.
+- Container Instance IAM Role = only for the EC2 launch type (container instances), not Fargate.
+- Service-Linked Role = a special role linked to the ECS service itself, not per-task permissions.
+
+=== Q17: On-prem Linux server -> AWS SDK needs access keys (IAM user) ===
+Requirement: Node.js app on an ON-PREMISES Linux server accesses S3/DynamoDB/ElastiCache
+via the AWS SDK; most suitable way to provide access.
+CORRECT: Create a new IAM user with programmatic access; on the server create the
+credentials file at ~/.aws/credentials with the IAM user's ACCESS KEYS.
+Key facts:
+- Resources inside AWS -> use IAM roles. Apps OUTSIDE AWS (on-prem, 3rd-party) -> need
+  access keys for programmatic access. AWS SDK reads ~/.aws/credentials.
+Distractors:
+- IAM role assigned to on-prem server = you cannot directly assign an IAM role to an on-prem server; access keys preferred for on-prem SDK.
+- IAM role + STS AssumeRole = the app is on-prem, not EC2; access keys still preferred here.
+- IAM user username + hashed password in credentials file = console credentials are for humans, not programmatic SDK calls.
+
+=== Q18: ElastiCache for Redis (Multi-AZ replication, sub-ms) ===
+Requirement: caching in front of RDS MySQL; supports Multi-AZ REPLICATION with sub-ms
+response; LEAST effort.
+CORRECT: Set up an ElastiCache for Redis cluster with replication for high availability.
+Key facts:
+- ElastiCache Redis supports replication (and Multi-AZ); Memcached does NOT support replication.
+- Both offer sub-ms latency.
+Distractors:
+- ElastiCache for Memcached = sub-ms but NO replication.
+- DynamoDB + DAX (via Schema Conversion Tool) = huge effort; no need to change schema.
+- Global Accelerator = network performance service, not a cache.
+
+=== Q19: CloudFront Functions (Viewer Request) for JWT validation ===
+Requirement: Fargate behind ALB, fronted by CloudFront; flood of unauthenticated login
+attempts raises Fargate CPU; validate JWT and reduce load, most operationally efficient.
+CORRECT: Create a CloudFront Function for JWT validation; attach it to the Viewer Request event.
+Key facts:
+- CloudFront Functions = lightweight JS at edge, viewer request/response only; ideal for
+  request authorization (validate JWT) at the edge before requests reach the origin. Highly scalable, low latency.
+Distractors:
+- Lambda@Edge on Origin Response = too late (after origin already processed); doesn't reduce origin load; can add errors.
+- Lambda via ALB routing = requests still traverse to ALB/Lambda; not efficient, adds latency.
+- Auto-scaling Fargate = reactive, doesn't stop unauthenticated requests from consuming resources.
+NOTE for card writing: distinguish CloudFront Functions (viewer request/response, JS, ultra-light)
+from Lambda@Edge (all 4 events incl origin req/resp, heavier). JWT validation to shed load = Viewer Request + CloudFront Functions.

@@ -3,3 +3,15 @@ __pycache__/
 *.pyc
 *.apkg
 .DS_Store
+
+# Build artifacts (editable install)
+*.egg-info/
+build/
+dist/
+
+# Generated deck packages live here (regenerate from the .py scripts)
+decks/*/out/
+
+# Investigation agent logs (local noise, not source)
+investigation/
+kiro-notes/

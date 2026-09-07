@@ -6,6 +6,42 @@ card design and the anti-patterns already fixed.
 
 ![format](https://img.shields.io/badge/format-.apkg-blue) ![python](https://img.shields.io/badge/python-3.8%2B-green)
 
+## Repository layout
+
+The reusable **engine** is separated from **per-exam content**, so you can add
+as many exams as you want without cluttering the root:
+
+```
+anki-mcq-template/
+├── anki_mcq/              # the reusable engine (installable package)
+│   ├── engine.py          # model, CSS, card(), build_deck() (stable GUIDs + per-name deck id)
+│   ├── create_deck.py     # build -> verify -> import straight into the target (sub)deck
+│   ├── verify_deck.py     # quality gate (enforces DECK_STANDARDS.md); CLI: mcq-verify
+│   ├── sync_deck.py        # update a deck in place via AnkiConnect (keeps review progress)
+│   └── import_to_anki.py   # import a .apkg via AnkiConnect; CLI: mcq-import
+├── decks/                 # one folder per exam
+│   └── dva-c02/           # AWS Developer Associate (DVA-C02)
+│       ├── dva_c02_04.py  # generator scripts (one per subdeck)
+│       ├── dva_c02_05.py
+│       ├── dva_c02_06.py
+│       ├── out/           # generated .apkg files (git-ignored, regenerate anytime)
+│       └── notes/         # review results, explanations, source material
+├── examples/
+│   └── example_deck.py    # minimal 3-card example (passes the quality gate)
+├── docs/
+│   ├── DECK_STANDARDS.md      # MANDATORY quality standards every deck must follow
+│   └── PRESERVING_PROGRESS.md # how to update decks without losing scheduling
+├── pyproject.toml         # installs the engine as the `anki_mcq` package
+├── requirements.txt
+└── LICENSE
+```
+
+### Adding a new exam
+
+Create a new folder under `decks/` (e.g. `decks/saa-c03/`), add an `out/`
+subfolder, and write your generator scripts there. Because the engine is an
+installed package, `from anki_mcq import card, create` works from any folder.
+
 ## Why this template
 
 Building MCQ cards by hand is easy to get wrong. This template bakes in the
@@ -13,8 +49,7 @@ lessons learned:
 
 - **The front never leaks the answer.** Options are stored in two fields: a
   neutral one shown on the front, and a marked one (correct highlighted) shown
-  only on the back. (A naive single-field approach shows the green ✓ on the
-  question side — useless as a test.)
+  only on the back.
 - **Options are shuffled** deterministically per card, so the correct letter is
   not predictable across the deck. You learn the concept, not the position.
 - **Didactic back:** a verdict line, an explanation, and optional callout boxes
@@ -33,21 +68,21 @@ lessons learned:
 
 ```bash
 python3 -m venv .venv
-./.venv/bin/pip install -r requirements.txt
-./.venv/bin/python example_deck.py     # writes example_deck.apkg
+./.venv/bin/pip install -e .          # installs the anki_mcq engine (+ genanki)
+./.venv/bin/python examples/example_deck.py   # writes example_deck.apkg
 ```
 
-Then import `example_deck.apkg` into Anki (double-click) or, if Anki is running
-with the [AnkiConnect](https://ankiweb.net/shared/info/2055492159) add-on:
+Then import the `.apkg` into Anki (double-click) or, if Anki is running with the
+[AnkiConnect](https://ankiweb.net/shared/info/2055492159) add-on:
 
 ```bash
-./.venv/bin/python import_to_anki.py example_deck.apkg
+./.venv/bin/mcq-import example_deck.apkg
 ```
 
 ## Writing your own deck
 
 ```python
-from anki_mcq import card, build_deck
+from anki_mcq import card, create
 
 cards = [
     card(
@@ -61,18 +96,20 @@ cards = [
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://example.com">docs</a></div>'
         ),
+        key="my-deck-q1",                # stable key (recommended for in-place sync)
     ),
     # ...more cards
 ]
 
-build_deck("My Deck Name", cards, "my_deck.apkg")
+# build -> verify -> import straight into the target subdeck (needs Anki + AnkiConnect)
+create(deck_name="My Deck::01", cards=cards, out_path="out/my_deck_01.apkg")
 ```
 
 ### The correct letter: use `{{L}}`, never hardcode it
 
 Options are **shuffled**, so the correct answer's letter changes. **Never** write
 `Correct: C` in the answer text (it will drift out of sync with the shuffled
-options). Instead, write the placeholder `{{L}}` and `build_deck` substitutes the
+options). Instead, write the placeholder `{{L}}` and the engine substitutes the
 real shuffled letter:
 
 ```python
@@ -98,7 +135,7 @@ keep files ASCII-safe, or just write UTF-8 directly — both work.
 ## Card-writing best practices
 
 Baked into the design, but worth stating (full list in
-[DECK_STANDARDS.md](DECK_STANDARDS.md) — MANDATORY reading):
+[docs/DECK_STANDARDS.md](docs/DECK_STANDARDS.md) — MANDATORY reading):
 
 - **One concept per card** (minimum information principle).
 - **Prefix the topic** in the question so it reads well when reviews are interleaved.
@@ -116,12 +153,11 @@ resets each card's scheduling (due/interval/ease/reps and history).
 
 Two safe options:
 
-1. **In-place sync (recommended, Anki running):** use `sync_deck.py`, which
-   edits existing notes via AnkiConnect `updateNoteFields` (progress kept) and
-   only adds genuinely new cards. It never deletes.
+1. **In-place sync (recommended, Anki running):** use `sync`, which edits
+   existing notes via AnkiConnect `updateNoteFields` (progress kept) and only
+   adds genuinely new cards. It never deletes.
    ```python
-   from anki_mcq import card
-   from sync_deck import sync
+   from anki_mcq import card, sync
    cards = [ card(question="...", options=[...], correct=1, answer="...",
                   key="my-deck-q1") ]   # stable key
    sync(deck_name="DVA-C02::01", cards=cards)
@@ -130,59 +166,28 @@ Two safe options:
    updates matched notes in place **if the note type is unchanged** and you
    leave "Import any learning progress" unchecked in the import dialog.
 
-Full rules and rationale: see [PRESERVING_PROGRESS.md](PRESERVING_PROGRESS.md).
+Full rules and rationale: see [docs/PRESERVING_PROGRESS.md](docs/PRESERVING_PROGRESS.md).
 Always back up first: File -> Export -> Anki Collection Package (`.colpkg`).
-
-## Files
-
-| File | Purpose |
-|---|---|
-| `anki_mcq.py` | The reusable engine: model, CSS, `card()`, `build_deck()` (stable GUIDs + per-name deck id) |
-| `create_deck.py` | Recommended flow: build -> verify -> import straight into the target (sub)deck |
-| `sync_deck.py` | Update a deck in place via AnkiConnect, preserving review progress |
-| `verify_deck.py` | Quality gate — run before importing (enforces the standards) |
-| `example_deck.py` | Minimal 3-card example (passes `verify_deck.py`) |
-| `import_to_anki.py` | Import a `.apkg` via AnkiConnect |
-| `DECK_STANDARDS.md` | MANDATORY quality standards every deck must follow |
-| `PRESERVING_PROGRESS.md` | How to update decks without losing scheduling |
-| `requirements.txt` | `genanki` |
-
-## Recommended flow for a NEW deck
-
-Use `create_deck.create`, which builds, runs the quality gate, and imports the
-package **directly into the target subdeck** (no card-moving, no ambiguous
-queries):
-
-```python
-from anki_mcq import card
-from create_deck import create
-
-cards = [ card(question="...", options=[...], correct=1, answer="...",
-               key="dva02-q1") ]
-create(deck_name="DVA-C02::02", cards=cards, out_path="DVA-C02_02.apkg")
-```
-
-`build_deck` derives a unique deck id from the name, so each subdeck imports
-cleanly to its own place.
 
 ## Quality gate (run before importing)
 
-Every deck must pass `verify_deck.py`, which enforces [DECK_STANDARDS.md](DECK_STANDARDS.md):
-front does not leak the answer, verdict letter matches the highlighted option,
-no leftover `{{L}}`, 4 options per card, each card has a verdict, and each back
-refutes its distractors.
+Every deck must pass the quality gate, which enforces
+[docs/DECK_STANDARDS.md](docs/DECK_STANDARDS.md): front does not leak the answer,
+verdict letter matches the highlighted option, no leftover `{{L}}`, 4 options per
+card, each card has a verdict, and each back refutes its distractors.
 
 ```bash
-./.venv/bin/python verify_deck.py my_deck.apkg   # must print "OK (0 problemas)"
+./.venv/bin/mcq-verify decks/dva-c02/out/DVA-C02_04.apkg   # must print "OK (0 problemas)"
 ```
 
-Do not import a deck that fails verification.
+`create()` runs this automatically before importing. Do not import a deck that
+fails verification.
 
 ## Requirements
 
 - Python 3.8+
-- `genanki`
-- (optional) Anki + AnkiConnect add-on for `import_to_anki.py`
+- `genanki` (installed via `pip install -e .`)
+- (optional) Anki + AnkiConnect add-on for importing/syncing
 
 ## License
 

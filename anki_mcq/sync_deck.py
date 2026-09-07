@@ -35,7 +35,7 @@ import hashlib
 import json
 import urllib.request
 
-from anki_mcq import make_model, render_options, DEFAULT_MODEL_ID
+from .engine import make_model, render_options, DEFAULT_MODEL_ID
 
 ANKICONNECT = "http://localhost:8765"
 KEY_TAG_PREFIX = "mcqkey:"

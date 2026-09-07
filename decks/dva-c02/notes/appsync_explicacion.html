@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Report</title>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #fff; }
+h1 { color: #232f3e; font-size: 22pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color: #0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 2em; }
+h3 { color: #232f3e; font-size: 13pt; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt; }
+th { background-color: #232f3e; color: white; padding: 8px; text-align: left; }
+td { border: 1px solid #ddd; padding: 6px 8px; }
+tr:nth-child(even) { background-color: #f8f8f8; }
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 10pt; color: #c7254e; }
+pre { background: #1e1e2e; padding: 16px; border-radius: 8px; font-size: 9.5pt; white-space: pre-wrap; word-break: break-word; overflow-x: auto; }
+pre code { background: none; color: #cdd6f4; padding: 0; font-size: inherit; }
+blockquote { border-left: 4px solid #0073bb; margin: 12px 0; padding: 8px 16px; background: #f0f7fc; }
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+.mermaid { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0; text-align: center; }
+.code-wrapper { position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: #3498db; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: 8pt; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { background: #27ae60; }
+</style>
+</head>
+<body>
+<h1
+id="aws-appsync-a-fondo-graphql-gestionado-tiempo-real-y-offline">AWS
+AppSync a fondo: GraphQL gestionado, tiempo real y offline</h1>
+<p>Guia visual para entender <strong>que es AppSync</strong>,
+<strong>como funciona</strong> y <strong>en que se diferencia</strong>
+de los servicios con los que se suele confundir (Cognito Sync, Amplify,
+Pinpoint, API Gateway).</p>
+<hr />
+<h2 id="la-idea-en-una-frase">1. La idea en una frase</h2>
+<blockquote>
+<p><strong>AWS AppSync es un servicio gestionado que te da una API
+GraphQL para leer, escribir y combinar datos de varias fuentes, con
+actualizaciones en tiempo real y acceso offline.</strong></p>
+</blockquote>
+<p>Su superpoder frente a otros servicios de sincronizacion: permite que
+<strong>varios usuarios colaboren sobre datos compartidos en tiempo
+real</strong>, no solo sincronizar los datos de un unico usuario entre
+sus dispositivos.</p>
+<div class="mermaid">
+flowchart LR
+    APP["App movil / web"] -->|una sola consulta GraphQL| AS(AWS AppSync)
+    AS --> DDB[(DynamoDB)]
+    AS --> RDS[(RDS / Aurora)]
+    AS --> LAM(Lambda)
+    AS --> HTTP(APIs HTTP)
+    AS --> OS[(OpenSearch)]
+    AS -.->|tiempo real via subscriptions| APP
+</div>
+<p>Con REST tradicional pedirias a varios endpoints y unirias los datos
+en el cliente. Con <strong>GraphQL</strong> en AppSync, el cliente pide
+<strong>exactamente</strong> los campos que necesita en <strong>una
+sola</strong> peticion, y AppSync los resuelve desde una o varias
+fuentes.</p>
+<hr />
+<h2 id="que-es-graphql-el-corazon-de-appsync">2. Que es GraphQL (el
+corazon de AppSync)</h2>
+<p><strong>GraphQL</strong> es un lenguaje de consulta para APIs. En vez
+de muchos endpoints REST, tienes <strong>un solo endpoint</strong> y un
+<strong>schema</strong> que declara los tipos y las operaciones.</p>
+<p>Tres tipos de operacion:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Operacion</th>
+<th>Que hace</th>
+<th>Analogia</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Query</strong></td>
+<td>Leer datos</td>
+<td>“dame el pedido 42 con su cliente”</td>
+</tr>
+<tr>
+<td><strong>Mutation</strong></td>
+<td>Crear / actualizar / borrar</td>
+<td>“cambia el estado del pedido a enviado”</td>
+</tr>
+<tr>
+<td><strong>Subscription</strong></td>
+<td>Recibir cambios en <strong>tiempo real</strong></td>
+<td>“avisame cuando cambie el pedido 42”</td>
+</tr>
+</tbody>
+</table>
+<div class="mermaid">
+flowchart TB
+    subgraph SCHEMA["Schema GraphQL (el contrato)"]
+        Q["Query: leer"]
+        M["Mutation: escribir"]
+        S["Subscription: tiempo real"]
+    end
+    Q --> R1["Resolver -> DynamoDB"]
+    M --> R2["Resolver -> Lambda"]
+    S --> R3["Push a los clientes suscritos"]
+</div>
+<p>Cada campo del schema se conecta a una fuente de datos mediante un
+<strong>resolver</strong> (la pieza que traduce la peticion GraphQL a la
+llamada real a DynamoDB, Lambda, etc.).</p>
+<blockquote>
+<p><strong>Idea clave del “pide solo lo que necesitas”:</strong> el
+cliente controla la forma de la respuesta. Pide 2 campos y recibe 2
+campos; pide un objeto anidado y AppSync lo arma. Esto reduce
+sobre-fetching y viajes de red.</p>
+</blockquote>
+<hr />
+<h2 id="las-tres-capacidades-que-hay-que-recordar">3. Las tres
+capacidades que hay que recordar</h2>
+<h3 id="tiempo-real-subscriptions">3.1 Tiempo real (subscriptions)</h3>
+<p>Cuando un cliente hace una <strong>mutation</strong>, AppSync empuja
+el cambio a <strong>todos</strong> los clientes suscritos a esa
+subscription, por WebSockets. Asi varios usuarios ven el mismo dato
+actualizarse al instante.</p>
+<div class="mermaid">
+sequenceDiagram
+    participant U1 as Usuario A
+    participant U2 as Usuario B
+    participant AS as AppSync
+    U2->>AS: subscription onPedidoActualizado(42)
+    U1->>AS: mutation actualizaPedido(42, "enviado")
+    AS-->>U1: respuesta
+    AS-->>U2: push en tiempo real: pedido 42 = enviado
+</div>
+<h3 id="offline-y-sincronizacion-delta-sync">3.2 Offline y
+sincronizacion (Delta Sync)</h3>
+<p>Las apps moviles/web pueden <strong>leer datos locales sin
+conexion</strong> y, al volver online, <strong>sincronizar</strong> los
+cambios con <strong>resolucion de conflictos</strong> configurable. En
+movil esto se suele consumir via <strong>Amplify DataStore</strong>, que
+usa AppSync por debajo.</p>
+<div class="mermaid">
+flowchart LR
+    OFF["Dispositivo sin conexion<br/>lee/escribe local"] -->|vuelve online| SYNC["AppSync Delta Sync<br/>sincroniza + resuelve conflictos"]
+    SYNC --> DDB[(DynamoDB)]
+</div>
+<h3 id="multi-usuario-colaborativo-el-diferenciador">3.3 Multi-usuario
+colaborativo (el diferenciador)</h3>
+<p>Combina las dos anteriores: varios usuarios editan un mismo
+documento/estado y todos convergen al mismo dato en tiempo real. Este es
+el punto que distingue a AppSync de Cognito Sync.</p>
+<hr />
+<h2 id="como-fluye-una-peticion-en-appsync">4. Como fluye una peticion
+en AppSync</h2>
+<div class="mermaid">
+flowchart TB
+    A["1. Cliente envia Query/Mutation/Subscription"] --> B["2. AppSync autentica (API key, IAM, Cognito, OIDC, Lambda auth)"]
+    B --> C["3. El resolver del campo transforma la peticion"]
+    C --> D["4. Va a la fuente de datos (DynamoDB, Lambda, RDS, HTTP, OpenSearch)"]
+    D --> E["5. El resolver mapea la respuesta al schema"]
+    E --> F["6. Devuelve SOLO los campos pedidos"]
+    F --> G["7. Si fue mutation: push en tiempo real a los suscritos"]
+</div>
+<p><strong>Autenticacion</strong>: AppSync admite API key, IAM,
+<strong>Cognito User Pools</strong>, OIDC y <strong>Lambda
+authorizers</strong>. (Nota util: Cognito y AppSync se usan juntos con
+frecuencia; Cognito autentica, AppSync sirve los datos.)</p>
+<hr />
+<h2 id="comparacion-con-servicios-parecidos-lo-que-mas-se-confunde">5.
+Comparacion con servicios parecidos (lo que mas se confunde)</h2>
+<div class="mermaid">
+flowchart TB
+    Q{"Que necesito?"}
+    Q --> A["Datos multi-fuente + tiempo real +<br/>varios usuarios colaborando"]
+    Q --> B["Sincronizar datos de UN usuario<br/>entre SUS dispositivos"]
+    Q --> C["Construir y desplegar una app<br/>web/movil (frontend + backend)"]
+    Q --> D["Enviar push / email / SMS<br/>a clientes (engagement)"]
+    Q --> E["Exponer una API REST /<br/>proxy HTTP a un backend"]
+    A --> AS["AWS AppSync (GraphQL)"]
+    B --> CS["Amazon Cognito Sync (legacy)"]
+    C --> AM["AWS Amplify"]
+    D --> PP["Amazon Pinpoint"]
+    E --> AG["Amazon API Gateway"]
+</div>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th>Servicio</th>
+<th>Para que sirve</th>
+<th>Tiempo real</th>
+<th>Multi-usuario colaborativo</th>
+<th>Se confunde con AppSync porque…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>AWS AppSync</strong></td>
+<td>API <strong>GraphQL</strong> gestionada sobre varias fuentes</td>
+<td>Si (subscriptions)</td>
+<td><strong>Si</strong></td>
+<td>(es la respuesta correcta)</td>
+</tr>
+<tr>
+<td><strong>Amazon Cognito Sync</strong></td>
+<td>Sincroniza datasets de <strong>un usuario</strong> entre sus
+dispositivos</td>
+<td>Push de “hay cambios”</td>
+<td><strong>No</strong></td>
+<td>tambien “sincroniza datos entre dispositivos”. <em>Legacy: AWS
+recomienda AppSync.</em></td>
+</tr>
+<tr>
+<td><strong>AWS Amplify</strong></td>
+<td>Framework para <strong>construir y desplegar</strong> apps
+web/movil</td>
+<td>Via AppSync por debajo</td>
+<td>Via AppSync</td>
+<td>tambien aparece en apps moviles; pero Amplify es el
+<strong>framework</strong>, no el servicio de datos</td>
+</tr>
+<tr>
+<td><strong>Amazon Pinpoint</strong></td>
+<td><strong>Engagement</strong>: push, email, SMS, voz, campanas</td>
+<td>No aplica</td>
+<td>No</td>
+<td>dicen “notificar a usuarios”, pero es mensajeria, no datos</td>
+</tr>
+<tr>
+<td><strong>Amazon API Gateway</strong></td>
+<td>Exponer APIs <strong>REST/HTTP/WebSocket</strong> a un backend</td>
+<td>WebSocket manual</td>
+<td>No nativo</td>
+<td>ambos son “capas de API”; API GW es REST/HTTP, AppSync es GraphQL
+gestionado</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="appsync-vs-api-gateway-la-comparacion-tecnica-mas-util">6.
+AppSync vs API Gateway (la comparacion tecnica mas util)</h2>
+<p>Ambos ponen una “capa de API” delante de tu backend, pero resuelven
+cosas distintas:</p>
+<div class="mermaid">
+flowchart LR
+    subgraph APIGW["API Gateway (REST/HTTP)"]
+        G1["/pedidos/42"] --> GB1[(Backend)]
+        G2["/pedidos/42/cliente"] --> GB2[(Backend)]
+    end
+    subgraph APPSYNC["AppSync (GraphQL)"]
+        A1["1 query: pedido(42){ estado cliente{ nombre } }"] --> AB[(Varias fuentes)]
+    end
+</div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Criterio</th>
+<th>API Gateway</th>
+<th>AppSync</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Estilo de API</td>
+<td>REST / HTTP / WebSocket</td>
+<td><strong>GraphQL</strong></td>
+</tr>
+<tr>
+<td>Numero de endpoints</td>
+<td>Muchos (uno por recurso)</td>
+<td><strong>Uno</strong></td>
+</tr>
+<tr>
+<td>Forma de la respuesta</td>
+<td>La define el backend</td>
+<td><strong>La define el cliente</strong> (pide campos)</td>
+</tr>
+<tr>
+<td>Tiempo real</td>
+<td>WebSocket (manual)</td>
+<td><strong>Subscriptions integradas</strong></td>
+</tr>
+<tr>
+<td>Sobre/infra-fetching</td>
+<td>Comun</td>
+<td>Se minimiza (pides lo justo)</td>
+</tr>
+<tr>
+<td>Caso tipico</td>
+<td>API REST clasica, proxy Lambda</td>
+<td>Apps con datos combinados y tiempo real</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Regla de examen:</strong> si el escenario dice
+<strong>“GraphQL”</strong>, <strong>“tiempo real”</strong> y
+<strong>“varios usuarios colaboran sobre datos compartidos”</strong>
+-&gt; <strong>AppSync</strong>. Si dice <strong>“solo un usuario
+sincroniza entre sus dispositivos”</strong> -&gt; Cognito Sync. Si dice
+<strong>“REST”</strong> o <strong>“proxy HTTP”</strong> -&gt; API
+Gateway.</p>
+</blockquote>
+<hr />
+<h2 id="cuando-elegir-appsync">7. Cuando elegir AppSync</h2>
+<p>Buen encaje:</p>
+<ul>
+<li>Apps moviles/web que <strong>combinan datos de varias
+fuentes</strong> en una sola vista.</li>
+<li>Necesitas <strong>actualizaciones en tiempo real</strong> (chat,
+tableros, juegos, colaboracion).</li>
+<li>Necesitas <strong>offline + sincronizacion</strong> con resolucion
+de conflictos.</li>
+<li>Quieres que el <strong>cliente controle</strong> que campos recibe
+(menos viajes de red).</li>
+</ul>
+<p>No es el encaje ideal si:</p>
+<ul>
+<li>Solo necesitas una <strong>API REST simple</strong> -&gt; API
+Gateway.</li>
+<li>Solo necesitas <strong>sincronizar un usuario</strong> entre
+dispositivos -&gt; (historicamente Cognito Sync; hoy
+AppSync/DataStore).</li>
+<li>Lo tuyo es <strong>mensajeria/campanas</strong> -&gt; Pinpoint.</li>
+</ul>
+<hr />
+<h2 id="resumen-en-30-segundos">8. Resumen en 30 segundos</h2>
+<ol type="1">
+<li><strong>AppSync = GraphQL gestionado</strong> sobre varias fuentes
+(DynamoDB, Lambda, RDS, HTTP, OpenSearch).</li>
+<li>Tres operaciones: <strong>Query</strong> (leer),
+<strong>Mutation</strong> (escribir), <strong>Subscription</strong>
+(tiempo real).</li>
+<li>Da <strong>tiempo real</strong>, <strong>offline + sync con
+resolucion de conflictos</strong>, y <strong>colaboracion
+multi-usuario</strong> (su diferenciador).</li>
+<li><strong>Cognito Sync</strong> = un usuario entre sus dispositivos
+(legacy). <strong>Amplify</strong> = framework para construir apps.
+<strong>Pinpoint</strong> = mensajeria. <strong>API Gateway</strong> =
+REST/HTTP.</li>
+<li>En el examen: “GraphQL + tiempo real + varios usuarios colaborando”
+-&gt; <strong>AppSync</strong>.</li>
+</ol>
+<p><strong>Enlaces oficiales:</strong></p>
+<ul>
+<li>Que es AppSync:
+https://docs.aws.amazon.com/appsync/latest/devguide/what-is-appsync.html</li>
+<li>Datos en tiempo real (subscriptions):
+https://docs.aws.amazon.com/appsync/latest/devguide/aws-appsync-real-time-data.html</li>
+<li>Offline / Delta Sync:
+https://docs.aws.amazon.com/appsync/latest/devguide/tutorial-delta-sync.html</li>
+<li>Cognito Sync (contexto, legacy):
+https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-sync.html</li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({ startOnLoad: true, theme: 'default' });
+// Add copy buttons to ALL pre blocks
+document.querySelectorAll('pre').forEach(pre => {
+  if (pre.closest('.mermaid')) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'code-wrapper';
+  pre.parentNode.insertBefore(wrapper, pre);
+  wrapper.appendChild(pre);
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy';
+  btn.onclick = function() {
+    const code = pre.querySelector('code') || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  };
+  wrapper.appendChild(btn);
+});
+</script>
+</body>
+</html>

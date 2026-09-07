@@ -26,7 +26,7 @@ import os
 import shutil
 import zipfile
 
-from anki_mcq import render_options
+from .engine import render_options
 
 _VERDICT_RE = re.compile(r'class="verdict">\s*(?:Correct|Correcta):\s*([A-D])\b')
 _MARKED_RE = re.compile(r'class="opt correct"><span class="k">([A-D])')
@@ -122,9 +122,13 @@ def _print(problems, label):
     return 1
 
 
-if __name__ == "__main__":
+def _cli():
     import sys
     if len(sys.argv) != 2:
-        print("usage: verify_deck.py <deck.apkg>", file=sys.stderr)
+        print("usage: mcq-verify <deck.apkg>", file=sys.stderr)
         raise SystemExit(2)
     raise SystemExit(_print(verify_apkg(sys.argv[1]), sys.argv[1]))
+
+
+if __name__ == "__main__":
+    _cli()
