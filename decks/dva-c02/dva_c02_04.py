@@ -63,10 +63,10 @@ cards = [
     card(
         question="Items de <b>3.5 KB</b>; se necesitan <b>150 lecturas eventualmente consistentes por segundo</b>. Un compa&ntilde;ero calcul&oacute; <b>150 RCU</b> (deber&iacute;an ser 75). &iquest;Qu&eacute; error de c&aacute;lculo cometi&oacute;?",
         options=[
-            "Us&oacute; el conteo de lectura fuerte (1 unidad por item de 4 KB) y no lo dividi&oacute; entre 2 para el modelo eventual",
-            "Multiplic&oacute; por 2 por tratarse de lecturas transaccionales",
-            "Olvid&oacute; redondear el tama&ntilde;o del item a 4 KB",
-            "Us&oacute; un tama&ntilde;o de item de 3.5 KB sin convertirlo a bytes",
+            "Us&oacute; el conteo de lectura fuerte (1 unidad por item de 4 KB) sin dividirlo entre 2 para el modelo eventual",
+            "Trat&oacute; las lecturas como transaccionales y multiplic&oacute; el costo por 2 en vez de usar el modelo eventual",
+            "Olvid&oacute; redondear el item de 3.5 KB al siguiente bloque de 4 KB al contar las unidades de lectura",
+            "Redonde&oacute; el item de 3.5 KB a dos bloques de 4 KB, contando 2 unidades por lectura en lugar de 1",
         ],
         correct=0,
         key="dva04-q6-rcu-mistake",
@@ -108,12 +108,12 @@ cards = [
     card(
         question="&iquest;Cu&aacute;les son los requisitos para habilitar <b>Cross-Region Replication (CRR)</b> en S3?",
         options=[
-            "Origen y destino en la MISMA regi&oacute;n, con Object Lock activo",
-            "Versionado en origen y destino, buckets en regiones distintas, y permisos para que S3 replique en tu nombre",
-            "Solo habilitar versionado en el bucket de origen",
-            "Habilitar Transfer Acceleration en ambos buckets",
+            "Versionado activo en origen y destino, buckets en regiones distintas y un rol IAM para que S3 replique en tu nombre",
+            "Versionado activo en origen y destino, ambos buckets en la MISMA regi&oacute;n y un rol IAM para que S3 replique",
+            "Versionado activo solo en el bucket de origen, buckets en regiones distintas y un rol IAM para que S3 replique",
+            "Versionado activo en origen y destino, buckets en regiones distintas y Object Lock obligatorio en ambos",
         ],
-        correct=1,
+        correct=0,
         key="dva04-q10-crr-requirements",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; versionado en ambos, regiones distintas y un rol IAM que permita replicar.</div>'
@@ -199,12 +199,12 @@ cards = [
     card(
         question="App con CloudFront cuyo <b>origen</b> a veces no responde y devuelve <b>HTTP 504</b> al servir contenido (peticiones GET). &iquest;Qu&eacute; acci&oacute;n costo-eficiente resuelve esos 504?",
         options=[
-            "Aumentar el Cache-Control max-age de los objetos",
-            "Configurar origin failover con un grupo de or&iacute;genes (primario + secundario)",
-            "Desplegar la app en varias regiones con Route 53 latency routing",
-            "Crear VPCs en varias regiones unidas por un transit VPC",
+            "Configurar origin failover con un origin group (primario + secundario) que conmute en 504",
+            "Aumentar el TTL con Cache-Control max-age para servir m&aacute;s objetos desde el cache del edge",
+            "Replicar la app en varias regiones y enrutar con Route 53 latency routing hacia la m&aacute;s cercana",
+            "Conectar VPCs de varias regiones con un transit VPC para dar alta disponibilidad al origen",
         ],
-        correct=1,
+        correct=0,
         key="dva04-q14-origin-failover",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; configurar origin failover.</div>'
@@ -257,12 +257,12 @@ cards = [
     card(
         question="App de subastas: cada nueva puja debe ser <b>mayor que la puja actual</b>. &iquest;C&oacute;mo se implementa esto de forma m&aacute;s efectiva en las llamadas a DynamoDB?",
         options=[
-            "Habilitar DynamoDB Transactions",
-            "Usar conditional writes con una condition expression que valide que la nueva puja &gt; la actual",
-            "Usar DynamoDB Streams + Lambda para comparar pujas",
-            "Usar optimistic locking",
+            'Un conditional write con condition expression "puja &gt; :actual" que rechaza pujas menores',
+            "Una transacci&oacute;n TransactWriteItems para agrupar la lectura y la escritura de la puja",
+            "Un stream de DynamoDB con Lambda que compare la puja nueva contra la anterior tras escribir",
+            'Optimistic locking con atributo Version y condici&oacute;n "Version = :leida" antes de escribir',
         ],
-        correct=1,
+        correct=0,
         key="dva04-q15-conditional-writes",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; conditional writes con condition expression.</div>'
@@ -335,12 +335,12 @@ cards = [
     card(
         question="&iquest;Cu&aacute;l es la diferencia clave entre <b>LSI</b> y <b>GSI</b> respecto a alcance de consulta y consistencia?",
         options=[
-            "LSI consulta toda la tabla; GSI una sola partici&oacute;n",
-            "LSI: misma partition key, una partici&oacute;n, fuerte O eventual. GSI: toda la tabla, solo eventual",
-            "Ambos consultan una sola partici&oacute;n con consistencia fuerte",
-            "GSI permite consistencia fuerte y LSI no",
+            "LSI: una partici&oacute;n, lectura fuerte o eventual; GSI: toda la tabla, solo eventual",
+            "LSI: toda la tabla, solo eventual; GSI: una partici&oacute;n, lectura fuerte o eventual",
+            "LSI: una partici&oacute;n, solo eventual; GSI: toda la tabla, lectura fuerte o eventual",
+            "LSI: toda la tabla, lectura fuerte; GSI: una partici&oacute;n, solo eventual",
         ],
-        correct=1,
+        correct=0,
         key="dva04-q17-lsi-vs-gsi",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; LSI: 1 partici&oacute;n, fuerte/eventual; GSI: toda la tabla, solo eventual.</div>'
@@ -375,12 +375,12 @@ cards = [
     card(
         question="&iquest;En qu&eacute; se diferencia la concurrencia de Lambda entre fuentes <b>poll-based</b> (Kinesis/DynamoDB Streams) y <b>push-based</b> (API Gateway/S3)?",
         options=[
-            "En ambas la concurrencia = items/seg &times; duraci&oacute;n",
-            "Poll-based: la concurrencia la fija el n&uacute;mero de shards. Push-based: &asymp; items/seg &times; duraci&oacute;n",
-            "Poll-based no tiene l&iacute;mite; push-based s&iacute;",
-            "Push-based procesa en orden; poll-based no",
+            "Poll-based: la fija el n&uacute;mero de shards (hasta x10 por shard); push-based: aprox items/seg &times; duraci&oacute;n",
+            "Poll-based: items/seg &times; duraci&oacute;n; push-based: items/seg &times; duraci&oacute;n (misma f&oacute;rmula en ambos)",
+            "Poll-based: sin l&iacute;mite estructural; push-based: acotada por shards y factor de paralelismo",
+            "Poll-based: escala con la tasa de invocaci&oacute;n; push-based: la fija el n&uacute;mero de shards del origen",
         ],
-        correct=1,
+        correct=0,
         key="dva04-q18-poll-vs-push",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; poll = shards; push = tasa &times; duraci&oacute;n.</div>'

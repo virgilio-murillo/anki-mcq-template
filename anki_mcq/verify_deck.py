@@ -64,6 +64,25 @@ def verify_cards(cards, shuffle_seed_base=1):
         idx = i + 1
         if len(c["options"]) != 4:
             problems.append((idx, f'{len(c["options"])} opciones (se esperan 4)'))
+        # Balance check: the correct option must NOT be a length outlier in
+        # EITHER direction. Patterns that give away the answer by shape:
+        #   - correct is the LONGEST and much longer than the rest ("most detailed")
+        #   - correct is the SHORTEST and much shorter than the rest ("terse tell")
+        # Fix by matching all 4 options' length/specificity, not by any pattern.
+        _opts = c["options"]
+        _ci = c["correct"]
+        if len(_opts) == 4 and 0 <= _ci < 4:
+            _lens = [len(re.sub(r'<[^>]+>', '', o)) for o in _opts]
+            _clen = _lens[_ci]
+            _others = [_lens[j] for j in range(4) if j != _ci]
+            _avg = sum(_others) / len(_others) if _others else 0
+            _maxlen = max(_lens)
+            # Only judge when options are substantial (avoid one-word answers).
+            if _avg and _maxlen >= 60:
+                if _clen == _maxlen and _clen > 1.4 * _avg:
+                    problems.append((idx, f"opcion correcta es la MAS LARGA y desbalanceada (len {_clen} vs prom {round(_avg)}, >1.4x)"))
+                if _clen == min(_lens) and _clen * 1.4 < _avg:
+                    problems.append((idx, f"opcion correcta es la MAS CORTA y desbalanceada (len {_clen} vs prom {round(_avg)}, <0.71x)"))
         neutral, marked, letter = render_options(c["options"], c["correct"], seed=shuffle_seed_base + i)
         if 'opt correct' in neutral:
             problems.append((idx, "FRENTE filtra la respuesta"))

@@ -62,6 +62,17 @@ Structure that works well on the back:
 - Plausible, not obviously wrong.
 - Each must be refuted on the back.
 - Avoid inventing non-existent features unless clearly flagged as a distractor.
+- **Balanced length & specificity (MANDATORY).** The 4 options must be of
+  comparable length and detail. NEVER make the correct option markedly longer or
+  more specific than the distractors: no option may exceed ~1.4x the average
+  length of the others. A learner must not be able to pick the answer by its
+  shape (the "longest/most-detailed option is correct" tell). Fix by RAISING the
+  distractors to the same level (make them specific, technically plausible near-
+  misses), NOT by shortening the correct one. Deciding between options should be
+  HARD because they look similar.
+- Distractors must be concrete technical claims (a believable wrong mechanism,
+  wrong parameter, wrong service role), never vague fillers like "all of them do
+  the same" or "none apply".
 
 ## 6. Preserve review progress (see PRESERVING_PROGRESS.md)
 

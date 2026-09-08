@@ -898,28 +898,33 @@ cards = [
     card(
         question="En DynamoDB, &iquest;c&oacute;mo cambia el costo de capacidad para operaciones <b>transaccionales</b> (TransactGetItems / TransactWriteItems) frente a lecturas fuertes / escrituras normales?",
         options=[
-            "Las transaccionales consumen el DOBLE: una lectura transaccional = 2x una lectura fuerte; una escritura transaccional = 2x una escritura normal",
-            "Consumen la mitad que las normales",
-            "Consumen lo mismo que las lecturas eventuales",
-            "No consumen capacidad porque son at&oacute;micas",
+            "Una lectura transaccional cuesta 2x una lectura fuerte, y una escritura transaccional cuesta 2x una escritura normal",
+            "Solo la escritura transaccional cuesta 2x una escritura normal; la lectura transaccional cuesta igual que una lectura fuerte",
+            "Ambas cuestan 1.5x: una lectura transaccional = 1.5x una lectura fuerte, y una escritura transaccional = 1.5x una escritura normal",
+            "La lectura transaccional cuesta 2x una lectura fuerte, pero la escritura transaccional cuesta igual que una escritura normal",
         ],
         correct=0,
         key="dva07-q50-transactional-cost",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; transaccional = el doble.</div>'
-            '<p>Las operaciones <b>transaccionales</b> cuestan <b>el doble</b>: una <b>lectura transaccional</b> consume 2 veces lo de una lectura <b>fuertemente consistente</b>, y una <b>escritura transaccional</b> consume 2 veces lo de una escritura normal (DynamoDB hace preparaci&oacute;n y commit en dos fases). Por eso, en un c&aacute;lculo, "40 RCU/WCU" suele salir cuando el escenario es transaccional, no eventual ni fuerte simple.</p>'
-            '<p><b>Por qu&eacute; NO las otras:</b> no cuestan la mitad, no equivalen a eventual (eventual es la mitad de fuerte, lo opuesto), y por supuesto s&iacute; consumen capacidad.</p>'
-            '<div class="extra"><span class="h">Truco de examen</span>Eventual = mitad de fuerte. Transaccional = doble de fuerte/normal. Fuerte/normal = base.</div>'
+            '<p>Las operaciones <b>transaccionales</b> cuestan <b>el doble</b>: una <b>lectura transaccional</b> consume 2 veces lo de una lectura <b>fuertemente consistente</b>, y una <b>escritura transaccional</b> consume 2 veces lo de una escritura normal (DynamoDB hace preparaci&oacute;n y commit en dos fases). El doble aplica a <b>ambas</b>, lectura y escritura.</p>'
+            '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>"Solo la escritura 2x, lectura igual que fuerte":</b> falso; la lectura transaccional tambi&eacute;n cuesta 2x (no igual que una lectura fuerte simple).</li>'
+            '<li><b>"Ambas 1.5x":</b> el multiplicador es <b>2x</b>, no 1.5x. La estructura es correcta pero el n&uacute;mero es err&oacute;neo.</li>'
+            '<li><b>"Solo la lectura 2x, escritura igual que normal":</b> el espejo del anterior; la escritura transaccional tambi&eacute;n cuesta 2x.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Truco de examen</span>Eventual = mitad de fuerte. Transaccional = doble (ambas, lectura y escritura). Fuerte/normal = base. Nota: se consume capacidad aunque la transacci&oacute;n se cancele.</div>'
             '<div class="links"><span class="h">Link</span><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadWriteCapacityMode.html">docs.aws read/write capacity</a></div>'
         ),
     ),
     card(
         question="Debes cifrar datos <b>en reposo</b> en S3 con una clave de cifrado <b>provista y gestionada por tu empresa</b> (no por AWS), con AES-256. &iquest;Qu&eacute; dos opciones cumplen? (elige el par correcto)",
         options=[
-            "SSE-C (server-side con clave provista por el cliente) + cifrado del lado del cliente con tu propia master key",
-            "SSE-S3 (claves gestionadas por S3) + SSE-KMS",
-            "SSE-KMS + SSL/TLS en tr&aacute;nsito",
-            "SSE-S3 + pre-signed URLs",
+            "SSE-C (clave AES-256 provista por el cliente en cada request) + cifrado del lado del cliente con tu propia clave maestra",
+            "SSE-KMS con CMK propia gestionada en AWS KMS + SSE-C con clave AES-256 provista por el cliente en cada request",
+            "SSE-S3 con claves AES-256 gestionadas por Amazon S3 + SSE-KMS con clave gestionada por AWS KMS",
+            "Cifrado del lado del cliente con tu clave maestra + SSE-S3 con claves gestionadas por Amazon S3",
         ],
         correct=0,
         key="dva07-q57-sse-c-clientside",
@@ -930,14 +935,13 @@ cards = [
             '<li><b>SSE-C:</b> server-side encryption donde <b>t&uacute; provees la clave</b> en cada request; S3 cifra/descifra con ella (AES-256) pero no la almacena.</li>'
             '<li><b>Client-side encryption con tu propia master key:</b> ciframos en el cliente <b>antes</b> de subir; t&uacute; gestionas la clave por completo.</li>'
             '</ul>'
-            '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
+            '<p><b>Por qu&eacute; NO las otras, una por una (todas son pares donde al menos una t&eacute;cnica falla el requisito):</b></p>'
             '<ul>'
-            '<li><b>SSE-S3:</b> las claves las gestiona <b>AWS</b> (S3), no tu empresa. No cumple.</li>'
-            '<li><b>SSE-KMS:</b> aunque uses una KMS key tuya (incluso con material importado), las claves las <b>gestiona KMS</b>, no directamente tu empresa. El escenario pide una clave <b>provista y gestionada por ti</b>, as&iacute; que SSE-KMS no cumple ese matiz.</li>'
-            '<li><b>SSL/TLS:</b> protege datos <b>en tr&aacute;nsito</b>, no en reposo (y la app ya usa HTTPS).</li>'
-            '<li><b>Pre-signed URLs:</b> control de acceso temporal, no cifrado en reposo.</li>'
+            '<li><b>SSE-KMS con CMK propia + SSE-C:</b> tentador porque suena a "clave tuya", pero una <b>CMK de KMS</b> la <b>gestiona AWS KMS</b> (no la provees por request), as&iacute; que ese lado no cumple "clave provista y gestionada por la empresa". SSE-C solo s&iacute; cumple.</li>'
+            '<li><b>SSE-S3 + SSE-KMS:</b> ambas usan AES-256 pero <b>ambas</b> claves las gestiona <b>AWS</b> (S3 y KMS). Ninguna es gestionada por la empresa.</li>'
+            '<li><b>Client-side + SSE-S3:</b> client-side s&iacute; cumple, pero <b>SSE-S3</b> usa claves de <b>AWS</b>; el par mezcla una correcta con una incorrecta, as&iacute; que no es el par v&aacute;lido.</li>'
             '</ul>'
-            '<div class="extra"><span class="h">Truco de examen</span>&iquest;"clave gestionada por el cliente/empresa"? &rarr; <b>SSE-C</b> o <b>client-side</b>. &iquest;"gestionada por AWS"? &rarr; SSE-S3/SSE-KMS.</div>'
+            '<div class="extra"><span class="h">Truco de examen</span>&iquest;"clave provista/gestionada por el cliente/empresa"? &rarr; <b>SSE-C</b> (por request) o <b>client-side</b>. &iquest;gestionada por AWS? &rarr; SSE-S3 y SSE-KMS (incluida una CMK propia).</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingEncryption.html">docs.aws S3 encryption</a><br>'
             '<a href="https://tutorialsdojo.com/amazon-s3/">tutorialsdojo S3</a></div>'

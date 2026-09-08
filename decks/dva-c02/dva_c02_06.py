@@ -151,12 +151,12 @@ cards = [
     card(
         question="En DynamoDB, &iquest;cu&aacute;l es la diferencia entre un <b>projection expression</b> y un <b>filter expression</b>?",
         options=[
-            "Son lo mismo",
-            "Projection expression elige qu&eacute; atributos se devuelven; filter expression elige qu&eacute; items se devuelven tras un Query/Scan",
-            "Projection filtra items y filter elige atributos",
-            "Ambos modifican items en una escritura",
+            'Projection expression elige qu&eacute; <b>atributos</b> se devuelven; filter expression decide qu&eacute; <b>items</b> se conservan tras un Query/Scan',
+            'Projection expression decide qu&eacute; <b>items</b> se devuelven; filter expression elige qu&eacute; <b>atributos</b> aparecen en cada item resultante',
+            'Filter expression se eval&uacute;a durante el Query/Scan y reduce la capacidad de lectura consumida; projection expression no afecta a los items',
+            'Projection expression filtra items por la clave; filter expression recorta los atributos devueltos una vez terminado el Query/Scan',
         ],
-        correct=1,
+        correct=0,
         key="dva06-q9-projection-vs-filter",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; projection = atributos; filter = items.</div>'
@@ -296,12 +296,12 @@ cards = [
     card(
         question="&iquest;En qu&eacute; se diferencian <b>CloudFront Functions</b> y <b>Lambda@Edge</b>, y cu&aacute;ndo conviene cada uno?",
         options=[
-            "Son lo mismo con distinto nombre",
-            "CloudFront Functions: JS ultraligero, solo viewer request/response, ideal para autorizaci&oacute;n de tokens en el edge. Lambda@Edge: m&aacute;s pesado, cubre tambi&eacute;n origin request/response",
-            "Lambda@Edge solo corre en viewer request; CloudFront Functions en los cuatro eventos",
-            "CloudFront Functions solo sirve para redimensionar im&aacute;genes",
+            "CloudFront Functions: JS ligero (ECMAScript 5.1), solo viewer request/response, submilisegundo, sin acceso de red. Lambda@Edge: Node/Python, los 4 eventos incluido origin, con acceso de red",
+            "CloudFront Functions: Node/Python en los 4 eventos con acceso de red. Lambda@Edge: JS ligero submilisegundo solo en viewer request/response, sin acceso de red",
+            "CloudFront Functions: JS en los 4 eventos incluido origin y con acceso de red. Lambda@Edge: solo viewer request/response y sin poder llamar a otros servicios",
+            "Ambas usan Node/Python en los 4 eventos incluido origin; la &uacute;nica diferencia es que Lambda@Edge se factura aparte y CloudFront Functions va incluido",
         ],
-        correct=1,
+        correct=0,
         key="dva06-q19-cf-func-vs-lambda-edge",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; CF Functions = ligero, viewer only; Lambda@Edge = m&aacute;s pesado, 4 eventos.</div>'

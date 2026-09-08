@@ -225,12 +225,12 @@ cards = [
     card(
         question="&iquest;Cu&aacute;l es la diferencia clave entre <b>AWS AppSync</b> y <b>Amazon Cognito Sync</b> para sincronizar datos?",
         options=[
-            "Son el mismo servicio con distinto nombre",
             "Cognito Sync sincroniza datos de un usuario entre sus dispositivos; AppSync a&ntilde;ade colaboraci&oacute;n multi-usuario en tiempo real sobre datos compartidos",
-            "AppSync solo funciona offline y Cognito Sync solo online",
-            "Cognito Sync usa GraphQL y AppSync no",
+            "Ambos exponen una API GraphQL administrada; Cognito Sync agrega suscripciones en tiempo real y AppSync solo almacena datasets clave-valor por usuario",
+            "Cognito Sync ofrece tiempo real por WebSockets entre usuarios; AppSync solo cachea datos localmente y no admite suscripciones ni notificaciones push",
+            "Cognito Sync sincroniza datasets clave-valor entre servicios de backend; AppSync solo replica el estado de un &uacute;nico usuario sin compartir datos",
         ],
-        correct=1,
+        correct=0,
         key="dva05-q13-appsync-vs-cognitosync",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; Cognito Sync = un usuario; AppSync = multi-usuario en tiempo real.</div>'
@@ -364,12 +364,12 @@ cards = [
     card(
         question="&iquest;Qu&eacute; hace exactamente <b>S3 Object Lambda</b> y por qu&eacute; evita duplicar los datos?",
         options=[
-            "Copia el objeto a otro bucket ya transformado",
-            "Ejecuta tu c&oacute;digo durante la petici&oacute;n GET para transformar los datos al vuelo, devolviendo la versi&oacute;n modificada sin guardar una segunda copia",
-            "Cifra el bucket con una clave por rol",
-            "Programa un trabajo por lotes nocturno que redacta los objetos",
+            "Ejecuta tu funci&oacute;n Lambda durante la petici&oacute;n GET, LIST o HEAD y devuelve la versi&oacute;n transformada con WriteGetObjectResponse, sin almacenar una copia derivada",
+            "Dispara una funci&oacute;n Lambda por notificaci&oacute;n de evento al subir el objeto (PUT), guardando la versi&oacute;n transformada que luego sirve cada petici&oacute;n GET",
+            "Transforma el objeto en la primera lectura y guarda esa versi&oacute;n en la cach&eacute; de CloudFront, sirviendo esa copia derivada en las siguientes peticiones",
+            "Aplica reglas de transformaci&oacute;n mediante replicaci&oacute;n S3 y mantiene una copia ya transformada en un bucket de destino que la aplicaci&oacute;n consulta por GET",
         ],
-        correct=1,
+        correct=0,
         key="dva05-q21-object-lambda-how",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; ejecuta tu c&oacute;digo en el GET y transforma al vuelo, sin copia extra.</div>'
