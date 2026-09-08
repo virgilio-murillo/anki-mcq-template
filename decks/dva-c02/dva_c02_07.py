@@ -54,10 +54,10 @@ cards = [
     card(
         question="Debes servir a cada rol una versi&oacute;n <b>redactada distinta</b> de los mismos registros PII en S3, manteniendo <b>una sola copia</b> de los datos, aplicando una Lambda RedactPII-[role] por rol. &iquest;Qu&eacute; combinaci&oacute;n de recursos S3 usas?",
         options=[
-            "Un S3 Access Point por rol + un S3 Object Lambda Access Point por rol asociado a su Lambda RedactPII",
-            "Un solo S3 Access Point compartido + una Lambda que decide el rol internamente",
-            "S3 Replication para crear una copia redactada por rol",
-            "S3 Event Notification que invoca RedactPII en cada GET",
+            "Un S3 Access Point por rol mas un S3 Object Lambda Access Point por rol asociado a su Lambda RedactPII-[role]",
+            "Un solo S3 Access Point compartido mas una Lambda que decide el rol internamente y redacta seg&uacute;n quien llama",
+            "S3 Replication desde el bucket origen hacia un bucket redactado distinto por rol, servido por su propio Access Point",
+            "Un S3 Access Point por rol mas S3 Event Notification que invoca la Lambda RedactPII-[role] en cada peticion GET",
         ],
         correct=0,
         key="dva07-q4-object-lambda-per-role",
@@ -97,12 +97,12 @@ cards = [
     card(
         question="&iquest;En qu&eacute; se diferencia <b>S3 Object Lambda</b> de una <b>S3 Event Notification</b> que invoca una Lambda, respecto a cu&aacute;ndo actua?",
         options=[
-            "Object Lambda transforma el objeto al RECUPERARLO (GET); Event Notification dispara en eventos de escritura/estado (ObjectCreated), no en GET",
-            "Ambas actuan en el GET del objeto",
-            "Object Lambda actua al subir; Event Notification al recuperar",
-            "Ambas crean copias transformadas del objeto",
+            "Object Lambda actua en la escritura (PUT/POST); Event Notification tambi&eacute;n dispara al crear objetos, ambas en la subida",
+            "Object Lambda actua al subir el objeto (PUT); Event Notification actua al recuperarlo (GET), invirtiendo los momentos",
+            "Object Lambda transforma el objeto al recuperarlo (GET); Event Notification dispara en eventos de escritura/estado (ObjectCreated), no en GET",
+            "Object Lambda guarda una copia transformada del objeto; Event Notification tambi&eacute;n persiste una versi&oacute;n convertida, ambas al escribir",
         ],
-        correct=0,
+        correct=2,
         key="dva07-q4-objectlambda-vs-eventnotif",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; Object Lambda en el GET; Event Notification en escrituras.</div>'
@@ -115,10 +115,10 @@ cards = [
     card(
         question="Al usar un <b>Global Secondary Index (GSI)</b> en DynamoDB, &iquest;de d&oacute;nde se consumen las unidades de capacidad de las queries/scans sobre ese &iacute;ndice?",
         options=[
-            "Del propio GSI, no de la tabla base",
-            "De la tabla base, no del &iacute;ndice",
-            "Se reparten al 50% entre &iacute;ndice y tabla base",
-            "No consumen capacidad porque el &iacute;ndice es solo lectura",
+            "Las queries y scans consumen la capacidad de lectura del propio GSI",
+            "Las queries y scans consumen la capacidad de lectura de la tabla base",
+            "El consumo de lectura se reparte en partes iguales entre GSI y tabla",
+            "Las queries y scans no consumen capacidad porque el GSI es solo lectura",
         ],
         correct=0,
         key="dva07-q6-gsi-capacity",
@@ -154,10 +154,10 @@ cards = [
     card(
         question="Respecto a la <b>partition key</b>: &iquest;en qu&eacute; se diferencian un <b>GSI</b> y un <b>LSI</b> de DynamoDB?",
         options=[
-            "GSI puede tener una partition key DISTINTA a la de la tabla; LSI debe usar la MISMA partition key con una sort key alterna",
-            "GSI debe usar la misma partition key; LSI puede usar una distinta",
-            "ambos deben usar la misma partition key que la tabla",
-            "ambos pueden usar cualquier partition key distinta",
+            "GSI puede usar una partition key distinta a la de la tabla; LSI reutiliza la misma con otra sort key",
+            "GSI debe reutilizar la partition key de la tabla; LSI puede usar una partition key distinta a la suya",
+            "GSI reutiliza la partition key de la tabla; LSI tambi&eacute;n la reutiliza pero con otra sort key alterna",
+            "GSI puede usar cualquier partition key distinta; LSI tambi&eacute;n admite una partition key distinta a la tabla",
         ],
         correct=0,
         key="dva07-q6-gsi-vs-lsi-pk",
@@ -196,10 +196,10 @@ cards = [
     card(
         question="En API Gateway con backend Lambda, &iquest;qu&eacute; diferencia hay entre <b>Lambda proxy</b> y <b>Lambda custom (non-proxy)</b> integration?",
         options=[
-            "Proxy pasa la petici&oacute;n tal cual y devuelve la salida sin mapeos; custom exige configurar integration request/response con mapping templates",
-            "Proxy exige mapping templates; custom pasa todo sin tocar",
-            "Ambas exigen configurar mapping templates",
-            "Proxy es para backends HTTP; custom es para backends Lambda",
+            "Proxy pasa la petici&oacute;n tal cual y devuelve la salida sin mapeos; custom configura integration request/response con mapping templates (VTL)",
+            "Proxy configura integration request/response con mapping templates (VTL); custom pasa la petici&oacute;n tal cual y devuelve la salida sin mapeos",
+            "Ambas configuran integration request/response con mapping templates (VTL) para transformar los datos entre el m&eacute;todo y la Lambda",
+            "Proxy sirve para backends HTTP con mapping templates; custom sirve solo para backends Lambda sin ninguna transformaci&oacute;n de datos",
         ],
         correct=0,
         key="dva07-q7-proxy-vs-custom",
@@ -214,10 +214,10 @@ cards = [
     card(
         question="Otros sitios est&aacute;n <b>hotlinkeando</b> tus fotos alojadas en S3 (las enlazan desde sus p&aacute;ginas), subiendo tus costos de transferencia. Quieres controlar el acceso de forma <b>escalable</b>. &iquest;Qu&eacute; soluci&oacute;n es la m&aacute;s efectiva?",
         options=[
-            "CloudFront con signed URLs o signed cookies",
-            "Habilitar CORS permitiendo GET desde todos los or&iacute;genes",
-            "Bloquear las IP de los sitios ofensores con Network ACL",
-            "Generar pre-signed URLs de S3 con expiraci&oacute;n para cada objeto",
+            "CloudFront con signed URLs o signed cookies para controlar qui&eacute;n accede al contenido en la CDN",
+            "Habilitar CORS permitiendo GET desde todos los or&iacute;genes para que el navegador cargue las im&aacute;genes",
+            "Bloquear con Network ACL las IP de los sitios ofensores que enlazan tus im&aacute;genes",
+            "Generar una pre-signed URL de S3 con expiraci&oacute;n para cada objeto que quieras servir",
         ],
         correct=0,
         key="dva07-q10-cloudfront-signed",
@@ -239,10 +239,10 @@ cards = [
     card(
         question="En CloudFront, &iquest;cu&aacute;ndo usas <b>signed URL</b> y cu&aacute;ndo <b>signed cookies</b> para restringir contenido?",
         options=[
-            "signed URL para archivos individuales; signed cookies para varios archivos sin cambiar las URLs",
-            "signed URL para varios archivos; signed cookies para uno solo",
-            "signed URL solo para HTTP; signed cookies solo para HTTPS",
-            "son intercambiables, no hay diferencia funcional",
+            "signed URL da acceso a un archivo individual; signed cookies dan acceso a varios archivos sin cambiar las URLs",
+            "signed URL da acceso a varios archivos a la vez; signed cookies dan acceso a un solo archivo por cookie",
+            "signed URL solo funciona sobre HTTP; signed cookies solo funcionan sobre conexiones HTTPS del navegador",
+            "signed URL y signed cookies son intercambiables y no tienen ninguna diferencia funcional entre s&iacute;",
         ],
         correct=0,
         key="dva07-q10-signedurl-vs-cookie",
@@ -257,10 +257,10 @@ cards = [
     card(
         question="Para frenar el <b>hotlinking</b> de tus im&aacute;genes en CloudFront, &iquest;por qu&eacute; una <b>Network ACL por IP</b> y <b>CORS abierto a todos</b> son malas soluciones?",
         options=[
-            "La NACL por IP se evade cambiando de IP; CORS abierto permite que cualquier sitio use tus objetos (empeora)",
-            "La NACL por IP es la mejor opci&oacute;n; CORS abierto tambi&eacute;n sirve",
-            "Ambas bloquean el hotlinking a nivel de aplicaci&oacute;n",
-            "CORS por IP y NACL abierto son equivalentes a signed URLs",
+            "La NACL por IP se evade cambiando de red o IP, y un CORS abierto autoriza a cualquier sitio a usar tus objetos",
+            "La NACL por IP basta para bloquear todo hotlinking, y el CORS abierto refuerza esa restricci&oacute;n de acceso",
+            "La NACL filtra el tr&aacute;fico del edge de CloudFront y el CORS abierto bloquea el hotlinking a nivel de navegador",
+            "La NACL por IP y el CORS abierto equivalen a signed URLs, ofreciendo el mismo control de acceso al contenido",
         ],
         correct=0,
         key="dva07-q10-why-not-nacl-cors",
@@ -305,10 +305,10 @@ cards = [
     card(
         question="En X-Ray, &iquest;cu&aacute;l es la diferencia entre las APIs <b>GetTraceSummaries</b> y <b>BatchGetTraces</b>?",
         options=[
-            "GetTraceSummaries busca por rango de tiempo con filter expression y devuelve IDs + annotations; BatchGetTraces recupera trazas completas por ID (sin filtro)",
-            "BatchGetTraces acepta filter expressions; GetTraceSummaries solo por ID",
-            "Ambas aceptan filter expressions",
-            "GetTraceSummaries configura sampling; BatchGetTraces filtra por annotation",
+            "GetTraceSummaries busca por rango de tiempo con filter expression y devuelve IDs; BatchGetTraces recupera trazas completas por ID sin filtro",
+            "GetTraceSummaries recupera trazas completas por ID sin filtro; BatchGetTraces busca por rango de tiempo con filter expression y devuelve IDs",
+            "GetTraceSummaries y BatchGetTraces aceptan filter expression y devuelven las trazas completas coincidentes dentro del rango de tiempo",
+            "GetTraceSummaries configura las reglas de sampling; BatchGetTraces filtra por annotation las trazas de un rango de tiempo dado",
         ],
         correct=0,
         key="dva07-q15-gettracesummaries-vs-batch",
@@ -344,10 +344,10 @@ cards = [
     card(
         question="Distingue el rol de <b>AWS WAF</b>, <b>Amazon GuardDuty</b> y <b>AWS Firewall Manager</b>. &iquest;Cu&aacute;l describe correctamente a cada uno?",
         options=[
-            "WAF filtra/bloquea tr&aacute;fico web (capa 7); GuardDuty detecta amenazas (alerta); Firewall Manager administra WAF/Shield a escala en varias cuentas",
-            "WAF detecta amenazas; GuardDuty bloquea tr&aacute;fico web; Firewall Manager es un firewall de red",
-            "Los tres bloquean SQLi/XSS de la misma forma",
-            "Firewall Manager reemplaza a WAF inspeccionando peticiones HTTP",
+            "WAF filtra y bloquea tr&aacute;fico web de capa 7; GuardDuty detecta amenazas y genera alertas; Firewall Manager administra WAF y Shield a escala en varias cuentas",
+            "GuardDuty filtra y bloquea tr&aacute;fico web de capa 7; WAF detecta amenazas y genera alertas; Firewall Manager administra Shield y reglas a escala en varias cuentas",
+            "Firewall Manager filtra y bloquea tr&aacute;fico web de capa 7; GuardDuty detecta amenazas y alerta; WAF administra Shield y pol&iacute;ticas a escala en varias cuentas",
+            "WAF filtra y bloquea tr&aacute;fico web de capa 7; Firewall Manager detecta amenazas y alerta; GuardDuty administra WAF y Shield a escala en varias cuentas",
         ],
         correct=0,
         key="dva07-q17-waf-vs-guardduty-vs-fm",
@@ -387,10 +387,10 @@ cards = [
     card(
         question="Para servir contenido est&aacute;tico global con baja latencia, &iquest;por qu&eacute; <b>EC2</b>, <b>EFS</b> y <b>Glacier</b> NO son buenos como almacenamiento/origen frente a S3?",
         options=[
-            "EC2 es regional y para procesamiento din&aacute;mico; EFS es regional y no es origen nativo de CloudFront; Glacier es archivado con recuperaci&oacute;n lenta",
-            "EC2 es la mejor opci&oacute;n como origen est&aacute;tico global",
-            "EFS se conecta directo a CloudFront igual que S3",
-            "Glacier sirve contenido con la menor latencia posible",
+            "EC2 es c&oacute;mputo regional para contenido din&aacute;mico; EFS es un sistema de archivos NFS regional y no es origen nativo de CloudFront; Glacier es archivado con recuperaci&oacute;n lenta",
+            "EC2 es la mejor opci&oacute;n como origen est&aacute;tico global; EFS se conecta directo a CloudFront igual que S3; y Glacier sirve el contenido con la menor latencia posible sin restaurar",
+            "EC2 es almacenamiento de objetos global y duradero; EFS es un origen nativo de CloudFront; y Glacier es una clase de servido est&aacute;tico en tiempo real para tr&aacute;fico frecuente",
+            "EC2 replica objetos est&aacute;ticos por todas las regiones; EFS est&aacute; optimizado como origen de CDN; y Glacier entrega con latencia de milisegundos en el edge de forma predeterminada",
         ],
         correct=0,
         key="dva07-q19-why-not-efs-ec2-glacier",
@@ -431,9 +431,9 @@ cards = [
         question="&iquest;Qu&eacute; relaci&oacute;n tiene <b>AWS SAM</b> con <b>CloudFormation</b> al desplegar?",
         options=[
             "SAM es una extensi&oacute;n de CloudFormation: su sintaxis abreviada se expande a CloudFormation v&iacute;a el Transform AWS::Serverless-2016-10-31 durante el deploy",
-            "SAM y CloudFormation no tienen relaci&oacute;n; SAM despliega por su cuenta",
-            "CloudFormation es una capa encima de SAM",
-            "SAM reemplaza a CloudFormation y no lo usa por debajo",
+            "SAM y CloudFormation son productos sin relaci&oacute;n; SAM realiza el despliegue por su cuenta sin generar plantillas de CloudFormation",
+            "CloudFormation es una capa construida encima de SAM y depende de SAM para poder desplegar cualquier recurso serverless",
+            "SAM reemplaza por completo a CloudFormation y despliega los recursos serverless sin usar CloudFormation por debajo",
         ],
         correct=0,
         key="dva07-q21-sam-transform-cfn",
@@ -473,12 +473,12 @@ cards = [
     card(
         question="En un custom identity broker, &iquest;qu&eacute; llamadas de <b>STS</b> se usan para obtener credenciales temporales de AWS y qu&eacute; devuelven?",
         options=[
-            "AssumeRole o GetFederationToken; devuelven access key, secret key y session token temporales",
-            "GetCallerIdentity; devuelve credenciales permanentes",
-            "CreateUser + CreateAccessKey; devuelven claves de larga duraci&oacute;n",
-            "AssumeRoleWithSAML unicamente; requiere que el store sea SAML",
+            "GetCallerIdentity: solo identifica al llamante y no entrega ninguna credencial nueva",
+            "AssumeRole o GetFederationToken: devuelven access key, secret key y session token temporales",
+            "CreateUser y CreateAccessKey de IAM: generan un usuario y claves de larga duraci&oacute;n, no STS",
+            "AssumeRoleWithSAML &uacute;nicamente: exige que el identity store sea compatible con SAML 2.0",
         ],
-        correct=0,
+        correct=1,
         key="dva07-q23-sts-assumerole-federation",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; AssumeRole o GetFederationToken.</div>'
@@ -496,10 +496,10 @@ cards = [
     card(
         question="Necesitas consultar con la <b>misma partition key</b> pero una <b>sort key alterna</b> y con <b>strong consistency</b>. La tabla <b>ya existe</b> con datos. &iquest;Qu&eacute; haces?",
         options=[
-            "Crear una nueva tabla con un LSI (misma PK, sort key alterna) y migrar los datos",
-            "A&ntilde;adir un LSI a la tabla existente",
-            "Crear un GSI con la misma partition key y la sort key alterna",
-            "Crear un GSI usando la sort key alterna como atributo proyectado",
+            "Crear una tabla nueva con un LSI de sort key alterna y migrar los datos",
+            "A&ntilde;adir a la tabla actual un LSI con la misma PK y una sort key alterna",
+            "Crear un GSI con la misma PK y la sort key alterna, y leer con consistencia fuerte",
+            "Crear un GSI que proyecte la sort key alterna y consultarlo con strong read",
         ],
         correct=0,
         key="dva07-q26-lsi-new-table",
@@ -567,9 +567,9 @@ cards = [
         question="En X-Ray, &iquest;cu&aacute;l es la diferencia entre <b>annotations</b> y <b>metadata</b>?",
         options=[
             "Annotations se indexan y sirven para filter expressions; metadata no se indexa",
-            "Metadata se indexa y sirve para filtrar; annotations no",
-            "Ambas se indexan y ambas sirven para filtrar",
-            "Ninguna se indexa; ambas son solo para visualizaci&oacute;n",
+            "Annotations no se indexan; metadata se indexa y sirve para filter expressions",
+            "Annotations y metadata se indexan y ambas sirven para filter expressions",
+            "Annotations y metadata no se indexan; ambas son solo para visualizaci&oacute;n",
         ],
         correct=0,
         key="dva07-q29-annotation-vs-metadata",
@@ -611,10 +611,10 @@ cards = [
     card(
         question="En ECS, &iquest;para qu&eacute; sirve cada task placement strategy: <b>binpack</b>, <b>spread</b> y <b>random</b>?",
         options=[
-            "binpack: minimiza instancias (empaca por CPU/mem); spread: distribuye uniformemente (alta disponibilidad); random: al azar honrando constraints",
-            "binpack: distribuye uniformemente; spread: empaca; random: usa m&aacute;s instancias",
-            "los tres minimizan el n&uacute;mero de instancias",
-            "binpack maximiza disponibilidad; spread minimiza costo; random balancea CPU",
+            "binpack empaca tareas por CPU/memoria minimizando instancias; spread las reparte uniformemente por atributo (alta disponibilidad); random las coloca al azar",
+            "binpack coloca tareas al azar minimizando instancias; spread las reparte uniformemente por atributo (alta disponibilidad); random las empaca por CPU/memoria",
+            "binpack reparte tareas uniformemente por atributo; spread las consolida por CPU/memoria minimizando instancias; random las coloca al azar por disponibilidad",
+            "binpack empaca tareas por CPU/memoria minimizando instancias; spread las coloca al azar; random las reparte uniformemente por atributo (alta disponibilidad)",
         ],
         correct=0,
         key="dva07-q34-strategy-purposes",
@@ -654,10 +654,10 @@ cards = [
     card(
         question="&iquest;Qu&eacute; hace cada comando de la SAM CLI: <b>sam build</b>, <b>sam package</b>, <b>sam deploy</b> y <b>sam publish</b>?",
         options=[
-            "build: compila artefactos en local; package: sube artefactos a S3 y genera plantilla con refs S3; deploy: crea/actualiza el stack (hace package impl&iacute;cito); publish: publica al Serverless Application Repository",
-            "build: despliega el stack; package: publica al repositorio; deploy: compila; publish: sube a S3",
-            "los cuatro despliegan el stack de formas equivalentes",
-            "build: sube a S3; deploy: solo valida la plantilla; publish: crea el stack",
+            "build: compila los artefactos en local; package: sube los artefactos a S3 y genera una plantilla con referencias a S3; deploy: crea o actualiza el stack (package impl&iacute;cito); publish: publica la app al Serverless Application Repository",
+            "build: sube los artefactos a S3 y reescribe la plantilla; package: compila los artefactos en local; deploy: solo valida la plantilla sin crear el stack; publish: publica la imagen del contenedor en Amazon ECR para su distribuci&oacute;n",
+            "build: crea o actualiza el stack en CloudFormation; package: publica la app al Serverless Application Repository; deploy: compila los artefactos en local; publish: sube los artefactos a un bucket de S3",
+            "build: empaqueta y despliega el stack en un paso; package: ejecuta las pruebas de la app; deploy: publica al Serverless Application Repository; publish: compila los artefactos en local",
         ],
         correct=0,
         key="dva07-q37-sam-commands",
@@ -697,9 +697,9 @@ cards = [
         question="&iquest;Por qu&eacute; el <b>optimistic locking</b> por n&uacute;mero de versi&oacute;n <b>no funciona como esperas</b> con <b>DynamoDB global tables</b>?",
         options=[
             "Las global tables reconcilian escrituras concurrentes con 'last writer wins', que puede sobrescribir sin comprobar la versi&oacute;n",
-            "Las global tables bloquean la escritura hasta validar la versi&oacute;n en todas las regiones",
-            "Las global tables no permiten escrituras concurrentes",
-            "El optimistic locking solo funciona en global tables",
+            "Las global tables bloquean cada escritura hasta validar el n&uacute;mero de versi&oacute;n en todas las regiones replicadas",
+            "Las global tables usan un modelo activo-activo pero rechazan por completo las escrituras concurrentes al mismo item",
+            "Las global tables aplican el optimistic locking por versi&oacute;n de forma global antes de propagar cada escritura",
         ],
         correct=0,
         key="dva07-q41-global-tables-lww",
@@ -843,10 +843,10 @@ cards = [
     card(
         question="&iquest;A qu&eacute; recurso pertenece cada propiedad: <code>Code</code> (con ZipFile/S3Bucket) y <code>CodeUri</code>?",
         options=[
-            "Code -> AWS::Lambda::Function (CloudFormation); CodeUri -> AWS::Serverless::Function (SAM)",
-            "Code -> SAM; CodeUri -> CloudFormation",
-            "ambas pertenecen a CloudFormation",
-            "ambas pertenecen a SAM",
+            "Code pertenece a AWS::Lambda::Function (CloudFormation) y CodeUri a AWS::Serverless::Function (SAM)",
+            "Code pertenece a AWS::Serverless::Function (SAM) y CodeUri a AWS::Lambda::Function (CloudFormation)",
+            "Code y CodeUri pertenecen ambas a AWS::Lambda::Function, el recurso de Lambda en CloudFormation",
+            "Code y CodeUri pertenecen ambas a AWS::Serverless::Function, el recurso de funci&oacute;n en SAM",
         ],
         correct=0,
         key="dva07-q48-code-vs-codeuri",
@@ -950,10 +950,10 @@ cards = [
     card(
         question="En el cifrado de S3, &iquest;qui&eacute;n gestiona la clave en cada opci&oacute;n: SSE-S3, SSE-KMS, SSE-C y client-side encryption?",
         options=[
-            "SSE-S3: AWS (S3); SSE-KMS: AWS KMS; SSE-C: el cliente la provee en cada request; client-side: el cliente por completo",
-            "SSE-S3: el cliente; SSE-KMS: el cliente; SSE-C: AWS; client-side: AWS",
-            "las cuatro son gestionadas por AWS",
-            "las cuatro son gestionadas por el cliente",
+            "SSE-S3: la clave la gestiona AWS (S3); SSE-KMS: la gestiona AWS KMS; SSE-C: el cliente la provee en cada request; client-side: el cliente por completo",
+            "SSE-S3: la clave la gestiona AWS (S3); SSE-KMS: la gestiona AWS KMS; SSE-C: la gestiona AWS por completo; client-side: el cliente la provee en cada request",
+            "SSE-S3: la clave la gestiona AWS (S3); SSE-KMS: el cliente la provee en cada request; SSE-C: la gestiona AWS KMS; client-side: la gestiona el cliente por completo",
+            "SSE-S3: el cliente por completo; SSE-KMS: la gestiona AWS KMS; SSE-C: la gestiona AWS (S3); client-side: el cliente la provee en cada request",
         ],
         correct=0,
         key="dva07-q57-who-manages-key",
