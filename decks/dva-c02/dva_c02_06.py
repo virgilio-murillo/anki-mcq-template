@@ -39,12 +39,12 @@ cards = [
     card(
         question="Para saber <b>qui&eacute;n</b> (qu&eacute; llamada API) modific&oacute; un IAM role, versus saber si un recurso <b>ya no coincide con la plantilla</b> de CloudFormation, &iquest;qu&eacute; servicio corresponde a cada caso?",
         options=[
-            "CloudTrail para ambos casos",
-            "CloudTrail para el 'qui&eacute;n hizo el cambio'; drift detection de CloudFormation para 'no coincide con la plantilla'",
-            "Drift detection para ambos casos",
-            "AWS Config para el 'qui&eacute;n' y CloudWatch para 'no coincide'",
+            "CloudTrail identifica qui&eacute;n hizo el cambio; drift detection de CloudFormation detecta que no coincide con la plantilla",
+            "CloudTrail identifica qui&eacute;n hizo el cambio y tambi&eacute;n detecta que el recurso no coincide con la plantilla",
+            "Drift detection de CloudFormation identifica qui&eacute;n hizo el cambio y tambi&eacute;n si no coincide con la plantilla",
+            "AWS Config identifica qui&eacute;n hizo el cambio; CloudWatch detecta que el recurso no coincide con la plantilla",
         ],
-        correct=1,
+        correct=0,
         key="dva06-q1-cloudtrail-vs-drift",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; CloudTrail = qui&eacute;n; drift detection = desviaci&oacute;n del stack.</div>'
@@ -106,12 +106,12 @@ cards = [
     card(
         question="En el mismo caso (320 lecturas/seg, items de 17 KB), &iquest;por qu&eacute; <b>800 RCU</b> es incorrecto si el requisito es lectura <b>fuertemente consistente</b>?",
         options=[
-            "Porque 800 supera el l&iacute;mite de la tabla",
-            "Porque 800 corresponde a la f&oacute;rmula eventual (la mitad), y no cumple la consistencia fuerte pedida",
-            "Porque olvida redondear el item a 4 KB",
-            "Porque 800 es el valor transaccional",
+            "Porque 800 aplica la f&oacute;rmula eventual (1600 dividido entre 2) y no la consistencia fuerte pedida",
+            "Porque 800 usa el valor transaccional, que en realidad exige el doble: 3200 RCU para esos items",
+            "Porque 800 redondea el item a 16 KB en vez de 20 KB, arrojando 4 unidades por lectura y no 5",
+            "Porque 800 asume items de 4 KB (1 unidad) e ignora las 5 unidades que exigen los 17 KB reales",
         ],
-        correct=1,
+        correct=0,
         key="dva06-q7-why-not-800",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; 800 es la cuenta eventual, no cumple consistencia fuerte.</div>'
@@ -171,10 +171,10 @@ cards = [
     card(
         question="Tienes 4 tareas ECS con Fargate y cada una necesita acceder a <b>recursos AWS distintos</b>. &iquest;Cu&aacute;l es la forma m&aacute;s eficiente de darles acceso?",
         options=[
-            "Crear 4 IAM Roles distintos con los permisos necesarios y asignar uno a cada tarea (task role)",
-            "Crear un IAM Group con todos los permisos y asignarlo a cada tarea",
-            "Crear 4 Container Instance IAM Roles y asignarlos a cada tarea",
-            "Crear 4 Service-Linked Roles y asignarlos a cada tarea",
+            "Crear 4 IAM Roles distintos y asignar uno a cada tarea como task role (taskRoleArn)",
+            "Crear 4 Container Instance Roles (ecsInstanceRole) y asignar uno a cada tarea",
+            "Crear 4 Service-Linked Roles de ECS y asignar uno a cada tarea como task role",
+            "Crear 4 IAM Groups con permisos distintos y asignar uno a cada tarea como task role",
         ],
         correct=0,
         key="dva06-q10-task-role",
@@ -317,9 +317,9 @@ cards = [
         question="Una config CORS de un bucket S3 tiene <code>AllowedOrigin=https://tutorialsdojo.com</code>, <code>AllowedMethod</code> = GET, PUT, POST, DELETE, <code>AllowedHeader=*</code>, <code>MaxAgeSeconds=3600</code>. &iquest;Qu&eacute; DOS afirmaciones son ciertas? (marca la de los <b>metodos</b>)",
         options=[
             "Permite a un usuario ver, agregar, borrar o actualizar objetos del bucket desde el dominio tutorialsdojo.com",
-            "El navegador cachear&aacute; la respuesta al preflight OPTIONS durante 1 hora",
-            "Est&aacute;n permitidos todos los metodos HTTP",
-            "La peticion falla si no se incluye el header x-amz-meta-custom-header",
+            "Permite ejecutar los m&eacute;todos GET, PUT, POST y DELETE sobre el bucket desde cualquier origen o dominio web",
+            "Habilita absolutamente todos los m&eacute;todos HTTP existentes para las solicitudes de origen cruzado al bucket",
+            "La solicitud de origen cruzado falla si el navegador no incluye el header x-amz-meta-custom-header en ella",
         ],
         correct=0,
         key="dva06-q4-cors-allows",
@@ -340,12 +340,12 @@ cards = [
     card(
         question="En una regla CORS de S3, &iquest;qu&eacute; hace exactamente el elemento <code>ExposeHeader</code> (ej. <code>ExposeHeader=ETag</code>)?",
         options=[
-            "Obliga a que la peticion incluya ese header o falla",
             "Expone ese header de la respuesta para que el JavaScript del cliente pueda leerlo",
-            "Permite ese header en el preflight de la peticion",
-            "Cachea ese header en el navegador",
+            "Autoriza ese header en el preflight v&iacute;a Access-Control-Request-Headers del navegador",
+            "Fija cu&aacute;ntos segundos el navegador cachea ese header antes de volver a pedirlo",
+            "Define ese header como m&eacute;todo HTTP permitido en la regla CORS del bucket",
         ],
-        correct=1,
+        correct=0,
         key="dva06-q4-cors-exposeheader",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; expone un header de la respuesta al c&oacute;digo del cliente.</div>'
@@ -363,12 +363,12 @@ cards = [
     card(
         question="&iquest;Qu&eacute; hace (y qu&eacute; NO hace) una configuraci&oacute;n CORS en un bucket S3?",
         options=[
-            "Autoriza al usuario a ejecutar acciones sobre el bucket (como una policy)",
-            "Define qu&eacute; orígenes (dominios) del navegador pueden hacer peticiones cross-origin al bucket; NO autoriza acciones",
-            "Cifra los objetos del bucket en reposo",
-            "Reemplaza a las bucket policies e IAM",
+            "Define qu&eacute; or&iacute;genes (dominios) del navegador pueden hacer peticiones cross-origin al bucket; NO autoriza acciones",
+            "Concede a los or&iacute;genes listados permiso para ejecutar acciones sobre los objetos, igual que una bucket policy",
+            "Cifra en reposo los objetos servidos a or&iacute;genes cross-origin y gestiona las claves de ese cifrado",
+            "Sustituye a las bucket policies e IAM como mecanismo de autorizaci&oacute;n para el acceso desde el navegador",
         ],
-        correct=1,
+        correct=0,
         key="dva06-q4-cors-not-authz",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; CORS define orígenes permitidos del navegador; no autoriza acciones.</div>'
@@ -413,10 +413,10 @@ cards = [
     card(
         question="Al subir a S3, &iquest;qu&eacute; valor del header <code>x-amz-server-side-encryption</code> corresponde a cada tipo de cifrado del lado servidor?",
         options=[
-            "aws:kms para SSE-KMS; AES256 para SSE-S3; headers -customer-* para SSE-C",
-            "AES256 para SSE-KMS y aws:kms para SSE-S3",
-            "aws:kms para todos los tipos de cifrado",
-            "SSE-C usa el valor aws:kms",
+            "SSE-KMS usa aws:kms, SSE-S3 usa AES256 y SSE-C usa headers -customer-*",
+            "SSE-KMS usa AES256, SSE-S3 usa aws:kms y SSE-C usa headers -customer-*",
+            "SSE-KMS, SSE-S3 y SSE-C usan todos el valor aws:kms en el mismo header",
+            "SSE-KMS usa aws:kms, SSE-S3 usa AES256 y SSE-C usa el valor aws:kms",
         ],
         correct=0,
         key="dva06-q5-sse-header-map",

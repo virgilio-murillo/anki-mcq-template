@@ -39,12 +39,12 @@ cards = [
     card(
         question="En una acci&oacute;n de <b>aprobaci&oacute;n manual</b> de CodePipeline, &iquest;qu&eacute; pasa si nadie aprueba ni rechaza dentro del plazo l&iacute;mite?",
         options=[
-            "El pipeline espera indefinidamente hasta que alguien responda",
-            "A los 7 d&iacute;as se trata como acci&oacute;n fallida y el pipeline NO contin&uacute;a",
-            "Se aprueba autom&aacute;ticamente para no bloquear el flujo",
-            "Se reinicia el pipeline desde la primera etapa",
+            "Tras el plazo por defecto de 7 d&iacute;as la acci&oacute;n falla y el pipeline se detiene",
+            "Al vencer el plazo la acci&oacute;n se aprueba y el pipeline pasa a la etapa siguiente",
+            "El plazo se ignora y la etapa queda en curso hasta que alguien responda",
+            "Se reintenta la aprobaci&oacute;n y se reenv&iacute;a la notificaci&oacute;n cada 24 horas",
         ],
-        correct=1,
+        correct=0,
         key="dva05-q4-approval-timeout",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; a los 7 d&iacute;as se considera fallida.</div>'
@@ -59,10 +59,10 @@ cards = [
     card(
         question="Debes trazar en X-Ray todas las peticiones de tu app, <b>incluyendo las llamadas a recursos AWS aguas abajo</b>. &iquest;Qu&eacute; acci&oacute;n implementas?",
         options=[
-            "Usar el X-Ray SDK para generar segment documents con subsegments y enviarlos al daemon de X-Ray, que los agrupa y sube a la API en lotes",
-            "Usar el X-Ray SDK para subir un trace segment ejecutando la API PutTraceSegments",
-            "Instalar X-Ray en cada servicio y recurso AWS que la app llama",
-            "Pasar varios trace segments como par&aacute;metro de PutTraceSegments",
+            "Usar el X-Ray SDK para generar segment documents con subsegments de llamadas aguas abajo y enviarlos al daemon, que los sube a la API en lotes",
+            "Usar el X-Ray SDK para que llame directamente a PutTraceSegments y suba cada trace segment individual a la API de X-Ray sin pasar por el daemon",
+            "Instalar y configurar el agente de X-Ray en cada servicio y recurso AWS aguas abajo que la aplicaci&oacute;n invoca para que reporten sus propios segments",
+            "Usar el X-Ray SDK para agrupar en lotes varios trace segments y pasarlos como un &uacute;nico array en el par&aacute;metro TraceSegmentDocuments de PutTraceSegments",
         ],
         correct=0,
         key="dva05-q7-segment-documents",
@@ -84,12 +84,12 @@ cards = [
     card(
         question="En AWS X-Ray, &iquest;cu&aacute;l es la diferencia entre un <b>segment</b> y un <b>subsegment</b>?",
         options=[
-            "Segment y subsegment son sin&oacute;nimos",
-            "El segment describe el trabajo que hace tu propia app; el subsegment describe llamadas a servicios/recursos aguas abajo",
-            "El segment es para errores y el subsegment para &eacute;xitos",
-            "El subsegment es el resultado final que ve el usuario",
+            "El segment describe el trabajo local de tu propia app; el subsegment describe llamadas aguas abajo",
+            "El segment describe llamadas aguas abajo; el subsegment describe el trabajo local de tu propia app",
+            "El segment solo cubre peticiones HTTP entrantes; el subsegment solo cubre llamadas al AWS SDK",
+            "El segment agrupa todos los segments de una request; el subsegment es una llamada a otra cuenta AWS",
         ],
-        correct=1,
+        correct=0,
         key="dva05-q7-segment-vs-subsegment",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; segment = tu app; subsegment = llamadas aguas abajo.</div>'
@@ -104,12 +104,12 @@ cards = [
     card(
         question="Necesitas ver c&oacute;mo los <b>procesos individuales</b> de una instancia RDS usan la CPU (porcentaje de CPU y memoria consumida <b>por cada proceso</b>). &iquest;Qu&eacute; usas?",
         options=[
-            "CloudWatch para monitorear el CPUUtilization de la base de datos",
-            "Enhanced Monitoring de RDS",
-            "Un script de shell que publica m&eacute;tricas personalizadas a CloudWatch",
-            "Las m&eacute;tricas CPU% y MEM% de la consola de RDS",
+            "Enhanced Monitoring de RDS, un agente en la instancia que expone m&eacute;tricas por proceso (CPU%, MEM%) en tiempo real",
+            "La m&eacute;trica CPUUtilization de CloudWatch, que agrega el uso de CPU de toda la instancia",
+            "Un script de shell en el host de RDS que publica m&eacute;tricas por proceso a CloudWatch",
+            "Performance Insights de RDS, que mide la carga de la base de datos por consulta SQL",
         ],
-        correct=1,
+        correct=0,
         key="dva05-q11-enhanced-monitoring",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; Enhanced Monitoring de RDS.</div>'
@@ -129,12 +129,12 @@ cards = [
     card(
         question="&iquest;En qu&eacute; se diferencian las m&eacute;tricas de CPU de <b>CloudWatch</b> y de <b>Enhanced Monitoring</b> en RDS?",
         options=[
-            "Son id&eacute;nticas, solo cambia el nombre",
-            "CloudWatch mide desde el hipervisor (sin desglose por proceso); Enhanced Monitoring mide desde un agente en la instancia (por proceso)",
-            "CloudWatch mide por proceso; Enhanced Monitoring solo el total",
-            "Enhanced Monitoring no guarda historial",
+            "CloudWatch mide desde el hipervisor, sin desglose por proceso; Enhanced Monitoring, con un agente, por proceso",
+            "CloudWatch mide por proceso con un agente; Enhanced Monitoring solo el total, desde el hipervisor de la instancia",
+            "CloudWatch mide desde un agente en el sistema operativo; Enhanced Monitoring desde el hipervisor, por proceso",
+            "CloudWatch mide desde el hipervisor y guarda historial; Enhanced Monitoring, por agente, sin conservar historial",
         ],
-        correct=1,
+        correct=0,
         key="dva05-q11-cw-vs-enhanced",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; CloudWatch = hipervisor; Enhanced = agente en la instancia.</div>'
@@ -175,12 +175,12 @@ cards = [
     card(
         question="En caching, &iquest;por qu&eacute; se a&ntilde;ade un <b>TTL</b> a los items en una estrategia write-through?",
         options=[
-            "Para acelerar las escrituras a la base de datos",
             "Para que los datos poco le&iacute;dos expiren solos y no se acumule cach&eacute; que casi nunca se usa",
-            "Para forzar consistencia fuerte en la base de datos",
-            "Para evitar cifrar los datos en cach&eacute;",
+            "Para reducir la cantidad de conexiones abiertas contra la base de datos relacional",
+            "Para forzar consistencia fuerte entre la cach&eacute; y la base de datos en cada escritura",
+            "Para acelerar las escrituras a la base de datos evitando bloqueos durante el commit",
         ],
-        correct=1,
+        correct=0,
         key="dva05-q12-why-ttl",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; para expirar datos poco le&iacute;dos y no desperdiciar espacio.</div>'
@@ -339,12 +339,12 @@ cards = [
     card(
         question="Debes redactar PII de registros en S3 de forma <b>distinta por rol</b>, cada usuario ve solo lo suyo, y manteniendo <b>una sola copia</b> de los datos. &iquest;Qu&eacute; combinaci&oacute;n usas? (marca la pieza del <b>Object Lambda</b>)",
         options=[
-            "Notificaci&oacute;n de eventos S3 que invoca la funci&oacute;n RedactPII en peticiones GET",
-            "Un S3 Object Lambda Access Point por rol, asociado a la funci&oacute;n RedactPII-[rol]; el cliente usa GetObject contra &eacute;l",
-            "S3 Replication para el bucket",
-            "La API GetObjectLegalHold para obtener los datos redactados",
+            "Un S3 Object Lambda Access Point por rol, con la funci&oacute;n RedactPII-[rol] adjunta; el cliente hace GetObject contra ese punto",
+            "Una notificaci&oacute;n de eventos de S3 que invoca la funci&oacute;n RedactPII en cada petici&oacute;n GetObject del bucket, sin copiar datos",
+            "Replicaci&oacute;n de S3 hacia un bucket por rol con una regla que redacta la PII durante la copia y el cliente lee la r&eacute;plica",
+            "Un &uacute;nico access point con la API GetObjectLegalHold, que devuelve el objeto ya redactado seg&uacute;n el rol que hace la petici&oacute;n",
         ],
-        correct=1,
+        correct=0,
         key="dva05-q21-object-lambda",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; un S3 Object Lambda Access Point por rol (asociado a su funci&oacute;n RedactPII-[rol]).</div>'
