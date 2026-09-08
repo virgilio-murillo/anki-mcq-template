@@ -179,12 +179,12 @@ cards = [
     card(
         question="En un upload a bucket SSE-KMS, &iquest;por qu&eacute; <b>NO</b> se necesita el permiso <code>kms:Encrypt</code>?",
         options=[
-            "Porque el cifrado lo hace el cliente, no KMS",
-            "Porque S3 genera una data key desde la KMS key para cifrar; kms:Encrypt solo aplica a datos peque&ntilde;os (&le;4 KB)",
-            "Porque SSE-KMS no cifra realmente los objetos",
-            "Porque kms:Decrypt ya incluye a kms:Encrypt",
+            "Porque S3 llama a GenerateDataKey para obtener una data key y cifra el objeto localmente; Encrypt solo cifra datos &le;4 KB",
+            "Porque el permiso kms:Decrypt abarca las operaciones de cifrado del objeto, haciendo innecesario conceder kms:Encrypt aparte",
+            "Porque al activar S3 Bucket Keys el cifrado se resuelve a nivel de bucket y sustituye la llamada individual a kms:Encrypt",
+            "Porque S3 usa la KMS key directamente sobre los bytes del objeto, y kms:Encrypt solo se exige en cifrado del lado del cliente",
         ],
-        correct=1,
+        correct=0,
         key="dva04-q13-why-no-encrypt",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; S3 usa una data key; kms:Encrypt es solo para datos peque&ntilde;os.</div>'
@@ -218,12 +218,12 @@ cards = [
     card(
         question="En la misma app CloudFront, la queja principal es que el <b>login es lento</b> para usuarios globales. &iquest;Qu&eacute; opci&oacute;n costo-eficiente acerca la autenticaci&oacute;n a los usuarios?",
         options=[
-            "Route 53 latency routing a m&uacute;ltiples regiones",
-            "Lambda@Edge para ejecutar la autenticaci&oacute;n en ubicaciones cercanas al usuario",
-            "Aumentar el TTL de la cach&eacute; de CloudFront",
-            "Un transit VPC entre regiones",
+            "Lambda@Edge que ejecuta la l&oacute;gica de autenticaci&oacute;n en las ubicaciones edge cercanas al usuario",
+            "CloudFront Functions en viewer request para validar el token de login en cada edge cercano",
+            "Global Accelerator con endpoints Anycast para acercar el tr&aacute;fico de login al backend regional",
+            "Replicar el servicio de autenticaci&oacute;n en varias regiones con Route 53 latency-based routing",
         ],
-        correct=1,
+        correct=0,
         key="dva04-q14-lambda-edge",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; Lambda@Edge.</div>'
@@ -237,12 +237,12 @@ cards = [
     card(
         question="Ante logins lentos en CloudFront, &iquest;por qu&eacute; aumentar el <code>Cache-Control max-age</code> NO resuelve el problema?",
         options=[
-            "Porque max-age no existe en CloudFront",
-            "Porque el problema es la autenticaci&oacute;n din&aacute;mica, no el cacheo de objetos est&aacute;ticos",
-            "Porque max-age solo aplica a im&aacute;genes",
-            "Porque desactiva el HTTPS",
+            "Porque el cuello de botella es la autenticaci&oacute;n din&aacute;mica por request, no el cacheo de objetos est&aacute;ticos",
+            "Porque max-age solo controla la frescura del objeto en cache, no reduce la latencia de generar la sesi&oacute;n",
+            "Porque un max-age mayor obliga a CloudFront a revalidar cada login contra el origen antes de responderlo",
+            "Porque al subir max-age las cookies de sesi&oacute;n se agrupan en una sola cache key compartida entre usuarios",
         ],
-        correct=1,
+        correct=0,
         key="dva04-q14-why-not-cache",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; el cuello de botella es la autenticaci&oacute;n, no el cache.</div>'
@@ -277,12 +277,12 @@ cards = [
     card(
         question="Para la regla \"nueva puja &gt; puja actual\", &iquest;por qu&eacute; <b>optimistic locking</b> NO es la soluci&oacute;n adecuada?",
         options=[
-            "Porque optimistic locking bloquea la tabla entera",
-            "Porque solo verifica que el item no cambi&oacute; desde tu lectura (version), no compara valores como \"&gt; actual\"",
-            "Porque optimistic locking no existe en DynamoDB",
-            "Porque consume 2 WCU por escritura",
+            "Porque la condici&oacute;n de versi&oacute;n solo comprueba que el item no cambi&oacute; desde tu lectura, no que la puja supere a la actual",
+            "Porque compara la puja contra la versi&oacute;n num&eacute;rica del item, y esa versi&oacute;n se incrementa sin evaluar el importe real",
+            "Porque el atributo version detecta cambios concurrentes pero obliga a releer y reintentar en vez de validar la puja",
+            "Porque solo asegura que gane el &uacute;ltimo escritor, as&iacute; que una puja menor podr&iacute;a sobrescribir a una mayor",
         ],
-        correct=1,
+        correct=0,
         key="dva04-q15-why-not-optimistic",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; solo compara la versi&oacute;n, no valores de negocio.</div>'
@@ -355,12 +355,12 @@ cards = [
     card(
         question="Una Lambda procesa un stream de <b>Kinesis Data Streams</b> con <b>100 shards activos</b> (10 s por invocaci&oacute;n, 50 items/seg). &iquest;Qu&eacute; es cierto sobre la concurrencia?",
         options=[
-            "La Lambda tendr&aacute; 500 ejecuciones concurrentes",
-            "Habr&aacute; como m&aacute;ximo 100 invocaciones concurrentes (1 por shard)",
-            "La Lambda se throttlea por exceso de shards",
-            "Hay que mergear shards para aumentar la concurrencia",
+            "Habr&aacute; como m&aacute;ximo 100 invocaciones concurrentes: 1 por shard, sin ParallelizationFactor",
+            "Habr&aacute; 500 invocaciones concurrentes de forma autom&aacute;tica, sin configurar nada extra",
+            "Habr&aacute; 200 invocaciones concurrentes porque Lambda usa 2 batches por shard por defecto",
+            "Escalar&aacute; sola a 1000 concurrentes; para subirla hay que mergear shards, no configurarla",
         ],
-        correct=1,
+        correct=0,
         key="dva04-q18-shards-concurrency",
         answer=(
             '<div class="verdict">Correcta: {{L}} &mdash; a lo sumo 100 invocaciones concurrentes (1 por shard).</div>'
