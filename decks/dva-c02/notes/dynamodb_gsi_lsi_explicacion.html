@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GSI vs LSI en DynamoDB — Por qué la partition key (DVA-C02)</title>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #fff; }
+h1 { color: #232f3e; font-size: 22pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color: #0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 2em; }
+h3 { color: #232f3e; font-size: 13pt; margin-top: 1.5em; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt; }
+th { background-color: #232f3e; color: white; padding: 8px; text-align: left; }
+td { border: 1px solid #ddd; padding: 6px 8px; vertical-align: top; }
+tr:nth-child(even) { background-color: #f8f8f8; }
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 10pt; color: #c7254e; }
+pre { background: #1e1e2e; padding: 16px; border-radius: 8px; font-size: 9.5pt; white-space: pre-wrap; word-break: break-word; overflow-x: auto; }
+pre code { background: none; color: #cdd6f4; padding: 0; font-size: inherit; }
+blockquote { border-left: 4px solid #0073bb; margin: 12px 0; padding: 8px 16px; background: #f0f7fc; }
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+.mermaid { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0; text-align: center; }
+.code-wrapper { position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: #3498db; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: 8pt; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { background: #27ae60; }
+.callout { border-radius: 8px; padding: 12px 16px; margin: 16px 0; }
+.callout .h { display: block; font-weight: 700; margin-bottom: 4px; }
+.tip { background: #fff8e1; border-left: 4px solid #ff9900; }
+.warn { background: #fdecea; border-left: 4px solid #d13212; }
+.key { background: #eaf5ea; border-left: 4px solid #1d8102; }
+.legend { font-size: 9pt; color: #555; text-align: center; margin-top: -8px; }
+.gsi { color: #0073bb; font-weight: 700; }
+.lsi { color: #1d8102; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>GSI vs LSI en DynamoDB: <em>por qu&eacute;</em> uno cambia la partition key y el otro no</h1>
+
+<blockquote>
+<p><strong>La pregunta:</strong> respecto a la partition key, &iquest;en qu&eacute; se diferencian un GSI y un LSI?</p>
+<p><strong>Respuesta: A</strong> &mdash; el <span class="gsi">GSI</span> puede tener una partition key <strong>distinta</strong> a la de la tabla; el <span class="lsi">LSI</span> debe usar la <strong>misma</strong> partition key y solo cambia la sort key.</p>
+</blockquote>
+
+<p>Memorizar la regla es f&aacute;cil. Aqu&iacute; vas a entender <strong>por qu&eacute;</strong> es as&iacute;, y una vez que lo veas, todas las dem&aacute;s diferencias (consistencia, throughput, cu&aacute;ndo se pueden crear) se deducen solas.</p>
+
+<hr>
+
+<h2>1. La base: c&oacute;mo DynamoDB guarda los datos f&iacute;sicamente</h2>
+
+<p>DynamoDB reparte los datos en muchos servidores llamados <strong>particiones</strong>. &iquest;C&oacute;mo decide en qu&eacute; partici&oacute;n va cada item? Aplica una <strong>funci&oacute;n hash sobre la partition key</strong>. El resultado del hash determina la partici&oacute;n f&iacute;sica.</p>
+
+<div class="mermaid">
+flowchart LR
+    ITEM["Item nuevo<br/>PK = ForumName"] --> H{{"hash(ForumName)"}}
+    H -->|rango 1| P1[(Particion 1)]
+    H -->|rango 2| P2[(Particion 2)]
+    H -->|rango 3| P3[(Particion 3)]
+</div>
+<p class="legend">La partition key es literalmente la "direccion fisica" del item. Cambiarla = otra ubicacion en el disco.</p>
+
+<div class="callout key"><span class="h">Consecuencia central</span>Dentro de una partici&oacute;n, todos los items con la <strong>misma partition key</strong> se guardan <strong>juntos y ordenados por sort key</strong>. Esto se llama una <em>item collection</em>. Es rapid&iacute;simo leer un rango dentro de una sola partition key.</div>
+
+<hr>
+
+<h2>2. El LSI: vive PEGADO a cada partici&oacute;n de la tabla</h2>
+
+<p>Un <span class="lsi">LSI (Local Secondary Index)</span> es "local" porque <strong>vive dentro de la misma partici&oacute;n que los datos de la tabla</strong>. Es simplemente <em>otro orden</em> (otra sort key) de los mismos items que ya est&aacute;n en esa partici&oacute;n.</p>
+
+<div class="mermaid">
+flowchart TB
+    subgraph PART["Particion para ForumName = 'S3'"]
+      direction TB
+      T["Tabla base<br/>PK=ForumName, SK=Subject<br/>(ordenado por Subject)"]
+      L["LSI LastPostIndex<br/>PK=ForumName, SK=LastPostDateTime<br/>(los MISMOS items, ordenados por fecha)"]
+    end
+</div>
+<p class="legend">El LSI es una vista alterna de la MISMA item collection. Comparte la particion, por eso comparte la partition key.</p>
+
+<div class="callout warn"><span class="h">Por eso el LSI NO puede cambiar la partition key</span>Si cambiaras la partition key, el hash mandar&iacute;a los datos a <strong>otra partici&oacute;n f&iacute;sica</strong>. Ya no ser&iacute;a "local" a la partici&oacute;n de la tabla: ser&iacute;a algo remoto. Un LSI, por definici&oacute;n, reordena lo que ya vive en la partici&oacute;n. Por eso solo puede cambiar la <strong>sort key</strong>.</div>
+
+<h3>Todo lo dem&aacute;s del LSI se deduce de esto</h3>
+<table>
+<thead><tr><th>Propiedad del LSI</th><th>Por qu&eacute;, dado que vive pegado a la partici&oacute;n</th></tr></thead>
+<tbody>
+<tr><td>Puede leerse con <strong>consistencia fuerte</strong></td><td>Los datos est&aacute;n en la misma partici&oacute;n, se actualizan en la misma operaci&oacute;n de escritura. No hay r&eacute;plica separada que pueda ir atrasada.</td></tr>
+<tr><td>Consume throughput de la <strong>tabla base</strong> (no tiene el suyo)</td><td>No es una estructura separada; es parte de la partici&oacute;n de la tabla. Lecturas y escrituras cuentan contra las RCU/WCU de la tabla.</td></tr>
+<tr><td>Solo se crea <strong>al crear la tabla</strong> y no se puede borrar despu&eacute;s</td><td>Cambia la estructura f&iacute;sica de las particiones existentes. Reorganizar particiones vivas no es una operaci&oacute;n online.</td></tr>
+<tr><td>L&iacute;mite de <strong>10 GB por valor de partition key</strong></td><td>Todo (tabla + LSIs) de una misma partition key debe caber en una &uacute;nica partici&oacute;n f&iacute;sica.</td></tr>
+<tr><td>Puede traer atributos <strong>no proyectados</strong> (fetch de la tabla)</td><td>La tabla est&aacute; ah&iacute; mismo, en la misma partici&oacute;n; buscar el atributo faltante es barato en distancia.</td></tr>
+<tr><td>M&aacute;ximo <strong>5 LSIs</strong> por tabla; clave siempre <strong>compuesta</strong> (PK+SK)</td><td>Un LSI sin sort key no tendr&iacute;a sentido: su &uacute;nica razón de ser es ofrecer otra sort key.</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>3. El GSI: es una TABLA-SOMBRA independiente</h2>
+
+<p>Un <span class="gsi">GSI (Global Secondary Index)</span> es "global" porque es, en la pr&aacute;ctica, <strong>una tabla completamente nueva y separada</strong> que DynamoDB mantiene por ti. Tiene <strong>su propio espacio de particiones</strong>, con su propia funci&oacute;n hash sobre <strong>su propia partition key</strong>.</p>
+
+<div class="mermaid">
+flowchart LR
+    subgraph BASE["Tabla base (particiones por ForumName)"]
+      B1[(P1)]
+      B2[(P2)]
+      B3[(P3)]
+    end
+    subgraph GSIX["GSI (particiones propias por, p.ej., UserId)"]
+      G1[(gP1)]
+      G2[(gP2)]
+    end
+    BASE ==>|"replicacion asincrona<br/>(DynamoDB copia los items)"| GSIX
+</div>
+<p class="legend">El GSI se rehashea con SU partition key. Por eso puede abarcar TODA la tabla, cruzando todas las particiones originales.</p>
+
+<div class="callout key"><span class="h">Por eso el GSI SI puede cambiar la partition key</span>Como es un almac&eacute;n f&iacute;sico aparte, DynamoDB toma cada item de la tabla, aplica el hash sobre la <strong>partition key del GSI</strong> (que puede ser cualquier atributo) y lo coloca en las particiones del GSI. No est&aacute; atado a la distribuci&oacute;n de la tabla base.</div>
+
+<h3>Todo lo dem&aacute;s del GSI se deduce de esto</h3>
+<table>
+<thead><tr><th>Propiedad del GSI</th><th>Por qu&eacute;, dado que es una tabla-sombra separada</th></tr></thead>
+<tbody>
+<tr><td>Solo <strong>consistencia eventual</strong> en las queries</td><td>La copia al GSI es <strong>as&iacute;ncrona</strong>. Justo despu&eacute;s de escribir en la tabla, el GSI puede ir unos milisegundos atrasado.</td></tr>
+<tr><td>Tiene su <strong>propio throughput</strong> (RCU/WCU independientes)</td><td>Es un almac&eacute;n separado; escala aparte. Si sus WCU son insuficientes, se <strong>throttlea la escritura de la tabla base</strong>.</td></tr>
+<tr><td>Se puede <strong>crear/borrar en cualquier momento</strong> (online)</td><td>No toca las particiones de la tabla; DynamoDB construye la estructura nueva en background (backfill).</td></tr>
+<tr><td><strong>Sin l&iacute;mite</strong> de 10 GB por partition key</td><td>Tiene sus propias particiones; no comparte el l&iacute;mite de una partici&oacute;n de la tabla.</td></tr>
+<tr><td>Solo devuelve atributos <strong>proyectados</strong> (no hace fetch a la tabla)</td><td>La tabla base vive en otro espacio de particiones; ir a buscarla ser&iacute;a caro, as&iacute; que DynamoDB no lo hace.</td></tr>
+<tr><td>Clave <strong>simple o compuesta</strong></td><td>Al ser una tabla nueva, puede tener solo partition key, o partition + sort key.</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>4. La analog&iacute;a que lo fija todo</h2>
+
+<blockquote>
+<p>Imagina una <strong>biblioteca</strong> donde los libros est&aacute;n en estantes por <strong>g&eacute;nero</strong> (esa es la partition key), y dentro de cada estante ordenados por <strong>t&iacute;tulo</strong> (sort key).</p>
+<ul>
+<li><span class="lsi">LSI</span> = poner en <strong>el mismo estante</strong> un segundo &iacute;ndice que ordena esos mismos libros por <strong>fecha</strong>. Sigue siendo el estante de ese g&eacute;nero (misma partition key), solo cambia el criterio de orden (sort key).</li>
+<li><span class="gsi">GSI</span> = montar una <strong>segunda biblioteca entera</strong> donde reorganizas TODOS los libros por <strong>autor</strong> (otra partition key). Es un edificio aparte, con su propio personal (throughput) y se actualiza copiando desde la biblioteca original (eventual).</li>
+</ul>
+</blockquote>
+
+<hr>
+
+<h2>5. Tabla comparativa (oficial)</h2>
+
+<table>
+<thead><tr><th>Caracter&iacute;stica</th><th class="gsi">GSI</th><th class="lsi">LSI</th></tr></thead>
+<tbody>
+<tr><td>Partition key</td><td><strong>Puede ser distinta</strong> a la de la tabla</td><td><strong>Misma</strong> que la tabla</td></tr>
+<tr><td>Sort key</td><td>Opcional (clave simple o compuesta)</td><td>Obligatoria y distinta (clave siempre compuesta)</td></tr>
+<tr><td>Alcance de la query</td><td>Toda la tabla, cruzando particiones</td><td>Una sola partici&oacute;n (un valor de PK)</td></tr>
+<tr><td>Consistencia de lectura</td><td>Solo eventual</td><td>Eventual <strong>o</strong> fuerte</td></tr>
+<tr><td>Throughput</td><td>Propio (independiente)</td><td>Comparte el de la tabla base</td></tr>
+<tr><td>Cu&aacute;ndo se crea</td><td>Al crear la tabla o despu&eacute;s; se puede borrar</td><td>Solo al crear la tabla; no se borra despu&eacute;s</td></tr>
+<tr><td>L&iacute;mite de tama&ntilde;o</td><td>Sin restricci&oacute;n por PK</td><td>10 GB por valor de partition key</td></tr>
+<tr><td>Atributos no proyectados</td><td>No los trae (solo proyectados)</td><td>S&iacute; los trae (fetch de la tabla)</td></tr>
+<tr><td>M&aacute;ximo por tabla</td><td>20 (l&iacute;mite por defecto, ampliable)</td><td>5</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>6. Ejemplo pr&aacute;ctico (tabla Thread del foro)</h2>
+
+<p>Tabla base: <code>PK = ForumName</code>, <code>SK = Subject</code>.</p>
+
+<div class="code-wrapper"><button class="copy-btn">Copiar</button><pre><code># LSI: misma PK (ForumName), nueva SK (LastPostDateTime)
+#   -> "dame los hilos del foro 'S3' ordenados por fecha"
+aws dynamodb create-table --table-name Thread \
+  --attribute-definitions \
+    AttributeName=ForumName,AttributeType=S \
+    AttributeName=Subject,AttributeType=S \
+    AttributeName=LastPostDateTime,AttributeType=S \
+  --key-schema \
+    AttributeName=ForumName,KeyType=HASH \
+    AttributeName=Subject,KeyType=RANGE \
+  --local-secondary-indexes \
+    "IndexName=LastPostIndex,KeySchema=[{AttributeName=ForumName,KeyType=HASH},{AttributeName=LastPostDateTime,KeyType=RANGE}],Projection={ProjectionType=ALL}" \
+  --billing-mode PAY_PER_REQUEST</code></pre></div>
+
+<div class="code-wrapper"><button class="copy-btn">Copiar</button><pre><code># GSI: PK DISTINTA (UserId) -> "dame todos los hilos creados por un usuario,
+#   sin importar el foro". Cruza todas las particiones de la tabla.
+aws dynamodb update-table --table-name Thread \
+  --attribute-definitions AttributeName=UserId,AttributeType=S \
+  --global-secondary-index-updates \
+    "[{\"Create\":{\"IndexName\":\"UserThreadsIndex\",\"KeySchema\":[{\"AttributeName\":\"UserId\",\"KeyType\":\"HASH\"}],\"Projection\":{\"ProjectionType\":\"ALL\"}}}]"</code></pre></div>
+
+<p class="legend">Fijate: el LSI se define AL crear la tabla; el GSI se puede a&ntilde;adir despu&eacute;s con update-table.</p>
+
+<hr>
+
+<h2>7. Regla de decisi&oacute;n + trucos de examen</h2>
+
+<div class="mermaid">
+flowchart TD
+    Q{Necesito consultar por...} --> A{Otra partition key<br/>que no es la de la tabla?}
+    A -- Si --> G[[Usa GSI<br/>eventual, throughput propio,<br/>se puede anadir despues]]
+    A -- No, misma PK<br/>pero otro orden --> L[[Usa LSI<br/>puede ser fuerte,<br/>solo al crear la tabla]]
+</div>
+
+<div class="callout tip"><span class="h">Trucos de examen (DVA-C02)</span>
+<ul>
+<li>&iquest;Otra partition key? &rarr; <span class="gsi">GSI</span>. &iquest;Misma PK, otra sort key? &rarr; <span class="lsi">LSI</span>.</li>
+<li>&iquest;Necesitas <strong>strong consistency</strong> en el &iacute;ndice? &rarr; solo el <span class="lsi">LSI</span> puede.</li>
+<li>&iquest;El &iacute;ndice se debe <strong>a&ntilde;adir a una tabla ya existente</strong>? &rarr; tiene que ser <span class="gsi">GSI</span> (el LSI solo al crear).</li>
+<li>Si un <span class="gsi">GSI</span> tiene <strong>WCU insuficientes</strong>, se <strong>throttlea la escritura de la tabla base</strong>. Regla: <code>WCU del GSI &ge; WCU de la tabla</code>.</li>
+<li>&iquest;Historia menciona 10 GB por partition key? &rarr; pista de <span class="lsi">LSI</span>.</li>
+</ul>
+</div>
+
+<h3>Enlaces oficiales</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/SecondaryIndexes.html">Improving data access with secondary indexes</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GSI.html">Global Secondary Indexes</a></li>
+<li><a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LSI.html">Local Secondary Indexes</a></li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.parentElement.querySelector('code');
+      navigator.clipboard.writeText(code.innerText).then(function () {
+        btn.textContent = 'Copiado';
+        btn.classList.add('copied');
+        setTimeout(function () { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

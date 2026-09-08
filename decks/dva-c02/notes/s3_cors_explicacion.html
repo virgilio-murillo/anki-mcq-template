@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CORS en Amazon S3 — Explicación a fondo (DVA-C02)</title>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #fff; }
+h1 { color: #232f3e; font-size: 22pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color: #0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 2em; }
+h3 { color: #232f3e; font-size: 13pt; margin-top: 1.5em; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt; }
+th { background-color: #232f3e; color: white; padding: 8px; text-align: left; }
+td { border: 1px solid #ddd; padding: 6px 8px; vertical-align: top; }
+tr:nth-child(even) { background-color: #f8f8f8; }
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 10pt; color: #c7254e; }
+pre { background: #1e1e2e; padding: 16px; border-radius: 8px; font-size: 9.5pt; white-space: pre-wrap; word-break: break-word; overflow-x: auto; }
+pre code { background: none; color: #cdd6f4; padding: 0; font-size: inherit; }
+blockquote { border-left: 4px solid #0073bb; margin: 12px 0; padding: 8px 16px; background: #f0f7fc; }
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+.mermaid { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0; text-align: center; }
+.code-wrapper { position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: #3498db; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: 8pt; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { background: #27ae60; }
+.callout { border-radius: 8px; padding: 12px 16px; margin: 16px 0; }
+.callout .h { display: block; font-weight: 700; margin-bottom: 4px; }
+.tip { background: #fff8e1; border-left: 4px solid #ff9900; }
+.warn { background: #fdecea; border-left: 4px solid #d13212; }
+.key { background: #eaf5ea; border-left: 4px solid #1d8102; }
+.legend { font-size: 9pt; color: #555; text-align: center; margin-top: -8px; }
+.pill { display: inline-block; background: #232f3e; color: #fff; border-radius: 12px; padding: 1px 10px; font-size: 8.5pt; margin: 2px; }
+.pill.req { background: #0073bb; }
+.pill.res { background: #1d8102; }
+</style>
+</head>
+<body>
+
+<h1>CORS en Amazon S3 a fondo: Same-Origin Policy, preflight y reglas de bucket</h1>
+
+<p>Guía visual para el examen <strong>AWS Certified Developer &ndash; Associate (DVA-C02)</strong>. Explica qu&eacute; es CORS, por qu&eacute; existe, c&oacute;mo lo eval&uacute;a S3, c&oacute;mo se configura, y los errores t&iacute;picos que caen en el examen.</p>
+
+<blockquote>
+<p><strong>Idea en una frase:</strong> CORS es un mecanismo del <em>navegador</em> por el que un servidor (aqu&iacute; un bucket S3) declara <em>qu&eacute; or&iacute;genes web</em> pueden leer sus respuestas desde JavaScript. Si el bucket no lo declara, el navegador <strong>bloquea</strong> que el JavaScript lea la respuesta.</p>
+</blockquote>
+
+<hr>
+
+<h2>1. El problema: la Same-Origin Policy (SOP)</h2>
+
+<p>Los navegadores aplican una regla de seguridad llamada <strong>Same-Origin Policy</strong>: el JavaScript de una p&aacute;gina solo puede <em>leer</em> respuestas de recursos que est&eacute;n en el <strong>mismo origen</strong> que la p&aacute;gina. Esto evita que un sitio malicioso lea datos de otro sitio donde t&uacute; est&aacute;s autenticado.</p>
+
+<p>Un <strong>origen</strong> se define por la terna <code>esquema://host:puerto</code>. Si cualquiera de los tres difiere, es un origen distinto (una petici&oacute;n <em>cross-origin</em>).</p>
+
+<table>
+<thead><tr><th>P&aacute;gina que corre el JS</th><th>Recurso al que llama</th><th>&iquest;Mismo origen?</th><th>Motivo</th></tr></thead>
+<tbody>
+<tr><td><code>https://app.example.com</code></td><td><code>https://app.example.com/data</code></td><td>S&iacute;</td><td>Igual esquema, host y puerto.</td></tr>
+<tr><td><code>https://app.example.com</code></td><td><code>https://cdn.example.com</code></td><td>No</td><td>Host distinto (<code>app</code> vs <code>cdn</code>).</td></tr>
+<tr><td><code>https://app.example.com</code></td><td><code>http://app.example.com</code></td><td>No</td><td>Esquema distinto (https vs http).</td></tr>
+<tr><td><code>https://app.example.com</code></td><td><code>https://app.example.com:8443</code></td><td>No</td><td>Puerto distinto.</td></tr>
+<tr><td><code>https://app.example.com</code></td><td><code>https://mi-bucket.s3.us-east-1.amazonaws.com</code></td><td>No</td><td>Host distinto &rarr; <strong>hace falta CORS en el bucket</strong>.</td></tr>
+</tbody>
+</table>
+
+<div class="callout key"><span class="h">Clave</span>CORS <strong>relaja</strong> la Same-Origin Policy de forma controlada. Es el servidor (S3) quien, con sus cabeceras de respuesta, le dice al navegador "s&iacute;, este origen puede leerme".</div>
+
+<h3>&iquest;Qui&eacute;n hace cumplir CORS?</h3>
+<p>El <strong>navegador</strong>, no S3. S3 solo a&ntilde;ade cabeceras <code>Access-Control-Allow-*</code> a su respuesta seg&uacute;n tu configuraci&oacute;n. El navegador decide si deja que el JavaScript lea esa respuesta. Por eso, herramientas como <code>curl</code> o los SDK del lado servidor <strong>no se ven afectados por CORS</strong>: no hay navegador que lo imponga.</p>
+
+<hr>
+
+<h2>2. Escenario t&iacute;pico con S3</h2>
+
+<p>Tienes un sitio web (SPA en React/JS) servido desde un origen, y ese JavaScript hace <code>fetch</code>/<code>XMLHttpRequest</code> directamente contra el endpoint de la API de un bucket S3 (por ejemplo para subir con <code>PUT</code> o leer con <code>GET</code>). Como el host del bucket difiere del host de la p&aacute;gina, es cross-origin y el navegador exige CORS.</p>
+
+<div class="mermaid">
+flowchart LR
+    subgraph Navegador
+      P["Pagina web<br/>https://app.example.com"]
+    end
+    B[("Bucket S3<br/>mi-bucket.s3.us-east-1.amazonaws.com")]
+    P -- "fetch GET/PUT (cross-origin)" --> B
+    B -- "respuesta + Access-Control-Allow-Origin" --> P
+    P -. "el navegador verifica<br/>las cabeceras CORS" .-> P
+</div>
+<p class="legend">Sin las cabeceras CORS correctas en la respuesta de S3, el navegador bloquea que el JS lea el resultado.</p>
+
+<div class="callout tip"><span class="h">Casos de examen frecuentes</span>Web font alojada en S3, sitio est&aacute;tico en S3 que llama a la API del propio bucket, subida directa desde el navegador a S3 con URL prefirmada. Si aparece "el navegador bloquea", "cross-origin", "CORS error en consola" &rarr; la respuesta casi siempre es <strong>configurar CORS en el bucket</strong>.</div>
+
+<hr>
+
+<h2>3. Peticiones simples vs. preflight (OPTIONS)</h2>
+
+<p>Hay dos caminos seg&uacute;n el tipo de petici&oacute;n:</p>
+
+<h3>3.1 Petici&oacute;n "simple"</h3>
+<p>Si es un <code>GET</code>/<code>HEAD</code>/<code>POST</code> sencillo con cabeceras est&aacute;ndar, el navegador manda la petici&oacute;n directa e incluye la cabecera <code>Origin</code>. S3 responde y a&ntilde;ade <code>Access-Control-Allow-Origin</code>. El navegador compara: si coincide, deja leer; si no, bloquea.</p>
+
+<div class="mermaid">
+sequenceDiagram
+    participant JS as JavaScript (navegador)
+    participant S3 as Amazon S3
+    JS->>S3: GET /objeto  (Origin: https://app.example.com)
+    S3-->>JS: 200 OK  (Access-Control-Allow-Origin: https://app.example.com)
+    Note over JS: El navegador ve que el origen coincide -> permite leer la respuesta
+</div>
+
+<h3>3.2 Petici&oacute;n con preflight</h3>
+<p>Para peticiones "no simples" (por ejemplo <code>PUT</code>, <code>DELETE</code>, o con cabeceras personalizadas como <code>Authorization</code> o <code>x-amz-*</code>), el navegador env&iacute;a primero una petici&oacute;n <strong>preflight</strong> con el m&eacute;todo <code>OPTIONS</code> para <em>preguntar permiso</em> antes de mandar la petici&oacute;n real.</p>
+
+<div class="mermaid">
+sequenceDiagram
+    participant JS as JavaScript (navegador)
+    participant S3 as Amazon S3
+    JS->>S3: OPTIONS /objeto (preflight)<br/>Origin + Access-Control-Request-Method: PUT<br/>Access-Control-Request-Headers: x-amz-...
+    S3-->>JS: 200 OK<br/>Access-Control-Allow-Origin / -Methods / -Headers<br/>Access-Control-Max-Age: 3000
+    Note over JS: Preflight OK. El navegador cachea el permiso (MaxAgeSeconds)
+    JS->>S3: PUT /objeto (peticion real) + Origin
+    S3-->>JS: 200 OK + Access-Control-Allow-Origin
+</div>
+
+<div class="callout tip"><span class="h">Truco de examen</span>El preflight usa el m&eacute;todo <strong>OPTIONS</strong>. <code>MaxAgeSeconds</code> es cu&aacute;ntos segundos el navegador <strong>cachea</strong> ese permiso para no repetir el OPTIONS en cada llamada.</div>
+
+<hr>
+
+<h2>4. C&oacute;mo eval&uacute;a S3 la configuraci&oacute;n CORS</h2>
+
+<p>Cuando S3 recibe una petici&oacute;n preflight, recorre las reglas y usa la <strong>primera <code>CORSRule</code> que coincida</strong>. Para que una regla coincida, se deben cumplir las <strong>tres</strong> condiciones:</p>
+
+<table>
+<thead><tr><th>Cabecera de la petici&oacute;n (navegador)</th><th>Debe coincidir con este elemento de la regla</th></tr></thead>
+<tbody>
+<tr><td><code>Origin</code></td><td><code>AllowedOrigins</code></td></tr>
+<tr><td><code>Access-Control-Request-Method</code></td><td><code>AllowedMethods</code></td></tr>
+<tr><td><code>Access-Control-Request-Headers</code></td><td><code>AllowedHeaders</code></td></tr>
+</tbody>
+</table>
+
+<div class="callout key"><span class="h">Clave de orden</span>Gana la <strong>primera regla que casa</strong>, no la "mejor". Ordena de m&aacute;s espec&iacute;fica a m&aacute;s general. Puedes tener hasta <strong>100 reglas</strong> por configuraci&oacute;n.</div>
+
+<div class="callout warn"><span class="h">CORS no es seguridad de acceso</span>Habilitar CORS <strong>no</strong> otorga permisos. Las <strong>ACL y las bucket policies siguen aplicando</strong>. CORS solo controla si el <em>navegador</em> deja leer la respuesta al JS de otro origen; la autorizaci&oacute;n real la deciden IAM/policy/ACL.</div>
+
+<hr>
+
+<h2>5. Los 5 elementos de una regla CORS</h2>
+
+<table>
+<thead><tr><th>Elemento</th><th>Obligatorio</th><th>Qu&eacute; hace</th><th>Reglas del comod&iacute;n <code>*</code></th></tr></thead>
+<tbody>
+<tr><td><code>AllowedMethods</code></td><td>S&iacute;</td><td>M&eacute;todos HTTP permitidos.</td><td>Valores fijos: <code>GET</code>, <code>PUT</code>, <code>POST</code>, <code>DELETE</code>, <code>HEAD</code>. (No hay <code>OPTIONS</code> aqu&iacute;: S3 lo maneja solo para el preflight.)</td></tr>
+<tr><td><code>AllowedOrigins</code></td><td>S&iacute;</td><td>Or&iacute;genes autorizados, p.ej. <code>https://www.example.com</code>.</td><td>Como m&aacute;ximo <strong>un</strong> <code>*</code>: <code>https://*.example.com</code>. <code>*</code> solo = cualquier origen. Puedes exigir <code>https</code> para solo or&iacute;genes seguros.</td></tr>
+<tr><td><code>AllowedHeaders</code></td><td>No</td><td>Cabeceras permitidas en el preflight (via <code>Access-Control-Request-Headers</code>).</td><td>Como m&aacute;ximo <strong>un</strong> <code>*</code> por cadena. <code>x-amz-*</code> habilita todas las de Amazon.</td></tr>
+<tr><td><code>ExposeHeaders</code></td><td>No</td><td>Cabeceras de la <em>respuesta</em> que el JS podr&aacute; leer (p.ej. desde <code>XMLHttpRequest</code>).</td><td>Se listan expl&iacute;citamente, p.ej. <code>ETag</code>, <code>x-amz-request-id</code>.</td></tr>
+<tr><td><code>MaxAgeSeconds</code></td><td>No</td><td>Segundos que el navegador cachea la respuesta del preflight.</td><td>Valor num&eacute;rico, p.ej. <code>3000</code>.</td></tr>
+</tbody>
+</table>
+
+<div class="callout warn"><span class="h">Error frecuente</span><code>ExposeHeaders</code> no "permite" nada: solo <em>expone</em> cabeceras de respuesta para que el JS las pueda leer. Sin listar <code>ETag</code> ah&iacute;, un multipart upload desde el navegador no podr&aacute; leer el ETag de cada parte.</div>
+
+<hr>
+
+<h2>6. Las cabeceras HTTP en juego</h2>
+
+<p><span class="pill req">Petici&oacute;n (navegador &rarr; S3)</span></p>
+<table>
+<thead><tr><th>Cabecera</th><th>Cu&aacute;ndo</th><th>Significado</th></tr></thead>
+<tbody>
+<tr><td><code>Origin</code></td><td>Siempre en cross-origin</td><td>El origen de la p&aacute;gina que hace la llamada.</td></tr>
+<tr><td><code>Access-Control-Request-Method</code></td><td>Solo en preflight</td><td>El m&eacute;todo que la petici&oacute;n real va a usar.</td></tr>
+<tr><td><code>Access-Control-Request-Headers</code></td><td>Solo en preflight</td><td>Las cabeceras que la petici&oacute;n real va a enviar.</td></tr>
+</tbody>
+</table>
+
+<p><span class="pill res">Respuesta (S3 &rarr; navegador)</span></p>
+<table>
+<thead><tr><th>Cabecera</th><th>Se deriva de</th><th>Significado</th></tr></thead>
+<tbody>
+<tr><td><code>Access-Control-Allow-Origin</code></td><td><code>AllowedOrigins</code></td><td>Origen(es) autorizado(s) a leer la respuesta.</td></tr>
+<tr><td><code>Access-Control-Allow-Methods</code></td><td><code>AllowedMethods</code></td><td>M&eacute;todos permitidos.</td></tr>
+<tr><td><code>Access-Control-Allow-Headers</code></td><td><code>AllowedHeaders</code></td><td>Cabeceras permitidas.</td></tr>
+<tr><td><code>Access-Control-Expose-Headers</code></td><td><code>ExposeHeaders</code></td><td>Cabeceras de respuesta legibles por el JS.</td></tr>
+<tr><td><code>Access-Control-Max-Age</code></td><td><code>MaxAgeSeconds</code></td><td>Cu&aacute;nto cachea el navegador el preflight.</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>7. Ejemplos de configuraci&oacute;n</h2>
+
+<div class="callout tip"><span class="h">Importante</span>En la <strong>consola de S3</strong>, la configuraci&oacute;n CORS debe ser <strong>JSON</strong> (la consola nueva ya no acepta XML). La <strong>API REST</strong> sigue usando XML.</div>
+
+<h3>7.1 JSON (consola / <code>aws s3api</code>) &mdash; tres reglas</h3>
+<p>Regla 1 y 2: <code>PUT/POST/DELETE</code> desde dos or&iacute;genes concretos. Regla 3: <code>GET</code> desde cualquier origen.</p>
+<div class="code-wrapper"><button class="copy-btn">Copiar</button><pre><code>[
+    {
+        "AllowedHeaders": ["*"],
+        "AllowedMethods": ["PUT", "POST", "DELETE"],
+        "AllowedOrigins": ["http://www.example1.com"],
+        "ExposeHeaders": []
+    },
+    {
+        "AllowedHeaders": ["*"],
+        "AllowedMethods": ["PUT", "POST", "DELETE"],
+        "AllowedOrigins": ["http://www.example2.com"],
+        "ExposeHeaders": []
+    },
+    {
+        "AllowedHeaders": [],
+        "AllowedMethods": ["GET"],
+        "AllowedOrigins": ["*"],
+        "ExposeHeaders": []
+    }
+]</code></pre></div>
+
+<h3>7.2 JSON con opcionales (<code>ExposeHeaders</code> + <code>MaxAgeSeconds</code>)</h3>
+<div class="code-wrapper"><button class="copy-btn">Copiar</button><pre><code>[
+    {
+        "AllowedHeaders": ["*"],
+        "AllowedMethods": ["PUT", "POST", "DELETE"],
+        "AllowedOrigins": ["http://www.example.com"],
+        "ExposeHeaders": [
+            "x-amz-server-side-encryption",
+            "x-amz-request-id",
+            "x-amz-id-2"
+        ],
+        "MaxAgeSeconds": 3000
+    }
+]</code></pre></div>
+
+<h3>7.3 El mismo ejemplo en XML (API REST)</h3>
+<div class="code-wrapper"><button class="copy-btn">Copiar</button><pre><code>&lt;CORSConfiguration&gt;
+ &lt;CORSRule&gt;
+   &lt;AllowedOrigin&gt;http://www.example.com&lt;/AllowedOrigin&gt;
+   &lt;AllowedMethod&gt;PUT&lt;/AllowedMethod&gt;
+   &lt;AllowedMethod&gt;POST&lt;/AllowedMethod&gt;
+   &lt;AllowedMethod&gt;DELETE&lt;/AllowedMethod&gt;
+   &lt;AllowedHeader&gt;*&lt;/AllowedHeader&gt;
+   &lt;MaxAgeSeconds&gt;3000&lt;/MaxAgeSeconds&gt;
+   &lt;ExposeHeader&gt;x-amz-server-side-encryption&lt;/ExposeHeader&gt;
+   &lt;ExposeHeader&gt;x-amz-request-id&lt;/ExposeHeader&gt;
+   &lt;ExposeHeader&gt;x-amz-id-2&lt;/ExposeHeader&gt;
+ &lt;/CORSRule&gt;
+&lt;/CORSConfiguration&gt;</code></pre></div>
+
+<hr>
+
+<h2>8. C&oacute;mo aplicarlo (CLI y SDK)</h2>
+
+<h3>8.1 AWS CLI</h3>
+<div class="code-wrapper"><button class="copy-btn">Copiar</button><pre><code># Aplicar la configuracion CORS (archivo local cors.json)
+aws s3api put-bucket-cors --bucket &lt;MI_BUCKET&gt; --cors-configuration file://cors.json
+
+# Ver la configuracion actual
+aws s3api get-bucket-cors --bucket &lt;MI_BUCKET&gt;
+
+# Borrar toda la configuracion CORS
+aws s3api delete-bucket-cors --bucket &lt;MI_BUCKET&gt;</code></pre></div>
+
+<h3>8.2 Consola</h3>
+<p>Bucket &rarr; pesta&ntilde;a <strong>Permissions</strong> &rarr; secci&oacute;n <strong>Cross-origin resource sharing (CORS)</strong> &rarr; pegar el JSON &rarr; Guardar.</p>
+
+<div class="mermaid">
+flowchart TD
+    A[Bucket S3] --> B[Permissions]
+    B --> C["Cross-origin resource sharing (CORS)"]
+    C --> D["Editar: pegar JSON con las CORSRule"]
+    D --> E[Save changes]
+</div>
+
+<hr>
+
+<h2>9. Diagrama mental completo</h2>
+
+<div class="mermaid">
+flowchart TD
+    START([JS hace peticion cross-origin a S3]) --> Q{Es peticion simple?}
+    Q -- Si --> DIR[Envia peticion con Origin]
+    Q -- No --> PRE[Envia preflight OPTIONS<br/>con Origin + Request-Method + Request-Headers]
+    PRE --> MATCH{Primera CORSRule que casa<br/>las 3 condiciones?}
+    MATCH -- No casa --> BLOCK[[Navegador bloquea:<br/>error CORS en consola]]
+    MATCH -- Casa --> OK1[S3 responde Allow-* + Max-Age]
+    OK1 --> CACHE[Navegador cachea permiso]
+    CACHE --> DIR
+    DIR --> RESP{Allow-Origin coincide<br/>con el Origin?}
+    RESP -- Si --> READ[[JS puede leer la respuesta]]
+    RESP -- No --> BLOCK
+</div>
+
+<hr>
+
+<h2>10. Troubleshooting y errores comunes</h2>
+
+<table>
+<thead><tr><th>S&iacute;ntoma</th><th>Causa probable</th><th>Arreglo</th></tr></thead>
+<tbody>
+<tr><td>"No 'Access-Control-Allow-Origin' header is present" en consola del navegador</td><td>No hay config CORS, o el <code>Origin</code> no casa con <code>AllowedOrigins</code></td><td>A&ntilde;adir/ajustar la regla; verificar esquema, host y puerto exactos.</td></tr>
+<tr><td>Falla solo <code>PUT</code>/<code>DELETE</code>, el <code>GET</code> funciona</td><td>M&eacute;todo no est&aacute; en <code>AllowedMethods</code> de la regla que casa</td><td>Incluir el m&eacute;todo en la regla correcta.</td></tr>
+<tr><td>Preflight (OPTIONS) devuelve 403</td><td>Cabecera personalizada no listada en <code>AllowedHeaders</code></td><td>Agregar la cabecera (o <code>*</code> / <code>x-amz-*</code>).</td></tr>
+<tr><td>El JS no puede leer el <code>ETag</code></td><td>Falta <code>ExposeHeaders</code></td><td>Listar <code>ETag</code> en <code>ExposeHeaders</code>.</td></tr>
+<tr><td>Funciona en <code>curl</code> pero no en el navegador</td><td>Es un problema de CORS (solo el navegador lo impone)</td><td>Configurar CORS en el bucket; no es un problema de permisos IAM.</td></tr>
+<tr><td>Cambi&eacute; la regla pero sigue fallando un rato</td><td>El navegador cache&oacute; el preflight (<code>MaxAgeSeconds</code>)</td><td>Esperar a que expire o limpiar cach&eacute; del navegador al probar.</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>11. Resumen para el examen (DVA-C02)</h2>
+
+<div class="callout key"><span class="h">Puntos que caen</span>
+<ul>
+<li><strong>CORS lo impone el navegador</strong>, no S3. <code>curl</code>/SDK servidor no se ven afectados.</li>
+<li><strong>CORS no es autorizaci&oacute;n</strong>: ACL y bucket policies siguen aplicando.</li>
+<li>Origen = <code>esquema://host:puerto</code>; cualquier diferencia = cross-origin.</li>
+<li>Preflight = m&eacute;todo <strong>OPTIONS</strong> antes de la petici&oacute;n real (para <code>PUT</code>/<code>DELETE</code>/cabeceras custom).</li>
+<li>S3 usa la <strong>primera <code>CORSRule</code> que casa</strong> (3 condiciones: Origin, Method, Headers). Hasta 100 reglas.</li>
+<li>5 elementos: <code>AllowedMethods</code>, <code>AllowedOrigins</code>, <code>AllowedHeaders</code>, <code>ExposeHeaders</code>, <code>MaxAgeSeconds</code>.</li>
+<li><code>AllowedMethods</code> solo: GET, PUT, POST, DELETE, HEAD.</li>
+<li><code>MaxAgeSeconds</code> = cach&eacute; del preflight en el navegador.</li>
+<li><code>ExposeHeaders</code> = qu&eacute; cabeceras de respuesta puede leer el JS (p.ej. <code>ETag</code>).</li>
+<li>En la <strong>consola solo JSON</strong>; la API REST usa XML.</li>
+<li>Wildcard <code>*</code>: uno por cadena en <code>AllowedOrigins</code>/<code>AllowedHeaders</code>.</li>
+</ul>
+</div>
+
+<h3>Enlaces oficiales</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors.html">Using cross-origin resource sharing (CORS)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManageCorsUsing.html">Elements of a CORS configuration</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/enabling-cors-examples.html">Configuring CORS (console, CLI, SDK)</a></li>
+<li><a href="https://docs.aws.amazon.com/AmazonS3/latest/userguide/cors-troubleshooting.html">Troubleshooting CORS</a></li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.parentElement.querySelector('code');
+      navigator.clipboard.writeText(code.innerText).then(function () {
+        btn.textContent = 'Copiado';
+        btn.classList.add('copied');
+        setTimeout(function () { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

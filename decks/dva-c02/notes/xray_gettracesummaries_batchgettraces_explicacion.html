@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>X-Ray: GetTraceSummaries vs BatchGetTraces (DVA-C02)</title>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #fff; }
+h1 { color: #232f3e; font-size: 22pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color: #0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 2em; }
+h3 { color: #232f3e; font-size: 13pt; margin-top: 1.5em; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt; }
+th { background-color: #232f3e; color: white; padding: 8px; text-align: left; }
+td { border: 1px solid #ddd; padding: 6px 8px; vertical-align: top; }
+tr:nth-child(even) { background-color: #f8f8f8; }
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 10pt; color: #c7254e; }
+pre { background: #1e1e2e; padding: 16px; border-radius: 8px; font-size: 9.5pt; white-space: pre-wrap; word-break: break-word; overflow-x: auto; }
+pre code { background: none; color: #cdd6f4; padding: 0; font-size: inherit; }
+blockquote { border-left: 4px solid #0073bb; margin: 12px 0; padding: 8px 16px; background: #f0f7fc; }
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+.mermaid { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0; text-align: center; }
+.code-wrapper { position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: #3498db; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: 8pt; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { background: #27ae60; }
+.callout { border-radius: 8px; padding: 12px 16px; margin: 16px 0; }
+.callout .h { display: block; font-weight: 700; margin-bottom: 4px; }
+.tip { background: #fff8e1; border-left: 4px solid #ff9900; }
+.warn { background: #fdecea; border-left: 4px solid #d13212; }
+.key { background: #eaf5ea; border-left: 4px solid #1d8102; }
+.legend { font-size: 9pt; color: #555; text-align: center; margin-top: -8px; }
+.sum { color: #0073bb; font-weight: 700; }
+.bat { color: #8250df; font-weight: 700; }
+</style>
+</head>
+<body>
+
+<h1>X-Ray: <span class="sum">GetTraceSummaries</span> vs <span class="bat">BatchGetTraces</span></h1>
+
+<blockquote>
+<p><strong>La pregunta:</strong> &iquest;cu&aacute;l es la diferencia entre <code>GetTraceSummaries</code> y <code>BatchGetTraces</code>?</p>
+<p><strong>Respuesta: C</strong> &mdash; <span class="sum">GetTraceSummaries</span> busca por <strong>rango de tiempo</strong> con una filter expression y devuelve <strong>IDs + annotations</strong>; <span class="bat">BatchGetTraces</span> recupera <strong>trazas completas por ID</strong> (sin filtro).</p>
+</blockquote>
+
+<p>Son dos APIs que trabajan <strong>en pareja</strong>, en dos pasos: primero <em>descubres</em> qu&eacute; trazas te interesan, luego <em>traes el detalle</em>. Entender ese flujo hace obvia la respuesta.</p>
+
+<hr>
+
+<h2>1. Repaso r&aacute;pido: &iquest;qu&eacute; es una traza?</h2>
+
+<p>Una <strong>traza (trace)</strong> es el recorrido completo de <strong>una</strong> petici&oacute;n a trav&eacute;s de todos tus servicios. Cada traza tiene un <code>TraceId</code> y se compone de <strong>segments</strong> y <strong>subsegments</strong> (documentos JSON con el trabajo de cada salto).</p>
+
+<p>Cuando depuras, tienes miles o millones de trazas. No puedes pedirlas todas. Necesitas: (1) <strong>filtrar</strong> las que importan, y (2) <strong>abrir</strong> solo esas para ver el detalle. Eso es exactamente lo que hace cada API.</p>
+
+<hr>
+
+<h2>2. El flujo de dos pasos (la clave)</h2>
+
+<div class="mermaid">
+sequenceDiagram
+    participant App as Tu codigo / consola
+    participant XR as X-Ray API
+    Note over App,XR: PASO 1 - Descubrir
+    App->>XR: GetTraceSummaries(StartTime, EndTime, FilterExpression)
+    XR-->>App: TraceSummaries [ IDs + annotations + duracion + errores ]
+    Note over App: Elijo los TraceIds que me interesan (hasta 5 por lote)
+    Note over App,XR: PASO 2 - Detallar
+    App->>XR: BatchGetTraces(TraceIds = [id1, id2, ...])
+    XR-->>App: Traces completas (todos los segments/subsegments)
+</div>
+<p class="legend">Summaries = el buscador. BatchGetTraces = abrir el expediente completo de los que elegiste.</p>
+
+<div class="callout key"><span class="h">Analog&iacute;a</span><span class="sum">GetTraceSummaries</span> es como buscar en Google: escribes un criterio (rango de fecha + filtro) y te devuelve <strong>una lista de resultados</strong> con t&iacute;tulos (los IDs y annotations). <span class="bat">BatchGetTraces</span> es <strong>hacer clic</strong> en unos cuantos resultados para leer la p&aacute;gina completa.</div>
+
+<hr>
+
+<h2>3. <span class="sum">GetTraceSummaries</span> a detalle</h2>
+
+<p><strong>Prop&oacute;sito:</strong> descubrir qu&eacute; trazas existen en una ventana de tiempo que cumplan un criterio. Devuelve <strong>resumenes</strong>, no el detalle completo.</p>
+
+<table>
+<thead><tr><th>Par&aacute;metro</th><th>Obligatorio</th><th>Qu&eacute; hace</th></tr></thead>
+<tbody>
+<tr><td><code>StartTime</code> / <code>EndTime</code></td><td>S&iacute;</td><td>La ventana de tiempo (Unix seconds). Es la base de la b&uacute;squeda.</td></tr>
+<tr><td><code>FilterExpression</code></td><td>No</td><td>Criterio adicional: por servicio, error, usuario, annotation, etc.</td></tr>
+<tr><td><code>TimeRangeType</code></td><td>No</td><td>Interpreta el rango por <code>TraceId</code> (inicio), <code>Event</code> (actualizaci&oacute;n) o <code>Service</code> (fin de segmento).</td></tr>
+<tr><td><code>Sampling</code> / <code>SamplingStrategy</code></td><td>No</td><td>Traer solo un subconjunto de resumenes.</td></tr>
+<tr><td><code>NextToken</code></td><td>No</td><td>Paginaci&oacute;n.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Devuelve</strong> <code>TraceSummaries</code>: cada uno trae <code>Id</code>, <code>Annotations</code>, <code>Duration</code>, <code>EntryPoint</code>, <code>ErrorRootCauses</code>, etc. Suficiente para decidir cu&aacute;les abrir, <strong>pero no los segment documents completos</strong>.</p>
+
+<h3>Ejemplos de filter expression</h3>
+<div class="code-wrapper"><button class="copy-btn">Copiar</button><pre><code># Trazas que pasan por un servicio
+service("api.example.com")
+
+# Trazas con una annotation concreta
+annotation.account = "12345"
+
+# Trazas con error
+error = true</code></pre></div>
+
+<div class="code-wrapper"><button class="copy-btn">Copiar</button><pre><code># CLI: descubrir trazas con error en la ultima hora
+aws xray get-trace-summaries \
+  --start-time $(date -v-1H +%s) \
+  --end-time $(date +%s) \
+  --filter-expression 'error = true'</code></pre></div>
+
+<hr>
+
+<h2>4. <span class="bat">BatchGetTraces</span> a detalle</h2>
+
+<p><strong>Prop&oacute;sito:</strong> dado que ya sabes los <code>TraceId</code>, traer las <strong>trazas completas</strong> (todos los segments y subsegments). <strong>No filtra ni busca por tiempo.</strong></p>
+
+<table>
+<thead><tr><th>Par&aacute;metro</th><th>Obligatorio</th><th>Detalle</th></tr></thead>
+<tbody>
+<tr><td><code>TraceIds</code></td><td>S&iacute;</td><td>Lista de IDs: <strong>de 1 a 5</strong> por llamada.</td></tr>
+<tr><td><code>NextToken</code></td><td>No</td><td>Paginaci&oacute;n.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Devuelve</strong> <code>Traces</code> (cada una con sus <code>Segments</code> y sus <code>Document</code> JSON) y <code>UnprocessedTraceIds</code> (los que no se pudieron procesar). <strong>No acepta <code>FilterExpression</code> ni <code>StartTime</code>/<code>EndTime</code>.</strong></p>
+
+<div class="callout warn"><span class="h">L&iacute;mite que cae en el examen</span><code>BatchGetTraces</code> acepta <strong>m&aacute;ximo 5 TraceIds</strong> por llamada. Si <code>GetTraceSummaries</code> te dio 50 IDs, haces 10 llamadas a <code>BatchGetTraces</code> (o paginas).</div>
+
+<div class="code-wrapper"><button class="copy-btn">Copiar</button><pre><code># CLI: traer el detalle de trazas concretas por ID
+aws xray batch-get-traces \
+  --trace-ids 1-5f84c7a1-e7d1... 1-5f84c7b2-a3f0...</code></pre></div>
+
+<hr>
+
+<h2>5. Comparativa lado a lado</h2>
+
+<table>
+<thead><tr><th>Aspecto</th><th class="sum">GetTraceSummaries</th><th class="bat">BatchGetTraces</th></tr></thead>
+<tbody>
+<tr><td>Para qu&eacute;</td><td>Descubrir / buscar trazas</td><td>Traer el detalle completo</td></tr>
+<tr><td>Entrada principal</td><td>Rango de tiempo + filtro opcional</td><td>Lista de TraceIds (1 a 5)</td></tr>
+<tr><td>&iquest;Acepta FilterExpression?</td><td>S&iacute;</td><td>No</td></tr>
+<tr><td>&iquest;Busca por tiempo?</td><td>S&iacute; (StartTime/EndTime)</td><td>No</td></tr>
+<tr><td>Qu&eacute; devuelve</td><td>IDs + annotations + resumen (sin segments completos)</td><td>Trazas completas (segments/subsegments)</td></tr>
+<tr><td>Orden en el flujo</td><td>Paso 1</td><td>Paso 2</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>6. Por qu&eacute; NO las otras opciones</h2>
+
+<table>
+<thead><tr><th>Opci&oacute;n</th><th>Por qu&eacute; es falsa</th></tr></thead>
+<tbody>
+<tr><td><b>A.</b> Summaries configura sampling; BatchGetTraces filtra por annotation</td><td>El <strong>sampling</strong> se define con las <strong>Sampling Rules</strong>, no con Summaries. Y BatchGetTraces <strong>no filtra</strong> (ni por annotation ni por nada): solo trae por ID.</td></tr>
+<tr><td><b>B.</b> Ambas aceptan filter expressions</td><td>Solo <span class="sum">GetTraceSummaries</span> acepta <code>FilterExpression</code>. <span class="bat">BatchGetTraces</span> no.</td></tr>
+<tr><td><b>D.</b> BatchGetTraces acepta filter expressions; Summaries solo por ID</td><td>Invertido. Es al rev&eacute;s: Summaries filtra por tiempo/expresi&oacute;n; BatchGetTraces va por ID.</td></tr>
+<tr><td><b>C.</b> Summaries filtra por tiempo + expresi&oacute;n (IDs+annotations); BatchGetTraces por ID</td><td><strong>Correcta.</strong> Coincide con el contrato real de ambas APIs.</td></tr>
+</tbody>
+</table>
+
+<hr>
+
+<h2>7. No confundir con sampling</h2>
+
+<div class="callout tip"><span class="h">Sampling &ne; estas APIs</span>El <strong>sampling</strong> decide <em>qu&eacute; porcentaje de peticiones se trazan</em> (para no trazar el 100% y ahorrar). Se configura con <strong>Sampling Rules</strong> (reservoir + fixed rate), NO con <code>GetTraceSummaries</code>. El par&aacute;metro <code>Sampling</code> de Summaries solo dice "devu&eacute;lveme un subconjunto de los resumenes", que es otra cosa.</div>
+
+<hr>
+
+<h2>8. Resumen para el examen (DVA-C02)</h2>
+
+<div class="callout key"><span class="h">Puntos clave</span>
+<ul>
+<li>Flujo de <strong>dos pasos</strong>: <span class="sum">GetTraceSummaries</span> (descubrir) &rarr; <span class="bat">BatchGetTraces</span> (detallar).</li>
+<li><strong>Buscar/filtrar</strong> &rarr; <span class="sum">GetTraceSummaries</span> (StartTime/EndTime + FilterExpression, devuelve IDs + annotations).</li>
+<li><strong>Traer detalle por ID</strong> &rarr; <span class="bat">BatchGetTraces</span> (1 a 5 IDs, sin filtro, devuelve trazas completas).</li>
+<li>Solo <span class="sum">Summaries</span> acepta <code>FilterExpression</code>.</li>
+<li>El <strong>sampling</strong> lo definen las <strong>Sampling Rules</strong>, no estas APIs.</li>
+<li>Filter expressions t&iacute;picas: <code>service("...")</code>, <code>annotation.x = "..."</code>, <code>error = true</code>.</li>
+</ul>
+</div>
+
+<h3>Enlaces oficiales</h3>
+<ul>
+<li><a href="https://docs.aws.amazon.com/xray/latest/api/API_GetTraceSummaries.html">API GetTraceSummaries</a></li>
+<li><a href="https://docs.aws.amazon.com/xray/latest/api/API_BatchGetTraces.html">API BatchGetTraces</a></li>
+<li><a href="https://docs.aws.amazon.com/xray/latest/devguide/aws-xray-interface-console.html#xray-console-filters">Filter expressions</a></li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  mermaid.initialize({ startOnLoad: true, theme: 'default', securityLevel: 'loose' });
+  document.querySelectorAll('.copy-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var code = btn.parentElement.querySelector('code');
+      navigator.clipboard.writeText(code.innerText).then(function () {
+        btn.textContent = 'Copiado';
+        btn.classList.add('copied');
+        setTimeout(function () { btn.textContent = 'Copiar'; btn.classList.remove('copied'); }, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>
