@@ -1,0 +1,69 @@
+# DVA-C02 practice set 3 - raw questions (pasted 2026-09-09)
+# Built by dva_c02_08.py -> deck DVA-C02::08
+#
+# PART A: questions marked Incorrect (actually failed) -> cards.
+#   Failed: Q5, Q6, Q7, Q21, Q29, Q32, Q36, Q40
+#
+# PART B: 10 ADDITIONAL "risk" questions on topics NOT yet covered in decks 04-08.
+#   Selected by reading the real card text (question= lines) of every existing deck,
+#   classifying Q41-Q65 as COVERED / PARTIAL / GAP, and picking clean gaps:
+#   Q41 Cognito Adaptive Authentication
+#   Q42 IAM cross-account role switching (audit across own accounts)
+#   Q44 STS GetSessionToken (MFA-protected API calls)
+#   Q47 CodeDeploy Linear deployment config (vs Canary/All-at-once)
+#   Q48 Kinesis PutRecord + SequenceNumberForOrdering (ordering + dedup)
+#   Q51 RDS Read Replica (read scaling, minimal code change)
+#   Q52 DynamoDB TTL (expire items) - distinct from ElastiCache cache TTL
+#   Q56 Elastic Beanstalk Blue/Green (runtime upgrade + rollback)
+#   Q60 CodeDeploy agent (HTTPS 443, EC2/on-prem, Lambda not in-place)
+#   Q62 IAM Policy Simulator
+#
+#   Excluded as ALREADY COVERED (verified against real card text):
+#   Q43 Lambda mem->CPU (dva08-q40) | Q45 RCU 10->10/20 (dva07-q45) |
+#   Q46 optimistic locking version (dva04-q15, dva07-q673) | Q50 CFN drift (dva06-q1) |
+#   Q54 IAM role for EC2->S3 (dva08-q36) | Q55 S3 CORS (dva06-q4) |
+#   Q57 SSE-C headers (dva07-q57) | Q61/Q65 X-Ray subsegments/namespace (dva05-q7, dva07-q567)
+#   Excluded as REDUNDANT/PARTIAL: Q49 /tmp caching (~dva05-q12 caching strategies),
+#   Q53/Q58/Q63 Kinesis (overlap dva04-q18; kept only Q48), Q59 concurrency (partial),
+#   Q64 atomic counter (not failed; was Correct)
+
+Q1  [Correct]   DynamoDB atomic counters (UpdateItem) for website visitor count, tolerates over/undercount
+Q2  [Correct]   Elastic Beanstalk deploy via CLI: package as ZIP + eb deploy
+Q3  [Correct]   Lambda async: Invoke API with InvocationType = Event (InvokeAsync deprecated)
+Q4  [Correct]   CodeDeploy Lambda canary AppSpec hook: BeforeAllowTraffic
+Q5  [Incorrect] Cognito Identity Pools + enable access to unauthenticated identities (guest + social temp creds)
+Q6  [Incorrect] KMS envelope encryption: encrypt data w/ data key, then encrypt data key w/ top-level PLAINTEXT root key
+Q7  [Incorrect] API Gateway Lambda Authorizer: TOKEN-based authorization for OAuth/SAML bearer token
+Q8  [Correct]   Lambda async retries fail -> Dead Letter Queue (SNS topic or SQS queue)
+Q9  [Correct]   Cross-account S3 access via IAM role -> STS AssumeRole API
+Q10 [Correct]   ECS Fargate 4 tasks, different resources -> 4 IAM (task) Roles
+Q11 [Correct]   DynamoDB partition key: high-cardinality unique attr (employee_id)
+Q12 [Correct]   API Gateway HTTP_PROXY integration (passthrough to backend HTTP endpoint)
+Q13 [Correct]   API Gateway non-proxy Lambda: enforce required query string param -> Method Request
+Q14 [Correct]   DynamoDB ProvisionedThroughputExceeded: GSI WCU < base table WCU
+Q15 [Correct]   Elastic Beanstalk least deploy time: All at once
+Q16 [Correct]   S3 list-objects timeout -> pagination with --page-size and --max-items
+Q17 [Correct]   DynamoDB read+write many items fewer round trips -> BatchGetItem / BatchWriteItem
+Q18 [Correct]   DynamoDB threads last 3 months, same partition key + alt sort key -> Local Secondary Index
+Q19 [Correct]   DynamoDB Streams NEW_IMAGE + Kinesis Adapter (KCL) for real-time analytics on EKS
+Q20 [Correct]   Lambda concurrent executions = invocations/sec * avg duration (10 * 3 = 30)
+Q21 [Incorrect] CloudWatch agent on ASB instances: attach CloudWatchAgentServerPolicy to IAM role
+Q22 [Correct]   Lambda deployment package too large -> Lambda Layers
+Q23 [Correct]   CloudFormation easiest Lambda deploy: source inline in ZipFile parameter (AWS::Lambda::Function Code)
+Q24 [Correct]   X-Ray custom tool: GetTraceSummaries (IDs) -> BatchGetTraces (full traces)
+Q25 [Correct]   X-Ray behind ALB: client IP from X-Forwarded-For header
+Q26 [Correct]   CloudWatch shared dashboard-per-app: custom namespace with unique metric name
+Q27 [Correct]   CI/CD deploy to EC2 + on-premises: AWS CodeDeploy
+Q28 [Correct]   X-Ray more granular downstream detail -> subsegments
+Q29 [Incorrect] Elasticity (most): EC2 Spot Fleet + DynamoDB (Application Auto Scaling)
+Q30 [Correct]   X-Ray on ECS: Docker image running X-Ray daemon + task def UDP port 2000
+Q31 [Correct]   SQS FIFO dedup: MessageDeduplicationId on SendMessage (5-min dedup window)
+Q32 [Incorrect] DynamoDB least RCU by primary key: Query with eventual consistency reads
+Q33 [Correct]   SAM deploy: sam build + sam deploy
+Q34 [Correct]   Beanstalk decouple RDS: blue/green + snapshot + deletion protection + remove SG rule before terminating
+Q35 [Correct]   Beanstalk env manifest config file: env.yaml
+Q36 [Incorrect] EC2 still writes both buckets: app still uses IAM role configured for AWS CLI key
+Q37 [Correct]   Lambda throttling: first function's concurrency limit >> second function's
+Q38 [Correct]   ECS task placement minimize instances/cost: binpack strategy
+Q39 [Correct]   Schedule Lambda every 30 min: EventBridge (CloudWatch Events) rule
+Q40 [Incorrect] Increase Lambda CPU -> increase allocated memory (CPU scales with memory)
