@@ -17,3 +17,5 @@ investigation/
 kiro-notes/
 .kiro-agents/
 findings/
+decks/*/kiro-test/
+decks/*/backups/
