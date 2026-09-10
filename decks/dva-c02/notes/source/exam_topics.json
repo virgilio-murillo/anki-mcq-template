@@ -1,1233 +1,456 @@
 [
  {
   "id": "t001",
-  "topic": "DynamoDB Streams as a Lambda event source for change data capture",
-  "concept": "DynamoDB Streams capture item-level changes in a table and can trigger Lambda functions in near real-time, enabling immediate notification of data modifications without polling or scheduled scans.",
+  "topic": "DynamoDB Streams como fuente de eventos para Lambda",
+  "concept": "DynamoDB Streams captura cambios en tablas en tiempo real y puede invocar funciones Lambda automáticamente, permitiendo arquitecturas event-driven sin polling manual.",
   "service": "DynamoDB",
   "question": 1
  },
  {
   "id": "t002",
-  "topic": "Event-driven vs polling architectures for change detection",
-  "concept": "Event-driven architectures using streams or triggers detect changes immediately as they occur, while scheduled polling introduces latency and inefficiency by periodically scanning for changes at fixed intervals.",
-  "service": "Lambda",
-  "question": 1
+  "topic": "Arquitecturas serverless event-driven con SNS y Lambda",
+  "concept": "SNS puede publicar eventos a funciones Lambda suscritas, creando una arquitectura serverless event-driven. Lambda se invoca automáticamente cuando SNS publica mensajes, sin necesidad de polling ni infraestructura de servidores.",
+  "service": "SNS, Lambda",
+  "question": 2
  },
  {
   "id": "t003",
-  "topic": "RDS database trigger limitations for Lambda invocation",
-  "concept": "Standard RDS database engines (PostgreSQL, MySQL) cannot directly invoke Lambda functions via database triggers, unlike Aurora MySQL which supports native Lambda integration.",
-  "service": "RDS",
-  "question": 1
+  "topic": "Global Secondary Index (GSI) en DynamoDB",
+  "concept": "Los GSI permiten consultar datos usando claves alternativas (diferentes a la partition/sort key de la tabla base). Se pueden crear después de que la tabla existe y son esenciales para patrones de acceso eficientes como leaderboards ordenados por atributos no-clave.",
+  "service": "DynamoDB",
+  "question": 3
  },
  {
   "id": "t004",
-  "topic": "Lambda functions as SNS topic subscribers for event-driven architectures",
-  "concept": "AWS Lambda functions can directly subscribe to Amazon SNS topics to receive and process events in a serverless, event-driven manner, eliminating the need for compute instances to poll or listen for messages.",
-  "service": "AWS Lambda",
-  "question": 2
+  "topic": "Modelos de consistencia de lectura en DynamoDB",
+  "concept": "Eventually consistent reads consumen la mitad de RCUs que strongly consistent reads. Usar eventually consistent cuando la aplicación tolera datos ligeramente desactualizados optimiza costos.",
+  "service": "DynamoDB",
+  "question": 4
  },
  {
   "id": "t005",
-  "topic": "Serverless vs server-based compute for event processing",
-  "concept": "Serverless architectures use managed services like Lambda that automatically scale and require no server provisioning, while EC2-based solutions require managing instances and are not considered serverless even when used with event services like SQS or SNS.",
-  "service": "AWS Lambda",
-  "question": 2
+  "topic": "Cognito Sync para sincronización de datos de usuario entre dispositivos",
+  "concept": "Cognito Sync permite sincronizar datos de perfil de usuario y preferencias de aplicación entre múltiples dispositivos y plataformas (móvil, web) para el mismo usuario autenticado.",
+  "service": "Cognito",
+  "question": 5
  },
  {
   "id": "t006",
-  "topic": "Event-driven vs request-driven invocation patterns",
-  "concept": "Event-driven architectures use asynchronous event sources (like SNS publishing to Lambda) where events trigger function execution, while request-driven patterns (like API Gateway synchronous invocations) require explicit API calls and do not constitute event-driven design.",
-  "service": "Amazon SNS",
-  "question": 2
+  "topic": "Configuración de proveedores de identidad social en Cognito User Pools",
+  "concept": "Para integrar proveedores de identidad social (Google, Facebook, etc.) basados en OpenID en Cognito User Pools, se requiere registrar la aplicación con el proveedor social y obtener un App Client ID y App Client Secret, que se configuran en el user pool para establecer la federación de identidades.",
+  "service": "Cognito",
+  "question": 6
  },
  {
   "id": "t007",
-  "topic": "DynamoDB Global Secondary Index (GSI) for alternative query patterns",
-  "concept": "GSIs allow querying DynamoDB tables using different partition and sort keys than the base table, enabling efficient queries on non-key attributes. GSIs can be created after table creation, unlike Local Secondary Indexes.",
-  "service": "DynamoDB",
-  "question": 3
+  "topic": "Optimización de tiempos de build en CodeBuild mediante imágenes personalizadas",
+  "concept": "Las imágenes Docker personalizadas con dependencias pre-instaladas eliminan el tiempo de descarga e instalación en cada build, siendo más eficiente que descargar paquetes desde VPC, S3 o internet en cada ejecución.",
+  "service": "CodeBuild",
+  "question": 7
  },
  {
   "id": "t008",
-  "topic": "DynamoDB Query vs Scan operations for data retrieval efficiency",
-  "concept": "Query operations require a partition key and optionally a sort key for efficient targeted retrieval, while Scan operations read every item in the table and should be avoided for large tables due to performance and cost implications.",
-  "service": "DynamoDB",
-  "question": 3
+  "topic": "Dead-letter queues (DLQ) en SNS",
+  "concept": "Configurar una cola SQS como DLQ para una suscripción SNS permite almacenar mensajes que fallan en su entrega, evitando pérdida de datos críticos durante interrupciones prolongadas.",
+  "service": "SNS",
+  "question": 8
  },
  {
   "id": "t009",
-  "topic": "DynamoDB Local Secondary Index (LSI) creation constraints",
-  "concept": "LSIs must be created at table creation time and share the same partition key as the base table but allow a different sort key. They cannot be added to existing tables.",
-  "service": "DynamoDB",
-  "question": 3
+  "topic": "Roles de ejecución de Lambda y permisos IAM",
+  "concept": "Las funciones Lambda requieren un rol de ejecución con permisos IAM explícitos para acceder a otros servicios AWS. Un error AccessDenied indica falta de permisos en el rol, no problemas de capacidad o throttling.",
+  "service": "Lambda",
+  "question": 9
  },
  {
   "id": "t010",
-  "topic": "DynamoDB eventually consistent vs strongly consistent reads RCU consumption",
-  "concept": "Eventually consistent reads consume half the RCUs of strongly consistent reads (0.5 RCU vs 1 RCU per 4KB). When stale data is tolerable, eventually consistent reads minimize RCU costs.",
-  "service": "DynamoDB",
-  "question": 4
+  "topic": "Políticas de despliegue en Elastic Beanstalk",
+  "concept": "Comprender las diferencias entre las políticas de despliegue (immutable, blue/green, rolling, all-at-once) y cuáles lanzan instancias nuevas versus desplegar en instancias existentes.",
+  "service": "Elastic Beanstalk",
+  "question": 10
  },
  {
   "id": "t011",
-  "topic": "DynamoDB transactional reads RCU consumption",
-  "concept": "Transactional reads consume 2x the RCUs of strongly consistent reads (2 RCUs per 4KB) and are only needed for ACID guarantees across multiple items or tables, not for single-item reads.",
-  "service": "DynamoDB",
-  "question": 4
+  "topic": "Integración de certificados SSL/TLS de ACM con Application Load Balancer",
+  "concept": "Los certificados X.509 emitidos por ACM se configuran directamente en el ALB (no en instancias EC2 individuales) y no pueden exportarse. ACM gestiona automáticamente la renovación cuando se integra con servicios compatibles como ALB.",
+  "service": "Certificate Manager",
+  "question": 11
  },
  {
   "id": "t012",
-  "topic": "DynamoDB PartiQL query read consistency options",
-  "concept": "PartiQL queries in DynamoDB support both eventually consistent and strongly consistent reads with the same RCU consumption patterns as standard GetItem/Query operations.",
-  "service": "DynamoDB",
-  "question": 4
+  "topic": "Secrets Manager para rotación automática de credenciales",
+  "concept": "Secrets Manager permite almacenar credenciales cifradas con KMS y rotarlas automáticamente, a diferencia de Parameter Store que no soporta rotación automática de secretos.",
+  "service": "Secrets Manager",
+  "question": 12
  },
  {
   "id": "t013",
-  "topic": "Amazon Cognito Sync for cross-device user data synchronization",
-  "concept": "Cognito Sync enables synchronization of application-related user profile data across multiple devices and platforms using client libraries, allowing users to access the same data regardless of which device they use.",
-  "service": "Amazon Cognito",
-  "question": 5
+  "topic": "Compatibilidad entre AWS Encryption SDK y S3 encryption client",
+  "concept": "El AWS Encryption SDK y el S3 encryption client no son compatibles entre sí porque producen formatos de cifrado diferentes. Para cifrar y descifrar datos correctamente, ambas operaciones deben usar la misma herramienta (ambas con Encryption SDK o ambas con S3 encryption client).",
+  "service": "Encryption SDK",
+  "question": 13
  },
  {
   "id": "t014",
-  "topic": "AWS DataSync use cases and limitations",
-  "concept": "DataSync is designed for transferring data between on-premises storage systems and AWS storage services, not for synchronizing user data across client devices or mobile applications.",
-  "service": "AWS DataSync",
-  "question": 5
+  "topic": "Requisitos de sincronización de tiempo para operaciones de CodeDeploy",
+  "concept": "CodeDeploy requiere que la hora del sistema en las instancias EC2 esté sincronizada correctamente para validar las firmas de las solicitudes de despliegue. Errores de 'Signature expired' indican desincronización temporal entre la instancia y el servicio.",
+  "service": "CodeDeploy",
+  "question": 14
  },
  {
   "id": "t015",
-  "topic": "Application Load Balancer sticky sessions behavior",
-  "concept": "ALB sticky sessions bind a user's session to a specific target server for session persistence, but do not synchronize or share data across multiple devices or sessions.",
-  "service": "Elastic Load Balancing",
-  "question": 5
+  "topic": "Recopilación centralizada de logs desde múltiples fuentes con CloudWatch Agent",
+  "concept": "El agente de CloudWatch permite recopilar logs tanto de instancias EC2 como de servidores on-premises y enviarlos a CloudWatch Logs para almacenamiento durable y visualización, sin necesidad de reescribir la aplicación.",
+  "service": "CloudWatch",
+  "question": 15
  },
  {
   "id": "t016",
-  "topic": "Amazon Cognito User Pool social identity provider (IdP) integration requirements",
-  "concept": "Social IdPs (Google, Facebook, Amazon, Apple) use OpenID Connect and require an app client ID and app client secret obtained from the social provider's developer console to integrate with Cognito User Pools.",
-  "service": "Amazon Cognito",
-  "question": 6
+  "topic": "DynamoDB Streams con Lambda para procesamiento en tiempo real",
+  "concept": "DynamoDB Streams captura cambios en tablas y permite invocar funciones Lambda automáticamente ante modificaciones, habilitando arquitecturas event-driven serverless sin modificar la aplicación origen.",
+  "service": "DynamoDB Streams",
+  "question": 16
  },
  {
   "id": "t017",
-  "topic": "SAML vs OpenID Connect authentication protocols in Cognito",
-  "concept": "Social IdPs use OpenID Connect protocol requiring client ID and secret, while enterprise SAML IdPs use SAML metadata documents. These are distinct integration methods that cannot be interchanged.",
-  "service": "Amazon Cognito",
-  "question": 6
+  "topic": "Control de acceso basado en atributos (ABAC) con Cognito Identity Pools",
+  "concept": "Configurar un único rol IAM en el identity pool con políticas que usen condiciones de tags principales (${aws:PrincipalTag/}) para controlar acceso a recursos según atributos del usuario, permitiendo permisos dinámicos sin crear múltiples roles por departamento.",
+  "service": "Cognito",
+  "question": 17
  },
  {
   "id": "t018",
-  "topic": "CodeBuild custom Docker images for pre-installed dependencies",
-  "concept": "Custom CodeBuild images allow pre-installation of dependencies, tools, and packages in a Docker image, eliminating download and installation time during each build compared to downloading dependencies in the buildspec install phase.",
-  "service": "CodeBuild",
-  "question": 7
+  "topic": "Optimización de latencia en funciones Lambda con conexiones a bases de datos",
+  "concept": "Usar provisioned concurrency para pre-inicializar conexiones y mover la inicialización de clientes SDK y conexiones de base de datos fuera del handler de la función para reducir cold starts y latencia de integración.",
+  "service": "Lambda",
+  "question": 18
  },
  {
   "id": "t019",
-  "topic": "CodeBuild build time optimization strategies",
-  "concept": "Build time can be reduced through various methods (custom images, VPC endpoints to internal resources, S3-hosted dependencies), but pre-baking dependencies into custom Docker images provides the greatest time savings by eliminating repeated download and installation steps.",
-  "service": "CodeBuild",
-  "question": 7
+  "topic": "Configuración de Availability Zones en Application Load Balancer",
+  "concept": "Un ALB solo enruta tráfico a instancias en Availability Zones habilitadas. Si las instancias están registradas pero no reciben tráfico, el problema típico es que sus AZs no están habilitadas en el ALB.",
+  "service": "Application Load Balancer",
+  "question": 19
  },
  {
   "id": "t020",
-  "topic": "CodeBuild VPC configuration for private resource access",
-  "concept": "VPC-enabled CodeBuild projects can access resources within a VPC such as internally hosted package managers or EC2 instances, reducing external internet dependency but still requiring download time during builds.",
-  "service": "CodeBuild",
-  "question": 7
+  "topic": "Cognito Identity Pools - Flujo de autenticación federada con proveedores de identidad externos",
+  "concept": "Para obtener credenciales AWS temporales usando un token OpenID de un proveedor externo, se debe usar Cognito Identity Pool con el flujo simplificado: primero llamar GetId (con el token OpenID para obtener un Cognito ID) y luego GetCredentialsForIdentity (con el Cognito ID para obtener credenciales AWS temporales).",
+  "service": "Cognito",
+  "question": 20
  },
  {
   "id": "t021",
-  "topic": "SNS subscription dead-letter queue (DLQ) for failed message deliveries",
-  "concept": "An Amazon SQS queue can be configured as a dead-letter queue (DLQ) for an SNS subscription to capture and store messages that fail delivery to the subscription endpoint, preventing message loss during outages or misconfigurations.",
-  "service": "SNS",
-  "question": 8
+  "topic": "Paquetes de despliegue de Lambda",
+  "concept": "Un deployment package de Lambda debe incluir el código compilado y las dependencias de la aplicación, pero NO el runtime (provisto por Lambda), ni el execution role (configurado externamente), ni las referencias a event sources (externas a la función).",
+  "service": "Lambda",
+  "question": 21
  },
  {
   "id": "t022",
-  "topic": "SNS delivery policies vs dead-letter queues for message persistence",
-  "concept": "SNS delivery policies control retry behavior with time-limited attempts that eventually exhaust, while dead-letter queues provide persistent storage for failed messages beyond retry exhaustion, making DLQs the solution for long-term message preservation during extended outages.",
-  "service": "SNS",
-  "question": 8
+  "topic": "Secrets Manager para gestión y rotación automática de credenciales",
+  "concept": "Secrets Manager almacena credenciales de bases de datos de forma segura y permite rotación automática programada, a diferencia de Parameter Store que no soporta rotación automática ni KMS que solo cifra pero no almacena/distribuye credenciales.",
+  "service": "Secrets Manager",
+  "question": 22
  },
  {
   "id": "t023",
-  "topic": "Lambda destinations vs SNS dead-letter queues",
-  "concept": "Failure destinations are a feature of AWS Lambda asynchronous invocations, not SNS topics. SNS uses dead-letter queues (DLQs) attached to subscriptions to handle delivery failures, not failure destinations at the topic level.",
-  "service": "SNS",
-  "question": 8
+  "topic": "Cifrado de CloudWatch Logs con claves KMS administradas por el cliente",
+  "concept": "Para cifrar log groups de CloudWatch Logs con una clave KMS customer managed key, se debe usar AWS CLI (comandos associate-kms-key o create-log-group), no la consola. La clave KMS debe ser simétrica.",
+  "service": "CloudWatch Logs",
+  "question": 23
  },
  {
   "id": "t024",
-  "topic": "Lambda execution role IAM permissions for DynamoDB write operations",
-  "concept": "Lambda functions require an execution role with explicit IAM permissions (e.g., dynamodb:PutItem, dynamodb:BatchWriteItem) to write to DynamoDB tables. AccessDenied errors indicate missing IAM permissions, not capacity or throttling issues.",
-  "service": "AWS Lambda",
-  "question": 9
+  "topic": "Decodificación de mensajes de error de autorización con STS",
+  "concept": "Cuando una operación AWS falla con un mensaje de autorización codificado (UnauthorizedOperation), se debe usar el comando 'decode-authorization-message' de STS para decodificar el mensaje y obtener detalles adicionales sobre el fallo de autorización.",
+  "service": "STS",
+  "question": 24
  },
  {
   "id": "t025",
-  "topic": "DynamoDB error types: AccessDeniedException vs ProvisionedThroughputExceededException vs ThrottlingException",
-  "concept": "AccessDeniedException indicates IAM permission issues, ProvisionedThroughputExceededException indicates exhausted WCU/RCU capacity, and ThrottlingException indicates API rate limit exceeded. Each error type has distinct causes and requires different remediation approaches.",
-  "service": "Amazon DynamoDB",
-  "question": 9
+  "topic": "Distributed tracing con X-Ray en arquitecturas de microservicios",
+  "concept": "X-Ray proporciona capacidades de distributed tracing para rastrear requests a través de múltiples servicios y identificar cuellos de botella. Requiere ejecutar el daemon de X-Ray como contenedor sidecar en ECS para recopilar datos de trazabilidad.",
+  "service": "X-Ray",
+  "question": 25
  },
  {
   "id": "t026",
-  "topic": "Elastic Beanstalk Immutable deployment policy",
-  "concept": "Immutable deployments launch a completely new set of EC2 instances with the new application version, then terminate old instances after successful deployment, ensuring zero downtime and easy rollback.",
-  "service": "AWS Elastic Beanstalk",
-  "question": 10
+  "topic": "Modos de capacidad de DynamoDB (provisioned vs on-demand)",
+  "concept": "On-demand mode escala automáticamente para manejar cargas de trabajo impredecibles y picos de tráfico sin errores de ProvisionedThroughputExceededException, mientras que provisioned capacity requiere configuración manual o Auto Scaling que puede no responder suficientemente rápido a picos repentinos.",
+  "service": "DynamoDB",
+  "question": 26
  },
  {
   "id": "t027",
-  "topic": "Elastic Beanstalk Blue/Green deployment strategy",
-  "concept": "Blue/green deployments create a separate complete environment with new instances for the new application version, allowing testing before swapping CNAMEs to redirect traffic from the old (blue) to new (green) environment.",
-  "service": "AWS Elastic Beanstalk",
-  "question": 10
+  "topic": "Autenticación y autorización de usuarios a escala con Cognito",
+  "concept": "Cognito proporciona identidades únicas para usuarios a gran escala y genera credenciales temporales de IAM para acceder a servicios AWS como DynamoDB, sin necesidad de crear usuarios IAM individuales.",
+  "service": "Cognito",
+  "question": 27
  },
  {
   "id": "t028",
-  "topic": "Elastic Beanstalk Rolling deployment policies distinction",
-  "concept": "Rolling and Rolling with additional batch deployments update existing instances in batches rather than launching entirely new instances, with the additional batch variant temporarily adding capacity during deployment.",
-  "service": "AWS Elastic Beanstalk",
-  "question": 10
+  "topic": "S3 Event Notifications para invocar Lambda",
+  "concept": "S3 Event Notifications permite invocar funciones Lambda automáticamente en respuesta a eventos del bucket (PUT, DELETE, etc.), habilitando arquitecturas event-driven para procesamiento de objetos.",
+  "service": "S3",
+  "question": 28
  },
  {
   "id": "t029",
-  "topic": "ACM certificate attachment to Application Load Balancer for HTTPS termination",
-  "concept": "ACM certificates can be directly attached to ALB listeners via the AWS Console to enable HTTPS termination at the load balancer level, eliminating the need to manage certificates on individual EC2 instances.",
-  "service": "AWS Certificate Manager",
-  "question": 11
+  "topic": "Optimización de throughput en Kinesis Data Streams usando PutRecords para batch processing",
+  "concept": "PutRecords permite enviar múltiples registros en una sola llamada API, reduciendo significativamente el uso de CPU y red comparado con múltiples llamadas individuales de PutRecord. Es la forma recomendada de optimizar la ingesta de datos en productores.",
+  "service": "Kinesis Data Streams",
+  "question": 29
  },
  {
   "id": "t030",
-  "topic": "ACM certificate export limitations and supported integrations",
-  "concept": "ACM certificates cannot be exported (private keys remain in ACM) and cannot be directly installed on EC2 instances unless using AWS Nitro Enclaves. ACM certificates are designed for integrated AWS services like ALB, CloudFront, and API Gateway.",
-  "service": "AWS Certificate Manager",
-  "question": 11
+  "topic": "Trust policy vs access policy en roles IAM para Cognito Identity Pools",
+  "concept": "La trust policy controla QUIÉN puede asumir el rol (sts:AssumeRoleWithWebIdentity). La access policy controla QUÉ puede hacer después de asumirlo. Errores en trust policy impiden asumir el rol; errores en access policy ocurren al usar credenciales ya asumidas.",
+  "service": "IAM",
+  "question": 30
  },
  {
   "id": "t031",
-  "topic": "Application Load Balancer SSL/TLS termination architecture",
-  "concept": "ALB performs SSL/TLS termination by decrypting HTTPS traffic using ACM certificates at the load balancer layer, then forwarding traffic to backend EC2 instances (typically over HTTP), offloading certificate management from individual instances.",
-  "service": "Elastic Load Balancing",
-  "question": 11
+  "topic": "Ubicación de archivos de configuración buildspec.yml y appspec.yml",
+  "concept": "Los archivos buildspec.yml (CodeBuild) y appspec.yml (CodeDeploy) deben ubicarse en el directorio raíz del repositorio de código fuente por defecto, no en subdirectorios.",
+  "service": "CodeBuild, CodeDeploy",
+  "question": 31
  },
  {
   "id": "t032",
-  "topic": "AWS Secrets Manager automatic rotation for database credentials",
-  "concept": "Secrets Manager supports automatic rotation of database credentials with KMS encryption at rest, unlike Parameter Store which requires manual rotation or external automation.",
-  "service": "AWS Secrets Manager",
-  "question": 12
+  "topic": "DynamoDB Global Secondary Indexes",
+  "concept": "Los GSI permiten consultas eficientes usando claves alternativas (partition key y sort key diferentes a la tabla base). Se crean sobre la tabla base y se sincronizan automáticamente; no se pueden insertar items directamente en el índice.",
+  "service": "DynamoDB",
+  "question": 32
  },
  {
   "id": "t033",
-  "topic": "Systems Manager Parameter Store SecureString vs String parameter types",
-  "concept": "SecureString parameters support KMS encryption for sensitive data, while String parameters store plain text without encryption, but Parameter Store lacks native automatic rotation capabilities.",
-  "service": "AWS Systems Manager Parameter Store",
-  "question": 12
+  "topic": "Secciones de plantillas CloudFormation",
+  "concept": "Comprender el propósito de cada sección de una plantilla CloudFormation, especialmente Mappings para definir valores condicionales basados en claves como regiones, y distinguirlas de Parameters, Resources y Outputs.",
+  "service": "CloudFormation",
+  "question": 33
  },
  {
   "id": "t034",
-  "topic": "Lambda IAM permissions for Secrets Manager secret retrieval",
-  "concept": "Lambda functions require secretsmanager:GetSecretValue permission on the secret ARN and kms:Decrypt permission on the KMS key ARN to retrieve and decrypt secrets.",
-  "service": "AWS Lambda",
-  "question": 12
+  "topic": "Manejo de duplicados en SQS con visibility timeout y deduplicación a nivel de aplicación",
+  "concept": "SQS garantiza entrega at-least-once, lo que puede causar duplicados. Se previenen aumentando el visibility timeout para que exceda el tiempo de procesamiento completo y/o implementando lógica de deduplicación en la aplicación antes de escribir a la base de datos.",
+  "service": "SQS",
+  "question": 34
  },
  {
   "id": "t035",
-  "topic": "AWS Encryption SDK vs S3 encryption client compatibility",
-  "concept": "The AWS Encryption SDK and S3 encryption client produce incompatible ciphertext formats and cannot decrypt each other's encrypted data. Both encryption and decryption operations must use the same SDK (either both use Encryption SDK or both use S3 encryption client).",
-  "service": "AWS Encryption SDK",
-  "question": 13
+  "topic": "Lambda Layers para compartir dependencias",
+  "concept": "Lambda Layers permite empaquetar y compartir código común (librerías, dependencias) entre múltiples funciones Lambda de forma centralizada, evitando duplicación y facilitando actualizaciones sin modificar cada función individualmente.",
+  "service": "Lambda",
+  "question": 35
  },
  {
   "id": "t036",
-  "topic": "AWS Encryption SDK cross-language compatibility",
-  "concept": "The AWS Encryption SDK supports cross-language encryption and decryption, meaning data encrypted with the Encryption SDK in one language (e.g., Java) can be decrypted using the Encryption SDK in another language (e.g., Python), as long as both use the same SDK.",
-  "service": "AWS Encryption SDK",
-  "question": 13
+  "topic": "Políticas de bucket de S3 para forzar cifrado en tránsito",
+  "concept": "Usar la condición 'aws:SecureTransport': 'false' con efecto 'Deny' para bloquear conexiones HTTP no cifradas y forzar HTTPS en todas las solicitudes al bucket, independientemente de otras políticas existentes.",
+  "service": "S3",
+  "question": 36
  },
  {
   "id": "t037",
-  "topic": "CodeDeploy agent InvalidSignatureException due to time skew",
-  "concept": "CodeDeploy agent requires accurate system time on EC2 instances to validate request signatures. Time drift or incorrect date/time settings cause InvalidSignatureException errors because the signature timestamp doesn't match the instance's clock.",
-  "service": "AWS CodeDeploy",
-  "question": 14
+  "topic": "API Gateway caching",
+  "concept": "Habilitar el caché en API Gateway reduce el tráfico al endpoint backend almacenando respuestas y sirviéndolas directamente desde el gateway, mejorando el rendimiento sin escalar la infraestructura subyacente.",
+  "service": "API Gateway",
+  "question": 37
  },
  {
   "id": "t038",
-  "topic": "AWS API request signature validation and time synchronization",
-  "concept": "AWS API requests use signature version 4 signing with timestamps. If an EC2 instance's system clock is skewed beyond the acceptable threshold (typically 5 minutes), AWS services reject requests with InvalidSignatureException because the signature appears expired or not yet valid.",
-  "service": "AWS IAM",
-  "question": 14
+  "topic": "Estrategias de caching en CodeBuild para optimizar tiempos de build",
+  "concept": "Entender las diferencias entre local caching (almacena en el host de build, ideal para archivos grandes y builds frecuentes) vs S3 caching (almacena en bucket S3, más lento para transferir archivos grandes) y cómo configurar rutas de cache en buildspec.",
+  "service": "CodeBuild",
+  "question": 38
  },
  {
   "id": "t039",
-  "topic": "CloudWatch agent for hybrid log collection from on-premises and EC2",
-  "concept": "The CloudWatch agent can be deployed to both on-premises servers and EC2 instances to collect and send logs to CloudWatch Logs for centralized storage and monitoring in hybrid environments.",
-  "service": "CloudWatch",
-  "question": 15
+  "topic": "Cálculo de capacidad provisionada (RCU y WCU) en DynamoDB",
+  "concept": "Calcular RCU considerando el tamaño del ítem (múltiplos de 4 KB), tipo de consistencia (eventually consistent usa 50% de RCU) y operaciones por segundo. Calcular WCU basándose en múltiplos de 1 KB por ítem y escrituras por segundo.",
+  "service": "DynamoDB",
+  "question": 39
  },
  {
   "id": "t040",
-  "topic": "CloudWatch Logs console for log visualization and metric filters",
-  "concept": "CloudWatch console provides native visualization capabilities for logs and allows creating metric filters to graph metrics derived from log events without requiring additional services or custom development.",
-  "service": "CloudWatch",
-  "question": 15
+  "topic": "Garantías de entrega en SQS: Standard vs FIFO queues",
+  "concept": "Las colas SQS Standard ofrecen entrega 'at-least-once' (pueden duplicar mensajes), mientras que las colas FIFO garantizan procesamiento 'exactly-once'. No se puede cambiar el tipo de cola después de crearla; se debe crear una nueva cola FIFO.",
+  "service": "SQS",
+  "question": 40
  },
  {
   "id": "t041",
-  "topic": "Service selection for log aggregation with minimal developer effort",
-  "concept": "CloudWatch agent-based log collection requires minimal code changes compared to rewriting applications to push logs to S3, Redshift, or QuickSight SPICE, making it the lowest-effort solution for hybrid log aggregation.",
-  "service": "CloudWatch",
-  "question": 15
+  "topic": "AWS SAM para desarrollo y despliegue de aplicaciones serverless",
+  "concept": "SAM permite empaquetar y desplegar aplicaciones serverless completas (Lambda + DynamoDB) como una unidad, y ejecutar pruebas locales mediante SAM CLI, a diferencia de otras herramientas de despliegue que no ofrecen testing local.",
+  "service": "SAM",
+  "question": 41
  },
  {
   "id": "t042",
-  "topic": "DynamoDB Streams as a Lambda event source for change notifications",
-  "concept": "DynamoDB Streams captures item-level modifications in near real-time and can trigger Lambda functions automatically when table data changes, enabling event-driven architectures without polling or modifying the application writing to DynamoDB.",
-  "service": "DynamoDB",
-  "question": 16
+  "topic": "Multipart upload en S3",
+  "concept": "Para archivos grandes que exceden el límite de 5GB de PUT simple, se debe usar multipart upload que permite subir objetos hasta 5TB dividiéndolos en partes.",
+  "service": "S3",
+  "question": 42
  },
  {
   "id": "t043",
-  "topic": "Event-driven architecture vs polling for data changes",
-  "concept": "Event-driven architectures using streams and triggers respond immediately to data changes, while polling introduces latency and inefficiency by repeatedly checking for changes at fixed intervals.",
-  "service": "General Architecture",
-  "question": 16
+  "topic": "Offloading de contenido estático a S3 para reducir carga en instancias EC2",
+  "concept": "S3 puede servir contenido estático (HTML, CSS, JS, imágenes) directamente a clientes sin pasar por servidores web, reduciendo la carga computacional y de red en las instancias EC2 de la aplicación.",
+  "service": "S3",
+  "question": 43
  },
  {
   "id": "t044",
-  "topic": "Serverless compute options: Lambda vs ECS Fargate vs EC2",
-  "concept": "Lambda is fully serverless and event-driven with automatic scaling, while ECS on Fargate requires container management and EC2 requires instance management, making Lambda the most serverless option for event processing.",
-  "service": "Lambda",
-  "question": 16
+  "topic": "Cifrado del lado del cliente (client-side encryption) en S3",
+  "concept": "El cifrado client-side permite usar claves asimétricas gestionadas por el cliente para cifrar datos antes de subirlos a S3, mientras que las opciones server-side (SSE-C, SSE-S3, SSE-KMS) solo soportan claves simétricas.",
+  "service": "S3",
+  "question": 44
  },
  {
   "id": "t045",
-  "topic": "Cognito Identity Pool attribute-based access control (ABAC) using Principal Tags",
-  "concept": "Identity pools can pass user pool custom attributes as Principal Tags to IAM roles, enabling ABAC where a single IAM role uses conditions like ${aws:PrincipalTag/attribute} to dynamically control resource access based on user attributes rather than assigning different roles per user group.",
-  "service": "Amazon Cognito",
-  "question": 17
+  "topic": "Ejecución paralela de acciones dentro de un stage en CodePipeline",
+  "concept": "Las acciones dentro de un mismo stage de CodePipeline pueden ejecutarse en paralelo, mientras que los stages se ejecutan secuencialmente. Para paralelizar tareas (como tests), se deben configurar múltiples acciones paralelas dentro del mismo stage.",
+  "service": "CodePipeline",
+  "question": 45
  },
  {
   "id": "t046",
-  "topic": "S3 object tag-based access control with IAM condition keys",
-  "concept": "IAM policies can use the s3:ExistingObjectTag/<tag-key> condition key to grant access to S3 objects based on their tags, enabling fine-grained access control where users can only access objects whose tags match their principal attributes.",
-  "service": "Amazon S3",
-  "question": 17
+  "topic": "Programación de tareas periódicas con EventBridge y Lambda",
+  "concept": "EventBridge permite invocar funciones Lambda en horarios programados (cron/rate expressions). Lambda con conectividad VPC puede acceder a recursos privados como instancias EC2 para ejecutar scripts personalizados de forma serverless.",
+  "service": "EventBridge",
+  "question": 46
  },
  {
   "id": "t047",
-  "topic": "Cognito Identity Pool vs User Pool IAM role association",
-  "concept": "IAM roles are associated with identity pools (not user pools directly), and identity pools can use either role-based access control (multiple roles selected by rules) or attribute-based access control (single role with policy conditions based on principal tags from user pool attributes).",
-  "service": "Amazon Cognito",
-  "question": 17
+  "topic": "Canary deployments en API Gateway con versiones de Lambda",
+  "concept": "Usar canary releases en un stage de API Gateway para dirigir un porcentaje del tráfico a una nueva versión de función Lambda ($LATEST) mientras se mantiene la versión estable anterior, permitiendo pruebas graduales en producción sin cambiar la URL del API.",
+  "service": "API Gateway",
+  "question": 47
  },
  {
   "id": "t048",
-  "topic": "Lambda provisioned concurrency for reducing cold start latency",
-  "concept": "Provisioned concurrency keeps Lambda functions initialized and ready to respond immediately, eliminating cold start delays including database connection initialization time, without adding infrastructure.",
-  "service": "AWS Lambda",
-  "question": 18
+  "topic": "Permisos de ejecución de Lambda para escribir logs en CloudWatch Logs",
+  "concept": "Las funciones Lambda requieren permisos explícitos en su rol de ejecución (logs:CreateLogGroup, logs:CreateLogStream, logs:PutLogEvents) para que los logs generados automáticamente se escriban en CloudWatch Logs.",
+  "service": "Lambda",
+  "question": 48
  },
  {
   "id": "t049",
-  "topic": "Lambda function handler best practices for external connections",
-  "concept": "Initialize SDK clients and database connections outside the Lambda function handler (in global scope) so they persist across invocations and are reused, reducing connection establishment overhead on each invocation.",
-  "service": "AWS Lambda",
-  "question": 18
+  "topic": "Cognito Identity Pools para acceso no autenticado",
+  "concept": "Usar Cognito Identity Pools para otorgar credenciales temporales a usuarios no autenticados que necesitan acceder a servicios AWS desde aplicaciones cliente (browser/mobile), evitando exponer credenciales permanentes en el código.",
+  "service": "Cognito",
+  "question": 49
  },
  {
   "id": "t050",
-  "topic": "API Gateway caching limitations for write operations",
-  "concept": "API Gateway caching only applies to GET requests and reduces read latency but does not improve write operation latency or Lambda integration time for non-cacheable requests.",
-  "service": "Amazon API Gateway",
-  "question": 18
+  "topic": "Archivos de configuración .ebextensions en Elastic Beanstalk",
+  "concept": "Los archivos de configuración en el directorio .ebextensions deben tener extensión .config (no .yaml, .yml u otra) para que Elastic Beanstalk los procese correctamente durante el despliegue de la aplicación.",
+  "service": "Elastic Beanstalk",
+  "question": 50
  },
  {
   "id": "t051",
-  "topic": "ALB Availability Zone configuration for traffic distribution",
-  "concept": "Application Load Balancers must have Availability Zones explicitly enabled to route traffic to registered targets in those zones. Even if instances are registered with the ALB, they will not receive traffic if their Availability Zone is not enabled on the load balancer.",
-  "service": "Elastic Load Balancing",
-  "question": 19
+  "topic": "Stage variables en API Gateway",
+  "concept": "Las stage variables permiten parametrizar configuraciones entre stages (dev/prod) y pueden usarse en integration requests para referenciar dinámicamente aliases o versiones de Lambda mediante la sintaxis ${stageVariables.NOMBRE}.",
+  "service": "API Gateway",
+  "question": 51
  },
  {
   "id": "t052",
-  "topic": "ALB target registration vs Availability Zone enablement",
-  "concept": "Target registration with an ALB is separate from Availability Zone enablement. Instances can be successfully registered as targets but remain idle if the ALB is not configured to route traffic to their Availability Zone.",
-  "service": "Elastic Load Balancing",
-  "question": 19
+  "topic": "Dead-Letter Queues en Lambda",
+  "concept": "Configurar una cola SQS como dead-letter queue (DLQ) para almacenar de forma duradera eventos que Lambda no puede procesar exitosamente, usando la propiedad DeadLetterConfig con el ARN de la cola SQS.",
+  "service": "Lambda",
+  "question": 52
  },
  {
   "id": "t053",
-  "topic": "Auto Scaling group distribution across Availability Zones with ALB",
-  "concept": "When Auto Scaling groups launch instances across multiple Availability Zones, the associated ALB must have those same Availability Zones enabled to distribute traffic to all instances, otherwise instances in disabled zones remain idle despite being healthy and registered.",
-  "service": "EC2 Auto Scaling",
-  "question": 19
+  "topic": "IAM Roles para EC2",
+  "concept": "Las aplicaciones en instancias EC2 deben usar roles de IAM (credenciales temporales) en lugar de credenciales permanentes para acceder a servicios de AWS como DynamoDB de forma segura.",
+  "service": "IAM",
+  "question": 53
  },
  {
   "id": "t054",
-  "topic": "Cognito Identity Pools vs User Pools for AWS credential vending",
-  "concept": "Identity pools provide temporary AWS credentials for federated identities (including web identity providers), while user pools only provide user authentication and management without AWS credentials.",
-  "service": "Amazon Cognito",
-  "question": 20
+  "topic": "Rotación automática de secretos con Secrets Manager",
+  "concept": "Secrets Manager proporciona rotación automática de secretos mediante plantillas de Lambda, cifrado por defecto y gestión programada de credenciales, eliminando la necesidad de implementar manualmente la lógica de rotación con EventBridge o código personalizado.",
+  "service": "Secrets Manager",
+  "question": 54
  },
  {
   "id": "t055",
-  "topic": "Cognito Identity Pool enhanced authflow API sequence: GetId then GetCredentialsForIdentity",
-  "concept": "To obtain AWS credentials from an OpenID token, call GetId API with the token to get a Cognito ID, then call GetCredentialsForIdentity API with that Cognito ID to receive temporary AWS credentials.",
-  "service": "Amazon Cognito",
-  "question": 20
+  "topic": "Políticas de despliegue en Elastic Beanstalk",
+  "concept": "Comprender las diferentes estrategias de despliegue (all-at-once, rolling, rolling with additional batch, blue/green) y cuándo usar blue/green deployment para cutover completo con capacidad de rollback y mínimo downtime.",
+  "service": "Elastic Beanstalk",
+  "question": 55
  },
  {
   "id": "t056",
-  "topic": "Web identity federation with Cognito Identity Pools for mobile apps",
-  "concept": "Mobile apps can use external identity providers (Google, Facebook, etc.) to obtain OpenID tokens, then exchange them for AWS credentials via Cognito Identity Pools to access AWS services like DynamoDB.",
-  "service": "Amazon Cognito",
-  "question": 20
+  "topic": "DynamoDB Streams - Configuración de tipos de eventos para proteger datos sensibles",
+  "concept": "Comprender los diferentes tipos de eventos de DynamoDB Streams (KEYS_ONLY, NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES) y cómo KEYS_ONLY registra solo claves de partición/ordenamiento sin exponer atributos con PII, mientras que NEW_IMAGE expone todos los datos del item.",
+  "service": "DynamoDB",
+  "question": 56
  },
  {
   "id": "t057",
-  "topic": "Lambda deployment package contents for Java runtime",
-  "concept": "A Lambda deployment package (.zip or .jar) must include compiled application code and application dependencies, but does NOT include the runtime environment (provided by Lambda), execution role (IAM resource configured separately), or event source references (external triggers).",
-  "service": "AWS Lambda",
-  "question": 21
+  "topic": "Acciones de aprobación manual en CodePipeline",
+  "concept": "CodePipeline soporta acciones de aprobación (approval actions) como tipo de acción nativa dentro de un stage, permitiendo pausar el pipeline para revisión manual antes de continuar con el despliegue.",
+  "service": "CodePipeline",
+  "question": 57
  },
  {
   "id": "t058",
-  "topic": "Lambda managed runtime vs custom dependencies",
-  "concept": "Lambda provides and manages the runtime environment (e.g., Java runtime), so developers only need to package their compiled code and custom dependencies, not the base runtime itself.",
-  "service": "AWS Lambda",
-  "question": 21
+  "topic": "Gestión de capacidad de throughput en DynamoDB",
+  "concept": "Identificar y resolver errores de ProvisionedThroughputExceededException causados por insuficientes Write Capacity Units (WCU) o Read Capacity Units (RCU) provisionadas para la tabla o sus índices secundarios globales.",
+  "service": "DynamoDB",
+  "question": 58
  },
  {
   "id": "t059",
-  "topic": "Lambda execution role configuration vs deployment package",
-  "concept": "The Lambda execution role is an IAM role configured when creating/updating the function to grant AWS service permissions, and is NOT included in the deployment package which only contains code artifacts.",
-  "service": "AWS Lambda",
-  "question": 21
+  "topic": "Step Functions para orquestación de reintentos con Lambda",
+  "concept": "Step Functions permite orquestar funciones Lambda con lógica de reintentos que excede el timeout máximo de Lambda (15 minutos), usando máquinas de estado con configuración de BackoffRate y maxAttempts para manejar fallos de forma asíncrona y duradera.",
+  "service": "Step Functions",
+  "question": 59
  },
  {
   "id": "t060",
-  "topic": "AWS Secrets Manager automatic rotation for database credentials",
-  "concept": "Secrets Manager natively supports automatic rotation of database credentials on a schedule, unlike Parameter Store which requires custom Lambda functions for rotation. This is the recommended service for storing and rotating RDS credentials.",
-  "service": "AWS Secrets Manager",
-  "question": 22
+  "topic": "Trazabilidad y análisis de latencia end-to-end con X-Ray",
+  "concept": "X-Ray permite rastrear solicitudes a través de servicios distribuidos (API Gateway, Lambda, DynamoDB) para identificar cuellos de botella de rendimiento y analizar latencia de extremo a extremo mediante trazas visuales.",
+  "service": "X-Ray",
+  "question": 60
  },
  {
   "id": "t061",
-  "topic": "Systems Manager Parameter Store vs Secrets Manager for credential storage",
-  "concept": "Parameter Store can store secrets but does not have built-in automatic rotation capabilities, while Secrets Manager provides both secure storage and native automatic rotation for credentials. Parameter Store requires custom Lambda functions to implement rotation.",
-  "service": "AWS Systems Manager Parameter Store",
-  "question": 22
+  "topic": "Server-Side Encryption con claves proporcionadas por el cliente (SSE-C) en S3",
+  "concept": "Para descifrar objetos encriptados con SSE-C, el cliente debe proporcionar la misma clave de encriptación utilizada originalmente en cada operación (GetObject, PutObject). S3 no almacena las claves del cliente, solo un HMAC salado para validación.",
+  "service": "S3",
+  "question": 61
  },
  {
   "id": "t062",
-  "topic": "AWS KMS key encryption vs credential management services",
-  "concept": "KMS encrypts data and manages encryption keys but does not store, distribute, or rotate application credentials. Credential management requires Secrets Manager or Parameter Store, not KMS alone.",
-  "service": "AWS KMS",
-  "question": 22
+  "topic": "Políticas de despliegue en Elastic Beanstalk",
+  "concept": "Comprender las diferencias entre políticas de despliegue (Rolling, All at once, Immutable, Rolling with additional batch) en términos de uso de instancias existentes vs nuevas y tiempo de inactividad.",
+  "service": "Elastic Beanstalk",
+  "question": 62
  },
  {
   "id": "t063",
-  "topic": "CloudWatch Logs encryption with KMS customer managed keys via AWS CLI",
-  "concept": "CloudWatch Logs log groups can only be encrypted with KMS customer managed keys using the AWS CLI (associate-kms-key or create-log-group commands), not through the AWS Management Console.",
-  "service": "CloudWatch Logs",
-  "question": 23
+  "topic": "Configuración de memoria y CPU en Lambda",
+  "concept": "En Lambda, aumentar la memoria asignada también incrementa proporcionalmente la CPU disponible para la función, lo que reduce el tiempo de ejecución de cargas intensivas de CPU.",
+  "service": "Lambda",
+  "question": 63
  },
  {
   "id": "t064",
-  "topic": "KMS symmetric vs asymmetric key types for CloudWatch Logs encryption",
-  "concept": "CloudWatch Logs encryption requires symmetric KMS customer managed keys; asymmetric keys are not supported for log group encryption.",
-  "service": "AWS KMS",
-  "question": 23
+  "topic": "X-Ray para tracing y análisis de performance de funciones Lambda",
+  "concept": "X-Ray permite rastrear llamadas API (como DynamoDB) desde Lambda, identificar cuellos de botella y analizar tiempos de ejecución mediante traces distribuidos.",
+  "service": "X-Ray",
+  "question": 64
  },
  {
   "id": "t065",
-  "topic": "CloudWatch Logs log group encryption modification without deletion",
-  "concept": "Existing CloudWatch Logs log groups can be modified to add KMS encryption using the associate-kms-key CLI command without requiring deletion and recreation of the log group.",
-  "service": "CloudWatch Logs",
-  "question": 23
- },
- {
-  "id": "t066",
-  "topic": "STS decode-authorization-message for encoded IAM authorization failures",
-  "concept": "When an AWS API call fails with an UnauthorizedOperation error and returns an encoded authorization failure message, use the AWS STS decode-authorization-message command to decode the message and reveal detailed information about why the request was denied.",
-  "service": "AWS STS",
-  "question": 24
- },
- {
-  "id": "t067",
-  "topic": "IAM authorization error troubleshooting with encoded messages",
-  "concept": "Distinguish between encrypted content (requiring KMS decrypt) and encoded authorization messages (requiring STS decode-authorization-message). Encoded messages are specifically returned by AWS when authorization fails and contain diagnostic information about the denial reason.",
-  "service": "IAM",
-  "question": 24
- },
- {
-  "id": "t068",
-  "topic": "AWS X-Ray distributed tracing for microservices",
-  "concept": "X-Ray provides distributed tracing capabilities to track and analyze user requests as they travel through microservices architectures, identifying performance bottlenecks and issues across service boundaries. Unlike CloudWatch metrics/logs or ALB metrics, X-Ray specifically traces request paths end-to-end across distributed services.",
-  "service": "AWS X-Ray",
-  "question": 25
- },
- {
-  "id": "t069",
-  "topic": "X-Ray daemon deployment on Amazon ECS",
-  "concept": "The X-Ray daemon must run as a sidecar container alongside application containers in ECS to collect trace data from instrumented applications. This requires creating a Docker image with the X-Ray daemon and configuring it to run in the ECS task definition.",
-  "service": "AWS X-Ray",
-  "question": 25
- },
- {
-  "id": "t070",
-  "topic": "CloudWatch vs X-Ray for application observability",
-  "concept": "CloudWatch collects metrics and logs for monitoring resource utilization and application output, but does not provide distributed tracing. X-Ray is specifically designed for tracing request flows across distributed services to identify performance degradation patterns and service dependencies.",
-  "service": "AWS X-Ray",
-  "question": 25
- },
- {
-  "id": "t071",
-  "topic": "DynamoDB provisioned vs on-demand capacity modes for unpredictable workloads",
-  "concept": "On-demand mode automatically scales to accommodate unpredictable traffic spikes without ProvisionedThroughputExceededException errors, while provisioned mode with Auto Scaling may not scale fast enough for rapid spikes despite having Auto Scaling enabled.",
-  "service": "DynamoDB",
-  "question": 26
- },
- {
-  "id": "t072",
-  "topic": "DynamoDB ProvisionedThroughputExceededException error handling",
-  "concept": "This exception occurs when read/write requests exceed the provisioned capacity units (RCUs/WCUs) for a table or index, indicating the need to either increase provisioned capacity, implement exponential backoff retries, or switch to on-demand mode.",
-  "service": "DynamoDB",
-  "question": 26
- },
- {
-  "id": "t073",
-  "topic": "Amazon Cognito for web application user authentication and identity management at scale",
-  "concept": "Amazon Cognito provides scalable user identity management for web applications, generating temporary AWS credentials that allow authenticated users to directly access AWS services like DynamoDB without creating individual IAM users.",
-  "service": "Amazon Cognito",
-  "question": 27
- },
- {
-  "id": "t074",
-  "topic": "IAM users vs Amazon Cognito for application user authentication",
-  "concept": "IAM users are intended for AWS account access and have service quotas (default 5,000 per account), making them unsuitable for authenticating application end-users at scale, whereas Amazon Cognito is purpose-built for application user authentication supporting millions of users.",
-  "service": "IAM",
-  "question": 27
- },
- {
-  "id": "t075",
-  "topic": "Amazon Cognito temporary credentials for direct AWS service access from browser-based applications",
-  "concept": "Amazon Cognito Identity Pools provide temporary, limited-privilege AWS credentials to authenticated users, enabling browser-based applications using AWS SDK for JavaScript to directly access services like DynamoDB without backend servers.",
-  "service": "Amazon Cognito",
-  "question": 27
- },
- {
-  "id": "t076",
-  "topic": "S3 Event Notifications to invoke Lambda functions",
-  "concept": "S3 Event Notifications can trigger Lambda functions automatically when specific S3 events occur (such as object creation, deletion, or modification). This is the primary mechanism for event-driven processing of S3 objects.",
-  "service": "Amazon S3",
-  "question": 28
- },
- {
-  "id": "t077",
-  "topic": "S3 feature capabilities and use cases",
-  "concept": "Understanding that S3 Storage Lens is for analytics/visibility, S3 Object Lock is for retention/compliance, and S3 Lifecycle rules are for storage class transitions and expiration—none of these can invoke Lambda functions or serve as event triggers.",
-  "service": "Amazon S3",
-  "question": 28
- },
- {
-  "id": "t078",
-  "topic": "Kinesis Data Streams PutRecords vs PutRecord API for batch ingestion",
-  "concept": "PutRecords API allows batching multiple records in a single API call (up to 500 records or 5 MB), significantly reducing network overhead and CPU usage compared to individual PutRecord calls, thereby increasing throughput for high-volume data ingestion.",
-  "service": "Amazon Kinesis Data Streams",
-  "question": 29
- },
- {
-  "id": "t079",
-  "topic": "Kinesis Client Library (KCL) purpose and limitations",
-  "concept": "KCL is designed for consuming and processing data from Kinesis streams (consumer-side), not for producing/putting records into streams. It handles shard-to-worker relationships for readers but does not provide producer functionality.",
-  "service": "Amazon Kinesis Data Streams",
-  "question": 29
- },
- {
-  "id": "t080",
-  "topic": "IAM role trust policy vs access policy for AssumeRole operations",
-  "concept": "Trust policies control WHO can assume a role (which principals are allowed to call sts:AssumeRole), while access policies control WHAT the role can do after being assumed. An sts:AssumeRoleWithWebIdentity error indicates the trust policy is misconfigured, not the access policy.",
-  "service": "IAM",
-  "question": 30
- },
- {
-  "id": "t081",
-  "topic": "Cognito Identity Pool authenticated role trust policy configuration",
-  "concept": "When using Cognito web identity federation, the authenticated IAM role's trust policy must explicitly allow cognito-identity.amazonaws.com as the principal with sts:AssumeRoleWithWebIdentity action and proper conditions (like StringEquals for cognito-identity.amazonaws.com:aud matching the identity pool ID).",
-  "service": "Amazon Cognito",
-  "question": 30
- },
- {
-  "id": "t082",
-  "topic": "STS AssumeRoleWithWebIdentity authentication flow sequence",
-  "concept": "The AssumeRoleWithWebIdentity call occurs AFTER successful authentication with the identity provider. Errors at the AssumeRole step indicate trust policy issues, not authentication failures which would occur earlier in the flow.",
-  "service": "AWS STS",
-  "question": 30
- },
- {
-  "id": "t083",
-  "topic": "CodeBuild buildspec.yml default file location",
-  "concept": "CodeBuild expects the buildspec.yml file to be located in the root of the source directory by default, though an alternate location can be specified in the build project configuration.",
-  "service": "AWS CodeBuild",
-  "question": 31
- },
- {
-  "id": "t084",
-  "topic": "CodeDeploy appspec.yml default file location",
-  "concept": "CodeDeploy requires the appspec.yml file to be placed in the root of the application source directory for the deployment to function correctly.",
-  "service": "AWS CodeDeploy",
-  "question": 31
- },
- {
-  "id": "t085",
-  "topic": "DynamoDB Global Secondary Index (GSI) query patterns with composite keys",
-  "concept": "A GSI provides an alternate partition key and sort key for querying a DynamoDB table. Items are written to the base table and automatically synchronized to the GSI; you cannot write directly to a GSI. QueryItem API on a GSI enables efficient lookups using the GSI's partition key and optional sort key.",
-  "service": "DynamoDB",
-  "question": 32
- },
- {
-  "id": "t086",
-  "topic": "S3 object metadata vs object tags for indexing and search",
-  "concept": "S3 object metadata (x-amz-meta- prefix) and object tags can store key-value pairs, but neither provides native search/indexing capabilities via S3 APIs. External indexing solutions like DynamoDB or OpenSearch are required for searchable metadata.",
-  "service": "S3",
-  "question": 32
- },
- {
-  "id": "t087",
-  "topic": "Lambda with Rekognition DetectLabels integration pattern for image analysis",
-  "concept": "S3 events can trigger Lambda functions that invoke Rekognition DetectLabels to extract labels from images. The detected labels must be stored in a separate searchable data store (like DynamoDB with GSI) since S3 itself does not provide label search functionality.",
-  "service": "Lambda",
-  "question": 32
- },
- {
-  "id": "t088",
-  "topic": "CloudFormation Mappings section for region-specific values",
-  "concept": "The Mappings section in CloudFormation templates is used to define key-value pairs that map to different values based on conditions like AWS Region, enabling region-specific resource configurations such as AMI IDs. This differs from Parameters (user inputs), Resources (stack components), and Outputs (exported values).",
-  "service": "AWS CloudFormation",
-  "question": 33
- },
- {
-  "id": "t089",
-  "topic": "CloudFormation template sections and their purposes",
-  "concept": "Understanding the distinct purposes of CloudFormation template sections: Parameters for user inputs, Resources for defining stack components, Outputs for exporting values, and Mappings for conditional value lookups based on keys like Region or environment.",
-  "service": "AWS CloudFormation",
-  "question": 33
- },
- {
-  "id": "t090",
-  "topic": "SQS at-least-once delivery and application-level idempotency",
-  "concept": "SQS standard queues guarantee at-least-once delivery, meaning messages can be delivered multiple times. Applications must implement idempotency checks (e.g., verifying duplicates before processing) to handle the same message being processed more than once.",
-  "service": "Amazon SQS",
-  "question": 34
- },
- {
-  "id": "t091",
-  "topic": "SQS visibility timeout configuration to prevent duplicate processing",
-  "concept": "If a message's visibility timeout expires before the consumer processes and deletes it, another consumer can retrieve and process the same message, creating duplicates. The visibility timeout must be set longer than the maximum processing time to prevent this.",
-  "service": "Amazon SQS",
-  "question": 34
- },
- {
-  "id": "t092",
-  "topic": "Lambda Layers for shared dependencies across multiple functions",
-  "concept": "Lambda layers allow you to package and centrally manage common dependencies, libraries, or custom runtimes that can be attached to multiple Lambda functions, avoiding the need to bundle dependencies with each function's deployment package individually.",
-  "service": "AWS Lambda",
-  "question": 35
- },
- {
-  "id": "t093",
-  "topic": "Lambda deployment package options: container images vs layers vs inline code",
-  "concept": "Lambda supports three deployment methods: container images (bundle everything including dependencies in a Docker image), layers (separate reusable components attached to functions), and inline code with dependencies. Layers are optimal for centrally managing shared dependencies across multiple functions without modifying each function's code.",
-  "service": "AWS Lambda",
-  "question": 35
- },
- {
-  "id": "t094",
-  "topic": "S3 bucket policy aws:SecureTransport condition key for enforcing HTTPS",
-  "concept": "The aws:SecureTransport condition key evaluates to true for HTTPS requests and false for HTTP requests. To enforce HTTPS-only access, use a Deny effect with aws:SecureTransport=false, which blocks all HTTP requests regardless of other Allow policies.",
-  "service": "Amazon S3",
-  "question": 36
- },
- {
-  "id": "t095",
-  "topic": "IAM policy evaluation logic: explicit Deny overrides Allow",
-  "concept": "In AWS IAM policy evaluation, an explicit Deny always takes precedence over any Allow statements. This means a Deny policy with aws:SecureTransport=false will block HTTP requests even when other policies allow them, whereas an Allow policy with aws:SecureTransport=true won't prevent HTTP if other policies allow it.",
-  "service": "IAM",
-  "question": 36
- },
- {
-  "id": "t096",
-  "topic": "API Gateway caching to reduce backend load",
-  "concept": "API Gateway can cache endpoint responses to reduce traffic to backend services. When enabled, API Gateway returns cached responses for duplicate requests during the TTL period instead of invoking the backend, improving performance and reducing load.",
-  "service": "Amazon API Gateway",
-  "question": 37
- },
- {
-  "id": "t097",
-  "topic": "ElastiCache vs API Gateway caching use cases",
-  "concept": "ElastiCache is used for application-level caching of database queries or computed results, while API Gateway caching is specifically for caching API responses at the gateway layer. API Gateway caching directly reduces traffic to backend endpoints, whereas ElastiCache reduces database load but not API endpoint traffic.",
-  "service": "Amazon API Gateway",
-  "question": 37
- },
- {
-  "id": "t098",
-  "topic": "CodeBuild local caching vs S3 caching for build artifacts",
-  "concept": "Local caching stores build artifacts on the build host itself and is optimal for large dependency files and frequent builds, while S3 caching stores artifacts in an S3 bucket across multiple hosts but incurs network transfer overhead that can degrade performance for large files.",
-  "service": "AWS CodeBuild",
-  "question": 38
- },
- {
-  "id": "t099",
-  "topic": "CodeBuild buildspec cache configuration with paths",
-  "concept": "The buildspec file's cache section must specify the cache type (local or S3) and include paths to directories containing reusable build dependencies (like /.m2 for Maven) to enable caching of those artifacts across builds.",
-  "service": "AWS CodeBuild",
-  "question": 38
- },
- {
-  "id": "t100",
-  "topic": "CodeArtifact as artifact repository vs CodeBuild caching",
-  "concept": "CodeArtifact serves as a managed artifact repository for storing and retrieving approved packages but does not provide the same build performance optimization as CodeBuild caching, which stores already-downloaded dependencies locally to avoid repeated downloads.",
-  "service": "AWS CodeArtifact",
-  "question": 38
- },
- {
-  "id": "t101",
-  "topic": "DynamoDB RCU calculation for eventually consistent reads",
-  "concept": "One RCU supports one strongly consistent read per second for items up to 4 KB. Eventually consistent reads consume half the RCUs (divide by 2). Must round item size up to nearest 4 KB multiple before calculating.",
-  "service": "DynamoDB",
-  "question": 39
- },
- {
-  "id": "t102",
-  "topic": "DynamoDB WCU calculation based on item size",
-  "concept": "One WCU supports one write per second for items up to 1 KB. For items larger than 1 KB, round up the item size to calculate required WCUs (e.g., 7 KB item requires 7 WCUs per write).",
-  "service": "DynamoDB",
-  "question": 39
- },
- {
-  "id": "t103",
-  "topic": "DynamoDB capacity unit provisioning for throughput requirements",
-  "concept": "Multiply per-item capacity units by the number of operations per second to determine minimum provisioned capacity. Must account for item size and consistency model (eventual vs strong) when calculating total RCU/WCU needs.",
-  "service": "DynamoDB",
-  "question": 39
- },
- {
-  "id": "t104",
-  "topic": "SQS Standard vs FIFO queue delivery guarantees",
-  "concept": "SQS Standard queues provide at-least-once delivery (allowing duplicates), while SQS FIFO queues provide exactly-once processing semantics. Queue type cannot be changed after creation, requiring a new queue to switch from Standard to FIFO.",
-  "service": "Amazon SQS",
-  "question": 40
- },
- {
-  "id": "t105",
-  "topic": "SQS FIFO queue exactly-once processing",
-  "concept": "SQS FIFO queues guarantee exactly-once message processing through deduplication and strict ordering, eliminating duplicate message processing that occurs with Standard queues.",
-  "service": "Amazon SQS",
-  "question": 40
- },
- {
-  "id": "t106",
-  "topic": "SQS DelaySeconds parameter behavior",
-  "concept": "The DelaySeconds parameter postpones delivery of new messages to consumers but does not prevent duplicate deliveries in Standard queues, as it only affects initial message visibility timing.",
-  "service": "Amazon SQS",
-  "question": 40
- },
- {
-  "id": "t107",
-  "topic": "AWS SAM local testing and deployment capabilities",
-  "concept": "AWS SAM (Serverless Application Model) provides both local testing capabilities via SAM CLI (sam local invoke, sam local start-api) and unified deployment of serverless resources (Lambda, DynamoDB, API Gateway) as a single packaged unit, distinguishing it from other deployment tools.",
-  "service": "AWS SAM",
-  "question": 41
- },
- {
-  "id": "t108",
-  "topic": "AWS SAM vs CloudFormation for serverless deployments",
-  "concept": "AWS SAM extends CloudFormation with simplified syntax for serverless resources and adds local testing capabilities, while plain CloudFormation (including nested stacks) can deploy Lambda and DynamoDB but lacks built-in local testing features.",
-  "service": "AWS SAM",
-  "question": 41
- },
- {
-  "id": "t109",
-  "topic": "CodeDeploy Lambda deployment limitations",
-  "concept": "AWS CodeDeploy handles Lambda function deployment strategies (linear, canary, all-at-once traffic shifting) but cannot deploy Lambda functions together with other resources like DynamoDB tables as a unified infrastructure-as-code package.",
-  "service": "AWS CodeDeploy",
-  "question": 41
- },
- {
-  "id": "t110",
-  "topic": "S3 single PUT operation size limit vs multipart upload requirement",
-  "concept": "S3 has a 5GB maximum size limit for single PUT operations. Files larger than 100MB should use multipart upload, and files larger than 5GB must use multipart upload to overcome the EntityTooLarge error.",
-  "service": "Amazon S3",
-  "question": 42
- },
- {
-  "id": "t111",
-  "topic": "S3 multipart upload for large objects",
-  "concept": "Multipart upload allows uploading large objects in parts (5MB to 5GB per part, up to 10,000 parts), enabling uploads up to 5TB and providing better performance, pause/resume capability, and recovery from network issues.",
-  "service": "Amazon S3",
-  "question": 42
- },
- {
-  "id": "t112",
-  "topic": "S3 Transfer Acceleration limitations and use cases",
-  "concept": "S3 Transfer Acceleration speeds up long-distance transfers using CloudFront edge locations but does not increase the 5GB single PUT operation limit or eliminate the need for multipart uploads for large files.",
-  "service": "Amazon S3",
-  "question": 42
- },
- {
-  "id": "t113",
-  "topic": "S3 static website hosting to offload EC2 web server requests",
-  "concept": "S3 can serve static content (HTML, CSS, JavaScript, images) directly to clients via HTTP/HTTPS, bypassing EC2 instances entirely and reducing compute load on the application tier.",
-  "service": "Amazon S3",
-  "question": 43
- },
- {
-  "id": "t114",
-  "topic": "EBS Multi-Attach volume scope and limitations for shared storage",
-  "concept": "EBS Multi-Attach volumes can only be attached to instances within a single Availability Zone and still require EC2 instances to serve content, making them unsuitable for offloading HTTP requests to AWS infrastructure.",
-  "service": "Amazon EBS",
-  "question": 43
- },
- {
-  "id": "t115",
-  "topic": "ElastiCache as in-memory cache vs static content delivery",
-  "concept": "ElastiCache is an in-memory key-value store for caching application data and database query results, but cannot directly serve HTTP static content to clients and still requires EC2 instances as intermediaries.",
-  "service": "Amazon ElastiCache",
-  "question": 43
- },
- {
-  "id": "t116",
-  "topic": "S3 client-side encryption with asymmetric customer-managed keys",
-  "concept": "Client-side encryption with customer-managed keys supports both symmetric and asymmetric encryption, allowing users to encrypt data before upload using a public key while only the key owner can decrypt with the private key.",
-  "service": "Amazon S3",
-  "question": 44
- },
- {
-  "id": "t117",
-  "topic": "S3 server-side encryption key type limitations (SSE-C, SSE-KMS, SSE-S3)",
-  "concept": "All S3 server-side encryption options (SSE-C, SSE-KMS, SSE-S3) only support symmetric encryption keys, not asymmetric keys, regardless of whether KMS can create asymmetric keys.",
-  "service": "Amazon S3",
-  "question": 44
- },
- {
-  "id": "t118",
-  "topic": "Client-side vs server-side encryption in S3",
-  "concept": "Client-side encryption encrypts data before sending to S3 and supports asymmetric keys, while server-side encryption encrypts data after S3 receives it and only supports symmetric keys.",
-  "service": "Amazon S3",
-  "question": 44
- },
- {
-  "id": "t119",
-  "topic": "CodePipeline parallel actions within a stage",
-  "concept": "Multiple actions within the same CodePipeline stage can execute in parallel, while stages themselves execute sequentially. This enables parallel execution of independent tasks like test segments without creating separate stages.",
-  "service": "AWS CodePipeline",
-  "question": 45
- },
- {
-  "id": "t120",
-  "topic": "CodeBuild actions for parallel test execution",
-  "concept": "CodeBuild actions can be configured to run in parallel within a single CodePipeline stage to execute independent test segments concurrently, reducing overall test execution time compared to sequential execution.",
-  "service": "AWS CodeBuild",
-  "question": 45
- },
- {
-  "id": "t121",
-  "topic": "EventBridge scheduled rules for Lambda function invocation",
-  "concept": "EventBridge (formerly CloudWatch Events) can invoke Lambda functions on a schedule using cron or rate expressions, enabling periodic execution of custom logic without managing infrastructure.",
-  "service": "Amazon EventBridge",
-  "question": 46
- },
- {
-  "id": "t122",
-  "topic": "Lambda VPC configuration for private resource access",
-  "concept": "Lambda functions can be configured to connect to a VPC to access private resources like EC2 instances, requiring proper VPC configuration including subnets and security groups for network connectivity.",
-  "service": "AWS Lambda",
-  "question": 46
- },
- {
-  "id": "t123",
-  "topic": "ALB health check limitations and customization",
-  "concept": "ALB health checks are HTTP/HTTPS requests that expect specific status codes and cannot execute custom scripts; custom health logic requires external solutions like Lambda functions that can programmatically assess instance health.",
-  "service": "Application Load Balancer",
-  "question": 46
- },
- {
-  "id": "t124",
-  "topic": "API Gateway canary deployments with Lambda function versions",
-  "concept": "API Gateway canary releases allow splitting traffic between two Lambda function versions (stable and canary) on the same stage without changing the API URL. The canary deployment directs a configurable percentage of traffic to the canary version while the rest goes to the base version.",
-  "service": "API Gateway",
-  "question": 47
- },
- {
-  "id": "t125",
-  "topic": "Lambda function versions vs $LATEST for production traffic splitting",
-  "concept": "Lambda function versions are immutable snapshots that enable stable references for production traffic, while $LATEST always points to the most recent code. For canary testing, the stable production code must be a numbered version, and the new code can be referenced via $LATEST or a new version in the canary configuration.",
-  "service": "Lambda",
-  "question": 47
- },
- {
-  "id": "t126",
-  "topic": "API Gateway stage deployment vs canary release within a stage",
-  "concept": "Deploying to a new API Gateway stage creates a different URL endpoint, while a canary release within an existing stage maintains the same URL and splits traffic between two backend configurations (e.g., different Lambda versions) based on percentage.",
-  "service": "API Gateway",
-  "question": 47
- },
- {
-  "id": "t127",
-  "topic": "Lambda execution role permissions for CloudWatch Logs",
-  "concept": "Lambda functions require explicit IAM permissions (logs:CreateLogGroup, logs:CreateLogStream, logs:PutLogEvents) in their execution role to write logs to CloudWatch Logs, even though logging happens automatically when permissions are present.",
-  "service": "AWS Lambda",
-  "question": 48
- },
- {
-  "id": "t128",
-  "topic": "Lambda execution role vs invocation permissions",
-  "concept": "The execution role (what Lambda assumes to access AWS resources) is distinct from invocation permissions (who can invoke Lambda). Logging requires execution role permissions, not invocation permissions or permissions from other services.",
-  "service": "AWS Lambda",
-  "question": 48
- },
- {
-  "id": "t129",
-  "topic": "Amazon Cognito Identity Pools for unauthenticated access",
-  "concept": "Cognito identity pools can provide temporary AWS credentials to unauthenticated users, enabling browser-based applications to access AWS services without embedding long-term credentials in client-side code.",
-  "service": "Amazon Cognito",
-  "question": 49
- },
- {
-  "id": "t130",
-  "topic": "AWS SDK credential management for browser-based applications",
-  "concept": "Browser-based AWS SDK calls require temporary credentials (not IAM user access keys or role ARNs directly), which can be obtained through AWS.CognitoIdentityCredentials for unauthenticated access scenarios.",
-  "service": "AWS SDK",
-  "question": 49
- },
- {
-  "id": "t131",
-  "topic": "IAM security best practices for client-side credentials",
-  "concept": "Long-term credentials (IAM user access keys) must never be embedded in client-side code or websites; temporary credentials from services like Cognito Identity Pools should be used instead for browser-based access.",
-  "service": "IAM",
-  "question": 49
- },
- {
-  "id": "t132",
-  "topic": "Elastic Beanstalk .ebextensions configuration file naming requirements",
-  "concept": "Configuration files in the .ebextensions directory must use the .config extension (not .yaml, .yml, or .json) to be recognized and processed by Elastic Beanstalk during deployment.",
-  "service": "AWS Elastic Beanstalk",
-  "question": 50
- },
- {
-  "id": "t133",
-  "topic": "Elastic Beanstalk option_settings namespace for Application Healthcheck URL",
-  "concept": "The correct namespace for configuring application health check URLs in Elastic Beanstalk is 'aws:elasticbeanstalk:application' with option_name 'Application Healthcheck URL', used within option_settings section of .config files.",
-  "service": "AWS Elastic Beanstalk",
-  "question": 50
- },
- {
-  "id": "t134",
-  "topic": "API Gateway stage variables for dynamic Lambda function routing",
-  "concept": "Stage variables in API Gateway allow different stages (dev, prod) to invoke different Lambda function versions or aliases by using ${stageVariables.variableName} syntax in integration requests, enabling environment-specific configurations without duplicating API definitions.",
-  "service": "API Gateway",
-  "question": 51
- },
- {
-  "id": "t135",
-  "topic": "Lambda function aliases for version management",
-  "concept": "Lambda aliases (like dev and prod) are pointers to specific Lambda function versions that can be referenced in invocations using the function-name:alias-name syntax, enabling stable references to different versions across environments.",
-  "service": "Lambda",
-  "question": 51
- },
- {
-  "id": "t136",
-  "topic": "API Gateway integration request Lambda function name configuration",
-  "concept": "Integration requests in API Gateway define how API methods connect to backend services like Lambda, and the Lambda function name can include dynamic references (stage variables) or static suffixes (aliases) to control which function version is invoked.",
-  "service": "API Gateway",
-  "question": 51
- },
- {
-  "id": "t137",
-  "topic": "Lambda DeadLetterConfig for asynchronous invocation failures",
-  "concept": "Lambda functions can be configured with a DeadLetterConfig property that sends failed event payloads to an SQS queue or SNS topic for durable storage and later processing when asynchronous invocations fail after all retry attempts are exhausted.",
-  "service": "AWS Lambda",
-  "question": 52
- },
- {
-  "id": "t138",
-  "topic": "SQS as Lambda dead-letter queue target for durable message storage",
-  "concept": "SQS queues provide durable message storage and are the appropriate target for Lambda DeadLetterConfig when events need to be persisted for later processing, unlike ephemeral storage or email notifications which are not durable.",
-  "service": "Amazon SQS",
-  "question": 52
- },
- {
-  "id": "t139",
-  "topic": "CloudFormation AWS::Lambda::Function DeadLetterConfig property configuration",
-  "concept": "In CloudFormation templates, the DeadLetterConfig property of AWS::Lambda::Function resource requires a TargetArn that references either an SQS queue ARN or SNS topic ARN to capture failed asynchronous invocations.",
-  "service": "AWS CloudFormation",
-  "question": 52
- },
- {
-  "id": "t140",
-  "topic": "EC2 instance IAM roles for application access to AWS services",
-  "concept": "EC2 instances should use IAM roles (temporary credentials) rather than IAM users (permanent credentials) to securely access AWS services like DynamoDB. IAM roles are attached via launch templates in Auto Scaling groups.",
-  "service": "IAM",
-  "question": 53
- },
- {
-  "id": "t141",
-  "topic": "Lambda authorizers scope and compatibility with load balancers vs API Gateway",
-  "concept": "Lambda authorizers are only compatible with API Gateway for custom authorization logic, not with Application Load Balancers or Network Load Balancers.",
-  "service": "API Gateway",
-  "question": 53
- },
- {
-  "id": "t142",
-  "topic": "Cognito User Pools vs Identity Pools for AWS service access",
-  "concept": "Cognito User Pools provide authentication for application users but do not provide AWS credentials for accessing services like DynamoDB. Identity Pools (federated identities) are needed to exchange user pool tokens for temporary AWS credentials.",
-  "service": "Amazon Cognito",
-  "question": 53
- },
- {
-  "id": "t143",
-  "topic": "AWS Secrets Manager automatic rotation with rotation templates",
-  "concept": "Secrets Manager provides built-in rotation templates (SecretsManagerRotationTemplate) and native scheduling to automatically rotate secrets every N days with minimal code, unlike Parameter Store which requires custom Lambda functions and EventBridge rules for rotation.",
-  "service": "AWS Secrets Manager",
-  "question": 54
- },
- {
-  "id": "t144",
-  "topic": "AWS Secrets Manager vs Systems Manager Parameter Store for secret rotation",
-  "concept": "Secrets Manager is purpose-built for secrets with automatic rotation capabilities and mandatory encryption at rest, while Parameter Store SecureString requires manual rotation implementation using Lambda and EventBridge, making Secrets Manager the lower-effort choice for rotation requirements.",
-  "service": "AWS Secrets Manager",
-  "question": 54
- },
- {
-  "id": "t145",
-  "topic": "Lambda functions retrieving secrets from Secrets Manager at runtime",
-  "concept": "Lambda functions can dynamically pull secrets from Secrets Manager using API calls at runtime, automatically receiving rotated values without requiring environment variable updates or redeployment when secrets rotate.",
-  "service": "AWS Lambda",
-  "question": 54
- },
- {
-  "id": "t146",
-  "topic": "Elastic Beanstalk Blue/Green deployment using environment URL swap",
-  "concept": "Blue/Green deployment via creating a new Elastic Beanstalk environment and swapping environment URLs enables zero-downtime full cutover with instant rollback capability, ideal for incompatible version updates.",
-  "service": "AWS Elastic Beanstalk",
-  "question": 55
- },
- {
-  "id": "t147",
-  "topic": "Elastic Beanstalk deployment policies: All-at-once vs Rolling vs Rolling with additional batch",
-  "concept": "All-at-once updates all instances simultaneously causing downtime; Rolling updates instances in batches maintaining partial availability; Rolling with additional batch launches new instances first but all three perform in-place updates unsuitable for incompatible versions requiring full cutover.",
-  "service": "AWS Elastic Beanstalk",
-  "question": 55
- },
- {
-  "id": "t148",
-  "topic": "DynamoDB Streams view types (KEYS_ONLY vs NEW_IMAGE vs OLD_IMAGE vs NEW_AND_OLD_IMAGES)",
-  "concept": "KEYS_ONLY stream view type records only partition and sort keys without attribute values, preventing PII exposure, while NEW_IMAGE, OLD_IMAGE, and NEW_AND_OLD_IMAGES include full item data with all attributes.",
-  "service": "DynamoDB",
-  "question": 56
- },
- {
-  "id": "t149",
-  "topic": "AWS SDK API response structure (response data vs response metadata)",
-  "concept": "AWS SDK API responses contain both response data (actual item attributes/content) and response metadata (request ID, HTTP status, retry attempts). Logging only metadata provides operational visibility without exposing sensitive data content.",
-  "service": "AWS SDK",
-  "question": 56
- },
- {
-  "id": "t150",
-  "topic": "Lambda function logging strategies for PII compliance",
-  "concept": "When processing PII in Lambda functions, developers must selectively log workflow events and API metadata while avoiding logging the actual data payload to maintain compliance and operational visibility.",
-  "service": "Lambda",
-  "question": 56
- },
- {
-  "id": "t151",
-  "topic": "CodePipeline approval actions for manual intervention",
-  "concept": "CodePipeline supports approval actions as a built-in action type that enables manual approval gates within a pipeline stage, allowing human review before proceeding to subsequent stages like production deployment.",
-  "service": "AWS CodePipeline",
-  "question": 57
- },
- {
-  "id": "t152",
-  "topic": "CodePipeline stage transitions vs approval actions",
-  "concept": "Disabling stage transitions prevents pipeline executions from entering a stage but does not provide manual approval functionality; approval actions are the correct mechanism for requiring explicit human authorization before proceeding.",
-  "service": "AWS CodePipeline",
-  "question": 57
- },
- {
-  "id": "t153",
-  "topic": "CodePipeline action types (source, build, test, deploy, approval, invoke)",
-  "concept": "CodePipeline has six valid action types, each serving distinct purposes in the CI/CD workflow, with approval being the specific action type designed for manual review gates rather than using stage manipulation or multiple pipelines.",
-  "service": "AWS CodePipeline",
-  "question": 57
- },
- {
-  "id": "t154",
-  "topic": "DynamoDB ProvisionedThroughputExceededException error meaning and causes",
-  "concept": "ProvisionedThroughputExceededException indicates that write or read requests exceed the provisioned WCU/RCU capacity for a table or its global secondary indexes, not permissions, item size, or storage issues.",
-  "service": "DynamoDB",
-  "question": 58
- },
- {
-  "id": "t155",
-  "topic": "DynamoDB provisioned capacity units (WCU/RCU) and throttling",
-  "concept": "Tables and GSIs have provisioned write capacity units (WCU) and read capacity units (RCU) that limit throughput; exceeding these limits causes throttling with ProvisionedThroughputExceededException errors.",
-  "service": "DynamoDB",
-  "question": 58
- },
- {
-  "id": "t156",
-  "topic": "DynamoDB error types: ValidationException vs ProvisionedThroughputExceededException vs AccessDeniedException",
-  "concept": "Different DynamoDB errors indicate different issues: ValidationException for item size/format violations, ProvisionedThroughputExceededException for capacity limits, and AccessDeniedException for IAM permission issues.",
-  "service": "DynamoDB",
-  "question": 58
- },
- {
-  "id": "t157",
-  "topic": "Lambda function timeout limits and retry constraints",
-  "concept": "Lambda functions have a maximum timeout of 15 minutes that applies to the entire execution including extensions and layers. Synchronous invocations and nested Lambda calls cannot exceed this timeout, making them unsuitable for long-running retry scenarios that need to span hours.",
-  "service": "AWS Lambda",
-  "question": 59
- },
- {
-  "id": "t158",
-  "topic": "Step Functions state machine retry configuration with BackoffRate and MaxAttempts",
-  "concept": "Step Functions can orchestrate long-running workflows beyond Lambda's timeout limits by using task states with retry policies. The BackoffRate and MaxAttempts parameters enable exponential backoff retries over extended periods, and state machines can be triggered directly from API Gateway.",
-  "service": "AWS Step Functions",
-  "question": 59
- },
- {
-  "id": "t159",
-  "topic": "API Gateway integration with Step Functions for asynchronous workflows",
-  "concept": "API Gateway REST APIs can directly start Step Functions state machine executions using POST method integration, enabling asynchronous workflow orchestration that decouples the API response from long-running backend processes.",
-  "service": "Amazon API Gateway",
-  "question": 59
- },
- {
-  "id": "t160",
-  "topic": "AWS X-Ray tracing for API Gateway and Lambda end-to-end latency analysis",
-  "concept": "X-Ray provides distributed tracing to identify performance bottlenecks across API Gateway and Lambda by capturing end-to-end request flows, showing latency at each service boundary, unlike CloudWatch Logs which only shows individual service logs without correlation.",
-  "service": "AWS X-Ray",
-  "question": 60
- },
- {
-  "id": "t161",
-  "topic": "CloudWatch Logs vs X-Ray for performance troubleshooting",
-  "concept": "CloudWatch Logs are suitable for debugging errors and failures within individual services (API Gateway execution logs, Lambda function logs), but X-Ray is required for tracing latency and performance bottlenecks across distributed service calls.",
-  "service": "Amazon CloudWatch",
-  "question": 60
- },
- {
-  "id": "t162",
-  "topic": "CloudTrail for API Gateway service API auditing vs request tracing",
-  "concept": "CloudTrail logs API Gateway control plane operations (API creation, deployment, updates) but does not capture data plane request latency or performance metrics for individual API invocations.",
-  "service": "AWS CloudTrail",
-  "question": 60
- },
- {
-  "id": "t163",
-  "topic": "S3 SSE-C GetObject API requirements",
-  "concept": "When retrieving objects encrypted with SSE-C (server-side encryption with customer-provided keys), the GetObject API call must include both the S3 object key and the same customer-provided encryption key used during upload. S3 does not store the encryption key, only a salted HMAC for validation.",
-  "service": "Amazon S3",
-  "question": 61
- },
- {
-  "id": "t164",
-  "topic": "S3 server-side encryption types: SSE-C vs SSE-KMS",
-  "concept": "SSE-C requires the customer to provide and manage encryption keys with each request, while SSE-KMS uses AWS KMS managed keys identified by ARN. The encryption method determines what credentials/keys must be provided in API calls.",
-  "service": "Amazon S3",
-  "question": 61
- },
- {
-  "id": "t165",
-  "topic": "S3 SSE-C encryption key storage and HMAC validation",
-  "concept": "With SSE-C, S3 stores only a randomly salted HMAC of the encryption key for validation purposes, not the actual encryption key. The HMAC cannot be used to derive or retrieve the original encryption key, requiring customers to maintain the key separately.",
-  "service": "Amazon S3",
-  "question": 61
- },
- {
-  "id": "t166",
-  "topic": "Elastic Beanstalk Rolling deployment policy characteristics",
-  "concept": "Rolling deployment updates instances in batches using only existing instances, maintaining partial availability during deployment but potentially causing reduced capacity and some service degradation. It does not create new instances unlike Rolling with Additional Batch or Immutable deployments.",
-  "service": "AWS Elastic Beanstalk",
-  "question": 62
- },
- {
-  "id": "t167",
-  "topic": "Elastic Beanstalk All-at-once vs Rolling deployment outage impact",
-  "concept": "All-at-once deployment updates all instances simultaneously causing complete service outage, while Rolling deployment maintains partial service availability by updating instances in batches, resulting in minimal but not zero outage.",
-  "service": "AWS Elastic Beanstalk",
-  "question": 62
- },
- {
-  "id": "t168",
-  "topic": "Elastic Beanstalk deployment policies that create new instances",
-  "concept": "Rolling with Additional Batch and Immutable deployment policies create new EC2 instances during deployment, while Rolling and All-at-once policies use only existing instances for in-place updates.",
-  "service": "AWS Elastic Beanstalk",
-  "question": 62
- },
- {
-  "id": "t169",
-  "topic": "Lambda memory allocation affects CPU allocation",
-  "concept": "Increasing Lambda function memory allocation proportionally increases CPU resources available to the function, which can reduce execution time for CPU-intensive workloads.",
-  "service": "AWS Lambda",
-  "question": 63
- },
- {
-  "id": "t170",
-  "topic": "Lambda execution environment vs EC2 instances",
-  "concept": "Lambda functions run in AWS-managed execution environments, not on EC2 instances. You cannot configure Lambda to run on specific EC2 instance types; Lambda abstracts the underlying compute infrastructure.",
-  "service": "AWS Lambda",
-  "question": 63
- },
- {
-  "id": "t171",
-  "topic": "Lambda reserved concurrency purpose",
-  "concept": "Reserved concurrency controls the maximum number of concurrent executions for a function but does not affect individual function execution time or timeout issues for single invocations.",
-  "service": "AWS Lambda",
-  "question": 63
- },
- {
-  "id": "t172",
-  "topic": "AWS X-Ray tracing for Lambda functions to inspect downstream service calls",
-  "concept": "X-Ray can be enabled on Lambda functions to trace and measure the timing of downstream API calls (like DynamoDB operations), providing detailed performance insights and identifying bottlenecks in the execution path.",
-  "service": "AWS X-Ray",
-  "question": 64
- },
- {
-  "id": "t173",
-  "topic": "X-Ray integration with DynamoDB SDK calls for performance analysis",
-  "concept": "When X-Ray tracing is enabled, the AWS SDK automatically instruments DynamoDB API calls, capturing timing data, request/response details, and errors to help diagnose performance issues.",
-  "service": "AWS X-Ray",
-  "question": 64
- },
- {
-  "id": "t174",
-  "topic": "CloudWatch Metrics vs X-Ray for API call inspection",
-  "concept": "CloudWatch Metrics provide aggregate statistics (invocation count, duration, errors) but cannot inspect individual API call timing or trace request flows, whereas X-Ray provides detailed tracing of individual requests and downstream service calls.",
-  "service": "Amazon CloudWatch",
-  "question": 64
- },
- {
-  "id": "t175",
-  "topic": "DynamoDB Conditional Writes for optimistic locking",
-  "concept": "Conditional writes in DynamoDB allow updates to succeed only if item attributes meet expected conditions, preventing concurrent update conflicts by checking the current state before applying changes.",
-  "service": "DynamoDB",
-  "question": 65
- },
- {
-  "id": "t176",
-  "topic": "DynamoDB Atomic Counters vs Conditional Writes",
-  "concept": "Atomic counters increment/decrement numeric attributes without read-before-write but allow overcounting/undercounting, while conditional writes enforce strict consistency by validating expected conditions before updates.",
+  "topic": "Conditional writes en DynamoDB",
+  "concept": "Mecanismo para garantizar que una operación de escritura solo se ejecute si se cumplen condiciones específicas sobre los atributos actuales del item, previniendo actualizaciones concurrentes no deseadas.",
   "service": "DynamoDB",
   "question": 65
  }

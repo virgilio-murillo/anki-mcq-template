@@ -11,7 +11,7 @@ Anki MCQ decks for the DVA-C02 exam, one generator script per subdeck.
 | `dva_c02_06.py` | `DVA-C02::06` | 18 |
 | `dva_c02_07.py` | `DVA-C02::07` | 45 |
 | `dva_c02_08.py` | `DVA-C02::08` | 26 |
-| `dva_c02_09.py` | `DVA-C02::09` | 129 |
+| `dva_c02_09.py` | `DVA-C02::09` | 32 |
 
 ## Regenerate a deck
 
