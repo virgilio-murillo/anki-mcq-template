@@ -1,7 +1,7 @@
+# Python
 .venv/
 __pycache__/
 *.pyc
-*.apkg
 .DS_Store
 
 # Build artifacts (editable install)
@@ -9,13 +9,27 @@ __pycache__/
 build/
 dist/
 
-# Generated deck packages live here (regenerate from the .py scripts)
+# Generated deck packages (regenerate from the .py generators)
+*.apkg
 decks/*/out/
 
-# Investigation agent logs (local noise, not source)
+# Local agent/investigation logs (noise, not source)
+.kiro-agents/
 investigation/
 kiro-notes/
-.kiro-agents/
 findings/
-decks/*/kiro-test/
+
+# study/ material is versioned, but not its intermediate images or venv
+decks/*/study/img/
+decks/*/study/img_*/
+decks/*/study/.venv/
+
+# qa/ scripts + reports are versioned; large raw intermediates are not
+decks/*/qa/**/batches/
+decks/*/qa/**/reviews/
+decks/*/qa/**/candidates/
+decks/*/qa/**/blind_batches/
+decks/*/qa/**/blind_prompts/
+
+# Deck backups (local safety copies)
 decks/*/backups/
