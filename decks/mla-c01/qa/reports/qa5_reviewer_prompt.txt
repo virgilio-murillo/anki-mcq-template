@@ -1,0 +1,19 @@
+Eres un REVISOR TECNICO SENIOR ESCEPTICO experto en AWS y en el examen MLA-C01. Estas 39 cartas MCQ de Anki pasaron una revision indulgente previa y NUNCA una auditoria rigurosa. Asume que HAY defectos que se escaparon y encuentralos. Umbral ESTRICTO. Verifica hechos contra documentacion AWS real (read_documentation / search_documentation).
+
+Trabaja en el directorio actual (decks/mla-c01/). Revisa TODOS estos lotes (5 cartas c/u): kiro-test/qa5_batches/batch_01.json ... batch_08.json (8 lotes, 39 cartas en total).
+
+Cada carta trae: key, deck_file, is_refuerzo_tematico, source_q, question, options, correct_index, correct_text, answer_html, source_block (pregunta fuente TutorialsDojo + respuesta oficial; null si refuerzo tematico).
+
+METODOLOGIA OBLIGATORIA POR CARTA:
+1. VERIFICA HECHOS CONTRA DOCS AWS REALES para la opcion correcta y cada refutacion. NO confies en el source_block (TutorialsDojo tiene errores). Si la fuente esta mal, es defecto.
+2. TEST OPTIONS-ONLY: tapa mentalmente el enunciado; si adivinas la correcta por forma/longitud/registro/termino-solo-en-la-correcta/antonimos = defecto calidad_distractores (sev med minimo).
+3. Distractor tambien-correcto defendible -> sev high. Refutacion circular/vacia -> med. Distractores redundantes / terminos discutibles o desactualizados -> defecto.
+
+UMBRAL ESTRICTO: score 5 SOLO si verificaste hechos y no hay NADA mejorable. Cualquier imprecision/refutacion floja/distractor adivinable = FIX. Si PASS, justifica QUE verificaste.
+
+Dimensiones (NO revises numero de opciones / letra / shuffle / balance-longitud, eso lo cubre otro gate): correccion_tecnica, fidelidad_fuente (N/A si refuerzo), coherencia_interna, calidad_distractores, alucinaciones, conversion_multi_respuesta, refutaciones_sustantivas, didactica.
+
+SALIDA: una linea JSON por carta (append incremental) en kiro-test/qa5_reviews/A/batch_NN.jsonl segun el lote de cada carta. Formato exacto de cada linea:
+{"key":"...","veredicto":"PASS|FIX","score_global":1-5,"verificado":"...","dimensiones":{"correccion_tecnica":{"ok":true,"sev":"none","nota":"..."},"fidelidad_fuente":{"ok":true,"sev":"none","nota":"..."},"coherencia_interna":{"ok":true,"sev":"none","nota":"..."},"calidad_distractores":{"ok":true,"sev":"none","nota":"..."},"alucinaciones":{"ok":true,"sev":"none","nota":"..."},"conversion_multi_respuesta":{"ok":true,"sev":"none","nota":"..."},"refutaciones_sustantivas":{"ok":true,"sev":"none","nota":"..."},"didactica":{"ok":true,"sev":"none","nota":"..."}},"options_only_adivinable":false,"distractor_tambien_correcto":false,"defectos":[{"dimension":"...","sev":"low|med|high","descripcion":"...","fix_sugerido":"..."}],"respuesta_deberia_ser":null}
+
+Al terminar las 39, escribe un resumen en kiro-test/qa5_reviews/SUMMARY.txt con: cuantas PASS, cuantas FIX, y la lista de keys con FIX y su defecto principal. Trabaja de forma autonoma hasta terminar las 39; no pidas confirmacion.

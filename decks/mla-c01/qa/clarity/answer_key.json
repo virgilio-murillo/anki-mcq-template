@@ -1,0 +1,674 @@
+{
+  "mla01-q1": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q1b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q2": {
+    "correct_index": 3,
+    "correct_label": "D",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q3": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q4": {
+    "correct_index": 2,
+    "correct_label": "C",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q5": {
+    "correct_index": 3,
+    "correct_label": "D",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q6": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q7": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q8": {
+    "correct_index": 2,
+    "correct_label": "C",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q9": {
+    "correct_index": 2,
+    "correct_label": "C",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q10": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q11": {
+    "correct_index": 2,
+    "correct_label": "C",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q12": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q12b": {
+    "correct_index": 2,
+    "correct_label": "C",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q13": {
+    "correct_index": 3,
+    "correct_label": "D",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q14": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q15": {
+    "correct_index": 2,
+    "correct_label": "C",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q16": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q17": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q18": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q19": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q20": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q21a": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q21b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q21c": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q22": {
+    "correct_index": 3,
+    "correct_label": "D",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q23": {
+    "correct_index": 3,
+    "correct_label": "D",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q24": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q25": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q26": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q27": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q28": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q29": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q30": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q31": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q32": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q33": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q34": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q35": {
+    "correct_index": 2,
+    "correct_label": "C",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q36a": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q36b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q37": {
+    "correct_index": 2,
+    "correct_label": "C",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q38": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q39": {
+    "correct_index": 2,
+    "correct_label": "C",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q40": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q41": {
+    "correct_index": 1,
+    "correct_label": "B",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-q42": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla01-r1-formatos": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": true
+  },
+  "mla01-r2-storage": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": true
+  },
+  "mla01-r3-kinesis": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": true
+  },
+  "mla01-r4-movimiento": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": true
+  },
+  "mla01-r5-clarify": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": true
+  },
+  "mla01-r6-groundtruth": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": true
+  },
+  "mla01-r7-wrangler": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": true
+  },
+  "mla01-r8-scaler": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": true
+  },
+  "mla01-r9-dms": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_01.py",
+    "is_refuerzo_tematico": true
+  },
+  "mla02-q1": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q1b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q2": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q2b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q3": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q3b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q4": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q5": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q5b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q6": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q6b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q7": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q8": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q9": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q10": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q11": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q21b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q12": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q13": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q13b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q14": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q15": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q16": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q17": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q18": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q18b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q19": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q20": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q20b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q21": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q22": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q23": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q23b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q24": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q25": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q26": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q27": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q28": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q29": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q30": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q31": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q31b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q32": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q33": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q34": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q35": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q36": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q37": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q38": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q38b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q39": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q40": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q40b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q32b": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q41": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  },
+  "mla02-q42": {
+    "correct_index": 0,
+    "correct_label": "A",
+    "deck_file": "mla_c01_02.py",
+    "is_refuerzo_tematico": false
+  }
+}

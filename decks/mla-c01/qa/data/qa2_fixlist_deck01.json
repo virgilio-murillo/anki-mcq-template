@@ -1,0 +1,1881 @@
+[
+  {
+    "key": "mla01-q1",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 4,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Modelo simple = mas interpretable; correcto.",
+        "nota_B": "Modelo simple por explicabilidad es correcto para banca regulada."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente TutorialsDojo.",
+        "nota_B": "Coincide con el source_block y respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Enunciado, correcta y refutaciones coherentes.",
+        "nota_B": "Enunciado, correcta y answer_html coherentes."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Las 4 opciones son el producto cartesiano simple/complejo x explicabilidad/exactitud. El enunciado dice explicitamente 'explicar en terminos humanos' (explicabilidad), asi que options-only permite descartar las de 'exactitud' y elegir 'simple + explicabilidad' sin pensar.",
+        "nota_B": "Distractores 2x2 combinatorios (simple/complejo x explicabilidad/exactitud). El enunciado subraya 'explicar en terminos humanos', lo que hace que la opcion 'simple + explicabilidad' destaque por forma sin razonar el trade-off."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A single answer.",
+        "nota_B": "Single answer, sin conversion problematica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones distinguen bien 'razon correcta pero criterio equivocado'.",
+        "nota_B": "Cada refutacion explica el error especifico (razon correcta vs modelo correcto)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Buen exam tip.",
+        "nota_B": "Exam tip util (regulacion=explicabilidad)."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Estructura de opciones factorial que junto con la palabra clave 'terminos humanos' del enunciado hace la respuesta deducible sin razonar el trade-off. Defecto heredado del formato de la fuente.",
+        "fix_sugerido": "Aceptable dado que replica la pregunta fuente, pero para robustez podria reformularse el enunciado para no repetir literalmente 'explicabilidad', obligando a razonar el mapeo requisito->criterio.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "low",
+        "descripcion": "El fraseo del enunciado ('explicar en terminos humanos', 'transparencia y equidad') alinea semanticamente con la opcion correcta, permitiendo adivinar por coincidencia de palabras sin entender el trade-off.",
+        "fix_sugerido": "Reformular el enunciado para no repetir literalmente 'explicabilidad'; p.ej. pedir 'justificar cada decision ante reguladores' y dejar que el alumno mapee eso a explicabilidad.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q10",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 3,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": true,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "El par elegido (KDS + Flink) es tecnicamente correcto para ingesta+procesamiento en tiempo real.",
+        "nota_B": "KDS+Flink es una respuesta correcta; pero la afirmacion implicita de que MSK no sirve para tiempo real es incorrecta."
+      },
+      "fidelidad_fuente": {
+        "sev": "med",
+        "nota_A": "La respuesta correcta coincide con la fuente (las dos opciones correctas).",
+        "nota_B": "La carta hereda de TutorialsDojo una refutacion erronea sobre MSK (que MSK es solo 'transferencia entre aplicaciones'). MSK es un servicio de streaming en tiempo real de pleno derecho."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Internamente coherente, pero apoyada en premisa falsa."
+      },
+      "calidad_distractores": {
+        "sev": "high",
+        "nota_A": "Distractores (Glue+Athena, S3+Lambda batch, SQS+EMR) plausibles y distintos.",
+        "nota_B": "El distractor implicito MSK+Flink es defendible como tambien-correcto: MSK ingiere en tiempo real y Flink procesa. Colapsar un 'Select TWO' (KDS+Flink) a single-answer deja a MSK como alternativa valida no seleccionable."
+      },
+      "alucinaciones": {
+        "sev": "med",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Caracterizar MSK como 'principalmente transferencia entre sistemas, no tiempo real' es una imprecision tecnica (cuasi-alucinacion heredada de la fuente)."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "med",
+        "nota_A": "La fuente es 'Select TWO' con 5 opciones donde MSK tambien es plausible como servicio de streaming. La conversion a single-answer emparejo KDS+Flink en una sola opcion y relego MSK y Firehose a distractores. Es una conversion aceptable, PERO la fuente descarta MSK con una razon incorrecta ('mainly used for data transfer rather than real-time processing'), afirmacion que verifique como FALSA: MSK soporta streaming en tiempo real de baja latencia. La carta no reproduce esa refutacion (bien), pero al empaquetar KDS+Flink como unica correcta, ignora que MSK+Flink tambien seria una respuesta streaming valida bajo otra lectura.",
+        "nota_B": "La conversion de 'Select TWO' a single-answer introduce el problema de MSK tambien-correcto; la refutacion tapa esto minimizando MSK erroneamente."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "med",
+        "nota_A": "Las refutaciones de la carta (Glue/Athena batch, S3+Lambda anade latencia, EMR nocturno) son solidas; no arrastra la refutacion erronea de MSK de la fuente.",
+        "nota_B": "La refutacion de MSK no es sustantiva: repite el error de la fuente en vez de dar un motivo valido (p.ej. que el escenario/fuente designa el par KDS+Flink)."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "Exam tip razonable.",
+        "nota_B": "El exam tip es util pero refuerza la idea imprecisa de que MSK no es para tiempo real."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "conversion_multi_respuesta",
+        "sev": "med",
+        "descripcion": "Pregunta fuente 'Select TWO' de 5 opciones convertida a single-answer emparejando KDS+Flink. Funciona, pero la fuente subyacente descarta MSK con una justificacion tecnicamente incorrecta (MSK si hace streaming en tiempo real). Si en el futuro se reformula, no debe reforzarse la idea de que MSK 'no sirve para tiempo real'.",
+        "fix_sugerido": "Mantener la respuesta pero, si se agrega nota sobre MSK, aclarar que MSK TAMBIEN puede ingerir/procesar en tiempo real; se elige KDS+Flink por ser el par canonico del escenario, no porque MSK sea batch.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "high",
+        "descripcion": "MSK + Managed Service for Apache Flink es una pareja tambien-correcta para ingerir y procesar transacciones en tiempo real; presentarla como distractor unico incorrecto es cuestionable.",
+        "fix_sugerido": "Reformular la opcion de MSK para que sea claramente inferior en el contexto (p.ej. 'Amazon MSK requiriendo autogestion de brokers/particiones y sin capa de procesamiento') o cambiar el enunciado para pedir explicitamente la opcion mas gestionada/serverless de baja operacion.",
+        "por": "B"
+      },
+      {
+        "dimension": "fidelidad_fuente",
+        "sev": "med",
+        "descripcion": "La refutacion afirma que MSK es 'principalmente para transferencia entre aplicaciones y no procesamiento en tiempo real', lo cual es incorrecto segun docs AWS.",
+        "fix_sugerido": "Eliminar esa afirmacion; justificar el descarte de MSK por el requisito de minima operacion/servicio gestionado, no negando su capacidad de tiempo real.",
+        "por": "B"
+      }
+    ],
+    "prio": "P0"
+  },
+  {
+    "key": "mla01-q11",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "med",
+        "nota_A": "El distractor 'Avro RecordIO' conflaciona dos formatos diferentes (Avro y RecordIO/protobuf-RecordIO). La descripcion de la opcion ('serializacion orientada a registros para streaming secuencial') mezcla caracteristicas de ambos. La correcta (Parquet) no se afecta, pero el distractor contiene una imprecision tecnica.",
+        "nota_B": "Parquet correcto para almacenamiento/procesamiento analitico eficiente."
+      },
+      "fidelidad_fuente": {
+        "sev": "low",
+        "nota_A": "La fuente ya escribe 'Avro RecordIO' como una sola opcion; el error se hereda. 'Heredado' no exime: sigue siendo un defecto.",
+        "nota_B": "Coincide con respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente internamente pese a la conflacion.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "El distractor Avro RecordIO es un termino hibrido no estandar; podria confundir al estudiante sobre si 'Avro RecordIO' es un formato real.",
+        "nota_B": "El distractor 'Avro RecordIO' mezcla dos formatos distintos (Avro row-based vs RecordIO, contenedor de registros). Es un termino discutible/impreciso aunque proviene del source."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "No hay alucinacion (proviene de la fuente), pero si imprecision terminologica.",
+        "nota_B": "La refutacion trata Avro correctamente como row-based; sin invencion sustantiva."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "low",
+        "nota_A": "La refutacion habla solo de 'Avro' (row-based) e ignora el componente 'RecordIO', dejando incompleta la explicacion del termino hibrido.",
+        "nota_B": "Refutaciones correctas (XML verboso, CSV sin compresion/tipado, Avro row-based)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip columnar vs row-based correcto.",
+        "nota_B": "Exam tip columnar vs row-based util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "med",
+        "descripcion": "El distractor 'Avro RecordIO' funde dos formatos distintos. Avro es un formato row-based de Apache; RecordIO (protobuf RecordIO) es el formato de registros de SageMaker. Presentarlos como un unico formato 'Avro RecordIO' es tecnicamente incorrecto y potencialmente confuso.",
+        "fix_sugerido": "Separar en un distractor limpio: usar solo 'Avro (formato row-based con schema evolution)' o solo 'RecordIO (protobuf, orientado a registros para SageMaker)'; y que la refutacion nombre el formato real. Evitar el hibrido 'Avro RecordIO'.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "low",
+        "descripcion": "'Avro RecordIO' conflaciona dos formatos distintos; puede confundir a un alumno que conoce que RecordIO (protobuf/MXNet) no es lo mismo que Avro.",
+        "fix_sugerido": "Renombrar el distractor a solo 'Avro' (row-based) o separar 'RecordIO-protobuf' como opcion propia, para no mezclar conceptos.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q12b",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 4,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "Firehose correcto para ingesta/carga streaming a S3.",
+        "nota_B": "Firehose correcto, pero es near real-time (buffering), no latencia sub-segundo; el enunciado lo llama 'tiempo real'."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al item de la fuente.",
+        "nota_B": "Coincide con la asignacion oficial (Firehose para social real-time)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Refuerzo tematico de q12; distractores (Glue batch, EMR batch, Redshift Spectrum) distintos y plausibles. Buen contraste Firehose vs Glue/EMR/Spectrum.",
+        "nota_B": "Glue/EMR/Redshift Spectrum bien diferenciados."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Item de matching aislado; correcto.",
+        "nota_B": "Buena sub-pregunta derivada del 'Select FOUR'."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones dan razon tecnica (batch vs streaming, query vs ingesta).",
+        "nota_B": "Refutaciones correctas."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip Firehose vs KDS claro.",
+        "nota_B": "Exam tip (Firehose=cargar streaming sin servidores; KDS=leer/procesar baja latencia) util y matiza la diferencia."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "low",
+        "descripcion": "El enunciado dice 'en tiempo real' pero Firehose entrega en NEAR real-time por su buffering; podria inducir confusion frente a KDS.",
+        "fix_sugerido": "Cambiar 'en tiempo real' por 'streaming near real-time' o 'de forma continua/administrada' para ser tecnicamente exacto.",
+        "por": "B"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q13",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 4,
+    "score_B": 3,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "DTT es transferencia fisica; unica opcion que no depende de la red limitada. Correcto.",
+        "nota_B": "DTT existe y es offline/fisico, pero encaja peor que Snowball para 'poca conectividad on-site'; requiere llevar el hardware a la instalacion AWS."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel.",
+        "nota_B": "Fiel al source_block (que designa DTT como respuesta)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente con la premisa de la fuente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Storage Gateway/DataSync/Transfer Acceleration son tres servicios reales, todos online; buen conjunto para probar el concepto offline-vs-online.",
+        "nota_B": "Falta el distractor/opcion canonico (Snow Family) que es la respuesta clasica del examen para muchos TB sin red; su ausencia hace la pregunta menos representativa aunque no invalida DTT."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones; DTT es un servicio real y vigente.",
+        "nota_B": "La descripcion de DTT (migracion fisica offline en instalacion AWS) es correcta segun docs."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones correctas: todas siguen dependiendo de internet.",
+        "nota_B": "Refutaciones correctas: Storage Gateway/DataSync/S3 TA dependen de la red limitada."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip 'muchos TB + poca conectividad = transferencia fisica' correcto; menciona familia Snow como alternativa historica.",
+        "nota_B": "Exam tip (muchos TB + poca red = transferencia fisica offline, incluye familia Snow) util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "low",
+        "descripcion": "El razonamiento asume que DTT elude la red del data center, pero DTT requiere transportar fisicamente los dispositivos a una instalacion AWS con fibra; para 'poca conectividad on-site' el mecanismo tipico es Snow Family (dispositivo enviado al cliente).",
+        "fix_sugerido": "Anadir un matiz al enunciado (p.ej. 'la empresa puede transportar sus dispositivos a una instalacion AWS') o incluir Snow Family como opcion y precisar por que se prefiere DTT en el escenario dado.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q15",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "EFS correcto para acceso concurrente desde muchas EC2.",
+        "nota_B": "EFS = acceso concurrente multi-EC2; correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel.",
+        "nota_B": "Coincide con respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "DataSync/EBS/Storage Gateway bien diferenciados; ninguno da acceso concurrente amplio como file system.",
+        "nota_B": "EBS/DataSync/Storage Gateway plausibles y bien diferenciados."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "low",
+        "nota_A": "Refutacion de EBS ('atado normalmente a una sola instancia') es correcta y matiza con 'normalmente' (existe io1/io2 Multi-Attach, pero no aplica al caso). Aceptable.",
+        "nota_B": "Refutaciones precisas (EBS no comparte; DataSync transfiere; SG es hibrido)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip EFS vs EBS vs FSx Lustre util.",
+        "nota_B": "Exam tip (concurrente=EFS; una instancia=EBS; HPC=FSx Lustre) excelente."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q17",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 5,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Aumentar shards en KDS es la solucion correcta; Firehose no tiene shards aprovisionados.",
+        "nota_B": "Aumentar shards es la palanca estandar de throughput en KDS; correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel.",
+        "nota_B": "Coincide con respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Compresion/deduplicacion/shards-en-Firehose son tres errores distintos y plausibles; el de Firehose ademas ensena que Firehose no tiene shards.",
+        "nota_B": "El distractor 'shards aprovisionados en Firehose' es un excelente trap (Firehose no los tiene)."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "low",
+        "nota_A": "Refutaciones correctas y verificadas (Firehose autoescala sin shards).",
+        "nota_B": "La refutacion de compresion la descarta como que 'no aborda la performance'; en realidad comprimir puede ayudar al limite de bytes/shard, aunque no eleva el limite de registros/s. Es correcta como 'no es la MEJOR', pero el motivo dado es impreciso."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip KDS shards vs Firehose autoescala: correcto.",
+        "nota_B": "Exam tip (KDS escala con shards; Firehose auto-escala) util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "refutaciones_sustantivas",
+        "sev": "low",
+        "descripcion": "La refutacion de compresion afirma que no mejora performance/latencia; comprimir reduce bytes por registro y puede mejorar el throughput efectivo bajo el limite de 1MB/s por shard (aunque no bajo el limite de 1000 rec/s).",
+        "fix_sugerido": "Precisar: 'la compresion puede aliviar el limite de bytes por shard pero no el de registros/s ni el numero de shards, por eso no resuelve el cuello de forma general; anadir shards es la solucion directa.'",
+        "por": "B"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q18",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Transformar a columnar para acceso mas rapido: correcto.",
+        "nota_B": "Transformar a columnar para lectura rapida por columnas; correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "La fuente es 'Select and order THREE'; se extrajo el paso clave (columnar) como MCQ. La correcta y los distractores provienen de las opciones de la fuente.",
+        "nota_B": "Coincide con la respuesta oficial (paso 3 = columnar)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Convertir a JSON / mantener CSV / agregar por creadores: tres alternativas distintas de la fuente; el de 'agregar por creadores' es el mas debil pero valido como error de la fuente.",
+        "nota_B": "Distractores plausibles (JSON, mantener CSV, agregar por creadores) bien elegidos."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "low",
+        "nota_A": "La fuente era una pregunta de ordenar 3 pasos (filtrar->comprimir->columnar). Se convirtio a una MCQ single sobre 'a que formato transformar para acceso mas rapido', lo cual es fiel al paso 3, pero pierde el matiz de que la transformacion columnar es el ultimo paso de una secuencia. La conversion es correcta y sin ambiguedad para el objetivo elegido; se marca low solo por transparencia del cambio de tipo.",
+        "nota_B": "Buena extraccion del paso clave del 'order THREE' original."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones dan razon tecnica (JSON jerarquico read-heavy peor, CSV por filas, agregacion irrelevante).",
+        "nota_B": "Refutaciones correctas y especificas."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip del pipeline filtrar->comprimir->columnar util.",
+        "nota_B": "Exam tip (filtrar->comprimir->columnar) util."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q1b",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 4,
+    "score_B": 3,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Correcto: simple mas explicable/rapido, menos exacto; complejo al reves y mas costoso de entrenar.",
+        "nota_B": "Descripcion del trade-off correcta."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Refuerzo tematico derivado de la q1, fiel al concepto fuente.",
+        "nota_B": "Consistente con el source_block (misma pregunta base q1)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Distractores usan absolutos ('siempre', 'nunca', 'no hay diferencia') pero son plausibles como errores conceptuales tipicos; el correcto no es adivinable solo por longitud (es el mas largo pero los absolutos son senal legitima de error conceptual, no artefacto).",
+        "nota_B": "Los tres distractores usan absolutos ('siempre mas exacto', 'siempre mas barato', 'no hay diferencia'). La opcion correcta es la unica matizada ('suele... pero puede'). Es adivinable por forma: el patron 'la opcion prudente es la correcta' funciona sin conocer ML."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones dan razon tecnica real (costo de computo, etc.).",
+        "nota_B": "Refutaciones correctas (complejo suele costar mas computo, etc.)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Analogia caja transparente/negra util.",
+        "nota_B": "Analogia caja negra/transparente util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Tres distractores con absolutos (siempre/nunca/no hay diferencia) frente a una unica opcion matizada; el examinado detecta la correcta por el estilo hedged sin dominar el contenido.",
+        "fix_sugerido": "Rehacer distractores con afirmaciones plausibles y especificas (p.ej. 'el complejo siempre es preferible si hay GPU disponible', 'la interpretabilidad no afecta la eleccion en banca') que exijan conocimiento real para descartar.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q20",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "S3 correcto para data lake (11 nueves de durabilidad, escala).",
+        "nota_B": "S3 con 11 nueves = base de data lake; correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel.",
+        "nota_B": "Coincide con respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "FSx Lustre/EFS/Storage Gateway plausibles y distintos. Nota menor: la refutacion llama a FSx for Lustre 'efimero', lo cual es una simplificacion (Lustre persistente existe), pero en contexto de data lake durable de largo plazo el punto se sostiene.",
+        "nota_B": "FSx Lustre/EFS/Storage Gateway plausibles y bien diferenciados."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "11 nueves verificado; sin invenciones. Nota menor: describir FSx Lustre como 'efimero' es una simplificacion aceptable (puede ser persistente), pero no afecta la respuesta."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "low",
+        "nota_A": "Refutacion de FSx Lustre como 'efimero' es una generalizacion (hay modo persistente), pero valida para el criterio 'repositorio durable de data lake'. Aceptable.",
+        "nota_B": "Refutaciones correctas por servicio."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip 'data lake = S3' correcto.",
+        "nota_B": "Exam tip (data lake en AWS = S3 casi siempre) util."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q21a",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "DPL es la metrica correcta para 'proporcion de resultados positivos entre grupos'.",
+        "nota_B": "DPL = diferencia de proporcion de positivos entre grupos; correcto por definicion de Clarify."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al item de matching de la fuente.",
+        "nota_B": "Coincide con la asignacion oficial y docs Clarify."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Cada opcion lleva su propia definicion embebida y la de DPL ('mide la disparidad de resultados positivos entre grupos') es casi un eco literal del enunciado ('comparar la proporcion de resultados positivos entre grupos'). Options-only: se puede emparejar la definicion de la opcion con el enunciado sin conocer las metricas -> give-away de wording.",
+        "nota_B": "Las 4 metricas de Clarify como opciones; buena discriminacion conceptual."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Sin invenciones; definiciones alineadas con docs."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Item de matching 'Select THREE' correctamente desglosado en cartas independientes (q21a/b/c).",
+        "nota_B": "Buena descomposicion del 'match/Select THREE' en sub-pregunta single-answer."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones distinguen bien CI/TVD/KL de DPL.",
+        "nota_B": "Refutaciones precisas por metrica."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip de la familia de metricas util.",
+        "nota_B": "Exam tip (DPL vs CI vs TVD) util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "El enunciado y la definicion embebida en la opcion correcta comparten frase casi identica ('proporcion de resultados positivos entre grupos'), permitiendo emparejar por coincidencia lexica sin dominar las metricas. Afecta a las tres cartas de la serie (q21a/b/c).",
+        "fix_sugerido": "Quitar (o reformular) la definicion embebida en las opciones, dejando solo el nombre de la metrica (DPL/CI/TVD/KL), o parafrasear el enunciado para que no reutilice la misma frase que la definicion de la opcion correcta. Asi se obliga a conocer que hace cada metrica.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q21b",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "CI correcto para desbalance de representacion m/f.",
+        "nota_B": "CI = representacion/imbalance de grupos; correcto por definicion de Clarify."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel.",
+        "nota_B": "Coincide con la asignacion oficial y docs."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "La opcion CI ('evalua la representacion relativa de clases o grupos') refleja el enunciado ('medir el desbalance entre instancias'); emparejamiento por wording posible sin conocer las metricas. Give-away.",
+        "nota_B": "Metricas de Clarify como opciones; buena discriminacion."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Desglose correcto del matching.",
+        "nota_B": "Buena descomposicion single-answer."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones correctas.",
+        "nota_B": "Refutaciones precisas por metrica."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip util.",
+        "nota_B": "Exam tip (desbalance de representacion m/f = CI) util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Mismo defecto de give-away lexico que q21a: la definicion embebida en la opcion CI parafrasea el enunciado, permitiendo acierto por coincidencia de palabras.",
+        "fix_sugerido": "Igual que q21a: dejar solo el nombre de la metrica en las opciones o parafrasear el enunciado para romper el eco lexico.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q21c",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "TVD = maxima diferencia entre distribuciones; correcto y verificado en docs.",
+        "nota_B": "TVD = maxima divergencia entre distribuciones; correcto por definicion de Clarify."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel; la carta MEJORA la refutacion de KL de la fuente (vaga) con el argumento correcto de no-acotada/no-simetrica.",
+        "nota_B": "Coincide con la asignacion oficial y docs."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "La opcion TVD ('cuantifica la maxima divergencia entre distribuciones de resultados') es un eco del enunciado ('maxima disparidad en los resultados'); emparejamiento por wording posible. Mismo give-away que q21a/b.",
+        "nota_B": "KL es el distractor mas fuerte y la carta lo aborda explicitamente; buena discriminacion."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones; el matiz KL es correcto.",
+        "nota_B": "Afirmaciones sobre KL (no acotada, no simetrica) correctas; sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Desglose correcto del matching 'Select THREE'.",
+        "nota_B": "Buena descomposicion single-answer."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutacion de KL sustantiva y verificada (KL no acotada, no simetrica; TVD es la de maxima disparidad). Fortaleza.",
+        "nota_B": "Refutacion de KL genuinamente sustantiva (propiedades matematicas), no circular."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip solido; explica por que KL es el distractor tipico.",
+        "nota_B": "Exam tip (maxima disparidad=TVD; KL suele ser distractor) util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Give-away lexico: la definicion embebida en la opcion TVD parafrasea el enunciado ('maxima disparidad/divergencia'), permitiendo acierto por coincidencia de palabras sin dominar las metricas. Consistente con q21a/b.",
+        "fix_sugerido": "Dejar solo el nombre de la metrica en las opciones o reformular el enunciado para no reutilizar 'maxima divergencia/disparidad'. Se conserva el excelente matiz KL en la refutacion.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q24",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": true,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "La respuesta correcta (execution role sin permisos) es la causa mas probable/tipica. Correcta como 'most likely'.",
+        "nota_B": "Causa mas probable = execution role sin permisos; correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente.",
+        "nota_B": "Coincide con respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente en la conclusion."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "'La bucket policy S3 deniega el acceso' es un distractor DEFENDIBLE como tambien-correcto: un Deny en bucket policy causa 403 real y actua a nivel de objeto. El enunciado ('conecta pero 403 al leer .csv') es compatible tanto con role sin permisos como con bucket policy Deny. La pregunta pide 'la mas probable', lo que salva la unicidad, pero el distractor no es claramente incorrecto.",
+        "nota_B": "El distractor 'bucket policy deniega' es en realidad una causa PLAUSIBLE de 403 al leer objetos; se descarta con un argumento incorrecto (que la conexion fallaria), no por ser menos probable."
+      },
+      "alucinaciones": {
+        "sev": "low",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "La afirmacion 'si la bucket policy denegara, la conexion fallaria' es imprecisa: la conexion/ListBucket puede tener exito y GetObject fallar con 403."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "med",
+        "nota_A": "La refutacion de la bucket policy ('si denegara, la conexion misma fallaria y no llegaria a leer objetos') es tecnicamente floja: en S3 no hay 'conexion' separada de la autorizacion por objeto; un Deny de bucket policy sobre GetObject produciria exactamente el 403 descrito al leer los .csv. La distincion 'connect vs retrieve' que usa la fuente no es un mecanismo real de S3.",
+        "nota_B": "La refutacion de la bucket policy usa un razonamiento tecnicamente erroneo (conexion vs objeto). Deberia descartarse por probabilidad ('menos comun que un role sin permisos'), no por imposibilidad."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "Exam tip 403=role / 404=no existe / timeout=red es util y mnemotecnico, aunque simplifica (403 tambien puede venir de bucket policy/SCP/KMS).",
+        "nota_B": "Exam tip (403=role sin permisos; 404=no existe; timeout=red/VPC) muy util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "refutaciones_sustantivas",
+        "sev": "med",
+        "descripcion": "La refutacion del distractor 'bucket policy deniega' se basa en una distincion inexistente en S3 (conectar vs recuperar). Un Deny en bucket policy sobre s3:GetObject produce el mismo 403 al leer los .csv, por lo que ese distractor es defendible como tambien-correcto. La unicidad se sostiene solo por el 'most likely' del enunciado.",
+        "fix_sugerido": "Reescribir la refutacion sin el argumento 'connect vs retrieve': explicar que un Deny explicito en bucket policy es posible pero menos comun en este escenario (normalmente el problema es que al role le falta s3:GetObject/ListBucket, o kms:Decrypt si hay CMK). Alternativamente, endurecer el enunciado indicando que 'no hay Deny en la bucket policy' para eliminar la ambiguedad.",
+        "por": "A"
+      },
+      {
+        "dimension": "refutaciones_sustantivas",
+        "sev": "med",
+        "descripcion": "La refutacion afirma que una bucket policy denegante haria fallar la conexion; en realidad una bucket policy puede permitir la conexion/ListBucket y denegar GetObject a nivel de objeto, causando el mismo 403. El motivo real de descarte es que es menos comun que un execution role sin permisos.",
+        "fix_sugerido": "Reescribir: 'Una bucket policy con Deny explicito tambien podria causar 403, pero es menos frecuente que un execution role sin s3:GetObject; ademas requiere un Deny especifico. Por eso la causa mas probable es el execution role.'",
+        "por": "B"
+      }
+    ],
+    "prio": "P0"
+  },
+  {
+    "key": "mla01-q25",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 5,
+    "score_B": 4,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Ground Truth = etiquetado; distincion etiquetar-vs-inferir correcta y verificada.",
+        "nota_B": "Ground Truth = etiquetado administrado, confirmado en docs."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Opciones y respuesta fieles al source_block.",
+        "nota_B": "Coincide con respuesta oficial TD."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "verdict, correct_index (1) y correct_text coinciden.",
+        "nota_B": "question, correct_index=1 y answer_html concuerdan."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "NTM/CNN/Comprehend son distractores fuertes y todos ML.",
+        "nota_B": "La pregunta usa 'etiquetar' y solo la opcion correcta contiene 'labeling job'; adivinable por coincidencia de palabra clave sin razonar el resto."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin afirmaciones inventadas.",
+        "nota_B": "Sin afirmaciones inventadas."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Single-answer; N/A conversion.",
+        "nota_B": "No aplica; single-answer."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Cada refutacion da razon tecnica real (topic vs sentiment; requiere datos etiquetados; inferir vs etiquetar).",
+        "nota_B": "Cada refutacion da razon concreta (NTM no supervisado, CNN necesita labels, Comprehend no crea dataset)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip claro etiquetar=GT vs analizar-ya=Comprehend.",
+        "nota_B": "Exam tip util Ground Truth vs Comprehend."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Match lexico: 'etiquetar' en el stem apunta directo a 'labeling job'; el examinado acierta sin evaluar NTM/CNN/Comprehend.",
+        "fix_sugerido": "Reformular el stem evitando la palabra 'etiquetar/labeling' literal (p.ej. 'preparar anotaciones supervisadas de alta calidad') para forzar el razonamiento.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q27",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Migracion homogenea con DMS es correcta.",
+        "nota_B": "MySQL->Aurora MySQL = homogenea con DMS, confirmado en docs."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al source_block.",
+        "nota_B": "Coincide con TD."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index 0 coherente.",
+        "nota_B": "correct_index=0 coherente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Options-only adivinable: la correcta es la unica opcion 'DMS administrado' neutral; los 3 distractores llevan senales negativas evidentes (fisico/fragil/complejo).",
+        "nota_B": "El distractor de replicacion CDC con DMS es fuerte (mismo servicio, distinto modo); obliga a distinguir migracion unica vs continua."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones tecnicas.",
+        "nota_B": "Ninguna."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Single-answer.",
+        "nota_B": "No aplica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "med",
+        "nota_A": "La refutacion de 'replicacion continua' se basa en 'pide migrar una vez', premisa NO presente en el enunciado breve de la carta (solo dice 'mover datos'); DMS CDC es capacidad real, distractor semi-defendible.",
+        "nota_B": "Refutaciones concretas y correctas."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip homogenea vs heterogenea (DMS+SCT) correcto y util.",
+        "nota_B": "Exam tip compatible=homogenea, distinto=DMS+SCT, correcto."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Adivinable por options-only: correcta es la unica opcion 'DMS administrado' sin bandera negativa; distractores con senales obvias (equipo fisico, script fragil, complejidad innecesaria).",
+        "fix_sugerido": "Hacer que un distractor use tambien DMS de forma neutral (p.ej. 'DMS heterogenea con Schema Conversion Tool') para forzar discriminar homogenea vs heterogenea en vez de detectar la bandera roja.",
+        "por": "A"
+      },
+      {
+        "dimension": "refutaciones_sustantivas",
+        "sev": "med",
+        "descripcion": "La refutacion de la opcion CDC/ongoing invoca 'el escenario pide migrar una vez', premisa ausente del enunciado de la carta.",
+        "fix_sugerido": "Anadir al enunciado que es una migracion puntual/one-time, o refutar CDC por 'anade complejidad de sincronizacion continua no requerida para un dataset de entrenamiento estatico'.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q28",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 4,
+    "score_B": 4,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Transfer Acceleration correcto y bien descrito (edge/CloudFront).",
+        "nota_B": "S3TA por edge locations, confirmado en docs."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al source.",
+        "nota_B": "Coincide con TD."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index 0 coherente.",
+        "nota_B": "correct_index=0 coherente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "El distractor KMS es tematicamente ajeno (unico que no es servicio de transferencia) -> descartable por options-only; distractor debil.",
+        "nota_B": "El distractor KMS ('cifrar y comprimir para acelerar') es obviamente falso (KMS no comprime); no es plausible y reduce la dificultad. Data Transfer Terminal se repite como distractor en q27 y r4 (redundancia entre cartas)."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "La carta NO alucina; identifica correctamente que KMS no comprime.",
+        "nota_B": "Ninguna."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Single-answer.",
+        "nota_B": "No aplica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con razon tecnica real.",
+        "nota_B": "Refutaciones correctas."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip claro.",
+        "nota_B": "Exam tip claro."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "El distractor 'KMS cifrar y comprimir' es el unico que no es un servicio de transferencia de datos y ademas atribuye compresion a KMS (falso), haciendolo eliminable de inmediato y bajando la calidad del set.",
+        "fix_sugerido": "Reemplazar por un distractor de transferencia plausible, p.ej. 'Usar Amazon CloudFront con upload via distribucion' o 'subir con multipart upload estandar sin acelerar', que exijan discriminar de verdad frente a Transfer Acceleration.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "El distractor de KMS mezcla cifrado+compresion (KMS no comprime) resultando en una opcion no plausible/descartable a simple vista; el resto son geograficamente/operativamente ajenos, haciendo la correcta adivinable.",
+        "fix_sugerido": "Sustituir el distractor KMS por uno plausible del dominio de transferencia (p.ej. DataSync por red, o Snowball) que exija razonar 'minimo cambio de setup'.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q29",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Robust=mediana/IQR verificado; Min-Max descripcion [0,1] correcta; Standard media/desv correcto.",
+        "nota_B": "Robust Scaler usa mediana/IQR, resistente a outliers; confirmado en docs y Spark."
+      },
+      "fidelidad_fuente": {
+        "sev": "med",
+        "nota_A": "Se sustituyo el distractor 'Z-score normalization' del source por 'Min-Max Scaler' sin nota. Cambio de conjunto de opciones respecto a la fuente.",
+        "nota_B": "Mejora sobre la fuente: reemplaza el opcion mal descrito de TD (Z-score) por Min-Max, que es un scaler real de Data Wrangler; misma respuesta correcta."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index 0 coincide con correct_text y verdict.",
+        "nota_B": "correct_index=0 coherente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Tras la sustitucion, los 3 distractores son distintos entre si (el source original tenia Standard y Z-score redundantes); la carta corrigio esa redundancia.",
+        "nota_B": "Standard y Min-Max son distractores fuertes (ambos escalan a rango pero sensibles a outliers); L1 es distinto (normaliza vector)."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Min-Max es concepto real; sin invencion.",
+        "nota_B": "Ninguna."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Single-answer.",
+        "nota_B": "No aplica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutacion de Min-Max ('sensible a outliers, un extremo comprime el resto') es tecnicamente correcta y sustantiva.",
+        "nota_B": "Cada refutacion explica por que falla ante outliers o por que no aplica."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip Robust=outliers correcto.",
+        "nota_B": "Exam tip correcto: outliers -> Robust (mediana+IQR)."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "fidelidad_fuente",
+        "sev": "med",
+        "descripcion": "La carta reemplaza el distractor fuente 'Z-score normalization' por 'Min-Max Scaler'. Aunque tecnicamente correcto y mejora la calidad (Z-score y Standard Scaler son la misma tecnica = redundancia en la fuente), es una desviacion de las opciones oficiales sin documentar.",
+        "fix_sugerido": "Documentar la sustitucion (nota de que se elimino la redundancia Standard/Z-score), o mantener las 4 opciones fuente si el objetivo es fidelidad estricta. Como esta, aceptable pero debe registrarse la alteracion.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q30",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 4,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "EMR Spark puede generar RecordIO-Protobuf a escala; premisa 'ya usan EMR' hace correcta la eleccion.",
+        "nota_B": "seq2seq usa RecordIO-Protobuf en training, verificado. EMR Spark puede escribir a S3 el formato con librerias protobuf."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel; la carta evita repetir 'recommendation model' de la fuente.",
+        "nota_B": "Coincide con TD; TD llama al modelo 'recommendation' pero el card usa 'seq2seq' correctamente."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index 1 coherente.",
+        "nota_B": "correct_index=1 coherente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Fargate/Redshift Spectrum/Firehose plausibles y distintos.",
+        "nota_B": "Fargate, Redshift Spectrum y Firehose son plausibles y requieren razonar batch vs streaming vs query."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Ninguna afirmacion inventada."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Single-answer.",
+        "nota_B": "No aplica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Razones reales (Firehose=streaming; Spectrum=query; Fargate=contenedor a medida).",
+        "nota_B": "Refutaciones concretas y validas."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "El escenario asume seq2seq para 'recomendacion' (heredado de fuente TutorialsDojo), un uso atipico de seq2seq que puede confundir; no afecta la respuesta pero es un termino discutible.",
+        "nota_B": "El exam tip 'Spark lo genera a escala' sobresimplifica: generar RecordIO-Protobuf requiere serializacion protobuf a medida (no es un writer nativo de Spark). Puede inducir la idea erronea de que Spark exporta RecordIO-Protobuf out-of-the-box."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "didactica",
+        "sev": "low",
+        "descripcion": "El enunciado usa 'seq2seq' asociado a un modelo de recomendacion (heredado de la fuente). Seq2seq es para traduccion/resumen; asociarlo a recomendacion es impreciso y potencialmente confuso.",
+        "fix_sugerido": "Neutralizar el enunciado a 'algoritmo built-in de SageMaker que usa Pipe mode / RecordIO-Protobuf' sin afirmar que seq2seq es para recomendacion, o cambiar el ejemplo de algoritmo.",
+        "por": "A"
+      },
+      {
+        "dimension": "didactica",
+        "sev": "low",
+        "descripcion": "El exam tip implica que Spark produce RecordIO-Protobuf de forma directa; en realidad exige codigo/protobuf custom sobre el cluster EMR.",
+        "fix_sugerido": "Matizar el tip: 'EMR/Spark procesa a escala y, con la libreria protobuf instalada, serializa a RecordIO-Protobuf' para no sugerir soporte nativo.",
+        "por": "B"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q32",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 2,
+    "score_B": 2,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": true,
+    "respuesta_deberia_ser": "Bajo documentacion AWS actual, la respuesta oficial de la fuente es cuestionable; la opcion tecnicamente correcta para redactar PII es Amazon Comprehend (opcion 'Convertir PDFs a texto y usar Comprehend'). La carta deberia reescribirse o retirarse.",
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "high",
+        "nota_A": "Ningun ready-to-use model de Canvas redacta PII/PHI desde PDF: el de PII solo acepta texto/tabular y solo detecta. Afirmacion falsa.",
+        "nota_B": "La opcion correcta afirma que un modelo ready-to-use de Canvas 'procesa PDFs y redacta PII/PHI'; docs muestran que el modelo de PII solo acepta texto/tabular y solo detecta, no redacta. Afirmacion falsa."
+      },
+      "fidelidad_fuente": {
+        "sev": "high",
+        "nota_A": "Fiel a la fuente, pero la FUENTE esta equivocada; 'heredado' no exime.",
+        "nota_B": "Fiel a TD pero TD esta equivocado; reproducir un error factual es defecto segun la metodologia (verificar contra docs reales)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index 0 coincide con correct_text (coherente internamente, pero apoyado en premisa falsa).",
+        "nota_B": "correct_index y answer_html son internamente consistentes (pero consistentemente erroneos)."
+      },
+      "calidad_distractores": {
+        "sev": "high",
+        "nota_A": "El distractor 'Convertir PDF a texto + Comprehend' es de hecho una solucion REAL y funcional (Comprehend redacta PII); mas defendible que la 'correcta' oficial.",
+        "nota_B": "El distractor 'Textract + JumpStart' o 'convertir a texto + Comprehend' son en realidad enfoques MAS correctos tecnicamente: Comprehend SI detecta/redacta PII en texto y Textract extrae texto de PDF. El distractor puede ser el enfoque tambien-correcto (defendible)."
+      },
+      "alucinaciones": {
+        "sev": "high",
+        "nota_A": "La carta afirma que Canvas tiene un modelo ready-to-use que procesa PDFs y redacta PII/PHI: no existe tal modelo (verificado en docs).",
+        "nota_B": "Se atribuye a Canvas una capacidad inexistente (redaccion de PII/PHI en PDF por modelo ready-to-use)."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Single-answer.",
+        "nota_B": "No aplica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "med",
+        "nota_A": "La refutacion de Comprehend ('no puede procesar PDF, anade overhead') se usa para descartar la unica solucion realmente capaz de redactar PII; refutacion enganosa.",
+        "nota_B": "La refutacion de 'convertir a texto + Comprehend' lo descarta por 'overhead', pero es un pipeline valido y mas fiel a las capacidades reales; refutacion debil frente a un enfoque correcto."
+      },
+      "didactica": {
+        "sev": "med",
+        "nota_A": "Ensena una falsedad ('Canvas ready-to-use redacta PII/PHI de PDFs').",
+        "nota_B": "El exam tip ensena una heuristica que puede llevar a error en el examen (Canvas ready-to-use no redacta PII/PHI en PDF)."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "high",
+        "descripcion": "La respuesta 'correcta' asume que un modelo ready-to-use de SageMaker Canvas puede procesar PDFs y redactar PII/PHI. La lista oficial de Canvas no incluye tal modelo: 'Personal information detection' solo acepta texto/tabular y solo DETECTA (no redacta); los modelos que aceptan PDF no redactan PII.",
+        "fix_sugerido": "Descartar o reescribir la carta. La solucion real de menor esfuerzo defendible es Comprehend (redaccion de PII via job asincrono) tras extraer texto, o combinar Textract+Comprehend. Como minimo, no afirmar una capacidad de Canvas que no existe.",
+        "por": "A"
+      },
+      {
+        "dimension": "alucinaciones",
+        "sev": "high",
+        "descripcion": "Afirmacion inventada/incorrecta sobre capacidades de SageMaker Canvas (redaccion de PII/PHI desde PDF).",
+        "fix_sugerido": "Eliminar la afirmacion. Verificar contra docs Canvas ready-to-use models.",
+        "por": "A"
+      },
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "high",
+        "descripcion": "Afirma que un modelo ready-to-use de SageMaker Canvas procesa PDFs y redacta PII/PHI directamente; los docs indican que el modelo de deteccion de informacion personal solo acepta texto/tabular y detecta (no redacta), y los modelos de documento (PDF) no redactan PII.",
+        "fix_sugerido": "Recomponer la pregunta: la respuesta minima-overhead defendible tecnicamente es 'Amazon Textract para extraer texto de PDF + Amazon Comprehend para detectar y redactar PII/PHI' (Comprehend tiene API de redaccion de PII sobre texto). Alternativamente marcar la carta como fuente defectuosa y reescribir el escenario para que Comprehend/Textract sea la correcta.",
+        "por": "B"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "high",
+        "descripcion": "El distractor Textract+JumpStart y el de Comprehend son enfoques tecnicamente validos para redactar PII, por lo que hay mas de una opcion defendible como correcta.",
+        "fix_sugerido": "Eliminar la ambiguedad haciendo que la unica opcion correcta sea el pipeline Textract+Comprehend y convertir la de Canvas en distractor claramente descartable.",
+        "por": "B"
+      }
+    ],
+    "prio": "P0"
+  },
+  {
+    "key": "mla01-q34",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 5,
+    "score_B": 4,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "KDS+Flink correcto; Flink hace deteccion de anomalias en vivo.",
+        "nota_B": "KDS+Flink para tiempo real, confirmado."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Servicios fieles al source.",
+        "nota_B": "Coincide con TD (respuestas: KDS y Flink)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index 0 coherente.",
+        "nota_B": "correct_index=0 coherente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Cada distractor empareja servicios que introducen retraso o no aplican.",
+        "nota_B": "Los distractores incluyen elementos incongruentes (SQS+Training Compiler no tienen relacion con anomalias en streaming; S3+Athena claramente en reposo). La correcta es la unica que nombra un motor de analitica de streaming (Flink) -> adivinable por eliminacion."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Ninguna."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Conversion Select-TWO -> single correcta: los 2 correctos van juntos en una sola opcion, sin solapamiento con distractores.",
+        "nota_B": "Conversion Select TWO -> single-answer bien hecha: empareja los dos servicios correctos en una opcion y arma pares plausibles en las otras."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Razones reales (batch=retraso; S3/Athena=reposo; Training Compiler=entrenamiento).",
+        "nota_B": "Refutaciones concretas (batch vs streaming, entrega vs analitica)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip: streaming en vivo=Flink sobre KDS; Firehose=entrega.",
+        "nota_B": "Exam tip correcto: analitica en vivo = Flink sobre KDS."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Solo la opcion correcta menciona un motor de analitica de streaming (Flink); las demas emparejan servicios claramente de reposo/lotes/entrenamiento, permitiendo adivinar por eliminacion sin dominar el tema.",
+        "fix_sugerido": "Fortalecer un distractor con un par plausible de tiempo real (p.ej. 'Kinesis Data Streams + Lambda con Kinesis Data Analytics deprecado' o 'KDS + OpenSearch') para que la eleccion exija distinguir capacidades reales de analitica.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q36b",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 5,
+    "score_B": 3,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "med",
+        "nota_A": "DPL=diferencia de proporciones de etiquetas entre grupos; verificado.",
+        "nota_B": "DPL opera sobre etiquetas observadas (pre-training), no sobre predicciones del modelo. Para 'tasas predichas' la metrica correcta seria DPPL. El card define DPL bien ('diferencia de proporciones de etiquetas entre dos grupos') pero la aplica a 'tasas de churn predichas', creando un desajuste conceptual."
+      },
+      "fidelidad_fuente": {
+        "sev": "low",
+        "nota_A": "Fiel al source.",
+        "nota_B": "Fiel a TD, pero TD arrastra la imprecision label-vs-prediction."
+      },
+      "coherencia_interna": {
+        "sev": "low",
+        "nota_A": "correct_index 0 coherente.",
+        "nota_B": "El stem pide medir desbalance en tasas PREDICHAS; la definicion de DPL en la opcion habla de proporciones de ETIQUETAS: leve incoherencia entre stem y justificacion."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "PDP/TVD/KL bien diferenciados.",
+        "nota_B": "PDP/TVD/KL son distractores validos; entre las opciones DPL sigue siendo la mejor (DPPL no esta ofrecido)."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invencion; la definicion de DPL es correcta."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Mitad DPL del matching, sin ambiguedad.",
+        "nota_B": "Conversion del Select TWO a carta independiente correcta."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Razones reales.",
+        "nota_B": "Refutaciones de PDP/TVD/KL correctas."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "Exam tip disparidad=DPL vs efecto feature=PDP.",
+        "nota_B": "Ensena a asociar DPL con 'tasas predichas', lo que puede confundir DPL (labels) con DPPL (predicciones) en el examen."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "med",
+        "descripcion": "Se aplica DPL (metrica sobre etiquetas observadas, pre-training) a 'tasas de churn PREDICHAS'; la metrica correcta para predicciones es DPPL. Desajuste label-vs-prediction heredado de la fuente.",
+        "fix_sugerido": "Reformular el stem para hablar de 'desbalance en la proporcion de ETIQUETAS/casos positivos entre grupos en los datos' (que es lo que mide DPL), o aclarar en el answer_html que DPL es pre-entrenamiento sobre labels (y mencionar que DPPL es su analogo sobre predicciones).",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q37",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 4,
+    "score_B": 3,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Spearman=monotona via rangos; correcto. La aclaracion 'monotona' evita el error de decir que capta toda no-linealidad.",
+        "nota_B": "Spearman para monotona no lineal (rangos), correcto y verificado conceptualmente."
+      },
+      "fidelidad_fuente": {
+        "sev": "med",
+        "nota_A": "Se sustituyo el distractor fuente 'Kendall's Tau' por 'Chi-cuadrado' sin documentarlo.",
+        "nota_B": "La fuente TD tenia como 4a opcion 'Kendall's Tau' (distractor fuerte, tambien no-parametrico monotono); el card lo sustituyo por 'Chi-cuadrado', alterando el conjunto de opciones y bajando la dificultad."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index 2 coincide.",
+        "nota_B": "correct_index=2 coherente con las opciones del card."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Tras la sustitucion los distractores son inequivocamente incorrectos (Chi-cuadrado y Cramer's V son categoricas; Pearson lineal); mejora vs el Kendall's Tau ambiguo del source.",
+        "nota_B": "Al quitar Kendall's Tau, la unica opcion de correlacion monotona sobre numericas queda Spearman; Cramer's V y Chi-cuadrado son ambas categoricas y Pearson es lineal, por lo que la correcta se adivina por eliminacion (test options-only)."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Chi-cuadrado es prueba real; sin invencion.",
+        "nota_B": "Ninguna."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Single-answer.",
+        "nota_B": "No aplica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Razones reales por opcion.",
+        "nota_B": "Refutaciones correctas (Cramer's V/Chi-cuadrado categoricas, Pearson lineal)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip lineal=Pearson / monotona=Spearman / categoricas=Cramer's V.",
+        "nota_B": "Exam tip util: lineal=Pearson, monotona=Spearman, categoricas=Cramer's V; podria agregar Kendall's Tau."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "fidelidad_fuente",
+        "sev": "med",
+        "descripcion": "La carta reemplaza el distractor fuente 'Kendall's Tau' por 'Chi-cuadrado (prueba de independencia)'. Es una mejora (Kendall's Tau tambien mide asociacion monotona y era semi-correcto), pero es una alteracion del conjunto oficial sin nota.",
+        "fix_sugerido": "Documentar la sustitucion (motivo: Kendall's Tau era distractor also-correct por medir asociacion monotona). Alternativa fiel: mantener Kendall's Tau pero entonces el enunciado debe distinguir explicitamente por que Spearman > Kendall (tamano de muestra/uso), como hace el propio source.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Se elimino el distractor mas fuerte (Kendall's Tau, tambien monotono no-parametrico) y se puso Chi-cuadrado (categorico). Ahora Spearman es la unica opcion de correlacion monotona numerica y se adivina por eliminacion.",
+        "fix_sugerido": "Restaurar 'Kendall's Tau' como cuarta opcion (distractor fuerte) y explicar por que Spearman es preferible (Kendall se usa mas con muestras pequenas/datos ordinales), tal como hace la fuente original.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q38",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "La carta atribuye a Clarify la deriva de sesgo/atribucion (correcto) y la de datos a Model Monitor; corrige el error del source. Residual: enunciado habla de 'data drift' generico resuelto solo por Clarify en el titulo de la opcion.",
+        "nota_B": "Clarify=sesgo/explicabilidad + deriva de sesgo/atribucion via Model Monitor, confirmado. El card evita el error de atribuir data drift generico a Clarify."
+      },
+      "fidelidad_fuente": {
+        "sev": "low",
+        "nota_A": "Se aparta del source SOLO para corregir un error factual (apropiado): la fuente decia que Clarify monitorea data drift; la carta lo matiza.",
+        "nota_B": "Mejora deliberada sobre TD (que decia 'Clarify monitors data drift'); misma respuesta correcta, redaccion mas precisa."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index 1 coincide con correct_text.",
+        "nota_B": "correct_index=1 coherente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Model Monitor/Neo/Ground Truth son distractores reales bien diferenciados. Nota: Model Monitor como distractor es parcialmente correcto para 'data drift' pero no para 'bias' -> aceptable porque el requisito es sesgo+drift.",
+        "nota_B": "Model Monitor (solo), Neo y Ground Truth son distractores del dominio que exigen distinguir sesgo vs calidad vs optimizacion vs etiquetado."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones; de hecho corrige una del source.",
+        "nota_B": "Ninguna."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Single-answer.",
+        "nota_B": "No aplica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutacion de Model Monitor ('no es la herramienta especifica de metricas de sesgo, esa es Clarify') es tecnicamente correcta.",
+        "nota_B": "Refutaciones correctas."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "El enunciado plantea 'data drift' de forma generica y la respuesta lo cubre via 'deriva de sesgo/atribucion'; para maxima precision el enunciado deberia decir 'sesgo y su deriva' y aclarar que la deriva de calidad de datos requiere Model Monitor.",
+        "nota_B": "Exam tip correcto: sesgo=Clarify, calidad/deriva en produccion=Model Monitor (suelen ir juntos)."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "didactica",
+        "sev": "low",
+        "descripcion": "El enunciado usa 'data drift' de forma generica (heredado del source, que confunde bias drift con data drift). La carta corrige el cuerpo, pero el enunciado y el titulo de la opcion siguen sugiriendo que Clarify 'monitorea data drift', cuando la deriva de calidad de datos es de Model Monitor.",
+        "fix_sugerido": "Ajustar el enunciado a 'evaluar/mitigar sesgo y vigilar la DERIVA DE SESGO' y, si se quiere cubrir data drift, la opcion correcta debe nombrar explicitamente Clarify + Model Monitor como pareja.",
+        "por": "A"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q4",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 4,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Reentrenar por data drift es correcto; Model Monitor detecta drift.",
+        "nota_B": "Reentrenar por data drift es correcto; Model Monitor detecta drift."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel.",
+        "nota_B": "Coincide con source y respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Dos distractores son casi la misma afirmacion: 'los datos de produccion siempre son consistentes...reentrenar innecesario' y 'los datos de produccion no difieren con el tiempo...no hace falta reentrenar'. Ambos niegan el drift con identico contenido logico -> distractores redundantes. Ademas options-only: 3 de 4 opciones dicen lo mismo (no reentrenar) y solo 1 dice reentrenar; el patron 'una contra tres' delata la correcta.",
+        "nota_B": "Dos distractores ('produccion siempre consistente' y 'no difieren con el tiempo') son casi el mismo enunciado negado; redundancia que reduce el poder discriminante a un efectivo 2 opciones."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones citan estacionalidad/tendencias como causa de drift; sustantivas.",
+        "nota_B": "Refutaciones correctas (estacionalidad/tendencias = drift)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip claro.",
+        "nota_B": "Definicion de data drift clara."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Distractores redundantes: 'produccion siempre consistente' y 'produccion no difiere con el tiempo' son la misma idea; sumado al patron 1-contra-3, la correcta es adivinable sin leer el enunciado. Heredado de la fuente pero corregible.",
+        "fix_sugerido": "Reemplazar uno de los dos distractores de 'no drift' por uno cualitativamente distinto, p.ej. 'basta con reentrenar una sola vez al detectar el primer error' o 'el drift se corrige subiendo la tasa de aprendizaje sin nuevos datos', para romper la redundancia y el patron 1-contra-3.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "low",
+        "descripcion": "Dos de los cuatro distractores son parafrasis del mismo error (produccion == entrenamiento), reduciendo la dificultad; el alumno descarta ambos de golpe.",
+        "fix_sugerido": "Sustituir uno de los dos por un distractor plausible pero distinto, p.ej. 'basta monitorear metricas de negocio sin reentrenar' o 'el reentrenamiento solo es necesario si cambia el esquema de features'.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q40",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 5,
+    "score_B": 3,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Multi-proveedor + personalizacion privada + serverless correcto.",
+        "nota_B": "Todos los beneficios afirmados de Bedrock (multi-proveedor, serverless, personalizacion privada) son correctos y verificados."
+      },
+      "fidelidad_fuente": {
+        "sev": "low",
+        "nota_A": "Combina las 2 correctas del source en una opcion; fiel.",
+        "nota_B": "El stem del card anade 'con privacidad de los datos', pero la fuente TD justamente descarto la opcion de privacidad por no ser el foco; leve tension con el razonamiento oficial (aunque no cambia la respuesta)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index 0 coincide.",
+        "nota_B": "correct_index=0 coherente con el stem del card."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "3 distractores claramente falsos sobre Bedrock, pero plausibles como 'trampa' para quien no conoce el servicio.",
+        "nota_B": "Los tres distractores son negaciones obviamente falsas de Bedrock (requiere aprovisionar infra / exponer datos publicamente / un solo modelo sin fine-tuning). La correcta es la unica opcion 'positiva/verdadera' -> adivinable por forma (test options-only)."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Ninguna."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "low",
+        "nota_A": "Select-TWO -> single: ambas correctas fusionadas en una opcion, distractores todos falsos.",
+        "nota_B": "Conversion Select TWO -> single-answer: agrupa los dos beneficios oficiales en una opcion; aceptable, pero introduce la tension de privacidad en el stem."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con razon real (serverless=no aprovisiona infra; personalizacion privada=no expone datos).",
+        "nota_B": "Refutaciones correctas (Bedrock es serverless, no expone datos, es multi-modelo)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip: multi-proveedor, serverless, personalizacion privada.",
+        "nota_B": "Exam tip correcto sobre ventajas de Bedrock."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Los distractores son afirmaciones categoricamente falsas sobre Bedrock; la unica opcion verdadera es la correcta, adivinable sin conocimiento (patron 'la que suena bien').",
+        "fix_sugerido": "Convertir al menos un distractor en un beneficio real pero NO pedido (p.ej. 'ofrece APIs distintas por FM' como en la fuente) para forzar a distinguir cual par de beneficios responde al requisito, no cual afirmacion es verdadera.",
+        "por": "B"
+      },
+      {
+        "dimension": "fidelidad_fuente",
+        "sev": "low",
+        "descripcion": "El stem introduce 'privacidad de los datos' como requisito, mientras la fuente descarto la opcion de privacidad por no ser el foco del escenario.",
+        "fix_sugerido": "Alinear el stem con la logica de la fuente (enfatizar 'elegir entre modelos de terceros' y 'fine-tune') sin sobre-enfatizar privacidad, o aceptar privacidad y ajustar la explicacion.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q41",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 5,
+    "score_B": 4,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Bedrock cumple los 3 requisitos; roles de los otros 3 servicios correctos.",
+        "nota_B": "Bedrock cumple los tres requisitos, confirmado en docs."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al source.",
+        "nota_B": "Coincide con TD."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index 1 coincide.",
+        "nota_B": "correct_index=1 coherente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Comprehend Medical/Studio/Rekognition son distractores solidos.",
+        "nota_B": "Comprehend Medical y Rekognition son de dominios ajenos (clinico/vision) y faciles de descartar; solo SageMaker Studio es distractor fuerte. La correcta es la unica que menciona 'serverless + multiples FMs' -> parcialmente adivinable."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Ninguna."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Single-answer.",
+        "nota_B": "No aplica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Razones reales por servicio.",
+        "nota_B": "Refutaciones correctas; la de SageMaker Studio (gestionas mas infra) es la mas relevante."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip: elegir FMs + fine-tune privado + serverless = Bedrock.",
+        "nota_B": "Exam tip correcto."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "low",
+        "descripcion": "Dos de tres distractores (Comprehend Medical, Rekognition) son de dominio ajeno y triviales de descartar; la pregunta se reduce a Bedrock vs SageMaker Studio.",
+        "fix_sugerido": "Sustituir uno de los distractores ajenos por una opcion generativa/administrada mas cercana (p.ej. 'SageMaker JumpStart') para exigir distinguir 'elegir/fine-tune FMs sin infra' con mayor finura.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q5",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "med",
+        "nota_A": "La refutacion de QuickSight dice que 'es una herramienta de BI/visualizacion, no de prediccion de ML' — impreciso: Amazon QuickSight SI incluye forecasting basado en ML (ML Insights/forecast) integrado. La fuente misma dice 'basic forecasting capabilities'. El punto correcto es que no es la herramienta de PREPARACION/limpieza con menor overhead, no que no pronostique.",
+        "nota_B": "Data Wrangler = menor esfuerzo operativo para limpieza; correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "low",
+        "nota_A": "La fuente reconoce que QuickSight tiene 'basic forecasting'; la carta lo endurecio a 'no es de prediccion', desviandose de la fuente.",
+        "nota_B": "Coincide con respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente en lo demas.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Distractores plausibles y distintos (Notebook+Pandas, EMR+PySpark, QuickSight).",
+        "nota_B": "Distractores plausibles y diferenciados (Pandas manual, EMR/PySpark, QuickSight BI)."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones graves.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "med",
+        "nota_A": "La refutacion de QuickSight se apoya en una afirmacion imprecisa (negar su forecasting) en lugar de la razon real (no hace la limpieza de timestamps/faltantes ni es la de menor overhead para preparar datos).",
+        "nota_B": "La refutacion de QuickSight lo llama 'no de prediccion de ML'; en rigor QuickSight SI ofrece forecasting (ML Insights). El motivo correcto de descarte es que no es herramienta de PREPARACION/limpieza de datos, no que carezca de forecasting. Impreciso aunque no cambia la respuesta."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip util.",
+        "nota_B": "Exam tip (menor esfuerzo+preparar datos=Data Wrangler/DataBrew) util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "refutaciones_sustantivas",
+        "sev": "med",
+        "descripcion": "Refutar QuickSight diciendo que 'no es de prediccion de ML' es tecnicamente incorrecto: QuickSight ofrece forecasting ML integrado. La verdadera razon para descartarlo es que no realiza la preparacion/limpieza de datos (timestamps irregulares, faltantes) con el menor overhead.",
+        "fix_sugerido": "Cambiar la refutacion a: 'QuickSight es una herramienta de BI; aunque tiene forecasting ML basico, no esta pensada para limpiar/imputar timestamps irregulares y faltantes, que es el nucleo del requisito; Data Wrangler lo hace con menor overhead.'",
+        "por": "A"
+      },
+      {
+        "dimension": "refutaciones_sustantivas",
+        "sev": "low",
+        "descripcion": "La refutacion insinua que QuickSight no hace forecasting; QuickSight ML Insights si lo hace. El eje de descarte real es que no es herramienta de preparacion/limpieza de datos.",
+        "fix_sugerido": "Reescribir la refutacion de QuickSight: 'QuickSight es BI/visualizacion (incluso con forecasting ML Insights), pero no esta pensado para limpiar timestamps irregulares ni imputar faltantes, que es el requisito central.'",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q8",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 4,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Datos de buro de credito son la senal mas directa; correcto.",
+        "nota_B": "Credit bureau data es la fuente correcta y pertinente."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente.",
+        "nota_B": "Coincide con la respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Coherente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Medico/educativo/empleo son fuentes reales y distintas; empleo es el distractor 'defendible' pero la refutacion lo aborda. No adivinable por forma.",
+        "nota_B": "La fuente original es de tipo 'cuales son importantes' (potencialmente multiples). Empleo e (en menor grado) educacion son datos legitimamente utiles en scoring crediticio; como distractores son 'menos correctos' mas que incorrectos. El enunciado en espanol ('importante y pertinente') mitiga esto al pedir la mas directa, pero sigue habiendo cierta ambiguedad de grado."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin alucinaciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "La fuente presenta 4 opciones tipo lista sin marcar 'select N'; se trato como single-answer, correcto (la fuente da una sola respuesta).",
+        "nota_B": "Se colapso bien a single-answer eligiendo la mas determinante."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones dan razon real (privacidad, senal indirecta).",
+        "nota_B": "Refutaciones razonables (medico=privacidad; empleo/educacion=menos directos)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip sobre priorizar datos financieros directos y evitar atributos sensibles: bueno y alineado a fairness.",
+        "nota_B": "Exam tip (datos financieros directos, evitar sensibles) util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "low",
+        "descripcion": "Empleo y educacion no son irrelevantes en scoring real; son distractores 'menos correctos' por grado, lo que puede generar debate en un examinado estricto.",
+        "fix_sugerido": "Reforzar el enunciado con 'la fuente MAS directamente predictiva del riesgo crediticio' para dejar claro que se pide un ranking, no exclusion absoluta.",
+        "por": "B"
+      }
+    ],
+    "prio": "P2"
+  }
+]

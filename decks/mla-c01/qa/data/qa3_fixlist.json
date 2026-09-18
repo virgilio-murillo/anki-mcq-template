@@ -1,0 +1,669 @@
+[
+  {
+    "key": "mla01-q1b",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Trade-off simple(explicable/rapido/menos exacto) vs complejo(exacto/opaco) correcto.",
+        "nota_B": "Trade-off correctamente enunciado."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Deriva del mismo bloque fuente que q1.",
+        "nota_B": "Refuerzo conceptual fiel al source_block de q1."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "index 0 coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Los 3 distractores usan absolutos (siempre/no influye) detectables por el clasico tell de negaciones absolutas; sigue siendo habilidad de examen legitima, no adivinable solo por forma de la correcta.",
+        "nota_B": "Trampas de absolutos ('siempre') bien construidas."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones; correlacion velocidad-generalizacion correctamente negada."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ conceptual simple.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta cada absoluto con matiz correcto (velocidad!=generalizacion).",
+        "nota_B": "Cada distractor refutado con razon tecnica (sesgo/varianza, regulacion)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Analogia caja transparente/negra util.",
+        "nota_B": "Eje caja transparente vs caja negra util."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q20",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 5,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "S3 = data lake, 99.999999999% durabilidad; correcto.",
+        "nota_B": "Refutacion de FSx for Lustre lo describe como 'efimero' de forma absoluta; Lustre soporta despliegues PERSISTENT_1/PERSISTENT_2 ademas de SCRATCH. Imprecision menor que no altera la eleccion de S3."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Coincide con fuente.",
+        "nota_B": "Fiel a la respuesta del source (S3)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "index 1 coherente.",
+        "nota_B": "verdict y tip consistentes."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "FSx Lustre, EFS, Storage Gateway bien descartados.",
+        "nota_B": "Distractores de storage plausibles; ninguno es tambien-correcto para data lake."
+      },
+      "alucinaciones": {
+        "sev": "low",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "'FSx Lustre efimero' es una generalizacion inexacta, no una alucinacion pura, pero conviene matizar."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ simple.",
+        "nota_B": "N/A."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta por proposito (HPC/compartido/hibrido vs objetos durables).",
+        "nota_B": "El motivo real para descartar FSx (no es object store durable de largo plazo para data lake) es valido; solo sobra el adjetivo 'efimero'."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Regla data lake = S3 acertada.",
+        "nota_B": "'Data lake = S3' correcto."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "Refutacion de FSx for Lustre lo tacha de 'efimero' en absoluto; FSx for Lustre ofrece despliegues persistentes (PERSISTENT_1/2) y scratch. Mejor: 'no es un object store durable de bajo costo pensado como base de data lake' sin afirmar que es efimero.",
+        "por": "B"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q21a",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 5,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "DPL mide proporcion de positivos entre grupos; coincide con doc oficial.",
+        "nota_B": "DPL = diferencia de proporcion de positivos entre grupos, verificado en docs."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Coincide con la asignacion de la fuente.",
+        "nota_B": "Fiel al mapeo del source."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "index 0 coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "CI/TVD/KL bien diferenciados de DPL.",
+        "nota_B": "CI/TVD/KL son metricas reales de Clarify, distractores fuertes."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "De un match Select THREE; item aislado valido.",
+        "nota_B": "Match THREE dividido en sub-cartas; item aislado correcto."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta por lo que mide cada metrica.",
+        "nota_B": "Cada metrica refutada por su definicion."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Resumen DPL/CI/TVD claro.",
+        "nota_B": "Tip DPL vs CI vs TVD claro."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "Nota menor: Clarify ya no admite nuevos clientes (doc), pero las definiciones y el temario MLA-C01 siguen vigentes; no es defecto de la carta.",
+        "por": "A"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q21c",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 3,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": "TVD (correcta dentro del set porque KS no se ofrece), pero reescribir verdict/exam-tip: TVD mide medio de la diferencia L1 entre distribuciones y es la mejor opcion disponible; la etiqueta 'maxima divergencia/disparidad' corresponde a Kolmogorov-Smirnov (KS), que aqui no figura.",
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "med",
+        "nota_A": "La respuesta TVD es aceptable dentro del set (KS no se ofrece), pero el verdict/refutacion/exam-tip afirman que TVD es la metrica de 'maxima disparidad/divergencia entre distribuciones'; segun la doc oficial esa etiqueta ('maximum divergence') corresponde a KS. TVD mide medio de la diferencia L1, no un maximo.",
+        "nota_B": "'TVD = maxima divergencia entre distribuciones' contradice la doc oficial: 'maximum divergence' es KS. TVD es 'half of L1-norm difference'. La seleccion es correcta solo por ausencia de KS en las opciones."
+      },
+      "fidelidad_fuente": {
+        "sev": "low",
+        "nota_A": "La fuente ya arrastra la frase imprecisa 'maximum divergence' para TVD; la carta la amplifico en un exam-tip categorico.",
+        "nota_B": "Fiel al source de Tutorials Dojo, que arrastra la misma imprecision (describe TVD como 'maximum divergence')."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "index 0 coherente con TVD.",
+        "nota_B": "El card es internamente coherente con su propia (imprecisa) definicion."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "DPL/CI/KL bien descartados como no-respuesta dentro del set.",
+        "nota_B": "DPL/CI/KL son distractores validos; KL bien matizado (no acotada, no simetrica)."
+      },
+      "alucinaciones": {
+        "sev": "med",
+        "nota_A": "El exam-tip 'Maxima disparidad entre distribuciones de resultados = TVD' es una afirmacion imprecisa frente a la doc de Clarify (esa descripcion es de KS).",
+        "nota_B": "Atribuir 'maxima divergencia' a TVD es una imprecision de definicion (propiedad real de KS)."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "De un match Select THREE; item aislado valido.",
+        "nota_B": "Sub-carta del Match THREE, correcta."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "med",
+        "nota_A": "La refutacion de KL es correcta en que KL no esta acotada y no es simetrica, pero el argumento central ('TVD es la metrica de maxima disparidad') no lo respalda la doc.",
+        "nota_B": "La justificacion de por que TVD y no KL se apoya en la definicion imprecisa; deberia decir 'entre las opciones dadas TVD es la unica distancia entre distribuciones de resultados; la doc reserva maximum divergence para KS'."
+      },
+      "didactica": {
+        "sev": "med",
+        "nota_A": "Ensena una asociacion incorrecta TVD=maxima disparidad; deberia decir que TVD mide medio de la diferencia L1 y es la mejor de las opciones dadas, aclarando que la metrica de 'maxima divergencia' es KS (no ofrecida).",
+        "nota_B": "El tip 'maxima disparidad entre distribuciones = TVD' induce a error frente a un examen que use la definicion oficial de KS."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "Afirmacion imprecisa: presenta TVD como la metrica de 'maxima disparidad/divergencia entre distribuciones'; la doc oficial de Clarify asigna 'maximum divergence' a Kolmogorov-Smirnov (KS). TVD = medio de la diferencia L1.",
+        "por": "A"
+      },
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "El exam-tip refuerza esa asociacion incorrecta y deberia reescribirse para no ensenar el concepto erroneo.",
+        "por": "A"
+      },
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "El enunciado, refutaciones y tip equiparan TVD con 'maxima divergencia/maxima disparidad', definicion que AWS Clarify asigna a Kolmogorov-Smirnov (KS). TVD = mitad de la diferencia de norma L1 entre distribuciones. Recomendacion: reformular a 'TVD mide la diferencia (distancia L1/2) entre las distribuciones de resultados por grupo; entre las opciones dadas es la unica metrica de distancia de distribuciones' y evitar el termino 'maxima divergencia' (propio de KS). La respuesta seleccionada (TVD) sigue siendo la mejor entre las 4 opciones.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla01-q37",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 5,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Spearman correcto para monotona/no-lineal; refutaciones de Pearson/Cramer/Kendall exactas.",
+        "nota_B": "Spearman correcto para monotona no lineal. La afirmacion 'coeficiente de rango mas usado por defecto para muestras grandes' es defendible y coincide con la fuente."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Coincide con el razonamiento del bloque fuente.",
+        "nota_B": "La fuente explicitamente dice que Kendall se prefiere para muestras pequenas y que Spearman es mas apropiado aqui; la carta lo respeta."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index=2 = Spearman, consistente.",
+        "nota_B": "index 2 = Spearman, coincide."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Kendall es el distractor fuerte pero el enunciado lo desambigua con 'por defecto / muestra grande'.",
+        "nota_B": "Kendall's Tau es un distractor fuerte: tambien mide correlacion monotona por rangos. La distincion (muestras grandes -> Spearman) es sutil pero la carta la explica bien y esta anclada al enunciado ('muestra grande', 'mas usado por defecto'). No es tambien-correcto dado el enunciado."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ de respuesta unica, sin conversion.",
+        "nota_B": "Single-answer, sin conversion."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutacion de Kendall explica cuando se prefiere (muestras pequenas/ordinales).",
+        "nota_B": "La refutacion de Kendall es honesta: reconoce que tambien es monotona por rangos y explica por que Spearman es preferido en el caso general."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Regla lineal/monotona/categorica bien resumida.",
+        "nota_B": "Exam tip claro."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "Kendall vs Spearman es una distincion de convencion/uso mas que de correccion estricta; el enunciado necesita el ancla 'muestra grande / mas usado por defecto' para que Spearman sea inequivocamente mejor que Kendall. Ya esta anclado, por eso PASS, pero por eso score 4 y no 5.",
+        "por": "B"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q5",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 5,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Data Wrangler correcto para menor overhead de preparacion.",
+        "nota_B": "Data Wrangler = menor esfuerzo operativo para preparar datos. Verificado."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Refleja fuente; nombre 'Data Wrangler' correcto.",
+        "nota_B": "Fiel; nota que la fuente usa 'SageMaker Studio Data Wrangler' y la carta dice 'SageMaker Data Wrangler', diferencia de nomenclatura irrelevante."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index=3 consistente.",
+        "nota_B": "index 3 coincide con verdict."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Distractores implican mas codigo/infra; QuickSight bien matizado.",
+        "nota_B": "Notebook+Pandas (codigo manual), EMR Serverless+PySpark (clusters/jobs), QuickSight (BI) son plausibles pero con mas overhead o proposito distinto."
+      },
+      "alucinaciones": {
+        "sev": "low",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "La carta reconoce con matiz que QuickSight incluye forecasting ML (ML Insights) pero no limpieza; matiz correcto y honesto, no es alucinacion."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Respuesta unica.",
+        "nota_B": "Single-answer LEAST operational overhead."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones concretas de overhead.",
+        "nota_B": "Refutaciones centradas en overhead y en el nucleo del requisito (limpiar timestamps/faltantes)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "'Menor overhead + preparar datos' = Data Wrangler/DataBrew.",
+        "nota_B": "Exam tip: menor overhead + preparar datos -> Data Wrangler o DataBrew."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla01-q8",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 5,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Credit bureau data es la fuente mas predictiva y pertinente.",
+        "nota_B": "Buro de credito = predictor mas directo y pertinente. Correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Coincide con la fuente; el reframing 'MAS directamente' evita que empleo sea tambien-valido.",
+        "nota_B": "Fiel; el enunciado agrega 'MAS directamente predictiva' para forzar single-best entre opciones que en la fuente eran candidatas, lo que resuelve bien la ambiguedad."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index=2 consistente.",
+        "nota_B": "index 2 coincide."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Empleo es distractor razonable pero explicitamente menos determinante.",
+        "nota_B": "Empleo e historial medico/educativo son distractores; empleo es senal legitima pero menos determinante que buro (bien matizado). El ancla 'MAS directamente predictiva' evita ambiguedad."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Reformulado a mejor-opcion unica correctamente.",
+        "nota_B": "Single-answer; la fuente lista 4 items y la carta selecciona el mejor con ancla clara."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta privacidad(medico) y debilidad(educacion/empleo).",
+        "nota_B": "Refutaciones explican privacidad (medico) y debilidad de senal (educacion/empleo)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Prioriza datos financieros directos, evita atributos sensibles.",
+        "nota_B": "Exam tip: priorizar datos financieros directos, evitar atributos sensibles."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q1",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 5,
+    "score_B": 3,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "FPR+F1 valido; el matiz sobre insensibilidad del FPR y rol de Precision es correcto.",
+        "nota_B": "Las metricas estan bien definidas. Es cierto que en 3% de positivos el FPR es poco sensible a FP; la fuente prioriza FPR+F1 y la carta lo respeta. Tecnicamente defendible pero la propia carta lo cuestiona."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Conserva el par de la fuente y anade nuance honesto sin contradecirla.",
+        "nota_B": "El resultado (FPR+F1) es fiel a la fuente."
+      },
+      "coherencia_interna": {
+        "sev": "med",
+        "nota_A": "correct_index=0 consistente pese al matiz; no genera segunda respuesta correcta.",
+        "nota_B": "Contradiccion interna: el verdict afirma FPR+F1 como par correcto, pero el 'Matiz importante' dedica un parrafo a argumentar que Precision es la metrica que mide directamente los FP y que el FPR es 'poco sensible aqui' y 'complementario'. El alumno queda con la duda de por que no se eligio una opcion con Precision. El razonamiento erosiona la respuesta marcada."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Accuracy en desbalance y cut-off(no-metrica) bien descartados.",
+        "nota_B": "El distractor 'Precision + Accuracy global' contiene Precision, que la propia carta declara superior al FPR para medir FP. Aunque Accuracy lo arruina en desbalance, el argumento pro-Precision de la carta acerca peligrosamente ese distractor a 'tambien defendible' en la mente del alumno. La justificacion para descartarlo (Accuracy enga�a) es correcta pero compite con el elogio explicito a Precision."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Formulas y definiciones (Precision=TP/(TP+FP)) correctas.",
+        "nota_B": "Sin datos inventados."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Select-TWO a par unico correcto.",
+        "nota_B": "SELECT TWO convertido a pares en cada opcion, correcto."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "low",
+        "nota_A": "Explica por que Accuracy enga&ntilde;a con 3% positivos y por que cut-off no es metrica.",
+        "nota_B": "Las refutaciones de Recall+Accuracy y Recall+Cutoff son solidas; la de Precision+Accuracy es correcta pero debilitada por el propio elogio a Precision en el matiz."
+      },
+      "didactica": {
+        "sev": "med",
+        "nota_A": "Matiz Precision/FPR es exactamente el punto fino del tema; evita Accuracy en desbalance.",
+        "nota_B": "El 'Matiz importante' es tecnicamente ilustrativo pero didacticamente contraproducente: introduce tension entre la respuesta correcta y un distractor, en vez de reforzar por que FPR+F1 es la eleccion. Recomendacion: acortar el matiz para no posicionar la Precision por encima del FPR, o encuadrarlo como 'ambas capturan FP; el par de la fuente combina limite de FP (FPR) con balance (F1)'."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "Contradiccion interna (sev med): el cuerpo argumenta que Precision > FPR para medir falsos positivos, socavando la opcion marcada (FPR+F1).",
+        "por": "B"
+      },
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "El matiz aproxima el distractor 'Precision+Accuracy' a la correctitud percibida, restando limpieza a la discriminacion entre opciones.",
+        "por": "B"
+      },
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "Recomendacion: reescribir el 'Matiz importante' para que no eleve la Precision por encima del FPR; enmarcar FPR y Precision como complementarias y justificar el par de la fuente por combinar acotacion de FP (FPR) con balance Precision-Recall (F1).",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q13",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 5,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "OpenSearch vector + Titan Embeddings G1 correcto.",
+        "nota_B": "OpenSearch como vector DB + Bedrock KB con Titan Embeddings es correcto. Verificado (S3 fuente, OpenSearch vector store)."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Coincide con fuente (par OpenSearch + Bedrock KB Titan).",
+        "nota_B": "Fiel al SELECT TWO; usa la nomenclatura de la fuente ('OpenSearch Service vector database')."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "correct_index=0 consistente.",
+        "nota_B": "index 0 coincide; el par emparejado en la opcion es coherente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Distractores plausibles pero sin busqueda semantica vectorial.",
+        "nota_B": "Aurora PostgreSQL texto plano, Glue->RDS, Comprehend->DynamoDB son plausibles pero no aptos para busqueda semantica vectorial."
+      },
+      "alucinaciones": {
+        "sev": "low",
+        "nota_A": "Titan Embeddings G1 es modelo real; sin invenciones.",
+        "nota_B": "Titan Embeddings G1 es un modelo de embeddings real. Nota menor: la KB de Bedrock integra oficialmente OpenSearch Serverless (y OpenSearch Service gestionado); la carta dice 'OpenSearch Service' siguiendo la fuente, aceptable a nivel examen."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Select-TWO combinado en un par unico coherente.",
+        "nota_B": "SELECT TWO a par, coherente con 'par de soluciones'."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "La refutacion de Aurora aplica a la opcion tal como escrita (texto plano sin embeddings). El propio exam tip reconoce pgvector como vector store valido, evitando afirmacion absoluta enga&ntilde;osa.",
+        "nota_B": "Refutaciones explican por que relacional/entidades pierden semantica."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "RAG=embeddings+vector DB; menciona Bedrock KB + OpenSearch o pgvector.",
+        "nota_B": "Exam tip: RAG = embeddings + vector DB; relacional pura no sirve."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q23",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 5,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Interface = ENI/IP privada, sin IGW/NAT; regionalidad de ambos endpoints correcta segun docs.",
+        "nota_B": "Interface = ENI/IP privada, sin internet, es correcto y aporta acceso privado. La carta desactiva el mito 'cross-region por si solo'."
+      },
+      "fidelidad_fuente": {
+        "sev": "low",
+        "nota_A": "Mantiene la respuesta designada (interface) pero corrige el razonamiento defectuoso de la fuente sobre cross-region; mejora, no traiciona.",
+        "nota_B": "La fuente TD justifica el interface por 'cross-region', razonamiento tecnicamente debil (un gateway tambien daria acceso privado intra-region). La carta lo maneja de forma transparente en lugar de repetir el error, lo cual es mejor que la fuente."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Correcta, verdict y nota de region coherentes.",
+        "nota_B": "index/text/veredicto consistentes."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Gateway/CRR/Transfer Family son alternativas distinguibles por concepto, no por forma.",
+        "nota_B": "El gateway endpoint tambien lograria acceso privado a S3 intra-region; se descarta correctamente porque no da IP privada/ENI ni acceso on-prem/otra-VPC, que es el matiz que la carta explota. No es tambien-correcto de forma estricta bajo el diseno pedido."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Nota sobre peering/TGW para cruzar region es exacta (confirmado en docs).",
+        "nota_B": "Sin invenciones; la nota de regionalidad es real."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "No aplica multi-respuesta; single-choice.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutacion de gateway (intra-region, por route table, sin ENI/on-prem) es precisa.",
+        "nota_B": "Refutaciones concretas: gateway solo por ruta y sin on-prem; CRR duplica datos; Transfer Family no integra con SageMaker."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip gateway vs interface completo y correcto; ademas aclara regionalidad, punto que suele confundir.",
+        "nota_B": "Exam tip preciso; aclara regionalidad de ambos endpoints."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "Herencia de la fuente: la premisa 'interface endpoint por cross-region' es debil; la carta la mitiga con nota explicita, no corrige el enunciado base. No bloqueante.",
+        "por": "B"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q29",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 5,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Definiciones de Precision/Recall/Accuracy/F1 correctas; R-cuadrado=regresion, Perplexity=NLP correctos.",
+        "nota_B": "El cuarteto Precision/Recall/Accuracy/F1 es correcto para clasificacion binaria."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Coincide con las 4 correctas de la fuente.",
+        "nota_B": "Coincide con las 4 respuestas de la fuente (Precision, Recall, Accuracy, F1)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Enunciado (cuarteto para clasificacion binaria) y correcta alineados.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores mezclan una metrica no-clasificacion (R-cuadrado/Perplexity) o un cuarteto distinto valido (Especificidad/AUC-ROC); no adivinable por forma.",
+        "nota_B": "El distractor 'Precision, Recall, Especificidad, AUC-ROC' contiene metricas que TAMBIEN son de clasificacion (riesgo de tambien-correcto). La carta lo admite y se apoya en que el escenario pide el cuarteto especifico Precision/Recall/Accuracy/F1; la desambiguacion depende de 'el cuarteto que pide la fuente', no de que las metricas sean invalidas. Defendible pero es el punto mas fino de la carta."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones; caracterizacion de R-cuadrado y Perplexity correcta."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Select-FOUR convertido a 'cuarteto correcto vs cuartetos distractores'; valido.",
+        "nota_B": "Convierte 'select FOUR' en opcion-cuarteto agrupada consistente con la fuente."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Maneja con honestidad que Especificidad/AUC-ROC tambien son de clasificacion pero no el cuarteto pedido; no es distractor tambien-correcto porque el enunciado pide el cuarteto estandar de la fuente.",
+        "nota_B": "Refutaciones correctas: R-cuadrado=regresion, Perplexity=lenguaje; y honestidad sobre especificidad/AUC-ROC."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip clasifica bien clasificacion vs regresion vs NLP.",
+        "nota_B": "Exam tip clasifica metricas por tipo de tarea con precision."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "?",
+        "sev": "med",
+        "descripcion": "El distractor con Especificidad/AUC-ROC usa metricas que si son de clasificacion; la unicidad de la correcta descansa en 'cuarteto especifico pedido' mas que en invalidez. Mitigado por la nota honesta de la carta; no bloqueante.",
+        "por": "B"
+      }
+    ],
+    "prio": "P2"
+  }
+]

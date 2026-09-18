@@ -1,0 +1,2653 @@
+[
+  {
+    "key": "mla02-q1",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 4,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "med",
+        "nota_A": "El enunciado pide 'minimizar falsos positivos'. La respuesta FPR es la que da TutorialsDojo, pero tecnicamente Precision es la metrica que aborda mas directamente el costo de falsos positivos en clases muy desbalanceadas; el FPR puede permanecer bajo aunque haya muchos FP porque el denominador (negativos reales) es enorme. El texto de la carta afirma que 'minimizar FPR cumple el requisito', afirmacion imprecisa heredada de la fuente.",
+        "nota_B": "FPR mide negativos reales clasificados como positivos; F1 es media armonica de precision y recall. Todo correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a TutorialsDojo (FPR + F1 = respuestas oficiales).",
+        "nota_B": "Refleja fielmente la respuesta oficial (FPR + F1)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Verdict, explicacion y refutaciones coherentes entre si.",
+        "nota_B": "Pregunta, opciones y explicacion consistentes."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Los 4 son pares de metricas de longitud similar; no hay tell de forma/longitud. No adivinable solo por forma.",
+        "nota_B": "Los 3 distractores contienen RMSE (regresion) o cut-off (no metrica), eliminables sin conocer FPR/F1. El unico par 'limpio' de clasificacion es la correcta, lo que la hace adivinable por eliminacion."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones; definiciones correctas.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Fuente Select TWO convertida a MCQ de un solo par correcto; distractores combinan metrica valida + invalida, conversion limpia.",
+        "nota_B": "Select TWO original convertido a MCQ de pares; el par correcto conserva ambas respuestas oficiales."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta RMSE (regresion), Accuracy (enganosa en desbalance) y cut-off (no es metrica) con razon tecnica real.",
+        "nota_B": "Cada refutacion explica por que la metrica no aplica."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "Deberia advertir que Precision (no FPR) es el indicador mas directo de falsos positivos, matiz clave para el examen.",
+        "nota_B": "Buen exam tip sobre evitar Accuracy en desbalanceado."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "med",
+        "descripcion": "Afirma que 'minimizar FPR cumple el requisito de minimizar falsos positivos'; en un dataset con 3% de positivos el FPR es poco sensible a los FP (denominador = negativos reales, muy grande), mientras que Precision es la metrica directa. Imprecision heredada de TutorialsDojo pero no corregida.",
+        "fix_sugerido": "Anadir en la explicacion que Precision es la metrica que mide directamente el costo de falsos positivos y que el F1 la incorpora; aclarar que el FPR es complementario pero menos sensible en desbalance extremo.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Adivinable por eliminacion: RMSE (x2) y cut-off marcan sus opciones como no-clasificacion, dejando solo A como par valido de clasificacion.",
+        "fix_sugerido": "Sustituir al menos un distractor por un par plausible de clasificacion (ej. 'Precision y Accuracy global' o 'Recall y Accuracy') para forzar razonamiento sobre desbalanceo en vez de descarte por RMSE.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q10",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Crear bucket S3 primero es correcto; RDS no es data source valido de Bedrock KB (verificado).",
+        "nota_B": "Crear bucket S3 primero es correcto: la KB necesita la fuente existente para enlazarla."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al orden oficial de la fuente.",
+        "nota_B": "Fiel al orden oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Distractores = pasos posteriores (configurar KB, cargar datos) o servicio invalido (RDS). Plausibles y educativos.",
+        "nota_B": "Distractores son pasos reales en orden equivocado o servicios no validos (RDS); plausibles."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Ordering convertido a 'primer paso'; conversion valida.",
+        "nota_B": "Select-and-order THREE reducido a 'primer paso'; conversion valida y consistente con el orden oficial."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "low",
+        "nota_A": "Refutaciones correctas. Matiz: el exam tip dice 'la fuente tipica es S3'; correcto, aunque Bedrock KB tambien admite Redshift para datos estructurados (no relevante para el caso pero conviene no absolutizar).",
+        "nota_B": "Refutaciones explican dependencia de orden y por que RDS no aplica."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip flujo S3-KB-ingestar correcto.",
+        "nota_B": "Tip fuente S3 (no RDS/SNS) util."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q11",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "UpdateFeatureGroup + PutRecord correcto. Matiz: PutRecord actualiza registros uno a uno (o BatchWriteRecord en bulk); poblar TODOS los historicos requiere iterar, no es automatico. La carta dice 'poblar los registros' sin afirmar automatismo, aceptable.",
+        "nota_B": "UpdateFeatureGroup + PutRecord es exactamente el flujo documentado."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a las dos respuestas oficiales (UpdateFeatureGroup + PutRecord).",
+        "nota_B": "Fiel a la respuesta oficial (Select TWO)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente; feature=columna, record=fila."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Distractores usan verbos destructivos/invalidos (Delete, reindexar, primary key); plausibles y refutables. Estructura de par en las 4, sin tell de longitud claro.",
+        "nota_B": "Distractores incluyen operaciones reales mal usadas y una inventada plausible ('reindexar'); buenos."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones; 'reindexar' correctamente marcado como operacion inexistente.",
+        "nota_B": "Sin invenciones en la correcta; 'reindexar' se marca correctamente como operacion inexistente."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "low",
+        "nota_A": "Select TWO convertido a MCQ bundleando ambas acciones correctas en una opcion. Conversion valida; el correcto es la unica opcion sin verbo destructivo/invalido, lo que permite eliminacion por concepto (aceptable).",
+        "nota_B": "Select TWO convertido a MCQ de par; el par correcto conserva ambas acciones oficiales."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta Delete (pierde historico), primary key y reindexar con razon tecnica real.",
+        "nota_B": "Refutaciones sustantivas y precisas."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip 'feature=columna, record=fila' excelente.",
+        "nota_B": "Tip feature=columna/record=fila muy claro."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q12",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Linear Learner para regresion tabular correcto y verificado.",
+        "nota_B": "Linear Learner para regresion tabular es correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al source_block.",
+        "nota_B": "Fiel a la respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores de dominios distintos (series de tiempo, anomalias, imagenes); el correcto es el unico de regresion tabular, guiable con conocimiento del concepto. DeepAR es distractor razonable por 'forecast'.",
+        "nota_B": "Distractores son algoritmos reales con dominios distintos (DeepAR series, RCF anomalias, CNN imagenes); plausibles. XGBoost seria alternativa valida pero no esta como opcion, evitando ambiguedad."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ de una respuesta.",
+        "nota_B": "Opcion unica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta DeepAR (series de tiempo, no features estaticas), RCF y CNN con razon real.",
+        "nota_B": "Cada refutacion explica el dominio del algoritmo."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip regresion tabular vs series vs anomalias correcto; menciona XGBoost como alternativa valida.",
+        "nota_B": "Tip regresion tabular=Linear Learner/XGBoost util."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q13",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "OpenSearch (vector DB) + Bedrock KB con Titan Embeddings correcto y verificado.",
+        "nota_B": "OpenSearch como vector DB + Bedrock KB con Titan Embeddings G1 es correcto para RAG."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a las dos respuestas oficiales.",
+        "nota_B": "Fiel al par oficial (Select TWO)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores son combos plausibles de servicios reales (Aurora/Glue/Comprehend). El correcto es el unico que menciona vectorial/embeddings/KB; guiable por concepto RAG, no por forma.",
+        "nota_B": "Cada distractor combina dos servicios reales mal aplicados a RAG; plausibles y no adivinables."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Titan Embeddings G1, OpenSearch vector DB son reales; sin invenciones.",
+        "nota_B": "Sin invenciones; Titan Embeddings G1 existe."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Select TWO bundleado en una opcion correcta; conversion valida y clara.",
+        "nota_B": "Select TWO convertido a MCQ combinando ambas respuestas oficiales en una sola opcion; conversion valida (agrupa las 2 correctas y empareja distractores en pares plausibles)."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "low",
+        "nota_A": "Refutaciones correctas. Matiz: Aurora PostgreSQL CON pgvector si puede ser vector store para RAG; la refutacion aplica a la opcion tal como esta redactada (texto plano en relacional), pero convendria no absolutizar que 'una relacional no sirve'.",
+        "nota_B": "Refutaciones explican por que relacional/DynamoDB no sirven para busqueda semantica."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip RAG = embeddings + vector DB correcto; menciona pgvector como alternativa.",
+        "nota_B": "Tip RAG=embeddings+vector DB muy util."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q14",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "Object Detection para contar es correcto. Matiz didactico: la segmentacion SEMANTICA no cuenta instancias, pero la INSTANCE segmentation si; la carta acierta al limitarse a los built-ins de SageMaker donde Object Detection es la opcion.",
+        "nota_B": "Object Detection para detectar/contar multiples instancias es correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al source_block.",
+        "nota_B": "Fiel a la respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Eco leve: el stem dice 'multiples objetos' y el correcto lo repite. Distractores son algoritmos de vision reales bien diferenciados; guiable por concepto (contar=instancias).",
+        "nota_B": "Semantic Segmentation es distractor fuerte (vision densa) pero correctamente descartado porque no separa instancias; distractores plausibles."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ de una respuesta.",
+        "nota_B": "Opcion unica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta Semantic Segmentation (no cuenta instancias), Image Classification y Object2Vec con razon tecnica real.",
+        "nota_B": "La refutacion de segmentacion explica bien la diferencia instancia vs pixel."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip 'contar = distinguir instancias = Object Detection' correcto.",
+        "nota_B": "Tip 'contar=distinguir instancias=Object Detection' util."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q16",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Comprehend para sentimiento/NLP correcto y verificado.",
+        "nota_B": "Comprehend para sentimiento/insights de texto es correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al mapeo de la fuente.",
+        "nota_B": "Fiel al mapeo oficial (feedback->Comprehend)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Eco leve: stem 'sentimiento e insights de texto' vs correcto 'sentimiento... texto'. Distractores (Lex, SageMaker, Rekognition) son servicios reales de dominios distintos; guiable por concepto.",
+        "nota_B": "Distractores son servicios AI/ML reales con dominios distintos; SageMaker es distractor razonable (podria hacerlo con mas esfuerzo) correctamente descartado por overhead."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Matching (Select THREE) convertido a MCQ de un item; conversion valida.",
+        "nota_B": "Match/Select THREE fuente reducido a un solo mapeo (feedback->Comprehend); conversion valida."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta Lex, SageMaker y Rekognition con su funcion real; nota que SageMaker es mas esfuerzo que un servicio administrado.",
+        "nota_B": "Refutaciones asignan cada servicio a su uso."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip NLP=Comprehend / chatbot=Lex / a medida=SageMaker / imagen=Rekognition correcto.",
+        "nota_B": "Tip Comprehend/Lex/SageMaker/Rekognition claro."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q17",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "CodePipeline como orquestador correcto y verificado.",
+        "nota_B": "CodePipeline como orquestador end-to-end es correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al mapeo de la fuente.",
+        "nota_B": "Fiel al mapeo oficial (orquestar->CodePipeline)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Eco leve: 'orquesta' aparece en stem y solo en la opcion correcta. Distractores (CodeBuild/CodeDeploy/CodeArtifact) son servicios reales del stack Code*; fuertes y educativos, guiable por concepto.",
+        "nota_B": "Distractores son servicios Code* reales con roles distintos; CodeBuild/CodeDeploy son distractores fuertes correctamente descartados por 'orquestar todo'."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Matching convertido a MCQ; conversion valida.",
+        "nota_B": "Match/Select THREE reducido a un solo mapeo (orquestar->CodePipeline); conversion valida."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta CodeBuild (build/test), CodeDeploy (deploy) y CodeArtifact (repositorio) con su rol real.",
+        "nota_B": "Refutaciones distinguen orquestar vs build vs deploy vs repositorio. Nota: CodeDeploy tambien soporta Fargate, omitido pero no incorrecto."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip Pipeline/Build/Deploy/Artifact correcto.",
+        "nota_B": "Tip Pipeline/Build/Deploy/Artifact muy claro."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q18",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Canary para rollout inicial pequeno correcto y verificado.",
+        "nota_B": "Canary para rollout pequeno con trafico real y rollback es correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al source_block.",
+        "nota_B": "Fiel a la respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores son las otras 3 estrategias reales. Linear es el distractor mas cercano (tambien gradual); bien refutado por la ausencia de fase inicial minima. Guiable por concepto.",
+        "nota_B": "Las 4 estrategias son reales; linear y shadow son distractores fuertes correctamente diferenciados."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ de una respuesta.",
+        "nota_B": "Opcion unica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta blue/green (switch total), linear (sin fase inicial minima) y shadow (sin servir a usuarios) con razon real.",
+        "nota_B": "Refutaciones distinguen cada estrategia con precision."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip canary/linear/blue-green/shadow correcto.",
+        "nota_B": "Tip canary/linear/blue-green/shadow excelente."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q2",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Object Detection para identificar+ubicar es correcto; SSD y bounding box verificados en docs.",
+        "nota_B": "Object Detection cubre identificar+ubicar; SSD correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al source_block.",
+        "nota_B": "Fiel a la respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "El correcto es la unica opcion de vision con localizacion; ligeramente guiable por eliminacion, pero es inherente al concepto y los distractores son algoritmos reales bien descritos.",
+        "nota_B": "Distractores son algoritmos reales de SageMaker con dominios distintos; plausibles."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Descripciones de Object2Vec/K-Means/RCF correctas.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ de una respuesta, sin conversion.",
+        "nota_B": "Opcion unica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con razon tecnica real por cada algoritmo.",
+        "nota_B": "Cada refutacion describe el uso real del algoritmo."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip de granularidad (Classification/Detection/Segmentation) correcto y valioso.",
+        "nota_B": "Buen exam tip sobre granularidad Classification/Detection/Segmentation."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q20",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 3,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "med",
+        "nota_A": "La refutacion de Lambda ('el modelo de 2 GB excede los limites de despliegue de Lambda') es FALSA: la imagen de contenedor de Lambda admite hasta 10 GB y /tmp hasta 10 GB. Lambda no es la mejor opcion por otras razones (servicio no especifico de ML, cold starts, carga del modelo en cada invocacion, gestion manual), pero el motivo declarado es incorrecto. Error heredado de TutorialsDojo y no corregido.",
+        "nota_B": "La correcta (serverless sin Provisioned Concurrency) es la mejor por costo en reposo y auto-escala; correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "med",
+        "nota_A": "Fiel al source_block (que contiene el mismo error). La instruccion exige NO eximir por 'heredado de la fuente'.",
+        "nota_B": "La fuente TutorialsDojo afirma que 2 GB 'excede los limites de despliegue de Lambda' de forma absoluta. Eso solo es cierto para .zip (250 MB descomprimido); via imagen de contenedor Lambda soporta hasta 10 GB, asi que 2 GB NO excede. La carta reproduce este error de la fuente."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Verdict y explicacion coherentes; el fallo esta en el contenido factual de una refutacion.",
+        "nota_B": "Pregunta y correcta coherentes."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Distractores plausibles (serverless CON PC, real-time con auto-scaling, Lambda); serverless CON PC y real-time bien refutados por costo en reposo.",
+        "nota_B": "Distractores plausibles (serverless con PC, real-time con auto-scaling, Lambda); pero la razon dada para descartar Lambda es imprecisa."
+      },
+      "alucinaciones": {
+        "sev": "med",
+        "nota_A": "Afirmacion factual incorrecta sobre el limite de despliegue de Lambda para un modelo de 2 GB (contradice docs de limites de Lambda).",
+        "nota_B": "Afirmacion imprecisa: 'el modelo de 2 GB excede los limites de despliegue de Lambda'. Lambda con imagen de contenedor admite 10 GB; 2 GB cabe. La razon correcta para descartar Lambda es que cargar un modelo de 2 GB desde S3 en cada invocacion es impractico (cold start, latencia, 6 MB payload) y que no es 'fully managed' para servir modelos, no un limite de tamano."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ de una respuesta.",
+        "nota_B": "Opcion unica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "med",
+        "nota_A": "La refutacion de Lambda usa una razon tecnica FALSA (limite de tamano) en vez del motivo real (no es servicio ML administrado, cold start, cargar 2 GB desde S3 por invocacion es inviable en la practica).",
+        "nota_B": "La refutacion de Lambda es tecnicamente incorrecta (razon del limite de tamano). Debe reescribirse."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "Exam tip de serverless correcto; convendria corregir el mito del limite de Lambda.",
+        "nota_B": "Tip serverless vs provisioned concurrency correcto."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "med",
+        "descripcion": "La carta afirma que 'el modelo de 2 GB excede los limites de despliegue de Lambda'. Verificado contra docs de limites de Lambda: la imagen de contenedor admite hasta 10 GB y /tmp hasta 10 GB (solo el ZIP se limita a 250 MB descomprimido). Un modelo de 2 GB no excede esos limites.",
+        "fix_sugerido": "Reemplazar el motivo por el real: Lambda no es la mejor opcion porque no es un servicio de inferencia ML administrado, sufre cold starts, tiene timeout de 15 min y cargar un modelo de 2 GB desde S3 en cada invocacion es ineficiente; NO porque el tamano exceda el limite (con imagen de contenedor Lambda admite hasta 10 GB).",
+        "por": "A"
+      },
+      {
+        "dimension": "refutaciones_sustantivas",
+        "sev": "med",
+        "descripcion": "La refutacion 'el modelo de 2 GB excede los limites de despliegue de Lambda' es incorrecta: Lambda con imagen de contenedor soporta hasta 10 GB (verificado en docs de limites de Lambda); 2 GB cabe. Solo excede el limite de .zip (250 MB descomprimido).",
+        "fix_sugerido": "Reescribir la refutacion: descartar Lambda porque cargar un modelo de 2 GB desde S3 en CADA invocacion es impractico (arranque en frio prolongado, latencia alta, cobro por duracion) y Lambda no es la opcion 'fully managed' de inferencia de SageMaker que pide el enunciado; NO por un limite de tamano de despliegue.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q20b",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 4,
+    "score_B": 3,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Las 4 descripciones de opciones de inferencia son tecnicamente correctas segun docs.aws.",
+        "nota_B": "La definicion de Batch Transform (lotes programados, sin endpoint vivo) es correcta segun docs.aws."
+      },
+      "fidelidad_fuente": {
+        "sev": "med",
+        "nota_A": "Carta de refuerzo conceptual sobre Batch Transform derivada de la q20 fuente; no contradice la fuente (la q20 fuente era sobre Serverless, esta reorienta a Batch Transform correctamente).",
+        "nota_B": "El source_block NO respalda el framing de la carta: la pregunta fuente pregunta por trafico impredecible y su respuesta oficial es Serverless Inference. La carta reencuadra hacia Batch Transform sin apoyo directo del bloque fuente citado."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "question/correct_index/correct_text/answer_html consistentes.",
+        "nota_B": "Pregunta, correcta y refutaciones son coherentes entre si."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores plausibles (cada uno describe otra opcion real de inferencia). La opcion correcta es la mas 'descriptiva/generica' pero no adivinable trivialmente.",
+        "nota_B": "La correcta es adivinable: es la unica opcion que menciona 'grandes datasets programada sin endpoint', patron tipico de batch; las otras describen serverless/real-time/tuning."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin afirmaciones inventadas."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "N/A: MCQ single-answer bien formada.",
+        "nota_B": "No aplica multi-respuesta; es MCQ simple conceptual."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Cada refutacion da la razon tecnica (mapea cada distractor a su opcion real).",
+        "nota_B": "Cada refutacion nombra el servicio correcto (serverless, real-time, tuning). Sustantivas."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip claro y correcto (Real-time/Serverless/Async/Batch).",
+        "nota_B": "El exam tip que contrasta las 4 opciones de inferencia es util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "fidelidad_fuente",
+        "sev": "med",
+        "descripcion": "El source_block citado corresponde a una pregunta cuya respuesta oficial es Serverless Inference (no Batch Transform); la carta reencuadra el tema sin evidencia directa en el bloque.",
+        "fix_sugerido": "Sustituir el source_block por la pregunta/explicacion fuente que realmente trate Batch Transform (p.ej. la de q25), o marcar la carta como refuerzo_tematico con source null.",
+        "por": "B"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "min",
+        "descripcion": "Correcta adivinable por forma (unica que describe lote programado sin endpoint).",
+        "fix_sugerido": "Endurecer un distractor para que tambien mencione 'sin endpoint' o 'programado' y forzar discriminacion conceptual real.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q21",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 4,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Orden y definiciones de Feature Store correctos segun docs.aws.",
+        "nota_B": "Feature group como contenedor logico primero; offline store en S3 para batch. Correcto segun docs.aws."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel: la fuente es un 'select and order THREE' cuyo Step 1 es 'Define a new feature group'.",
+        "nota_B": "El source_block (select-and-order THREE) respalda exactamente el orden y la eleccion de la carta."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta ('primer paso') y correcta ('definir feature group') alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "OPTIONS-ONLY ADIVINABLE: la pregunta pide el PRIMER paso; 'Conectar offline store' y 'Cargar datos por batch' presuponen pasos previos, y 'Crear endpoint para consultas' es claramente ajeno. 'Definir un nuevo feature group' es la unica accion fundacional/inicial => adivinable por logica de precedencia sin saber el tema.",
+        "nota_B": "Adivinable: 'definir un nuevo feature group' es la unica accion que suena a 'crear/primer paso'; las otras presuponen que el grupo ya existe."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "low",
+        "nota_A": "Conversion de 'select and order THREE' a MCQ de 'primer paso' es valida, aunque pierde la parte de ordenamiento; aceptable.",
+        "nota_B": "Conversion de select-and-order a MCQ de 'primer paso' es limpia y valida."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones dan razon de precedencia real.",
+        "nota_B": "Explica por que cada opcion es paso 2/3 o ajena (endpoint = online store)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Buen tip offline vs online store.",
+        "nota_B": "Contraste offline (S3/batch) vs online (baja latencia) es didactico."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "La respuesta correcta es adivinable solo mirando opciones: es la unica accion 'inicial/fundacional'; las demas presuponen un feature group existente o son claramente de inferencia.",
+        "fix_sugerido": "Reformular distractores para que compitan como posibles 'primeros pasos' plausibles (p.ej. 'Definir el schema de los records', 'Crear el feature group', 'Registrar los features en el catalogo'), o cambiar el enunciado para preguntar por la funcion del feature group en vez de 'primer paso'.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "min",
+        "descripcion": "La correcta se adivina por ser la unica accion 'inicial'; los distractores delatan que son pasos posteriores.",
+        "fix_sugerido": "Reformular distractores para que suenen igualmente iniciales (p.ej. 'Definir el schema del offline store') sin delatar orden.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q22",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Roles de los 4 servicios Code* correctos.",
+        "nota_B": "Mapeo servicio-funcion correcto y verificado contra docs.aws de cada servicio Code*."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al matching de la fuente (Store and manage built packages = CodeArtifact).",
+        "nota_B": "El source_block (match FOUR) respalda 'Store and manage the built packages -> CodeArtifact'."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta pide el que 'almacena paquetes construidos'; correcta = CodeArtifact."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores son los otros 3 servicios Code* reales; buen contraste. La correcta no es adivinable por forma (todas llevan descripcion entre parentesis).",
+        "nota_B": "Distractores son servicios Code* plausibles; no adivinable trivialmente por forma (todas llevan descripcion)."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Conversion de matching a MCQ single-answer valida y bien acotada.",
+        "nota_B": "Conversion de match-FOUR a MCQ aislando una relacion es correcta."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Cada refutacion identifica la funcion real del servicio.",
+        "nota_B": "Cada refutacion describe la funcion real del servicio; nota final distingue de S3/ECR."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip util (Artifact vs S3 vs ECR).",
+        "nota_B": "Exam tip Artifact vs ECR vs S3 es preciso y util."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q23",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 2,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": true,
+    "respuesta_deberia_ser": "Deshabilitar el acceso directo a internet y crear un interface endpoint (PrivateLink) en la VPC hacia S3 (la LETRA sigue siendo la mejor de las 4, pero la justificacion del cross-region debe corregirse: requiere VPC peering/Transit Gateway, no solo el endpoint)",
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "high",
+        "nota_A": "Respuesta correcta valida: interface endpoint es la via privada; ademas AWS ahora habilita interface endpoints cross-region a S3. El texto no menciona el requisito real (vpce:AllowMultiRegion), pero el nucleo es correcto.",
+        "nota_B": "docs.aws: un interface endpoint de S3 apunta al endpoint regional de S3 de su propia region; no da acceso privado nativo a un bucket en otra region sin VPC peering/TGW hacia una VPC en esa region. La carta afirma que el interface endpoint por si solo cumple el acceso cross-region privado, lo cual no es exacto. Es un fallo heredado de TutorialsDojo."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente TutorialsDojo (que elige interface endpoint).",
+        "nota_B": "La carta reproduce fielmente el source_block; pero la fuente esta tecnicamente mal, y por instruccion eso es defecto."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Internamente coherente con la fuente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Distractores plausibles. La correcta es la mas larga/tecnica pero no trivialmente adivinable.",
+        "nota_B": "El distractor 'gateway endpoint' es defendible como parcialmente valido: para acceso a S3 mismo-region un gateway endpoint es la solucion estandar y gratuita; y el interface endpoint NO resuelve realmente el cross-region. La discriminacion se basa en una premisa erronea."
+      },
+      "alucinaciones": {
+        "sev": "med",
+        "nota_A": "Sin invenciones flagrantes.",
+        "nota_B": "La afirmacion de que interface endpoint permite acceso cross-region a un bucket remoto (implicito) es una imprecision propagada; el gateway 'solo misma region' vs interface 'cross-region' esta mal enmarcado (ambos son regionales)."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple, sin conversion."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "med",
+        "nota_A": "REFUTACION IMPRECISA (heredada de la fuente, no exime): dice que el gateway endpoint 'no soporta el acceso cross-region' como si el interface lo hiciera nativamente; en realidad el interface tampoco era cross-region historicamente y hoy requiere configuracion explicita (vpce:AllowMultiRegion). La justificacion de por que interface > gateway aqui es floja/parcialmente incorrecta en su razonamiento.",
+        "nota_B": "La refutacion del gateway ('no soporta cross-region del escenario') es circular respecto a la premisa erronea; no explica que ambos endpoints son regionales."
+      },
+      "didactica": {
+        "sev": "med",
+        "nota_A": "Tip 'gateway = S3/DynamoDB misma region; interface = ENI/PrivateLink' es correcto pero refuerza la simplificacion cross-region.",
+        "nota_B": "El exam tip 'gateway = misma region, interface = mas flexible' induce el error de creer que el interface resuelve cross-region a un bucket remoto sin peering."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "refutaciones_sustantivas",
+        "sev": "med",
+        "descripcion": "El razonamiento 'interface endpoint resuelve cross-region / gateway no' es tecnicamente impreciso: los interface endpoints cross-region para S3 son una capacidad reciente que exige vpce:AllowMultiRegion y DNS regional; el argumento real de por que gateway no sirve es que es intra-region y solo por tabla de rutas.",
+        "fix_sugerido": "Precisar la refutacion: el interface endpoint (PrivateLink) da acceso privado por ENI y soporta S3 cross-region con configuracion (vpce:AllowMultiRegion); el gateway endpoint es intra-region y solo via ruta, por eso no cubre el escenario us-east-1 a us-west-2.",
+        "por": "A"
+      },
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "high",
+        "descripcion": "El escenario y la respuesta implican que un interface VPC endpoint por si solo da acceso privado a un bucket S3 en OTRA region; docs.aws confirman que los endpoints S3 son regionales y que el acceso desde una VPC en otra region requiere VPC peering o Transit Gateway. La distincion 'gateway=misma region / interface=cross-region' es incorrecta (ambos son regionales).",
+        "fix_sugerido": "Reencuadrar: el interface endpoint aporta acceso privado (via IP privada/ENI) evitando internet, y para llegar a S3 en otra region se combina con VPC peering/Transit Gateway. Corregir el tip y la refutacion del gateway explicando que ambos son regionales pero el interface admite acceso desde on-prem/otra VPC-region via peering/TGW.",
+        "por": "B"
+      }
+    ],
+    "prio": "P0"
+  },
+  {
+    "key": "mla02-q23b",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 3,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "med",
+        "nota_A": "La distincion gateway (ruta, S3/DynamoDB, intra-region) vs interface (ENI, muchos servicios) es correcta.",
+        "nota_B": "'Gateway solo S3/DynamoDB' es correcto; 'interface = ENI privada, muchos servicios' es correcto. Pero el tip 'gateway=misma region, interface=cross-region' induce el mismo error que q23: ambos son regionales; el interface admite acceso desde otra region-VPC solo via peering/TGW, no cross-region a bucket remoto por si mismo."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "N/A estricta (refuerzo conceptual sobre el mismo escenario fuente q23).",
+        "nota_B": "Coherente con el source_block (reutilizado de q23)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "La correcta responde con precision a la pregunta de 'diferencia clave'."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "OPTIONS-ONLY parcialmente adivinable: la opcion correcta es la unica que NO contiene una afirmacion obviamente invertida/absurda ('gateway usa ENI', 'gateway cross-region nativo', 'ambos identicos salvo precio, interface gratis'). Un examinado avezado la detecta por eliminacion de exageraciones, ademas de ser la mas larga.",
+        "nota_B": "Distractores bien construidos (invierten ENI, afirman cross-region nativo del gateway, o 'identicos salvo precio'); no trivialmente adivinables."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "El exam tip 'Interface = ... muchos servicios, se cobra por hora' es correcto; pero mezcla con la nocion cross-region imprecisa."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ conceptual, sin conversion multi."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "low",
+        "nota_A": "Refutaciones correctas (ENI es del interface; gateway no es cross-region; no son identicos). Nota: el interface HOY si puede cross-region para S3, matiz omitido.",
+        "nota_B": "Refuta correctamente que el gateway use ENI y que sea cross-region nativo."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "Tip correcto salvo la simplificacion implicita sobre cross-region.",
+        "nota_B": "El tip final refuerza indirectamente el marco 'interface = cross-region', que es engañoso para S3."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Tres distractores contienen afirmaciones claramente invertidas o absurdas (gateway con ENI, gateway cross-region nativo, 'identicos salvo precio con interface gratis'), haciendo la correcta adivinable por eliminacion sin conocer el tema.",
+        "fix_sugerido": "Sustituir por distractores mas sutiles y parcialmente verdaderos (p.ej. 'el interface tambien es gratis y va por tabla de rutas', 'el gateway soporta cualquier servicio dentro de la VPC') para exigir conocimiento real.",
+        "por": "A"
+      },
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "med",
+        "descripcion": "El exam tip y el encuadre sugieren que la diferencia gateway/interface es 'misma region vs cross-region'. Segun docs.aws ambos endpoints de S3 son regionales; el interface solo admite acceso desde on-prem o desde una VPC en otra region via peering/TGW.",
+        "fix_sugerido": "Ajustar tip: 'Gateway = ruta, gratis, S3/DynamoDB, IPs publicas de S3, sin on-prem. Interface = ENI/PrivateLink, IP privada, muchos servicios, admite on-prem y otra VPC-region via peering/TGW.' Evitar decir que el interface es 'cross-region' a secas.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q24",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "El trio de acciones administradas es correcto para minimo esfuerzo.",
+        "nota_B": "Processing Job administrado con soporte TF/HuggingFace; Lambda como disparador; S3 Event Notifications->Step Functions. Correcto y consistente con docs.aws."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel: la fuente marca esas 3 opciones como correctas (Select THREE).",
+        "nota_B": "El source_block (Select THREE) coincide exactamente con las tres acciones agrupadas en la opcion correcta."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente; convierte 'Select THREE' agrupando el trio correcto como una sola opcion y agrupando combinaciones incorrectas como distractores.",
+        "nota_B": "Pregunta pide 'trio de acciones minimo esfuerzo'; la correcta agrupa las tres del source."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores combinan ECS/Fargate/Glue/Batch/EKS (mas overhead): plausibles y coherentes con el criterio 'minimo esfuerzo'. La correcta es la unica que usa Processing Job administrado.",
+        "nota_B": "Distractores combinan ECS/Fargate, Glue, Batch, EKS: todos anaden overtead, plausibles pero refutables. No adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Conversion valida de 'Select THREE' a MCQ single-answer empaquetando el trio correcto vs trios subóptimos.",
+        "nota_B": "Conversion de 'Select THREE' a una opcion que empaqueta el trio correcto vs distractores que empaquetan tríos incorrectos: valida y clara."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones dan razon real (overhead de ECS/EKS/Batch/Glue).",
+        "nota_B": "Explica por que ECS/Fargate, Glue y Batch/EKS anaden gestion innecesaria."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip claro (Processing Job vs Glue vs ECS/EKS/Batch).",
+        "nota_B": "Tip 'Processing Job = preproc ML administrado; Glue = ETL' es preciso."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q25",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 4,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Batch Transform es la opcion costo-efectiva para job programado 45 min. Limite serverless ~60s por request confirmado como restriccion real.",
+        "nota_B": "Batch Transform como respuesta es correcto. Pero el claim 'serverless con tope de ~60 s por request' no lo verifique en docs.aws de serverless; es una cifra de TD posiblemente desactualizada/imprecisa. La conclusion final sigue siendo valida."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente (Batch Transform correcto; serverless descartado por tope 60s).",
+        "nota_B": "El source_block respalda Batch Transform como respuesta y repite el claim de 60 s; la carta es fiel a la fuente (aunque la fuente arrastra el dato dudoso)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (job diario 45 min, minimizar costo) y correcta (Batch Transform) coherentes."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores plausibles y distintos entre si. La correcta no es adivinable por forma.",
+        "nota_B": "Distractores (serverless, EMR, ModelExplainabilityMonitor) plausibles; el ultimo es claramente ajeno pero los otros dos requieren razonamiento. No adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones; 'ModelExplainabilityMonitor' es un componente real de Clarify/Model Monitor.",
+        "nota_B": "El 'maximo de ~60 s por invocacion' de serverless es un dato no verificable en docs.aws; roza la imprecision factual."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple; sin conversion."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con razon tecnica real (tope 60s serverless, EMR big data, monitor no ejecuta inferencia).",
+        "nota_B": "Refutaciones nombran la naturaleza real de serverless, EMR y ModelExplainabilityMonitor."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip correcto y accionable.",
+        "nota_B": "El tip repite 'Serverless tiene tope de ~60 s por request' como hecho; conviene matizar o eliminar esa cifra."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "min",
+        "descripcion": "La carta afirma que Serverless Inference tiene un maximo de ~60 s por invocacion; docs.aws de serverless no establece ese tope explicito. Es un dato heredado de TutorialsDojo que puede confundir.",
+        "fix_sugerido": "Reemplazar '~60 s' por una razon verificable: serverless esta pensado para baja latencia/rafagas cortas y no para procesamiento por lotes de 45 min; evitar citar una cifra de timeout no confirmada.",
+        "por": "B"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q27",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 5,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "BYOC via Docker+ECR es el patron correcto y documentado.",
+        "nota_B": "Docker en ECR como bring-your-own-container en SageMaker es el patron correcto y verificado en docs.aws."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente.",
+        "nota_B": "El source_block respalda ECR + Docker container como respuesta y las tres refutaciones."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (scripts propios con dependencias, escalable) y correcta (contenedor en ECR) alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores plausibles (S3/Lambda/EKS). La correcta es la mas detallada pero el conocimiento es necesario para elegirla.",
+        "nota_B": "S3-directo, Lambda y EKS son plausibles y bien refutados; no adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con razon real (S3 no ejecuta, Lambda stateless corta, EKS complejidad).",
+        "nota_B": "Cada refutacion da la razon real (S3 no ejecuta, Lambda corta/stateless, EKS complejidad innecesaria)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip correcto (BYOC = imagen Docker en ECR).",
+        "nota_B": "Tip 'BYOC = imagen Docker en ECR' preciso."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q28",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "CodePipeline = orquestador CI/CD, correcto. Descripciones de distractores correctas.",
+        "nota_B": "CodePipeline como orquestador CI/CD es correcto; funciones de CodeBuild/CodeDeploy/CodeGuru verificadas."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente (CodePipeline correcto).",
+        "nota_B": "El source_block respalda CodePipeline como respuesta y las refutaciones exactas."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta ('orquestar pipeline completo') y correcta (CodePipeline) alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "OPTIONS-ONLY ADIVINABLE: el enunciado dice 'orquestar el pipeline CI/CD completo'. Solo 'CodePipeline' contiene 'Pipeline' en el nombre y evoca orquestacion; los otros (CodeBuild/CodeDeploy) son fases sueltas y CodeGuru es ajeno. La respuesta se adivina por keyword-matching enunciado<->nombre sin conocer el servicio.",
+        "nota_B": "CodeBuild/CodeDeploy/CodeGuru son distractores del mismo dominio, plausibles; no adivinable por forma trivial."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones dan la funcion real de cada servicio.",
+        "nota_B": "Explica el rol acotado de cada servicio (CI, deploy, code review)."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "El propio 'Exam tip' ('orquestar el pipeline completo siempre apunta a CodePipeline') confirma que es reconocible por keyword; util pero evidencia la adivinabilidad.",
+        "nota_B": "Tip 'orquestar pipeline = CodePipeline' claro."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "La correcta es adivinable por coincidencia lexica: 'pipeline completo' en el enunciado <-> 'CodePipeline'. No exige entender la diferencia real de orquestacion vs build/deploy.",
+        "fix_sugerido": "Evitar el termino 'pipeline' en el enunciado (p.ej. 'coordinar automaticamente las fases build->test->deploy en cada cambio de codigo') y/o incluir un distractor de orquestacion real como 'AWS Step Functions' para forzar discriminacion conceptual.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q29",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "Cuarteto correcto y definiciones de la carta correctas. Nota positiva: la carta define Accuracy como 'predicciones correctas entre el total', corrigiendo la definicion erronea de la fuente (que la ligaba a la clase positiva).",
+        "nota_B": "Metricas de clasificacion binaria correctas; RMSE=regresion y ROUGE=NLP correctamente excluidas. Definiciones exactas."
+      },
+      "fidelidad_fuente": {
+        "sev": "low",
+        "nota_A": "Fiel en la respuesta; se APARTA (correctamente) de la definicion imprecisa de Accuracy de la fuente. No es defecto sino mejora.",
+        "nota_B": "El source_block (Select FOUR) coincide: Precision, Recall, Accuracy, F1."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta ('cuarteto de metricas') y correcta alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "OPTIONS-ONLY ADIVINABLE: la opcion correcta es la unica compuesta 100% por metricas de clasificacion 'clasicas'. Cada distractor mete RMSE (regresion) o ROUGE (texto), terminos que un examinado reconoce como fuera de clasificacion => se elige la correcta por 'la unica sin intrusos' sin razonar el escenario.",
+        "nota_B": "Distractores mezclan metricas validas con RMSE/ROUGE (invalidas para clasificacion); requiere discriminar, no adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Definiciones de Precision/Recall/Accuracy/F1 correctas."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Conversion de 'Select FOUR' a MCQ single-answer valida (cuarteto correcto vs cuartetos con intrusos).",
+        "nota_B": "Conversion de 'Select FOUR' a MCQ que empaqueta el cuarteto correcto vs cuartetos contaminados con RMSE/ROUGE: valida y discriminante."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones correctas (RMSE=regresion, ROUGE=texto).",
+        "nota_B": "Refuta RMSE (regresion) y ROUGE (texto) con precision."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip solido (Clasificacion vs RMSE/regresion vs ROUGE/NLP).",
+        "nota_B": "Tip clasificacion vs regresion vs NLP muy util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "La correcta es adivinable por eliminacion: es el unico cuarteto sin RMSE ni ROUGE (metricas obviamente de otro dominio). No fuerza a razonar cuales metricas aplican a clasificacion binaria.",
+        "fix_sugerido": "Usar distractores que solo mezclen metricas de clasificacion entre si con un solo intruso sutil, o incluir metricas de clasificacion tambien validas pero no pedidas (AUC, especificidad) para exigir discriminacion mas fina.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q2b",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Definiciones correctas y verificadas.",
+        "nota_B": "Segmentacion semantica = clase por pixel. Correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Refuerzo consistente con la pregunta fuente.",
+        "nota_B": "Refuerzo coherente con el bloque fuente (q2)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "TELL de eco de enunciado: el stem dice 'segmentar cada pixel de una imagen en categorias' y SOLO la opcion correcta contiene la frase 'cada pixel en una categoria'. Un examinado adivina por coincidencia lexica sin saber el concepto.",
+        "nota_B": "Distractores son tareas de vision reales con granularidad distinta; requieren distinguir pixel vs caja vs imagen."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ de definicion, sin conversion.",
+        "nota_B": "Opcion unica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones correctas.",
+        "nota_B": "Refutaciones sustantivas."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip de granularidad correcto.",
+        "nota_B": "Reforzada la escala de granularidad."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "El enunciado usa 'segmentar cada pixel' y la unica opcion con 'cada pixel' es la correcta: adivinable solo por coincidencia lexica (options-only).",
+        "fix_sugerido": "Reformular el enunciado para NO usar 'cada pixel' (ej. 'asignar una categoria a nivel de pixel a toda la escena') o quitar la frase 'clasifica cada pixel' del texto de la opcion correcta para eliminar el eco.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q3",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "TLS/inter-container = en transito, correcto y verificado.",
+        "nota_B": "Inter-container traffic encryption (TLS) es la funcion correcta para cifrar entre nodos de entrenamiento."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al source_block (respuesta oficial).",
+        "nota_B": "Fiel a la respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores plausibles (KMS+SecretsManager, SecretsManager, batch transform); requieren distinguir transito vs reposo. El correcto es el unico que menciona TLS/inter-container, guiable solo si ya se domina el concepto.",
+        "nota_B": "Distractores combinan servicios reales mal aplicados (KMS reposo, Secrets Manager, batch transform); plausibles y no adivinables."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones; aclaracion de que SageMaker aprovisiona el cluster es correcta.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ de una respuesta.",
+        "nota_B": "Opcion unica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta cada opcion con razon tecnica real (reposo vs transito, secretos, inferencia).",
+        "nota_B": "Cada refutacion distingue reposo/transito/secretos/inferencia."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip transito/reposo/secretos correcto.",
+        "nota_B": "Exam tip claro: transito=TLS, reposo=KMS."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q30",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 5,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "med",
+        "nota_A": "Diagnostico correcto: falta permiso KMS en el execution role tras cambio a SSE-KMS.",
+        "nota_B": "El principal correcto es el execution role (bien). Pero el set de permisos es impreciso: para leer objetos SSE-KMS el permiso clave es kms:Decrypt; kms:Encrypt no habilita la lectura y falta kms:GenerateDataKey (necesario si el job escribe salida cifrada). docs.aws lista GenerateDataKey+Decrypt para upload/download."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente.",
+        "nota_B": "La carta reproduce fielmente el source_block (que tambien dice Encrypt+Decrypt); la imprecision es heredada de TutorialsDojo."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (AccessDenied tras SSE-KMS) y correcta (KMS al execution role) coherentes."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Distractores fuertes: cruzan dos ejes (KMS vs S3) x (role vs usuario). Exigen razonar 'quien actua' y 'que cambio'. No adivinable por forma.",
+        "nota_B": "Los 4 distractores varian principal (role vs usuario) y permiso (KMS vs S3); bien construidos, requieren razonar 'execution role usa sus permisos, no los del usuario'."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Afirmar que kms:Encrypt es necesario para descifrar/leer es impreciso; para lectura basta Decrypt."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones precisas: execution role vs usuario, y por que S3 ya estaba concedido.",
+        "nota_B": "Explica bien por que el usuario no aplica (job usa execution role) y por que S3 ya estaba concedido."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip excelente (SageMaker actua con execution role; AccessDenied nuevo tras SSE-KMS = falta permiso KMS).",
+        "nota_B": "Tip 'SageMaker actua con su execution role; AccessDenied nuevo tras SSE-KMS = falta KMS en el role' es correcto y valioso."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "med",
+        "descripcion": "El permiso descrito (kms:Encrypt + kms:Decrypt) es impreciso para el caso de LECTURA de datos de entrenamiento: docs.aws indican que descargar objetos SSE-KMS requiere kms:Decrypt (y GenerateDataKey para subir/escribir). kms:Encrypt no habilita la lectura.",
+        "fix_sugerido": "Precisar: el execution role necesita kms:Decrypt para leer los datos cifrados SSE-KMS (y kms:GenerateDataKey si tambien escribe salida cifrada). Mantener la LETRA correcta pero corregir el detalle de permisos en verdict/definicion.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q31b",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Confirmado: 'latency drift' no es un tipo de Model Monitor; los otros 3 listados si lo son.",
+        "nota_B": "Los 4 tipos confirmados en docs.aws; 'latency drift' correctamente identificado como NO-tipo."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "N/A estricta (refuerzo conceptual del escenario q31).",
+        "nota_B": "Coherente con el source_block que enumera los 4 tipos."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta 'cual NO es un tipo' y correcta (latency drift) alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "OPTIONS-ONLY ADIVINABLE: es una pregunta 'cual NO es'. La opcion correcta ('latency drift') es la unica que introduce un concepto de RED/SISTEMA (latencia) frente a tres opciones que son claramente 'quality/bias/attribution' de datos-modelo. Un examinado la detecta como la intrusa sin conocer la lista exacta de 4 tipos.",
+        "nota_B": "Los 3 distractores son tipos reales de Model Monitor; discriminacion basada en conocimiento real, no en forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones; los 4 tipos son exactos."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "Reformulacion a pregunta negativa ('cual NO es') es valida y didactica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Las 'no-refutaciones' confirman correctamente que los otros 3 si son tipos validos.",
+        "nota_B": "Confirma que los otros tres si son tipos validos, nombrando su alcance."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip enumera los 4 tipos correctamente.",
+        "nota_B": "Refuerza los 4 tipos y aclara que latencia/CPU es CloudWatch. Excelente refuerzo."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "La intrusa correcta ('latency drift') se identifica por ser el unico concepto de sistema/red entre tres tipos de calidad/sesgo, sin necesidad de conocer los 4 tipos reales.",
+        "fix_sugerido": "Usar como intrusa un termino que suene a Model Monitor pero no lo sea (p.ej. 'concept drift' o 'schema drift'), que compita en registro con los tres verdaderos y exija conocer la lista exacta.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q32",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Savings Plan sobre On-Demand cumple 'ahorro + sin interrupciones'. Refutaciones correctas.",
+        "nota_B": "Savings Plan sobre On-Demand = ahorro sin interrupciones, correcto; refutaciones de Spot/Studio/Budgets verificadas."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente (el ~64% aparece en la fuente y en docs.aws).",
+        "nota_B": "El source_block respalda Savings Plan (1 anio, upfront) como respuesta y las refutaciones."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (schedule estricto + reducir costo) y correcta alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores plausibles (Spot/Studio resizing/Budgets). Exige saber que Spot es interrumpible y que Budgets solo alerta.",
+        "nota_B": "Spot, Studio resizing y Budgets son plausibles y bien refutados; no adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "El 'hasta ~64%' coincide con la cifra de docs.aws (64%). Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con razon tecnica real.",
+        "nota_B": "Explica interrumpibilidad de Spot, mito del resizing de Studio y limite de Budgets (solo alerta)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip solido (Savings Plans vs Spot vs Budgets).",
+        "nota_B": "Tip Savings Plans vs Spot vs On-Demand claro y correcto."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q32b",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Razon correcta: Spot es interrumpible por reclamo de capacidad; refutaciones exactas (Spot es lo mas barato, si soporta compute-optimized, compromiso es de Savings Plans).",
+        "nota_B": "Spot interrumpible por reclamo de capacidad, correcto; Managed Spot Training usa checkpoints. Verificado."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "N/A estricta (refuerzo del escenario q32).",
+        "nota_B": "Coherente con el source_block (reutilizado de q32) que explica la interrumpibilidad de Spot."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (por que Spot no sirve sin tolerancia a interrupciones) y correcta alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores son afirmaciones falsas plausibles sobre Spot (mas caro, no soporta compute-optimized, requiere compromiso); exigen conocer Spot real. La correcta no es la mas larga.",
+        "nota_B": "Distractores contienen errores factuales verificables (Spot mas caro / no soporta compute-optimized / compromiso 1-3 anios); bien construidos."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "Refuerzo conceptual; conversion limpia."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones corrigen cada afirmacion falsa con dato real.",
+        "nota_B": "Refuta cada distractor con el hecho correcto (Spot es lo mas barato; disponible en muchas familias; compromiso 1-3 anios = Savings Plans)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip excelente (Spot=barato interrumpible; Savings Plans=descuento por compromiso; On-Demand=full).",
+        "nota_B": "Tip Spot vs Savings Plans vs On-Demand claro y correcto."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q33",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Logs Insights con comando 'pattern' respaldado por ML es correcto; refutaciones exactas.",
+        "nota_B": "Logs Insights con comando pattern (analisis de patrones) y anomaly (ML) confirmado en docs.aws; refutaciones correctas."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente.",
+        "nota_B": "El source_block respalda Logs Insights (incluyendo el comando 'pattern' backed by ML) y las refutaciones."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (analizar/consultar logs con deteccion de patrones ML) y correcta alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "OPTIONS-ONLY parcialmente adivinable: el enunciado pide 'analizar y consultar logs'; solo la correcta contiene 'Logs' en el nombre (CloudWatch Logs Insights). CloudTrail/Config/Grafana no evocan 'consulta de logs' tan directamente => keyword-matching enunciado<->nombre.",
+        "nota_B": "CloudTrail, Config y Grafana son distractores del dominio de observabilidad, plausibles; no adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "El claim 'comando pattern respaldado por ML' es verificable; anomaly usa ML. Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con funcion real de cada servicio.",
+        "nota_B": "Distingue auditoria API (CloudTrail), configuracion (Config) y visualizacion (Grafana)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip claro (consultar logs = Logs Insights; API = CloudTrail; config = Config).",
+        "nota_B": "Tip 'analizar logs = Logs Insights; auditar API = CloudTrail; Config = configuracion' preciso."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "La correcta es adivinable por coincidencia lexica: 'consultar/analizar logs' <-> 'CloudWatch Logs Insights' (unico con 'Logs' en el nombre).",
+        "fix_sugerido": "Anadir un distractor con 'log' en el nombre o concepto (p.ej. 'Amazon OpenSearch Service' o 'CloudWatch Logs (sin Insights)') para forzar discriminacion mas alla del keyword; o reformular el enunciado sin la palabra 'logs'.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q34",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "CloudTrail es correcto para 'quien hizo que API y cuando'. Refutaciones exactas.",
+        "nota_B": "CloudTrail = registro de actividad API para auditoria; correcto y verificado."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente.",
+        "nota_B": "El source_block respalda CloudTrail y las tres refutaciones."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta ('registrar actividad de API para auditoria') y correcta alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "OPTIONS-ONLY ADIVINABLE: el enunciado pide 'registrar actividad de API para auditoria (quien/que/cuando)'. Solo CloudTrail es un servicio de logging/auditoria; Trusted Advisor (recomendaciones) y Secrets Manager (secretos) son ajenos y facilmente descartables, dejando CloudTrail vs Config como unica duda real. La correcta se aisla por eliminacion sin conocimiento fino.",
+        "nota_B": "Config, Trusted Advisor y Secrets Manager son plausibles y bien refutados; no adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con funcion real de cada servicio.",
+        "nota_B": "Distingue Config (configuracion), Trusted Advisor (recomendaciones) y Secrets Manager (secretos)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip claro (API=CloudTrail; config de recursos=Config).",
+        "nota_B": "Tip 'quien llamo que API y cuando = CloudTrail; estado de configuracion = Config' preciso."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "Dos de los tres distractores (Trusted Advisor, Secrets Manager) son de dominios muy alejados de logging/auditoria, reduciendo la pregunta a CloudTrail vs Config y facilitando el acierto por eliminacion.",
+        "fix_sugerido": "Reemplazar Trusted Advisor y Secrets Manager por servicios que tambien registran/observan actividad (p.ej. Amazon CloudWatch Logs, AWS CloudTrail Lake, Amazon Macie, VPC Flow Logs) para forzar discriminacion entre opciones de observabilidad/seguridad.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q35",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 4,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "Segun AWS, los user-defined tags se crean al aplicarlos; separar 'crear' de 'adjuntar' como dos pasos distintos es una imprecision (heredada de la fuente). Como 'primer paso' de planificacion, 'definir los tags' es defendible.",
+        "nota_B": "El orden crear/definir -> aplicar -> activar en Billing es correcto respecto al resultado final; verificado contra docs.aws de activacion de tags."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel: la fuente ordena crear->adjuntar->habilitar y marca 'Create user-defined tags' como Step 1.",
+        "nota_B": "El source_block (select-and-order THREE) respalda exactamente los 3 pasos y su orden."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta ('primer paso') y correcta ('crear user-defined tags') coherentes con la fuente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "OPTIONS-ONLY ADIVINABLE: pide el PRIMER paso; 'adjuntar tags', 'habilitar en Billing' y 'configurar reportes' presuponen tags ya existentes => la unica accion 'inicial' es 'crear tags'. Adivinable por logica de precedencia.",
+        "nota_B": "Adivinable: 'crear tags' es la unica opcion que suena a 'primer paso'; 'adjuntar', 'habilitar' y 'configurar reportes' delatan ser posteriores."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "low",
+        "nota_A": "Conversion de 'select and order THREE' a MCQ de 'primer paso' valida; aceptable.",
+        "nota_B": "La distincion 'crear tag' (paso 1) vs 'adjuntar tag' (paso 2) es algo artificial: en AWS un user-defined tag existe al aplicarlo a un recurso; no hay un paso separado de 'creacion' desligado del recurso. Se hereda del framing del examen."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "low",
+        "nota_A": "Refutaciones por precedencia correctas, pero heredan la separacion imprecisa crear vs adjuntar.",
+        "nota_B": "Explica por que adjuntar/habilitar/reportes son pasos posteriores."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "Tip 'crear-aplicar-habilitar' util pero refuerza la separacion artificial crear vs aplicar.",
+        "nota_B": "Tip 'crear-aplicar-habilitar en Billing, luego Cost Explorer' es util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "La correcta se adivina por ser la unica accion inicial (las demas presuponen tags existentes). Ademas, la distincion 'crear' vs 'adjuntar' tags no refleja el flujo real de AWS (los user-defined tags nacen al aplicarse).",
+        "fix_sugerido": "Reformular a una pregunta conceptual (p.ej. 'que se requiere para que un tag aparezca en los reportes de costos?' -> activarlo en Billing) o alinear los pasos con el flujo real AWS (etiquetar recursos -> activar en Billing) evitando el paso ficticio de 'crear tag' separado.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "min",
+        "descripcion": "La correcta se adivina por ser la unica accion 'inicial'; los distractores delatan orden.",
+        "fix_sugerido": "Reformular distractores para que no revelen su posicion en la secuencia (evitar 'habilitar/adjuntar' explicitos).",
+        "por": "B"
+      },
+      {
+        "dimension": "conversion_multi_respuesta",
+        "sev": "min",
+        "descripcion": "El paso 'crear user-defined tags' separado de 'adjuntarlos' es artificial en AWS (un tag se crea al aplicarlo).",
+        "fix_sugerido": "Aclarar en la explicacion que 'crear' aqui significa definir el esquema clave-valor a usar antes de aplicarlo, para evitar la impresion de una API de 'crear tag' independiente.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q36",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "IAM roles + identity-based policies es la respuesta correcta para least privilege multi-servicio; refutaciones exactas (SCP no concede).",
+        "nota_B": "IAM roles + identity-based policies para least privilege es correcto; SCPs 'solo restringen, no conceden' verificado."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente.",
+        "nota_B": "El source_block respalda IAM roles con identity-based policies y las refutaciones."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (least privilege sobre SageMaker/S3/Glue) y correcta alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores plausibles (SCP/Endpoint Policies/RAM). Exige entender que SCP no otorga permisos. No adivinable por forma.",
+        "nota_B": "SCPs, Endpoint Policies y RAM son componentes IAM/acceso plausibles; requieren discriminar, no adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con matiz tecnico correcto (SCP = guardrail, no grant).",
+        "nota_B": "Punto clave 'SCPs no otorgan permisos, solo ponen guardarraliles' es sustantivo y correcto."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip solido (least privilege = IAM roles + identity-based; SCP solo restringe).",
+        "nota_B": "Tip 'least privilege = IAM roles + identity-based; SCPs solo restringen' preciso."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q37",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 3,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": true,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "med",
+        "nota_A": "La respuesta correcta es valida, pero la distincion inline-vs-managed sobre el MISMO execution role es de matiz; ambas satisfacen 'permisos al computo'.",
+        "nota_B": "La preferencia por inline sobre managed policy no tiene base tecnica solida: ambas se adjuntan al execution role del dominio y logran el mismo aislamiento. El ambito lo define el ROLE, no si la policy es inline o managed. La fuente misma reconoce que 'adjuntar una policy al role' es un buen enfoque."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel: la fuente elige la inline policy en el execution role del dominio y admite que 'attach a policy to the role' es 'a good approach' pero 'less specific'.",
+        "nota_B": "La carta reproduce el framing de la fuente (inline correcta, 'attach policy to role' menos especifica)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Internamente coherente con el source_block."
+      },
+      "calidad_distractores": {
+        "sev": "high",
+        "nota_A": "DISTRACTOR TAMBIEN-CORRECTO: 'Adjuntar una managed policy al role que usa el notebook de Studio' es defendible como correcto: sigue apuntando al execution role (computo, no usuario) y cumple el requisito. La diferencia inline vs managed y 'dominio' vs 'notebook role' es sutil y discutible; la propia fuente lo llama 'a good approach'. Riesgo alto de que el examinado elija el distractor con justificacion valida.",
+        "nota_B": "El distractor 'Adjuntar una managed policy al role que usa el notebook de Studio' es defendiblemente correcto: si el role es el execution role del dominio, una managed policy adjunta logra el mismo objetivo con igual aislamiento. La discriminacion inline-vs-managed es debil/artificial."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Insinuar que la managed policy 'podria afectar otros notebooks/usuarios' mientras la inline no lo haria es engañoso: el impacto depende del role al que se adjunta, no del tipo (inline/managed)."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "med",
+        "nota_A": "La refutacion del distractor 'role del notebook' ('menos especifico, podria afectar otros notebooks') es debil/circular: no da una razon tecnica solida de por que la inline es requerida sobre una managed policy en el mismo execution role.",
+        "nota_B": "La refutacion del distractor 'managed policy al role' es floja/circular: se limita a 'es correcto pero menos especifico', sin una diferencia tecnica real que lo invalide."
+      },
+      "didactica": {
+        "sev": "med",
+        "nota_A": "Tip razonable, pero simplifica una distincion realmente fina.",
+        "nota_B": "Enseña una distincion inline-vs-managed que no es la clave real (la clave es adjuntar al execution role del dominio); puede inducir la idea erronea de que inline aisla mejor que managed."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "high",
+        "descripcion": "El distractor 'managed policy al role del notebook de Studio' es esencialmente correcto (mismo execution role del computo); la unica separacion es inline-vs-managed y 'dominio' vs 'notebook role', un matiz demasiado fino para una unica respuesta indiscutible.",
+        "fix_sugerido": "Reemplazar ese distractor por uno claramente incorrecto (p.ej. 'resource-based policy en el bucket concediendo al usuario' o 'permisos via SCP') para que la inline-en-execution-role-del-dominio sea la unica opcion defendible; o convertir en pregunta conceptual sobre 'a que objeto se asignan los permisos del computo en Studio'.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "high",
+        "descripcion": "El distractor 'Adjuntar una managed policy al role que usa el notebook de Studio' es tambien correcto si ese role es el execution role del dominio; la distincion inline vs managed no altera el ambito ni el aislamiento. La pregunta tiene dos opciones defendibles.",
+        "fix_sugerido": "Reescribir el distractor debil para que sea claramente incorrecto (p.ej. 'adjuntar la policy a un role compartido por todos los dominios de Studio'), de modo que la unica correcta sea la del execution role del dominio especifico. Alternativamente, cambiar la clave de discriminacion a 'ambito del role' (dominio-especifico vs compartido) en vez de inline-vs-managed.",
+        "por": "B"
+      },
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "med",
+        "descripcion": "El material sugiere que inline aisla mejor que managed; tecnicamente el aislamiento depende del role, no del tipo de policy.",
+        "fix_sugerido": "Aclarar que lo relevante es adjuntar al execution role del dominio especifico; inline y managed son equivalentes en ambito.",
+        "por": "B"
+      }
+    ],
+    "prio": "P0"
+  },
+  {
+    "key": "mla02-q38",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 3,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": true,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "med",
+        "nota_A": "La respuesta (data quality drift) es la que da la fuente y es defendible. Matiz: en la literatura 'shift in data distribution' suele llamarse covariate/data drift; AWS Model Monitor lo agrupa como 'data quality'. Aceptable pero terminologicamente laxo.",
+        "nota_B": "Dentro de la taxonomia de SageMaker la respuesta es aceptable (data quality monitor detecta shift de distribucion). Pero 'data quality drift' para describir un cambio de distribucion de entrada es terminologia SageMaker; en ML estandar eso es 'data/covariate drift' y 'concept drift' aplica cuando cambia la relacion entrada-objetivo. El escenario 'cambios en demograficos Y condiciones de pacientes' es ambiguo entre ambos."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel: la fuente mapea ese escenario a Data quality drift.",
+        "nota_B": "El source_block (select THREE) asigna 'Data quality drift' a ese escenario; la carta es fiel."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta y correcta coherentes con la definicion dada."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "OPTIONS-ONLY parcialmente adivinable + termino discutible: el distractor 'concept drift' NO aparece en el marco de 4 tipos de AWS Model Monitor, mezclando taxonomias (AWS vs literatura general). Ademas, el escenario ('cambio en distribucion de datos de entrada') coincide casi literalmente con la definicion de la opcion correcta, facilitando el match textual.",
+        "nota_B": "'Concept drift' es un distractor defendible como tambien-correcto para 'cambios en condiciones de pacientes' (si cambia la relacion clinica->readmision). La discriminacion depende de aceptar la taxonomia SageMaker de forma estricta."
+      },
+      "alucinaciones": {
+        "sev": "low",
+        "nota_A": "'Concept drift' como distractor es un termino real de la literatura pero fuera de la taxonomia AWS Model Monitor; introducirlo mezcla marcos y puede confundir sobre cual es el 'oficial'.",
+        "nota_B": "Las definiciones dadas de cada tipo de drift son correctas."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "low",
+        "nota_A": "Conversion de matching 'Select THREE' a MCQ single-answer valida (aisla el primer escenario).",
+        "nota_B": "Conversion de select-THREE a MCQ aislando un escenario es valida."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "low",
+        "nota_A": "Refutaciones correctas; la de concept drift es adecuada (X->y vs distribucion de entrada).",
+        "nota_B": "La refutacion de 'concept drift' ('distinto del tipo que pide el escenario') es algo circular; no explica por que el escenario es distribucion de entrada y no cambio de relacion X->y."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip claro sobre los tres tipos.",
+        "nota_B": "El tip que contrasta los tres tipos es util, pero convendria advertir que 'data quality drift' es el nombre SageMaker de lo que en ML se llama data/covariate drift."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "El escenario reproduce casi textualmente la definicion de la opcion correcta ('cambia la distribucion de los datos de entrada'), y el distractor 'concept drift' pertenece a otra taxonomia (no AWS Model Monitor), mezclando marcos.",
+        "fix_sugerido": "Evitar repetir la definicion en el enunciado; usar distractores dentro de la taxonomia AWS (bias, feature attribution, model quality) y, si se incluye 'concept drift', aclarar que no es un tipo de Model Monitor de AWS.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "'Concept drift' es defendible como respuesta para 'cambios en demograficos y condiciones de pacientes'; el escenario no delimita si cambia la distribucion de entrada (data drift) o la relacion X->y (concept drift).",
+        "fix_sugerido": "Reformular el enunciado para dejar claro que SOLO cambia la distribucion de los datos de entrada (no la relacion con la etiqueta), o reforzar la refutacion de concept drift explicando la diferencia (X->y constante vs cambiante).",
+        "por": "B"
+      },
+      {
+        "dimension": "correccion_tecnica",
+        "sev": "min",
+        "descripcion": "'Data quality drift' es terminologia SageMaker; en ML estandar el shift de distribucion de entrada es 'data/covariate drift'.",
+        "fix_sugerido": "Añadir una nota aclarando que 'data quality drift' es el termino de SageMaker Model Monitor para el cambio de distribucion de datos de entrada.",
+        "por": "B"
+      }
+    ],
+    "prio": "P0"
+  },
+  {
+    "key": "mla02-q38b",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Bias drift + Clarify es correcto; refutaciones exactas.",
+        "nota_B": "Bias drift + Clarify es correcto y verificado en docs.aws."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "N/A estricta (refuerzo del escenario q38).",
+        "nota_B": "El source_block asigna 'marcado desproporcionado de grupos' a Bias drift (Clarify)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (marcado desproporcionado de grupos) y correcta (bias drift/Clarify) alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores emparejan tipo+servicio de forma cruzada (data quality+Clarify, feature attribution+CloudWatch, virtual+Debugger). Exige conocer tanto el tipo como el servicio; no trivialmente adivinable.",
+        "nota_B": "Distractores emparejan tipo+servicio incorrectos (data quality+Clarify, feature attribution+CloudWatch, virtual+Debugger); requieren discriminar tipo Y servicio, no adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones (Debugger, CloudWatch, Clarify son reales; 'virtual drift' se presenta como concepto de la fuente).",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "Conversion valida a MCQ tipo+servicio."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones dan razon real (tipo no encaja y/o servicio equivocado).",
+        "nota_B": "Refuta cada emparejamiento incorrecto explicando por que el tipo o el servicio no encaja."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip correcto (sesgo/fairness = Clarify).",
+        "nota_B": "Tip 'sesgo = Clarify; atribucion/calidad = Model Monitor (Clarify por debajo)' preciso."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q39",
+    "veredicto_A": "FIX",
+    "veredicto_B": "FIX",
+    "score_A": 3,
+    "score_B": 4,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Real-time endpoint con monitoreo continuo es correcto para baja latencia + deteccion inmediata.",
+        "nota_B": "Monitoreo continuo de real-time endpoint para baja latencia + deteccion inmediata es correcto y verificado."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente.",
+        "nota_B": "El source_block respalda la respuesta y las refutaciones (batch continuo, on-schedule, ModelExplainabilityMonitor)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (recomendaciones baja latencia + monitoreo continuo) y correcta alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "OPTIONS-ONLY ADIVINABLE: el enunciado enfatiza 'respuestas de baja latencia'. Solo la opcion correcta contiene 'real-time endpoint'; dos distractores son 'batch' (antonimo de baja latencia/tiempo real) y el cuarto es un monitor especifico. Keyword-matching 'baja latencia' <-> 'real-time' aisla la correcta.",
+        "nota_B": "Dos distractores son variantes de 'batch' (continuo con batch / on-schedule batch) muy parecidas entre si; ligera redundancia que facilita descartarlas en bloque."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones en la carta (la carta omite acertadamente la frase irrelevante de Factorization Machines del source)."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con razon real (batch = historico; on-schedule = intervalos; monitor solo attribution).",
+        "nota_B": "Distingue batch (historico/tendencias) de real-time (inmediato) y acota ModelExplainabilityMonitor."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip claro (baja latencia + deteccion inmediata = real-time endpoint).",
+        "nota_B": "Tip 'baja latencia + deteccion inmediata = real-time; batch = tendencias historicas' util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "La correcta se identifica por antonimia: 'baja latencia/tiempo real' vs distractores 'batch' e 'intervalos'. El examinado descarta batch por definicion sin razonar el monitoreo.",
+        "fix_sugerido": "Sustituir los dos distractores 'batch' por opciones que tambien sean real-time pero subóptimas (p.ej. 'CloudWatch alarms sobre latencia', 'sampling parcial del trafico'), evitando que 'batch' delate por antonimia.",
+        "por": "A"
+      },
+      {
+        "dimension": "calidad_distractores",
+        "sev": "min",
+        "descripcion": "Dos distractores basados en batch (continuo-con-batch y on-schedule-batch) son casi redundantes, permitiendo descartarlos como grupo.",
+        "fix_sugerido": "Sustituir uno por un distractor de otra naturaleza (p.ej. 'usar solo alarmas de CloudWatch sobre latencia') para diversificar la discriminacion.",
+        "por": "B"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q4",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "RMSE + wQL correctos para forecasting continuo; definiciones verificadas.",
+        "nota_B": "RMSE (regresion) y wQL (pronostico probabilistico/cuantiles) correctos para series de tiempo continuas."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a las respuestas oficiales (RMSE + Average wQL).",
+        "nota_B": "Refleja el par oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Tell sutil: las 3 opciones incorrectas se autoetiquetan como 'de clasificacion binaria' / 'probabilistica de clases' / 'combinando clasificacion', mientras la correcta no menciona clasificacion. Un examinado que sepa que es regresion descarta las 3 por la etiqueta sin evaluar las metricas.",
+        "nota_B": "Los distractores son pares que mezclan metricas de clasificacion; plausibles porque cada uno etiqueta su naturaleza, obligando a saber que el problema es regresion."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Select TWO convertido a MCQ de un par; distractores son pares plausibles, conversion limpia.",
+        "nota_B": "Select TWO convertido a MCQ de pares; el par correcto conserva ambas respuestas oficiales."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta AUC, F1 y Log loss como metricas de clasificacion con razon real.",
+        "nota_B": "Cada refutacion explica por que la metrica es de clasificacion."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip regresion vs clasificacion correcto.",
+        "nota_B": "Buen tip regresion vs clasificacion."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "low",
+        "descripcion": "Las opciones incorrectas incluyen coletillas ('de clasificacion binaria', 'probabilistica de clases', 'combinando clasificacion y regresion') que las delatan como no-regresion; la correcta carece de esa etiqueta.",
+        "fix_sugerido": "Homogeneizar las descripciones de los pares o quitar las coletillas 'de clasificacion' de los distractores para que no se autodescarten.",
+        "por": "A"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q40",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Inference Recommender es la respuesta correcta para elegir tipo/config de instancia; refutaciones exactas.",
+        "nota_B": "Inference Recommender = elegir tipo/config de instancia optima; correcto y verificado."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel a la fuente.",
+        "nota_B": "El source_block respalda Inference Recommender y las tres refutaciones."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (elegir instancia costo-efectiva con latencia/throughput) y correcta alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores son features reales de SageMaker con proposito distinto; exige distinguir 'elegir instancia' vs 'escalar/tunear/multi-modelo'. No adivinable por forma.",
+        "nota_B": "Automatic Scaling, Automatic Model Tuning y Multi-Model Endpoints son features SageMaker plausibles; requieren discriminar funcion, no adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones con funcion real de cada feature.",
+        "nota_B": "Distingue elegir tipo (Recommender) vs escalar cantidad (Auto Scaling) vs tunear (AMT) vs multi-modelo (MME)."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip claro (elegir instancia = Inference Recommender; escalar = Auto Scaling; tunear = AMT).",
+        "nota_B": "Tip que separa las 4 features es preciso y util."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q40b",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Proposito de Multi-Model Endpoints correcto; refutaciones exactas.",
+        "nota_B": "Proposito de MME (muchos modelos, un endpoint, compartir recursos/bajar costo, carga bajo demanda) correcto y verificado; A/B testing es de production variants, no el proposito de MME, y la carta no lo confunde."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "N/A estricta (refuerzo del escenario q40).",
+        "nota_B": "El source_block describe MME; notablemente el source menciona A/B testing como uso de MME (impreciso), pero la carta lo evita y da la definicion correcta."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (proposito de MME) y correcta alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores son otras features reales de SageMaker; exige distinguir propositos. No adivinable por forma.",
+        "nota_B": "Distractores son las otras 3 features (Inference Recommender, Auto Scaling, Automatic Model Tuning); requieren discriminar, no adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones; la carta mejora la fuente al no repetir el claim de A/B testing."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "Refuerzo conceptual derivado de q40; conversion limpia."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refutaciones asignan cada distractor a su feature real.",
+        "nota_B": "Atribuye correctamente cada distractor a su feature real."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Tip claro (muchos modelos, un endpoint = MME).",
+        "nota_B": "Tip 'muchos modelos, un endpoint = MME' preciso."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q41",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "low",
+        "nota_A": "Rekognition es la mejor respuesta para moderacion de imagenes con minimo esfuerzo. Matiz: la afirmacion de la fuente de que Bedrock 'no esta optimizado para analisis de imagenes/moderacion' quedo desactualizada (Bedrock Guardrails filtra imagenes daninas).",
+        "nota_B": "Rekognition moderation APIs = solucion administrada de minimo esfuerzo, correcto; el matiz sobre Bedrock multimodal esta bien manejado."
+      },
+      "fidelidad_fuente": {
+        "sev": "low",
+        "nota_A": "Fiel a la fuente, pero la fuente sostiene una premisa hoy imprecisa (Bedrock no sirve para moderar imagenes). La carta lo suaviza reconociendo que Bedrock 'exige mas ingenieria', mitigando parcialmente.",
+        "nota_B": "El source_block respalda Rekognition; la carta mejora la refutacion de Bedrock evitando el claim obsoleto 'Bedrock no es para imagenes'."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Consistente.",
+        "nota_B": "Pregunta (detectar imagenes que violan guias, minimo esfuerzo) y correcta alineadas."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "El distractor Bedrock es hoy parcialmente valido (Guardrails filtra imagenes), pero Rekognition gana claramente por 'minimo esfuerzo'; no llega a 'tambien-correcto' pleno porque el criterio operativo (menor overhead, API lista) favorece inequivocamente a Rekognition.",
+        "nota_B": "CNN a medida, Bedrock y Debugger son plausibles; requieren razonar 'minimo esfuerzo vs control total'. No adivinable por forma."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones; la carta ya matiza el caso Bedrock.",
+        "nota_B": "Sin invenciones; matiz de Bedrock preciso y actualizado."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ single-answer bien formada.",
+        "nota_B": "MCQ simple."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "med",
+        "nota_A": "TERMINO/PREMISA DESACTUALIZADA: la refutacion de Bedrock deberia reconocer que Bedrock Guardrails SI puede filtrar imagenes daninas hoy, y basar el descarte en 'minimo esfuerzo/API lista de moderacion' (Rekognition) en vez de sugerir que Bedrock no aplica a imagenes.",
+        "nota_B": "Refuta CNN (intensivo), Bedrock (mas ingenieria) y Debugger (debug de entrenamiento) con precision, sin heredar el error del source."
+      },
+      "didactica": {
+        "sev": "low",
+        "nota_A": "Tip correcto (moderacion lista = Rekognition), pero convendria matizar que Bedrock Guardrails ya ofrece filtrado de imagenes.",
+        "nota_B": "Tip 'moderacion lista = Rekognition; CNN propia solo si control total' util y correcto."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "refutaciones_sustantivas",
+        "sev": "med",
+        "descripcion": "La refutacion de Bedrock se apoya en una premisa desactualizada (Bedrock no analiza/modera imagenes). Bedrock Guardrails ya incluye un filtro de contenido de imagenes daninas (ApplyGuardrail).",
+        "fix_sugerido": "Reescribir el descarte de Bedrock: reconocer que Bedrock Guardrails puede filtrar imagenes, pero Rekognition Content Moderation es la opcion de MINIMO esfuerzo por ser una API de moderacion lista y purpose-built para deteccion de contenido inapropiado.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q5",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Definiciones de visualizaciones correctas.",
+        "nota_B": "Bar chart para frecuencia por categoria es correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al mapeo de la fuente (Bar chart para frecuencia por item).",
+        "nota_B": "Fiel al mapeo oficial (bar chart para frecuencia por item)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Eco de enunciado: el stem parentiza '(datos categoricos, conteos por categoria)' y SOLO la opcion correcta repite 'ideal para datos categoricos con conteos'. Adivinable por coincidencia lexica sin razonar la visualizacion.",
+        "nota_B": "Distractores son visualizaciones reales; la distincion bar vs histogram es sutil y educativa, no adivinable trivialmente."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Select THREE (matching) convertido a MCQ de un item; conversion valida.",
+        "nota_B": "Match/Select THREE original descompuesto en MCQ de un solo mapeo (frecuencia->bar chart); conversion correcta y sin perder la asociacion oficial."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta histogram, density y heatmap con razon tecnica real.",
+        "nota_B": "Refutaciones diferencian continuo vs categorico vs 2D."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip bar vs histograma util.",
+        "nota_B": "Tip bar vs histogram muy util."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "El enunciado ('datos categoricos, conteos por categoria') y la opcion correcta comparten las palabras clave 'categoricos'/'conteos', haciendola adivinable solo por lexico.",
+        "fix_sugerido": "Quitar la aclaracion parentetica del enunciado (dejar solo 'frecuencia de compra de distintos articulos en un periodo') y/o eliminar 'ideal para datos categoricos con conteos' del texto de la opcion correcta.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q5b",
+    "veredicto_A": "FIX",
+    "veredicto_B": "PASS",
+    "score_A": 3,
+    "score_B": 5,
+    "options_only_adivinable": true,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Definiciones correctas.",
+        "nota_B": "Histograma para distribucion de montos continuos es correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Refuerzo consistente con la fuente (histograma para distribucion continua).",
+        "nota_B": "Refuerzo fiel al mapeo oficial (concentracion continua->histogram)."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "med",
+        "nota_A": "Eco de enunciado: el stem dice 'montos de transaccion en un rango continuo' y solo la opcion correcta menciona 'valores continuos ... bins'. El termino 'continuo(s)' aparece unicamente en la correcta; adivinable por lexico.",
+        "nota_B": "Distractores plausibles; distincion histogram vs bar chart es sutil y educativa."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Item de matching convertido a MCQ; conversion valida.",
+        "nota_B": "Un solo mapeo extraido de la fuente Match; correcto."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta bar chart, heatmap y density con razon real.",
+        "nota_B": "Refutaciones sustantivas."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip bar vs histograma correcto.",
+        "nota_B": "Refuerza la diferencia visual bar vs histogram."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "calidad_distractores",
+        "sev": "med",
+        "descripcion": "El enunciado ('rango continuo') y la opcion correcta ('valores continuos en bins') comparten 'continuo'; adivinable por coincidencia lexica.",
+        "fix_sugerido": "Reformular el enunciado sin la palabra 'continuo' (ej. 'ver como se reparten los montos de transaccion') o quitar 'valores continuos' del texto de la opcion correcta.",
+        "por": "A"
+      }
+    ],
+    "prio": "P1"
+  },
+  {
+    "key": "mla02-q6",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "RCF para anomalias en sensores correcto y verificado.",
+        "nota_B": "RCF es el integrado correcto para anomalias en datos de sensores."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al source_block.",
+        "nota_B": "Fiel a la respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "Distractores son algoritmos reales de dominios distintos (reduccion dim., texto, imagenes); el correcto es el unico de anomalias, guiable solo con conocimiento del concepto.",
+        "nota_B": "Distractores son algoritmos reales con dominios distintos; plausibles."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ de una respuesta.",
+        "nota_B": "Opcion unica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta PCA, NTM y CNN con razon tecnica real.",
+        "nota_B": "Refutaciones describen uso real de PCA/NTM/CNN."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip RCF vs IP Insights correcto y verificado.",
+        "nota_B": "Tip RCF vs IP Insights pertinente y enlaza con q8."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q7",
+    "veredicto_A": "PASS",
+    "veredicto_B": "FIX",
+    "score_A": 4,
+    "score_B": 4,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "Orden correcto; 'ajustar hiperparametros y crear el fine-tuning job' es efectivamente el primer paso operativo tras los prerrequisitos.",
+        "nota_B": "El orden fine-tune->metricas->provisioned throughput es correcto y coincide con la doc."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al orden oficial de la fuente (a pesar de que el source_block duplica un paso, la carta lo resuelve correctamente).",
+        "nota_B": "Fiel a la respuesta oficial (Step 1 = crear fine-tuning job)."
+      },
+      "coherencia_interna": {
+        "sev": "low",
+        "nota_A": "Coherente.",
+        "nota_B": "El enunciado pregunta el 'primer paso del proceso de personalizacion'; estrictamente el primer paso del proceso es preparar el dataset, y solo por el contexto (ya hecho) el primer paso RESTANTE es el fine-tuning. La palabra 'primer paso' puede confundir; el distractor 'preparar dataset JSONL' es en realidad el primer paso real del proceso, refutado solo por 'ya esta hecho'."
+      },
+      "calidad_distractores": {
+        "sev": "none",
+        "nota_A": "Distractores son pasos reales del flujo colocados fuera de orden o ya realizados (analizar metricas = despues; provisioned throughput = final; preparar dataset = ya hecho). Plausibles y educativos.",
+        "nota_B": "Distractores son pasos reales del flujo en orden equivocado; buenos."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones; provisioned throughput y JSONL son conceptos reales de Bedrock.",
+        "nota_B": "Sin invenciones."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "Ordering (Select and order THREE) convertido a MCQ de 'primer paso'; conversion valida y clara.",
+        "nota_B": "Select-and-order THREE reducido a 'cual es el primer paso'; conversion valida apoyada en los prerrequisitos del enunciado."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Explica por que cada distractor no es el primer paso con razon temporal/logica real.",
+        "nota_B": "Refutaciones explican el orden; 'preparar dataset ya hecho' es la clave."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip con el flujo completo de custom model correcto.",
+        "nota_B": "Tip del flujo custom model claro."
+      }
+    },
+    "defectos": [
+      {
+        "dimension": "coherencia_interna",
+        "sev": "low",
+        "descripcion": "'Primer paso del proceso de personalizacion' es ambiguo: preparar el dataset ES el primer paso real del proceso; solo el contexto (dataset e IAM ya listos) hace que el fine-tuning sea el primer paso restante.",
+        "fix_sugerido": "Reformular la pregunta a 'dado que ya tiene el dataset JSONL y el rol IAM, cual es el primer paso RESTANTE' para eliminar la ambiguedad entre 'proceso completo' y 'pasos restantes'.",
+        "por": "B"
+      }
+    ],
+    "prio": "P2"
+  },
+  {
+    "key": "mla02-q8",
+    "veredicto_A": "PASS",
+    "veredicto_B": "PASS",
+    "score_A": 4,
+    "score_B": 5,
+    "options_only_adivinable": false,
+    "distractor_tambien_correcto": false,
+    "respuesta_deberia_ser": null,
+    "dimensiones": {
+      "correccion_tecnica": {
+        "sev": "none",
+        "nota_A": "IP Insights para IPv4 anomalas correcto; distincion con RCF valida y verificada.",
+        "nota_B": "IP Insights especifico para IPv4 y asociaciones IP-entidad; correcto."
+      },
+      "fidelidad_fuente": {
+        "sev": "none",
+        "nota_A": "Fiel al source_block.",
+        "nota_B": "Fiel a la respuesta oficial."
+      },
+      "coherencia_interna": {
+        "sev": "none",
+        "nota_A": "Coherente.",
+        "nota_B": "Consistente."
+      },
+      "calidad_distractores": {
+        "sev": "low",
+        "nota_A": "RCF es distractor fuerte (tambien es anomalias); PCA y K-Means plausibles. El stem menciona 'IPv4' y el correcto lo repite, pero la distincion IP Insights vs RCF exige conocimiento real, no solo lexico.",
+        "nota_B": "RCF es el distractor mas fuerte (tambien detecta anomalias) pero la palabra clave IPv4/asociaciones lo diferencia; distractores plausibles y no adivinables."
+      },
+      "alucinaciones": {
+        "sev": "none",
+        "nota_A": "Sin invenciones; endpoints real-time/batch de IP Insights confirmados.",
+        "nota_B": "Sin invenciones; 'asociaciones IP-entidad' confirmado en doc."
+      },
+      "conversion_multi_respuesta": {
+        "sev": "none",
+        "nota_A": "MCQ de una respuesta.",
+        "nota_B": "Opcion unica."
+      },
+      "refutaciones_sustantivas": {
+        "sev": "none",
+        "nota_A": "Refuta RCF (no capta asociaciones IP-entidad), PCA y K-Means con razon tecnica real.",
+        "nota_B": "La refutacion de RCF distingue correctamente que no captura asociaciones IP-entidad."
+      },
+      "didactica": {
+        "sev": "none",
+        "nota_A": "Exam tip 'IPv4 + anomalias = IP Insights, no RCF' correcto y de alto valor.",
+        "nota_B": "Tip 'IPv4+anomalias=IP Insights' muy pertinente."
+      }
+    },
+    "defectos": [],
+    "prio": "P2"
+  }
+]

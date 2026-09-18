@@ -1,0 +1,1860 @@
+# MLA-C01 Deck 01 - Data Preparation
+# 42 preguntas
+
+===== PREGUNTA 1 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A financial institution is working on a machine learning model for predicting loan approval decisions. The institution prioritizes explaining lending decisions to stakeholders in human terms for transparency and fairness.
+
+Which of the following machine learning model statements is true, and which does the institution need to choose to meet the requirement?
+
+A simple model should be chosen because explainability is crucial in loan approval decisions.
+A simple model should be chosen because accuracy is more important than explainability in loan approval decisions.
+A complex model should be chosen because explainability is crucial in loan approval decisions.
+A complex model should be chosen because accuracy is more important than explainability in loan approval decisions.
+Incorrect
+Machine learning (ML) is the process of training computers, using math and statistical processes, to find and recognize patterns in data. After patterns are found, ML generates and updates training models to make increasingly accurate predictions and inferences about future outcomes based on historical and new data. For example, ML could help determine the likelihood of a customer purchasing a particular product based on previous purchases by the user or the product’s past sales history.
+
+What are simple and complex machine learning models?
+
+Simple and complex ML models differ when balancing a model’s accuracy (number of correctly predicted data points) and a model’s explainability (how much of the ML system can be explained in “human terms”). The output of a simple ML model may be explainable and produce faster results, but the results may be inaccurate. The output of a complex ML model may be accurate, but the results may be difficult to communicate.
+
+simple-vs-complex-ml-model
+
+In the context of developing a machine learning model for predicting loan approvals, a financial institution prioritizing transparency and fairness over maximizing accuracy should opt for a simple model that is easily explainable. Transparency in lending decisions is crucial to ensure fairness and mitigate biases. Simple models such as decision trees or logistic regression provide clear visibility into the factors influencing loan approval, making it easier to explain why a decision was made. While accuracy is important in predicting loan approval decisions, the ability to explain why a particular decision was made is equally critical. Additionally, complex models might offer marginally better predictive accuracy, they often lack transparency, making it difficult to justify decisions to stakeholders and regulators.
+
+Hence, the correct answer is: A simple model should be chosen because explainability is crucial in loan approval decisions.
+
+The option that says: A complex model should be chosen because accuracy is more important than explainability in loan approval decisions is incorrect because it prioritizes accuracy over explainability, which is the requirement in this scenario. Furthermore, while accuracy is important in predicting loan approvals, it cannot be prioritized over explainability in this context. Financial institutions must ensure their decisions are transparent and fair, which is difficult with complex models like deep neural networks or ensemble methods that lack interpretability. Regulatory bodies often require institutions to provide clear reasons for loan approval or denial, making explainability crucial.
+
+The option that says: A simple model should be chosen because accuracy is more important than explainability in loan approval decisions is incorrect. This option correctly identifies the use of a simple model but incorrectly states the reason. The emphasis here should be on explainability, not just accuracy. While simple models can sometimes be less accurate than complex ones, their interpretability makes them more suitable for loan approval decisions where transparency is essential.
+
+The option that says: A complex model should be chosen because explainability is crucial in loan approval decisions is incorrect. While it correctly states that explainability is crucial, it incorrectly suggests using a complex model. Complex models are typically less interpretable, making it difficult to explain the decision-making process. For ensuring fairness and transparency, simple models that are inherently more interpretable are preferred.
+
+ 
+
+References:
+
+https://aws.amazon.com/what-is/machine-learning/
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-explainability.html
+
+ 
+
+Check out this AWS Machine Learning And AI Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+===== PREGUNTA 2 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A company is working on a machine learning project that involves analyzing customer data to predict churn rates.
+
+Which of the following statements best describes the machine learning approach the company should take?
+
+Manually analyze the customer data and replicate the analysis process using custom code to automate predictions.
+Use raw, unprocessed customer data directly as input to train the machine learning model.
+Develop a set of hard-coded rules and conditional statements to generate predictions.
+Feed the customer data into machine learning algorithms, which will learn patterns and build models to make predictions.
+Incorrect
+Machine Learning (ML) is the process of training computers, using math and statistical processes, to find and recognize patterns in data. After patterns are found, ML generates and updates training models to make increasingly accurate predictions and inferences about future outcomes based on historical and new data. For example, ML could help determine the likelihood of a customer purchasing a particular product based on previous purchases by the user or the product’s past sales history.
+
+The machine learning process typically involves:
+
+Data collection and preparation: Gathering relevant data and preprocessing it (cleaning, formatting, feature engineering) to make it suitable for model training.
+Model training: Feeding the prepared data into machine learning algorithms, which learn patterns and relationships within the data to build a model.
+Model evaluation: Assessing the trained model’s performance using evaluation metrics and techniques like cross-validation.
+Model deployment: Integrating the trained and evaluated model into applications or systems to make predictions or decisions on new data.
+machine-learning
+
+Machine learning involves feeding data into algorithms, which then build models that can make predictions or decisions without being explicitly programmed with rules.
+
+Therefore, the correct answer is: Feed the customer data into machine learning algorithms, which will learn patterns and build models to make predictions.
+
+The option that says: Develop a set of hard-coded rules and conditional statements to generate predictions is incorrect because machine learning don’t just rely on simple hard-coded rules and if-else conditions but rather learns from data and adapts over time. Additionally, AWS emphasizes that machine learning algorithms should not be explicitly programmed with rigid rules.
+
+The option that says: Manually analyze the customer data and replicate the analysis process using custom code to automate predictions is incorrect because it only contradicts the automated nature of machine learning. Machine learning algorithms are designed to learn patterns and make predictions automatically from data without the need for manual analysis or replication of human processes.
+
+The option that says: Use raw, unprocessed customer data directly as input to train the machine learning model is incorrect because AWS recommends data preprocessing and feature engineering to prepare the data for effective machine learning model training. Using raw, unprocessed data directly can lead to poor model performance and inaccurate predictions.
+
+ 
+
+References:
+
+https://community.aws/content/2drbbXokwrIXivItJ8ZeCk3gT5F/introduction-to-artificial-intelligence-and-machine-learning?lang=en
+
+https://aws.amazon.com/what-is/machine-learning/
+
+ 
+
+Check out this AWS Machine Learning And AI Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+===== PREGUNTA 3 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+An e-commerce company wants to improve customer satisfaction. They have collected historical data on customer interactions, including purchase history, product reviews, and customer service inquiries. The goal is to predict whether a customer is likely to be satisfied or dissatisfied based on this data.
+
+Which of the following tasks would machine learning be least useful?
+
+Analyzing social media sentiment based on customer posts.
+Calculating average shipping times for product deliveries.
+Predicting customer satisfaction based on real-time chat interactions.
+Predicting customer satisfaction based on historical data.
+Incorrect
+Machine Learning (ML) is the science of developing algorithms and statistical models that allow computer systems to perform tasks without explicit instructions. Instead of relying on predefined rules, machine learning systems learn from data patterns and make predictions based on historical information. Here are some key points about machine learning:
+
+Data-Driven Decision Making:
+– Machine learning leverages large quantities of historical data to make informed decisions. By analyzing patterns and relationships within the data, ML models can generalize and predict outcomes.
+
+Business Impact:
+– Machine learning is crucial for businesses because it drives growth, unlocks new revenue streams, and solves complex problems.
+
+– Traditional decision-making processes rely on data from various sources (such as customer feedback, employee data, and financial records). ML automates and optimizes this process, allowing businesses to achieve results faster.
+
+Industry Applications:
+– Manufacturing: ML supports predictive maintenance, quality control, and innovative research. For instance, manufacturing giant 3M uses ML to analyze slight changes in shape, size, and orientation to improve the abrasiveness and durability of products.
+
+– Healthcare and Life Sciences: ML analyzes wearable sensor data, aids real-time diagnosis, and detects diseases. Solutions include tumor detection and eye disease diagnosis.
+
+– Financial Services: ML enhances risk analytics, portfolio management, and fraud detection. It helps investors identify opportunities and mitigate risks.
+
+– Retail: ML improves customer service, stock management, upselling, and cross-channel marketing.
+
+
+
+Hence, the correct answer is: Calculating average shipping times for product deliveries. This task doesn’t necessarily require machine learning. It’s a straightforward statistical calculation based on historical shipping data. Machine learning wouldn’t add much value here; simple aggregation and analysis suffice.
+
+The option that says: Analyzing social media sentiment based on customer posts is incorrect because this task involves using natural language processing (NLP) techniques to understand customer sentiment expressed in social media posts, reviews, or comments. Machine learning models can be trained to classify sentiment as positive, negative, or neutral. It’s a useful task for understanding customer opinions and feedback.
+
+The option that says: Predicting customer satisfaction based on historical data is incorrect because this is a highly relevant task for machine learning. By using historical data (such as purchase history, reviews, and customer service interactions), ML models can predict whether a customer is likely to be satisfied or dissatisfied. Techniques like logistic regression, decision trees, or neural networks can be applied.
+
+The option that says: Predicting customer satisfaction based on real-time chat interactions is incorrect. This option focuses on analyzing customer interactions in real time, such as chat conversations with customer service representatives. By using machine learning, companies can predict customer satisfaction during ongoing interactions and address issues promptly. Techniques like NLP and sentiment analysis can be applied.
+
+ 
+
+References:
+
+https://aws.amazon.com/what-is/machine-learning/
+
+https://aws.amazon.com/ai/machine-learning/
+
+ 
+
+Check out this Machine Learning and AI Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+===== PREGUNTA 4 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A healthcare analytics team is discussing the lifecycle management of models deployed to production. The team’s data scientist is tasked with deciding whether the deployed machine learning models need to be retrained and updated regularly.
+
+Which of the following statements accurately reflects the requirements for maintaining machine learning models in production?
+
+Production data is always consistent with training data, making retraining unnecessary.
+Production data does not differ from training data over time, so models do not require continuous retraining.
+Machine learning models need to be regularly retrained as data changes over time.
+Once a machine learning model is deployed, it can remain effective indefinitely without updates.
+Incorrect
+Machine learning models in production environments are often subject to changes in the underlying data distributions, a phenomenon known as data drift. This can lead to decreased model performance over time if not addressed.
+
+
+
+Regular retraining helps models adapt to new data patterns and maintain their accuracy and relevance. Monitoring tools and practices, such as those provided by AWS SageMaker Model Monitor, are crucial for identifying when retraining is necessary.
+
+Hence, the correct answer is: Machine learning models need to be regularly retrained as data changes over time.
+
+The option that says: Production data does not differ from training data over time, so models do not require continuous retraining is incorrect. Production data can simply change over time due to various factors such as seasonality, trends, or external influences. These changes, known as data drift, can lead to discrepancies between the training data and the production data, necessitating continuous retraining to ensure the model’s accuracy and relevance.
+
+The option that says: Production data is always consistent with training data, making retraining unnecessary is incorrect because production data is rarely consistent with training data over extended periods. As mentioned above, the various factors cause the production data to diverge from the training data. This inconsistency requires regular monitoring and retraining of the models to ensure they continue to perform well.
+
+The option that says: Once a machine learning model is deployed, it can remain effective indefinitely without updates is incorrect because machine learning models must be regularly updated to account for changes in data patterns and maintain their performance. Without updates, models can become outdated and less effective as they fail to adapt to new data characteristics.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html
+
+ 
+
+Check out this Amazon SageMaker Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 5 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A retail company is launching a series of new products across its global stores. The company wants to forecast daily demand for its products based on historical sales data. The historical data includes information on product sales, inventory levels, and marketing campaigns. However, the timestamps for this data are irregular, and some data points are missing due to occasional stockouts or incomplete records.
+
+Which approach would you recommend to satisfy these requirements with the LEAST operational overhead?
+
+Clean and forecast data using Amazon SageMaker Studio Notebook with Pandas.
+Process and forecast data using Amazon EMR Serverless with PySpark.
+Visualize and forecast data using Amazon QuickSight.
+Prepare and analyze data using Amazon SageMaker Studio Data Wrangler.
+Incorrect
+Amazon SageMaker Studio Data Wrangler provides a streamlined and visual interface for data preparation and analysis. It enables users to handle irregular timestamps and missing data points effectively through built-in transformations and data cleaning functions. Data Wrangler is designed to minimize operational overhead by offering a low-code solution for data wrangling tasks, allowing users to quickly prepare data for machine learning without deep technical expertise in data engineering or programming.
+
+
+
+By leveraging Data Wrangler, the corporation can ensure efficient data preparation and focus more on the analysis and forecasting aspects with reduced operational overhead.
+
+Hence, the correct answer is: Prepare and analyze data using Amazon SageMaker Studio Data Wrangler.
+
+The option that says: Process and forecast data using Amazon EMR Serverless with PySpark is incorrect because while this can primarily handle large-scale data processing and complex transformations, it requires more setup and maintenance compared to Data Wrangler. This approach involves configuring clusters, managing PySpark scripts, and ensuring infrastructure scalability, leading to higher operational overhead.
+
+The option that says: Visualize and forecast data using Amazon QuickSight. is incorrect. Amazon QuickSight is just a tool for data visualization with basic forecasting capabilities. It is not primarily designed for extensive data cleaning or handling irregular timestamps and missing data points. QuickSight focuses more on presenting insights rather than preparing data, which is a crucial step in this scenario.
+
+The option that says: Clean and forecast data using Amazon SageMaker Studio Notebook with Pandas is incorrect. This option requires significant coding and manual intervention to handle irregular timestamps and missing data points compared to the streamlined interface provided by Data Wrangler.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html
+
+https://aws.amazon.com/blogs/machine-learning/prepare-time-series-data-with-amazon-sagemaker-data-wrangler/
+
+ 
+
+Check out this Amazon SageMaker Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 6 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A data engineering team of an energy company is working with an Amazon S3 bucket that holds approximately 1 TB of structured and semi-structured data from various ingestion pipelines. This includes sensor and operational data from smart grids, energy meters, and IoT devices in CSV, JSON, XLSX, and Apache Parquet formats. All the files are stored in the same S3 folder without subfolder separation.
+
+The team needs to process the data using AWS Glue DataBrew and then store the final output in S3 using a format that ensures output format compatibility for downstream Glue jobs.
+
+What is the most effective strategy to meet these requirements?
+
+Organize the data into separate folders based on file type. Use DataBrew to process each folder separately and save the output in Apache Parquet format.
+Process the data in the current S3 folder using DataBrew and store the output in Apache Parquet format.
+Process the data in the current S3 folder using DataBrew and store the output in JSON format.
+Upload all files to a single S3 folder. Use Glue to convert them into JSON format before processing with DataBrew.
+Incorrect
+AWS Glue DataBrew is a visual data preparation tool enabling users to clean and normalize data without writing code. Using DataBrew helps reduce the time it takes to prepare data for analytics and machine learning (ML) by up to 80 percent, compared to custom-developed data preparation. You can choose from over 250 ready-made transformations to automate data preparation tasks, such as filtering anomalies, converting data to standard formats, and correcting invalid values.
+
+DataBrew Overview Diagram
+
+Using the DataBrew console, you can browse Amazon S3 buckets and directories to select a file for your dataset. Datasets are not restricted to a single file. DataBrew is capable of processing all files within an S3 folder, provided that two conditions are met:
+
+1. All files share the same data format.
+
+2. All files use the same file extension.
+
+DataBrew supports using the Apache Parquet format. This column-based data format is preferred due to its performance orientation, especially with large datasets.
+
+Hence, the correct answer is: Organize the data into separate folders based on file type. Use DataBrew to process each folder separately and save the output in Apache Parquet format.
+
+The option that says: Process the data in the current S3 folder using DataBrew and store the output in Apache Parquet format is incorrect. The question specifies that the S3 folder contains multiple file types, all stored in the same folder. DataBrew can only process all files in a folder if they share the same format and file extension. Since this folder contains heterogeneous file types, it violates both requirements.
+
+The option that says: Upload all files to a single S3 folder. Use Glue to convert them into JSON format before processing with DataBrew is incorrect. This option suggests using AWS Glue first to convert the files to JSON before processing them with DataBrew, which is backwards. DataBrew is typically used before Glue jobs to perform cleaning, normalization, and transformation. Also, storing and exporting output in JSON is technically possible but not optimal for AWS Glue, which performs best with columnar formats like Parquet. This format choice would result in slower performance and increased cost in Glue-based ETL jobs.
+
+The option that says: Process the data in the current S3 folder using DataBrew and store the output in JSON format is incorrect. This option simply combines the inability of DataBrew to process heterogeneous file types and the slow performance of the JSON format, making this option completely unworkable.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/databrew/latest/dg/what-is.html
+
+https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html
+
+https://docs.aws.amazon.com/databrew/latest/dg/supported-data-file-sources.html#datasets.databrew-input-formats
+
+https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-parquet-home.html
+
+ 
+
+Check out this AWS Glue Cheat Sheet:
+
+https://tutorialsdojo.com/aws-glue/
+
+===== PREGUNTA 7 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+An online retail company is leveraging Amazon SageMaker AI to optimize a machine learning model built on past transaction records to predict future customer spending behavior. To improve model performance, an ML engineer needs to analyze both the input features and the predicted outcomes to uncover trends that might introduce bias or skew in predictions, particularly when evaluated across various demographic segments.
+
+What approach will enable the ML engineer to perform this detailed analysis?
+
+Utilize SageMaker Feature Store to store and manage the input features for model training, ensuring that the features are consistent and free from trends or biases that might affect predictions.
+Leverage SageMaker Clarify to analyze the model and training data for hidden patterns that could influence accuracy.
+Use SageMaker Ground Truth to label the input data and ensure it is free from biases or trends that could affect model predictions.
+Use SageMaker DataWrangler to preprocess and clean the input data before model training, ensuring that no trends or biases in the data might affect predictions.
+Incorrect
+You can use Amazon SageMaker Clarify to understand fairness and model explainability and to explain and detect bias in your models. You can configure a SageMaker Clarify processing job to compute bias metrics and feature attributions and generate reports for model explainability. SageMaker Clarify processing jobs are implemented using a specialized SageMaker Clarify container image.
+
+SageMaker Clarify processing job
+
+Amazon SageMaker Clarify enables you to detect and explain model predictions by identifying bias both in pre-training data and in post-training scenarios, including biases that may arise during training or in production environments.
+
+Hence, the correct answer is: Leverage SageMaker Clarify to analyze the model and training data for hidden patterns that could influence accuracy.
+
+The option that says: Use SageMaker DataWrangler to preprocess and clean the input data before model training, ensuring that no trends or biases in the data might affect predictions is incorrect. SageMaker DataWrangler is indeed a tool used for data preprocessing, cleaning, and feature engineering. However, SageMaker DataWrangler is primarily used for data preparation rather than for analyzing model bias or skew in predicted outcomes. The goal of the question is to evaluate the predicted outcomes and identify trends that might introduce bias in predictions, not just to clean or preprocess the input data before training.
+
+The option that says: Utilize SageMaker Feature Store to store and manage the input features for model training, ensuring that the features are consistent and free from trends or biases that might affect predictions is incorrect. While it is true that SageMaker Feature Store is indeed primarily designed for storing, managing, and sharing features used in machine learning models, it does not analyze the model’s predictions or perform any checks on potential bias or skew in the model’s predicted outcomes.
+
+The option that says: Use SageMaker Ground Truth to label the input data and ensure it is free from biases or trends that could affect model predictions is incorrect. SageMaker Ground Truth is a tool used only for data labeling (i.e., creating labeled datasets by human annotators or through active learning) and ensuring high-quality labeled data. SageMaker Ground Truth does not address or analyze the model’s predictions for bias or skew.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-configure-processing-jobs.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-processing-job-run.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/sms.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 8 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A financial adviser plans to use machine learning to improve the efficiency and accuracy of processing mortgage loan requests. By incorporating relevant financial and behavioral data, they aim to reduce the time needed to evaluate applications.
+
+Which options are important for gathering data during model training?
+
+Medical history
+Education History
+Credit bureau data
+Employment history
+Incorrect
+Credit bureau data is crucial in evaluating an individual’s financial behavior and risk profile. It includes information about credit scores, outstanding debts, and payment histories. In machine learning, the quality and relevance of the data used to train the model are critical for achieving accurate predictions. For loan application processing, financial and behavioral data, including credit bureau data, provide insights into an applicant’s ability to repay a loan.
+
+
+
+Credit bureau data is essential for creating accurate risk assessment models. It provides detailed insights into an individual’s financial stability and creditworthiness, making it highly relevant for training machine learning models in loan processing. This data helps in predicting the likelihood of defaults, thereby improving the accuracy of risk assessments and decision-making processes.
+
+Hence, the correct answer is: Credit bureau data.
+
+The option that says: Employment history is incorrect. While employment history provides some information about job stability and income, it does not offer as comprehensive a picture of financial behavior as credit bureau data. It is less directly relevant to financial risk assessment.
+
+The option that says: Medical history is incorrect because this is related to an individual’s health and has no direct correlation with their financial behavior or creditworthiness. In addition, it would likely violate privacy regulations to use this data. The primary focus here is on financial and behavioral data that directly impact the likelihood of defaults or claims rather than health-related data.
+
+The option that says: Education History is incorrect. While it offers insights into earning potential and stability, it is not as directly relevant to assessing financial behavior and creditworthiness as other factors like credit bureau data, which provide crucial indicators of financial status and repayment ability for mortgage loan processing.
+
+ 
+
+References:
+
+https://www.experian.com/blogs/insights/what-is-credit-risk-analytics/
+
+https://aws.amazon.com/blogs/machine-learning/prepare-data-for-predicting-credit-risk-using-amazon-sagemaker-data-wrangler-and-amazon-sagemaker-clarify/
+
+ 
+
+Check out this Amazon SageMaker Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 9 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A research institute is developing a deep-learning model to analyze satellite images for weather forecasting. The dataset consists of millions of high-resolution images stored in a format that requires file-level access. The model training process involves multiple GPU-powered Amazon EC2 instances that require high throughput and low latency access to the dataset for efficient distributed training.
+
+Which AWS storage solution is the MOST suitable to support the deep-learning model training process?
+
+Amazon Elastic File System (Amazon EFS)
+Amazon FSx for Windows File Server
+Amazon FSx for Lustre
+Amazon Simple Storage Service (Amazon S3)
+Incorrect
+Amazon FSx for Lustre is a fully managed high-performance file system designed for workloads that require fast, shared storage with sub-millisecond latencies and high throughput. This makes it particularly suitable for machine learning and high-performance computing (HPC) applications, such as deep learning model training. With Amazon FSx for Lustre, researchers can achieve efficient distributed training of their models by leveraging its capability to provide low-latency and high-bandwidth access to large datasets. This ensures that the multiple GPU-powered Amazon EC2 instances can access the data simultaneously without significant delays, leading to faster and more efficient training processes.
+
+
+
+Furthermore, Amazon FSx for Lustre integrates seamlessly with Amazon S3, allowing easy data transfer between the high-performance file system and scalable object storage. This integration is beneficial for workflows that involve pre-processing large datasets or saving model training results. The file system also supports file-level access, which is essential for applications requiring fine-grained data storage and retrieval control. Given these features, Amazon FSx for Lustre is the most suitable choice for supporting NLP model development, as it meets the high throughput and low latency requirements essential for efficient deep learning training on satellite image datasets.
+
+Hence, the correct answer is: Amazon FSx for Lustre.
+
+The option that says: Amazon Simple Storage Service (Amazon S3) is incorrect. Although S3 is excellent for storing large datasets and integrates well with many AWS services, it does not provide the necessary low-latency and high-throughput file-level access required for efficient distributed training. Amazon S3 is an object storage service designed primarily for high durability and scalability.
+
+The option that says: Amazon FSx for Windows File Server is incorrect. This file system is specifically for Windows-based applications that require SMB (Server Message Block) protocol support. This option is less suitable for high-performance computing tasks typically associated with Linux-based systems and deep-learning model training as it does not offer the same level of performance optimization as Amazon FSx for Lustre for high-throughput.
+
+The option that says: Amazon Elastic File System (Amazon EFS) is incorrect because EFS only provides scalable file storage for use with Amazon EC2 instances. It is not optimized for the high-performance requirements of deep learning model training on GPU instances. EFS is designed for general-purpose file storage and does not offer the same level of throughput and low latency.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html
+
+https://aws.amazon.com/fsx/lustre/
+
+https://aws.amazon.com/fsx/
+
+ 
+
+Check out this Amazon FSx Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-fsx/
+
+===== PREGUNTA 10 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A machine learning engineer is working on an AWS project involving real-time fraud detection for an online payment platform. The platform generates a continuous stream of transaction data that needs processing and analysis using a pre-trained model on Amazon SageMaker AI.
+
+Which combination of AWS services should the machine learning engineer choose to ingest and process the real-time transaction data before delivering it to SageMaker AI for inference? (Select TWO.)
+
+Amazon Data Firehose
+Amazon Kinesis Data Streams
+Amazon Managed Streaming for Apache Kafka (Amazon MSK)
+Amazon Managed Service for Apache Flink
+AWS Glue
+Incorrect
+Amazon Kinesis Data Streams is a scalable and durable real-time data streaming service offered by AWS. It allows you to continuously capture and store terabytes of data per hour from hundreds of thousands of sources, such as website clickstreams, database event streams, financial transactions, social media feeds, and IoT sensor data.
+
+Kinesis Data Streams can automatically scale to handle varying data volumes and provide features like data retention, data replication, and automatic load balancing. It is designed to handle real-time data ingestion from various sources and can be integrated with other AWS services like Amazon Managed Service for Apache Flink Studio, AWS Lambda, and Amazon SageMaker for real-time data processing and analysis.
+
+Apache Flink is an open-source distributed processing engine for stateful computations over data streams. It provides a high-performance runtime and a powerful stream processing API that supports stateful computations, event-time processing, and accurate fault-tolerance guarantees.
+
+Amazon Managed Service for Apache Flink is a fully managed service that enables you to run Apache Flink applications on AWS without having to manage the underlying infrastructure. It automatically provisions and manages the resources required to run Apache Flink clusters, including EC2 instances, Apache Flink runtime, and Apache ZooKeeper.
+
+With Amazon Managed Service for Apache Flink, you can consume data from various sources, including Amazon Kinesis Data Streams, and perform real-time data transformations, filtering, and enrichment. It supports stateful stream processing, allowing you to maintain and update the state as data flows through the application. This service integrates with other AWS services like Amazon SageMaker, Amazon S3, and Amazon Data Firehose, enabling you to build end-to-end real-time data processing pipelines.
+
+Amazon Kinesis Data Streams
+
+By using Kinesis Data Streams and Amazon Managed Service for Apache Flink together, the machine learning engineer can ingest the real-time transaction data from the online payment platform, apply any necessary transformations or preprocessing, and then deliver the processed data to Amazon SageMaker for real-time inference using the pre-trained machine learning model to detect fraudulent transactions.
+
+Hence, the correct answers are:
+
+– Amazon Kinesis Data Streams
+
+– Amazon Managed Service for Apache Flink
+
+Amazon Data Firehose is incorrect. While Kinesis Data Firehose can ingest and deliver data to Amazon S3 or other destinations, it is primarily designed for batch processing and not real-time inference.
+
+AWS Glue is incorrect because AWS Glue is a fully managed extract, transform, and load (ETL) service, primarily used for batch data processing and not real-time data ingestion and processing.
+
+Amazon Managed Streaming for Apache Kafka (Amazon MSK) is incorrect. While this service could technically handle streaming data, it’s mainly used for data transfer between different applications and systems rather than real-time processing and inference.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/streams/latest/dev/introduction.html
+
+https://docs.aws.amazon.com/whitepapers/latest/big-data-analytics-options/amazon-kinesis.html
+
+https://aws.amazon.com/managed-service-apache-flink/?nc=sn&loc=1
+
+ 
+
+Check out these AWS Cheat Sheets:
+
+https://tutorialsdojo.com/amazon-kinesis/
+
+https://tutorialsdojo.com/amazon-kinesis-data-streams-vs-data-firehose-vs-data-analytics-vs-video-streams/
+
+===== PREGUNTA 11 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A manufacturing company has uploaded raw event log data into a data repository to build a machine learning (ML) model for predictive maintenance. The raw event logs include vehicle numbers, scheduled maintenance, warranty expiration, wheel rotation, and more. The goal is to transform the data into an efficient format for storing and processing.
+
+What data format should be used?
+
+XML
+CSV Format
+Parquet
+Avro RecordIO
+Incorrect
+Parquet is a columnar storage file format optimized for big data processing frameworks such as Apache Hadoop, Apache Spark, and Apache Drill. It offers excellent data compression and encoding algorithms, which help reduce storage space and improve query performance.
+
+You can use AWS Glue Parquet writer to enable faster Parquet file writing. The conventional writer creates a schema before writing. The Parquet format does not keep the schema in an easily retrievable format; therefore, this may take some time. The AWS Glue Parquet writer does not require a pre-computed schema. As new data arrives, the writer computes and updates the schema dynamically.
+
+
+
+Parquet’s columnar format is ideal for storing and processing large datasets efficiently. It allows for high compression and faster query performance, making it suitable for ML models where fast access to specific data columns is crucial. This efficiency aligns to transform raw event logs into an optimal format for predictive maintenance.
+
+Hence, the correct answer is: Parquet.
+
+The option that says: CSV Format is incorrect. While it is easy to use and widely supported, it is not as efficient as columnar formats for large-scale data processing and storage. It does not support advanced data compression and indexing, which can lead to larger storage requirements and slower query performance.
+
+The option that says: XML is incorrect because XML is primarily a hierarchical data format that is verbose and not optimized for storage and processing efficiency, especially with large datasets. While XML is good for data interchange and readability, it does not support efficient data compression and query performance, making it less suitable for big data processing and analytics tasks compared to columnar storage formats like Parquet.
+
+The option that says: Avro RecordIO is incorrect because this option is only a row-based storage format that is efficient for serialization but not ideal for storage and processing of large datasets like Parquet. Avro does support schema evolution, but its row-based nature makes it less efficient for large-scale analytical workloads compared to Parquet.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-parquet-home.html
+
+https://parquet.apache.org/docs/overview/
+
+ 
+
+Check out this AWS Glue DataBrew Cheat Sheet:
+
+https://tutorialsdojo.com/aws-glue-databrew/
+
+===== PREGUNTA 12 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+An e-commerce company aims to enhance its predictive model for customer churn by incorporating data from various sources. The company plans to train its model using comprehensive datasets, including purchase histories, website activity, user profiles, and social media interactions.
+
+To achieve this, the company needs to:
+
+Extract and combine data from Amazon RDS databases, Amazon DynamoDB, and other data sources to create a unified dataset for training the machine learning model.
+
+Store the combined dataset in a cost-effective and scalable storage solution for both training and inference.
+
+Analyze large volumes of purchase history data using a distributed computing framework.
+
+Ingest, transform, and load real-time social media activity data.
+
+Match the appropriate AWS service or solution to each requirement from the options provided. Each option may be used once, more than once, or not at all. (Select FOUR)
+
+Extract and combine data from Amazon RDS databases, Amazon DynamoDB, and other data sources to create a unified dataset for training the machine learning model.
+(AWS Glue)
+Store the combined dataset in a cost-effective and scalable storage solution for training and inference.
+(Amazon S3)
+Analyze large volumes of purchase history data using a distributed computing framework.
+(Amazon EMR)
+Ingest, transform, and load real-time social media activity data.
+(Amazon Data Firehose)
+
+Incorrect0 / 4 Points
+AWS Glue is a fully managed extract, transform, and load (ETL) service that makes it easy to prepare and load data for analytics. It can be used to discover data, transform it, and prepare it for analytics and machine learning. AWS Glue provides a Data Catalog to store metadata about data sources and targets and a visual interface to build, run, and monitor ETL workflows.
+
+Amazon Simple Storage Service (Amazon S3) is an object storage service that offers industry-leading scalability, data availability, security, and performance. Customers of all sizes and industries can use Amazon S3 to store and protect any amount of data for a variety of use cases, such as data lakes, websites, mobile applications, backup and restore, archive, enterprise applications, IoT devices, and big data analytics.
+
+Amazon EMR is a managed cluster platform that simplifies running big data frameworks, such as Apache Spark, Apache Hive, Apache HBase, Apache Flink, Apache Hudi, and Presto, on AWS to process and analyze vast amounts of data. You can create and configure these frameworks to process data for analytics use cases, machine learning, and more.
+
+Amazon Data Firehose is a fully managed service that delivers real-time streaming data to destinations such as Amazon S3, Amazon Redshift, Amazon OpenSearch Service, and Splunk. It can capture, transform, and load streaming data into these destinations, allowing you to focus on your applications without having to manage any infrastructure.
+
+data-prepartaion-ml-model
+
+To improve its predictive model for customer churn, the e-commerce company can leverage AWS services in the following manner: AWS Glue can be used to extract and combine data from various sources like Amazon RDS databases, Amazon DynamoDB, and other data stores, creating a unified dataset for training the machine learning model. This combined dataset can then be stored in Amazon S3, a cost-effective and scalable object storage service, making it accessible for both training and inference purposes. For analyzing large volumes of purchase history data, which is crucial for understanding customer behavior, the company can utilize Amazon EMR, a distributed computing framework that enables efficient processing of big data. Additionally, to incorporate real-time social media activity data into the model, Amazon Data Firehose can be employed to ingest, transform, and load this streaming data directly into Amazon S3, where it can be combined with the other datasets. By leveraging these AWS services in tandem, the e-commerce company can streamline the entire data processing pipeline, from data ingestion and storage to analysis and model training, ultimately enhancing the accuracy and effectiveness of their customer churn prediction model.
+
+Hence, the correct answers are:
+
+– Extract and combine data from Amazon RDS databases, Amazon DynamoDB, and other data sources to create a unified dataset for training the machine learning model: AWS Glue
+
+– Store the combined dataset in a cost-effective and scalable storage solution for training and inference: Amazon S3
+
+– Analyze large volumes of purchase history data using a distributed computing framework: Amazon EMR
+
+– Ingest, transform, and load real-time social media activity data: Amazon Data Firehose
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+
+https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-what-is-emr.html
+
+https://docs.aws.amazon.com/firehose/latest/dev/what-is-this-service.html
+
+ 
+
+Check out the following Cheat Sheets:
+
+https://tutorialsdojo.com/amazon-s3/
+
+https://tutorialsdojo.com/amazon-kinesis/
+
+https://tutorialsdojo.com/amazon-emr/
+
+===== PREGUNTA 13 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A company needs to migrate 100 terabytes of data from an on-premises data center to Amazon S3. The data contains extensive logs, images, and unstructured data that will be used for training machine-learning models in Amazon SageMaker AI. The on-premises data center has limited internet connectivity, making online data transfer impractical.
+
+Which AWS service should be used to transfer the data?
+
+AWS Storage Gateway
+AWS DataSync
+S3 Transfer Acceleration
+AWS Data Transfer Terminal
+Incorrect
+The AWS Data Transfer Terminal is a network-ready, physical facility where you can bring your data storage devices for quick transfers to and from AWS Cloud services. This service allows you to upload data collected remotely, making it easier to access that information.
+
+Data Transfer Terminal
+
+To use the Data Transfer Terminal, schedule a reservation at one of the facilities through the AWS Management Console. Arrive at your scheduled time and upload your data to your AWS Cloud services using your devices. Once your reservation is complete and you leave the facility, it will be re-secured and prepared for the next scheduled appointment.
+
+Hence, the correct answer is: AWS Data Transfer Terminal. It is designed for large-scale offline data migrations. Since the company has limited internet connectivity, physically transferring the data using direct terminal access is the most practical and reliable solution for moving 100 TB of logs, images, and unstructured data into Amazon S3.
+
+S3 Transfer Acceleration is incorrect because it is primarily designed to speed up content transfers to and from Amazon S3 by using optimized network protocols and AWS edge locations. It still relies on the Internet for data transfer.
+
+AWS Storage Gateway is incorrect because it is not typically designed for large-scale data transfer and would still rely on internet connectivity.
+
+AWS DataSync is incorrect. While it is efficient for data transfer, it primarily depends on internet bandwidth. Given the limited internet connectivity, AWS DataSync would not be able to transfer 100 terabytes of data within the required timeframe.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/datatransferterminal/latest/userguide/what-is-dtt.html
+
+https://aws.amazon.com/data-transfer-terminal/pricing/
+
+ 
+
+Check out these AWS Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets/
+
+===== PREGUNTA 14 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A Machine Learning Specialist uses Amazon SageMaker Data Wrangler to prepare the training data for a model. The objective is to analyze the dataset to understand feature relationships and detect issues. The goal is to visualize correlations and assess strength to identify patterns and outliers.
+
+Which visualization technique should be used?
+
+Scatter Plot
+Histogram
+Multicollinearity
+Shapley values plot
+Incorrect
+Amazon SageMaker Data Wrangler offers a visual interface for preparing data for machine learning. It allows users to perform various data analysis tasks, including data visualization. Visualizing relationships between variables and evaluating the strength of these relationships is essential for understanding the dataset and spotting patterns and outliers. A scatter plot is a useful tool for showing the relationship between two continuous variables. By graphing each observation as a point, the scatter plot helps in identifying correlations, trends, and potential outliers in the data. It provides a clear visual representation of how one variable changes in relation to another, making it easier to detect linear and non-linear relationships, as well as clusters and deviations.
+
+Data Wrangler Scatter Plot
+
+In SageMaker Data Wrangler, scatter plots help understand feature relationships for feature engineering and model selection. Strong correlations may indicate redundant variables, while weak correlations may signal the need for additional features or data transformations. Additionally, scatter plots can identify outliers for effective dataset cleaning before model training, leading to more accurate predictive models.
+
+Hence, the correct answer is: Scatter Plot.
+
+Histogram is incorrect. This option is only used to visualize the distribution of a single variable rather than relationships between two variables. While histograms are helpful for understanding the distribution and frequency of data points, they do not provide insight into how two variables interact or correlate with each other.
+
+Shapley values plot is incorrect. While Shapley values are highly effective for understanding feature importance and attribution after a model is trained (typically via SageMaker Clarify), they are not a standard exploratory data visualization technique in Data Wrangler for initially assessing raw feature correlations.
+
+Multicollinearity is incorrect because it’s just a statistical phenomenon in which several independent variables in a model are highly correlated. It is not a visualization technique but rather an issue that needs to be detected and addressed through statistical analysis, often using techniques like variance inflation factor (VIF) or correlation matrices.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler-analyses.html#data-wrangler-visualize-scatter-plot
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.htmlhttps://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html
+
+ 
+
+Tutorials Dojo’s AWS Machine Learning Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+===== PREGUNTA 15 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A company is developing a machine learning (ML) platform for sentiment analysis of news articles. The platform needs storage to process large volumes of text data. The ML platform must handle concurrent access from multiple EC2 instances for data preprocessing, model training, and inference.
+
+Which of the following options will meet the requirements in this scenario?
+
+AWS DataSync
+Amazon EBS
+Amazon EFS
+AWS Storage Gateway
+Incorrect
+Amazon EFS is a fully managed, scalable, and elastic file storage service that provides seamless integration with existing applications using the Network File System (NFS) protocol. It automatically scales based on usage patterns and replicates data across multiple AZs for high availability.
+
+Amazon EFS
+
+EFS provides high levels of aggregate throughput and IOPS with consistently low latencies by enabling massively parallel shared access to thousands of Amazon EC2 instances for your applications. You can remotely and securely mount EFS file systems to multiple Amazon EC2 instances by using the AWS Systems Manager Run Command.
+
+Hence, the correct answer is: Amazon EFS.
+
+The option that says: Amazon EBS is incorrect because while EBS volumes are reliable and performant, they are only tied to specific instances and don’t support shared access.
+
+The option that says: AWS Storage Gateway is incorrect. This service is simply used for connecting on-premises environments to AWS storage services.
+
+The option that says: AWS DataSync is incorrect because it’s just a data transfer service for moving data between on-premises and AWS. DataSync is useful for data migration but not designed for concurrent access or ML model training.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html
+
+https://aws.amazon.com/efs/faq/
+
+https://docs.aws.amazon.com/efs/latest/ug/mount-multiple-ec2-instances.html#:~:text=You%20can%20mount%20EFS%20file,AWS%20Systems%20Manager%20User%20Guide.
+
+ 
+
+Check out this Amazon EFS Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-efs/
+
+===== PREGUNTA 16 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A ML Engineering team is responsible for developing a real-time fraud detection system for a financial services company. The system needs to ingest and process large volumes of data from various sources, including transaction logs, user behavior data, and account details. The data sources are diverse and may contain structured, semi-structured, or unstructured data formats.
+
+Which file format is best suited for effective real-time parsing and analysis of this diverse dataset?
+
+ORC
+JSON Lines
+XML
+Parquet
+Incorrect
+JSON Lines (JSONL), also known as newline-delimited JSON, is a format for encoding JSON objects where each object is separated by a newline character. Unlike traditional JSON, which represents data as a nested structure, JSONL stores each JSON object on a separate line. This format allows for efficient streaming and processing of large datasets because individual lines (or objects) can be read and processed independently without requiring the entire dataset to be loaded into memory.
+
+
+
+JSON Lines (JSONL) offers several advantages, including efficient parsing where each line can be processed individually, making it ideal for large-scale data processing. It supports streaming of data, which is beneficial for real-time applications, and its simplicity allows for easy appending of new records without altering the existing data structure. These features make JSONL particularly valuable for scenarios requiring efficient handling and processing of large volumes of data in real time.
+
+Hence, the correct answer is: JSON Lines.
+
+The option that says: Parquet is incorrect because it’s more suited for batch processing tasks due to its columnar format. It’s not ideal for incremental processing needed in real-time scenarios.
+
+The option that says: ORC is incorrect. Similar to the previous option, it is only optimized for performance in batch processing rather than real-time data handling.
+
+The option that says: XML is incorrect due to its verbosity and the complexity involved in parsing, which can hinder real-time data processing.
+
+ 
+
+References:
+
+https://aws.amazon.com/blogs/machine-learning/prepare-and-analyze-json-and-orc-data-with-amazon-sagemaker-data-wrangler/
+
+https://explore.skillbuilder.aws/learn/course/19562/play/129582/aws-ml-engineer-associate-11-collect-ingest-and-store-data;lp=2192
+
+ 
+
+Check out this AWS Machine Learning And AI Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+===== PREGUNTA 17 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A financial services company faces high latency and low throughput in its real-time fraud detection model. The system ingests transaction data into Amazon Kinesis Data Streams, which is then delivered to Amazon S3 for machine learning analysis using downstream analytics tools such as Amazon Elastic MapReduce. Amazon CloudWatch monitoring reveals that the bottleneck occurs during data ingestion from Kinesis Data Streams to S3.
+
+Which solution will improve ingestion performance and reduce latency?
+
+Increase the number of shards in Kinesis Data Streams.
+Implement data compression before sending the data to Kinesis Data Streams.
+Implement data deduplication before sending data to Kinesis Data Streams.
+Increase the number of provisioned shards in Amazon Data Firehose.
+Incorrect
+Amazon Kinesis Data Streams is a scalable and durable real-time data streaming service that can continuously capture gigabytes of data per second from hundreds of thousands of sources.
+
+Kinesis Data Streams are composed of one or more shards, which are independent sequences of data records. The number of shards determines the provisioned capacity for data ingestion.
+
+Increasing Shards in Kinesis
+
+In Amazon Kinesis Data Streams, issues can arise if the data ingestion process is not optimized. In this scenario, the bottleneck occurs during data ingestion from Kinesis Data Streams to S3, which suggests that the issue is related to the throughput capacity of Kinesis Data Streams or the way data is being ingested into S3.
+
+Increasing the number of shards in Kinesis Data Streams can help improve ingestion performance and reduce latency by increasing the parallelism in processing records. Each shard provides a fixed amount of throughput, so by adding more shards, the system can handle a higher volume of data more efficiently.
+
+Hence, the correct answer is: Increase the number of shards in Kinesis Data Streams.
+
+The option that says: Implement data deduplication before sending data to Kinesis Data Streams is incorrect. Deduplication primarily aims to eliminate redundant data entries, ensuring only unique records are processed. This is important when there are duplicate records due to retries or transmission errors. Implementing deduplication won’t directly improve ingestion performance or throughput.
+
+The option that says: Increase the number of provisioned shards in Amazon Data Firehose is incorrect because the architecture uses Kinesis Data Streams, not Firehose. Furthermore, Amazon Data Firehose is fully managed and scales automatically based on throughput, so it does not use provisioned shards that you can manually increase.
+
+The option that says: Implement data compression before sending the data to Kinesis Data Streams is incorrect because compression can only reduce the size of the data being transmitted; it does not directly address the underlying issue of data ingestion performance and latency.
+
+ 
+
+References:
+
+https://repost.aws/knowledge-center/kinesis-data-streams-open-shards
+
+https://docs.aws.amazon.com/streams/latest/dev/introduction.html
+
+ 
+
+Check out the following Cheat Sheets:
+
+https://tutorialsdojo.com/amazon-kinesis/
+
+https://tutorialsdojo.com/amazon-kinesis-data-streams-vs-data-firehose-vs-data-analytics-vs-video-streams/
+
+===== PREGUNTA 18 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A media company is developing a recommendation engine to boost user engagement by analyzing interactions. They collect and store data like user reviews, ratings, timestamps, and profiles (age, preferences, viewing history). This data is currently stored in a CSV (comma-separated value) format. The company also tracks the names of the content creators, which are stored alongside the interaction data.
+
+Select and order the steps a data scientist could take to optimize the data format and improve processing performance. Each step should be selected one time or not at all. (Select and order THREE.)
+
+Filter out irrelevant columns, focusing only on the reviews, ratings, and timestamps.
+
+Convert the data from CSV format to a hierarchical format such as JSON.
+
+Compress the data to reduce storage requirements and improve processing time.
+
+Keep the data in the existing CSV format and process all columns as-is.
+
+Aggregate the data by content creators’ names.
+
+Transform the CSV data into a columnar storage format for faster access.
+
+Step 1:
+(Filter out irrelevant columns, focusing only on the comments, likes, time, and date.)
+Step 2:
+(Compress the data to reduce storage requirements and improve processing time.)
+Step 3:
+(Transform the CSV data into a columnar storage format for faster access.)
+
+Incorrect0 / 3 Points
+In data science, optimizing data format and storage is critical for improving the performance of machine learning models, especially when working with big and heterogeneous datasets. In instances when an organization wants to adopt a recommendation engine or sentiment analysis model, data processing efficiency can have a substantial impact on the model’s accuracy and responsiveness. This necessitates a deliberate approach to data management, ensuring that only the most important information is processed and that the data is kept in a manner that allows for quick and efficient access.
+
+
+
+In the scenario presented, the correct approach consists of three key steps: first, filtering out irrelevant columns to focus on data directly related to user interactions; second, compressing the data to reduce storage space and improve processing speed; and third, transforming the CSV data into a columnar storage format that is optimized for rapid data retrieval. These steps work together to guarantee that the machine learning model runs as efficiently as possible, making the best use of available data while minimizing processing time and storage requirements.
+
+Hence, the correct answers are:
+
+– Step 1: Filter out irrelevant columns, focusing only on the comments, likes, time, and date.
+
+– Step 2: Compress the data to reduce storage requirements and improve processing time.
+
+– Step 3: Transform the CSV data into a columnar storage format for faster access.
+
+The option that says: Convert the data from CSV format to a hierarchical format such as JSON is incorrect because JSON, while flexible and useful for representing complex data structures, is not primarily optimized for the kind of read-heavy operations required in a recommendation engine. JSON’s hierarchical nature can typically lead to increased processing overhead and slower data retrieval compared to columnar formats, making it less suitable for improving performance in this context.
+
+The option that says: Keep the data in the existing CSV format and process all columns as-is is incorrect because CSV is a row-based storage format that is not optimized for large-scale data processing, particularly when only specific columns are relevant to the analysis. Additionally, simply processing all columns without filtering out irrelevant data increases the amount of data that must be handled, leading to slower performance and less efficient data processing.
+
+The option that says: Aggregate the data by content creators’ names is incorrect because the names of content creators are not directly relevant to the recommendation engine’s task of analyzing user interactions with content. Aggregating by content creators’ names would just introduce unnecessary complexity and would not contribute to improving the performance of the recommendation engine, which should focus on user interaction data like reviews, ratings, and timestamps.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html
+
+https://docs.aws.amazon.com/redshift/latest/dg/c_columnar_storage_disk_mem_mgmnt.html
+
+ 
+
+Check out this Amazon Glue Cheat Sheet:
+
+https://tutorialsdojo.com/aws-glue/#concepts
+
+===== PREGUNTA 19 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A company is working on optimizing data transfer performance for a large-scale machine learning application. The application involves frequent uploads and downloads of large datasets stored on Amazon S3, which are used for training ML models. These datasets are accessed from various global locations. The goal is to reduce latency and improve transfer speeds to accelerate the training process and deployment of ML models.
+
+Which AWS service should you recommend to achieve this?
+
+AWS Global Accelerator
+Amazon S3 Transfer Acceleration
+AWS Direct Connect
+AWS DataSync
+Incorrect
+Amazon S3 Transfer Acceleration is a feature that operates at the bucket level. It facilitates fast, secure, and straightforward file transfers over long distances between your client and an S3 bucket. The feature is designed to enhance transfer speeds into S3 buckets from around the world. Transfer Acceleration leverages the globally distributed edge locations in Amazon CloudFront. When data reaches an edge location, it is directed to Amazon S3 via an optimized network path.
+
+
+
+Amazon S3 Transfer Acceleration leverages Amazon CloudFront’s globally distributed edge locations to accelerate uploads to Amazon S3. It optimizes data transfer using a content delivery network (CDN) approach. When users upload files, the data is routed through CloudFront’s edge locations, reducing latency and improving transfer speeds.
+
+Hence, the correct answer is: Amazon S3 Transfer Acceleration.
+
+The option that says: AWS Direct Connect is incorrect because this primarily provides a dedicated network connection between on-premises data centers and AWS. However, it’s not specifically designed to optimize S3 data transfers. Its focus is on network connectivity rather than transfer speed.
+
+The option that says: AWS Global Accelerator is incorrect because this only improves application availability and performance by using static IP addresses and anycast routing. It’s not designed for S3 data transfers. Its primary use case is routing traffic to endpoints across regions.
+
+The option that says: AWS DataSync is incorrect because this is used for data migration between on-premises storage systems and AWS services. It doesn’t directly enhance S3 transfer speeds. Its purpose is data synchronization, not acceleration.
+
+ 
+
+References:
+
+https://aws.amazon.com/s3/transfer-acceleration/
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html
+
+ 
+
+Check out this Amazon S3 Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-s3/
+
+===== PREGUNTA 20 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A company is designing a data lake architecture for its large e-commerce platform. The platform generates massive amounts of customer transaction data, product images, and user reviews. The data must be stored securely and ensure high durability and availability.
+
+Which AWS storage service would be the most suitable for this use case?
+
+Amazon FSx for Lustre
+Amazon S3
+Amazon EFS
+AWS Storage Gateway
+Incorrect
+A data lake built on AWS utilizes Amazon S3 as its main storage platform. Amazon S3 offers an ideal base for a data lake due to its virtually limitless scalability and high durability. You have the flexibility to smoothly increase storage from gigabytes to petabytes of content, and you only pay for what you use. Amazon S3 is designed to provide 99.999999999% durability. It offers scalable performance, user-friendly features, built-in encryption, and access control capabilities. Amazon S3 seamlessly integrates with a wide range of AWS and third-party ISV tools for data ingestion, processing, and security.
+
+
+Amazon S3 is highly scalable and can handle massive amounts of data. It’s designed for durability and availability, making it suitable for storing customer transaction data, product images, and user reviews. Amazon S3 provides durability for objects stored in it. This means your data is highly protected against loss. It offers high availability across multiple Availability Zones (AZs), ensuring your data remains accessible even if one AZ experiences issues. Amazon S3 supports encryption, access control policies, and fine-grained permissions, allowing you to secure your data.
+
+Hence, the correct answer is: Amazon S3.
+
+The option that says: Amazon EFS is incorrect because it is primarily designed for shared file storage across multiple instances. It lacks the scalability needed for massive data lakes and isn’t optimized for this use case.
+
+The option that says: Amazon FSx for Lustre is incorrect. It’s more suitable for high-performance computing (HPC) workloads, not general-purpose data lakes.
+
+The option that says: AWS Storage Gateway is incorrect because this service only connects on-premises environments to AWS storage services. It’s not intended for building data lake architectures.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/whitepapers/latest/building-data-lakes/amazon-s3-data-lake-storage-platform.html
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
+
+ 
+
+Check out this Amazon S3 Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-s3/
+
+===== PREGUNTA 21 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A data scientist is in the process of examining a machine learning model to identify potential biases within the training data before it’s deployed in a production environment. The goal is to guarantee that the model exhibits no disproportionate favoritism or discrimination towards any specific demographic group.
+
+Match each pre-training bias metric with its appropriate scenario. Each metric may be used more than once. (Select THREE.)
+
+Total Variation Distance (TVD)
+Kullback-Leibler Divergence (KL)
+Difference in Proportions of Labels (DPL)
+Class Imbalance (CI)
+The data scientist wants to compare the difference in the proportion of positive outcomes among different racial groups.
+(Difference in Proportions of Labels (DPL))
+The dataset must be analyzed to measure the imbalance between male and female instances.
+(Class Imbalance (CI))
+The data scientist is interested in evaluating the maximum disparity in results among different income levels.
+(Total Variation Distance (TVD))
+
+
+Incorrect0 / 3 Points
+Evaluating and reducing bias in machine learning models is crucial for creating fair and accurate models, especially when dealing with sensitive demographic data. Pre-training bias metrics are essential tools for data scientists to identify and address potential biases within a dataset before the model is trained. Applying these metrics can help ensure that machine learning models are more equitable and that predictions do not disproportionately favor or disadvantage specific groups.
+
+
+
+Class Imbalance (CI) – This metric evaluates the representation of different classes or demographic groups in a dataset. For instance, if one gender is significantly underrepresented, CI will reveal this imbalance, which could lead to biased predictions that favor the more represented class. Addressing such imbalances is important to ensure that the model learns fairly from all data groups.
+
+Difference in Proportions of Labels (DPL) –  DPL measures disparities in the proportion of positive outcomes between different demographic groups. For example, if a model predicts higher success rates for one racial group compared to another, DPL will highlight this discrepancy, indicating a potential bias in outcomes. Analyzing DPL can make adjustments to the model or dataset to reduce such disparities and promote fairness.
+
+Total Variation Distance (TVD) – TVD quantifies the maximum divergence in outcome distributions between different demographic groups. It’s a critical metric for identifying how much the predicted outcomes for one group differ from another, thus helping to assess bias in the model’s predictions.
+
+Hence, the correct answers are:
+
+– The data scientist wants to compare the difference in the proportion of positive outcomes among different racial groups: Difference in Proportions of Labels (DPL)
+
+– The dataset must be analyzed to measure the imbalance between male and female instances: Class Imbalance (CI)
+
+– The data scientist is interested in evaluating the maximum disparity in results among different income levels: Total Variation Distance (TVD)
+
+The option that says: Kullback-Leibler Divergence (KL) is incorrect. This metric primarily measures the divergence between two probability distributions often used to compare the distribution of outcomes across different groups. KL Divergence is not specifically tailored for measuring class imbalance or comparing the proportion of labels across demographic groups. It is typically used in broader contexts of distribution comparisons and might not provide a direct assessment of bias related to demographic attributes.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-measure-data-bias.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-detect-data-bias.html
+
+ 
+
+Check out this AWS Machine Learning And AI Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+===== PREGUNTA 22 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A company plans to migrate a large training dataset from on-premises servers to Amazon Elastic File System (EFS). This dataset will be accessed by a fleet of Amazon EC2 instances for distributed ML model training. The company requires a solution that can efficiently handle the transfer of large volumes of data with minimal disruption to ongoing operations.
+
+Which AWS service is best suited for the company’s requirements?
+
+Amazon Data Firehose
+Amazon CloudFront
+Amazon S3 Transfer Acceleration
+AWS DataSync
+Incorrect
+AWS DataSync is an online tool for data transfer and discovery that makes data migration easier and makes it quick, simple, and safe to move file or object data to and from AWS storage services.
+
+
+
+AWS DataSync is the most appropriate service for this scenario because it is specifically designed to efficiently move large amounts of data between on-premises storage and AWS services such as Amazon EFS. It automates data transfer, reduces manual intervention, and ensures secure and efficient migration, which is critical for machine learning workloads.
+
+Hence, the correct answer is: AWS DataSync.
+
+The option that says: Amazon Data Firehose is incorrect because it is a service simply designed for loading streaming data into AWS, rather than transferring bulk files to Amazon EFS.
+
+The option that says: Amazon S3 Transfer Acceleration is incorrect because it is only intended to accelerate uploads to Amazon S3 over long distances by leveraging Amazon CloudFront’s globally distributed edge locations, not for direct transfers to Amazon EFS.
+
+The option that says: Amazon CloudFront is incorrect because it is just a content delivery network (CDN) designed to deliver web content to users globally with low latency, not for migrating data to Amazon EFS.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/datasync/latest/userguide/what-is-datasync.html
+
+https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html
+
+ 
+
+Check out this AWS DataSync Cheat Sheet:
+
+https://tutorialsdojo.com/aws-datasync/
+
+===== PREGUNTA 23 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A data analytics team needs to process and prepare large volumes of JSON data from an Amazon S3 bucket for machine learning training. The team requires an automated solution that minimizes operational effort for transforming the data into a format suitable for ML models.
+
+Which approach would best meet these requirements?
+
+Create an Amazon EMR cluster. Use Apache Drill to transform the JSON data into a format for ML models.
+Use AWS Step Functions to orchestrate multiple AWS Lambda functions for batch processing the JSON data.
+Set up an AWS Lambda function triggered by S3 events. Process and transform the JSON data using Pandas.
+Set up an AWS Glue job and use the visual ETL editor to transform the JSON data from S3 for data ingestion.
+Incorrect
+AWS Glue is a serverless data integration service that makes it easy for analytics users to discover, prepare, move, and integrate data from multiple sources. You can use it for analytics, machine learning, and application development. It also includes additional productivity and data ops tooling for authoring, running jobs, and implementing business workflows.
+
+aws-glue-studio-visual-etl
+
+Glue provides a visual ETL editor that provides an automated way to handle the ETL processes, allowing users to transform data with minimal operational effort. It supports various data formats, including JSON, and can directly read data from Amazon S3. This makes it well-suited for handling large volumes of data and preparing it for ML models.
+
+Hence, the correct answer is: Set up an AWS Glue job and use the visual ETL editor to transform the JSON data from S3 for data ingestion.
+
+The option that says: Use AWS Step Functions to orchestrate multiple AWS Lambda functions for batch processing the JSON data is incorrect because this option introduces additional complexity due to the orchestration of multiple compute functions. While this approach is possible, it is simply not as efficient as using Glue for large-scale data transformations.
+
+The option that says: Set up a Lambda function triggered by S3 events. Process and transform the data for feature engineering using Pandas is incorrect because an AWS Lambda function is subjected to a maximum execution time of 15 minutes. Handling large datasets primarily requires splitting the data or optimizing processing to fit within this limit, making this option less suitable for heavy ETL tasks.
+
+The option that says: Create an Amazon EMR cluster. Use Apache Drill to transform the data into a format suitable for the ML models is incorrect because Amazon EMR is powerful for large-scale processing but is only recommended when you need deep, cluster-level control. It requires far more operational management and configuration compared to the automated, serverless features of Glue.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/glue/latest/dg/what-is-glue.html
+
+https://docs.aws.amazon.com/glue/latest/dg/author-job-glue.html
+
+ 
+
+Check out this AWS Glue Cheat Sheet:
+
+https://tutorialsdojo.com/aws-glue/
+
+===== PREGUNTA 24 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+An ML engineer sets up an Amazon SageMaker Processing job that fetches .csv files within an Amazon S3 bucket. Although the job successfully connects to the S3 bucket, it encounters a 403 error when attempting to retrieve the .csv files. The ML engineer confirms that the S3 bucket exists and the SageMaker Processing job is correctly configured to use a VPC endpoint.
+
+Which of the following is the most likely cause of this error?
+
+The IAM user who created the SageMaker Processing job does not have administrative permissions.
+The execution role associated with the SageMaker Processing job lacks the required permissions to access the S3 bucket.
+The S3 bucket policy denies access to the SageMaker Processing job.
+The S3 bucket is located in a different AWS region from the SageMaker Processing job.
+Incorrect
+Amazon SageMaker Processing jobs allow ML engineers to perform data preprocessing, postprocessing, and model evaluation using fully managed infrastructure. These jobs typically involve reading data from Amazon S3, performing operations on that data, and then writing the results back to S3. For SageMaker Processing jobs to function correctly, the execution role associated with the job must have appropriate permissions to access the S3 bucket where the data is stored.
+
+In this scenario, the SageMaker Processing job can connect to the S3 bucket, but it encounters a 403 error when trying to access the specific .csv files. A 403 error indicates that the job is being denied access to the files due to insufficient permissions.
+
+Amazon SageMaker Execution Role
+
+The most likely cause of the error is that the SageMaker Processing job execution role does not have the necessary permissions to access the files in the S3 bucket. For the job to successfully access and process the .csv files, the execution role must have appropriate permissions, such as s3:GetObject, to read the files. If these permissions are missing, the job will fail with a 403 error, indicating that access is denied.
+
+Additionally, if the S3 bucket were encrypted with a customer-managed key, the execution role would also need kms:Decrypt permissions, and potentially kms:CreateGrant if the job needs to delegate permissions to SageMaker services.
+
+Hence, the correct answer is: The execution role associated with the SageMaker Processing job lacks the required permissions to access the S3 bucket.
+
+The option that says: The S3 bucket policy denies access to the SageMaker Processing job is incorrect because the scenario describes that the SageMaker Processing job can successfully connect to the S3 bucket. If the S3 bucket policy were denying access, the connection itself would fail, and the job would not even begin to access the files. The error encountered is at the file retrieval stage, indicating that the issue lies with the specific object-level permissions rather than the bucket policy.
+
+The option that says: The S3 bucket is located in a different AWS region from the SageMaker Processing job is incorrect because it can only access S3 buckets across regions, and the bucket’s location alone would not cause a 403 error.
+
+The option that says: The IAM user who created the SageMaker Processing job does not have administrative permissions is incorrect because the permissions of the IAM user who created the job do not directly affect the job’s execution. The job operates based on the permissions granted to its execution role, not the creator’s IAM permissions.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/processing-job.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html#sagemaker-roles-createprocessingjob-perms
+
+ 
+
+Check out this Amazon SageMaker Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 25 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+An e-commerce company stores a large dataset of raw customer reviews in Amazon S3. The goal is to develop a text classification system that categorizes reviews into positive, negative, and neutral sentiments. Efficient labeling of the reviews and high-quality annotations are needed to train a sentiment analysis model on Amazon SageMaker AI.
+
+Which solution will achieve this goal with minimal operational effort?
+
+Use the Amazon SageMaker Neural Topic Model (NTM) algorithm to organize the datasets.
+Create a labeling job using SageMaker Ground Truth to annotate the reviews.
+Train a convolutional neural network (CNN) to automatically categorize the reviews.
+Utilize Amazon Comprehend to analyze and categorize sentiment.
+Incorrect
+Amazon SageMaker Ground Truth is a data labeling service that simplifies the creation of high-quality training datasets for machine learning (ML) models. Ground Truth offers a unique combination of automated data labeling and human labeling to ensure efficiency and accuracy. By using active learning, Ground Truth can reduce the manual labeling required by automatically labeling data when it has high confidence in the predictions.
+
+labeling-jobs
+
+SageMaker Ground Truth has a major advantage in handling various data types, such as text, videos, images, and 3D point clouds. The service seamlessly integrates with Amazon S3 for easy data access and provides built-in support for labeling tasks like text classification, object detection, and semantic segmentation. Moreover, Ground Truth continually enhances its labeling models by incorporating feedback from human labelers, ensuring the accuracy of automated labels. This feature is vital for ensuring that the labeled data is of high quality, making it essential to developing reliable and effective ML models.
+
+Hence, the correct answer is: Create a labeling job using SageMaker Ground Truth to annotate the reviews.
+
+The option that says: Train a convolutional neural network (CNN) to automatically categorize the reviews is incorrect. While CNNs can be used for text classification, the primary need here is to label the raw data first. Training a model requires a labeled dataset, which does not yet exist.
+
+The option that says: Use the SageMaker Neural Topic Model (NTM) algorithm to organize the datasets is incorrect. Neural Topic Model (NTM) is only for unsupervised learning and is used to group documents into topics, not for sentiment classification. It doesn’t help with labeling reviews by sentiment (positive, negative, neutral), nor does it directly support creating labeled datasets for training a model.
+
+The option that says: Utilize Amazon Comprehend to analyze and categorize sentiment is incorrect. Although Amazon Comprehend can provide quick sentiment analysis results, it’s not focused on labeling the data for future use in training custom models. If the goal is to label data for training purposes, Comprehend won’t provide the labeled dataset needed for training your own SageMaker model.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/sms.html
+
+https://aws.amazon.com/sagemaker/groundtruth/features/?nc=sn&loc=2
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 26 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A data scientist is working on a machine learning project to predict customer churn using customer demographics, interaction history, and subscription details from the past five years. The goal is to build an ML model that generalizes well to new customers and reduces prediction bias.
+
+The data scientist needs to use an AWS visual data preparation tool to prepare the data and split it into training and validation sets, with the dataset sorted by customer signup date. To prevent future data from leaking into the training set and causing severe overfitting, the split process must strictly preserve the chronological order of the records. If this sequence is disrupted, the resulting ML metrics during validation will be misleadingly optimistic and will not reflect the model’s actual real-world performance.
+
+Which data preparation approach will best meet the requirements?
+
+Use the Ordered split transform in Amazon SageMaker Data Wrangler.
+Run a Python script using an Amazon SageMaker Processing job to split the dataset by key.
+Use the Stratified split transform in Amazon SageMaker Data Wrangler.
+Use an AWS Glue DataBrew recipe to perform a randomized split on the dataset.
+Incorrect
+With SageMaker Data Wrangler, splitting your data into training, test, and validation sets is now a seamless process that can be done with just a few clicks. This functionality eliminates the need for manual coding, which was previously required to prepare datasets for machine learning model training. SageMaker Data Wrangler provides several split types, including randomized, ordered, stratified, and key-based splits, allowing you to customize how much data is allocated to each split. This feature ensures that your data is properly segmented for downstream ML model training and validation.
+
+Amazon SageMaker Data Wrangler Ordered Split
+
+The Ordered split transform in Amazon SageMaker Data Wrangler is the most suitable choice when working with time-sensitive data, such as datasets sorted by date. This transform ensures that the data is split in the same order as it is provided, preserving the temporal sequence of events. This is particularly important for training machine learning models where the goal is to predict future events based on past data. By using an ordered split, the model is trained on older data and validated on more recent data, mimicking how the model will perform on unseen, future data, and reducing the risk of data leakage.
+
+Hence, the correct answer is: Use the Ordered split transform in Amazon SageMaker Data Wrangler.
+
+The option that says: Use an AWS Glue DataBrew recipe to perform a randomized split on the dataset is incorrect because a randomized split divides the data without properly preserving the chronological order. While DataBrew is a visual data preparation tool, a randomized split approach might be generally suitable for typical cases but is simply not appropriate for time-series or date-based data where the sequence of events is crucial for making accurate predictions.
+
+The option that says: Run a Python script using an Amazon SageMaker Processing job to split the dataset by key is incorrect because a key-based split is only meant for partitioning based on a specific key identifier, and it does not ensure that the ML model will generalize well on time-ordered data. Furthermore, using a Python script in a SageMaker Processing job is not a visual data preparation approach, failing the scenario’s requirement.
+
+The option that says: Use the Stratified split transform in Amazon SageMaker Data Wrangler is incorrect. A stratified split is typically used only to ensure that each split represents the overall dataset proportionally across a specified key, such as class labels in classification tasks. This method ensures all categories of data are represented in each set but does not handle time series data appropriately.
+
+References:
+
+https://aws.amazon.com/about-aws/whats-new/2022/06/split-data-train-test-sets-amazon-sagemaker-data-wrangler/
+
+https://aws.amazon.com/blogs/machine-learning/create-train-test-and-validation-splits-on-your-data-for-machine-learning-with-amazon-sagemaker-data-wrangler/
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker
+
+===== PREGUNTA 27 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A startup uses an on-premises MySQL database to store its machine learning (ML) model training data. The decision has been made to migrate the ML data to Amazon Aurora for better scalability and performance.
+
+What is the most suitable approach for migrating ML data from MySQL to Aurora?
+
+Use AWS DMS to perform a homogeneous migration from MySQL to Aurora.
+Use AWS Data Transfer Terminal by reserving time at an AWS facility and physically connecting equipment to transfer the ML data into AWS, then load it into Aurora.
+Set up a real-time data replication pipeline between MySQL and Aurora using AWS DMS.
+Create a custom Python script that extracts the ML data from MySQL, compresses it, and uploads it directly to Aurora via the AWS SDK.
+Incorrect
+The AWS Database Migration Service (AWS DMS) is a managed migration and replication service that helps you quickly and securely move your database and analytics workloads to AWS with minimal downtime and zero data loss. AWS DMS supports migration between over 20 database and analytics engines. For example, you can migrate from Oracle to Amazon Aurora MySQL-Compatible Edition, MySQL to Amazon Relational Database Service (RDS) for MySQL, Microsoft SQL Server to Amazon Aurora PostgreSQL-Compatible Edition, MongoDB to Amazon DocumentDB with MongoDB compatibility, Oracle to Amazon Redshift, and Amazon Simple Storage Service (S3).
+
+AWS DMS
+
+Homogeneous data migrations are serverless and enable you to transfer data between identical database engines. This means you can move data from a MySQL instance to an Aurora MySQL instance. Homogeneous data migrations allow you to migrate data, table partitions, data types, and secondary objects like functions and stored procedures.
+
+Hence, the correct answer is: Use AWS DMS to perform a homogeneous migration from MySQL to Aurora.
+
+The option that says: Use AWS Data Transfer Terminal by reserving time at an AWS facility and physically connecting equipment to transfer the ML data into AWS, then load it into Aurora is incorrect because AWS Data Transfer Terminal is primarily designed for bulk offline data uploads at secure AWS facilities using high-throughput connections. It is not intended for structured database migrations into Aurora. While valid for large unstructured datasets, it does not handle schema conversion, relational integrity, or replication required for database migration.
+
+The option that says: Set up a real-time data replication pipeline between MySQL and Aurora using AWS DMS is incorrect. Although AWS DMS also supports real-time data replication using change data capture (CDC) from source to target, it’s not the best fit for ML data migration. Continuous synchronization can introduce latency and potential data consistency issues. AWS DMS is typically suited for one-time migrations, ensuring consistency during the transition.
+
+The option that says: Create a custom Python script that extracts the ML data from MySQL, compresses it, and uploads it directly to Aurora via the AWS SDK is incorrect. While custom scripts can be used, they require additional development effort and may not handle all edge cases. AWS DMS provides a more robust and straightforward solution for ML data migration.
+
+ 
+
+References:
+
+https://aws.amazon.com/dms/
+
+https://docs.aws.amazon.com/whitepapers/latest/migrating-databases-to-amazon-aurora/planning-your-database-migration-process.html
+
+https://aws.amazon.com/blogs/database/migrate-an-on-premises-mysql-database-to-amazon-aurora-mysql-over-a-private-network-using-aws-dms-homogeneous-data-migration-and-network-load-balancer/
+
+ 
+
+Check out this AWS Database Migration Service Cheat Sheet:
+
+https://tutorialsdojo.com/aws-database-migration-service/
+
+===== PREGUNTA 28 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+An ML specialist uploads a training dataset collected from multiple geographic locations to an Amazon S3 bucket. The current upload process is significantly slower than expected. The specialist seeks a solution to accelerate the data transfer without significantly changing the existing setup.
+
+Which solution will most effectively speed up the upload process to S3?
+
+Use S3 Transfer Acceleration.
+Use AWS Data Transfer Terminal.
+Utilize AWS Direct Connect.
+Use AWS Key Management Service (AWS KMS) to encrypt and compress the data for faster transfer.
+Incorrect
+Amazon S3 Transfer Acceleration is a service that speeds up data transfers to Amazon S3 by routing data through Amazon CloudFront’s globally distributed edge locations. This service is beneficial for applications with users spread across different locations or for uploading large amounts of data. Using CloudFront’s optimized network paths, Transfer Acceleration can significantly reduce latency and improve upload performance compared to standard Amazon S3 data transfer methods. The service directs data to the closest edge location, from where it travels over AWS’s optimized network to the target S3 bucket, making the process faster and more efficient without requiring changes to the existing application.
+
+S3 Transfer Acceleration
+
+S3 Transfer Acceleration is easy to enable and requires minimal configuration changes. It is beneficial when end users are far from the S3 bucket’s region or network conditions are suboptimal. Additionally, S3 Transfer Acceleration is compatible with multipart uploads, making it an effective solution for large-scale uploads. The service can be turned on via the S3 console, AWS CLI, or API, and users can easily measure the potential speed improvement using the S3 Transfer Acceleration Speed Comparison tool. This service is a cost-effective way to enhance the performance of data transfers to S3 without the need for complex infrastructure changes.
+
+Hence, the correct answer is: Use S3 Transfer Acceleration.
+
+The option that says: Utilize AWS Direct Connect is incorrect. This service only creates a private connection from your on-premises infrastructure to AWS, bypassing the public internet. While it can offer lower latency and more consistent network performance, it’s best for long-term, high-volume data transfers between a specific location and AWS.
+
+The option that says: Use AWS Data Transfer Terminal is incorrect because this service is intended for offline bulk data transfers using physical devices. It is not designed for continuous uploads from multiple geographic sources.
+
+The option that says: Use AWS Key Management Service (AWS KMS) to encrypt and compress the data for faster transfer is incorrect. AWS Key Management Service (AWS KMS) is typically used for creating and controlling cryptographic keys to encrypt data, not for accelerating data transfer speeds.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration.html
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/transfer-acceleration-examples.html
+
+ 
+
+Check out this Amazon S3 Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-s3/
+
+===== PREGUNTA 29 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A data scientist is using Amazon SageMaker Data Wrangler to prepare a financial dataset for a machine learning model that predicts loan defaults. The dataset has two features: LoanAmount, which ranges from $1,000 to $500,000, and CustomerAge, which ranges from 18 to 75. In addition, the dataset contains a CreditScore feature, with values ranging from 600 to 800 and a few outliers as low as 5. To ensure the machine learning model performs optimally, all features must be scaled to a similar range.
+
+Which scaling function in SageMaker Data Wrangler is most appropriate for addressing the outliers in the dataset?
+
+Standard Scaler
+Z-score normalization
+Robust Scaler
+L1 Normalization
+Incorrect
+Amazon SageMaker Data Wrangler provides a variety of scaling methods to normalize features for machine learning models. When dealing with outliers, Robust Scaler is very effective because it scales features using outlier-tolerant statistics. Specifically, it removes the median and scales the data using the interquartile range (IQR), making it less vulnerable to outliers than the Standard Scaler or Min-Max Scaler.
+
+The Robust Scaler modifies the dataset by removing the median and scaling the data based on a predetermined quantile range, regularly the interquartile range (IQR), which spans the first and third quartiles. This method is similar to the Standard Scaler, except instead of using the mean and standard deviation, it utilizes the median and quantiles. This distinction makes it more resistant to the effects of outliers.
+
+TD Robust Scaler
+
+Robust Scaler is especially suited for this scenario since the CreditScore feature has significant outliers (values as low as 5), and using a method sensitive to outliers could adversely affect model performance.
+
+Hence, the correct answer is: Robust Scaler.
+
+Standard Scaler is incorrect because it simply standardizes features by removing the mean and scaling to unit variance, which may not handle outliers effectively, as outliers can significantly affect the mean and variance.
+
+L1 Normalization is incorrect. L1 normalization primarily scales samples so that the sum of absolute values is 1, which does not inherently address the issue of outliers in the feature range.
+
+Z-score normalization is incorrect because it is typically used to scale feature vectors to have a unit norm, but it doesn’t address the issue of outliers in the dataset effectively.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler-transform.html#data-wrangler-transform-process-numeric
+
+https://spark.apache.org/docs/3.0.0/ml-features#robustscaler
+
+ 
+
+Check out this Amazon SageMaker Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 30 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A team is working on a machine learning project that involves training a recommendation model using the Amazon SageMaker seq2seq algorithm. The dataset is stored in Amazon S3. The team currently uses Amazon EMR Spark jobs for its nightly log aggregation and reporting pipeline, which is separate from the ML workflow.
+
+The goal is to convert this training dataset into the RecordIO-Protobuf format, which is required for efficient training with SageMaker Pipe mode.
+
+Which of the following options would be most suitable for this use case?
+
+Deploy an AWS Fargate task that runs a custom containerized application that is responsible for converting the dataset.
+Set up an EMR cluster, load the dataset from S3, and leverage Apache Spark to perform the necessary conversions.
+Utilize Amazon Redshift Spectrum to query the dataset stored in S3 and perform the necessary conversions.
+Use a Firehose stream to ingest the dataset from S3 and transform it into RecordIO-Protobuf format.
+Incorrect
+Apache Spark is a distributed processing framework and programming model that facilitates machine learning, stream processing, and graph analytics with Amazon EMR clusters. Like Apache Hadoop, Spark is an open-source, distributed processing system commonly utilized for big data workloads. However, Spark differs from Hadoop MapReduce in several significant ways. Spark features an optimized directed acyclic graph (DAG) execution engine and actively caches data in memory, enhancing performance, especially for specific algorithms and interactive queries.
+
+Amazon EMR - Apache Spark
+
+Amazon EMR (Elastic MapReduce) is a managed big data platform that allows you to process large datasets using popular frameworks like Apache Spark.
+
+EMR Cluster: EMR provides a scalable and cost-effective way to process data. You can create an EMR cluster, which automatically provisions the necessary resources (such as EC2 instances) for your Spark jobs.
+
+Spark is a powerful distributed data processing framework. You can write Spark jobs to read the dataset from Amazon S3, transform it into the RecordIO-Protobuf format, and save it back to S3. Spark’s parallel processing capabilities make it efficient for large-scale data conversion.
+
+RecordIO-Protobuf Format: EMR allows you to install additional libraries (such as protobuf) on the cluster, enabling you to serialize your data into the required format.
+
+Hence, the correct answer is: Set up an EMR cluster, load the dataset from S3, and leverage Apache Spark to perform the necessary conversions.
+
+The option that says: Deploy an AWS Fargate task that runs a custom containerized application that is responsible for converting the dataset is incorrect. While Fargate is suitable for running containerized applications, it’s not the most straightforward solution for this specific use case. Setting up a custom containerized application introduces unnecessary complexity. You’d need to manage the container, orchestration, and data transfer.
+
+The option that says: Use a Firehose stream to ingest the dataset from S3 and transform it into RecordIO-Protobuf format is incorrect because a Firehose stream is primarily designed for real-time streaming data delivery, not for batch processing or converting static datasets stored in S3.
+
+The option that says: Utilize Amazon Redshift Spectrum to query the dataset stored in S3 and perform the necessary conversions is incorrect. Redshift Spectrum is a query service for analyzing data in S3 using SQL queries. However, it’s not meant for format conversion. Redshift Spectrum is only used for analytical queries rather than data transformation.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/cdf-training.html
+
+https://docs.aws.amazon.com/emr/latest/ReleaseGuide/emr-spark.html
+
+ 
+
+Check out this Amazon EMR Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-emr/
+
+===== PREGUNTA 31 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A logistics company is optimizing delivery routes using historical time-series data, but faces missing values in its dataset. The training data is stored in Amazon Redshift, and the company plans to implement a fully managed solution for data preprocessing and feature engineering entirely within the Amazon SageMaker AI environment to streamline its complex ML workflows.
+
+What is the MOST operationally efficient way to handle the missing values in its dataset?
+
+Perform data preprocessing using SageMaker Data Wrangler built-in features within SageMaker Canvas to handle missing values.
+Use Redshift's built-in SQL functions to handle missing values directly within the Redshift cluster before exporting the unstructured format records to SageMaker AI for model development.
+
+Export the data from Redshift to Amazon S3. Use Amazon Athena with CREATE TABLE AS SELECT (CTAS) statements to preprocess the data and handle missing values before importing it back into SageMaker AI.
+Develop a custom script using AWS Lambda to automatically identify and fill in missing values.
+Incorrect
+SageMaker Data Wrangler is a feature of Amazon SageMaker AI that accelerates data preparation for machine learning. You can use it to clean, transform, and analyze time-series data quickly. It provides built-in data transformations, including robust methods to handle missing values (such as imputation), to streamline ML workflows. Since it is natively integrated into the SageMaker Canvas workspace, data scientists can perform these preprocessing tasks entirely within the SageMaker environment without writing complex code, making it the most operationally efficient fully managed solution.
+
+amazon-sagemaker-data-wrangler-architecture
+
+Hence, the correct answer is: Perform data preprocessing using SageMaker Data Wrangler built-in features within SageMaker Canvas to handle missing values.
+
+The option that says: Use Redshift’s built-in SQL functions to handle missing values directly within the Redshift cluster before exporting the unstructured format records to SageMaker AI for model development is incorrect because while Amazon Redshift can perform SQL-based data manipulation, processing the data before exporting it breaks the requirement of performing data preprocessing “entirely within the Amazon SageMaker AI environment”. It typically involves more manual effort compared to using SageMaker’s built-in visual tools.
+
+The option that says: Export the data from Redshift to Amazon S3. Use Amazon Athena with CREATE TABLE AS SELECT (CTAS) statements to preprocess the data and handle missing values before importing it back into SageMaker AI is incorrect because adding Amazon S3 and Amazon Athena into the pipeline increases architecture complexity. Athena is primarily an interactive query service, and using it for robust ML feature engineering and missing value imputation requires custom queries, resulting in higher operational overhead.
+
+The option that says: Develop a custom script using AWS Lambda to automatically identify and fill in missing values is incorrect because AWS Lambda requires custom code development, testing, and maintenance to handle data imputation. This significantly increases operational overhead compared to using the out-of-the-box features provided by SageMaker Data Wrangler.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-data-preparation.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 32 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A healthcare technology company is developing a machine learning model to analyze medical records. These records are in PDF format and stored in an Amazon S3 bucket. These records contain sensitive information such as patient names, addresses, phone numbers, and medical history details. Before training the model, the company must detect and redact personally identifiable information (PII) and protected health information (PHI) from the records to ensure compliance with data privacy regulations.
+
+Which is the most operationally efficient solution that can meet the requirements?
+
+Use a SageMaker Canvas ready-to-use model to process PDFs and redact PII/PHI.
+Convert PDFs to text, then use Comprehend to detect and redact PII/PHI.
+Use S3 Object Lambda with Comprehend to redact PII/PHI.
+Use Amazon Textract to extract text from PDFs, then use a SageMaker JumpStart pre-trained model for redaction.
+Incorrect
+Amazon SageMaker Canvas is a no-code visual interface that empowers you to prepare data, build, and deploy highly accurate ML models, streamlining the end-to-end ML lifecycle in a unified environment. With SageMaker Canvas, users can easily import data from various sources, visualize and prepare the data, and then train, evaluate, and deploy ML models using a simple drag-and-drop interface. SageMaker Canvas leverages Amazon SageMaker’s robust ML infrastructure to provide an intuitive platform for creating predictive models, making machine learning more accessible to a broader audience, including those without deep technical expertise.
+
+
+
+Using Amazon SageMaker Canvas eliminates the need for extensive configuration, manual intervention, or the setup of additional services, thus significantly reducing operational overhead. It includes ready-to-use models that can automatically detect and redact PII and PHI from text data. This solution requires the least operational overhead because you can use a pre-built model without developing your code or converting the PDF files to text format.
+
+Hence, the correct answer is: Use a SageMaker Canvas ready-to-use model to process PDFs and redact PII/PHI.
+
+The option that says: Use S3 Object Lambda with Comprehend to redact PII/PHI is incorrect. While Amazon Comprehend can detect and redact PII and PHI from text data, using it with an Amazon S3 Object Lambda access point would only introduce additional operational overhead. This approach would require configuring, deploying, and maintaining a Lambda function, which goes against the requirement of minimal operational overhead.
+
+The option that says: Convert PDFs to text, then use Comprehend to detect and redact PII/PHI is incorrect. While Amazon Comprehend can primarily detect and redact PII and PHI from text data, it cannot process PDF files directly. The PDF files would need to be converted to text format first, adding operational overhead compared to using a SageMaker Canvas ready-to-use model that can process PDF files directly.
+
+The option that says: Use Amazon Textract to extract text from PDFs, then use a SageMaker JumpStart pre-trained model for redaction is incorrect. While Amazon Textract can extract text from PDF files, and SageMaker JumpStart provides pre-trained models, this solution requires more operational overhead than a SageMaker Canvas ready-to-use model. You would need to configure and deploy the pre-trained model and integrate it with Amazon Textract.
+
+ 
+
+References:
+
+https://aws.amazon.com/blogs/aws/new-ready-to-use-models-and-support-for-custom-text-and-image-classification-models-in-amazon-sagemaker-canvas/
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-ready-to-use-models.html
+
+ 
+
+Check out this Amazon SageMaker Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 33 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A data science team is developing multiple machine learning (ML) applications that require both training and low-latency inference. These applications need to share features across different AWS accounts with minimal operational overhead.
+
+Which of the following options will fulfill the given requirements?
+
+Use Amazon SageMaker Feature Store with both online and offline stores, and configure cross-account access to share features.
+Use Amazon RDS to store features and set up replication between databases in different accounts.
+Store features in Amazon S3 and use AWS IAM to manually manage access policies for each account.
+Store features in Amazon S3 and use AWS Glue with native DynamicFrames to transform and catalog features, then share them across accounts using the Glue Data Catalog.
+Incorrect
+The process of developing machine learning (ML) involves extracting raw data and converting it into features, which are meaningful inputs for your ML model. These features are then stored in a way that allows for data exploration, ML training, and ML inference. Amazon SageMaker Feature Store makes it easier for you to create, store, share, and manage features by providing options for feature stores and reducing the need for repetitive data processing and curation work.
+
+SageMaker Feature Store
+
+Amazon SageMaker Feature Store is specifically designed for storing, sharing, and managing features for machine learning models. It supports both online and offline stores, which cater to low-latency inference and training needs, respectively. Additionally, it allows for cross-account access, making it easy to share features across different AWS accounts with minimal operational overhead.
+
+– Online Store: Provides low-latency access to features for real-time inference.
+
+– Offline Store: Used for batch processing and training.
+
+Hence, the correct answer is: Use Amazon SageMaker Feature Store with both online and offline stores, and configure cross-account access to share features.
+
+The option that says: Store features in Amazon S3 and use AWS Glue with native DynamicFrames to transform and catalog features, then share them across accounts using the Glue Data Catalog is incorrect. While AWS Glue DynamicFrames are useful for ETL transformations and schema-flexible data processing, they are not designed for feature storage or retrieval in ML workflows. Storing features in S3 and cataloging them with Glue does not address the low-latency inference requirement, as S3 and Glue are batch-oriented tools and cannot provide the millisecond read times needed for real-time predictions.
+
+The option that says: Store features in Amazon S3 and use AWS IAM to manually manage access policies for each account is incorrect because Storing features in Amazon S3 and manually managing access policies with AWS IAM can be more complex and error-prone. This approach requires significant operational overhead to ensure proper access controls and does not provide the integrated feature management capabilities that SageMaker Feature Store offers.
+
+The option that says: Use Amazon RDS to store features and set up replication between databases in different accounts is incorrect because Amazon RDS is primarily a relational database service and is not optimized for storing and managing machine learning features. Setting up replication between databases in different accounts can be complex and does not address the need for low-latency inference. This option also lacks the specialized feature management capabilities provided by SageMaker Feature Store.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-storage-configurations.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store.html
+
+ 
+
+Check out this Amazon SageMaker Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 34 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A team is currently working on a project that gathers real-time data with zero buffering from thousands of IoT sensors deployed across a widespread network. These sensors monitor various parameters, including air quality, traffic flow, and energy consumption. The goal is to develop a system capable of identifying abnormalities in this continuous data stream as the data arrives, without delay.
+
+Which AWS services best implement the real-time anomaly detection system described in the scenario? (Select TWO.)
+
+Amazon Managed Service for Apache Flink
+AWS Lambda
+Amazon Data Firehose
+Amazon Kinesis Data Streams
+Amazon SageMaker Training Compiler
+Incorrect
+Amazon Kinesis Data Streams is a service designed to handle high-throughput, continuous data streams from various sources, including IoT sensors. It allows you to ingest, process, and analyze real-time data. In the given scenario, Kinesis Data Streams is crucial for ingesting sensor data. This service provides a scalable and durable platform for managing large volumes of streaming data. You can create data streams, partition data, and distribute it across multiple consumers (e.g., Flink applications). Real-time processing applications can subscribe to these streams to perform analytics.
+
+amazon-kinesis-data-stream
+
+Amazon Managed Service for Apache Flink is a fully managed service that operates Apache Flink applications. In the given scenario, it processes the incoming data stream from Kinesis Data Streams. Flink is a robust stream processing framework that supports complex event-time processing, windowing, and stateful computations. It enables you to create customized Flink applications (using Flink SQL or Flink DataStream APIs) for real-time data analysis. In this setup, the customized Flink application aggregates sensor data, computes statistical metrics, and identifies anomalies.
+
+amazon-managed-service-apache-flink
+
+Hence, the correct answers are:
+
+– Amazon Kinesis Data Streams.
+
+– Amazon Managed Service for Apache Flink.
+
+Amazon SageMaker Training Compiler is incorrect because it is a feature of SageMaker designed to accelerate deep learning model training by converting models into hardware-optimized instructions, reducing training time and cost. It is scoped exclusively to the model training phase and has no capability for ingesting, processing, or analyzing real-time data streams. It plays no role in a real-time anomaly detection pipeline.
+
+Amazon Data Firehose is incorrect. Although a Firehose stream efficiently delivers streaming data to storage destinations, it lacks real-time analytics and processing features needed for instant anomaly detection as the data arrives. Firehose is primarily designed for reliable delivery, not for immediate analysis or detection of anomalies within the data stream.
+
+AWS Lambda is incorrect because this is just a serverless compute service that executes code in response to events (e.g., changes in S3 buckets, API Gateway requests). It is not typically designed for stream processing or anomaly detection. Lambda functions are stateless and short-lived, making them less suitable for continuous stream processing.
+
+ 
+
+References:
+
+https://aws.amazon.com/kinesis/data-streams/faqs/
+
+https://aws.amazon.com/managed-service-apache-flink/
+
+ 
+
+Check out this Amazon Kinesis Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-kinesis/
+
+===== PREGUNTA 35 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A manufacturing company is developing a customer segmentation model using Amazon SageMaker AI. The company stores long-term historical customer data in Amazon S3 Glacier Flexible Retrieval for archival purposes and keeps the most recent data in an S3 bucket for active analysis.
+
+The dataset includes both nominal categorical variables, such as customer region and product preferences, and numerical variables, like purchase frequency and total spending. The ML engineer needs to preprocess and transform this active dataset so it can be effectively analyzed and used for model training in SageMaker AI.
+
+Which SageMaker AI feature will help the engineer fulfill the requirements?
+
+SageMaker Neo
+SageMaker Feature Store
+SageMaker Data Wrangler
+SageMaker JumpStart
+Incorrect
+Amazon SageMaker Data Wrangler is a powerful tool designed to simplify and streamline the process of preparing data for machine learning. It allows users to import data from various sources, including Amazon S3, Amazon Athena, and Redshift, and provides an intuitive interface for cleaning, transforming, and visualizing data. With over 300 built-in data transformations, SageMaker Data Wrangler enables data scientists and engineers to perform tasks such as encoding categorical variables, scaling numerical data, handling missing values, and more without needing to write complex code. This functionality significantly reduces the time and effort required to prepare data for model training.
+
+Amazon SageMaker Data Wrangler
+
+Additionally, SageMaker Data Wrangler integrates seamlessly with other SageMaker services, making it easier to transition from data preparation to model training and deployment. Users can create processing workflows, visualize data transformations, and even analyze the importance of features within the same environment. This holistic approach to data preparation ensures that models are trained on well-prepared datasets, ultimately leading to more accurate and reliable predictions.
+
+Hence, the correct answer is: Amazon SageMaker Data Wrangler.
+
+SageMaker Feature Store is incorrect because it is primarily designed to store, retrieve, and share machine learning features. While it helps manage features for consistent model training and inference, it does not offer extensive data preprocessing capabilities for transforming categorical and numerical variables.
+
+SageMaker JumpStart is incorrect. This feature only provides pre-built models and end-to-end solutions for common machine learning use cases, allowing users to quickly start their ML projects. However, it does not focus on the data preparation tasks required in this scenario, such as encoding categorical variables or normalizing numerical data.
+
+SageMaker Neo is incorrect because it is used to optimize machine learning models for inference on different hardware platforms, including edge devices. While it enhances models’ performance after training, it does not provide tools for preprocessing data or transforming variables before model training, which is the primary requirement in this scenario.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html
+
+https://aws.amazon.com/sagemaker/data-wrangler/
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 36 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A machine learning team at a retail company is developing a model to predict customer churn. The model will identify customers who are likely to stop using the company’s services in the next 30 days. The team is concerned about the model’s interpretability and potential biases in its predictions.
+
+Choose the appropriate explainability analysis technique for each team’s requirements from the following list. Each technique may be selected once or multiple times. (Select TWO.)
+
+Identify how the predicted probability of churn changes as customer age increases.
+(Partial dependence plots (PDPs))
+Measure the imbalance in the predicted churn rates between different customer demographic groups (e.g., age groups).
+(Difference in proportions of labels (DPL))
+
+Incorrect0 / 2 Points
+Partial Dependence Plots (PDPs) are a popular technique for interpreting machine learning models by visualizing the marginal effect of one or more features on the model’s predictions.
+
+In the given scenario, PDPs can be used to “identify how the predicted probability of churn changes as customer age increases.” This technique can help the team understand the relationship between customer age and the predicted churn probability, which can be useful for identifying potential biases or patterns in the model’s predictions.
+
+Difference in Proportions of Labels (DPL) is a metric used to measure the difference in the proportions of positive and negative labels between two groups.
+
+In the given scenario, DPL can be used to “measure the imbalance in the predicted churn rates between different customer demographic groups (e.g., age groups).” This technique can help the team identify potential biases or disparities in the model’s predictions across different demographic groups, which is a crucial consideration for ensuring fairness and avoiding discrimination.
+
+
+
+Hence, the correct answers are:
+
+– Identify how the predicted probability of churn changes as customer age increases: Partial dependence plots (PDPs)
+
+– Measure the imbalance in the predicted churn rates between different customer demographic groups (e.g., age groups): Difference in proportions of labels (DPL)
+
+The option that says: Total Variation Distance (TVD) is incorrect. Total Variation Distance (TVD) is a metric primarily used to measure the overall difference between two probability distributions.
+
+The option that says: Kullback-Leibler Divergence (KL) is incorrect. Kullback-Leibler Divergence (KL) is a metric typically used to measure the difference between two probability distributions, similar to Total Variation Distance.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-processing-job-analysis-results.html#clarify-processing-job-analysis-results-pdp
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-data-bias-metric-true-label-imbalance.html
+
+ 
+
+Check out this AWS Machine Learning And AI Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+===== PREGUNTA 37 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+An ML Manager is analyzing both categorical and numeric features in a dataset using Amazon SageMaker Studio Notebook. The analyst needs to choose the appropriate statistical test or correlation metric to evaluate non-linear relationships between features.
+
+Which statistical test or correlation metric should the analyst use?
+
+Cramér's V
+Pearson
+Spearman
+Kendall's Tau
+Incorrect
+Spearman’s correlation is particularly useful when analyzing relationships between numeric features where the relationship might not be linear or when the data does not meet the assumptions of normality. Since Spearman’s correlation is a non-parametric measure, it determines the strength and direction of a monotonic relationship between two variables without assuming a particular distribution. This makes it suitable for both continuous and ordinal data, which is ideal for datasets that include a mix of numeric and categorical features.
+
+
+
+In this scenario, if the relationship between the numeric features is expected to be non-linear or if the data includes ranks rather than raw values, Spearman’s correlation would be the appropriate choice for evaluating these relationships.
+
+Hence, the correct answer is: Spearman.
+
+The option that says: Cramér’s V is incorrect because this option is only ideal for measuring the association between two categorical variables and is not applicable for evaluating relationships between numeric features.
+
+The option that says: Kendall’s Tau is incorrect. Although it is also a non-parametric correlation metric like Spearman, it is generally used to measure the ordinal association between two variables. Kendall’s Tau is often preferred when dealing with small sample sizes and ordinal data. Therefore, while Kendall’s Tau is effective in certain cases, Spearman’s rank correlation is more appropriate for this scenario.
+
+The option that says: Pearson is incorrect because this correlation coefficient only measures the strength and direction of a linear relationship between two numeric variables. Pearson’s correlation assumes normality and linearity, making it unsuitable for analyzing categorical features or non-linear relationships. In scenarios where non-linear relationships might exist, Spearman’s rank correlation is more appropriate.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-explore-data-analytics.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-explore-data-visualization.html
+
+ 
+
+Check out this Amazon SageMaker Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 38 =====
+Category: MLA – Data Preparation for Machine Learning (ML)
+Category: MLA – Data Preparation for Machine Learning (ML)
+A manufacturing company has developed a recommendation system using Amazon SageMaker AI. However, the dataset used for training is highly imbalanced, and the company is concerned about potential data drift affecting its model’s performance. The company wants an automated approach to evaluating and mitigating bias in its recommendations.
+
+What is the recommended approach to achieve this?
+
+Utilize Amazon SageMaker Model Monitor to detect the model when performance drops.
+Use Amazon SageMaker Clarify to detect bias and monitor data drift automatically.
+Utilize Amazon SageMaker Neo to optimize model performance and reduce data drift.
+Use Amazon SageMaker Ground Truth to label the data more accurately and prevent data drift.
+Incorrect
+Amazon SageMaker Clarify is a tool that helps organizations identify and mitigate bias in their machine-learning models. It offers capabilities for bias detection during the data preparation stage, after model training, and throughout the model’s deployment. SageMaker Clarify works by analyzing both the training data and the model’s predictions to uncover any potential bias that could lead to unfair outcomes. It provides detailed reports highlighting areas of concern and suggests mitigation strategies to ensure the fairness and accuracy of the model. Additionally, Clarify can be integrated into the model development workflow to continuously monitor for bias, helping maintain model integrity over time.
+
+data-drift
+
+Furthermore, SageMaker Clarify also includes functionality for monitoring data drift, which is critical in maintaining model performance as real-world data evolves. Data drift occurs when the distribution of incoming data changes over time, potentially leading to model degradation. By continuously analyzing incoming data and comparing it with the training data, SageMaker Clarify can detect drift and alert data scientists to take corrective action, such as retraining the model. This automated approach to bias detection and data drift monitoring ensures that models remain fair, accurate, and effective in dynamic environments, making SageMaker Clarify an essential tool for responsible AI development.
+
+Hence, the correct answer is: Use Amazon SageMaker Clarify to detect bias and monitor data drift automatically.
+
+The option that says: Utilize Amazon SageMaker Neo to optimize model performance and reduce data drift is incorrect because this service is primarily designed for optimizing machine learning models to run more efficiently on various hardware platforms, such as CPUs, GPUs, and edge devices. It compiles models into an optimized format that can be deployed on multiple hardware architectures with lower latency and better performance. SageMaker Neo does not address data drift or bias detection, which are the primary concerns in this scenario.
+
+The option that says: Use Amazon SageMaker Ground Truth to label the data more accurately and prevent data drift is incorrect. This option only focuses on creating high-quality labeled datasets using human annotators and automated data labeling techniques. SageMaker Ground Truth does not provide features for detecting or mitigating data drift or bias in models. It is not designed to monitor model performance after deployment or to handle issues related to imbalanced datasets.
+
+The option that says: Utilize Amazon SageMaker Model Monitor to detect the model when performance drops is incorrect. While SageMaker Model Monitor can track the quality of deployed models and detect data drift, it does not offer comprehensive bias detection and mitigation capabilities. Model Monitor can alert when there is a degradation in model performance, but it does not specifically focus on bias detection or provide automated mitigation strategies.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-detect-post-training-bias.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-configure-processing-jobs.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+===== PREGUNTA 39 =====
+Category: MLA – ML Model Development
+Category: MLA – ML Model Development
+A company is looking to use Amazon Bedrock for its AI-driven initiatives. They need a tool that can help create advanced conversational chatbots capable of interacting with customers and providing relevant information from their data systems.
+
+Which option best describes a use case that Amazon Bedrock excels at?
+
+Predictive maintenance of vehicles.
+Predicting future product demand.
+Developing chatbots that provide relevant information to customers.
+Identifying content within social media images.
+Incorrect
+Amazon Bedrock is a service that makes it easy for users to build and scale generative AI applications using pre-trained models from leading AI startups and Amazon itself. One of the key use cases of Amazon Bedrock is to enable the creation of sophisticated chatbots and virtual assistants that can understand and generate natural language, making it highly suitable for customer service applications.
+
+
+
+Amazon Bedrock helps create AI applications with a focus on natural language processing (NLP) and understanding, which are critical components for developing advanced conversational chatbots.
+
+Hence, the correct answer is: Developing chatbots that provide relevant information to customers.
+
+The option that says: Predicting future product demand is incorrect because Amazon Bedrock’s primary focus is on generative AI and NLP applications, not predictive analytics.
+
+The option that says: Identifying content within social media images is incorrect this task is better suited for services like Amazon Rekognition, which specializes in image and video analysis. Therefore, this does not satisfy the requirements.
+
+The option that says: Predictive maintenance of vehicles is incorrect because this option typically involves analyzing sensor data and applying machine learning models, which is not the primary use case for Amazon Bedrock.
+
+ 
+
+References:
+
+https://aws.amazon.com/bedrock/
+
+https://aws.amazon.com/generative-ai/
+
+ 
+
+Check out this Amazon Bedrock Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-bedrock/
+
+===== PREGUNTA 40 =====
+Category: MLA – ML Model Development
+Category: MLA – ML Model Development
+A large retail company is exploring generative AI to enhance its customer service chatbot. The company aims to fine-tune models from third-party services to enhance the chatbot’s comprehension of business-specific customer inquiries.
+
+Which benefits of Amazon Bedrock will help the retail company meet its requirements? (Select TWO.)
+
+Ensures that prompts and responses remain completely private and secure.
+Amazon Bedrock requires customers to handle infrastructure provisioning.
+Offers a wide range of pre-trained foundation models (FMs) from multiple providers.
+Offers distinct APIs for accessing different foundation models (FMs).
+Amazon Bedrock enables private customization of foundation models (FMs).
+Incorrect
+Amazon Bedrock is a service that provides access to foundation models (FMs) from leading AI providers. It allows businesses to integrate and scale generative AI applications without the complexity of managing underlying infrastructure. With Amazon Bedrock, companies can easily access various pre-trained models for tasks such as text generation, chatbots, image recognition, and more. This service offers flexibility in choosing the best models for specific use cases, enabling organizations to leverage cutting-edge AI technology to enhance their applications and customer experiences.
+
+
+
+One of the primary benefits of Amazon Bedrock is its support for the private customization of foundation models. This means businesses can fine-tune pre-trained models to suit their unique needs and data better, ensuring more accurate and relevant outputs. Additionally, Amazon Bedrock ensures data privacy and security, as prompts and responses are handled securely within the AWS environment. This allows companies to deploy AI solutions while confidently complying with data protection regulations. Amazon Bedrock empowers businesses to innovate rapidly and effectively in the AI landscape by providing a broad selection of models and robust security features.
+
+Hence, the correct answers are:
+
+– Offers a wide range of pre-trained foundation models (FMs) from multiple providers.
+
+– Amazon Bedrock enables private customization of foundation models (FMs).
+
+The option that says: Ensures that prompts and responses remain completely private and secure is incorrect. While important, the scenario does not specifically highlight privacy as a concern for enhancing the chatbot’s functionality. Therefore, it’s not among the most directly relevant benefits for the given requirement.
+
+The option that says: Offers distinct APIs for accessing different foundation models (FMs) is incorrect. This option simply describes a way of getting details about different foundation models available on Amazon Bedrock.
+
+The option that says: Amazon Bedrock requires customers to handle infrastructure provisioning is incorrect. Amazon Bedrock is primarily designed to take care of the infrastructure provisioning and management. Customers do not need to handle the underlying infrastructure, allowing them to focus on developing and deploying their AI applications.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
+
+https://aws.amazon.com/bedrock/
+
+ 
+
+Check out this Amazon Bedrock Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-bedrock/
+
+===== PREGUNTA 41 =====
+Category: MLA – ML Model Development
+Category: MLA – ML Model Development
+A healthcare company seeks to enhance patient outcome predictions using generative AI applications. The company requires a solution that allows selection from various predictive models, guarantees the confidentiality of private data during model fine-tuning, and eliminates the need for managing the underlying ML infrastructure.
+
+Which AWS service best meets the requirements?
+
+Amazon Comprehend Medical
+Amazon Bedrock
+Amazon SageMaker Studio
+Amazon Rekognition
+Incorrect
+Amazon Bedrock is a fully managed service that offers leading foundation models (FMs) and a set of capabilities to quickly build and scale generative artificial intelligence (generative AI) applications.
+
+
+
+Amazon Bedrock provides a serverless environment, simplifying the deployment and management of machine learning models without the need to handle the underlying infrastructure. Bedrock supports customizations of these models, ensuring privacy and security for user data, making it suitable for various applications, including those requiring handling of sensitive information.
+
+Hence, the correct answer is Amazon Bedrock.
+
+The option that says: Amazon SageMaker Studio is incorrect. While this service offers comprehensive tools for machine learning, it’s primarily designed for broad ML tasks rather than focusing specifically on generative AI and foundation models. It requires more hands-on management of the machine learning lifecycle compared to Bedrock.
+
+The option that says: Amazon Comprehend Medical is incorrect because this service is tailored only for extracting medical information from unstructured text using natural language processing. It does not support the creation or management of generative AI models, as it’s focused solely on NLP tasks in the medical field.
+
+The option that says: Amazon Rekognition is incorrect because Amazon Rekognition is simply used for tasks like facial analysis, object detection, and activity recognition. It does not facilitate the building or scaling of foundation models for generative AI applications, making it unsuitable for predictive analytics in healthcare beyond visual data.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
+
+https://aws.amazon.com/bedrock/
+
+ 
+
+Check out this Amazon Bedrock Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-bedrock/
+
+===== PREGUNTA 42 =====
+Category: MLA – ML Model Development
+Category: MLA – ML Model Development
+A financial company has accumulated a large volume of client feedback, reviews, and comments over the years. The company wants to analyze these data to identify common topics that frequently appear in the feedback to understand client sentiment better and improve their offerings. The specific topics are not predetermined, and the goal is to discover them automatically from the text data.
+
+Which built-in Amazon SageMaker AI algorithm is the most appropriate for this task?
+
+Latent Dirichlet Allocation (LDA) Algorithm
+Sequence-to-Sequence Algorithm
+BlazingText algorithm in Text Classification Mode
+Text Classification – TensorFlow algorithm
+Incorrect
+Amazon SageMaker’s Latent Dirichlet Allocation (LDA) algorithm is an unsupervised learning technique designed to represent a collection of documents as a combination of various topics. LDA is primarily used to identify a specified number of topics within a set of text documents. In this context, each document is considered an observation; the words within the documents are the features, and the topics are the categories. Since LDA is an unsupervised method, the topics are not specified up front, and the discovered topics may not necessarily match human categorizations. Instead, LDA learns the topics as a probability distribution over the words in the documents, and each document is characterized as a mixture of these topics.
+
+Latent Dirichlet Allocation (LDA) Algorithm
+
+In the given scenario, the financial services company aims to analyze client feedback to uncover common themes automatically. Since the themes are not predefined, a topic modeling approach is necessary. The LDA algorithm is designed for this purpose and is a powerful tool for text mining and natural language processing tasks. It allows the company to sift through vast amounts of textual data and discern patterns that might take time to be apparent. This insight can help the company make data-driven decisions to enhance its services and products based on the discovered client sentiments and themes. Thus, the LDA algorithm is the most appropriate choice for this task as it directly addresses the company’s requirement to automatically discover latent themes in their text data.
+
+Hence, the correct answer is: Latent Dirichlet Allocation (LDA) Algorithm.
+
+The option that says: Sequence-to-Sequence Algorithm is incorrect. This algorithm is primarily used for tasks such as language translation or summarization. Sequence-to-sequence models are designed to transform a sequence of elements (such as words in a sentence) into another sequence, and they are not suitable for unsupervised topic discovery.
+
+The option that says: Text Classification – TensorFlow Algorithm is incorrect because text classification requires predefined classes or topics. The goal in this scenario is to discover unknown topics, not classify text into existing categories. This algorithm is suitable for tasks where the categories are known and need to be applied to new text data.
+
+The option that says: BlazingText algorithm in Text Classification mode is incorrect. BlazingText algorithm in Text Classification mode is a supervised learning approach, which means it requires labeled training data to classify the text. In this scenario, the specific topics of the documents are unknown, making supervised learning methods unsuitable.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/lda-how-it-works.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/lda.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+

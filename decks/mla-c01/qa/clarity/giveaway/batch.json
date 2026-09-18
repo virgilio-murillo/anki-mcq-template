@@ -1,0 +1,172 @@
+[
+  {
+    "key": "mla01-q11",
+    "question": "<b>Formato de datos:</b> logs de eventos crudos (n&uacute;meros de veh&iacute;culo, mantenimiento, expiraci&oacute;n de garant&iacute;a, rotaci&oacute;n de ruedas) para un modelo de mantenimiento predictivo. Se busca un formato <b>eficiente para almacenar y procesar</b>. &iquest;Cu&aacute;l usar?",
+    "options": {
+      "A": "XML, por su estructura jer&aacute;rquica autodescriptiva y su amplio soporte entre herramientas heredadas",
+      "B": "CSV, por su simplicidad de filas separadas por comas y su compatibilidad universal con hojas de c&aacute;lculo",
+      "C": "Parquet, formato columnar comprimido optimizado para consultas anal&iacute;ticas y cargas de ML",
+      "D": "Avro, formato de serializaci&oacute;n orientado a filas con esquema y evoluci&oacute;n de esquema, pensado para escritura/streaming"
+    }
+  },
+  {
+    "key": "mla01-q2",
+    "question": "<b>ML - enfoque correcto:</b> una empresa quiere predecir <b>churn</b> (abandono de clientes) a partir de datos de clientes. &iquest;Cu&aacute;l describe mejor el enfoque de machine learning que deber&iacute;a seguir?",
+    "options": {
+      "A": "Analizar manualmente los datos y replicar ese an&aacute;lisis con c&oacute;digo a medida para automatizar predicciones",
+      "B": "Usar los datos crudos y sin procesar directamente como entrada para entrenar el modelo de machine learning",
+      "C": "Desarrollar un conjunto de reglas fijas y condicionales (if-else) que generen las predicciones",
+      "D": "Alimentar los datos a algoritmos de ML que aprendan patrones y construyan modelos para predecir"
+    }
+  },
+  {
+    "key": "mla01-q22",
+    "question": "<b>Migraci&oacute;n on-prem a EFS:</b> mover un gran dataset de entrenamiento desde servidores on-premises a Amazon EFS, con <b>m&iacute;nima interrupci&oacute;n</b> y manejo eficiente de grandes vol&uacute;menes. &iquest;Qu&eacute; servicio es el mejor?",
+    "options": {
+      "A": "Amazon Data Firehose, servicio de entrega de streaming en tiempo real hacia destinos como S3 u OpenSearch",
+      "B": "Amazon CloudFront, red de entrega de contenido (CDN) que cachea objetos en edge locations cercanas al usuario",
+      "C": "Amazon S3 Transfer Acceleration, que acelera subidas/bajadas a un bucket S3 usando las edge locations",
+      "D": "AWS DataSync, servicio de transferencia administrada que copia datos on-premises a EFS con verificaci&oacute;n"
+    }
+  },
+  {
+    "key": "mla01-q27",
+    "question": "<b>Migraci&oacute;n MySQL a Aurora:</b> hacer una migraci&oacute;n <b>puntual (one-time)</b> de datos de entrenamiento de un MySQL on-premises a Amazon Aurora (compatible con MySQL). &iquest;Cu&aacute;l es el enfoque m&aacute;s adecuado?",
+    "options": {
+      "A": "Usar AWS DMS para una migraci&oacute;n homog&eacute;nea (MySQL a Aurora, motores compatibles) administrada",
+      "B": "Usar AWS DMS con Schema Conversion Tool para una migraci&oacute;n heterog&eacute;nea convirtiendo el esquema de origen",
+      "C": "Montar un pipeline de replicaci&oacute;n continua en tiempo real entre MySQL y Aurora con AWS DMS ongoing",
+      "D": "Escribir un script Python que extraiga de MySQL, comprima y suba directamente a Aurora v&iacute;a el AWS SDK"
+    }
+  },
+  {
+    "key": "mla01-q3",
+    "question": "<b>ML - cu&aacute;ndo NO aporta valor:</b> una empresa de e-commerce tiene datos hist&oacute;ricos de clientes. &iquest;En cu&aacute;l de estas tareas el machine learning ser&iacute;a <b>menos &uacute;til</b>?",
+    "options": {
+      "A": "Analizar el sentimiento en redes sociales a partir de las publicaciones de clientes",
+      "B": "Calcular el tiempo promedio de env&iacute;o en las entregas de productos",
+      "C": "Predecir la satisfacci&oacute;n del cliente a partir de interacciones de chat en tiempo real",
+      "D": "Predecir la satisfacci&oacute;n del cliente a partir de datos hist&oacute;ricos"
+    }
+  },
+  {
+    "key": "mla01-q41",
+    "question": "<b>Elegir servicio de IA generativa:</b> una empresa de salud quiere <b>elegir entre varios modelos predictivos</b>, garantizar <b>confidencialidad</b> al hacer fine-tuning y <b>no gestionar infraestructura</b> ML. &iquest;Qu&eacute; servicio cumple mejor?",
+    "options": {
+      "A": "Amazon Comprehend Medical, servicio de NLP especializado en extraer entidades cl&iacute;nicas de texto m&eacute;dico",
+      "B": "Amazon Bedrock, acceso serverless a m&uacute;ltiples foundation models con personalizaci&oacute;n privada y sin infraestructura",
+      "C": "Amazon SageMaker Studio, IDE de ML donde se construyen y entrenan modelos administrando el entorno de c&oacute;mputo",
+      "D": "Amazon SageMaker JumpStart, cat&aacute;logo de modelos preentrenados que se despliegan en endpoints que t&uacute; administras"
+    }
+  },
+  {
+    "key": "mla01-r1-formatos",
+    "question": "<b>Formatos de datos - familias:</b> &iquest;qu&eacute; afirmaci&oacute;n clasifica correctamente estos formatos por su orientaci&oacute;n de almacenamiento?",
+    "options": {
+      "A": "Parquet y ORC son columnares (buenos para analytics); Avro, CSV y JSON Lines son por filas (buenos para escritura/streaming)",
+      "B": "Parquet y CSV son columnares; ORC y Avro son por filas; JSON Lines no encaja en ninguna categor&iacute;a conocida",
+      "C": "Todos (Parquet, ORC, Avro, CSV) son columnares porque comprimen datos y por eso sirven igual para analytics",
+      "D": "Avro y ORC son los &uacute;nicos columnares; Parquet es por filas y CSV es un formato binario comprimido no legible"
+    }
+  },
+  {
+    "key": "mla01-r2-storage",
+    "question": "<b>Selector de almacenamiento:</b> para entrenamiento de ML, &iquest;qu&eacute; asignaci&oacute;n servicio-caso es la correcta?",
+    "options": {
+      "A": "FSx for Lustre: HPC/ML de alto throughput; EFS: acceso concurrente NFS; EBS: bloques de una instancia; S3: data lake de objetos",
+      "B": "S3: acceso concurrente NFS; EFS: data lake de objetos; EBS: HPC de alto throughput; FSx for Lustre: bloques de una instancia",
+      "C": "EBS: data lake de objetos; S3: bloques de una instancia; EFS: HPC de alto throughput; FSx for Lustre: acceso concurrente NFS",
+      "D": "EFS: HPC de alto throughput; FSx for Lustre: data lake de objetos; S3: bloques de una instancia; EBS: acceso concurrente NFS"
+    }
+  },
+  {
+    "key": "mla01-r3-kinesis",
+    "question": "<b>Kinesis Data Streams vs Firehose:</b> &iquest;cu&aacute;l describe correctamente la diferencia clave entre ambos?",
+    "options": {
+      "A": "Data Streams: ingesta con shards para leer/procesar en tiempo real; Firehose: entrega administrada a destinos sin gestionar shards",
+      "B": "Firehose: ingesta con shards para procesamiento en vivo; Data Streams: solo entrega por lotes hacia Amazon Redshift cada hora",
+      "C": "Ambos son id&eacute;nticos: usan shards aprovisionados y solo entregan datos a S3 sin capacidad de procesamiento alguno",
+      "D": "Data Streams: exclusivo para archivos en reposo en S3; Firehose: exclusivo para bases de datos relacionales transaccionales"
+    }
+  },
+  {
+    "key": "mla01-r4-movimiento",
+    "question": "<b>Selector de movimiento de datos:</b> &iquest;qu&eacute; asignaci&oacute;n es correcta para llevar datos hacia AWS?",
+    "options": {
+      "A": "DataSync: migrar on-prem a S3/EFS/FSx por red; S3 Transfer Acceleration: acelerar subidas a S3 por edge; Data Transfer Terminal: transferencia f&iacute;sica offline",
+      "B": "Data Transfer Terminal: acelerar subidas a S3 por red; DataSync: transferencia f&iacute;sica offline; S3 Transfer Acceleration: migrar bases de datos relacionales",
+      "C": "S3 Transfer Acceleration: transferencia f&iacute;sica offline; Data Transfer Terminal: migrar on-prem por red; DataSync: acelerar consultas SQL en Athena",
+      "D": "Los tres hacen exactamente lo mismo: transferencia f&iacute;sica offline de datos hacia una instalaci&oacute;n de AWS con equipo propio"
+    }
+  },
+  {
+    "key": "mla01-r5-clarify",
+    "question": "<b>Clarify vs Model Monitor:</b> &iquest;cu&aacute;l distingue correctamente sus roles en SageMaker?",
+    "options": {
+      "A": "Clarify: m&eacute;tricas de sesgo y explicabilidad; Model Monitor: vigila calidad de datos/modelo y deriva en producci&oacute;n",
+      "B": "Model Monitor: calcula m&eacute;tricas de sesgo pre-entrenamiento; Clarify: solo compila modelos para inferencia en hardware",
+      "C": "Clarify: etiqueta datos con revisores humanos; Model Monitor: descubre t&oacute;picos latentes en texto no estructurado",
+      "D": "Ambos hacen lo mismo: &uacute;nicamente optimizan el tama&ntilde;o del modelo para reducir la latencia de inferencia"
+    }
+  },
+  {
+    "key": "mla01-r6-groundtruth",
+    "question": "<b>Ground Truth vs Comprehend:</b> &iquest;cu&aacute;l describe correctamente cu&aacute;ndo usar cada uno?",
+    "options": {
+      "A": "Ground Truth: crear etiquetas/anotaciones para entrenar tu modelo; Comprehend: NLP administrado que infiere sentimiento/entidades sin entrenar",
+      "B": "Comprehend: crear etiquetas manuales con revisores; Ground Truth: servicio de NLP que clasifica sentimiento directamente sin datos",
+      "C": "Ambos entrenan redes convolucionales desde cero para clasificar im&aacute;genes en categor&iacute;as predefinidas por el usuario",
+      "D": "Ground Truth: compilar modelos para edge; Comprehend: almacenar y servir features de baja latencia para inferencia"
+    }
+  },
+  {
+    "key": "mla01-r7-wrangler",
+    "question": "<b>Data Wrangler vs Feature Store:</b> &iquest;cu&aacute;l resume correctamente para qu&eacute; sirve cada uno?",
+    "options": {
+      "A": "Data Wrangler: preparar/transformar datos (limpiar, codificar, escalar, dividir); Feature Store: almacenar y servir features (online/offline)",
+      "B": "Feature Store: transformar datos crudos con recetas visuales; Data Wrangler: repositorio online/offline de features para inferencia",
+      "C": "Ambos son motores de streaming que ingieren datos IoT en tiempo real y detectan anomal&iacute;as sin ninguna preparaci&oacute;n previa",
+      "D": "Data Wrangler: compilar modelos para edge; Feature Store: descubrir t&oacute;picos latentes en grandes vol&uacute;menes de texto"
+    }
+  },
+  {
+    "key": "mla01-r8-scaler",
+    "question": "<b>Escalado - Robust vs Standard:</b> &iquest;cu&aacute;ndo elegir Robust Scaler en lugar de Standard Scaler?",
+    "options": {
+      "A": "Cuando hay outliers: Robust usa mediana e IQR (resistente a extremos); Standard usa media/desviaci&oacute;n, sensibles a outliers",
+      "B": "Cuando NO hay outliers: Robust usa media y desviaci&oacute;n, y Standard usa mediana e IQR para ignorar los valores centrales",
+      "C": "Siempre Standard, porque Robust Scaler solo funciona con variables categ&oacute;ricas y nunca con num&eacute;ricas continuas",
+      "D": "Nunca importa: ambos producen exactamente el mismo resultado sin importar la presencia de valores at&iacute;picos en los datos"
+    }
+  },
+  {
+    "key": "mla01-r9-dms",
+    "question": "<b>AWS DMS - homog&eacute;nea vs heterog&eacute;nea:</b> &iquest;cu&aacute;l describe correctamente la diferencia?",
+    "options": {
+      "A": "Homog&eacute;nea: mismo motor o compatibles (MySQL a Aurora MySQL) solo con DMS; heterog&eacute;nea: motores distintos, DMS m&aacute;s Schema Conversion Tool",
+      "B": "Homog&eacute;nea: motores distintos que requieren convertir el esquema; heterog&eacute;nea: mismo motor sin ninguna conversi&oacute;n de esquema",
+      "C": "Ambas requieren siempre transferencia f&iacute;sica offline en una instalaci&oacute;n de AWS con equipo propio del cliente",
+      "D": "Homog&eacute;nea: solo bases NoSQL; heterog&eacute;nea: solo bases relacionales, sin posibilidad de mezclar tipos de motor"
+    }
+  },
+  {
+    "key": "mla02-q15",
+    "question": "Entrenar deep learning con dataset masivo de video en un file system distribuido, requiriendo <b>alto throughput y baja latencia</b> con lecturas/escrituras intensivas. &iquest;Que almacenamiento conviene?",
+    "options": {
+      "A": "Amazon FSx for Lustre (HPC/ML, latencias sub-milisegundo, integra con S3)",
+      "B": "Amazon Elastic File System (EFS), almacenamiento de proposito general",
+      "C": "Amazon File Cache, cache de datos accedidos con frecuencia desde origenes",
+      "D": "AWS Storage Gateway, integracion hibrida on-premises con AWS"
+    }
+  },
+  {
+    "key": "mla02-q33",
+    "question": "Se quiere <b>consultar interactivamente</b> grandes volumenes de registros operativos de varios recursos AWS, agrupando entradas similares con deteccion de patrones respaldada por ML, sin administrar infraestructura. &iquest;Que servicio conviene?",
+    "options": {
+      "A": "Amazon CloudWatch Logs Insights",
+      "B": "Amazon OpenSearch Service",
+      "C": "AWS CloudTrail",
+      "D": "AWS Config"
+    }
+  }
+]

@@ -1,0 +1,903 @@
+1. Question
+Category: MLA – Data Preparation for Machine Learning (ML)
+A financial institution is working on a machine learning model for predicting loan approval decisions. The institution prioritizes explaining lending decisions to stakeholders in human terms for transparency and fairness.
+
+Which of the following machine learning model statements is true, and which does the institution need to choose to meet the requirement?
+
+A simple model should be chosen because explainability is crucial in loan approval decisions.
+A simple model should be chosen because accuracy is more important than explainability in loan approval decisions.
+A complex model should be chosen because explainability is crucial in loan approval decisions.
+A complex model should be chosen because accuracy is more important than explainability in loan approval decisions.
+Incorrect
+Machine learning (ML) is the process of training computers, using math and statistical processes, to find and recognize patterns in data. After patterns are found, ML generates and updates training models to make increasingly accurate predictions and inferences about future outcomes based on historical and new data. For example, ML could help determine the likelihood of a customer purchasing a particular product based on previous purchases by the user or the product’s past sales history.
+
+What are simple and complex machine learning models?
+
+Simple and complex ML models differ when balancing a model’s accuracy (number of correctly predicted data points) and a model’s explainability (how much of the ML system can be explained in “human terms”). The output of a simple ML model may be explainable and produce faster results, but the results may be inaccurate. The output of a complex ML model may be accurate, but the results may be difficult to communicate.
+
+simple-vs-complex-ml-model
+
+In the context of developing a machine learning model for predicting loan approvals, a financial institution prioritizing transparency and fairness over maximizing accuracy should opt for a simple model that is easily explainable. Transparency in lending decisions is crucial to ensure fairness and mitigate biases. Simple models such as decision trees or logistic regression provide clear visibility into the factors influencing loan approval, making it easier to explain why a decision was made. While accuracy is important in predicting loan approval decisions, the ability to explain why a particular decision was made is equally critical. Additionally, complex models might offer marginally better predictive accuracy, they often lack transparency, making it difficult to justify decisions to stakeholders and regulators.
+
+Hence, the correct answer is: A simple model should be chosen because explainability is crucial in loan approval decisions.
+
+The option that says: A complex model should be chosen because accuracy is more important than explainability in loan approval decisions is incorrect because it prioritizes accuracy over explainability, which is the requirement in this scenario. Furthermore, while accuracy is important in predicting loan approvals, it cannot be prioritized over explainability in this context. Financial institutions must ensure their decisions are transparent and fair, which is difficult with complex models like deep neural networks or ensemble methods that lack interpretability. Regulatory bodies often require institutions to provide clear reasons for loan approval or denial, making explainability crucial.
+
+The option that says: A simple model should be chosen because accuracy is more important than explainability in loan approval decisions is incorrect. This option correctly identifies the use of a simple model but incorrectly states the reason. The emphasis here should be on explainability, not just accuracy. While simple models can sometimes be less accurate than complex ones, their interpretability makes them more suitable for loan approval decisions where transparency is essential.
+
+The option that says: A complex model should be chosen because explainability is crucial in loan approval decisions is incorrect. While it correctly states that explainability is crucial, it incorrectly suggests using a complex model. Complex models are typically less interpretable, making it difficult to explain the decision-making process. For ensuring fairness and transparency, simple models that are inherently more interpretable are preferred.
+
+ 
+
+References:
+
+https://aws.amazon.com/what-is/machine-learning/
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-model-explainability.html
+
+ 
+
+Check out this AWS Machine Learning And AI Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+
+2. Question
+Category: MLA – ML Model Development
+A company is looking to use Amazon Bedrock for its AI-driven initiatives. They need a tool that can help create advanced conversational chatbots capable of interacting with customers and providing relevant information from their data systems.
+
+Which option best describes a use case that Amazon Bedrock excels at?
+
+Predictive maintenance of vehicles.
+Predicting future product demand.
+Developing chatbots that provide relevant information to customers.
+Identifying content within social media images.
+Incorrect
+Amazon Bedrock is a service that makes it easy for users to build and scale generative AI applications using pre-trained models from leading AI startups and Amazon itself. One of the key use cases of Amazon Bedrock is to enable the creation of sophisticated chatbots and virtual assistants that can understand and generate natural language, making it highly suitable for customer service applications.
+
+
+
+Amazon Bedrock helps create AI applications with a focus on natural language processing (NLP) and understanding, which are critical components for developing advanced conversational chatbots.
+
+Hence, the correct answer is: Developing chatbots that provide relevant information to customers.
+
+The option that says: Predicting future product demand is incorrect because Amazon Bedrock’s primary focus is on generative AI and NLP applications, not predictive analytics.
+
+The option that says: Identifying content within social media images is incorrect this task is better suited for services like Amazon Rekognition, which specializes in image and video analysis. Therefore, this does not satisfy the requirements.
+
+The option that says: Predictive maintenance of vehicles is incorrect because this option typically involves analyzing sensor data and applying machine learning models, which is not the primary use case for Amazon Bedrock.
+
+ 
+
+References:
+
+https://aws.amazon.com/bedrock/
+
+https://aws.amazon.com/generative-ai/
+
+ 
+
+Check out this Amazon Bedrock Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-bedrock/
+
+
+3. Question
+Category: MLA – Data Preparation for Machine Learning (ML)
+A company is working on a machine learning project that involves analyzing customer data to predict churn rates.
+
+Which of the following statements best describes the machine learning approach the company should take?
+
+Manually analyze the customer data and replicate the analysis process using custom code to automate predictions.
+Use raw, unprocessed customer data directly as input to train the machine learning model.
+Develop a set of hard-coded rules and conditional statements to generate predictions.
+Feed the customer data into machine learning algorithms, which will learn patterns and build models to make predictions.
+Incorrect
+Machine Learning (ML) is the process of training computers, using math and statistical processes, to find and recognize patterns in data. After patterns are found, ML generates and updates training models to make increasingly accurate predictions and inferences about future outcomes based on historical and new data. For example, ML could help determine the likelihood of a customer purchasing a particular product based on previous purchases by the user or the product’s past sales history.
+
+The machine learning process typically involves:
+
+Data collection and preparation: Gathering relevant data and preprocessing it (cleaning, formatting, feature engineering) to make it suitable for model training.
+Model training: Feeding the prepared data into machine learning algorithms, which learn patterns and relationships within the data to build a model.
+Model evaluation: Assessing the trained model’s performance using evaluation metrics and techniques like cross-validation.
+Model deployment: Integrating the trained and evaluated model into applications or systems to make predictions or decisions on new data.
+machine-learning
+
+Machine learning involves feeding data into algorithms, which then build models that can make predictions or decisions without being explicitly programmed with rules.
+
+Therefore, the correct answer is: Feed the customer data into machine learning algorithms, which will learn patterns and build models to make predictions.
+
+The option that says: Develop a set of hard-coded rules and conditional statements to generate predictions is incorrect because machine learning don’t just rely on simple hard-coded rules and if-else conditions but rather learns from data and adapts over time. Additionally, AWS emphasizes that machine learning algorithms should not be explicitly programmed with rigid rules.
+
+The option that says: Manually analyze the customer data and replicate the analysis process using custom code to automate predictions is incorrect because it only contradicts the automated nature of machine learning. Machine learning algorithms are designed to learn patterns and make predictions automatically from data without the need for manual analysis or replication of human processes.
+
+The option that says: Use raw, unprocessed customer data directly as input to train the machine learning model is incorrect because AWS recommends data preprocessing and feature engineering to prepare the data for effective machine learning model training. Using raw, unprocessed data directly can lead to poor model performance and inaccurate predictions.
+
+ 
+
+References:
+
+https://community.aws/content/2drbbXokwrIXivItJ8ZeCk3gT5F/introduction-to-artificial-intelligence-and-machine-learning?lang=en
+
+https://aws.amazon.com/what-is/machine-learning/
+
+ 
+
+Check out this AWS Machine Learning And AI Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+
+4. Question
+Category: MLA – ML Model Development
+A large retail company is exploring generative AI to enhance its customer service chatbot. The company aims to fine-tune models from third-party services to enhance the chatbot’s comprehension of business-specific customer inquiries.
+
+Which benefits of Amazon Bedrock will help the retail company meet its requirements? (Select TWO.)
+
+Ensures that prompts and responses remain completely private and secure.
+Amazon Bedrock requires customers to handle infrastructure provisioning.
+Offers a wide range of pre-trained foundation models (FMs) from multiple providers.
+Offers distinct APIs for accessing different foundation models (FMs).
+Amazon Bedrock enables private customization of foundation models (FMs).
+Incorrect
+Amazon Bedrock is a service that provides access to foundation models (FMs) from leading AI providers. It allows businesses to integrate and scale generative AI applications without the complexity of managing underlying infrastructure. With Amazon Bedrock, companies can easily access various pre-trained models for tasks such as text generation, chatbots, image recognition, and more. This service offers flexibility in choosing the best models for specific use cases, enabling organizations to leverage cutting-edge AI technology to enhance their applications and customer experiences.
+
+
+
+One of the primary benefits of Amazon Bedrock is its support for the private customization of foundation models. This means businesses can fine-tune pre-trained models to suit their unique needs and data better, ensuring more accurate and relevant outputs. Additionally, Amazon Bedrock ensures data privacy and security, as prompts and responses are handled securely within the AWS environment. This allows companies to deploy AI solutions while confidently complying with data protection regulations. Amazon Bedrock empowers businesses to innovate rapidly and effectively in the AI landscape by providing a broad selection of models and robust security features.
+
+Hence, the correct answers are:
+
+– Offers a wide range of pre-trained foundation models (FMs) from multiple providers.
+
+– Amazon Bedrock enables private customization of foundation models (FMs).
+
+The option that says: Ensures that prompts and responses remain completely private and secure is incorrect. While important, the scenario does not specifically highlight privacy as a concern for enhancing the chatbot’s functionality. Therefore, it’s not among the most directly relevant benefits for the given requirement.
+
+The option that says: Offers distinct APIs for accessing different foundation models (FMs) is incorrect. This option simply describes a way of getting details about different foundation models available on Amazon Bedrock.
+
+The option that says: Amazon Bedrock requires customers to handle infrastructure provisioning is incorrect. Amazon Bedrock is primarily designed to take care of the infrastructure provisioning and management. Customers do not need to handle the underlying infrastructure, allowing them to focus on developing and deploying their AI applications.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
+
+https://aws.amazon.com/bedrock/
+
+ 
+
+Check out this Amazon Bedrock Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-bedrock/
+
+
+5. Question
+Category: MLA – ML Model Development
+A healthcare company seeks to enhance patient outcome predictions using generative AI applications. The company requires a solution that allows selection from various predictive models, guarantees the confidentiality of private data during model fine-tuning, and eliminates the need for managing the underlying ML infrastructure.
+
+Which AWS service best meets the requirements?
+
+Amazon Comprehend Medical
+Amazon Bedrock
+Amazon SageMaker Studio
+Amazon Rekognition
+Incorrect
+Amazon Bedrock is a fully managed service that offers leading foundation models (FMs) and a set of capabilities to quickly build and scale generative artificial intelligence (generative AI) applications.
+
+
+
+Amazon Bedrock provides a serverless environment, simplifying the deployment and management of machine learning models without the need to handle the underlying infrastructure. Bedrock supports customizations of these models, ensuring privacy and security for user data, making it suitable for various applications, including those requiring handling of sensitive information.
+
+Hence, the correct answer is Amazon Bedrock.
+
+The option that says: Amazon SageMaker Studio is incorrect. While this service offers comprehensive tools for machine learning, it’s primarily designed for broad ML tasks rather than focusing specifically on generative AI and foundation models. It requires more hands-on management of the machine learning lifecycle compared to Bedrock.
+
+The option that says: Amazon Comprehend Medical is incorrect because this service is tailored only for extracting medical information from unstructured text using natural language processing. It does not support the creation or management of generative AI models, as it’s focused solely on NLP tasks in the medical field.
+
+The option that says: Amazon Rekognition is incorrect because Amazon Rekognition is simply used for tasks like facial analysis, object detection, and activity recognition. It does not facilitate the building or scaling of foundation models for generative AI applications, making it unsuitable for predictive analytics in healthcare beyond visual data.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html
+
+https://aws.amazon.com/bedrock/
+
+ 
+
+Check out this Amazon Bedrock Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-bedrock/
+
+
+6. Question
+Category: MLA – Data Preparation for Machine Learning (ML)
+An e-commerce company wants to improve customer satisfaction. They have collected historical data on customer interactions, including purchase history, product reviews, and customer service inquiries. The goal is to predict whether a customer is likely to be satisfied or dissatisfied based on this data.
+
+Which of the following tasks would machine learning be least useful?
+
+Analyzing social media sentiment based on customer posts.
+Calculating average shipping times for product deliveries.
+Predicting customer satisfaction based on real-time chat interactions.
+Predicting customer satisfaction based on historical data.
+Incorrect
+Machine Learning (ML) is the science of developing algorithms and statistical models that allow computer systems to perform tasks without explicit instructions. Instead of relying on predefined rules, machine learning systems learn from data patterns and make predictions based on historical information. Here are some key points about machine learning:
+
+Data-Driven Decision Making:
+– Machine learning leverages large quantities of historical data to make informed decisions. By analyzing patterns and relationships within the data, ML models can generalize and predict outcomes.
+
+Business Impact:
+– Machine learning is crucial for businesses because it drives growth, unlocks new revenue streams, and solves complex problems.
+
+– Traditional decision-making processes rely on data from various sources (such as customer feedback, employee data, and financial records). ML automates and optimizes this process, allowing businesses to achieve results faster.
+
+Industry Applications:
+– Manufacturing: ML supports predictive maintenance, quality control, and innovative research. For instance, manufacturing giant 3M uses ML to analyze slight changes in shape, size, and orientation to improve the abrasiveness and durability of products.
+
+– Healthcare and Life Sciences: ML analyzes wearable sensor data, aids real-time diagnosis, and detects diseases. Solutions include tumor detection and eye disease diagnosis.
+
+– Financial Services: ML enhances risk analytics, portfolio management, and fraud detection. It helps investors identify opportunities and mitigate risks.
+
+– Retail: ML improves customer service, stock management, upselling, and cross-channel marketing.
+
+
+
+Hence, the correct answer is: Calculating average shipping times for product deliveries. This task doesn’t necessarily require machine learning. It’s a straightforward statistical calculation based on historical shipping data. Machine learning wouldn’t add much value here; simple aggregation and analysis suffice.
+
+The option that says: Analyzing social media sentiment based on customer posts is incorrect because this task involves using natural language processing (NLP) techniques to understand customer sentiment expressed in social media posts, reviews, or comments. Machine learning models can be trained to classify sentiment as positive, negative, or neutral. It’s a useful task for understanding customer opinions and feedback.
+
+The option that says: Predicting customer satisfaction based on historical data is incorrect because this is a highly relevant task for machine learning. By using historical data (such as purchase history, reviews, and customer service interactions), ML models can predict whether a customer is likely to be satisfied or dissatisfied. Techniques like logistic regression, decision trees, or neural networks can be applied.
+
+The option that says: Predicting customer satisfaction based on real-time chat interactions is incorrect. This option focuses on analyzing customer interactions in real time, such as chat conversations with customer service representatives. By using machine learning, companies can predict customer satisfaction during ongoing interactions and address issues promptly. Techniques like NLP and sentiment analysis can be applied.
+
+ 
+
+References:
+
+https://aws.amazon.com/what-is/machine-learning/
+
+https://aws.amazon.com/ai/machine-learning/
+
+ 
+
+Check out this Machine Learning and AI Cheat Sheets:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+
+7. Question
+Category: MLA – Data Preparation for Machine Learning (ML)
+A healthcare analytics team is discussing the lifecycle management of models deployed to production. The team’s data scientist is tasked with deciding whether the deployed machine learning models need to be retrained and updated regularly.
+
+Which of the following statements accurately reflects the requirements for maintaining machine learning models in production?
+
+Production data is always consistent with training data, making retraining unnecessary.
+Production data does not differ from training data over time, so models do not require continuous retraining.
+Machine learning models need to be regularly retrained as data changes over time.
+Once a machine learning model is deployed, it can remain effective indefinitely without updates.
+Incorrect
+Machine learning models in production environments are often subject to changes in the underlying data distributions, a phenomenon known as data drift. This can lead to decreased model performance over time if not addressed.
+
+
+
+Regular retraining helps models adapt to new data patterns and maintain their accuracy and relevance. Monitoring tools and practices, such as those provided by AWS SageMaker Model Monitor, are crucial for identifying when retraining is necessary.
+
+Hence, the correct answer is: Machine learning models need to be regularly retrained as data changes over time.
+
+The option that says: Production data does not differ from training data over time, so models do not require continuous retraining is incorrect. Production data can simply change over time due to various factors such as seasonality, trends, or external influences. These changes, known as data drift, can lead to discrepancies between the training data and the production data, necessitating continuous retraining to ensure the model’s accuracy and relevance.
+
+The option that says: Production data is always consistent with training data, making retraining unnecessary is incorrect because production data is rarely consistent with training data over extended periods. As mentioned above, the various factors cause the production data to diverge from the training data. This inconsistency requires regular monitoring and retraining of the models to ensure they continue to perform well.
+
+The option that says: Once a machine learning model is deployed, it can remain effective indefinitely without updates is incorrect because machine learning models must be regularly updated to account for changes in data patterns and maintain their performance. Without updates, models can become outdated and less effective as they fail to adapt to new data characteristics.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/whatis.html
+
+ 
+
+Check out this Amazon SageMaker Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+
+8. Question
+Category: MLA – ML Model Development
+A financial company has accumulated a large volume of client feedback, reviews, and comments over the years. The company wants to analyze these data to identify common topics that frequently appear in the feedback to understand client sentiment better and improve their offerings. The specific topics are not predetermined, and the goal is to discover them automatically from the text data.
+
+Which built-in Amazon SageMaker AI algorithm is the most appropriate for this task?
+
+Latent Dirichlet Allocation (LDA) Algorithm
+Sequence-to-Sequence Algorithm
+BlazingText algorithm in Text Classification Mode
+Text Classification – TensorFlow algorithm
+Incorrect
+Amazon SageMaker’s Latent Dirichlet Allocation (LDA) algorithm is an unsupervised learning technique designed to represent a collection of documents as a combination of various topics. LDA is primarily used to identify a specified number of topics within a set of text documents. In this context, each document is considered an observation; the words within the documents are the features, and the topics are the categories. Since LDA is an unsupervised method, the topics are not specified up front, and the discovered topics may not necessarily match human categorizations. Instead, LDA learns the topics as a probability distribution over the words in the documents, and each document is characterized as a mixture of these topics.
+
+Latent Dirichlet Allocation (LDA) Algorithm
+
+In the given scenario, the financial services company aims to analyze client feedback to uncover common themes automatically. Since the themes are not predefined, a topic modeling approach is necessary. The LDA algorithm is designed for this purpose and is a powerful tool for text mining and natural language processing tasks. It allows the company to sift through vast amounts of textual data and discern patterns that might take time to be apparent. This insight can help the company make data-driven decisions to enhance its services and products based on the discovered client sentiments and themes. Thus, the LDA algorithm is the most appropriate choice for this task as it directly addresses the company’s requirement to automatically discover latent themes in their text data.
+
+Hence, the correct answer is: Latent Dirichlet Allocation (LDA) Algorithm.
+
+The option that says: Sequence-to-Sequence Algorithm is incorrect. This algorithm is primarily used for tasks such as language translation or summarization. Sequence-to-sequence models are designed to transform a sequence of elements (such as words in a sentence) into another sequence, and they are not suitable for unsupervised topic discovery.
+
+The option that says: Text Classification – TensorFlow Algorithm is incorrect because text classification requires predefined classes or topics. The goal in this scenario is to discover unknown topics, not classify text into existing categories. This algorithm is suitable for tasks where the categories are known and need to be applied to new text data.
+
+The option that says: BlazingText algorithm in Text Classification mode is incorrect. BlazingText algorithm in Text Classification mode is a supervised learning approach, which means it requires labeled training data to classify the text. In this scenario, the specific topics of the documents are unknown, making supervised learning methods unsuitable.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/lda-how-it-works.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/lda.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+
+9. Question
+Category: MLA – ML Model Development
+An e-commerce company wants to implement a machine learning system to detect fraudulent online transactions. An ML engineer has deployed a machine learning model to identify and minimize these fraudulent activities. However, only a small percentage (around 3%) of the transactions in the dataset are found fraudulent. The company wants to fine-tune the model’s ability to detect fraud while minimizing false positives to ensure genuine transactions are not impeded.
+
+Which metrics should the ML engineer use to optimize the performance of its fraud detection system? (Select TWO.)
+
+Cut-off
+RMSE (Root Mean Square Error)
+True Positive Rate
+False Positive Rate
+F1 Score
+Incorrect
+RMSE (Root Mean Square Error) is a metric used to measure the differences between predicted values and actual values in a regression problem. It calculates the square root of the average squared differences between the predicted and actual values. A lower Root Mean Square Error value indicates better model performance.
+
+True Positive Rate (Recall or Sensitivity), also known as Recall or Sensitivity, is a metric used in classification problems. It assesses the percentage of true positive instances correctly identified by the model. A higher True Positive Rate indicates that the model is better at detecting positive instances.
+
+False Positive Rate is another metric used in classification problems. It measures the proportion of actual negative instances that are incorrectly classified as positive by the model. A lower False Positive Rate is desirable, as it means the model is less likely to misclassify negative instances as positive.
+
+F1 Score is a metric that merges recall and precision into a single score. It is the harmonic mean of recall and precision. Precision measures the fraction of correctly predicted positive outcomes, while recall is the same as the True Positive Rate. The F1 Score provides a balanced measure of a model’s performance by considering both precision and recall.
+
+Cut-off (or threshold) is a value used to convert the model’s predicted probabilities or scores into binary class predictions. Specifically, the cut-off is a threshold value that separates the two classes. Any predicted probability or score above the cut-off value is classified as one class (e.g., positive or fraudulent), while any value below the cut-off is classified as the other class (e.g., negative or genuine).
+
+
+
+The problem statement mentions that the company wants to fine-tune the fraud detection model to identify fraudulent transactions while minimizing false positives (genuine transactions incorrectly flagged as fraudulent). By optimizing (minimizing) the FPR, the ML engineer can ensure that the fraud detection system does not unnecessarily flag too many genuine transactions as fraudulent.Remember that FPR directly measures the proportion of genuine (non-fraudulent) transactions that are incorrectly classified as fraudulent by the model. A low FPR indicates that the model is minimizing the number of false positives, which aligns with the company’s requirement. Next is optimizing the F1 Score which helps strike a balance between Precision (minimizing false positives) and Recall (detecting true fraudulent cases). By maximizing the F1 Score, the ML engineer can optimize the model to have both a reasonably high Precision (low false positives) and a high Recall (high true positive rate for fraudulent transactions).
+
+Hence, the correct answers are:
+
+– False Positive Rate
+
+– F1 Score
+
+The option that says: RMSE (Root Mean Square Error) is incorrect because it is a metric primarily used for regression problems, where the goal is to predict a continuous value. In the case of fraud detection, which is a classification problem, RMSE is not an appropriate metric.
+
+The option that says: True Positive Rate is incorrect. The True Positive Rate (TPR) measures how well the model identifies actual fraudulent transactions but does not address the need to minimize false positives. A high TPR indicates that the model detects many fraudulent cases accurately; however, it can also result in a high False Positive Rate (FPR), meaning that genuine transactions might be wrongly flagged as fraudulent. Since the company’s goal is to minimize false positives to avoid disrupting legitimate transactions, focusing on metrics like FPR and F1 Score is more appropriate. These metrics directly address the issue of false positives and ensure that the model effectively balances detecting fraud while minimizing incorrect flags on genuine transactions.
+
+The option that says: Cut-off is incorrect. The cut-off (or threshold) is not a performance metric but only a decision boundary used to classify transactions as fraudulent or not. Adjusting the cut-off is part of the process to optimize performance metrics like precision, recall, and F1 Score, but it is not a metric itself.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/machine-learning/latest/dg/amazon-machine-learning-key-concepts.html
+
+https://docs.aws.amazon.com/machine-learning/latest/dg/what-is-amazon-machine-learning.html
+
+ 
+
+Check out this AWS Machine Learning and AI Cheat Sheet:
+
+https://tutorialsdojo.com/aws-cheat-sheets-aws-machine-learning-and-ai/
+
+
+10. Question
+Category: MLA – Data Preparation for Machine Learning (ML)
+A retail company is launching a series of new products across its global stores. The company wants to forecast daily demand for its products based on historical sales data. The historical data includes information on product sales, inventory levels, and marketing campaigns. However, the timestamps for this data are irregular, and some data points are missing due to occasional stockouts or incomplete records.
+
+Which approach would you recommend to satisfy these requirements with the LEAST operational overhead?
+
+Clean and forecast data using Amazon SageMaker Studio Notebook with Pandas.
+Process and forecast data using Amazon EMR Serverless with PySpark.
+Visualize and forecast data using Amazon QuickSight.
+Prepare and analyze data using Amazon SageMaker Studio Data Wrangler.
+Incorrect
+Amazon SageMaker Studio Data Wrangler provides a streamlined and visual interface for data preparation and analysis. It enables users to handle irregular timestamps and missing data points effectively through built-in transformations and data cleaning functions. Data Wrangler is designed to minimize operational overhead by offering a low-code solution for data wrangling tasks, allowing users to quickly prepare data for machine learning without deep technical expertise in data engineering or programming.
+
+
+
+By leveraging Data Wrangler, the corporation can ensure efficient data preparation and focus more on the analysis and forecasting aspects with reduced operational overhead.
+
+Hence, the correct answer is: Prepare and analyze data using Amazon SageMaker Studio Data Wrangler.
+
+The option that says: Process and forecast data using Amazon EMR Serverless with PySpark is incorrect because while this can primarily handle large-scale data processing and complex transformations, it requires more setup and maintenance compared to Data Wrangler. This approach involves configuring clusters, managing PySpark scripts, and ensuring infrastructure scalability, leading to higher operational overhead.
+
+The option that says: Visualize and forecast data using Amazon QuickSight. is incorrect. Amazon QuickSight is just a tool for data visualization with basic forecasting capabilities. It is not primarily designed for extensive data cleaning or handling irregular timestamps and missing data points. QuickSight focuses more on presenting insights rather than preparing data, which is a crucial step in this scenario.
+
+The option that says: Clean and forecast data using Amazon SageMaker Studio Notebook with Pandas is incorrect. This option requires significant coding and manual intervention to handle irregular timestamps and missing data points compared to the streamlined interface provided by Data Wrangler.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html
+
+https://aws.amazon.com/blogs/machine-learning/prepare-time-series-data-with-amazon-sagemaker-data-wrangler/
+
+ 
+
+Check out this Amazon SageMaker Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+
+11. Question
+Category: MLA – ML Model Development
+An AI development team is building a solution using Amazon SageMaker AI to support a smart retail system. As part of the ML model development, the team must analyze visual inputs to identify an item in an image and provide the item’s location on store shelves in real-time.
+
+Given this image processing and computer vision requirement, which of the following SageMaker algorithms is best for this task?
+
+Object detection – MXNet
+K-Means Clustering
+Object2Vec
+Random Cut Forest (RCF)
+Incorrect
+The Amazon SageMaker AI Object Detection – MXNet algorithm detects and classifies objects in images using a single deep neural network. It is a supervised learning algorithm that takes images as input and identifies all instances of objects within the image scene. The object is categorized into one of the classes in a specified collection with a confidence score that it belongs to the class. A rectangular bounding box indicates its location and scale in the image. It uses the Single Shot multibox Detector (SSD) framework and supports two base networks: VGG and ResNet. The network can be trained from scratch or with models pre-trained on the ImageNet dataset.
+
+Bird Identifier using the Object Detection algorithm
+
+We are being asked of two capabilities: identifying the object class (e.g., shirt, mug) and locating the object (bounding box coordinates). The Object detection algorithm fits both key requirements.
+
+Hence, the correct answer is: Object detection – MXNet.
+
+Object2Vec is incorrect. Object2Vec is a SageMaker algorithm primarily used to learn vector embeddings of discrete objects (like user IDs, item IDs, etc.). It’s typically used in recommendation systems or semantic similarity tasks, not computer vision or image processing. It does not work on images and cannot detect or locate items visually.
+
+K-Means Clustering is incorrect. K-Means is an unsupervised algorithm used to cluster data points based on similarity. It primarily operates on numerical feature vectors, not raw image data. It does not understand object categories or bounding boxes and is unsuitable for image-based object detection tasks.
+
+Random Cut Forest (RCF) is incorrect. RCF is primarily used for anomaly detection in time series or tabular data. It analyzes patterns in data streams and identifies outliers. It does not process images, nor can it identify or locate objects within them.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/object-detection.html
+
+https://aws.amazon.com/blogs/machine-learning/identifying-bird-species-on-the-edge-using-the-amazon-sagemaker-built-in-object-detection-algorithm-and-aws-deeplens/
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/object2vec.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/k-means.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/randomcutforest.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+
+12. Question
+Category: MLA – Data Preparation for Machine Learning (ML)
+A data engineering team of an energy company is working with an Amazon S3 bucket that holds approximately 1 TB of structured and semi-structured data from various ingestion pipelines. This includes sensor and operational data from smart grids, energy meters, and IoT devices in CSV, JSON, XLSX, and Apache Parquet formats. All the files are stored in the same S3 folder without subfolder separation.
+
+The team needs to process the data using AWS Glue DataBrew and then store the final output in S3 using a format that ensures output format compatibility for downstream Glue jobs.
+
+What is the most effective strategy to meet these requirements?
+
+Organize the data into separate folders based on file type. Use DataBrew to process each folder separately and save the output in Apache Parquet format.
+Process the data in the current S3 folder using DataBrew and store the output in Apache Parquet format.
+Process the data in the current S3 folder using DataBrew and store the output in JSON format.
+Upload all files to a single S3 folder. Use Glue to convert them into JSON format before processing with DataBrew.
+Incorrect
+AWS Glue DataBrew is a visual data preparation tool enabling users to clean and normalize data without writing code. Using DataBrew helps reduce the time it takes to prepare data for analytics and machine learning (ML) by up to 80 percent, compared to custom-developed data preparation. You can choose from over 250 ready-made transformations to automate data preparation tasks, such as filtering anomalies, converting data to standard formats, and correcting invalid values.
+
+DataBrew Overview Diagram
+
+Using the DataBrew console, you can browse Amazon S3 buckets and directories to select a file for your dataset. Datasets are not restricted to a single file. DataBrew is capable of processing all files within an S3 folder, provided that two conditions are met:
+
+1. All files share the same data format.
+
+2. All files use the same file extension.
+
+DataBrew supports using the Apache Parquet format. This column-based data format is preferred due to its performance orientation, especially with large datasets.
+
+Hence, the correct answer is: Organize the data into separate folders based on file type. Use DataBrew to process each folder separately and save the output in Apache Parquet format.
+
+The option that says: Process the data in the current S3 folder using DataBrew and store the output in Apache Parquet format is incorrect. The question specifies that the S3 folder contains multiple file types, all stored in the same folder. DataBrew can only process all files in a folder if they share the same format and file extension. Since this folder contains heterogeneous file types, it violates both requirements.
+
+The option that says: Upload all files to a single S3 folder. Use Glue to convert them into JSON format before processing with DataBrew is incorrect. This option suggests using AWS Glue first to convert the files to JSON before processing them with DataBrew, which is backwards. DataBrew is typically used before Glue jobs to perform cleaning, normalization, and transformation. Also, storing and exporting output in JSON is technically possible but not optimal for AWS Glue, which performs best with columnar formats like Parquet. This format choice would result in slower performance and increased cost in Glue-based ETL jobs.
+
+The option that says: Process the data in the current S3 folder using DataBrew and store the output in JSON format is incorrect. This option simply combines the inability of DataBrew to process heterogeneous file types and the slow performance of the JSON format, making this option completely unworkable.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/databrew/latest/dg/what-is.html
+
+https://docs.aws.amazon.com/databrew/latest/dg/datasets.multiple-files.html
+
+https://docs.aws.amazon.com/databrew/latest/dg/supported-data-file-sources.html#datasets.databrew-input-formats
+
+https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-format-parquet-home.html
+
+ 
+
+Check out this AWS Glue Cheat Sheet:
+
+https://tutorialsdojo.com/aws-glue/
+
+
+13. Question
+Category: MLA – ML Solution Monitoring, Maintenance, and Security
+A factory uses Amazon SageMaker AI to run an ML model that analyzes a combination of images and video feeds of products on an assembly line and classifies each item into two categories based on quality inspection: “Passed” or “Failed.” These classifications help robots sort the products automatically. To ensure the system is working correctly, the company needs to evaluate the performance of the ML model in this scenario.
+
+Which evaluation metrics would be appropriate for measuring the model’s effectiveness? (Select FOUR.)
+
+ROUGE score
+Root Mean Square Error
+Recall
+Precision
+F1 Score
+Accuracy
+Incorrect
+Binary classification is supervised learning that assigns an individual to one of two predefined and mutually exclusive classes based on the individual’s attributes, for example, “Passed” or “Failed”. It is supervised because the models are trained using examples in which the attributes are provided with correctly labeled objects.
+
+Binary Classification Metrics
+
+Precision is the proportion of correctly identified true positives among all predicted positives. Precision matters most when false positives carry significant consequences, such as object detection in autonomous vehicles, where a false positive can induce sudden unnecessary braking.
+
+Recall is defined as True Positives divided by (True Positives + False Negatives), and its value ranges between 0 and 1. Recall is critical in scenarios where missing a positive instance (i.e., a false negative) has significant consequences, such as medical diagnostics, fraud detection, and manufacturing quality control.
+
+Accuracy is the proportion of correct predictions out of all predictions made. It indicates how often the model’s predictions match the positive class labels.
+
+F1 Score is the harmonic average of precision and recall. F1 ensures that precision and recall are given equal weight, penalizing significant differences between them.
+
+Thus, the correct answers are:
+
+– Precision
+
+– Recall
+
+– Accuracy
+
+– F1 Score
+
+Root Mean Square Error is incorrect because Root Mean Square Error (RMSE) is the square root of the average of the squared differences between predicted and actual values. It measures error in predicting continuous values, not discrete labels like “Passed”/”Failed”. It is only used for regression problems, not classification.
+
+ROUGE score is incorrect because it only assesses how closely a model’s text summarization matches a reference summary. It only applies to text summarization tasks, not classification.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/algorithms-choose.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-accuracy-evaluation.html
+
+https://aws.amazon.com/blogs/machine-learning/is-your-model-good-a-deep-dive-into-amazon-sagemaker-canvas-advanced-metrics/
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+
+14. Question
+Category: MLA – ML Model Development
+An ML engineer working for a healthcare tech company is tasked with ensuring encryption in transit for all communications during an Amazon SageMaker training job. The engineer runs the job across a distributed training cluster and must ensure that all communication between nodes during the job is secured.
+
+Which approach best ensures encryption in transit during the training process?
+
+Specify an AWS Key Management Service (AWS KMS) key with AWS Secrets Manager while creating the SageMaker training cluster.
+Provide an AWS Secrets Manager key when creating the training job request.
+Enable encryption for communication between nodes while processing batch transform jobs.
+Enable inter-container traffic encryption in a training cluster to use TLS certificates.
+Incorrect
+By default, Amazon SageMaker AI runs training jobs in an Amazon Virtual Private Cloud (Amazon VPC) to help keep your data secure. You can add another level of security to protect your training containers and data by configuring a private VPC. Distributed ML frameworks and algorithms usually transmit information directly related to the model, such as weights, not the training dataset. When performing distributed training, you can further protect data transmitted between instances. This can help you to comply with regulatory requirements. To do this, use inter-container traffic encryption.
+
+Enable inter-container traffic encryption
+
+You can enable TLS (Transport Layer Security) to secure communication between nodes within a training cluster.
+
+Hence, the correct answer is: Enable inter-container traffic encryption in a training cluster to use TLS certificates.
+
+The option that says: Provide an AWS Secrets Manager key when creating the training job request is incorrect. Secrets Manager is not used to encrypt data in transit. It is simply a service for storing and managing secrets like credentials and API keys. SageMaker training jobs do not support specifying a Secrets Manager key for encryption purposes. In fact, data encryption in SageMaker (both at rest and in transit) is done via AWS Key Management Service (KMS) and TLS, respectively, not Secrets Manager keys.
+
+The option that says: Specify an AWS Key Management Service (AWS KMS) key with AWS Secrets Manager while creating the SageMaker training cluster is incorrect. While this option mentions KMS, which is valid for encryption at rest, it still misapplies the services. KMS encrypts S3 input data, model artifacts, or logs, not specifically to encrypt inter-container communication. Also, pairing Secrets Manager with KMS in this context is irrelevant to the requirement of encrypting data in transit. Finally, SageMaker training clusters are provisioned automatically and not created manually by users.
+
+The option that says: Enable encryption for communication between nodes while processing batch transform jobs is incorrect. Batch transform is simply a batch inference feature in SageMaker, not a training process. While encryption of input/output data in batch transform can be configured, the use case described here is training, not inference. Moreover, batch transform typically does not require inter-node communication in the same way that distributed training does. Thus, enabling node-to-node encryption in batch transform jobs is irrelevant and does not satisfy the requirements for training job security.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/train-encrypt.htmll
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-in-transit.html
+
+https://docs.aws.amazon.com/prescriptive-guidance/latest/encryption-best-practices/kms.html
+
+https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+
+15. Question
+Category: MLA – ML Model Development
+A machine learning engineer working in a weather forecasting agency was tasked with selecting appropriate metrics to assess the quality of a time-series forecasting model. The agency uses the model, deployed on Amazon SageMaker AI, to predict future temperatures and humidity levels.
+
+Which metrics are most suitable for evaluating this model? (Select TWO.)
+
+Root mean square error (RMSE)
+Log loss
+Area Under the Curve (AUC)
+F1 Score
+Average weighted quantile loss (Average wQL)
+Incorrect
+Time-series forecasting is a data science technique that uses machine learning and other computer technologies to study past observations and predict future time-series data values. Here are some examples of time-series forecasting:
+
+Astronomical data consists of repetitive movements of the planets over centuries. You can use this data to accurately predict astronomical events like eclipses and comets.
+
+Weather forecasting uses humidity and temperature patterns to predict weather changes.
+
+Product demand forecasting uses historical sales data to predict how many units will be sold in future periods, such as the coming weeks or months.
+
+Product demand and forecasts
+
+The time-series forecasting model in our question predicts future temperatures and humidity levels, both continuous variables. As this is a regression task, the model is evaluated using regression metrics.
+
+Root mean square error (RMSE) is a standard metric for evaluating regression models. RMSE quantifies how far off the model’s predictions are from actual values by penalizing larger errors more heavily. RMSE is calculated by taking the square root of the mean of the squared differences between the actual values and the predicted values
+
+Average Weighted Quantile Loss (Average wQL) is designed for probabilistic forecasting, where one predicts a range (distribution) of possible future values rather than a single point. It’s beneficial in time-series models like those used in weather forecasting, where uncertainty and quantiles matter (e.g., what’s the 90th percentile expected humidity?).
+
+Thus, the correct answers are:
+
+– Root mean square error (RMSE)
+
+– Average weighted quantile loss (Average wQL)
+
+Area Under the Curve (AUC) is incorrect because it is designed only for binary classification, not regression. AUC evaluates how well a model distinguishes between two classes (e.g., positive vs. negative) by plotting the True Positive Rate (Recall) vs. False Positive Rate at various threshold settings. It gives a sense of ranking performance, not exact value accuracy. An AUC score close to 1 suggests the machine learning model performs highly, while a score near 0.5 implies the model’s predictions are roughly equivalent to random guessing.
+
+F1 Score is incorrect because it only applies to classification, not to regression-based time-series forecasting tasks, where we predict continuous values. The F1 score is the harmonic mean of Precision and Recall, both used for binary or multi-class classification tasks.
+
+Log loss is incorrect because it is not typically used for regression tasks. It is primarily a classification metric designed for models that output probabilities for class predictions, rather than continuous numeric values. LogLoss measures the performance of a classification model where predictions are probabilities (between 0 and 1), and the actual labels are categorical (binary or multi-class).
+
+ 
+
+References:
+
+https://aws.amazon.com/what-is/forecast/
+
+https://docs.aws.amazon.com/forecast/latest/dg/metrics.html
+
+https://docs.aws.amazon.com/machine-learning/latest/dg/binary-model-insights.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-metrics-validation.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+
+16. Question
+Category: MLA – ML Solution Monitoring, Maintenance, and Security
+A company relies on Amazon SageMaker AI for its machine learning workflows. An internal quarterly compliance audit identified that the training data stored in Amazon S3 is encrypted using server-side encryption with S3-managed keys (SSE-S3). The company’s security policy mandates that all S3 buckets use server-side encryption with AWS KMS keys (SSE-KMS).
+
+An ML engineer was assigned to update the S3 bucket’s encryption settings accordingly. The engineer applied SSE-KMS encryption but made no other configuration changes. After this update, SageMaker training jobs failed with AccessDenied errors.
+
+How can the ML engineer fix this issue?
+
+
+
+Update the IAM policy attached to the SageMaker training job’s execution role, ensuring it has permissions for kms:Encrypt and kms:Decrypt to work with the SSE-KMS encryption key.
+
+Modify the IAM policy of the user who launched the SageMaker training jobs to grant kms:Encrypt and kms:Decrypt permissions for accessing the SSE-KMS encrypted S3 bucket.
+
+Grant the user who initiated the SageMaker training job the s3:ListBucket and s3:GetObject permissions by updating their IAM policy.
+
+Add the s3:ListBucket and s3:GetObject permissions to the IAM policy of the SageMaker training job’s execution role.
+Incorrect
+AWS KMS is a service that combines secure, highly available hardware and software to provide a key management system scaled for the cloud. S3 uses server-side encryption with SSE-KMS to encrypt your S3 object data.
+
+Amazon SageMaker AI Execution Role
+
+When you use a SageMaker AI feature with resources in Amazon S3, such as input data, the execution role you specify in your request is used to access these resources. To access an S3 bucket encrypted with AWS Key Management Service (KMS) using server-side encryption (SSE-KMS), the execution role must have the necessary permissions to use the KMS key.
+
+Hence, the correct answer is: Update the IAM policy attached to the SageMaker training job’s execution role, ensuring it has permissions for kms:Encrypt and kms:Decrypt to work with the SSE-KMS encryption key.
+
+The option that says: Grant the user who initiated the SageMaker training job the s3:ListBucket and s3:GetObject permissions by updating their IAM policy is incorrect. When an Amazon SageMaker training job runs, it primarily uses the execution role permissions and not the permissions of the user who initiated the job. Giving the user more S3 permissions does not impact whether the training job can access S3. Also, the original question’s core problem involves switching from SSE-S3 to SSE-KMS. As the AccessDenied error did not exist before the encryption setting switch, we can assume that the execution role already has the s3:ListBucket and s3:GetObject permissions.
+
+The option that says: Modify the IAM policy of the user who launched the SageMaker training jobs to grant kms:Encrypt and kms:Decrypt permissions for accessing the SSE-KMS encrypted S3 bucket is incorrect. Like the option above, SageMaker training jobs use only the execution role, not the user’s credentials. If the execution role lacks the proper permissions, KMS will deny encryption and decryption attempts, even if the user has full KMS access.
+
+The option that says: Add the s3:ListBucket and s3:GetObject permissions to the IAM policy of the SageMaker training job’s execution role is incorrect. While these permissions are required to access S3 objects, the training jobs ran successfully before switching from SSE-S3 to SSE-KMS. This strongly suggests that the execution role already had them. The root cause of the new AccessDenied error is likely to be the missing KMS permissions, not S3 access rights.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-roles.html#sagemaker-roles-get-execution-role-s3
+
+https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html
+
+https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+
+17. Question
+Category: MLA – ML Solution Monitoring, Maintenance, and Security
+An international logistics firm has implemented an XGBoost-based machine learning model to predict demand and optimize shipping routes. The model is deployed on an Amazon SageMaker AI endpoint and trained using typical operational data. AWS Lambda is utilized to deliver predictions to the company’s application, while Amazon CloudWatch is used to log latency and resource utilization.
+
+An ML engineer needs to set up a monitoring solution that can track and detect any decrease in model accuracy over time using incoming live data.
+
+Which approach would best address this need?
+
+Use AWS Glue to analyze real-time inference data and model predictions, then create an ETL pipeline to alert when drift is detected.
+Set up Amazon EventBridge Scheduler to poll the Lambda function and analyze its output to detect drift.
+Configure a monitoring job in Amazon SageMaker Model Monitor to identify drift by comparing live data against the baseline statistics and constraints from the training data.
+Review CloudWatch latency and utilization logs and use them to detect potential model drift.
+Incorrect
+Amazon SageMaker Model Monitor monitors the quality of Amazon SageMaker AI machine learning models in production.
+
+Model Monitor provides the following types of monitoring:
+
+Data quality – Monitor drift in data quality.
+
+Model quality – Monitor drift in model quality metrics, such as accuracy.
+
+Bias drift for models in production – Monitor bias in your model’s predictions.
+
+Feature attribution drift for models in production – Monitor drift in feature attribution.
+
+Model Deployment and Monitoring for Drift
+
+The question asks us to identify a decrease in model accuracy over time by analyzing incoming real-time data. Model accuracy is one of the model quality metrics that Model Monitor is designed to do.
+
+Hence, the correct answer is: Configure a monitoring job in Amazon SageMaker Model Monitor to identify drift by comparing live data against the baseline statistics and constraints from the training data.
+
+The option that says: Set up Amazon EventBridge Scheduler to poll the Lambda function and analyze its output to detect drift is incorrect. While Amazon EventBridge Scheduler can trigger a Lambda function on a recurring schedule, the option is categorically wrong for model monitoring, particularly in detecting model drift. It can invoke Lambda functions on a defined schedule, but it has no native capabilities to analyze data or detect statistical drift. Detecting model drift requires data statistics tracking and constraints comparison, which are outside the scope of what an EventBridge Scheduler plus Lambda solution can do out of the box.
+
+The option that says: Review CloudWatch latency and utilization logs and use them to detect potential model drift is incorrect. While CloudWatch can capture and log metrics such as model latency and resource utilization, these metrics reflect system performance rather than data quality or distribution. Detecting model drift requires monitoring the statistical properties of the input features and model predictions over time. Therefore, CloudWatch alone is insufficient for drift detection, as it only monitors system performance and does not provide insights into how the input data or predictions change.
+
+The option that says: Use AWS Glue to analyze real-time inference data and model predictions, then create an ETL pipeline to alert when drift is detected is incorrect. Glue is a serverless ETL (Extract, Transform, Load) service primarily used for batch data processing, not real-time streaming data analysis. Furthermore, like the option above, Glue does not provide built-in features for comparing incoming data distributions to baseline training data, making Glue ill-suited for the task.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html
+
+https://docs.aws.amazon.com/scheduler/latest/UserGuide/what-is-scheduler.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/monitoring-cloudwatch.html
+
+https://docs.aws.amazon.com/glue/latest/dg/how-it-works.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+
+18. Question
+Category: MLA – ML Solution Monitoring, Maintenance, and Security
+An accounting services firm runs training jobs on Amazon SageMaker AI using compute-optimized instances for a model that automates paperwork and reduces manual entries and errors. These jobs must adhere to a strict schedule without any interruptions or delays and must be completed on time every week without fail. For the next 55 weeks, the firm will run training workloads for 40 hours each week. The company must reduce its model training costs while strictly meeting the schedule.
+
+Which solution best satisfies these requirements?
+
+Use SageMaker Studio’s automatic instance resizing to reduce costs by adjusting computing resources based on the complexity of the training job in real time.
+Leverage the heterogeneous cluster capability in SageMaker Training. Configure Spot Instances for one or more of the instance groups.
+Subscribe to a SageMaker Savings Plan for a 1-year duration with an upfront payment. Execute a SageMaker Training job on the selected instance.
+Set up AWS Budgets to cap monthly training spend. Use it to manage training schedules within cost constraints automatically.
+Incorrect
+Savings Plans provide savings beyond On-Demand rates in exchange for a commitment to using a specified amount of compute power (measured per hour) for one or three years.
+
+When you sign up for Savings Plans, the prices you’ll pay for usage stay the same throughout the term. You can pay for your commitment using all upfront, Partial upfront, or no upfront payment options.
+
+SageMaker AI Savings Plans save up to 64 percent off of On-Demand rates. These plans automatically apply to your SageMaker AI instance usage regardless of instance family (for example, ml.m5, ml.c5, etc.), instance sizes (for example, ml.c5.large, ml.c5.xlarge, etc.), Region (for example, us-east-1, us-east-2, etc.), and component (for example, Notebook, Training, etc.).
+
+SageMaker AI Savings Plans
+
+The question asks us to reduce the model training costs while strictly meeting the schedule. Using SageMaker AI Savings Plans while running on On-Demand instances continually satisfies our requirements.
+
+Hence, the correct answer is: Subscribe to a SageMaker Savings Plan for a 1-year duration with an upfront payment. Execute a SageMaker Training job on the selected instance.
+
+The option that says: Leverage the heterogeneous cluster capability in SageMaker Training. Configure Spot Instances for one or more of the instance groups is incorrect. Heterogeneous clusters allow you to use different types of instances for various stages of the training process, making them highly flexible for training jobs. You can actually use Spot Instances in some or all of the instance groups, which provides a cost-saving benefit compared to On-Demand instances. However, Spot Instances are interruptible, and while they are ideal for cost savings, this introduces a risk of delays or job interruptions. Since the question emphasizes that training jobs must be completed on time without fail, this option is not recommended for strict deadline workloads unless interruption handling is built in.
+
+The option that says: Use SageMaker Studio’s automatic instance resizing to reduce costs by adjusting computing resources based on the complexity of the training job in real time is incorrect. SageMaker Studio does not automatically resize instances during training. Instance selection is simply based on user configuration before the job starts, and no feature automatically resizes based on job complexity during runtime.
+
+The option that says: Set up AWS Budgets to cap monthly training spend. Use it to manage training schedules within cost constraints automatically is incorrect. AWS Budgets simply tracks and alerts you when spending exceeds a defined threshold; it does not control or manage the execution or scheduling of training jobs. It cannot enforce runtime behavior, pause jobs, or adjust instance selection automatically. Therefore, relying on it to ensure training cost savings while completing on time and without interruptions is not feasible.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/savingsplans/latest/userguide/what-is-savings-plans.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/how-it-works-training.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/train-heterogeneous-cluster.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/studio-updated.html
+
+https://docs.aws.amazon.com/cost-management/latest/userguide/budgets-managing-costs.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/
+
+
+19. Question
+Category: MLA – Data Preparation for Machine Learning (ML)
+An online retail company is leveraging Amazon SageMaker AI to optimize a machine learning model built on past transaction records to predict future customer spending behavior. To improve model performance, an ML engineer needs to analyze both the input features and the predicted outcomes to uncover trends that might introduce bias or skew in predictions, particularly when evaluated across various demographic segments.
+
+What approach will enable the ML engineer to perform this detailed analysis?
+
+Utilize SageMaker Feature Store to store and manage the input features for model training, ensuring that the features are consistent and free from trends or biases that might affect predictions.
+Leverage SageMaker Clarify to analyze the model and training data for hidden patterns that could influence accuracy.
+Use SageMaker Ground Truth to label the input data and ensure it is free from biases or trends that could affect model predictions.
+Use SageMaker DataWrangler to preprocess and clean the input data before model training, ensuring that no trends or biases in the data might affect predictions.
+Incorrect
+You can use Amazon SageMaker Clarify to understand fairness and model explainability and to explain and detect bias in your models. You can configure a SageMaker Clarify processing job to compute bias metrics and feature attributions and generate reports for model explainability. SageMaker Clarify processing jobs are implemented using a specialized SageMaker Clarify container image.
+
+SageMaker Clarify processing job
+
+Amazon SageMaker Clarify enables you to detect and explain model predictions by identifying bias both in pre-training data and in post-training scenarios, including biases that may arise during training or in production environments.
+
+Hence, the correct answer is: Leverage SageMaker Clarify to analyze the model and training data for hidden patterns that could influence accuracy.
+
+The option that says: Use SageMaker DataWrangler to preprocess and clean the input data before model training, ensuring that no trends or biases in the data might affect predictions is incorrect. SageMaker DataWrangler is indeed a tool used for data preprocessing, cleaning, and feature engineering. However, SageMaker DataWrangler is primarily used for data preparation rather than for analyzing model bias or skew in predicted outcomes. The goal of the question is to evaluate the predicted outcomes and identify trends that might introduce bias in predictions, not just to clean or preprocess the input data before training.
+
+The option that says: Utilize SageMaker Feature Store to store and manage the input features for model training, ensuring that the features are consistent and free from trends or biases that might affect predictions is incorrect. While it is true that SageMaker Feature Store is indeed primarily designed for storing, managing, and sharing features used in machine learning models, it does not analyze the model’s predictions or perform any checks on potential bias or skew in the model’s predicted outcomes.
+
+The option that says: Use SageMaker Ground Truth to label the input data and ensure it is free from biases or trends that could affect model predictions is incorrect. SageMaker Ground Truth is a tool used only for data labeling (i.e., creating labeled datasets by human annotators or through active learning) and ensuring high-quality labeled data. SageMaker Ground Truth does not address or analyze the model’s predictions for bias or skew.
+
+ 
+
+References:
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-configure-processing-jobs.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/clarify-processing-job-run.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/data-wrangler.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store.html
+
+https://docs.aws.amazon.com/sagemaker/latest/dg/sms.html
+
+ 
+
+Check out this Amazon SageMaker AI Cheat Sheet:
+
+https://tutorialsdojo.com/amazon-sagemaker/

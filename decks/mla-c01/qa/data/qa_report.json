@@ -1,0 +1,5768 @@
+{
+  "total_esperadas": 112,
+  "total_revisadas": 112,
+  "faltantes": [],
+  "extra": [],
+  "conteo": {
+    "P0": 0,
+    "P1": 0,
+    "P2": 7,
+    "OK": 105
+  },
+  "reviews": {
+    "mla01-q1": {
+      "key": "mla01-q1",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Modelo simple por explicabilidad es correcto para decisiones de prestamo con transparencia/equidad."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: A simple model should be chosen because explainability is crucial'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict, opcion marcada y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Los otros 3 combinan modelo/razon incorrectos; inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin servicios/params inventados; arboles, regresion logistica correctos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuta cada distractor con razon tecnica real."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define explicabilidad, conecta escenario, espanol, sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q1b": {
+      "key": "mla01-q1b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Trade-off simple/complejo (explicabilidad vs exactitud) correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuerzo derivado de la misma fuente; consistente con la explicacion oficial."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y dorso concuerdan con la opcion marcada."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distractores con afirmaciones absolutas falsas, claramente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas correctas (costo de computo, trade-off real)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Buena analogia caja transparente/negra; espanol correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q2": {
+      "key": "mla01-q2",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Alimentar datos a algoritmos que aprenden patrones es la definicion correcta de ML."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'the correct answer is: Feed the customer data into machine learning algorithms...'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Reglas if-else, datos crudos, analisis manual: todos claramente no-ML o subotimos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones alineadas con la fuente."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip util; espanol correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q3": {
+      "key": "mla01-q3",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Calcular promedio de envio es agregacion estadistica; ML aporta menos valor. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: Calculating average shipping times'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente; pregunta pide 'menos util' y la respuesta lo refleja."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sentimiento, chat en tiempo real, historico: todos casos validos de ML."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones NLP/supervisado correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Buen exam tip sobre sobreingenieria."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q4": {
+      "key": "mla01-q4",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Reentrenar periodicamente por data drift es correcto; Model Monitor detecta drift."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'the correct answer is: Machine learning models need to be regularly retrained'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Afirmaciones de estabilidad/efectividad indefinida son falsas."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "SageMaker Model Monitor existe y detecta data drift. Correcto."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuta con estacionalidad/tendencias/drift, correcto."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define data drift antes de usarlo."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q5": {
+      "key": "mla01-q5",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Data Wrangler es la opcion de menor overhead para preparacion visual/low-code. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: Prepare and analyze data using ... Data Wrangler'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Notebook+Pandas y EMR+PySpark son mas overhead; QuickSight es BI no preparacion."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales; EMR Serverless y Data Wrangler correctos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones alineadas con overhead operativo."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip correcto (Data Wrangler/DataBrew para preparacion sin codigo)."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q6": {
+      "key": "mla01-q6",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DataBrew requiere mismo formato/extension por carpeta; separar y salir en Parquet es correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial 'Organize the data into separate folders... Parquet'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Los distractores fallan por entrada heterogenea o formato JSON suboptimo."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Condiciones de DataBrew (mismo formato/extension) son reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip sobre Parquet correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q7": {
+      "key": "mla01-q7",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "SageMaker Clarify es la herramienta de deteccion de sesgo y explicabilidad. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'the correct answer is: Leverage SageMaker Clarify'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Feature Store, Ground Truth, Data Wrangler tienen propositos distintos; inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales y bien descritos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas correctas por rol de cada servicio."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip por keywords util; espanol correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q8": {
+      "key": "mla01-q8",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Credit bureau data es la fuente mas pertinente para riesgo crediticio. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: Credit bureau data'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Medico (privacidad), educativo (indirecto), empleo (menos determinante): plausibles pero peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A (fuente respuesta unica)."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas incluyendo privacidad para historial medico."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip sobre atributos sensibles util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q9": {
+      "key": "mla01-q9",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "FSx for Lustre: file system paralelo HPC/ML, alto throughput, baja latencia, integra S3. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: Amazon FSx for Lustre'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente. Nota menor: la fuente mezcla 'satellite images'/'NLP' pero no afecta la respuesta."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "EFS (proposito general), FSx Windows (SMB), S3 (objetos, no POSIX): inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip claro."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q10": {
+      "key": "mla01-q10",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Kinesis Data Streams + Managed Service for Apache Flink es el par correcto para ingesta/procesamiento en tiempo real."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "La fuente 'Select TWO' marca exactamente esos dos; la opcion combinada respeta la respuesta oficial."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Glue+Athena, S3+Lambda batch, SQS+EMR nocturno son todos por lotes; ninguno es tambien-correcto."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conversion Select TWO -> opcion unica que agrupa ambos servicios; una sola respuesta defendible. Correcto."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones batch vs streaming correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip streaming vs batch correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q11": {
+      "key": "mla01-q11",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Parquet columnar comprimido es el formato eficiente para analytics/ML. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: Parquet'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "XML verboso, CSV sin compresion, Avro orientado a filas: inequivocamente peores para lecturas analiticas."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "low",
+          "nota": "'Avro RecordIO' combina dos formatos distintos, pero viene textual de la fuente; cosmetico, no altera la respuesta."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones columnar vs filas correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip columnar/filas correcto."
+        }
+      },
+      "defectos": [
+        {
+          "dimension": "alucinaciones",
+          "sev": "low",
+          "descripcion": "El distractor 'Avro RecordIO' junta dos formatos (Avro y RecordIO), heredado de la fuente TD. No afecta la correccion de la respuesta.",
+          "fix_sugerido": "Opcional: separar en 'Avro' a secas para evitar confusion."
+        }
+      ],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "P2"
+    },
+    "mla01-q12": {
+      "key": "mla01-q12",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "AWS Glue (ETL administrado + Data Catalog) para extraer y combinar de RDS/DynamoDB. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la fila oficial 'Extract and combine ... : AWS Glue'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "EMR, Firehose, Athena tienen roles distintos; ninguno extrae+combina de fuentes relacionales/NoSQL."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Matching Select FOUR convertido aislando la fila de Glue; una sola respuesta defendible. Correcto."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip Glue/EMR/Firehose correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q12b": {
+      "key": "mla01-q12b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Amazon Data Firehose para ingesta/carga streaming a S3. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la fila oficial 'Ingest ... real-time ... : Amazon Data Firehose'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Glue (batch), EMR (batch), Redshift Spectrum (consulta) no son entrega streaming; inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Redshift Spectrum y demas descritos correctamente."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Matching Select FOUR aislando la fila de Firehose; respuesta unica defendible. Correcto."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip Firehose vs Kinesis Data Streams correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q13": {
+      "key": "mla01-q13",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Data Transfer Terminal para migracion offline con internet limitado, alineado con la respuesta de TD."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: AWS Data Transfer Terminal'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Storage Gateway, DataSync, Transfer Acceleration dependen de la red; inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Data Transfer Terminal es servicio real (instalaciones fisicas AWS)."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas por dependencia de red."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip TB/PB + poca red = offline. Correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q14": {
+      "key": "mla01-q14",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Scatter plot para relacion entre dos variables y outliers. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: Scatter Plot'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Histograma (una variable), multicolinealidad (no viz), Shapley (importancia): inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conceptos correctos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones estadisticas correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip scatter vs histograma correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q15": {
+      "key": "mla01-q15",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "EFS (NFS compartido, multiples EC2) para acceso concurrente. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: Amazon EFS'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DataSync (transferencia), EBS (una instancia), Storage Gateway (hibrido): inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip EFS/EBS/FSx Lustre correcto y muy util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q16": {
+      "key": "mla01-q16",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "JSON Lines para parseo streaming registro a registro con datos mixtos. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: JSON Lines'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "ORC/Parquet (columnar batch), XML (verboso): inequivocamente peores para streaming linea a linea."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Formatos correctos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones columnar vs streaming correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip streaming vs batch correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q17": {
+      "key": "mla01-q17",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Aumentar shards en Kinesis Data Streams eleva throughput/paralelismo. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: Increase the number of shards in Kinesis Data Streams'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Compresion/dedup no elevan throughput por shard; 'shards en Firehose' es invalido (Firehose escala solo). Buenos distractores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Correcto: Firehose no tiene shards aprovisionados; la carta lo señala bien."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define shard antes de usarlo; exam tip correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q18": {
+      "key": "mla01-q18",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Transformar CSV a columnar para lecturas rapidas. Correcto (equivale a Step 3 oficial)."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con Step 3 oficial: 'Transform the CSV data into a columnar storage format'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "JSON (jerarquico), mantener CSV, agregar por creadores: inequivocamente peores/irrelevantes."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Order THREE convertido aislando el paso de transformacion a columnar; una sola respuesta defendible. Correcto."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip pipeline filtrar/comprimir/columnar correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q19": {
+      "key": "mla01-q19",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "S3 Transfer Acceleration usa edge locations de CloudFront para acelerar transferencias a S3. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: Amazon S3 Transfer Acceleration'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Global Accelerator (apps TCP/UDP), Direct Connect (enlace fijo), DataSync (migracion): inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales y bien descritos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip Transfer Acceleration vs Global Accelerator muy util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q20": {
+      "key": "mla01-q20",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "S3 = base de data lake, 11 nueves de durabilidad; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Correcta = Amazon S3, coincide con la fuente."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "correct_index=1 apunta a S3; verdict y refutaciones consistentes."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "FSx Lustre (HPC/efimero), EFS (file share) y Storage Gateway (hibrido) bien diferenciados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Single-answer, sin problemas."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada alternativa se descarta por su naturaleza tecnica."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Typo corregido: 'efimero' renderiza bien; no quedan typos evidentes en question/options/answer_html. Exam tip util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q21a": {
+      "key": "mla01-q21a",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DPL mide diferencia de proporcion de resultados positivos entre grupos. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la fila oficial 'proportion of positive outcomes ... racial groups: DPL'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CI, TVD, KL miden cosas distintas; inequivocamente peores para este escenario."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Metricas de Clarify reales (DPL, CI, TVD, KL)."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Matching Select THREE aislado a la fila DPL; respuesta unica defendible. Correcto."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas por definicion de cada metrica."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip resumen de metricas util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q21b": {
+      "key": "mla01-q21b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Class Imbalance (CI) mide representacion/desbalance de grupos (m/f). Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la fila oficial 'imbalance between male and female instances: CI'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DPL, TVD, KL no miden representacion; inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Metricas reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Matching Select THREE aislado a la fila CI; respuesta unica defendible. Correcto."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip claro."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q21c": {
+      "key": "mla01-q21c",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "TVD para maxima disparidad entre distribuciones de resultados; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "El sub-item de 'maximum disparity among income levels' mapea a TVD en la fuente."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "correct_index=0 apunta a TVD; verdict y exam tip consistentes."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DPL (proporcion positivos), CI (representacion), KL (divergencia general) son incorrectos para 'maxima disparidad'."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "KL efectivamente no acotada y no simetrica; TVD acotada/simetrica: afirmaciones correctas."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conversion fiel de Select THREE a MCQ sobre el sub-item de TVD/ingreso."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutacion de KL mejorada: no acotada/no simetrica y Clarify designa TVD para maxima disparidad. Tecnicamente correcta."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip marca TVD vs el distractor tipico KL."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q22": {
+      "key": "mla01-q22",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "AWS DataSync para migrar on-prem a EFS con minima interrupcion. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: AWS DataSync'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Firehose (streaming), CloudFront (CDN), S3 Transfer Acceleration (solo S3): inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DataSync soporta EFS/S3/FSx; correcto."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (Transfer Acceleration solo a S3, no EFS)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip on-prem->EFS/S3/FSx = DataSync correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q23": {
+      "key": "mla01-q23",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "AWS Glue con editor visual ETL es el minimo esfuerzo operativo (serverless). Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'Hence, the correct answer is: Set up an AWS Glue job and use the visual ETL editor'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "EMR+Drill, Step Functions+Lambda, Lambda+Pandas: todos mas overhead o con limites (Lambda 15 min). Buenos distractores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales; limite de 15 min de Lambda correcto."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip serverless/Glue correcto."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q24": {
+      "key": "mla01-q24",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "403 hacia S3 en Processing job = execution role sin permisos (s3:GetObject). Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con 'the correct answer is: The execution role ... lacks the required permissions'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coherente."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Usuario sin admin, bucket policy deny, region distinta: refutados con logica correcta (conecta pero falla al leer objeto)."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Correcto: 403 es autorizacion; region distinta no da 403. Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones solidas: distingue 403 vs 404 vs timeout, execution role vs usuario creador."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip 403/404/timeout muy util; define execution role."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q25": {
+      "key": "mla01-q25",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Ground Truth es el servicio de etiquetado administrado; correcto para crear anotaciones de alta calidad."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: labeling job con SageMaker Ground Truth."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict, opcion marcada y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "NTM/CNN/Comprehend plausibles pero incorrectos; ninguno etiqueta datos supervisados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales y descritos correctamente."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A: respuesta unica en la fuente."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada refutacion es tecnicamente correcta (NTM=topicos, CNN necesita etiquetas, Comprehend infiere no etiqueta)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define el rol de cada servicio; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q26": {
+      "key": "mla01-q26",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Ordered split preserva orden temporal y evita data leakage; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Correcta = Ordered split, coincide con la fuente."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "correct_index=0 apunta a Ordered split; verdict y refutaciones consistentes."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Processing job (no visual), Stratified (clases, no tiempo) y DataBrew random (rompe cronologia) incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Single-answer, sin problemas."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Descarte del Processing job endurecido: la fuente confirma que un script no es enfoque VISUAL y falla el requisito; ya no es ambiguo."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip claro: series de tiempo -> Ordered split, nunca aleatorio."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q27": {
+      "key": "mla01-q27",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "MySQL a Aurora MySQL = migracion homogenea con DMS; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: DMS homogenea."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Transfer Terminal/CDC/script son plausibles pero descartables; CDC se refuta por 'migrar una vez' no continuo."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones alineadas con la fuente (CDC agrega complejidad, SDK fragil, Terminal es fisico)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define homogenea vs heterogenea; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q28": {
+      "key": "mla01-q28",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "S3 Transfer Acceleration usa edge de CloudFront para acelerar subidas con cambios minimos; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: S3 Transfer Acceleration."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Direct Connect (sitio fijo), Data Transfer Terminal (offline) y KMS (no comprime) bien descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales; KMS no comprime, correctamente senalado."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas y alineadas con la fuente."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conecta escenario con solucion; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q29": {
+      "key": "mla01-q29",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Robust Scaler (mediana + IQR) es robusto a outliers; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "low",
+          "nota": "Correcta = Robust Scaler coincide con la fuente. La fuente listaba Z-score como distractor; se sustituyo por Min-Max, que no esta literal en las opciones fuente pero la explicacion fuente si menciona Min-Max como sensible a outliers, por lo que la sustitucion es defendible y no altera la respuesta."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "correct_index=0 apunta a Robust Scaler; verdict y exam tip consistentes."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Ya no hay dos distractores identicos: Standard, Min-Max y L1 son distintos entre si y todos incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Min-Max efectivamente sensible a outliers (un extremo comprime el resto): afirmacion correcta."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Single-answer, sin problemas."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Min-Max bien refutado por sensibilidad a outliers frente al metodo robusto (mediana/IQR)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip: outliers -> Robust Scaler; sin outliers -> Standard/Z-score."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "P2"
+    },
+    "mla01-q30": {
+      "key": "mla01-q30",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "EMR Spark puede convertir a RecordIO-Protobuf a escala y reutiliza el pipeline existente; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: cluster EMR con Apache Spark."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada (indice 1) concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fargate/Redshift Spectrum/Firehose plausibles pero inadecuados para conversion batch a RecordIO."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios y formato reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (Spectrum es SQL, Firehose es streaming, Fargate es mas overhead)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica RecordIO-Protobuf y Pipe mode; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q31": {
+      "key": "mla01-q31",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Data Wrangler en Canvas imputa faltantes sin codigo, dentro de SageMaker; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: Data Wrangler dentro de SageMaker Canvas."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "SQL Redshift/Athena CTAS/Lambda quedan fuera de SageMaker o agregan overhead; bien descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas segun el requisito 'enteramente dentro de SageMaker'."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conecta requisito de entorno con la herramienta; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q32": {
+      "key": "mla01-q32",
+      "veredicto": "PASS",
+      "score_global": 4,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Canvas ofrece modelos ready-to-use que redactan PII/PHI y procesan documentos con minimo overhead; correcto segun AWS/fuente."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: modelo ready-to-use de SageMaker Canvas."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "low",
+          "nota": "Comprehend PII / Textract+JumpStart / S3 Object Lambda son tecnicas validas para redactar; se descartan solo por 'mas overhead', criterio de la pregunta. Plausibles y correctamente inferiores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones basadas en overhead operativo, alineadas con la fuente."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define PII/PHI; espanol; sin em dashes."
+        }
+      },
+      "defectos": [
+        {
+          "dimension": "calidad_distractores",
+          "sev": "low",
+          "descripcion": "Los distractores son soluciones tecnicamente funcionales; solo pierden por overhead. El criterio 'menor esfuerzo operativo' del enunciado los desambigua correctamente.",
+          "fix_sugerido": "Mantener; el enunciado ya fuerza el criterio de minimo overhead que hace unica la respuesta."
+        }
+      ],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "P2"
+    },
+    "mla01-q33": {
+      "key": "mla01-q33",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Feature Store con online/offline y acceso cross-account cumple baja latencia + comparticion; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: Feature Store online+offline con cross-account."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "RDS/S3+IAM/S3+Glue no dan online store de baja latencia; bien descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (Glue es batch, S3+IAM overhead, RDS no es feature store)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica online vs offline store; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q34": {
+      "key": "mla01-q34",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Kinesis Data Streams (ingesta baja latencia) + Managed Service for Apache Flink (analitica en vivo) es la pareja correcta."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "La fuente 'Select TWO' marca Kinesis DS y Flink; la opcion correcta agrupa ambos."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Firehose+Lambda batch, S3+Athena, SQS+Training Compiler introducen retraso o no aplican; bien descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conversion de 'Select TWO' a opcion unica que empaqueta ambos servicios; una sola respuesta defendible. Correcta."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (Training Compiler es entrenamiento, Firehose es entrega, Athena/S3 es reposo)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distingue ingesta vs analitica en vivo; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q35": {
+      "key": "mla01-q35",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Data Wrangler codifica categoricas y escala numericas; correcto para preparar el dataset."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: SageMaker Data Wrangler."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada (indice 2) concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Neo/Feature Store/JumpStart no transforman datos crudos; bien descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales y descritos correctamente."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (Neo=compilar, Feature Store=almacenar, JumpStart=modelos)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distingue preparar vs almacenar features; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q36a": {
+      "key": "mla01-q36a",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "PDP muestra el efecto marginal de una feature (edad) sobre la prediccion; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "La fuente asigna PDP a 'como cambia la prediccion al variar la edad'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DPL/TVD/KL son metricas de sesgo o de distribuciones, no de efecto marginal; bien descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Metricas reales de Clarify."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conversion de matching 'Select TWO' a item unico aislando el sub-requisito de PDP; una sola respuesta."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (DPL=disparidad, TVD/KL=distribuciones)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define efecto marginal; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q36b": {
+      "key": "mla01-q36b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DPL mide diferencia de proporciones de etiquetas entre grupos; correcto para desbalance demografico."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "La fuente asigna DPL a 'desbalance entre grupos demograficos'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "PDP/TVD/KL no miden proporcion de etiquetas por grupo; bien descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Metricas reales de Clarify."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conversion de matching a item unico aislando el sub-requisito de DPL; una sola respuesta."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (PDP=efecto de feature, TVD/KL=distribuciones)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica disparidad entre grupos; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q37": {
+      "key": "mla01-q37",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Spearman sobre rangos captura correlacion monotona no lineal entre continuas; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Correcta = Spearman, coincide con la respuesta oficial de la fuente."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "correct_index=2 apunta a Spearman; verdict, exam tip y refutaciones consistentes."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cramer's V (categoricas), Pearson (lineal) y Chi-cuadrado (categoricas) son claramente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin afirmaciones inventadas; descripciones estadisticas correctas."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente ya era single-answer; sin conversion problematica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Chi-cuadrado ahora se refuta por tecnica (prueba de independencia entre categoricas, no cuantifica relacion monotona entre continuas): inequivocamente incorrecto, sustituye bien al antiguo Kendall's Tau casi-defendible."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip claro: lineal=Pearson, monotona=Spearman, categoricas=Cramer's V."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q38": {
+      "key": "mla01-q38",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Clarify para sesgo (y su deriva de sesgo/atribucion) + Model Monitor para calidad/deriva de datos; el matiz es mas preciso que la propia fuente y correcto segun docs AWS."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Correcta = Clarify, coincide con la fuente; el texto anadido sobre Model Monitor complementa sin contradecir."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "correct_index=1 apunta a Clarify; refutacion de Model Monitor coherente con el matiz (calidad de datos vs sesgo)."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Model Monitor (calidad), Neo (optimizacion inferencia) y Ground Truth (etiquetado) son incorrectos para 'sesgo'."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Atribucion Clarify=sesgo/atribucion, Model Monitor=calidad de datos: correcta y sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Single-answer, sin problemas."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Model Monitor ahora se refuta por ser la herramienta de calidad/deriva de datos, no la especifica de metricas de sesgo: correccion tecnica lograda."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip separa claramente sesgo=Clarify vs calidad=Model Monitor (trabajan juntos)."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q39": {
+      "key": "mla01-q39",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Bedrock destaca en IA generativa/NLP; chatbots conversacionales es caso canonico. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: desarrollar chatbots."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada (indice 2) concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Mantenimiento predictivo/forecasting/vision son ML clasico o Rekognition; bien descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (predictivo=regresion, demanda=forecasting, imagenes=Rekognition)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Contrapone generativo vs predictivo/vision; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q40": {
+      "key": "mla01-q40",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Bedrock ofrece FMs multi-proveedor y personalizacion privada; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "La fuente 'Select TWO' marca 'wide range of FMs' y 'private customization'; la opcion correcta agrupa ambos."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "'Requiere aprovisionar infra', 'exponer datos publicamente', 'un solo modelo sin fine-tuning' son inequivocamente falsos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Descripciones de Bedrock reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conversion de 'Select TWO' a opcion unica que empaqueta ambos beneficios; una sola respuesta defendible."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (serverless, personalizacion privada, multi-modelo)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Resume ventajas de Bedrock; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q41": {
+      "key": "mla01-q41",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Bedrock serverless con multiples FMs y personalizacion privada cumple: elegir modelos, confidencialidad, sin infraestructura. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: Amazon Bedrock."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada (indice 1) concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Comprehend Medical/SageMaker Studio/Rekognition no cumplen los tres requisitos; bien descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (Comprehend Medical=NLP clinico, Studio=gestionas mas, Rekognition=vision)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conecta requisitos con Bedrock; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-q42": {
+      "key": "mla01-q42",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "LDA es no supervisado y descubre topicos latentes sin etiquetas; correcto para temas no predefinidos."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con la respuesta oficial: LDA."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Seq2Seq (transforma secuencias) y las dos de clasificacion (supervisadas) bien descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Algoritmos built-in reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (supervisado requiere etiquetas; seq2seq no descubre topicos)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distingue topic modeling no supervisado vs clasificacion supervisada; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-r1-formatos": {
+      "key": "mla01-r1-formatos",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Parquet y ORC son columnares; Avro, CSV y JSON Lines son orientados a filas. Clasificacion correcta."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A: carta de refuerzo tematico (is_refuerzo_tematico=true)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Las alternativas invierten familias (CSV columnar, Avro columnar, etc.), inequivocamente falsas."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Formatos reales; correcto que CSV es texto y Avro es por filas."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (CSV por filas, comprimir no implica columnar, Avro por filas)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define columnar vs por filas y su uso; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-r2-storage": {
+      "key": "mla01-r2-storage",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "FSx for Lustre=HPC/ML alto throughput; EFS=NFS concurrente; EBS=bloques por instancia; S3=data lake de objetos. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A: carta de refuerzo tematico."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Las alternativas intercambian roles de S3/EFS/EBS/Lustre, inequivocamente falsas."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas por inversion de asignaciones."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Regla nemotecnica por caso de uso; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-r3-kinesis": {
+      "key": "mla01-r3-kinesis",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Data Streams usa shards para lectura/proceso en tiempo real; Firehose es entrega administrada sin shards. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A: carta de refuerzo tematico."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Invertir shards a Firehose, 'ambos identicos' o exclusividades falsas son inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (Firehose no expone shards; ambos son streaming)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distingue shards/tiempo real vs entrega administrada; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-r4-movimiento": {
+      "key": "mla01-r4-movimiento",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DataSync (migracion por red a S3/EFS/FSx), S3 Transfer Acceleration (subidas por edge), Data Transfer Terminal (transferencia fisica offline). Asignaciones correctas."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A: carta de refuerzo tematico."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Las alternativas intercambian roles (Terminal por red, DataSync offline, etc.), inequivocamente falsas."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Data Transfer Terminal es servicio real de transferencia fisica en instalaciones AWS; correcto."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas por inversion de roles."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Regla: poca red+muchos TB=fisico, migracion por red=DataSync, subidas globales=Transfer Acceleration; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-r5-clarify": {
+      "key": "mla01-r5-clarify",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Clarify=sesgo/explicabilidad; Model Monitor=calidad de datos/modelo y deriva en produccion. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A: carta de refuerzo tematico."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Invertir roles, 'Clarify etiqueta' o 'ambos optimizan tamano' son inequivocamente falsos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales; compilar=Neo, etiquetar=Ground Truth, topicos=LDA/NTM, correctamente atribuidos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas y bien atribuidas a otros servicios."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Deslinda las dos herramientas que suelen usarse juntas; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-r6-groundtruth": {
+      "key": "mla01-r6-groundtruth",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Ground Truth crea etiquetas para entrenar; Comprehend es NLP administrado que infiere sin entrenar. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A: carta de refuerzo tematico."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Invertir roles, 'ambos CNN de imagenes' o 'Ground Truth compila' son inequivocamente falsos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales; Neo y Feature Store correctamente referidos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Regla de decision etiquetar vs analizar ya; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-r7-wrangler": {
+      "key": "mla01-r7-wrangler",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Data Wrangler prepara/transforma; Feature Store almacena/sirve features (online/offline). Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A: carta de refuerzo tematico."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Invertir roles, 'ambos streaming IoT' o 'Wrangler compila' son inequivocamente falsos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales; Neo y LDA/NTM correctamente referidos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Flujo preparar->almacenar->consumir; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-r8-scaler": {
+      "key": "mla01-r8-scaler",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Robust Scaler usa mediana/IQR (resistente a outliers); Standard usa media/desviacion (sensible). Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A: carta de refuerzo tematico."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Version invertida, 'Robust solo categoricas' e 'iguales siempre' son inequivocamente falsos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Tecnicas reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Asocia palabra 'outliers' con Robust Scaler; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla01-r9-dms": {
+      "key": "mla01-r9-dms",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Homogenea=motores iguales/compatibles (solo DMS); heterogenea=motores distintos (DMS + Schema Conversion Tool). Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A: carta de refuerzo tematico."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y opcion marcada concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Definicion invertida, 'siempre offline fisico' y 'NoSQL vs relacional fijo' son inequivocamente falsos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DMS y SCT reales; correcto que DMS trabaja por red."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (la que convierte esquema es la heterogenea; distincion es compatibilidad de motor)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Regla compatibles=DMS directo, distintos=DMS+SCT; espanol; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q1": {
+      "key": "mla02-q1",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "FPR + F1 son correctas para desbalance con enfasis en minimizar falsos positivos."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: False Positive Rate + F1 Score. La carta marca FPR + F1. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict, opciones y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "RMSE (regresion), Accuracy+RMSE, Recall+Cut-off son inequivocamente inferiores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Select TWO convertido a un par unico correcto (FPR+F1); las otras opciones son pares invalidos. Una sola respuesta defendible."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales (RMSE=regresion, Accuracy engaña en desbalance, cut-off no es metrica)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define FPR y F1, conecta con escenario, espanol, sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q1b": {
+      "key": "mla02-q1b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Precision = TP/(TP+FP) = positivos correctos entre los predichos positivos. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuerzo conceptual coherente con el source_block (define precision/recall)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Recall, Accuracy, FPR bien diferenciados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada distractor mapeado a su metrica real correcta."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Definiciones claras, mnemotecnia util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q2": {
+      "key": "mla02-q2",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Object Detection - MXNet (SSD) identifica clase + bounding box. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: Object detection - MXNet. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Object2Vec, K-Means, RCF claramente no vision con localizacion."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "SSD, VGG/ResNet, framework correcto."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A (respuesta unica en fuente)."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip sobre granularidad de vision util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q2b": {
+      "key": "mla02-q2b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Semantic Segmentation clasifica cada pixel. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuerzo conceptual coherente con familia de vision de SageMaker."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Classification (imagen), Detection (caja), Object2Vec bien diferenciados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas por granularidad."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Escala Classification-Detection-Segmentation clara."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q3": {
+      "key": "mla02-q3",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Inter-container traffic encryption (TLS) cifra comunicacion entre nodos del training cluster. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: Enable inter-container traffic encryption. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "KMS (reposo), Secrets Manager (secretos), batch transform (inferencia) inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distincion reposo/transito/secretos correcta."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Regla transito=TLS, reposo=KMS clara."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q3b": {
+      "key": "mla02-q3b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "KMS es el mecanismo de cifrado en reposo (SSE-KMS S3, artefactos, volumenes). Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuerzo coherente con el source_block (KMS reposo, TLS transito)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "TLS, Secrets Manager, ACM bien diferenciados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Mapa reposo/transito/secretos/certificados util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q4": {
+      "key": "mla02-q4",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "RMSE + Average wQL correctas para forecasting de series de tiempo (regresion + probabilistico)."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: RMSE + Average wQL. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Los distractores combinan metricas de clasificacion (AUC, F1, Log loss) invalidas para regresion; pares inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "wQL existe en Forecast/series de tiempo. Correcto."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Select TWO convertido a par unico (RMSE+wQL); demas opciones son pares invalidos. Una sola respuesta defendible."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas: AUC/F1/Log loss son de clasificacion."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Separacion regresion vs clasificacion clara."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q5": {
+      "key": "mla02-q5",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Bar chart es adecuado para frecuencia por categoria discreta. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente matching: frecuencia por item = Bar chart. La carta aisla ese emparejamiento. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Histogram (continuo), Density plot, Heatmap (2D) inequivocamente peores para conteo categorico."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Matching Select THREE convertido a un solo emparejamiento (frecuencia->Bar chart). Una sola respuesta defendible."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas correctas por tipo de dato."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distincion bar/histogram/heatmap clara."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q5b": {
+      "key": "mla02-q5b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Histogram para distribucion de valores continuos en bins. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente: montos continuos = Histogram. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Bar chart, Heatmap, Density plot bien diferenciados; density plot correctamente descartado por falta de conteos por bin."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Emparejamiento unico aislado del matching. Defendible."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Aclara diferencia visual bar vs histograma."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q6": {
+      "key": "mla02-q6",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "RCF no supervisado para anomalias en series/sensores. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: Random Cut Forest. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "PCA (reduccion), NTM (texto), CNN (imagenes) inequivocamente peores para anomalias no supervisadas."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip RCF vs IP Insights util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q6b": {
+      "key": "mla02-q6b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "PCA = reduccion de dimensionalidad preservando varianza. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuerzo coherente con source_block."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "RCF, Linear Learner/XGBoost, NTM/LDA bien mapeados a otras tareas."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada distractor mapeado a su algoritmo real correcto."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Tabla mental de algoritmos util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q7": {
+      "key": "mla02-q7",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Con dataset y rol ya listos, el primer paso es crear el fine-tuning job. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente Step 1 = Adjust hyperparameters and create Fine-tuning job. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict, opciones y orden en dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Analizar metricas (posterior), comprar throughput (final), preparar dataset (ya hecho) inequivocamente no son el primer paso."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Flujo de custom models de Bedrock correcto."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Ordenamiento Select/order THREE convertido a pregunta de 'primer paso' con una sola respuesta correcta."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones por posicion en el flujo correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica que prerequisitos ya cumplidos desplazan el inicio; secuencia clara."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q8": {
+      "key": "mla02-q8",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "IP Insights optimizado para patrones/asociaciones de IPv4. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: SageMaker IP Insights. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "RCF, PCA, K-Means plausibles pero descartados correctamente; RCF bien matizado (no captura asociacion IP-entidad)."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas y bien matizadas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Palabra clave IPv4 -> IP Insights, contraste con RCF util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q9": {
+      "key": "mla02-q9",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Model Cards para documentacion estructurada con minimo overhead. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: SageMaker Model Cards. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Model Registry (gobernanza), ModelExplainabilityMonitor (deriva), S3+Athena (overhead) inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "ModelExplainabilityMonitor existe y su rol descrito es correcto. Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cards vs Registry vs Monitor bien distinguidos."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q10": {
+      "key": "mla02-q10",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Crear bucket S3 es el primer paso del flujo KB RAG. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente Step 1 = Set up S3 bucket. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Verdict, opciones y orden en dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Configurar KB (paso 2), cargar info (paso 3), RDS (fuente invalida) inequivocamente no son primer paso."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones; S3 como data source correcto."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Select/order THREE convertido a 'primer paso' con una sola respuesta correcta."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones por posicion/validez de fuente correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Secuencia S3-KB-ingestar clara."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q11": {
+      "key": "mla02-q11",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "UpdateFeatureGroup agrega feature y PutRecord puebla registros historicos/nuevos. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: UpdateFeatureGroup + PutRecord. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DeleteFeatureGroup (destructivo), primary key, reindex (no existe) inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Reindex correctamente descrito como operacion inexistente. Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Select TWO convertido a par unico (Update+Put); demas opciones son pares invalidos. Una sola respuesta defendible."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Feature=columna, Record=fila util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q21b": {
+      "key": "mla02-q21b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Online store = lecturas sub-segundo para inferencia en tiempo real. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuerzo coherente con source_block (offline=S3 historico, online=baja latencia)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Offline (S3), ETL (Glue), Model Registry bien diferenciados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada distractor mapeado a su funcion real correcta."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Online vs offline store claro."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q12": {
+      "key": "mla02-q12",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Linear Learner para regresion tabular (precios). Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: Linear learner. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "DeepAR (series), RCF (anomalias), CNN (imagenes) inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Regresion tabular vs series vs anomalias claro."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q13": {
+      "key": "mla02-q13",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "OpenSearch vector DB + Bedrock KB con Titan Embeddings G1 son las dos soluciones correctas para RAG. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: OpenSearch vector DB + Bedrock KB Titan Embeddings G1. La opcion correcta agrupa ambas. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distractores agrupan pares de acciones incorrectas (Aurora texto, Glue->RDS, Comprehend->DynamoDB) todas subptimas para busqueda semantica."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Titan Embeddings G1 existe; sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Select TWO convertido agrupando ambas respuestas correctas en una sola opcion; distractores son pares invalidos. Una sola respuesta defendible."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas (relacional no optimizada para vectores)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "RAG=embeddings+vector DB bien explicado."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q13b": {
+      "key": "mla02-q13b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Embeddings convierten texto en vectores para busqueda semantica. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuerzo coherente con source_block."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Generar respuesta (LLM), almacenar (S3), orquestar (KB) bien diferenciados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas por rol en el pipeline."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Pipeline RAG embeddings-vector DB-LLM claro."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q14": {
+      "key": "mla02-q14",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Object Detection para detectar/contar multiples instancias por imagen. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: Object detection algorithm. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Segmentation (pixel, no cuenta instancias), Classification (una etiqueta), Object2Vec (no imagenes) inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas; matiz segmentacion no separa instancias correcto."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Contar=distinguir instancias=Object Detection claro."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q15": {
+      "key": "mla02-q15",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "FSx for Lustre para HPC/ML de alto throughput y baja latencia, integra con S3. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: Amazon FSx for Lustre. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "EFS (general), File Cache (cache), Storage Gateway (hibrido) inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones; sub-milisegundo y cientos GB/s correctos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "HPC=Lustre, general=EFS, hibrido=Gateway claro."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q16": {
+      "key": "mla02-q16",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Comprehend para NLP (sentimiento, entidades, frases clave). Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente matching: feedback/sentimiento = Comprehend. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Lex (chatbot), SageMaker (modelo a medida), Rekognition (imagen/video) inequivocamente peores para sentimiento de texto."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Matching Select THREE convertido a un solo emparejamiento con una sola respuesta correcta."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas por rol de servicio."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Mapa NLP/chatbot/modelo/vision util."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q17": {
+      "key": "mla02-q17",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CodePipeline orquesta build/test/deploy end-to-end. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente: automatizar todo el proceso = CodePipeline. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CodeBuild (build), CodeDeploy (deploy), CodeArtifact (paquetes) inequivocamente no orquestan todo."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Matching Select THREE convertido a un solo emparejamiento con una sola respuesta correcta."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas por fase; CodeArtifact anadido como distractor valido."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Pipeline/Build/Deploy/Artifact bien distinguidos."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q18": {
+      "key": "mla02-q18",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Canary: subconjunto pequeno de trafico real y monitoreo. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: Canary deployment. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Blue/green (switch total), Linear (gradual constante), Shadow (espejo) bien diferenciados y descartados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones; estrategias reales de SageMaker."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas y precisas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Contraste de las 4 estrategias claro."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q18b": {
+      "key": "mla02-q18b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Shadow: trafico espejo sin servir respuestas a usuarios. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuerzo coherente con source_block."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Canary, blue/green, linear bien diferenciados."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada distractor mapeado a su estrategia real correcta."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Definiciones de las 4 estrategias claras."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q19": {
+      "key": "mla02-q19",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Network isolation mode aisla el training job de internet. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: Enable SageMaker AI network isolation mode. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cifrado (no aisla red), Canvas+VPC endpoint, S3 cifrado (reposo) inequivocamente insuficientes para aislamiento de red."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas: cifrado y S3 no aislan la red."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Aislar de internet=network isolation claro."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q20": {
+      "key": "mla02-q20",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Serverless Inference sin Provisioned Concurrency: escala automatico, cobra por uso, barato en reposo, tolera cold start. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Oficial: serverless endpoint sin Provisioned Concurrency. Coincide."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Concuerda."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Serverless con PC (caro en reposo), real-time (instancias siempre activas), Lambda (limite de tamano) inequivocamente peores."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "La refutacion de Lambda por 'excede limites de despliegue' replica el source_block; defendible dado el contexto. Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A"
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones correctas y alineadas con la fuente."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Serverless vs Provisioned Concurrency vs real-time claro."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q20b": {
+      "key": "mla02-q20b",
+      "veredicto": "PASS",
+      "score_global": 4,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Batch Transform = inferencia por lotes sobre grandes datasets sin endpoint persistente; descripcion correcta segun AWS."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "low",
+          "nota": "El source_block oficial responde 'serverless sin Provisioned Concurrency' a OTRA pregunta (escenario de trafico impredecible). Esta carta es una variante reformulada como pregunta conceptual independiente sobre Batch Transform; no contradice el hecho oficial, solo cambia de tema. Aceptable como refuerzo aunque diverge del escenario fuente."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion marcada y dorso concuerdan; verdict coincide con la opcion correcta."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distractores mapean inequivocamente a serverless, real-time y HPO; ninguno defendible como respuesta."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin servicios ni parametros inexistentes."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada refutacion usa razon tecnica real (serverless=baja latencia intermitente, real-time=24/7, HPO=Automatic Model Tuning)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define Batch Transform antes de usarlo; espanol claro; sin em dashes; buen exam tip comparativo."
+        }
+      },
+      "defectos": [
+        {
+          "dimension": "fidelidad_fuente",
+          "sev": "low",
+          "descripcion": "La carta reformula el escenario fuente (cuya respuesta oficial es serverless) en una pregunta conceptual distinta sobre Batch Transform.",
+          "fix_sugerido": "Ninguno obligatorio; opcionalmente marcar explicitamente como carta de refuerzo tematico."
+        }
+      ],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "P2"
+    },
+    "mla02-q21": {
+      "key": "mla02-q21",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "El primer paso para desarrollar features en Feature Store es definir el feature group; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con Step 1 oficial: 'Define a new feature group'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Orden (feature group -> offline store -> carga batch) coherente con enunciado y dorso."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distractores son pasos posteriores o del online store; inequivocamente no son el primer paso."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones; offline/online store descritos correctamente."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente 'select and order THREE' reformulada a 'primer paso'; respuesta unica defendible."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas correctas (offline store es paso 2, endpoint = online store)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define offline/online store; explica el orden; espanol claro sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q22": {
+      "key": "mla02-q22",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CodeArtifact almacena/gestiona paquetes (npm/PyPI/Maven) con versionado; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con matching oficial: 'Store and manage the built packages -> CodeArtifact'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CodeDeploy/CodeBuild/CodePipeline correctamente diferenciados; ninguno almacena paquetes."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Descripciones de servicios AWS correctas."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente matching (Select FOUR) reformulada a una sola relacion; respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada distractor refutado por su funcion real."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define funcion de cada servicio; exam tip util (no confundir con S3/ECR); sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q23": {
+      "key": "mla02-q23",
+      "veredicto": "PASS",
+      "score_global": 4,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Interface endpoint (PrivateLink) da acceso privado a S3 sin internet; correcto. Nota: el matiz 'cross-region' proviene del propio source_block de TD."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial: interface endpoint, deshabilitar acceso directo a internet."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "low",
+          "nota": "Gateway endpoint refutado por 'misma region' (argumento del source). El razonamiento gateway-no-cross-region es simplificado pero coincide con la fuente; distractores no son defendibles como respuesta."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin servicios inexistentes; Transfer Family y CRR descritos correctamente."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - fuente ya de respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones alineadas con la explicacion oficial de TD."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define interface vs gateway endpoint; exam tip claro; sin em dashes."
+        }
+      },
+      "defectos": [
+        {
+          "dimension": "calidad_distractores",
+          "sev": "low",
+          "descripcion": "El argumento 'gateway endpoint no sirve cross-region' es una simplificacion del source; en rigor la limitacion es que el gateway solo cubre trafico intra-region hacia S3, coincide con la fuente.",
+          "fix_sugerido": "Ninguno obligatorio; mantener alineado con la fuente TD."
+        }
+      ],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "P2"
+    },
+    "mla02-q23b": {
+      "key": "mla02-q23b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Gateway endpoint = solo S3/DynamoDB intra-region via tabla de rutas; interface = ENI privada para muchos servicios. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Consistente con explicacion oficial de VPC endpoints."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distractores invierten o falsean caracteristicas (ENI en gateway, cross-region nativo, gratuidad); inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales (ENI es del interface, gateway es intra-region)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define ambos tipos; exam tip comparativo excelente; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q24": {
+      "key": "mla02-q24",
+      "veredicto": "PASS",
+      "score_global": 4,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "SageMaker Processing Job + Lambda trigger + S3 Event Notifications/Step Functions es el trio oficial de minimo overhead; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "El trio marcado coincide con las TRES respuestas oficiales."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado y dorso concuerdan con la opcion combinada."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "low",
+          "nota": "Distractores agrupan ECS/Fargate/Glue/Batch/EKS que la fuente descarta por overhead; ninguno defendible. La combinacion en una sola opcion es correcta pero larga."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Servicios reales y correctamente descritos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente 'Select THREE' convertida a opcion unica que agrupa las tres correctas; respuesta unica defendible."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refuta Glue (ETL/overhead), ECS/Fargate y Batch/EKS (orquestacion innecesaria) con razones reales."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica por que Processing Job es administrado; exam tip claro; sin em dashes."
+        }
+      },
+      "defectos": [
+        {
+          "dimension": "calidad_distractores",
+          "sev": "low",
+          "descripcion": "La conversion a respuesta unica agrupa tres servicios por opcion, generando opciones largas; funciona pero exige leer con cuidado.",
+          "fix_sugerido": "Ninguno obligatorio; el gate mecanico ya cubre balance de longitud."
+        }
+      ],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "P2"
+    },
+    "mla02-q25": {
+      "key": "mla02-q25",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Batch Transform es lo mas costo-efectivo para job diario de 45 min sin tiempo real; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial: SageMaker Batch Transform job."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Serverless (tope ~60s), EMR (big data caro), ModelExplainabilityMonitor (no ejecuta inferencia) inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "El limite de ~60s de Serverless Inference y el rol de ModelExplainabilityMonitor son correctos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales y precisas."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conecta escenario con solucion; exam tip util; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q26": {
+      "key": "mla02-q26",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "El cooldown period entre acciones de escalado corrige el thrashing en target tracking; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial: 'Set a cooldown period between scaling actions'."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Subir target CPU, reducir min instancias y cambiar metrica no atacan la frecuencia; inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales alineadas con la fuente."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica thrashing y cooldown; exam tip claro; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q27": {
+      "key": "mla02-q27",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Empaquetar dependencias en Docker, subir a ECR y usar como processing/training container es el patron BYOC correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial (Docker + ECR)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "S3 (no ejecuta codigo), Lambda (short-lived) y EKS (complejidad innecesaria) inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada refutacion con razon tecnica real."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define ECR y BYOC; exam tip claro; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q28": {
+      "key": "mla02-q28",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CodePipeline orquesta el CI/CD completo; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial: AWS CodePipeline."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CodeBuild (build/test), CodeDeploy (deploy) y CodeGuru Reviewer (revision IA) no orquestan; inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Descripciones correctas de servicios."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip memorable ('orquestar pipeline completo'=CodePipeline); sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q29": {
+      "key": "mla02-q29",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Precision, Recall, Accuracy y F1 son metricas de clasificacion apropiadas; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "El cuarteto coincide con las CUATRO respuestas oficiales."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada distractor incluye RMSE (regresion) o ROUGE (texto), inequivocamente inapropiados para clasificacion binaria."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Definiciones de metricas correctas."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente 'Select FOUR' convertida a opcion que agrupa las 4 metricas; unica combinacion valida."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "RMSE=regresion y ROUGE=NLP correctamente explicados."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define cada metrica; exam tip agrupa por tarea; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q30": {
+      "key": "mla02-q30",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "El execution role del training job necesita kms:Encrypt/Decrypt para leer objetos SSE-KMS; correcto. SageMaker actua con el execution role, no con credenciales del usuario."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial (KMS al execution role)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan; buen razonamiento causal (error nuevo tras cambio a SSE-KMS)."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "KMS al usuario, S3 perms al role/usuario son inequivocamente incorrectos (job funcionaba antes con S3 perms; usa role)."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Permisos IAM/KMS reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales y precisas (execution role vs usuario, S3 ya presente)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica el modelo de permisos de SageMaker; exam tip claro; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q31": {
+      "key": "mla02-q31",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Model Monitor detecta drift de model quality (accuracy) comparando contra baseline; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial (SageMaker Model Monitor)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CloudWatch (rendimiento), EventBridge+Lambda (solo dispara), Glue (ETL sin baseline) inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Los 4 tipos de monitoreo listados son reales."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica los tipos de drift; exam tip claro; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q31b": {
+      "key": "mla02-q31b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "'Latency drift' NO es un tipo de Model Monitor; los 4 tipos son data quality, model quality, bias drift y feature attribution drift. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Consistente con la lista oficial de tipos de Model Monitor del source_block."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Pregunta tipo 'cual NO es'; opcion marcada y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Las otras 3 son tipos validos reales; solo latency drift es inexistente como tipo."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "No inventa tipos; identifica correctamente el falso."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica por que las otras 3 si son tipos validos."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Lista los 4 tipos; distingue CloudWatch (latencia) de Model Monitor; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q32": {
+      "key": "mla02-q32",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "SageMaker Savings Plan (compromiso 1/3 anios, hasta ~64% descuento) sobre On-Demand reduce costo sin interrupciones; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial (Savings Plan 1 anio upfront)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Spot (interrumpible) viola 'sin interrupciones'; resizing de Studio inexistente en runtime; Budgets solo alerta. Inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cifra ~64% y funcionamiento de Savings Plans correctos; niega bien el resizing automatico de Studio."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales alineadas con la fuente."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Contrasta Savings Plans vs Spot vs Budgets; exam tip claro; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q33": {
+      "key": "mla02-q33",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CloudWatch Logs Insights consulta/analiza logs y su comando 'pattern' esta respaldado por ML; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial (CloudWatch Logs Insights)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CloudTrail (auditoria API), Config (configuracion), Grafana (visualizacion) no analizan logs con ML; inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "El comando 'pattern' respaldado por ML es real; sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip diferencia Logs Insights vs CloudTrail vs Config; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q34": {
+      "key": "mla02-q34",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CloudTrail registra llamadas API (identidad, IP, timestamp) para auditoria; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial (AWS CloudTrail)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Config (configuracion), Trusted Advisor (recomendaciones), Secrets Manager (secretos) no registran API; inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Descripciones de servicios correctas."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip claro (quien llamo que API = CloudTrail); sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q35": {
+      "key": "mla02-q35",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "El primer paso de cost allocation tagging es crear user-defined tags (clave-valor); correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con Step 1 oficial."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Orden (crear -> aplicar -> habilitar en Billing) coherente con enunciado y dorso."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Adjuntar (paso 2), habilitar en Billing (paso 3) y reportes (posterior) no son el primero; inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente 'select and order THREE' reformulada a 'primer paso'; respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada refutacion ubica el paso correcto en la secuencia."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica el orden completo; exam tip claro; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q36": {
+      "key": "mla02-q36",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "IAM roles con identity-based policies es el mecanismo correcto para least privilege granular sobre SageMaker/S3/Glue."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "SCPs no otorgan permisos (solo restringen); Endpoint Policies solo cubren endpoints; RAM es cross-account. Inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Comportamiento de SCPs (guardrail, no concede) correcto; sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales (SCP nunca concede es un punto de examen clave)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip destaca 'SCP solo restringe'; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q37": {
+      "key": "mla02-q37",
+      "veredicto": "PASS",
+      "score_global": 4,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Inline policy en el execution role del dominio de Studio da permisos al computo aislando el dominio; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial (inline policy en execution role del dominio)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "low",
+          "nota": "El distractor 'policy al role del notebook' la propia fuente lo llama 'buen enfoque pero menos especifico'; el card lo refleja como tal. No es defendible como MEJOR respuesta pero es el distractor mas fino."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conceptos IAM/execution role correctos."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones alineadas con la fuente (usuario/grupo violan least privilege; role generico menos especifico)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Explica por que permisos al computo y no a usuarios; exam tip claro; sin em dashes."
+        }
+      },
+      "defectos": [
+        {
+          "dimension": "calidad_distractores",
+          "sev": "low",
+          "descripcion": "El distractor 'adjuntar policy al role del notebook' es tecnicamente valido pero menos especifico; la distincion con la respuesta correcta es sutil (viene del propio source_block de TD).",
+          "fix_sugerido": "Ninguno obligatorio; mantener la refutacion 'correcto pero menos especifico' tal como la da la fuente."
+        }
+      ],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "P2"
+    },
+    "mla02-q38": {
+      "key": "mla02-q38",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cambio en la distribucion de datos de entrada = data quality drift; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sub-item 'shift in data distribution' -> Data quality drift, coincide con la fuente."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "correct_index=0 apunta a data quality drift; verdict y exam tip consistentes."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Bias drift, feature attribution drift y concept drift son tipos distintos y claramente separables."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Definiciones de cada drift correctas."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Conversion fiel de Select THREE al sub-item de data quality drift."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Nuevo distractor concept drift (X->y) es claro y bien refutado: cambia la relacion entrada-objetivo, distinto de un cambio de distribucion de entrada. Reemplazo solido del 'virtual drift'."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip distingue distribucion=data quality, grupos=bias, importancia=feature attribution."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q38b": {
+      "key": "mla02-q38b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Marcado desproporcionado de grupos = bias drift, detectado con SageMaker Clarify; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con el mapeo oficial (bias drift / Clarify)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada distractor combina tipo o herramienta incorrecta (data quality+Clarify no encaja al escenario; feature attribution+CloudWatch; virtual+Debugger); inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Clarify para bias es real; sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Fuente matching (Select THREE) reformulada a un escenario; respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales (Debugger depura entrenamiento, CloudWatch no detecta attribution drift)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Distingue bias vs data quality vs feature attribution; exam tip claro; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q39": {
+      "key": "mla02-q39",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Recomendaciones con baja latencia + deteccion inmediata = monitoreo continuo de real-time endpoint; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial (continuous monitoring with real-time endpoint)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Batch/on-schedule (sin tiempo real) y ModelExplainabilityMonitor (solo attribution) inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales alineadas con la fuente."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip claro (baja latencia+inmediato = real-time; batch = tendencias); sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q40": {
+      "key": "mla02-q40",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Inference Recommender determina el tipo/config de instancia mas costo-efectivo con load testing; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial (SageMaker Inference Recommender)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Automatic Scaling (numero de instancias), Model Tuning (hiperparametros), Multi-Model Endpoints (varios modelos) no eligen tipo de instancia; inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Descripciones correctas de features."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip diferencia Recommender vs Scaling vs Tuning; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q40b": {
+      "key": "mla02-q40b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Multi-Model Endpoints alojan muchos modelos tras un endpoint compartiendo recursos y bajando costo; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Consistente con la descripcion oficial de Multi-Model Endpoints en el source_block."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Los distractores describen Inference Recommender, Automatic Scaling y Automatic Model Tuning; inequivocamente distintos de MME."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Carga bajo demanda y ahorro con muchos modelos es correcto."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Cada distractor mapeado a su feature real."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Define MME; exam tip evita confusiones comunes; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q32b": {
+      "key": "mla02-q32b",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Spot Instances usan capacidad sobrante y AWS puede reclamarlas/interrumpirlas; por eso no encajan en deadlines estrictos sin checkpointing. Correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Consistente con la refutacion oficial de Spot en el source_block."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "'Mas caras', 'no soportan compute-optimized' y 'compromiso 1-3 anios' (eso es Savings Plans) son falsos claros."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Managed Spot Training y checkpointing son reales; sin invenciones."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales (Spot es lo mas barato; compromiso = Savings Plans)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip contrasta Spot/Savings Plans/On-Demand; sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q41": {
+      "key": "mla02-q41",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Rekognition Content Moderation resuelve la deteccion de imagenes con minimo esfuerzo; correcto."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Correcta = Rekognition moderation APIs, coincide con la fuente."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "correct_index=0 apunta a Rekognition; verdict y exam tip consistentes."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "CNN a medida (mas esfuerzo), Bedrock (mas ingenieria) y Debugger (entrenamiento, no moderacion) son incorrectos por el criterio de minimo esfuerzo."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Ya no niega falsamente la capacidad multimodal de Bedrock; el matiz es correcto (mas ingenieria vs API lista)."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Single-answer, sin problemas."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutacion de Bedrock corregida: reconoce multimodal pero lo descarta por mayor esfuerzo de ingenieria frente a Rekognition; tecnicamente honesta y mas precisa que la fuente."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip: moderacion lista = Rekognition; CNN propia solo si necesitas control total."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    },
+    "mla02-q42": {
+      "key": "mla02-q42",
+      "veredicto": "PASS",
+      "score_global": 5,
+      "dimensiones": {
+        "correccion_tecnica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "IAM role cross-account asumido via sts:AssumeRole con credenciales temporales es el patron seguro correcto para acceso entre cuentas."
+        },
+        "fidelidad_fuente": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Coincide con respuesta oficial (IAM role en cuenta duena + AssumeRole)."
+        },
+        "coherencia_interna": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Enunciado, opcion y dorso concuerdan."
+        },
+        "calidad_distractores": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Bucket policy en la cuenta del startup (debe ir en la duena), Access Points (requieren IAM igual) y Block Public Access (no concede acceso) inequivocamente incorrectos."
+        },
+        "alucinaciones": {
+          "ok": true,
+          "sev": "none",
+          "nota": "STS, credenciales temporales y bucket policies descritos correctamente."
+        },
+        "conversion_multi_respuesta": {
+          "ok": true,
+          "sev": "none",
+          "nota": "N/A - respuesta unica."
+        },
+        "refutaciones_sustantivas": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Refutaciones tecnicas reales (bucket policy va en la cuenta duena; Access Points necesitan IAM)."
+        },
+        "didactica": {
+          "ok": true,
+          "sev": "none",
+          "nota": "Exam tip claro (cross-account = role + AssumeRole, no claves permanentes); sin em dashes."
+        }
+      },
+      "defectos": [],
+      "distractor_tambien_correcto": false,
+      "respuesta_deberia_ser": null,
+      "_prio": "OK"
+    }
+  }
+}
