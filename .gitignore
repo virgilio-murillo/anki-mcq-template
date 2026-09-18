@@ -33,3 +33,6 @@ decks/*/qa/**/blind_prompts/
 
 # Deck backups (local safety copies)
 decks/*/backups/
+
+# dedup: regenerable knowledge-base corpus
+decks/*/dedupe/existing_corpus/

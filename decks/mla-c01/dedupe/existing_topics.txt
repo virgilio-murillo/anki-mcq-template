@@ -1,0 +1,332 @@
+AWS Glue DataBrew: ~1 TB de datos de formatos mixtos (CSV, JSON, XLSX, Parquet) conviven en una sola carpeta de S3. Un dataset de DataBrew exige un unico formato/extension por data
+Almacenamiento para entrenamiento distribuido: millones de im genes de alta resoluci n que requieren acceso a nivel de archivo , y m ltiples instancias EC2 con GPU necesitan alto t
+Streaming en tiempo real: detecci n de fraude sobre un flujo continuo de transacciones que luego pasa a un modelo en SageMaker, con la menor carga operativa posible. Qu pareja de s
+Formato de datos: logs de eventos crudos (n meros de veh culo, mantenimiento, expiraci n de garant a, rotaci n de ruedas) para un modelo de mantenimiento predictivo. Se busca un fo
+Servicios de datos - ETL: hay que extraer y combinar datos de Amazon RDS, DynamoDB y otras fuentes en un dataset unificado para entrenar un modelo. Qu servicio encaja mejor? A. Ama
+Servicios de datos - streaming: hay que ingerir, transformar y cargar datos de actividad social de forma continua (near real-time) hacia S3 para el pipeline de ML. Qu servicio enca
+Migraci n de datos: mover 100 TB desde un data center on-premises hacia S3, con conectividad a internet muy limitada (transferencia online impracticable). La empresa puede llevar s
+Data Wrangler - visualizaci n: se quiere visualizar la relaci n entre DOS variables concretas (una en el eje x, otra en el eje y), apreciar si suben/bajan juntas e identificar outl
+Almacenamiento compartido: plataforma de an lisis de sentimiento que necesita acceso concurrente desde m ltiples instancias EC2 (preprocesamiento, entrenamiento e inferencia) sobre
+Formato para parseo en tiempo real: detecci n de fraude que ingiere datos diversos (estructurados, semi y no estructurados) y requiere parseo y an lisis en tiempo real , registro p
+Kinesis - throughput: el cuello de botella est en la ingesta de Kinesis Data Streams hacia S3 (alta latencia, bajo throughput), seg n CloudWatch. Qu soluci n mejora el rendimiento 
+Optimizar formato de datos: datos de interacciones en CSV para un motor de recomendaci n. Tras filtrar columnas irrelevantes y comprimir, a qu formato conviene transformar el CSV p
+Transferencia global a S3: subidas y descargas frecuentes de datasets grandes en S3 desde ubicaciones globales , con meta de reducir latencia y acelerar el entrenamiento. Qu servic
+Data lake: una plataforma de e-commerce genera transacciones, im genes de producto y rese as. Se requiere almacenamiento seguro, muy durable y altamente disponible . Qu servicio es
+M tricas de sesgo (Clarify): se quiere comparar la proporci n de resultados positivos entre distintos grupos raciales . Qu m trica de sesgo pre-entrenamiento aplica? A. Class Imbal
+M tricas de sesgo (Clarify): se debe analizar el dataset para medir el desbalance entre instancias masculinas y femeninas . Qu m trica de sesgo pre-entrenamiento aplica? A. Differe
+M tricas de sesgo (Clarify): entre dos grupos (definidos por nivel de ingreso), se quiere una m trica de sesgo pre-entrenamiento que sea una distancia ACOTADA (rango 0 a 1) y SIM&E
+Migraci n on-prem a EFS: mover un gran dataset de entrenamiento desde servidores on-premises a Amazon EFS, con m nima interrupci n y manejo eficiente de grandes vol menes. Qu servi
+Transformar JSON con menor esfuerzo: procesar grandes vol menes de JSON en S3 para entrenamiento, con una soluci n automatizada y de m nimo esfuerzo operativo . Qu enfoque conviene
+SageMaker 403 a S3: un Processing job conecta al bucket pero recibe 403 al leer los .csv. El bucket existe y el job usa un VPC endpoint. Cu l es la causa m s probable? A. El execut
+Datos supervisados con menor esfuerzo: rese as crudas sin etiquetar en S3. Antes de poder entrenar un modelo propio de an lisis de sentimiento en SageMaker, hay que anotar/etiqueta
+Split cronol gico: datos ordenados por fecha de alta; el split train/validation debe preservar estrictamente el orden temporal para evitar fuga de datos futuros y overfitting. Qu t
+Migraci n MySQL a Aurora: hacer una migraci n puntual (one-time) de datos de entrenamiento de un MySQL on-premises a Amazon Aurora (compatible con MySQL). Cu l es el enfoque m s ad
+Acelerar subida a S3: un dataset recolectado desde varias ubicaciones sube lento a S3. Se busca acelerar sin cambiar mucho el setup actual . Qu soluci n es m s efectiva? A. Usar AW
+Escalado con outliers: en Data Wrangler, features con rangos muy distintos y outliers en CreditScore (valores at picos tan bajos como 5). Hay que escalar todo a rango similar siend
+Convertir a RecordIO-Protobuf: hay que convertir un dataset de entrenamiento a RecordIO-Protobuf (para Pipe mode de SageMaker seq2seq). El equipo ya usa EMR Spark para otras cargas
+Faltantes con m nimo overhead: datos de series de tiempo en Redshift con valores faltantes; se quiere una soluci n totalmente administrada, dentro de SageMaker , para preprocesar. 
+Redactar PII/PHI en PDFs: registros m dicos en PDF en S3; antes de entrenar hay que detectar y redactar PII/PHI de forma operativamente eficiente. Qu soluci n conviene? A. Amazon T
+Compartir features entre cuentas: varias apps de ML requieren entrenamiento e inferencia de baja latencia y necesitan compartir features entre cuentas AWS con m nimo overhead. Qu o
+Anomal as en tiempo real: miles de sensores IoT env an datos sin buffering y hay que detectar anomal as a medida que llegan, sin retraso . Qu pareja de servicios implementa mejor e
+Transformar datos activos: dataset con variables categ ricas nominales (regi n, preferencias) y num ricas (frecuencia, gasto) que hay que preprocesar y transformar para entrenar en
+Explicabilidad (Clarify): se quiere identificar c mo cambia la probabilidad de churn a medida que aumenta la edad del cliente . Qu t cnica de an lisis usar? A. Difference in propor
+Sesgo pre-entrenamiento (Clarify): se quiere medir el desbalance en la proporci n de casos positivos de churn (las etiquetas observadas) entre grupos demogr ficos (p. ej. grupos de
+Correlaci n no lineal: hay que evaluar relaciones no lineales (mon tonas) entre features de una muestra grande, prefiriendo el coeficiente m s usado por defecto para este caso. Qu 
+Sesgo y su deriva, automatizados: dataset muy desbalanceado y preocupaci n por el sesgo y su deriva en el tiempo (bias drift); se quiere un enfoque automatizado para evaluar y miti
+Caso de uso de Amazon Bedrock: cu l describe mejor un caso en el que Amazon Bedrock (IA generativa con foundation models) destaca? A. Predicci n de la demanda futura de productos c
+Beneficios de Amazon Bedrock: un retailer quiere fine-tune de modelos de terceros para su chatbot, con privacidad de los datos. Qu par de beneficios de Bedrock le sirven? A. Ofrece
+Elegir servicio de IA generativa: una empresa de salud quiere elegir entre varios modelos predictivos , garantizar confidencialidad al hacer fine-tuning y no gestionar infraestruct
+Descubrir t picos: gran volumen de comentarios de clientes; se quiere descubrir autom ticamente los temas recurrentes (no predefinidos). Qu algoritmo built-in de SageMaker es el m 
+Formatos de datos - familias: qu afirmaci n clasifica correctamente estos formatos por su orientaci n de almacenamiento? A. ORC y Avro son columnares (buenos para analytics); Parqu
+Selector de almacenamiento: para entrenamiento de ML, qu asignaci n servicio-caso es la correcta? A. FSx for Lustre: HPC/ML de alto throughput; EBS: acceso concurrente NFS; EFS: bl
+Kinesis Data Streams vs Firehose: cu l describe correctamente la diferencia clave entre ambos? A. Data Streams: ingesta con shards para leer/procesar en tiempo real; Firehose: entr
+Selector de movimiento de datos: qu asignaci n es correcta para llevar datos hacia AWS? A. DataSync: migrar on-prem a S3/EFS/FSx por red; S3 Transfer Acceleration: transferencia f 
+Clarify vs Model Monitor: cu l distingue correctamente sus roles en SageMaker? A. Model Monitor: vigila calidad y deriva en producci n y tambi n calcula el sesgo previo al entrenam
+Ground Truth vs Comprehend: cu l describe correctamente cu ndo usar cada uno? A. Ground Truth: crear etiquetas/anotaciones para entrenar tu modelo; Comprehend: NLP administrado que
+Data Wrangler vs Feature Store: cu l resume correctamente para qu sirve cada uno? A. Data Wrangler: preparar/transformar datos (limpiar, codificar, escalar, dividir); Feature Store
+Escalado - Robust vs Standard: cu ndo elegir Robust Scaler en lugar de Standard Scaler? A. Cuando quieres media cero y varianza uno: Robust centra en la mediana y escala por IQR pa
+AWS DMS - homog nea vs heterog nea: cu l describe correctamente la diferencia? A. Homog nea: mismo motor migrado solo con DMS; heterog nea: motores distintos que se migran manualme
+ML - selecci n de modelo: una entidad financiera opera bajo regulaci n estricta y debe poder justificar ante auditores cada aprobaci n o rechazo de pr stamo , mostrando qu factores
+ML - concepto: al contrastar un modelo simple con uno complejo en machine learning, qu compensaci n (trade-off) los distingue? A. El modelo complejo siempre es preferible cuando ha
+ML - enfoque correcto: una empresa quiere predecir churn (abandono de clientes) a partir de datos de clientes. Cu l describe mejor el enfoque de machine learning que deber a seguir
+Preparaci n de datos - menor overhead: pron stico de demanda diaria con datos hist ricos de ventas que tienen timestamps irregulares y valores faltantes . Qu enfoque cumple con el 
+SageMaker - sesgo/patrones: un ingeniero de ML debe analizar features de entrada y predicciones para descubrir sesgo o skew, sobre todo por segmentos demogr ficos. Qu servicio se l
+Datos para modelo de cr dito: un asesor financiero entrena un modelo para procesar solicitudes de hipoteca. Qu fuente de datos es la M&Aacute;S directamente predictiva del riesgo c
+ML - cu ndo NO aporta valor: una empresa de e-commerce tiene datos hist ricos de clientes. En cu l de estas tareas el machine learning ser a menos til ? A. Anticipar la satisfacci 
+ML en producci n: un equipo de salud discute el ciclo de vida de modelos en producci n. Qu afirmaci n refleja correctamente los requisitos para mantener modelos de ML en producci n
+Clasificacion - que mide la Precision (a diferencia del Recall)? A. La proporcion de positivos reales que el modelo logro detectar (sensibilidad) B. La proporcion de predicciones c
+SageMaker Feature Store - para que sirve el online store (frente al offline store)? A. Lecturas de baja latencia (sub-segundo) de features para inferencia en tiempo real B. Ejecuta
+Pronosticar precios de vivienda (variable continua) a partir de features tabulares (metros, recamaras, ubicacion, a o). Que algoritmo integrado de SageMaker conviene? A. Random Cut
+Chatbot RAG sobre PDFs en S3 con LLMs. Que par de soluciones hace buscables las guias operativas para el chatbot? A. Convertir los PDFs a texto y guardarlos en Amazon Aurora Postgr
+En un flujo RAG, cual es el rol de un modelo de embeddings como Amazon Titan Embeddings G1? A. Almacenar de forma duradera los documentos originales antes de indexarlos B. Converti
+Conteo de animales en imagenes de dron (detectar y ubicar multiples objetos por escena). Que algoritmo integrado de SageMaker es el mas adecuado? A. Object Detection (dibuja cajas 
+Entrenar deep learning con dataset masivo de video en un file system distribuido, requiriendo alto throughput y baja latencia con lecturas/escrituras intensivas. Que almacenamiento
+Servicios AWS de ML - que servicio es el mas adecuado para analizar feedback de clientes (sentimiento e insights de texto) ? A. Amazon Lex (interfaces conversacionales y chatbots) 
+CI/CD de ML - que servicio orquesta todo el proceso de entrenar, probar y desplegar (build, test, deploy) automaticamente ante cada cambio de codigo? A. AWS CodeBuild (compila el c
+Se despliega un modelo XGBoost nuevo enviando un pequeno porcentaje del trafico al nuevo mientras la mayoria sigue con el viejo, para vigilar y poder revertir. Que estrategia es? A
+Estrategias de despliegue - que caracteriza al shadow deployment ? A. Desplaza el trafico de forma gradual y constante del entorno viejo al nuevo B. Corre la nueva version en paral
+Entrenamiento con datos sensibles que debe estar aislado de redes externas (sin acceso a internet durante el training). Que solucion cumple el requisito? A. Habilitar el modo netwo
+Modelo de 2 GB con trafico impredecible (picos en horario laboral, casi nulo de noche/fin de semana); debe escalar solo y ser barato en reposo. Que despliegue conviene? A. Endpoint
+SageMaker inference - cual describe mejor el caso ideal del Batch Transform frente a un endpoint real-time o serverless? A. Procesar payloads grandes de forma asincrona encolando l
+Montar un Feature Store centralizado en SageMaker. Segun el flujo oficial, con cual de estas acciones se arranca la configuracion de un feature group para retraining por lotes? A. 
+En el ciclo CI/CD, que servicio AWS almacena y gestiona los paquetes ya construidos (con versionado, formatos npm/PyPI/Maven)? A. AWS CodeBuild (compila el codigo y ejecuta pruebas
+Dataset sensible en un bucket de S3 en la region us-east-1 , pero las instancias de entrenamiento de SageMaker corren en una VPC de us-west-2 (otra region). El trafico hacia S3 NO 
+VPC endpoints - que diferencia clave hay entre un gateway endpoint y un interface endpoint (PrivateLink)? A. El interface endpoint permite acceder a un bucket S3 de otra region por
+Preprocesar texto (limpieza, tokenizacion, embeddings con TensorFlow/HuggingFace) desde S3 con minimo esfuerzo de gestion , disparado al subir datos nuevos. Que trio de acciones? A
+Modelo que corre una vez al dia , el procesamiento toma 45 min y la prioridad es minimizar costo. Que despliegue es el mas costo-efectivo? A. El ModelExplainabilityMonitor para age
+Un endpoint de SageMaker con target tracking sobre CPU escala demasiado seguido , causando inestabilidad. Que se debe configurar para resolverlo? A. Incrementar el valor objetivo d
+Un equipo tiene scripts Python propios (con dependencias especificas) y quiere ejecutarlos en SageMaker de forma escalable. Como incorporarlos? A. Guardar los scripts Python en un 
+Se busca un servicio que coordine automaticamente las fases build, test y deploy de un proyecto ML en cada cambio de codigo, enlazando los demas servicios del ciclo. Cual usar? A. 
+Clasificacion binaria de calidad (Passed/Failed) con imagenes y video. Se busca el cuarteto de metricas derivadas de la matriz de confusion a un umbral de decision fijo (es decir, 
+Tras cambiar un bucket de SSE-S3 a SSE-KMS , los training jobs fallan con AccessDenied (antes funcionaban). Como se corrige? A. Agregar permisos kms:Decrypt y kms:GenerateDataKey a
+Se necesita detectar la baja de accuracy del modelo con el tiempo usando datos en vivo (endpoint de SageMaker). Que enfoque conviene? A. Usar EventBridge Scheduler para sondear la 
+SageMaker Model Monitor expone cuatro tipos oficiales de monitoreo: data quality, model quality, bias drift y feature attribution drift. De las siguientes opciones, cual NO es uno 
+Training semanal fijo (55 semanas, 40 h/semana) que NO tolera interrupciones ni retrasos, pero se quiere reducir costo . Que solucion cumple? A. Usar el resizing automatico de inst
+Se quiere consultar interactivamente grandes volumenes de registros operativos de varios recursos AWS, agrupando entradas similares con deteccion de patrones respaldada por ML, sin
+Un auditor necesita el historial de quien invoco cada API de AWS (identidad, IP de origen, timestamp) en toda la cuenta, para cumplimiento. Que servicio conviene? A. AWS CloudTrail
+Ya se etiquetaron los recursos de ML con pares clave-valor, pero los tags no aparecen todavia en Cost Explorer ni en los reportes de costos. Que accion es indispensable para que em
+Controlar el acceso a SageMaker, S3 y Glue segun minimo privilegio . Que componentes de IAM son los mas apropiados? A. AWS Resource Access Manager (RAM) B. Service Control Policies
+En un SageMaker Studio con varios dominios, dar a un dominio especifico acceso a un bucket S3 sin afectar a otros dominios/usuarios, con permisos en el entorno de computo (no en us
+Deriva de modelo - en un modelo de readmision hospitalaria, el monitoreo detecta que la distribucion estadistica de los datos de entrada (edad, region, comorbilidades) ha cambiado:
+Un modelo empieza a marcar de forma desproporcionada a ciertos grupos de pacientes. Que tipo de drift es y que servicio ayuda a detectarlo? A. Bias drift, detectado con Amazon Sage
+Sistema de recomendaciones en produccion que exige respuestas de baja latencia y monitoreo continuo de desempeno/calidad. Que opcion de monitoreo conviene? A. Monitoreo on-schedule
+Se quiere elegir el tipo de instancia mas costo-efectivo para desplegar un modelo en tiempo real cumpliendo latencia y throughput. Que feature de SageMaker lo determina? A. Amazon 
+SageMaker - cual es el proposito principal de los Multi-Model Endpoints ? A. Alojar muchos modelos tras un solo endpoint para compartir recursos y bajar costo B. Ajustar automatica
+Entrenamiento en SageMaker - por que las Spot Instances NO sirven cuando el schedule no tolera interrupciones? A. Porque AWS puede interrumpirlas al reclamar la capacidad, arriesga
+Detectar y marcar automaticamente imagenes que violan las guias de comunidad subidas por usuarios, con minimo esfuerzo. Que enfoque conviene? A. Entrenar una CNN a medida en SageMa
+Un startup en OTRA cuenta AWS necesita acceso (programatico y por consola) al bucket S3 de otra empresa, de forma segura. Que solucion conviene? A. Habilitar S3 Block Public Access
+SageMaker vision - un vehiculo autonomo necesita etiquetar a nivel de pixel toda la escena (ej. carretera vs peaton vs cielo), no solo localizar objetos. Que algoritmo integrado co
+Seguridad en SageMaker - que servicio o mecanismo se usa para el cifrado en reposo (datos en S3, artefactos, logs)? A. AWS Certificate Manager (ACM) para certificados publicos B. A
+Modelo de forecasting de series de tiempo (temperatura y humedad, valores continuos) en SageMaker. Que par de metricas es mas adecuado para evaluarlo? A. F1 Score y Mean Absolute P
+Analisis de compras - se quiere comparar cuantas veces se compro cada articulo del catalogo en un periodo. Que visualizacion es la adecuada? A. Bar chart (una barra por articulo, a
+Algoritmos integrados de SageMaker - cual es el uso principal de Principal Component Analysis (PCA) ? A. Reduccion de dimensionalidad preservando la mayor varianza posible B. Detec
+Amazon Bedrock, la empresa YA tiene el dataset etiquetado en JSONL y el rol IAM listo. Dado esto, cual es el primer paso RESTANTE del proceso de personalizacion (fine-tuning) del m
+Chatbot RAG con Amazon Bedrock. Los registros sanitizados todavia no estan en la nube (aun no existe el bucket de almacenamiento) y hay que armar la knowledge base desde cero. Orde
+SageMaker Feature Store - se agrega una nueva feature a un feature group con datos historicos y todos los registros (incluidos historicos) deben reflejarla. Que par de acciones cor
+Deteccion de fraude - solo el 3% de las transacciones son fraudulentas. Se busca el par de metricas de evaluacion que a la vez (a) controle la tasa de falsos positivos sobre las tr
+SageMaker - se necesita identificar un articulo en una imagen y dar su ubicacion (bounding box) en estanterias en tiempo real. Que algoritmo integrado conviene? A. Random Cut Fores
+Training job distribuido en SageMaker (healthcare) - hay que cifrar la comunicacion en transito entre nodos del cluster de entrenamiento. Que se debe habilitar? A. Inter-container 
+Analisis de compras - se busca ver como se reparten los montos de transaccion y donde se concentran la mayoria. Que visualizacion conviene? A. Histogram (agrupa los montos en bins 
+Miles de sensores (calidad de aire, temperatura, humedad) con picos inusuales ; se necesita un algoritmo integrado de SageMaker para detectar anomalias . Cual? A. Convolutional Neu
+Logs historicos de trafico de red; objetivo: identificar direcciones IPv4 que se desvian del patron normal . Que algoritmo integrado de SageMaker es el mas adecuado? A. K-Means Clu
+Hay 35 modelos en SageMaker y se necesita documentar cada uno (proposito, metricas, contexto de negocio) de forma accesible y con minimo overhead operativo . Que usar? A. SageMaker
+Una Lambda corre en DEV, UAT y PROD usando par metros que var an por entorno y que est n hardcoded. C mo referenciar los par metros correctos sin modificar el c digo cada vez? A. C
+Cu l de estos elementos de Lambda / API Gateway sirve para pasar valores de configuraci n que cambian por entorno a una funci n? A. Una stage variable de API Gateway. B. Un Lambda 
+Un cliente de API Gateway quiere saltarse la cach y obtener la respuesta m s reciente del backend. Qu header debe enviar? A. X-Api-Cache: refresh B. Cache-Control: max-age=1 C. Cac
+Solo clientes autorizados deben poder invalidar una entrada de cach de API Gateway. Qu combinaci n lo logra? (elige la opci n que junta las DOS piezas correctas) A. Marcar 'Require
+En un worker environment de Elastic Beanstalk necesitas encolar mensajes seg n un horario (tareas peri dicas a intervalos regulares). Qu archivo de configuraci n agregas al source 
+Cu l archivo se usa con AWS CodeDeploy para definir el despliegue como hooks de eventos del ciclo de vida (no con Elastic Beanstalk)? A. Dockerrun.aws.json B. appspec.yml C. env.ya
+Una Lambda se conect a una VPC (para una base privada) y perdi el acceso a internet. Qu par de acciones lo arregla? A. Adjuntar un Internet Gateway + darle una IP p blica a la ENI 
+Tienes NAT gateway y ruta correcta, pero la Lambda en VPC sigue sin salir a internet. Qu revisas en el security group ? A. Que tenga una regla de entrada (inbound) desde 0.0.0.0/0.
+Al integrar una Lambda con una VPC, qui n crea las ENIs (interfaces de red) que la conectan a la red privada? A. El desarrollador debe crearlas manualmente antes de desplegar. B. S
+Una app de trading de alto rendimiento necesita una base que escale globalmente, maneje cambios frecuentes de esquema , persistencia r pida de sesi n y alto throughput con esquema 
+Por qu una base NoSQL como DynamoDB se adapta mejor que una relacional cuando el esquema cambia con frecuencia ? A. Porque obliga a definir todas las columnas y sus tipos por adela
+Por qu Redis es preferible a Memcached para un almac n de sesiones ? A. Porque Memcached no admite pares clave-valor. B. Porque Memcached no puede escalar horizontalmente. C. Porqu
+Por qu Sticky Sessions con cach local no es una buena soluci n de alta disponibilidad para sesiones? A. Porque no permiten balanceo de carga en absoluto. B. Porque requieren CloudF
+Usuarios deben autenticarse con IdPs sociales (Facebook, Google, etc.), luego subir archivos a S3 con credenciales AWS temporales, y adem s permitir acceso de invitados (guest). Qu
+En Amazon Cognito, cu l componente entrega credenciales AWS temporales y permite acceso de invitado (unauthenticated)? A. El User Pool. B. IAM Identity Center. C. El Identity Pool.
+Cu ndo necesitar as un custom identity broker con STS en lugar de Amazon Cognito? A. Siempre que uses proveedores sociales como Google o Facebook. B. Cuando quieras acceso de invit
+Un servicio interno necesita redactar PII de archivos en S3 antes de procesarlos, sin almacenar copias redactadas, de la forma m s costo-eficiente . Qu soluci n eliges? A. Una Lamb
+Para redactar PII antes de que la consuma un servicio interno , por qu S3 Object Lambda es mejor que Lambda@Edge? A. Porque Lambda@Edge est pensado para baja latencia a usuarios fi
+Por qu NO conviene usar AWS Glue o copiar archivos redactados a otro bucket para redactar PII on-demand ? A. Porque copiar a otro bucket es imposible en S3. B. Porque ambos crean c
+App legada con miles de usuarios y sesiones en memoria; el servidor on-prem llega a 100% CPU en picos. Tras migrar a AWS, c mo re-factorizar la gesti n de sesi n para rendimiento y
+Un sitio detr s de un ALB usa CloudFront con su nombre de dominio por defecto (ej. d111.cloudfront.net ). Tiene mal ranking por no usar HTTPS. Qu DOS acciones habilitan HTTPS entre
+En CloudFront, HTTPS tiene DOS tramos: viewer CloudFront y CloudFront origen. Cu l afirmaci n es correcta sobre los certificados? A. Con el dominio *.cloudfront.net , el tramo view
+Para HTTPS entre CloudFront y un origen personalizado (ej. un ALB), qu tipo de certificado NO se acepta? A. Un certificado v lido y no expirado de una autoridad reconocida. B. Un c
+El Viewer Protocol Policy de un cache behavior de CloudFront tiene tres valores. Cu l permite HTTP y HTTPS a la vez (sin forzar HTTPS)? A. Redirect HTTP to HTTPS . B. HTTP and HTTP
+Una Lambda invocada por API Gateway recibe 10 peticiones por segundo y cada una tarda hasta 50 segundos . Qu debe hacer el desarrollador para evitar el throttling ? A. Nada: Lambda
+Una Lambda recibe 20 invocaciones por segundo y cada una dura en promedio 4 segundos . Cu ntas ejecuciones concurrentes usar aproximadamente? A. 500 B. 5 C. 80 D. 24 A. 500 B. 5 C.
+Cu l es el l mite por defecto de ejecuciones concurrentes de Lambda por regi n (a travo s de todas las funciones) y c mo se sube? A. 10000 , y se baja abriendo un caso de soporte. 
+Dos Lambdas id nticas en una cuenta nueva; la segunda sufre Throttles mientras la primera va bien. Qu DOS acciones lo arreglan? (cuenta con l mite por defecto 1000) A. Poner el l m
+5 apps en EC2; quieres una representaci n gr fica de m tricas por app, aisladas entre s , en un solo panel de CloudWatch. Qu configuras? A. Una dimension personalizada de CloudWatc
+App de anal tica en tiempo real (en EKS) debe capturar SOLO los datos nuevos de items modificados en DynamoDB multi-regi n. C mo la configuras? A. DynamoDB Streams con NEW_AND_OLD_
+C mo se despliega correctamente una nueva versi n a Elastic Beanstalk v a CLI? A. Empaquetar como ZIP y desplegar con aws elasticbeanstalk update-application . B. Empaquetar como Z
+Necesitas invocar una Lambda de forma as ncrona . Qu API e InvocationType usas? A. API Invoke con InvocationType = Event . B. API Invoke con InvocationType = RequestResponse . C. A
+App de subastas en tiempo real con Kinesis Data Streams: cada puja se procesa una sola vez y en orden . Qu soluci n cumple? A. Reemplazar el stream por una SQS FIFO + SendMessageBa
+Con AWS Organizations, quieres probar el impacto de SCPs sobre tus pol ticas IAM y de recursos ANTES de aplicarlas. Qu servicio usas? A. Amazon Inspector. B. AWS Config. C. IAM Pol
+Una app lee items uno por uno de DynamoDB y escribe a otra tabla, repitiendo 100+ veces (lento). C mo acelerarla con m nima configuraci n ? A. Usar BatchGetItem y BatchWriteItem de
+App Java muy intensiva en escritura sobre DynamoDB sobrescribe datos obsoletos. C mo proteger las escrituras sin afectar el rendimiento ? A. Optimistic locking con n mero de versi 
+EC2 con KCL procesa un stream de Kinesis: la CPU est al m ximo y faltan shards para el ritmo de datos. Mejor acci n para resolverlo y prevenirlo? A. Aumentar el n mero de instancia
+En Elastic Beanstalk debes subir el runtime de Java 7 a Java 8 , mandar TODO el tr fico a la nueva versi n de inmediato y poder revertir r pido si falla. Qu haces? A. Blue/Green De
+Sobre el resharding de Kinesis Data Streams, qu DOS afirmaciones son correctas? A. Aumentas la capacidad dividiendo (split) shards. B. Debes fusionar los hot shards para aumentar l
+Cambiaste el IAM Role de una EC2 para que solo acceda al bucket de desarrollo, pero la instancia sigue escribiendo en ambos buckets. Causa m s probable? A. El instance profile role
+Un consumidor de Kinesis procesa datos cada dos d as y guarda en S3, pero S3 solo recibe la mitad; los sensores env an bien en tiempo real. Causa m s probable? A. Los sensores tien
+Un entorno de Elastic Beanstalk tiene un RDS acoplado (si terminas el entorno, cae la BD). C mo desacoplar la BD del entorno sin p rdida de datos ? A. Canary: snapshot del RDS; nue
+Con AWS SAM + CodeDeploy, en cada despliegue debe desplazarse 10% del tr fico cada 10 minutos hasta migrar todo. Qu configuraci n de despliegue usas? A. Linear . B. Immutable . C. 
+aws s3api list-objects hace timeout por el volumen. Para paginar y controlar cu ntos resultados vuelven, qu DOS par metros usas? A. --page-size . B. --size-only . C. --max-items . 
+Tabla DynamoDB con 10 RCU provisionadas e items de 4 KB . Cu ntas lecturas por segundo soporta? A. 5 fuertemente consistentes y 20 eventualmente consistentes. B. 20 fuertemente con
+Para una tabla DynamoDB de perfiles de empleados, cu l es el MEJOR atributo como partition key ? A. employee_name , para acelerar la b squeda. B. position_id , para ordenar por dep
+En ECS quieres una task placement strategy eficiente en costo que use el menor n mero de instancias (la alta disponibilidad no importa aqu ). Cu l usas? A. random (colocar al azar)
+Tabla DynamoDB, items de 3.5 KB , se esperan 150 lecturas eventualmente consistentes por segundo . Cu ntas RCU hay que aprovisionar? A. 600 B. 150 C. 300 D. 75 A. 600 B. 150 C. 300
+En DynamoDB, qu representa 1 RCU (Read Capacity Unit) para un item de hasta 4 KB? A. 2 lecturas fuertes o 1 eventual B. 1 lectura de cualquier tipo sin importar el tama o del item 
+Items de 3.5 KB ; se necesitan 150 lecturas eventualmente consistentes por segundo . Un compa ero calcul 150 RCU (deber an ser 75). Qu error de c lculo cometi ? A. Redonde el item 
+put-bucket-replication falla en un bucket S3 (pero funciona en otros) al configurar Cross-Region Replication (CRR) . Causa m s probable? A. El bucket no tiene S3 Transfer Accelerat
+Cu les son los requisitos para habilitar Cross-Region Replication (CRR) en S3? A. Versionado activo en origen y destino, buckets en regiones distintas y un rol IAM para que S3 repl
+Qu caracter stica de S3 debe activarse antes de poder configurar cualquier tipo de replicaci n (CRR o SRR)? A. Transfer Acceleration B. Static website hosting C. Versioning (versio
+Subir un archivo grande (100+ GB) con aws s3 cp a un bucket con SSE-KMS da Access Denied , pero archivos peque os s suben. Qu hace el CLI con archivos grandes que causa esto? A. Di
+Un multipart upload a un bucket con SSE-KMS da Access Denied. Qu permisos de KMS necesita el usuario para que funcione? A. Solo kms:Encrypt B. Solo kms:GenerateDataKey* C. kms:Crea
+En un upload a bucket SSE-KMS, por qu NO se necesita el permiso kms:Encrypt ? A. Porque S3 llama a GenerateDataKey para obtener una data key y cifra el objeto localmente; Encrypt s
+App con CloudFront cuyo origen a veces no responde y devuelve HTTP 504 al servir contenido (peticiones GET). Qu acci n costo-eficiente resuelve esos 504? A. Conectar VPCs de varias
+En la misma app CloudFront, la queja principal es que el login es lento para usuarios globales. Qu opci n costo-eficiente acerca la autenticaci n a los usuarios? A. Lambda@Edge que
+Ante logins lentos en CloudFront, por qu aumentar el Cache-Control max-age NO resuelve el problema? A. Porque el cuello de botella es la autenticaci n din mica por request, no el c
+App de subastas: cada nueva puja debe ser mayor que la puja actual . C mo se implementa esto de forma m s efectiva en las llamadas a DynamoDB? A. Optimistic locking con atributo Ve
+Para la regla "nueva puja puja actual", por qu optimistic locking NO es la soluci n adecuada? A. Porque compara la puja contra la versi n num rica del item, y esa versi n se increm
+Necesitas consultar una sola partici n (por su partition key) con otro sort key , admitiendo lecturas eventuales y fuertes . Qu usas? A. Un LSI creado despu s de la tabla B. Un GSI
+Sobre el momento de creaci n de los ndices en DynamoDB, qu es correcto? A. LSI y GSI se pueden crear en cualquier momento B. Ninguno de los dos se puede crear despu s de la tabla C
+Cu l es la diferencia clave entre LSI y GSI respecto a alcance de consulta y consistencia? A. LSI: una partici n, lectura fuerte o eventual; GSI: toda la tabla, solo eventual B. LS
+Una Lambda procesa un stream de Kinesis Data Streams con 100 shards activos (10 s por invocaci n, 50 items/seg). Qu es cierto sobre la concurrencia? A. Habr 200 invocaciones concur
+En qu se diferencia la concurrencia de Lambda entre fuentes poll-based (Kinesis/DynamoDB Streams) y push-based (API Gateway/S3)? A. Poll-based: items/seg duraci n; push-based: item
+Para aumentar la capacidad de datos de un Kinesis Data Stream (y con ello la concurrencia de la Lambda que lo consume), qu haces con los shards? A. Reiniciar el stream B. Merge (fu
+Un desarrollador tiene un certificado SSL/TLS de una CA de terceros (autoridad certificadora externa) listo para importar a AWS. En qu servicio puede importarlo de forma segura (ad
+Cu ndo se usa el IAM certificate store en vez de ACM para un certificado SSL/TLS? A. Cuando quieres administrar el certificado desde la consola de IAM B. Cuando el certificado es a
+En un pipeline de CodePipeline necesitas que alguien apruebe (revisi n de c digo) antes de pasar a la siguiente etapa: si aprueba, el pipeline sigue; si rechaza, se detiene. Qu sol
+En una acci n de aprobaci n manual de CodePipeline, qu pasa si nadie aprueba ni rechaza dentro del plazo l mite? A. Al vencer el plazo la acci n se aprueba y el pipeline pasa a la 
+Debes trazar en X-Ray todas las peticiones de tu app, incluyendo las llamadas a recursos AWS aguas abajo . Qu acci n implementas? A. Usar el X-Ray SDK para agrupar en lotes varios 
+En AWS X-Ray, cu l es la diferencia entre un segment y un subsegment ? A. El segment solo cubre peticiones HTTP entrantes; el subsegment solo cubre llamadas al AWS SDK B. El segmen
+Necesitas ver c mo los procesos individuales de una instancia RDS usan la CPU (porcentaje de CPU y memoria consumida por cada proceso ). Qu usas? A. Enhanced Monitoring de RDS, un 
+En qu se diferencian las m tricas de CPU de CloudWatch y de Enhanced Monitoring en RDS? A. CloudWatch mide desde el hipervisor y guarda historial; Enhanced Monitoring, por agente, 
+Quieres que la cach nunca sirva datos obsoletos (que siempre refleje la ltima escritura), y que las entradas poco le das expiren solas de la cach con un TTL. Cu l pseudoc digo impl
+En caching, por qu se a ade un TTL a los items en una estrategia write-through? A. Para que los datos poco le dos expiren solos y no se acumule cach que casi nunca se usa B. Para f
+Una app de juego debe sincronizar preferencias y estado entre dispositivos, y adem s permitir que varios usuarios colaboren sobre datos compartidos en tiempo real . Qu servicio usa
+Cu l es la diferencia clave entre AWS AppSync y Amazon Cognito Sync para sincronizar datos? A. Cognito Sync sincroniza datasets clave-valor entre servicios de backend; AppSync solo
+Necesitas un solo comando que comprima el c digo, lo suba a S3, genere la plantilla empaquetada y la despliegue . Cu l usas? A. sam deploy B. sam package C. sam publish D. aws clou
+En RDS for SQL Server necesitas cifrar los datos antes de escribirlos a disco y descifrarlos al leerlos , a nivel de la base de datos. Qu habilitas? A. RDS Encryption (cifrado en r
+Creas un GSI en una tabla DynamoDB en modo provisioned con muchas escrituras. Para evitar throttling, c mo debes fijar la capacidad del ndice? A. El RCU del GSI debe ser igual o me
+Si un GSI en modo provisioned tiene WCU insuficiente , qu se ve afectado? A. Se throttlea la actividad de escritura sobre la tabla base B. Se borran items de la tabla base C. Nada;
+Debes redactar PII de registros en S3 de forma distinta por rol , cada usuario ve solo lo suyo, y manteniendo una sola copia de los datos. Qu combinaci n usas? (marca la pieza del 
+Qu hace exactamente S3 Object Lambda y por qu evita duplicar los datos? A. Ejecuta tu funci n Lambda durante la petici n GET, LIST o HEAD y devuelve la versi n transformada con Wri
+Los IAM roles de unas Lambdas gestionadas por CloudFormation fueron modificados a mano . Necesitas identificar esos cambios no autorizados y ver qu recursos ya no coinciden con el 
+Para saber qui n (qu llamada API) modific un IAM role, versus saber si un recurso ya no coincide con la plantilla de CloudFormation, qu servicio corresponde a cada caso? A. CloudTr
+Quieres que el endpoint de una API creado en un stack de CloudFormation pueda referenciarse desde otros stacks (misma cuenta y regi n). Qu haces? A. Agregar el transform AWS::Inclu
+Una Lambda hace 320 lecturas fuertemente consistentes/seg a una tabla con RCU provisionado = 5440 ; items de 17 KB promedio. Para bajar costo manteniendo el rendimiento, a cu nto a
+En el mismo caso (320 lecturas/seg, items de 17 KB), por qu 800 RCU es incorrecto si el requisito es lectura fuertemente consistente ? A. Porque 800 aplica la f rmula eventual (160
+Tus consultas a DynamoDB devuelven todos los atributos por defecto, pero solo quieres traer ciertos atributos (ej. course_id y price). Qu usas? A. Expression attribute names B. Un 
+En DynamoDB, cu l es la diferencia entre un projection expression y un filter expression ? A. Projection expression filtra items por la clave; filter expression recorta los atribut
+Tienes 4 tareas ECS con Fargate y cada una necesita acceder a recursos AWS distintos . Cu l es la forma m s eficiente de darles acceso? A. Crear 4 IAM Roles distintos y asignar uno
+Una app Node.js corre en un servidor Linux on-premises (fuera de AWS) y usa el AWS SDK para acceder a S3, DynamoDB y ElastiCache. Cu l es la forma m s adecuada de darle acceso? A. 
+Quieres una capa de cach frente a un RDS MySQL que soporte replicaci n Multi-AZ con respuesta sub-milisegundo, con el menor esfuerzo . Qu eliges? A. AWS Global Accelerator integrad
+Entre ElastiCache for Redis y ElastiCache for Memcached , cu l soporta replicaci n y alta disponibilidad Multi-AZ? A. Memcached B. Redis C. Ambos por igual D. Ninguno; se necesita 
+Fargate detr s de un ALB, con CloudFront delante. Un aluvi n de logins no autenticados dispara la CPU de Fargate. Para validar el JWT y quitar carga de la forma m s eficiente, qu h
+En qu se diferencian CloudFront Functions y Lambda@Edge , y cu ndo conviene cada uno? A. Ambas usan Node/Python en los 4 eventos incluido origin; la nica diferencia es que Lambda@E
+Una config CORS de un bucket S3 tiene AllowedOrigin=https://tutorialsdojo.com , AllowedMethod = GET, PUT, POST, DELETE, AllowedHeader=* , MaxAgeSeconds=3600 . Qu DOS afirmaciones s
+En una regla CORS de S3, qu hace exactamente el elemento ExposeHeader (ej. ExposeHeader=ETag )? A. Define ese header como m todo HTTP permitido en la regla CORS del bucket B. Fija 
+Qu hace (y qu NO hace) una configuraci n CORS en un bucket S3? A. Define qu or genes (dominios) del navegador pueden hacer peticiones cross-origin al bucket; NO autoriza acciones B
+Un job debe subir archivos a un bucket con SSE-KMS usando la KMS key por defecto . Con la MENOR configuraci n , qu header incluyes en la petici n de subida? A. x-amz-server-side-en
+Al subir a S3, qu valor del header x-amz-server-side-encryption corresponde a cada tipo de cifrado del lado servidor? A. SSE-KMS, SSE-S3 y SSE-C usan todos el valor aws:kms en el m
+Para 20 lecturas eventualmente consistentes/seg de items de 2 KB en DynamoDB, cu ntos RCU necesitas? A. 5 B. 20 C. 40 D. 10 A. 5 B. 20 C. 40 D. 10
+En DynamoDB, c mo cambia el costo de capacidad para operaciones transaccionales (TransactGetItems / TransactWriteItems) frente a lecturas fuertes / escrituras normales? A. Ambas cu
+Debes cifrar datos en reposo en S3 con una clave de cifrado provista y gestionada por tu empresa (no por AWS), con AES-256. Qu dos opciones cumplen? (elige el par correcto) A. SSE-
+En el cifrado de S3, qui n gestiona la clave en cada opci n: SSE-S3, SSE-KMS, SSE-C y client-side encryption? A. SSE-S3: la clave la gestiona AWS (S3); SSE-KMS: la gestiona AWS KMS
+Sirves un sitio est tico (im genes, videos, HTML, JS) con la menor latencia posible para usuarios globales . Qu combinaci n de servicios usas? A. Amazon EFS + Amazon CloudFront B. 
+En una operaci n de escritura de DynamoDB (UpdateItem/PutItem/DeleteItem) quieres el total de write capacity units consumidos, con subtotales para la tabla y cada ndice secundario 
+En DynamoDB, cu l es el valor por defecto del par metro ReturnConsumedCapacity y qu hace? A. TOTAL: devuelve el total de capacidad consumida B. INDEXES: devuelve subtotales por tab
+Debes servir a cada rol una versi n redactada distinta de los mismos registros PII en S3, manteniendo una sola copia de los datos, aplicando una Lambda RedactPII-[role] por rol. Qu
+Con S3 Object Lambda, qu API usa el cliente para obtener el dato ya transformado (redactado) a trav s del Object Lambda Access Point? A. InvokeFunction directamente sobre la Lambda
+En qu se diferencia S3 Object Lambda de una S3 Event Notification que invoca una Lambda, respecto a cu ndo actua? A. Object Lambda actua en la escritura (PUT/POST); Event Notificat
+Al usar un Global Secondary Index (GSI) en DynamoDB, de d nde se consumen las unidades de capacidad de las queries/scans sobre ese ndice? A. Las queries y scans no consumen capacid
+Qu consistencia de lectura soporta un Global Secondary Index (GSI) de DynamoDB? A. Consistencia transaccional garantizada B. Solo consistencia fuerte (strong consistency) C. Solo c
+Respecto a la partition key : en qu se diferencian un GSI y un LSI de DynamoDB? A. GSI puede usar una partition key distinta a la de la tabla; LSI reutiliza la misma con otra sort 
+En API Gateway con backend Lambda, necesitas especificar c mo se mapean los datos de la petici n entrante a la integraci n y la respuesta de la integraci n al m todo. Qu tipo de in
+En API Gateway con backend Lambda, qu diferencia hay entre Lambda proxy y Lambda custom (non-proxy) integration? A. Proxy sirve para backends HTTP con mapping templates; custom sir
+Otros sitios est n hotlinkeando tus fotos alojadas en S3 (las enlazan desde sus p ginas), subiendo tus costos de transferencia. Quieres controlar el acceso de forma escalable . Qu 
+En CloudFront, cu ndo usas signed URL y cu ndo signed cookies para restringir contenido? A. signed URL da acceso a un archivo individual; signed cookies dan acceso a varios archivo
+Para frenar el hotlinking de tus im genes en CloudFront, por qu una Network ACL por IP y CORS abierto a todos son malas soluciones? A. La NACL por IP y el CORS abierto equivalen a 
+Quieres filtrar trazas de X-Ray por annotations con la m nima configuraci n , y obtener los trace IDs y annotations program ticamente. Qu dos acciones eliges? (elige el par correct
+En X-Ray, cu l es la diferencia entre las APIs GetTraceSummaries y BatchGetTraces ? A. GetTraceSummaries configura las reglas de sampling; BatchGetTraces filtra por annotation las 
+Tu portal (detr s de ALB/CloudFront/API Gateway) recibe muchos intentos de SQL injection y cross-site scripting (XSS) . Qu servicio mitiga estos ataques a nivel de capa 7? A. AWS W
+Distingue el rol de AWS WAF , Amazon GuardDuty y AWS Firewall Manager . Cu l describe correctamente a cada uno? A. WAF filtra y bloquea tr fico web de capa 7; GuardDuty detecta ame
+Para servir contenido est tico global con baja latencia, por qu EC2 , EFS y Glacier NO son buenos como almacenamiento/origen frente a S3? A. EC2 es la mejor opci n como origen est 
+Necesitas un framework simple y nativo de AWS para definir Lambda + API Gateway + DynamoDB en un solo stack, compartir config (memoria, timeouts) y desplegar todo como una nica ent
+Qu relaci n tiene AWS SAM con CloudFormation al desplegar? A. SAM es una extensi n de CloudFormation: su sintaxis abreviada se expande a CloudFormation v a el Transform AWS::Server
+Debes integrar un directorio LDAP on-premises con AWS IAM, pero el identity store no es compatible con SAML 2.0 . Cu l es la soluci n m s adecuada? A. Crear IAM roles que roten las
+En un custom identity broker, qu llamadas de STS se usan para obtener credenciales temporales de AWS y qu devuelven? A. AssumeRole o GetFederationToken: devuelven access key, secre
+Necesitas consultar con la misma partition key pero una sort key alterna y con strong consistency . La tabla ya existe con datos. Qu haces? A. A adir a la tabla actual un LSI con l
+Sobre los ndices secundarios de DynamoDB: cu l se puede a adir o borrar en cualquier momento y cu l solo se crea junto con la tabla ? A. LSI: en cualquier momento. GSI: solo al cre
+En X-Ray quieres que la llamada downstream a RDS (incluida la query SQL ) quede registrada como una unidad de trabajo propia y adem s buscable con filter expressions . D nde la reg
+En X-Ray, cu l es la diferencia entre annotations y metadata ? A. Annotations se indexan y sirven para filter expressions; metadata no se indexa B. Annotations no se indexan; metad
+En ECS quieres colocar tareas en instancias con recursos suficientes, respetando las constraints (impl citas o expl citas), con la menor configuraci n posible. Qu task placement st
+En ECS, para qu sirve cada task placement strategy: binpack , spread y random ? A. binpack empaca tareas por CPU/memoria minimizando instancias; spread las coloca al azar; random l
+Ya tienes una plantilla SAM y el c digo Lambda en local. Cu l es el flujo correcto de despliegue de una app SAM? A. Build en una instancia EC2, empaquetar, y desplegar desde CodePi
+Qu hace cada comando de la SAM CLI: sam build , sam package , sam deploy y sam publish ? A. build: crea o actualiza el stack en CloudFormation; package: publica la app al Serverles
+Varios usuarios actualizan el mismo item de DynamoDB concurrentemente y unos sobrescriben los cambios de otros. Quieres que una escritura solo tenga xito si el item no cambi desde 
+Por qu el optimistic locking por n mero de versi n no funciona como esperas con DynamoDB global tables ? A. Las global tables aplican el optimistic locking por versi n de forma glo
+En DynamoDB, con lecturas fuertemente consistentes : cu ntas lecturas por segundo cubre 1 RCU y de qu tama o de item? A. 2 lecturas fuertemente consistentes/seg de hasta 4 KB B. 1 
+Una Lambda hace 320 lecturas fuertemente consistentes/seg de items de 17 KB . Cu ntos RCU necesitas (valor ptimo para bajar costo sin perder rendimiento)? A. 3200 B. 5440 C. 1600 D
+Un item de 17 KB : cu ntos bloques cuenta para RCU (bloque 4 KB) y cu ntos para WCU (bloque 1 KB)? A. RCU: 17 bloques; WCU: 5 bloques B. RCU: 5 bloques; WCU: 5 bloques C. RCU: ceil
+En Elastic Beanstalk corres el X-Ray daemon en las instancias para subir trazas a X-Ray, usando el instance profile por defecto. Qu managed policy de IAM necesita el daemon para su
+Para X-Ray, qu managed policy usas para (a) solo ver el service map en la consola y (b) configurar encryption y sampling rules? A. (a) AWSXRayDaemonWriteAccess para ver; (b) AWSXra
+En una plantilla CloudFormation con AWS::Lambda::Function , quieres escribir el c digo Python inline (unas pocas l neas) dentro de la plantilla. Qu par metro usas? A. ZipFile (dent
+A qu recurso pertenece cada propiedad: Code (con ZipFile/S3Bucket) y CodeUri ? A. Code pertenece a AWS::Serverless::Function (SAM) y CodeUri a AWS::Lambda::Function (CloudFormation
+En DynamoDB, cu nto cubre 1 WCU y c mo calculas las WCU para 10 escrituras/seg de items de 2 KB ? A. 1 WCU = 2 escrituras/seg de hasta 1 KB; 10 WCU B. 1 WCU = 1 escritura/seg de ha
+Un juego m vil necesita entregar credenciales AWS temporales tanto a usuarios autenticados por redes sociales (Facebook, Google) como a usuarios invitados sin autenticar (guest). Q
+En Amazon Cognito, cu l es la diferencia principal entre un User Pool y un Identity Pool ? A. User Pool = entrega credenciales AWS temporales para servicios AWS; Identity Pool = di
+Cu l describe correctamente el proceso de envelope encryption (cifrado en sobre)? A. Cifrar los datos en claro con una KMS key, y luego cifrar esa KMS key con una data key de nivel
+En envelope encryption con AWS KMS, por qu conviene cifrar el mismo dato bajo varias claves reencriptando solo la data key en vez de reencriptar el dato completo? A. Porque KMS cob
+Con un API Gateway Lambda Authorizer , necesitas una estrategia de autenticaci n similar a OAuth o SAML (el llamador env a un bearer token, ej. un JWT). Qu tipo de autorizador usas
+En API Gateway, de d nde obtiene la identidad del llamador un REQUEST authorizer (autorizador basado en par metros de la petici n)? A. De una sesi n STS creada con AssumeRole por e
+Instancias EC2 en un Auto Scaling group tienen instalado el CloudWatch agent para publicar m tricas personalizadas, pero las instancias reci n lanzadas fallan al enviar las m trica
+Por qu se asocia un IAM role (v a instance profile) a una instancia EC2 en lugar de incrustar claves de acceso de larga duraci n en la instancia? A. Porque el role provee credencia
+Buscas los servicios que aporten MAYOR elasticidad (ajustar oferta de recursos a la demanda) manteniendo costo-eficiencia. Cu les dos aplican mejor? (elige el par correcto) A. Amaz
+En elasticidad AWS, qu distingue la elasticidad basada en tiempo (time-based) de la basada en volumen (volume-based)? A. Ambas significan lo mismo: pagar por recursos encendidos 24
+Una app recibe ProvisionedThroughputExceeded por picos de RCU en DynamoDB. Necesitas buscar tems por valores de primary key usando la MENOR cantidad de RCU . Qu haces? A. Usar la o
+En DynamoDB, por qu una operaci n Scan suele ser mucho m s costosa e ineficiente que una Query ? A. Scan lee cada tem de toda la tabla o ndice y luego filtra; Query localiza tems p
+Una instancia EC2 ten a un IAM role para escribir en los buckets S3 de dev y prod, y adem s tiene claves de acceso configuradas en el AWS CLI . Le asignas un nuevo IAM role que sol
+Qu es un instance profile en EC2 y cu ntos IAM roles puede entregar a la instancia a la vez? A. Es una pol tica inline adjunta directamente a la instancia EC2; puede contener hasta
+Necesitas aumentar la CPU disponible para una funci n Lambda que procesa registros en un fan-out desde un Kinesis data stream. Cu l es la MEJOR forma de lograrlo? A. Usar Lambda@Ed
+En AWS Lambda, qu significan las concurrent executions (ejecuciones concurrentes) y c mo se relacionan con la CPU? A. Es el n mero de invocaciones en paralelo; sube el paralelismo 
+Una app usa Cognito User Pools con MFA desactivado . Tras una filtraci n de datos ajena, temen que atacantes usen credenciales robadas. Quieren exigir MFA solo a los inicios de ses
+Una empresa tiene 3 cuentas AWS propias (A=Dev, B=Test, C=Prod). Un developer necesita acceso para auditar los despliegues en las cuentas B y C. Cu l es la forma M&Aacute;S eficien
+Un developer quiere usar MFA para proteger llamadas program ticas a operaciones como ec2:StopInstances . Necesita una API donde enviar el c digo MFA de su dispositivo y recibir cre
+Una app serverless (varias Lambda) se despliega con SAM y CodeDeploy. En cada despliegue debe desplazarse 10% del tr fico a la nueva versi n cada 10 minutos hasta migrar todo. Qu d
+App de subastas en tiempo real con Kinesis Data Streams. Reglas: cada puja se procesa una sola vez y un consumidor EC2 debe procesarlas en el mismo orden en que llegaron. Qu soluci
+Un sitio (ALB + Auto Scaling EC2 + RDS MySQL) va lento al leer art culos por un alto n mero de lecturas en la BD. Quieren aliviar la carga de lectura con el m nimo cambio de c digo
+Una app usa Amplify DataStore que sincroniza estado de sesi n en una tabla DynamoDB. La tabla crece much simo. Debes reducir el almacenamiento y el costo de datos irrelevantes SIN 
+Una app en Elastic Beanstalk corre en runtime Java 7 y debe subir a Java 8 (cambio de runtime). Todo el tr fico debe ir de inmediato a la nueva versi n y, si hay problemas, poder r
+Sobre AWS CodeDeploy, cu les DOS afirmaciones son correctas? (elige el par correcto) A. El agente de CodeDeploy se comunica por HTTP en el puerto 80; y CodeDeploy solo despliega a 
+Usando AWS Organizations, quieres probar el impacto de SCPs sobre tus IAM policies y resource policies antes de aplicarlas , sin ejecutar acciones reales. Qu servicio usas para pro
+Un workflow de Step Functions con 4 states maneja la l gica y los errores. Si el proceso falla , hay que agregar en un solo output todos los datos que pasaron por los nodos (input 
+En Amazon States Language (Step Functions), para qu sirve cada campo: Catch , Retry , ResultPath y ItemsPath ? A. Catch reintenta con backoff; Retry captura errores; ResultPath eli
+Un equipo despliega una app serverless con AWS CDK ( cdk deploy ). En una cuenta AWS nueva el primer despliegue falla con NoSuchBucket . No cambiaron el c digo ni la config del CDK
+En AWS CDK, qu hace cada comando: bootstrap , synth , context e import ? A. bootstrap importa recursos existentes; synth cachea datos del entorno; context provisiona el bucket de a
+Una API serverless est definida con constructs L2 de AWS CDK. El desarrollador quiere probar localmente algunas funciones Lambda (SAM y CDK ya configurados). Qu dos acciones combin
+Una plataforma externa manda webhooks por HTTPS a una Lambda y firma cada request con una clave secreta en los headers . La funci n debe ejecutar la l gica solo si el request viene
+En una Lambda Function URL , qu diferencia hay entre los tipos de autorizaci n AWS_IAM y NONE ? A. AWS_IAM firma la respuesta de la funci n con KMS; NONE cifra el payload de entrad
+Un script usa la API de bajo nivel BatchGetItem de DynamoDB y a menudo recibe resultados parciales: buena parte de las claves vuelve en UnprocessedKeys . Qu dos enfoques dan la rec
+Un developer quiere reducir el tiempo de un Scan de DynamoDB en horas de baja demanda sin afectar las cargas normales. El scan consume la mitad de los RCU fuertemente consistentes 
+Con Web Identity Federation, cada usuario debe acceder solo a los items cuya partition key es su propio user ID en una tabla DynamoDB. Qu condition key pones en la pol tica IAM del
+Al correr stop-instance por el AWS CLI recibes un UnauthorizedOperation con un mensaje de fallo adicional en texto cifrado (encoded) . C mo decodificas ese mensaje? A. Llamar al co
+Un equipo necesita extraer m tricas personalizadas (p. ej. tiempos de procesamiento) directamente de los logs de una Lambda, analizarlas y poner alarmas en tiempo real. Qu enfoque 
+Un developer quiere proteger con MFA llamadas program ticas a operaciones como ec2:StopInstances . Necesita una API donde enviar el c digo MFA de su dispositivo y recibir credencia
+Distingue las APIs de AWS STS: AssumeRole , AssumeRoleWithWebIdentity , AssumeRoleWithSAML , GetFederationToken y GetSessionToken . Cu l afirmaci n es correcta? A. GetFederationTok
+Una aplicaci n web en Elastic Beanstalk requiere despliegues sin tiempo de inactividad y con capacidad de rollback instant neo en caso de fallos. El equipo necesita mantener la cap
+Una empresa de comercio electr nico utiliza DynamoDB para almacenar pedidos. Necesitan enviar notificaciones en tiempo real cuando se crea o actualiza un pedido, sin modificar la a
+Un desarrollador necesita habilitar el inicio de sesi n con Google en una aplicaci n web que usa Amazon Cognito User Pools. Qu informaci n debe obtener de la consola de Google Clou
+Una aplicaci n procesa mensajes de una cola SQS est ndar mediante una funci n Lambda. Ocasionalmente, algunos mensajes fallan repetidamente debido a errores de validaci n de datos.
+Una funci n Lambda en tu aplicaci n devuelve un error AccessDenied al intentar escribir objetos en un bucket S3. La funci n se ejecuta correctamente en otros aspectos. Cu l es la c
+Una aplicaci n en ECS necesita acceder a credenciales de base de datos RDS que deben rotarse autom ticamente cada 30 d as sin intervenci n manual. Qu servicio de AWS proporciona es
+Una aplicaci n Lambda cifra objetos con AWS Encryption SDK antes de subirlos a S3. Otro equipo intenta descargar y descifrar esos objetos usando el Amazon S3 encryption client, per
+Una aplicaci n desplegada en instancias EC2 utiliza AWS CodeDeploy para automatizar despliegues. Los logs del agente de CodeDeploy muestran errores recurrentes de tipo SignatureDoe
+Una funci n Lambda en Node.js se conecta a una base de datos RDS MySQL y experimenta alta latencia en las primeras invocaciones despu s de per odos de inactividad. El c digo actual
+Has desplegado un Application Load Balancer (ALB) en una VPC con tres Availability Zones (us-east-1a, us-east-1b, us-east-1c). Registraste instancias EC2 en un target group en las 
+Un equipo de desarrollo mantiene redesplegar 15 funciones Lambda que todas utilizan las mismas librerías de Python (requests, boto3 personalizado, y un SDK interno). Actualmente ca
+Un equipo de desarrollo necesita garantizar que todas las solicitudes a un bucket de S3 utilicen cifrado en tr nsito (HTTPS). Qu configuraci n de pol tica de bucket cumple este req
+Una aplicaci n necesita ejecutar un script de limpieza de logs en instancias EC2 privadas cada d a a las 2:00 AM. El equipo busca la soluci n serverless m s simple que minimice com
+Una aplicaci n serverless usa API Gateway con una funci n Lambda integrada. El equipo quiere probar una nueva versi n de la funci n Lambda enviando solo el 10% del tr fico de produ
+Un equipo de desarrollo utiliza API Gateway con dos stages (dev y prod) que invocan la misma funci n Lambda. Necesitan que el stage dev invoque el alias 'development' de Lambda y e
+Una aplicaci n almacena objetos en S3 utilizando Server-Side Encryption con claves proporcionadas por el cliente (SSE-C). Qu debe hacer el cliente para recuperar y descifrar un obj
+Un equipo de desarrollo necesita implementar una arquitectura serverless donde m ltiples funciones Lambda procesen eventos publicados por un t pico SNS sin necesidad de administrar
+Un equipo de desarrollo utiliza AWS CodeBuild para compilar aplicaciones Node.js. Cada build tarda 8 minutos, de los cuales 5 minutos se dedican a descargar e instalar dependencias
+Una aplicaci n web utiliza un Application Load Balancer (ALB) para distribuir tr fico HTTPS. El equipo de desarrollo necesita habilitar SSL/TLS y quiere que AWS gestione autom tica
+Una aplicación web usa Amazon Cognito Identity Pools para autenticar usuarios de diferentes departamentos (ventas, marketing, finanzas). Cada usuario tiene un atributo personalizad
+Una aplicaci n m vil autentica usuarios con Google Sign-In (OpenID Connect) y necesita acceder a objetos en S3. Qu secuencia de llamadas API de Cognito Identity Pools permite conve
+Qu componentes DEBEN incluirse dentro del deployment package de una funci n Lambda? A. El c digo de la aplicaci n y las bibliotecas de dependencias necesarias para su ejecuci n B. 
+Un desarrollador necesita cifrar un log group existente de CloudWatch Logs utilizando una clave KMS customer managed key (CMK). Cu l es el m todo correcto para aplicar este cifrado
+Una aplicaci n m vil usa Amazon Cognito Identity Pools para autenticar usuarios y obtener credenciales temporales de AWS. Los usuarios autenticados reportan errores AccessDenied al
+Est s configurando un pipeline de CI/CD con AWS CodePipeline que integra CodeBuild para compilar la aplicaci n y CodeDeploy para desplegarla en instancias EC2. El pipeline falla co
+Qu secci n de una plantilla CloudFormation se utiliza para definir valores est ticos que var an seg n claves como la regi n o el tipo de instancia, permitiendo seleccionar valores 
+Una aplicaci n procesa mensajes de una cola est ndar de Amazon SQS y escribe los resultados en DynamoDB. Los logs muestran que algunos registros aparecen duplicados en la tabla. El
+Una aplicaci n serverless utiliza Amazon API Gateway para exponer una API REST que consulta datos de una base de datos RDS mediante funciones Lambda. Durante picos de tr fico, la b
+Un equipo de desarrollo utiliza AWS CodeBuild para compilar una aplicaci n Java con Maven. Los builds tardan 15 minutos y descargan 2 GB de dependencias desde repositorios remotos 
+Una aplicaci n de procesamiento de pedidos utiliza una cola Amazon SQS Standard para encolar transacciones. El equipo detecta que algunos pedidos se procesan dos veces, causando ca
+Un equipo de desarrollo utiliza AWS CodePipeline para automatizar el despliegue de una aplicaci n. Actualmente, el pipeline tiene un stage de pruebas que ejecuta tests unitarios, d
+Est s configurando un entorno de Elastic Beanstalk y necesitas ejecutar comandos personalizados durante el despliegue. Has creado un archivo de configuraci n en el directorio .ebex

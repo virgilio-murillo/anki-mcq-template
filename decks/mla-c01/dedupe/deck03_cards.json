@@ -1,0 +1,223 @@
+[
+  {
+    "key": "mla03-q3",
+    "question": "SageMaker XGBoost - una herramienta de diagnostico predice si un paciente tiene una enfermedad. El dataset tiene <b>muchos pacientes sanos y pocos enfermos</b> (clase positiva minoritaria). El modelo identifica bien a los sanos, pero <b>casi nunca detecta a los enfermos</b>. &iquest;Que ajuste mejora la deteccion de la clase minoritaria?",
+    "options": {
+      "A": "Aumentar el hiperparametro <code>scale_pos_weight</code>",
+      "B": "Reducir el hiperparametro <code>scale_pos_weight</code>",
+      "C": "Reducir el hiperparametro <code>max_depth</code> del arbol",
+      "D": "Aumentar la tasa de aprendizaje (<code>learning rate</code>)"
+    },
+    "correct_index": 0,
+    "correct_text": "Aumentar el hiperparametro <code>scale_pos_weight</code>",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - aumentar <code>scale_pos_weight</code>.</div><p><b>El problema:</b> el dataset esta desbalanceado. La clase positiva (pacientes enfermos) esta subrepresentada, asi que el modelo aprende a predecir casi siempre la clase mayoritaria (sanos) y falla al detectar la minoritaria.</p><p><b>Por que la respuesta sirve:</b> <code>scale_pos_weight</code> pondera la clase positiva durante el entrenamiento. Al <b>aumentarlo</b> se da mas peso a los positivos, aumentando la penalizacion por clasificar mal a un enfermo. Asi el modelo se vuelve mas sensible a la clase minoritaria.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Reducir <code>scale_pos_weight</code>:</b> da menos peso a la clase positiva, dificulta aun mas detectar enfermos; es lo contrario de lo pedido.</li><li><b>Reducir <code>max_depth</code>:</b> limita la complejidad del arbol para evitar sobreajuste, pero no ataca el desbalance de clases ni la incapacidad de detectar la clase positiva.</li><li><b>Aumentar el learning rate:</b> controla el tama&ntilde;o del paso en la optimizacion y puede acelerar la convergencia, pero no corrige el desbalance de clases.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>En XGBoost con clases desbalanceadas, <code>scale_pos_weight</code> es la palanca directa: subelo para favorecer la clase positiva minoritaria. Una guia comun es fijarlo en (negativos / positivos).</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost_hyperparameters.html\">docs.aws XGBoost hiperparametros</a></div>"
+  },
+  {
+    "key": "mla03-q12",
+    "question": "Inferencia - un modelo de forecast recibe carga <b>predecible y sostenida durante la misma ventana de 2 horas cada dia</b>, con multiples invocaciones que requieren <b>respuestas rapidas</b>. La empresa quiere que <b>AWS gestione la infraestructura y el auto scaling</b>. &iquest;Que solucion cumple?",
+    "options": {
+      "A": "SageMaker Serverless Inference con provisioned concurrency",
+      "B": "Un job de SageMaker batch transform agendado con AWS Lambda",
+      "C": "Un Auto Scaling group de instancias EC2 con scheduled scaling",
+      "D": "El modelo sobre un cluster de Amazon EKS en EC2 con pod auto scaling"
+    },
+    "correct_index": 0,
+    "correct_text": "SageMaker Serverless Inference con provisioned concurrency",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - Serverless Inference con provisioned concurrency.</div><p><b>El problema:</b> se necesitan respuestas rapidas en una ventana predecible, sin que la empresa administre servidores ni el escalado.</p><p><b>Por que la respuesta sirve:</b> <b>Serverless Inference</b> aprovisiona, escala y gestiona la capacidad de computo automaticamente (sin infraestructura a cargo del usuario). La <b>provisioned concurrency</b> mantiene el modelo \"caliente\" y listo, dando baja latencia para la carga predecible de esas 2 horas.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Batch transform con Lambda:</b> batch transform es para inferencia asincrona sobre grandes datasets, no para respuestas rapidas en linea.</li><li><b>EC2 Auto Scaling con scheduled scaling:</b> ajusta capacidad por horario, pero obliga a la empresa a gestionar las instancias EC2; no cumple el \"AWS gestiona la infraestructura\".</li><li><b>EKS en EC2 con pod auto scaling:</b> requiere administrar el cluster, los nodos EC2 y la configuracion de escalado; carga operativa que la empresa no quiere.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Trafico intermitente o predecible y respuesta rapida sin gestionar servidores: Serverless Inference. Si ademas debes evitar cold starts, agrega provisioned concurrency.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/serverless-endpoints.html\">docs.aws Serverless Inference</a></div>"
+  },
+  {
+    "key": "mla03-q16",
+    "question": "Preprocesamiento - durante la exploracion de datos, una columna numerica esta <b>sesgada a la derecha</b> (right-skewed): una cola larga de valores altos. &iquest;Que tecnica de transformacion mitiga mejor este sesgo?",
+    "options": {
+      "A": "Transformacion logaritmica de la columna",
+      "B": "Quantile binning (asignar igual numero de observaciones por bin)",
+      "C": "Transformacion de producto cartesiano entre variables",
+      "D": "Transformacion de bigrama disperso ortogonal (OSB)"
+    },
+    "correct_index": 0,
+    "correct_text": "Transformacion logaritmica de la columna",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - transformacion logaritmica.</div><p><b>El problema:</b> una distribucion sesgada a la derecha (cola larga hacia valores altos) puede perjudicar a muchos algoritmos de ML que asumen datos mas simetricos.</p><p><b>Por que la respuesta sirve:</b> aplicar el <b>logaritmo</b> a la columna comprime los valores grandes y estira los peque&ntilde;os, normalizando la distribucion y haciendola mas simetrica. Es el enfoque clasico para datos numericos con sesgo a la derecha.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Quantile binning:</b> reparte igual numero de observaciones por bin y sirve para categorizar variables continuas, pero no corrige directamente el sesgo de la distribucion.</li><li><b>Producto cartesiano:</b> crea features nuevas capturando interacciones entre variables categoricas o de texto; no aplica a datos numericos sesgados.</li><li><b>OSB (orthogonal sparse bigram):</b> es para analisis de texto (alternativa al bigrama); no tiene relacion con una columna numerica sesgada.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Sesgo a la derecha en una variable numerica: piensa en log (o raiz/Box-Cox). Binning y transformaciones de texto (OSB, cartesiano) resuelven otros problemas.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/machine-learning/latest/dg/data-transformations-reference.html\">docs.aws transformaciones de datos</a></div>"
+  },
+  {
+    "key": "mla03-q18",
+    "question": "SageMaker - se necesita un <b>algoritmo integrado supervisado</b> para predecir si un cliente <b>comprara o no</b> un producto (clasificacion binaria sobre datos etiquetados). &iquest;Cual conviene?",
+    "options": {
+      "A": "K-nearest neighbors (k-NN)",
+      "B": "Support Vector Regression (SVR)",
+      "C": "Random Cut Forest (RCF)",
+      "D": "K-means"
+    },
+    "correct_index": 0,
+    "correct_text": "K-nearest neighbors (k-NN)",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - k-nearest neighbors (k-NN).</div><p><b>El problema:</b> predecir compra si/no es una tarea de <b>clasificacion binaria supervisada</b> sobre datos historicos etiquetados, y debe ser un algoritmo integrado de SageMaker.</p><p><b>Por que la respuesta sirve:</b> <b>k-NN</b> es un algoritmo supervisado integrado que sirve para clasificacion. Busca los puntos mas cercanos a una nueva entrada y usa sus etiquetas para predecir la clase, ideal para clasificacion binaria como la decision de compra.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>SVR:</b> es supervisado pero de regresion (predice valores continuos), no clasificacion; ademas no es built-in de SageMaker (viene via el contenedor scikit-learn).</li><li><b>Random Cut Forest:</b> es no supervisado, para deteccion de anomalias; no predice sobre datos etiquetados.</li><li><b>K-means:</b> es no supervisado, para agrupar (clustering); no realiza clasificacion supervisada.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Clasificacion supervisada built-in: k-NN o XGBoost. K-means y Random Cut Forest son no supervisados; SVR es regresion y no es built-in.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/k-nearest-neighbors.html\">docs.aws algoritmo k-NN</a></div>"
+  },
+  {
+    "key": "mla03-q23",
+    "question": "Orquestacion - hay que procesar mas de <b>5 TB</b> de datos en S3 (CSV, JSON, Parquet y texto plano) en <b>varios pasos consecutivos</b> con manipulaciones complejas que tardan horas, incluyendo transformaciones de NLP, y <b>todo automatizado</b>. &iquest;Que solucion cumple?",
+    "options": {
+      "A": "SageMaker Pipelines para los pasos de procesamiento, automatizado con Amazon EventBridge",
+      "B": "Funciones AWS Lambda por paso, orquestadas con AWS Step Functions y EventBridge",
+      "C": "SageMaker Data Wrangler por paso, automatizado con jobs de Data Wrangler",
+      "D": "Notebooks de SageMaker AI por paso, automatizados con Amazon EventBridge"
+    },
+    "correct_index": 0,
+    "correct_text": "SageMaker Pipelines para los pasos de procesamiento, automatizado con Amazon EventBridge",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - SageMaker Pipelines + EventBridge.</div><p><b>El problema:</b> flujo multi-paso, con datos grandes y heterogeneos, transformaciones complejas de larga duracion (horas) y NLP, y necesidad de automatizacion de extremo a extremo.</p><p><b>Por que la respuesta sirve:</b> <b>SageMaker Pipelines</b> crea y gestiona flujos de ML a escala, encadenando pasos de procesamiento interconectados que manejan mas de 5 TB en formatos diversos y tareas largas (incluida NLP). Se puede automatizar el disparo con <b>EventBridge</b>. Da escalabilidad, flexibilidad y automatizacion.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Lambda + Step Functions + EventBridge:</b> Lambda tiene un limite de 15 minutos de ejecucion, insuficiente para pasos que tardan horas.</li><li><b>Data Wrangler + jobs:</b> procesa datos tabulares e imagenes, no texto plano, y no esta pensado para flujos complejos de multiples pasos.</li><li><b>Notebooks + EventBridge:</b> los notebooks son para experimentacion, no para automatizacion productiva de flujos complejos de procesamiento.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Flujo ML multi-paso, complejo y automatizado: SageMaker Pipelines. Recuerda el limite duro de 15 minutos de Lambda ante tareas de horas.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/pipelines.html\">docs.aws SageMaker Pipelines</a></div>"
+  },
+  {
+    "key": "mla03-q28",
+    "question": "SageMaker - el rendimiento de un modelo de clasificacion binaria cayo. Hay que <b>ajustar los hiperparametros manteniendo el mismo tipo de modelo</b>, con el <b>MENOR esfuerzo</b> posible. &iquest;Que funcionalidad conviene?",
+    "options": {
+      "A": "SageMaker AI Automatic Model Tuning para buscar los hiperparametros optimos",
+      "B": "Un notebook de SageMaker AI con una busqueda aleatoria de hiperparametros propia",
+      "C": "SageMaker Autopilot ejecutado con su configuracion por defecto de candidatos",
+      "D": "SageMaker Autopilot con <code>TabularJobConfig.ProblemType</code> = BinaryClassification"
+    },
+    "correct_index": 0,
+    "correct_text": "SageMaker AI Automatic Model Tuning para buscar los hiperparametros optimos",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - Automatic Model Tuning.</div><p><b>El problema:</b> optimizar hiperparametros con minimo esfuerzo <b>sin cambiar el tipo de modelo</b> subyacente.</p><p><b>Por que la respuesta sirve:</b> <b>Automatic Model Tuning</b> automatiza la busqueda de la mejor combinacion de hiperparametros manteniendo fijo el tipo de modelo. Reduce mucho el esfuerzo frente al ajuste manual.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Notebook con busqueda aleatoria propia:</b> exige escribir codigo, gestionar la busqueda y analizar resultados a mano; mas esfuerzo, y random search suele ser menos eficiente.</li><li><b>Autopilot por defecto:</b> prueba distintos algoritmos y tipos de modelo para hallar el mejor, por lo que cambiaria el tipo de modelo; incumple el requisito.</li><li><b>Autopilot con ProblemType = BinaryClassification:</b> aun asi Autopilot explora varios tipos de modelo; no garantiza mantener el mismo tipo de modelo.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Solo optimizar hiperparametros con mismo modelo y minimo esfuerzo: Automatic Model Tuning (HPO). Autopilot cambia de algoritmo/modelo, asi que no aplica cuando el tipo debe quedar fijo.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning.html\">docs.aws Automatic Model Tuning</a></div>"
+  },
+  {
+    "key": "mla03-q31",
+    "question": "Inferencia - varios modelos en instancias aceleradas requieren <b>respuestas en tiempo real</b>, cada uno con <b>requisitos de escalado distintos</b>, y <b>no se permite cold start</b>. &iquest;Que solucion cumple?",
+    "options": {
+      "A": "Un endpoint de SageMaker con un inference component por modelo, cada uno con auto scaling y minimo de copias >= 1",
+      "B": "Un endpoint SageMaker multi-modelo apuntando a artefactos en S3, con auto scaling y minimo de copias >= 1",
+      "C": "Un endpoint de SageMaker Asynchronous Inference por modelo, cada uno con su politica de auto scaling",
+      "D": "Un endpoint de SageMaker Serverless Inference por modelo, usando provisioned concurrency"
+    },
+    "correct_index": 0,
+    "correct_text": "Un endpoint de SageMaker con un inference component por modelo, cada uno con auto scaling y minimo de copias >= 1",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - endpoint con inference components y minimo de copias >= 1.</div><p><b>El problema:</b> tiempo real, instancias aceleradas, escalado independiente por modelo y cero cold start.</p><p><b>Por que la respuesta sirve:</b> los <b>inference components</b> permiten configurar y gestionar cada modelo dentro de un endpoint de SageMaker sobre instancias aceleradas. Cada componente tiene su propia politica de auto scaling (escalado independiente) y, fijando el <b>minimo de copias en al menos 1</b>, siempre hay una instancia activa, evitando cold starts y cumpliendo la respuesta en tiempo real.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Multi-model endpoint:</b> no evita cold starts por modelo y solo permite escalar a nivel de instancia, no por modelo individual.</li><li><b>Asynchronous Inference:</b> esta pensado para cargas asincronas sin respuesta inmediata; no cumple el tiempo real.</li><li><b>Serverless Inference:</b> no soporta instancias aceleradas (que el escenario exige) y tolera cold starts.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Muchos modelos, escalado por modelo, tiempo real y sin cold start sobre instancias aceleradas: inference components con min copies >= 1. Serverless no admite aceleradores.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html\">docs.aws inferencia en tiempo real</a></div>"
+  },
+  {
+    "key": "mla03-q33",
+    "question": "SageMaker Training API - se quiere que cada instancia de entrenamiento reciba <b>solo un subconjunto</b> (una particion) de los datos de S3, no la copia completa. &iquest;Que configuracion lo logra?",
+    "options": {
+      "A": "Fijar el campo <code>S3DataDistributionType</code> en <code>ShardedByS3Key</code>",
+      "B": "Fijar el campo <code>S3DataDistributionType</code> en <code>FullyReplicated</code>",
+      "C": "Fijar el campo <code>S3DataType</code> en <code>ShardedByS3Key</code>",
+      "D": "Fijar el campo <code>S3Uri</code> en <code>FullyReplicated</code>"
+    },
+    "correct_index": 0,
+    "correct_text": "Fijar el campo <code>S3DataDistributionType</code> en <code>ShardedByS3Key</code>",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - <code>S3DataDistributionType = ShardedByS3Key</code>.</div><p><b>El problema:</b> repartir (shardear) los datos entre las instancias para que cada una entrene con una parte distinta, no con el dataset completo.</p><p><b>Por que la respuesta sirve:</b> <code>S3DataDistributionType</code> define como se distribuyen los datos entre instancias. Con <code>ShardedByS3Key</code> cada instancia recibe una particion distinta segun la clave de S3, cumpliendo el requisito del subconjunto.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b><code>S3DataDistributionType</code> = FullyReplicated:</b> replica el dataset entero en cada instancia; es lo opuesto a repartir un subconjunto.</li><li><b><code>S3DataType</code> = ShardedByS3Key:</b> campo equivocado; ShardedByS3Key pertenece a <code>S3DataDistributionType</code>, no a <code>S3DataType</code>.</li><li><b><code>S3Uri</code> = FullyReplicated:</b> <code>S3Uri</code> indica la ubicacion de los datos, no el modo de distribucion; el valor no corresponde a ese campo.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Repartir datos entre instancias = <code>S3DataDistributionType: ShardedByS3Key</code>. Copia completa en cada una = <code>FullyReplicated</code>. Cuida no confundir el campo con <code>S3DataType</code> o <code>S3Uri</code>.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_S3DataSource.html\">docs.aws S3DataSource</a></div>"
+  },
+  {
+    "key": "mla03-q34",
+    "question": "Evaluacion - se comparan dos modelos de <b>traduccion automatica</b> (SageMaker seq2seq) que traducen articulos de noticias a varios idiomas. &iquest;Que metrica conviene usar para comparar su calidad?",
+    "options": {
+      "A": "BLEU (bilingual evaluation understudy) score",
+      "B": "F1 score",
+      "C": "Recall",
+      "D": "RMSE (root mean square error)"
+    },
+    "correct_index": 0,
+    "correct_text": "BLEU (bilingual evaluation understudy) score",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - BLEU score.</div><p><b>El problema:</b> medir la calidad de una traduccion automatica, comparando la salida del modelo con traducciones de referencia.</p><p><b>Por que la respuesta sirve:</b> <b>BLEU</b> es la metrica estandar para evaluar traduccion automatica: compara la salida del modelo con una o mas referencias humanas y puntua la coincidencia. Es la adecuada para comparar los dos modelos de traduccion.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>F1 score:</b> equilibra precision y recall en clasificacion (tipicamente binaria); no evalua la calidad de una traduccion.</li><li><b>Recall:</b> mide la proporcion de positivos reales detectados en clasificacion; no aplica a traduccion.</li><li><b>RMSE:</b> sirve para modelos de regresion (error sobre valores continuos); no se usa para comparar traducciones.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Traduccion automatica: BLEU. Clasificacion: F1/precision/recall. Regresion: RMSE/MAE. Empareja siempre la metrica con el tipo de tarea.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/seq-2-seq.html\">docs.aws seq2seq y BLEU</a></div>"
+  },
+  {
+    "key": "mla03-q35",
+    "question": "Costos - jobs de entrenamiento en SageMaker sobre una instancia compute optimized, con demanda <b>constante durante 55 semanas</b> (35 horas por semana). Hay que <b>reducir el costo de entrenamiento</b>. &iquest;Que solucion conviene?",
+    "options": {
+      "A": "Un SageMaker AI Savings Plan a 1 a&ntilde;o con pago All Upfront",
+      "B": "Un SageMaker Training Plan que reserve la instancia compute optimized",
+      "C": "La funcion de heterogeneous cluster de SageMaker Training para los jobs",
+      "D": "Un endpoint serverless con provisioned concurrency de 35 horas por semana"
+    },
+    "correct_index": 0,
+    "correct_text": "Un SageMaker AI Savings Plan a 1 a&ntilde;o con pago All Upfront",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - SageMaker AI Savings Plan a 1 a&ntilde;o, All Upfront.</div><p><b>El problema:</b> patron de uso predecible y sostenido (35 h/semana por 55 semanas); el objetivo es abaratar el entrenamiento.</p><p><b>Por que la respuesta sirve:</b> los <b>SageMaker AI Savings Plans</b> dan descuento a cambio de un compromiso de uso constante por 1 o 3 a&ntilde;os. Con un uso predecible como el descrito, un plan a 1 a&ntilde;o con <b>All Upfront</b> maximiza el descuento sobre el costo de entrenamiento.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>SageMaker Training Plan:</b> reserva capacidad de GPU, pero no soporta instancias compute optimized (tipo C) como la del escenario.</li><li><b>Heterogeneous cluster:</b> combina varios tipos de instancia para optimizar recursos, pero no aporta ahorro para una carga predecible y sostenida.</li><li><b>Endpoint serverless con provisioned concurrency:</b> serverless inference es para servir modelos (deployment), no para correr training jobs.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Uso predecible y sostenido a largo plazo: Savings Plan (1 o 3 a&ntilde;os). Training Plan reserva GPU; serverless es para inferencia, no entrenamiento.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/savings-plans.html\">docs.aws SageMaker Savings Plans</a></div>"
+  },
+  {
+    "key": "mla03-q43",
+    "question": "GenAI - se quiere hacer <b>consultas en lenguaje natural sobre miles de documentos legales</b> y generar respuestas. &iquest;Que solucion recupera los fragmentos relevantes y los pasa a un modelo para la respuesta generativa?",
+    "options": {
+      "A": "Usar la Retrieve API de Amazon Kendra para obtener los fragmentos relevantes y pasarlos a un modelo de lenguaje para la respuesta",
+      "B": "Usar la API de Amazon Bedrock para personalizar un modelo fundacional y consultar los documentos para devolver fragmentos relevantes",
+      "C": "Usar Amazon Comprehend (reconocimiento de entidades) para identificar los fragmentos y pasarlos a un modelo de lenguaje",
+      "D": "Usar la consola de Amazon Lex para crear un bot que consulte los documentos y devuelva fragmentos y respuestas generativas"
+    },
+    "correct_index": 0,
+    "correct_text": "Usar la Retrieve API de Amazon Kendra para obtener los fragmentos relevantes y pasarlos a un modelo de lenguaje para la respuesta",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - Amazon Kendra Retrieve API + modelo de lenguaje.</div><p><b>El problema:</b> patron RAG (retrieval augmented generation): primero recuperar los pasajes relevantes de un corpus grande, luego generar la respuesta con un LLM.</p><p><b>Por que la respuesta sirve:</b> <b>Amazon Kendra</b> hace busqueda inteligente con comprension semantica. Su <b>Retrieve API</b> devuelve los fragmentos de texto mas relevantes de los documentos, que luego se pasan a un modelo de lenguaje para producir la respuesta. Cubre recuperacion + generacion.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Amazon Bedrock API sola:</b> Bedrock da los modelos, pero no puede consultar los documentos sin un almacen indexado y buscable (por ejemplo, un indice de Kendra); requiere servicios adicionales.</li><li><b>Amazon Comprehend (entidades):</b> el reconocimiento de entidades identifica entidades concretas, no devuelve los fragmentos relevantes para responder una consulta.</li><li><b>Amazon Lex:</b> construye interfaces conversacionales; no es una solucion de busqueda documental inteligente y aun necesitaria integraciones adicionales (Kendra, Lambda).</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>RAG sobre documentos: recuperar con Kendra (Retrieve API) y generar con un LLM (Bedrock). Bedrock por si solo no busca en tu corpus.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_Retrieve.html\">docs.aws Kendra Retrieve API</a></div>"
+  },
+  {
+    "key": "mla03-q45",
+    "question": "Entrenamiento - miles de training jobs cortos con la <b>misma configuracion</b>; cada uno debe <b>arrancar en cuanto termina el anterior</b>, y algunos dias <b>no se ejecuta ninguno</b>. Se busca la opcion MAS rentable. &iquest;Cual conviene?",
+    "options": {
+      "A": "Crear training jobs de SageMaker AI y fijar <code>keep_alive_period_in_seconds</code> en cada job",
+      "B": "Crear un job de AWS Batch con EC2 Spot Instances y encolar los jobs con scheduling FIFO",
+      "C": "Crear un cluster de SageMaker HyperPod y encolar los jobs con Slurm",
+      "D": "Crear un cluster de Amazon EKS con AWS Fargate y encolar los jobs con Apache Airflow"
+    },
+    "correct_index": 0,
+    "correct_text": "Crear training jobs de SageMaker AI y fijar <code>keep_alive_period_in_seconds</code> en cada job",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - training jobs con <code>keep_alive_period_in_seconds</code>.</div><p><b>El problema:</b> muchos jobs cortos y secuenciales que deben arrancar de inmediato uno tras otro, con dias de cero actividad; hay que minimizar costo.</p><p><b>Por que la respuesta sirve:</b> <code>keep_alive_period_in_seconds</code> activa los <b>managed warm pools</b> de SageMaker: mantiene el cluster caliente entre jobs para que cada uno arranque enseguida. Es serverless y solo se paga por el tiempo activo del job o el warm pool en espera, ideal para cargas intermitentes; en dias sin jobs no hay costo persistente.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>AWS Batch con Spot:</b> las Spot pueden interrumpirse, causando retrasos entre jobs; no garantiza el arranque inmediato tras el anterior.</li><li><b>SageMaker HyperPod con Slurm:</b> pensado para entornos persistentes de larga duracion; sigue costando aunque este ocioso, poco rentable con dias sin jobs.</li><li><b>EKS con Fargate y Airflow:</b> el cluster sigue corriendo y generando costo incluso los dias sin training jobs; no es lo mas rentable.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Jobs cortos y secuenciales con arranque inmediato y dias ociosos: warm pools via <code>keep_alive_period_in_seconds</code>. Clusters persistentes (HyperPod, EKS) cuestan aun ociosos.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/train-warm-pools.html\">docs.aws managed warm pools</a></div>"
+  },
+  {
+    "key": "mla03-q51",
+    "question": "Text-to-speech - hay que generar un podcast de audio a partir de guiones escritos, introduciendo una <b>pausa unica despues de cada parrafo</b>. &iquest;Que solucion cumple?",
+    "options": {
+      "A": "Usar Amazon Polly para convertir texto a voz y definir las pausas con SSML (Speech Synthesis Markup Language)",
+      "B": "Usar Amazon Polly para convertir texto a voz y definir las pausas con lexicons",
+      "C": "Usar Amazon Comprehend para convertir texto a voz y definir las pausas con SSML",
+      "D": "Usar Amazon Transcribe para convertir texto a voz y definir las pausas con intents"
+    },
+    "correct_index": 0,
+    "correct_text": "Usar Amazon Polly para convertir texto a voz y definir las pausas con SSML (Speech Synthesis Markup Language)",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - Amazon Polly con SSML.</div><p><b>El problema:</b> convertir guiones a voz y controlar con precision una pausa tras cada parrafo.</p><p><b>Por que la respuesta sirve:</b> <b>Amazon Polly</b> convierte texto a voz, y <b>SSML</b> da control preciso sobre la salida, incluyendo etiquetas de pausa (por ejemplo <code>break</code>) para insertar una pausa unica despues de cada parrafo.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Polly con lexicons:</b> los lexicons personalizan la pronunciacion de palabras, no controlan el ritmo ni insertan pausas.</li><li><b>Amazon Comprehend con SSML:</b> Comprehend es NLP para analizar texto; no convierte texto a voz ni soporta SSML.</li><li><b>Amazon Transcribe con intents:</b> Transcribe hace speech-to-text (audio a texto), lo contrario de lo pedido; los intents pertenecen a Lex.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Texto a voz con control de pausas y prosodia: Polly + SSML. Lexicons solo cambian pronunciacion; Transcribe es audio a texto.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html\">docs.aws Polly SSML tags</a></div>"
+  },
+  {
+    "key": "mla03-q52",
+    "question": "PII - hay cientos de curriculums en PDF en S3 cada dia. Se necesita una solucion automatizada y escalable que <b>detecte y extraiga informacion personal identificable (PII)</b> de esos PDF y guarde el resultado de vuelta en S3. &iquest;Que solucion cumple?",
+    "options": {
+      "A": "Crear un analysis job de Amazon Comprehend y lanzar un trabajo asincrono para detectar las entidades PII",
+      "B": "Llamar a las operaciones asincronas de la API de Amazon Textract para detectar las entidades PII",
+      "C": "Crear un batch translation job de Amazon Transcribe y lanzar un trabajo asincrono para detectar las entidades PII",
+      "D": "Crear un batch inference job de Amazon Personalize y lanzar un trabajo asincrono para detectar las entidades PII"
+    },
+    "correct_index": 0,
+    "correct_text": "Crear un analysis job de Amazon Comprehend y lanzar un trabajo asincrono para detectar las entidades PII",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - Amazon Comprehend analysis job asincrono.</div><p><b>El problema:</b> detectar y extraer PII de muchos PDF de forma automatizada y escalable, y devolver el resultado a S3.</p><p><b>Por que la respuesta sirve:</b> <b>Amazon Comprehend</b> es un servicio de NLP que detecta (y puede redactar) PII en archivos PDF. Un <b>analysis job</b> procesa multiples documentos de forma asincrona y guarda los resultados de vuelta en el bucket S3.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Amazon Textract:</b> extrae texto de documentos, pero no detecta entidades PII por si mismo.</li><li><b>Amazon Transcribe:</b> es reconocimiento de voz (audio a texto); no procesa PDF ni detecta PII en texto.</li><li><b>Amazon Personalize:</b> genera recomendaciones de items; no tiene capacidad de detectar PII.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Detectar/redactar PII en texto o PDF: Amazon Comprehend (deteccion de PII, jobs asincronos). Textract solo extrae texto; Transcribe es audio; Personalize es recomendaciones.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/comprehend/latest/dg/how-pii.html\">docs.aws Comprehend deteccion de PII</a></div>"
+  },
+  {
+    "key": "mla03-q54",
+    "question": "Model Registry - hay que organizar modelos existentes (en model groups) en tres categorias (vision, NLP, reconocimiento de voz) para mejorar su descubribilidad a escala, <b>sin afectar la integridad de los artefactos ni los agrupamientos existentes</b>. &iquest;Que solucion cumple?",
+    "options": {
+      "A": "Crear una collection del SageMaker Model Registry por categoria y mover los model groups existentes a las collections",
+      "B": "Crear un model group por categoria y mover los modelos existentes a esos nuevos grupos",
+      "C": "Crear un tag personalizado por categoria y agregarlo a los model packages del Model Registry",
+      "D": "Usar SageMaker ML Lineage Tracking para identificar y etiquetar automaticamente a que grupo pertenece cada modelo"
+    },
+    "correct_index": 0,
+    "correct_text": "Crear una collection del SageMaker Model Registry por categoria y mover los model groups existentes a las collections",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - collections del Model Registry.</div><p><b>El problema:</b> categorizar modelos para descubrirlos mejor a escala, sin romper los agrupamientos existentes ni tocar los artefactos.</p><p><b>Por que la respuesta sirve:</b> las <b>collections</b> del SageMaker Model Registry estan dise&ntilde;adas para organizar model groups en categorias logicas <b>sin alterar su estructura existente</b>. Preservan las relaciones actuales y mejoran la descubribilidad a escala.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Crear nuevos model groups y mover modelos:</b> alteraria la organizacion actual y la integridad de los agrupamientos existentes.</li><li><b>Tags personalizados en model packages:</b> los model packages del Model Registry no soportan tags para esto; no es la via adecuada.</li><li><b>ML Lineage Tracking:</b> rastrea relaciones y dependencias entre artefactos; no sirve para categorizar modelos ni crear jerarquias de descubribilidad.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Agrupar model groups en categorias sin tocar su estructura: collections del Model Registry. Lineage Tracking es para linaje, no para organizar por categorias.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-collections.html\">docs.aws Model Registry collections</a></div>"
+  },
+  {
+    "key": "mla03-q55",
+    "question": "Privacidad - la empresa no quiere que SageMaker AI <b>recolecte metadata sobre el uso de las librerias provistas por AWS</b> durante los training jobs. &iquest;Que debe hacer en la API CreateTrainingJob?",
+    "options": {
+      "A": "Fijar la variable de entorno <code>OPT_OUT_TRACKING</code> en <code>1</code>",
+      "B": "Fijar la variable de entorno <code>OPT_OUT_TRACKING</code> en <code>0</code>",
+      "C": "Deshabilitar el uso de VPC en SageMaker AI mediante la opcion <code>VpcConfig</code>",
+      "D": "Configurar como privada la subnet usada por SageMaker AI mediante la opcion <code>VpcConfig</code>"
+    },
+    "correct_index": 0,
+    "correct_text": "Fijar la variable de entorno <code>OPT_OUT_TRACKING</code> en <code>1</code>",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - <code>OPT_OUT_TRACKING = 1</code>.</div><p><b>El problema:</b> impedir que SageMaker recolecte metadata sobre el uso de las librerias provistas por AWS en los training jobs.</p><p><b>Por que la respuesta sirve:</b> fijar la variable de entorno <code>OPT_OUT_TRACKING = 1</code> en CreateTrainingJob hace explicitamente el opt-out de la recoleccion de metadata sobre esas librerias. Es la palanca directa para el requisito.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b><code>OPT_OUT_TRACKING = 0</code>:</b> permite explicitamente la recoleccion; es lo contrario de lo pedido (para opt-out debe ser 1).</li><li><b>Deshabilitar VPC con <code>VpcConfig</code>:</b> cambia la configuracion de red, pero no afecta la recoleccion de metadata de las librerias.</li><li><b>Subnet privada con <code>VpcConfig</code>:</b> aisla la red por seguridad, pero no impide la recoleccion de metadata.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Opt-out de tracking de librerias AWS en SageMaker: <code>OPT_OUT_TRACKING = 1</code>. La configuracion de VPC es de red, no de recoleccion de metadata.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/data-protection.html\">docs.aws privacidad de datos en SageMaker</a></div>"
+  },
+  {
+    "key": "mla03-q64",
+    "question": "Inferencia - despliegue en produccion en un endpoint de SageMaker. El payload promedio varia entre <b>100 MB y 300 MB</b>, las peticiones deben procesarse en <b>60 minutos o menos</b> y el endpoint debe <b>ser persistente</b>. &iquest;Que opcion de inferencia cumple?",
+    "options": {
+      "A": "Asynchronous inference",
+      "B": "Real-time inference",
+      "C": "Batch transform",
+      "D": "Serverless inference"
+    },
+    "correct_index": 0,
+    "correct_text": "Asynchronous inference",
+    "answer_html": "<div class=\"verdict\">Correcta: {{L}} - Asynchronous inference.</div><p><b>El problema:</b> payloads grandes (100 a 300 MB), procesos que pueden durar hasta 60 minutos y necesidad de un endpoint persistente.</p><p><b>Por que la respuesta sirve:</b> <b>Asynchronous inference</b> admite payloads de hasta 1 GB (cubre 100 a 300 MB) y procesos largos de hasta 1 hora (cubre los 60 minutos), sobre un endpoint persistente. Es ideal cuando no se necesita respuesta inmediata y los payloads son grandes.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Real-time inference:</b> timeout de 60 segundos y payload maximo de 6 MB; no cubre 100 a 300 MB ni procesos largos.</li><li><b>Batch transform:</b> sirve para grandes datasets sin endpoint persistente; incumple el requisito de endpoint persistente.</li><li><b>Serverless inference:</b> timeout de 60 segundos y payload maximo de 4 MB; muy por debajo del tama&ntilde;o requerido.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Payload grande (hasta 1 GB) y proceso largo (hasta 1 h) con endpoint persistente: Asynchronous inference. Real-time y serverless topan en pocos MB y 60 s.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/async-inference.html\">docs.aws Asynchronous Inference</a></div>"
+  }
+]

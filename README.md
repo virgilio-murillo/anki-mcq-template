@@ -20,12 +20,17 @@ anki-mcq-template/
 │   ├── sync_deck.py        # update a deck in place via AnkiConnect (keeps review progress)
 │   └── import_to_anki.py   # import a .apkg via AnkiConnect; CLI: mcq-import
 ├── decks/                 # one folder per exam
-│   └── dva-c02/           # AWS Developer Associate (DVA-C02)
-│       ├── dva_c02_04.py  # generator scripts (one per subdeck)
-│       ├── dva_c02_05.py
-│       ├── dva_c02_06.py
+│   ├── dva-c02/           # AWS Developer Associate (DVA-C02)
+│   └── mla-c01/           # AWS ML Engineer Associate (MLA-C01)
+│       ├── mla_c01_01.py  # generator scripts (one per subdeck)
+│       ├── mla_c01_02.py
+│       ├── mla_c01_03.py  # extra deck: new-only questions from practice exam 2
 │       ├── out/           # generated .apkg files (git-ignored, regenerate anytime)
-│       └── notes/         # review results, explanations, source material
+│       ├── notes/source/  # source material (practice exams)
+│       ├── study/         # visual study cards (HTML) — see study/README.md
+│       ├── qa/            # quality-assurance trail — see qa/README.md
+│       └── dedupe/        # ADD A NEW PRACTICE EXAM without repeating concepts
+│                          #   (see dedupe/README.md)
 ├── examples/
 │   └── example_deck.py    # minimal 3-card example (passes the quality gate)
 ├── docs/
@@ -41,6 +46,30 @@ anki-mcq-template/
 Create a new folder under `decks/` (e.g. `decks/saa-c03/`), add an `out/`
 subfolder, and write your generator scripts there. Because the engine is an
 installed package, `from anki_mcq import card, create` works from any folder.
+
+### Adding a NEW practice exam without repeating concepts you already study
+
+When you already have decks and get a **new practice exam**, you usually don't
+want to re-study concepts you've already covered. There is a reproducible process
+to build an **extra deck with only the genuinely new concepts**, deduplicated
+against everything already in Anki (across all your existing decks).
+
+The process (parse the new exam → dump what you already have in Anki → an LLM
+judge decides, **by concept, not by text**, which questions are new → generate a
+deck with only those → run the QA gates → import) lives in and is documented at:
+
+> **`decks/mla-c01/dedupe/`** — see [`dedupe/README.md`](decks/mla-c01/dedupe/README.md)
+
+It was first used to turn `practice_exam_2.txt` (65 questions) into the extra deck
+`MLA-C01::03` with only the **17 new concepts** (40 were dropped as already
+covered). The same steps generalize to any future practice exam. Quick start:
+
+```bash
+cd decks/mla-c01
+../../.venv/bin/python dedupe/add_practice_exam.py \
+      --exam ../../practice_exam_N.txt --deck "MLA-C01::0X" --keyprefix mla0X
+# then follow dedupe/README.md for the LLM dedup + generation + QA steps
+```
 
 ## Why this template
 

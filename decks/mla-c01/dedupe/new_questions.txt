@@ -1,0 +1,114 @@
+Q2: An ML engineer receives datasets that contain missing values, duplicates, and extreme outliers. The ML engineer must consolidate these datasets into a single data frame and must prepare the data for ML. Which solution will meet these requir || RESP: Use Amazon SageMaker Data Wrangler to import the datasets and to consolidate them into a single data frame. Use the cleansing and enrichment functionalities to 
+
+Q3: An ML engineer is using the Amazon SageMaker AI XGBoost algorithm to develop a diagnostic tool. The tool uses multiple indicators to predict whether a patient has a specific disease. The dataset includes data from a large number of patients || RESP: Increase the value of the scale\_pos\_weight hyperparameter.
+
+Q4: An industrial company is exploring the use of generative AI to retrieve information from maintenance notes. The company currently uses a text-to-text foundation model (FM) on Amazon Bedrock. The company wants to optimize the model. The comp || RESP: Customize the model by using fine-tuning.
+
+Q5: A company needs a model that predicts the price of a house before the house is listed for sale. Which algorithm should the company use to meet this requirement? || RESP: XGBoost for regression
+
+Q6: A company wants to improve the performance of its ML model that is deployed in production. The company evaluates the performance of the model by getting feedback from customers. When the company deploys a new version of the model, only a sm || RESP: Use Amazon SageMaker AI endpoints. Create two production model variants. Assign a smaller weight to the new model than to the existing model. Increase the new m
+
+Q7: A company has an Amazon S3 bucket that contains 1 TB of files from different sources. The S3 bucket contains the following file types in the same S3 folder: CSV, JSON, XLSX, and Apache Parquet. An ML engineer must implement a solution that  || RESP: Separate the data into a different folder for each file type. Use DataBrew to process each folder individually. Store the output in Apache Parquet format.
+
+Q8: An ecommerce company designed an ML recommendation system to suggest similar products to customers that visit a product page. The system was deployed by using an Amazon SageMaker AI endpoint. After the system deployment, traffic has increas || RESP: Use a target tracking scaling policy based on a custom metric and a target value to scale instance count.
+
+Q9: A company wants to migrate an ML application to the AWS Cloud. The application predicts employee turnover. The company wants to continue using its current code implementation that is based on Apache Spark. Which solution will meet these req || RESP: Run the code in an AWS Glue interactive session.
+
+Q10: A company is using Amazon SageMaker AI to develop ML models. All of the company's resources are in the us-east-1 AWS Region. The company stores sensitive training data in an Amazon S3 bucket. The model training must have network isolation f || RESP: Run the SageMaker AI training jobs in private subnets. Create an S3 interface endpoint. Use the VPC endpoint to access the training data.
+
+Q11: A company has a medical image diagnostics application that analyzes images that are up to 1 MB in size. Hospitals use REST API calls to AWS to transmit images to CPU-based inference models that are hosted on Amazon SageMaker AI. The models  || RESP: Set up SageMaker Serverless Inference. Scale the underlying infrastructure based on workload requests.
+
+Q12: A company needs to host a custom ML model to perform forecast analysis. The forecast analysis will occur with predictable and sustained load during the same 2-hour period every day. Multiple invocations during the analysis period will requi || RESP: Use Amazon SageMaker Serverless Inference with provisioned concurrency.
+
+Q13: A company has an ML model that uses historical transaction data to predict customer behavior. An ML engineer is optimizing the model in Amazon SageMaker AI to enhance the model's predictive accuracy. The ML engineer must examine the input d || RESP: Use SageMaker Clarify to evaluate the model and training data for underlying patterns that might affect accuracy.
+
+Q14: A company has a trained ML model. The company needs an inference option that is always available. The inference option also must provide low, consistent latency for predictable traffic patterns. Which type of inference will meet these requi || RESP: Real-time inference
+
+Q16: An ML engineer is building a classification model. During data exploration, the ML engineer notices that one of the columns is right-skewed. Which transformation technique should the ML engineer use to mitigate this issue? || RESP: Logarithm transformation
+
+Q17: A company has deployed an image classification ML model. The company improves the existing model's accuracy. An ML engineer needs to validate the model upgrade in a production environment. The ML engineer must not change the existing produc || RESP: Deploy the upgraded model as a shadow variant. Join the production model and the shadow variant behind a unique endpoint.
+
+Q18: A company needs to use an Amazon SageMaker AI built-in algorithm for supervised training to predict whether a customer will buy a product. Which algorithm should the company use to meet this requirement? || RESP: K-nearest neighbors (k-NN)
+
+Q19: An ML engineer notices class imbalance in an image classification training job. What should the ML engineer do to resolve this issue? || RESP: Apply random oversampling on the dataset.
+
+Q20: A company wants to deploy a new ML model to Amazon SageMaker AI. The company developed the model by using the JAX framework. The JAX framework must be immediately available in a SageMaker AI notebook to all notebook users. Which solution wi || RESP: Create a custom Docker container that includes the JAX framework and associated libraries. Push the container image to Amazon Elastic Container Registry (Amazon
+
+Q22: A company needs to run a batch data-processing job on Amazon EC2 instances. The job will run during the weekend and will take 90 minutes to finish running. The processing can handle interruptions. The company will run the job every weekend  || RESP: Spot Instances
+
+Q23: A company is planning to create several ML prediction models. The training data is stored in Amazon S3. The entire dataset is more than 5 TB in size and consists of CSV, JSON, Apache Parquet, and simple text files. The data must be processe || RESP: Use Amazon SageMaker Pipelines to create a pipeline of data processing steps. Automate the pipeline by using Amazon EventBridge.
+
+Q24: A restaurant company is building an ML model by using Amazon SageMaker AI to predict daily sales. The sales system generates data in CSV format. The company has 6,000 restaurants and generates many files each day. The company performs queri || RESP: Store the data in Amazon S3 in CSV format. Use AWS Glue to extract, transform, and load (ETL) the data in Apache Parquet format.
+
+Q25: A company is working on an ML project that will include Amazon SageMaker AI notebook instances. An ML engineer must ensure that the SageMaker AI notebook instances do not allow root access. Which solution will prevent the deployment of note || RESP: Use IAM condition keys to stop deployments of SageMaker AI notebook instances that allow root access.
+
+Q27: A company has deployed an ML model by using an Amazon SageMaker AI endpoint. The company needs to deploy the latest version of the model in several steps over several days. The company will start by exposing 10% of users to the new model. E || RESP: Use a blue/green deployment with linear traffic shifting.
+
+Q28: A binary classification model's performance has decreased significantly during the past few days. An ML engineer needs to adjust the hyperparameters of the model. The underlying model type must remain the same. Which Amazon SageMaker AI fun || RESP: SageMaker AI automatic model tuning
+
+Q30: A company has trained an ML model in Amazon SageMaker AI. The company needs to host the model to provide inferences in a production environment. The model must be highly available and must respond with minimum latency. The size of each requ || RESP: Create a SageMaker AI real-time inference endpoint. Configure auto scaling. Configure the endpoint to present the existing model.
+
+Q31: A company runs Amazon SageMaker AI ML models that use accelerated instances. The models require real-time responses. Each model has different scaling requirements. The company must not allow a cold start for the models. Which solution will  || RESP: Create a SageMaker AI endpoint. Create an inference component for each model. In the inference component settings, specify the newly created endpoint. Create an
+
+Q32: A company deployed an ML model in Amazon SageMaker AI over 6 months ago. The model provides product recommendations. The model contributed to increased sales in the first quarter. In the most recent quarter, the number of customers purchasi || RESP: Re-train the model periodically with new and original data when a significant change in customer data is detected.
+
+Q33: A company created an ML training job by using the Amazon SageMaker AI API. The company stores training data on Amazon S3. The company wants to replicate a subset of the data onto each ML compute instance that is launched for model training. || RESP: Set the S3DataDistributionType field to ShardedByS3Key.
+
+Q34: A data scientist is building a translation model by using Amazon SageMaker AI seq2seq. The model will translate news articles into multiple languages. The data scientist has a dataset with historical news articles written in multiple langua || RESP: Bilingual evaluation understudy (BLEU) score
+
+Q35: A company runs training jobs on Amazon SageMaker AI by using a compute optimized instance. Demand for training runs will remain constant for the next 55 weeks. The instance needs to run for 35 hours each week. The company needs to reduce it || RESP: Opt in to a SageMaker AI Savings Plan with a 1-year term and an All Upfront payment. Run a SageMaker Training job on the instance.
+
+Q37: A company is deploying a computer vision model in retail stores. The model is for live self-checkout fraud detection and is deployed on an Amazon SageMaker AI real-time inference endpoint. After updates to the model, the company must valida || RESP: Use a canary deployment. In the CanarySize field, specify CAPACITY\_PERCENT with a value of 10.
+
+Q38: A company wants to improve its fraud detection capabilities. The company must implement a highly available streaming solution on AWS to ingest credit card data in real time to detect fraudulent transactions. Which solution will meet these r || RESP: Use Amazon Kinesis Data Streams to ingest the data. Use Amazon Managed Service for Apache Flink to analyze data. Use Amazon SageMaker AI to detect fraudulent tr
+
+Q39: A company has an ML model that needs to run one time each night to predict stock values. The model input is 3 MB of data that is collected during the current day. The model produces the predictions for the next day. The prediction process t || RESP: Use a serverless inference endpoint. Set the MaxConcurrency parameter to 1.
+
+Q40: An ML engineer needs to encrypt all data in transit when an ML training job runs. The ML engineer must ensure that encryption in transit is applied to processes that Amazon SageMaker AI uses during the training job. Which solution will meet || RESP: Encrypt communication between nodes in a training cluster.
+
+Q41: An ML engineer is using Amazon SageMaker AI to build and compare binary classification models for a company. The company needs a model that returns results with the fewest possible false positives. Which algorithm and primary model metric s || RESP: Use LightGBM as the algorithm. Use precision as the metric.
+
+Q42: A company builds and deploys ML models by using Amazon SageMaker AI. The models are used across multiple departments. The company allocates a monthly budget that each department can spend on AWS services. The company wants to ensure that ea || RESP: Create a budget in AWS Budgets with a fixed method. Specify a filter based on user-defined cost allocation tags that are associated with each department. Config
+
+Q43: A data scientist wants to use generative AI to run natural language queries on thousands of legal documents and generate responses. Which solution will meet these requirements? || RESP: Use the Amazon Kendra Retrieve API to search an Amazon Kendra index to return relevant text chunks. Pass relevant text chunks to a language model for generative
+
+Q44: A company deployed into production an ML model to use for image classification. The company developed a new version of the model with improved precision. The company wants to deploy the new model into production. The company must test the n || RESP: Shadow testing
+
+Q45: An ML engineer needs to create a training environment for thousands of training jobs. Each training job runs for a short duration of time and uses the same configuration, such as instance type. Each job needs to start running as soon as the || RESP: Create Amazon SageMaker AI training jobs. Set the keep\_alive\_period\_in\_seconds value for each job.
+
+Q46: A bank has used Amazon SageMaker AI to develop a credit risk scoring model to evaluate loan applications. The model is deployed on a SageMaker AI real-time endpoint with the data capture feature enabled. The bank needs real-time explanation || RESP: Update the SageMaker AI endpoint with an endpoint configuration that includes the SageMaker Clarify ExplainerConfig option. Extract the model predictions and Sh
+
+Q47: An ML engineer trained an ML model by using a tabular dataset. The dataset contains 1,000 data points with 5,000 features. The ML engineer needs to reduce overfitting to improve the model's performance. Which solution will reduce overfittin || RESP: Reduce the number of features by applying principal component analysis (PCA).
+
+Q48: A company's data scientists are using Amazon SageMaker Studio to train and implement new ML models. The company needs to allocate costs for each user. The company decides to create a report in AWS Cost Explorer that details daily costs with || RESP: Activate the following cost allocation tag: sagemaker: . Wait 24–48 hours for tags to show up in the cost allocation tag panel.
+
+Q49: An ML engineer has deployed a sentiment analysis ML model on an Amazon SageMaker AI endpoint that is supported by Amazon EC2 instances. The model will go into production in 1 week. The ML engineer must implement a solution to accommodate la || RESP: Configure a target tracking scaling policy based on a metric in Amazon CloudWatch.
+
+Q50: A glass manufacturing company uses a computer vision model to detect broken glass on its continuous production lines. The company uses Amazon SageMaker AI to train the model with more than 50 GB of images that are stored in Amazon S3. The c || RESP: Use pipe mode as the input mode for the training job configuration.
+
+Q51: An ML engineer needs to develop an audio podcast from written scripts. The ML engineer must introduce a unique break after each paragraph of the script. Which solution will meet these requirements? || RESP: Use Amazon Polly to convert the text to speech. Define the breaks by using Speech Synthesis Markup Language (SSML).
+
+Q52: A company receives hundreds of resumes every day. The company stores the resumes in an Amazon S3 bucket. The company needs to deploy an automated and scalable solution to detect and extract personally identifiable information (PII) from PDF || RESP: Create an Amazon Comprehend analysis job. Start an asynchronous job to detect the PII entities.
+
+Q54: A company that has hundreds of data scientists is using Amazon SageMaker AI to create ML models. The models are in model groups in the SageMaker Model Registry. The data scientists are grouped into three categories: computer vision, natural || RESP: Create a SageMaker Model Registry collection for each of the three categories. Move the existing model groups into the collections.
+
+Q55: A company uses AWS provided libraries during Amazon SageMaker AI training jobs. The SageMaker AI domain is configured to use public subnets. The company does not want SageMaker AI to collect metadata about the use of the AWS provided librar || RESP: Set the OPT\_OUT\_TRACKING environment variable to 1 in the SageMaker AI CreateTrainingJob API.
+
+Q56: A company is using Amazon SageMaker AI to develop an ML model. The model uses tabular data and image data. An ML engineer needs to implement a solution to prepare and visualize the data for the model. Which solution will meet these requirem || RESP: Use SageMaker Data Wrangler to prepare and visualize the data.
+
+Q57: A company wants to develop an ML model by using tabular data from its customers. The data contains meaningful ordered features with sensitive information that should not be discarded. An ML engineer must ensure that the sensitive data is ma || RESP: Prepare the data by using AWS Glue DataBrew.
+
+Q59: A company needs to ingest data from an Amazon Redshift cluster and a Snowflake data source into Amazon SageMaker Data Wrangler. The company also must transform the data to prepare the data for ML model training. Which solution will meet the || RESP: Connect to the Redshift cluster and the Snowflake data source by using separate data connections in SageMaker Data Wrangler. Import the data by using SQL querie
+
+Q60: A company uses Amazon SageMaker AI for its ML process. A compliance audit discovers that an Amazon S3 bucket for training data uses server-side encryption with S3 managed keys (SSE-S3). The company requires customer managed keys. An ML engi || RESP: Update the IAM policy that is attached to the execution role for the training jobs. Include the kms:Encrypt and kms:Decrypt permissions.
+
+Q61: A company needs to use retrieval augmented generation (RAG) to supplement an open source large language model (LLM) that runs on Amazon Bedrock. The company's data for RAG is a set of documents in an Amazon S3 bucket. The documents consist  || RESP: Create an Amazon Bedrock knowledge base. Configure a data source that references the S3 bucket. Use the Amazon Bedrock API to perform RAG queries.
+
+Q62: A company needs to develop an ML model. The model must identify an item in an image and must provide the location of the item. Which Amazon SageMaker AI algorithm will meet these requirements? || RESP: Object detection
+
+Q63: A company wants a cost-effective way to train an ML model from AWS Marketplace algorithms by using Amazon SageMaker AI. The model is trained once each month and takes several hours. Training time is not a concern for the company. What is th || RESP: Use SageMaker AI managed spot training.
+
+Q64: A company plans to deploy an ML model for production inference on an Amazon SageMaker AI endpoint. The average inference payload size will vary from 100 MB to 300 MB. Inference requests must be processed in 60 minutes or less, and the endpo || RESP: Asynchronous inference
+
+Q65: A company is using an AWS Lambda function to monitor the metrics from an ML model. An ML engineer needs to implement a solution to send an email message when the metrics breach a threshold. Which solution will meet this requirement? || RESP: Log the metrics from the Lambda function to Amazon CloudWatch. Configure a CloudWatch alarm to send the email message.
+
