@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Report</title>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #fff; }
+h1 { color: #232f3e; font-size: 22pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color: #0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 2em; }
+h3 { color: #232f3e; font-size: 13pt; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt; }
+th { background-color: #232f3e; color: white; padding: 8px; text-align: left; }
+td { border: 1px solid #ddd; padding: 6px 8px; }
+tr:nth-child(even) { background-color: #f8f8f8; }
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 10pt; color: #c7254e; }
+pre { background: #1e1e2e; padding: 16px; border-radius: 8px; font-size: 9.5pt; white-space: pre-wrap; word-break: break-word; overflow-x: auto; }
+pre code { background: none; color: #cdd6f4; padding: 0; font-size: inherit; }
+blockquote { border-left: 4px solid #0073bb; margin: 12px 0; padding: 8px 16px; background: #f0f7fc; }
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+.mermaid { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0; text-align: center; }
+.code-wrapper { position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: #3498db; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: 8pt; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { background: #27ae60; }
+</style>
+</head>
+<body>
+<h1 id="aws-cdk-bootstrap-synth-context-e-import">AWS CDK: bootstrap,
+synth, context e import</h1>
+<h2 id="la-pregunta">La pregunta</h2>
+<p>¿Qué hace cada comando del CDK CLI? Cada uno tiene una función
+distinta y es fácil confundirlos.</p>
+<p><strong>Respuesta correcta (B):</strong></p>
+<ul>
+<li><strong>bootstrap</strong>: provisiona los recursos base del
+entorno.</li>
+<li><strong>synth</strong>: genera la plantilla CloudFormation.</li>
+<li><strong>context</strong>: cachea datos del entorno (AZs, VPCs).</li>
+<li><strong>import</strong>: trae recursos existentes al stack.</li>
+</ul>
+<hr />
+<h2 id="los-4-comandos-de-un-vistazo">Los 4 comandos de un vistazo</h2>
+<div class="mermaid">
+flowchart LR
+    B(bootstrap<br/>prepara la cuenta+region) 
+    S(synth<br/>codigo -> plantilla CFN)
+    C(context<br/>cachea AZs, VPCs)
+    I(import<br/>adopta recursos existentes)
+    style B fill:#89b4fa,color:#1e1e2e
+    style S fill:#a6e3a1,color:#1e1e2e
+    style C fill:#f9e2af,color:#1e1e2e
+    style I fill:#cba6f7,color:#1e1e2e
+</div>
+<hr />
+<h2 id="cdk-bootstrap-preparar-el-entorno"><code>cdk bootstrap</code> —
+preparar el entorno</h2>
+<p>Se corre <strong>una sola vez por cuenta + región</strong>. Crea la
+infraestructura que CDK necesita para desplegar:</p>
+<div class="mermaid">
+flowchart TB
+    BOOT(cdk bootstrap) --> S3(Bucket S3<br/>para assets: Lambda, Docker)
+    BOOT --> IAM(Roles IAM<br/>de despliegue)
+    BOOT --> ECR(Repositorio ECR<br/>para imagenes de contenedor)
+    style BOOT fill:#89b4fa,color:#1e1e2e
+</div>
+<p>Sin bootstrap, un <code>deploy</code> que use assets falla porque no
+hay dónde subirlos.</p>
+<hr />
+<h2 id="cdk-synth-compilar-a-cloudformation"><code>cdk synth</code> —
+compilar a CloudFormation</h2>
+<p>Traduce tu código CDK (TypeScript, Python, Java…) a una
+<strong>plantilla CloudFormation</strong>:</p>
+<div class="mermaid">
+flowchart LR
+    CODE(Codigo CDK<br/>TypeScript / Python) -->|cdk synth| TPL(Plantilla CloudFormation<br/>JSON / YAML)
+    style CODE fill:#a6e3a1,color:#1e1e2e
+    style TPL fill:#f9e2af,color:#1e1e2e
+</div>
+<p>Es como un “compilador”: de código de alto nivel a la plantilla que
+CloudFormation sabe ejecutar. No despliega nada, solo genera el
+template.</p>
+<hr />
+<h2 id="cdk-context-cachear-datos-del-entorno"><code>cdk context</code>
+— cachear datos del entorno</h2>
+<p>Cuando CDK necesita datos reales de tu cuenta (qué AZs hay, qué VPCs
+existen), los consulta y los <strong>guarda en
+<code>cdk.context.json</code></strong> para reutilizarlos:</p>
+<div class="mermaid">
+flowchart LR
+    Q(CDK pregunta:<br/>que AZs / VPCs hay) -->|consulta una vez| AWS(Cuenta AWS)
+    AWS -->|guarda respuesta| CACHE(cdk.context.json)
+    CACHE -->|reutiliza en synth| REP(Builds reproducibles)
+    style CACHE fill:#f9e2af,color:#1e1e2e
+    style REP fill:#a6e3a1,color:#1e1e2e
+</div>
+<p>Beneficio: las builds son <strong>reproducibles</strong>. El
+resultado no cambia entre corridas aunque el entorno cambie.
+<code>cdk context</code> te deja ver y limpiar ese caché.</p>
+<hr />
+<h2 id="cdk-import-adoptar-recursos-existentes"><code>cdk import</code>
+— adoptar recursos existentes</h2>
+<p>Incorpora a un stack recursos que <strong>ya existen</strong>
+(creados a mano o por otra herramienta), usando los <em>resource
+imports</em> de CloudFormation:</p>
+<div class="mermaid">
+flowchart LR
+    EX(Recurso existente<br/>creado fuera de CDK) -->|cdk import| STK(Stack CDK<br/>ahora lo gestiona)
+    style EX fill:#f38ba8,color:#1e1e2e
+    style STK fill:#cba6f7,color:#1e1e2e
+</div>
+<p>CDK empieza a gestionar el recurso <strong>sin recrearlo ni
+borrarlo</strong>. Útil para migrar infra existente a CDK.</p>
+<hr />
+<h2 id="tabla-comparativa">Tabla comparativa</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Comando</th>
+<th>Qué hace</th>
+<th>Cuándo se usa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>bootstrap</strong></td>
+<td>Provisiona bucket S3, roles IAM y ECR en la cuenta+región</td>
+<td>Una vez por entorno</td>
+</tr>
+<tr>
+<td><strong>synth</strong></td>
+<td>Compila el código CDK a plantilla CloudFormation</td>
+<td>Cada vez que cambias el código</td>
+</tr>
+<tr>
+<td><strong>context</strong></td>
+<td>Cachea AZs, VPCs y otros datos del entorno</td>
+<td>Automático al sintetizar; lo gestionas para reproducibilidad</td>
+</tr>
+<tr>
+<td><strong>import</strong></td>
+<td>Adopta recursos ya existentes en un stack</td>
+<td>Al migrar infra existente a CDK</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="por-qué-fallan-las-otras-opciones">Por qué fallan las otras
+opciones</h2>
+<p>Todas <strong>intercambian las definiciones</strong>:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Error</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>Dice que bootstrap importa recursos y synth cachea; falso</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Dice que synth importa y context genera el template; falso</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Dice que synth provisiona el entorno e import cachea datos;
+falso</td>
+</tr>
+</tbody>
+</table>
+<p>Solo <strong>B</strong> asigna las cuatro funciones
+correctamente.</p>
+<hr />
+<h2 id="el-flujo-típico-de-trabajo">El flujo típico de trabajo</h2>
+<div class="mermaid">
+flowchart LR
+    A(cdk bootstrap<br/>una vez por entorno) --> B(escribir codigo CDK)
+    B --> C(cdk synth<br/>genera plantilla)
+    C --> D(cdk deploy<br/>crea/actualiza stack)
+    style A fill:#89b4fa,color:#1e1e2e
+    style C fill:#a6e3a1,color:#1e1e2e
+    style D fill:#cba6f7,color:#1e1e2e
+</div>
+<hr />
+<h2 id="resumen-de-examen-dva-c02">Resumen de examen (DVA-C02)</h2>
+<ul>
+<li><strong>bootstrap</strong> = prepara la cuenta+región (S3 assets,
+IAM, ECR). Una vez por entorno.</li>
+<li><strong>synth</strong> = código → plantilla CloudFormation. No
+despliega.</li>
+<li><strong>context</strong> = caché de datos del entorno (AZs, VPCs) en
+<code>cdk.context.json</code> → builds reproducibles.</li>
+<li><strong>import</strong> = adopta recursos existentes en un stack sin
+recrearlos.</li>
+<li>Flujo: <strong>bootstrap → escribir código → synth →
+deploy</strong>.</li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({ startOnLoad: true, theme: 'default' });
+// Add copy buttons to ALL pre blocks
+document.querySelectorAll('pre').forEach(pre => {
+  if (pre.closest('.mermaid')) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'code-wrapper';
+  pre.parentNode.insertBefore(wrapper, pre);
+  wrapper.appendChild(pre);
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy';
+  btn.onclick = function() {
+    const code = pre.querySelector('code') || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  };
+  wrapper.appendChild(btn);
+});
+</script>
+</body>
+</html>

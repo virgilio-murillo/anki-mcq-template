@@ -1,0 +1,162 @@
+
+=== DVA-C02::01 ===
+- Al integrar una Lambda con una VPC, ¿quién crea las ENIs (interfaces de red) que la conectan a la red privada?
+- App legada con miles de usuarios y sesiones en memoria; el servidor on-prem llega a 100% CPU en picos. Tras migrar a AWS, ¿cómo re-factorizar la gestión de sesión para rendimiento y alta disponibilidad?
+- En Amazon Cognito, ¿cuál componente entrega credenciales AWS temporales y permite acceso de invitado (unauthenticated)?
+- En un worker environment de Elastic Beanstalk necesitas encolar mensajes según un horario (tareas periódicas a intervalos regulares). ¿Qué archivo de configuración agregas al source bundle?
+- Para redactar PII antes de que la consuma un servicio interno , ¿por qué S3 Object Lambda es mejor que Lambda@Edge?
+- Solo clientes autorizados deben poder invalidar una entrada de caché de API Gateway. ¿Qué combinación lo logra? (elige la opción que junta las DOS piezas correctas)
+- Tienes NAT gateway y ruta correcta, pero la Lambda en VPC sigue sin salir a internet. ¿Qué revisas en el security group ?
+- Un cliente de API Gateway quiere saltarse la caché y obtener la respuesta más reciente del backend. ¿Qué header debe enviar?
+- Un servicio interno necesita redactar PII de archivos en S3 antes de procesarlos, sin almacenar copias redactadas, de la forma más costo-eficiente . ¿Qué solución eliges?
+- Una Lambda corre en DEV, UAT y PROD usando parámetros que varían por entorno y que están hardcoded. ¿Cómo referenciar los parámetros correctos sin modificar el código cada vez?
+- Una Lambda se conectó a una VPC (para una base privada) y perdió el acceso a internet. ¿Qué par de acciones lo arregla?
+- Una app de trading de alto rendimiento necesita una base que escale globalmente, maneje cambios frecuentes de esquema , persistencia rápida de sesión y alto throughput con esquema flexible. ¿Cuál eliges?
+- Usuarios deben autenticarse con IdPs sociales (Facebook, Google, etc.), luego subir archivos a S3 con credenciales AWS temporales, y además permitir acceso de invitados (guest). ¿Qué haces?
+- ¿Cuál archivo se usa con AWS CodeDeploy para definir el despliegue como hooks de eventos del ciclo de vida (no con Elastic Beanstalk)?
+- ¿Cuál de estos elementos de Lambda / API Gateway sirve para pasar valores de configuración que cambian por entorno a una función?
+- ¿Cuándo necesitarías un custom identity broker con STS en lugar de Amazon Cognito?
+- ¿Por qué NO conviene usar AWS Glue o copiar archivos redactados a otro bucket para redactar PII on-demand ?
+- ¿Por qué Redis es preferible a Memcached para un almacén de sesiones ?
+- ¿Por qué Sticky Sessions con caché local no es una buena solución de alta disponibilidad para sesiones?
+- ¿Por qué una base NoSQL como DynamoDB se adapta mejor que una relacional cuando el esquema cambia con frecuencia ?
+
+=== DVA-C02::02 ===
+- El Viewer Protocol Policy de un cache behavior de CloudFront tiene tres valores. ¿Cuál permite HTTP y HTTPS a la vez (sin forzar HTTPS)?
+- En CloudFront, HTTPS tiene DOS tramos: viewer&harr;CloudFront y CloudFront&harr;origen. ¿Cuál afirmación es correcta sobre los certificados?
+- Para HTTPS entre CloudFront y un origen personalizado (ej. un ALB), ¿qué tipo de certificado NO se acepta?
+- Un sitio detrás de un ALB usa CloudFront con su nombre de dominio por defecto (ej. d111.cloudfront.net ). Tiene mal ranking por no usar HTTPS. ¿Qué DOS acciones habilitan HTTPS entre los viewers y CloudFront ?
+- Una Lambda invocada por API Gateway recibe 10 peticiones por segundo y cada una tarda hasta 50 segundos . ¿Qué debe hacer el desarrollador para evitar el throttling ?
+- Una Lambda recibe 20 invocaciones por segundo y cada una dura en promedio 4 segundos . ¿Cuántas ejecuciones concurrentes usará aproximadamente?
+- ¿Cuál es el límite por defecto de ejecuciones concurrentes de Lambda por región (a travoés de todas las funciones) y cómo se sube?
+
+=== DVA-C02::03 ===
+- 5 apps en EC2; quieres una representación gráfica de métricas por app, aisladas entre sí, en un solo panel de CloudWatch. ¿Qué configuras?
+- App Java muy intensiva en escritura sobre DynamoDB sobrescribe datos obsoletos. ¿Cómo proteger las escrituras sin afectar el rendimiento ?
+- App de analítica en tiempo real (en EKS) debe capturar SOLO los datos nuevos de items modificados en DynamoDB multi-región. ¿Cómo la configuras?
+- App de subastas en tiempo real con Kinesis Data Streams: cada puja se procesa una sola vez y en orden . ¿Qué solución cumple?
+- Cambiaste el IAM Role de una EC2 para que solo acceda al bucket de desarrollo, pero la instancia sigue escribiendo en ambos buckets. ¿Causa más probable?
+- Con AWS Organizations, quieres probar el impacto de SCPs sobre tus políticas IAM y de recursos ANTES de aplicarlas. ¿Qué servicio usas?
+- Con AWS SAM + CodeDeploy, en cada despliegue debe desplazarse 10% del tráfico cada 10 minutos hasta migrar todo. ¿Qué configuración de despliegue usas?
+- Dos Lambdas idénticas en una cuenta nueva; la segunda sufre Throttles mientras la primera va bien. ¿Qué DOS acciones lo arreglan? (cuenta con límite por defecto 1000)
+- EC2 con KCL procesa un stream de Kinesis: la CPU está al máximo y faltan shards para el ritmo de datos. ¿Mejor acción para resolverlo y prevenirlo?
+- En ECS quieres una task placement strategy eficiente en costo que use el menor número de instancias (la alta disponibilidad no importa aquí). ¿Cuál usas?
+- En Elastic Beanstalk debes subir el runtime de Java 7 a Java 8 , mandar TODO el tráfico a la nueva versión de inmediato y poder revertir rápido si falla. ¿Qué haces?
+- Necesitas invocar una Lambda de forma asíncrona . ¿Qué API e InvocationType usas?
+- Para una tabla DynamoDB de perfiles de empleados, ¿cuál es el MEJOR atributo como partition key ?
+- Sobre el resharding de Kinesis Data Streams, ¿qué DOS afirmaciones son correctas?
+- Tabla DynamoDB con 10 RCU provisionadas e items de 4 KB . ¿Cuántas lecturas por segundo soporta?
+- Un consumidor de Kinesis procesa datos cada dos días y guarda en S3, pero S3 solo recibe la mitad; los sensores envían bien en tiempo real. ¿Causa más probable?
+- Un entorno de Elastic Beanstalk tiene un RDS acoplado (si terminas el entorno, cae la BD). ¿Cómo desacoplar la BD del entorno sin pérdida de datos ?
+- Una app lee items uno por uno de DynamoDB y escribe a otra tabla, repitiendo 100+ veces (lento). ¿Cómo acelerarla con mínima configuración ?
+- aws s3api list-objects hace timeout por el volumen. Para paginar y controlar cuántos resultados vuelven, ¿qué DOS parámetros usas?
+- ¿Cómo se despliega correctamente una nueva versión a Elastic Beanstalk vía CLI?
+
+=== DVA-C02::04 ===
+- Ante logins lentos en CloudFront, ¿por qué aumentar el Cache-Control max-age NO resuelve el problema?
+- App con CloudFront cuyo origen a veces no responde y devuelve HTTP 504 al servir contenido (peticiones GET). ¿Qué acción costo-eficiente resuelve esos 504?
+- App de subastas: cada nueva puja debe ser mayor que la puja actual . ¿Cómo se implementa esto de forma más efectiva en las llamadas a DynamoDB?
+- En DynamoDB, ¿qué representa 1 RCU (Read Capacity Unit) para un item de hasta 4 KB?
+- En la misma app CloudFront, la queja principal es que el login es lento para usuarios globales. ¿Qué opción costo-eficiente acerca la autenticación a los usuarios?
+- En un upload a bucket SSE-KMS, ¿por qué NO se necesita el permiso kms:Encrypt ?
+- Items de 3.5 KB ; se necesitan 150 lecturas eventualmente consistentes por segundo . Un compañero calculó 150 RCU (deberían ser 75). ¿Qué error de cálculo cometió?
+- Necesitas consultar una sola partición (por su partition key) con otro sort key , admitiendo lecturas eventuales y fuertes . ¿Qué usas?
+- Para aumentar la capacidad de datos de un Kinesis Data Stream (y con ello la concurrencia de la Lambda que lo consume), ¿qué haces con los shards?
+- Para la regla "nueva puja > puja actual", ¿por qué optimistic locking NO es la solución adecuada?
+- Sobre el momento de creación de los índices en DynamoDB, ¿qué es correcto?
+- Subir un archivo grande (100+ GB) con aws s3 cp a un bucket con SSE-KMS da Access Denied , pero archivos pequeños sí suben. ¿Qué hace el CLI con archivos grandes que causa esto?
+- Tabla DynamoDB, items de 3.5 KB , se esperan 150 lecturas eventualmente consistentes por segundo . ¿Cuántas RCU hay que aprovisionar?
+- Un desarrollador tiene un certificado SSL/TLS de una CA de terceros (autoridad certificadora externa) listo para importar a AWS. ¿En qué servicio puede importarlo de forma segura (además del IAM certificate store)?
+- Un multipart upload a un bucket con SSE-KMS da Access Denied. ¿Qué permisos de KMS necesita el usuario para que funcione?
+- Una Lambda procesa un stream de Kinesis Data Streams con 100 shards activos (10 s por invocación, 50 items/seg). ¿Qué es cierto sobre la concurrencia?
+- put-bucket-replication falla en un bucket S3 (pero funciona en otros) al configurar Cross-Region Replication (CRR) . ¿Causa más probable?
+- ¿Cuál es la diferencia clave entre LSI y GSI respecto a alcance de consulta y consistencia?
+- ¿Cuáles son los requisitos para habilitar Cross-Region Replication (CRR) en S3?
+- ¿Cuándo se usa el IAM certificate store en vez de ACM para un certificado SSL/TLS?
+- ¿En qué se diferencia la concurrencia de Lambda entre fuentes poll-based (Kinesis/DynamoDB Streams) y push-based (API Gateway/S3)?
+- ¿Qué característica de S3 debe activarse antes de poder configurar cualquier tipo de replicación (CRR o SRR)?
+
+=== DVA-C02::05 ===
+- Creas un GSI en una tabla DynamoDB en modo provisioned con muchas escrituras. Para evitar throttling, ¿cómo debes fijar la capacidad del índice?
+- Debes redactar PII de registros en S3 de forma distinta por rol , cada usuario ve solo lo suyo, y manteniendo una sola copia de los datos. ¿Qué combinación usas? (marca la pieza del Object Lambda )
+- Debes trazar en X-Ray todas las peticiones de tu app, incluyendo las llamadas a recursos AWS aguas abajo . ¿Qué acción implementas?
+- En AWS X-Ray, ¿cuál es la diferencia entre un segment y un subsegment ?
+- En RDS for SQL Server necesitas cifrar los datos antes de escribirlos a disco y descifrarlos al leerlos , a nivel de la base de datos. ¿Qué habilitas?
+- En caching, ¿por qué se añade un TTL a los items en una estrategia write-through?
+- En un pipeline de CodePipeline necesitas que alguien apruebe (revisión de código) antes de pasar a la siguiente etapa: si aprueba, el pipeline sigue; si rechaza, se detiene. ¿Qué solución es la más adecuada?
+- En una acción de aprobación manual de CodePipeline, ¿qué pasa si nadie aprueba ni rechaza dentro del plazo límite?
+- Necesitas un solo comando que comprima el código, lo suba a S3, genere la plantilla empaquetada y la despliegue . ¿Cuál usas?
+- Necesitas ver cómo los procesos individuales de una instancia RDS usan la CPU (porcentaje de CPU y memoria consumida por cada proceso ). ¿Qué usas?
+- Quieres que la caché nunca sirva datos obsoletos (que siempre refleje la última escritura), y que las entradas poco leídas expiren solas de la caché con un TTL. ¿Cuál pseudocódigo implementa write-through con TTL?
+- Si un GSI en modo provisioned tiene WCU insuficiente , ¿qué se ve afectado?
+- Una app de juego debe sincronizar preferencias y estado entre dispositivos, y además permitir que varios usuarios colaboren sobre datos compartidos en tiempo real . ¿Qué servicio usas?
+- ¿Cuál es la diferencia clave entre AWS AppSync y Amazon Cognito Sync para sincronizar datos?
+- ¿En qué se diferencian las métricas de CPU de CloudWatch y de Enhanced Monitoring en RDS?
+- ¿Qué hace exactamente S3 Object Lambda y por qué evita duplicar los datos?
+
+=== DVA-C02::06 ===
+- Al subir a S3, ¿qué valor del header x-amz-server-side-encryption corresponde a cada tipo de cifrado del lado servidor?
+- En DynamoDB, ¿cuál es la diferencia entre un projection expression y un filter expression ?
+- En el mismo caso (320 lecturas/seg, items de 17 KB), ¿por qué 800 RCU es incorrecto si el requisito es lectura fuertemente consistente ?
+- En una regla CORS de S3, ¿qué hace exactamente el elemento ExposeHeader (ej. ExposeHeader=ETag )?
+- Entre ElastiCache for Redis y ElastiCache for Memcached , ¿cuál soporta replicación y alta disponibilidad Multi-AZ?
+- Fargate detrás de un ALB, con CloudFront delante. Un aluvión de logins no autenticados dispara la CPU de Fargate. Para validar el JWT y quitar carga de la forma más eficiente, ¿qué haces?
+- Los IAM roles de unas Lambdas gestionadas por CloudFormation fueron modificados a mano . Necesitas identificar esos cambios no autorizados y ver qué recursos ya no coinciden con el stack. ¿Qué haces?
+- Para saber quién (qué llamada API) modificó un IAM role, versus saber si un recurso ya no coincide con la plantilla de CloudFormation, ¿qué servicio corresponde a cada caso?
+- Quieres que el endpoint de una API creado en un stack de CloudFormation pueda referenciarse desde otros stacks (misma cuenta y región). ¿Qué haces?
+- Quieres una capa de caché frente a un RDS MySQL que soporte replicación Multi-AZ con respuesta sub-milisegundo, con el menor esfuerzo . ¿Qué eliges?
+- Tienes 4 tareas ECS con Fargate y cada una necesita acceder a recursos AWS distintos . ¿Cuál es la forma más eficiente de darles acceso?
+- Tus consultas a DynamoDB devuelven todos los atributos por defecto, pero solo quieres traer ciertos atributos (ej. course_id y price). ¿Qué usas?
+- Un job debe subir archivos a un bucket con SSE-KMS usando la KMS key por defecto . Con la MENOR configuración , ¿qué header incluyes en la petición de subida?
+- Una Lambda hace 320 lecturas fuertemente consistentes/seg a una tabla con RCU provisionado = 5440 ; items de 17 KB promedio. Para bajar costo manteniendo el rendimiento, ¿a cuánto ajustas el RCU?
+- Una app Node.js corre en un servidor Linux on-premises (fuera de AWS) y usa el AWS SDK para acceder a S3, DynamoDB y ElastiCache. ¿Cuál es la forma más adecuada de darle acceso?
+- Una config CORS de un bucket S3 tiene AllowedOrigin=https://tutorialsdojo.com , AllowedMethod = GET, PUT, POST, DELETE, AllowedHeader=* , MaxAgeSeconds=3600 . ¿Qué DOS afirmaciones son ciertas? (marca la de los metodos )
+- ¿En qué se diferencian CloudFront Functions y Lambda@Edge , y cuándo conviene cada uno?
+- ¿Qué hace (y qué NO hace) una configuración CORS en un bucket S3?
+
+=== DVA-C02::07 ===
+- Al usar un Global Secondary Index (GSI) en DynamoDB, ¿de dónde se consumen las unidades de capacidad de las queries/scans sobre ese índice?
+- Con S3 Object Lambda, ¿qué API usa el cliente para obtener el dato ya transformado (redactado) a través del Object Lambda Access Point?
+- Debes cifrar datos en reposo en S3 con una clave de cifrado provista y gestionada por tu empresa (no por AWS), con AES-256. ¿Qué dos opciones cumplen? (elige el par correcto)
+- Debes integrar un directorio LDAP on-premises con AWS IAM, pero el identity store no es compatible con SAML 2.0 . ¿Cuál es la solución más adecuada?
+- Debes servir a cada rol una versión redactada distinta de los mismos registros PII en S3, manteniendo una sola copia de los datos, aplicando una Lambda RedactPII-[role] por rol. ¿Qué combinación de recursos S3 usas?
+- Distingue el rol de AWS WAF , Amazon GuardDuty y AWS Firewall Manager . ¿Cuál describe correctamente a cada uno?
+- En API Gateway con backend Lambda, necesitas especificar cómo se mapean los datos de la petición entrante a la integración y la respuesta de la integración al método. ¿Qué tipo de integración usas?
+- En API Gateway con backend Lambda, ¿qué diferencia hay entre Lambda proxy y Lambda custom (non-proxy) integration?
+- En CloudFront, ¿cuándo usas signed URL y cuándo signed cookies para restringir contenido?
+- En DynamoDB, con lecturas fuertemente consistentes : ¿cuántas lecturas por segundo cubre 1 RCU y de qué tamaño de item?
+- En DynamoDB, ¿cuál es el valor por defecto del parámetro ReturnConsumedCapacity y qué hace?
+- En DynamoDB, ¿cuánto cubre 1 WCU y cómo calculas las WCU para 10 escrituras/seg de items de 2 KB ?
+- En DynamoDB, ¿cómo cambia el costo de capacidad para operaciones transaccionales (TransactGetItems / TransactWriteItems) frente a lecturas fuertes / escrituras normales?
+- En ECS quieres colocar tareas en instancias con recursos suficientes, respetando las constraints (implícitas o explícitas), con la menor configuración posible. ¿Qué task placement strategy usas?
+- En ECS, ¿para qué sirve cada task placement strategy: binpack , spread y random ?
+- En Elastic Beanstalk corres el X-Ray daemon en las instancias para subir trazas a X-Ray, usando el instance profile por defecto. ¿Qué managed policy de IAM necesita el daemon para subir datos ?
+- En X-Ray quieres que la llamada downstream a RDS (incluida la query SQL ) quede registrada como una unidad de trabajo propia y además buscable con filter expressions . ¿Dónde la registras y con qué tipo de dato?
+- En X-Ray, ¿cuál es la diferencia entre annotations y metadata ?
+- En X-Ray, ¿cuál es la diferencia entre las APIs GetTraceSummaries y BatchGetTraces ?
+- En el cifrado de S3, ¿quién gestiona la clave en cada opción: SSE-S3, SSE-KMS, SSE-C y client-side encryption?
+- En un custom identity broker, ¿qué llamadas de STS se usan para obtener credenciales temporales de AWS y qué devuelven?
+- En una operación de escritura de DynamoDB (UpdateItem/PutItem/DeleteItem) quieres el total de write capacity units consumidos, con subtotales para la tabla y cada índice secundario afectado. ¿Qué valor pones en el paráme
+- En una plantilla CloudFormation con AWS::Lambda::Function , quieres escribir el código Python inline (unas pocas líneas) dentro de la plantilla. ¿Qué parámetro usas?
+- Necesitas consultar con la misma partition key pero una sort key alterna y con strong consistency . La tabla ya existe con datos. ¿Qué haces?
+- Necesitas un framework simple y nativo de AWS para definir Lambda + API Gateway + DynamoDB en un solo stack, compartir config (memoria, timeouts) y desplegar todo como una única entidad versionada . ¿Qué usas?
+- Otros sitios están hotlinkeando tus fotos alojadas en S3 (las enlazan desde sus páginas), subiendo tus costos de transferencia. Quieres controlar el acceso de forma escalable . ¿Qué solución es la más efectiva?
+- Para 20 lecturas eventualmente consistentes/seg de items de 2 KB en DynamoDB, ¿cuántos RCU necesitas?
+- Para X-Ray, ¿qué managed policy usas para (a) solo ver el service map en la consola y (b) configurar encryption y sampling rules?
+- Para frenar el hotlinking de tus imágenes en CloudFront, ¿por qué una Network ACL por IP y CORS abierto a todos son malas soluciones?
+- Para servir contenido estático global con baja latencia, ¿por qué EC2 , EFS y Glacier NO son buenos como almacenamiento/origen frente a S3?
+- Quieres filtrar trazas de X-Ray por annotations con la mínima configuración , y obtener los trace IDs y annotations programáticamente. ¿Qué dos acciones eliges? (elige el par correcto)
+- Respecto a la partition key : ¿en qué se diferencian un GSI y un LSI de DynamoDB?
+- Sirves un sitio estático (imágenes, videos, HTML, JS) con la menor latencia posible para usuarios globales . ¿Qué combinación de servicios usas?
+- Sobre los índices secundarios de DynamoDB: ¿cuál se puede añadir o borrar en cualquier momento y cuál solo se crea junto con la tabla ?
+- Tu portal (detrás de ALB/CloudFront/API Gateway) recibe muchos intentos de SQL injection y cross-site scripting (XSS) . ¿Qué servicio mitiga estos ataques a nivel de capa 7?
+- Un item de 17 KB : ¿cuántos bloques cuenta para RCU (bloque 4 KB) y cuántos para WCU (bloque 1 KB)?
+- Una Lambda hace 320 lecturas fuertemente consistentes/seg de items de 17 KB . ¿Cuántos RCU necesitas (valor óptimo para bajar costo sin perder rendimiento)?
+- Varios usuarios actualizan el mismo item de DynamoDB concurrentemente y unos sobrescriben los cambios de otros. Quieres que una escritura solo tenga éxito si el item no cambió desde que lo leíste. ¿Qué estrategia usas?
+- Ya tienes una plantilla SAM y el código Lambda en local. ¿Cuál es el flujo correcto de despliegue de una app SAM?
+- ¿A qué recurso pertenece cada propiedad: Code (con ZipFile/S3Bucket) y CodeUri ?
+- ¿En qué se diferencia S3 Object Lambda de una S3 Event Notification que invoca una Lambda, respecto a cuándo actua?
+- ¿Por qué el optimistic locking por número de versión no funciona como esperas con DynamoDB global tables ?
+- ¿Qué consistencia de lectura soporta un Global Secondary Index (GSI) de DynamoDB?
+- ¿Qué hace cada comando de la SAM CLI: sam build , sam package , sam deploy y sam publish ?
+- ¿Qué relación tiene AWS SAM con CloudFormation al desplegar?

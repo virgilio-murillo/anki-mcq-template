@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Report</title>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #fff; }
+h1 { color: #232f3e; font-size: 22pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color: #0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 2em; }
+h3 { color: #232f3e; font-size: 13pt; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt; }
+th { background-color: #232f3e; color: white; padding: 8px; text-align: left; }
+td { border: 1px solid #ddd; padding: 6px 8px; }
+tr:nth-child(even) { background-color: #f8f8f8; }
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 10pt; color: #c7254e; }
+pre { background: #1e1e2e; padding: 16px; border-radius: 8px; font-size: 9.5pt; white-space: pre-wrap; word-break: break-word; overflow-x: auto; }
+pre code { background: none; color: #cdd6f4; padding: 0; font-size: inherit; }
+blockquote { border-left: 4px solid #0073bb; margin: 12px 0; padding: 8px 16px; background: #f0f7fc; }
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+.mermaid { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0; text-align: center; }
+.code-wrapper { position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: #3498db; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: 8pt; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { background: #27ae60; }
+</style>
+</head>
+<body>
+<h1 id="codebuild-caching-local-vs-s3-para-dependencias-maven">CodeBuild
+caching: local vs S3 para dependencias Maven</h1>
+<h2 id="el-escenario">El escenario</h2>
+<ul>
+<li>App Java compilada con <strong>Maven</strong> en
+<strong>CodeBuild</strong>.</li>
+<li>Cada build tarda <strong>15 min</strong> y descarga <strong>2 GB de
+dependencias</strong> desde repos remotos.</li>
+<li>Se ejecutan <strong>builds múltiples veces al día</strong> sobre el
+<strong>mismo proyecto</strong>.</li>
+</ul>
+<p>¿Qué estrategia de caching optimiza mejor los tiempos?</p>
+<p><strong>Respuesta correcta (A): Local caching</strong> con
+<code>type: LOCAL</code> y modos
+<code>[LOCAL_SOURCE_CACHE, LOCAL_CUSTOM_CACHE]</code>, cacheando
+<code>/root/.m2/**/*</code>.</p>
+<hr />
+<h2 id="el-problema-que-resolvemos">El problema que resolvemos</h2>
+<p>Sin cache, cada build vuelve a descargar los mismos 2 GB de
+dependencias desde internet. Eso es tiempo y ancho de banda
+desperdiciados en cada ejecución.</p>
+<div class="mermaid">
+flowchart LR
+    B1(Build 1) -->|descarga 2GB| R(Repos remotos<br/>Maven Central)
+    B2(Build 2) -->|descarga 2GB otra vez| R
+    B3(Build 3) -->|descarga 2GB otra vez| R
+    style R fill:#f38ba8,color:#1e1e2e
+</div>
+<p>El cache guarda esas dependencias (<code>/root/.m2</code>) para
+reutilizarlas entre builds.</p>
+<hr />
+<h2 id="las-dos-formas-de-cachear-en-codebuild">Las dos formas de
+cachear en CodeBuild</h2>
+<div class="mermaid">
+flowchart TB
+    subgraph LOCAL[Local caching - type LOCAL]
+        L1(Cache en el HOST de build<br/>volumen EBS local)
+        L2(Sin transferencia de red)
+        L3(Rapidisimo si se reusa el mismo host)
+    end
+    subgraph S3[S3 caching - type S3]
+        S1(Cache en un bucket S3)
+        S2(Sube y baja el cache por red<br/>en cada build)
+        S3a(Persiste entre hosts y regiones)
+    end
+    style LOCAL fill:#a6e3a1,color:#1e1e2e
+    style S3 fill:#f9e2af,color:#1e1e2e
+</div>
+<h3 id="la-decisión-clave">La decisión clave</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Pregunta</th>
+<th>Si SÍ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>¿Mismo proyecto, alta frecuencia, misma región?</td>
+<td><strong>LOCAL</strong></td>
+</tr>
+<tr>
+<td>¿Builds ocasionales o cross-region?</td>
+<td><strong>S3</strong></td>
+</tr>
+<tr>
+<td>¿Cache grande (GB) reusado seguido?</td>
+<td><strong>LOCAL</strong> (evita transferir GB por red)</td>
+</tr>
+</tbody>
+</table>
+<p>En este caso: <strong>2 GB + builds múltiples diarios + mismo
+proyecto</strong> → <strong>LOCAL</strong> gana claramente. Transferir 2
+GB desde/hacia S3 en cada build añadiría minutos de latencia; el acceso
+local en el EBS del host es casi instantáneo.</p>
+<hr />
+<h2 id="los-tres-modos-de-local-caching">Los tres modos de LOCAL
+caching</h2>
+<div class="mermaid">
+flowchart LR
+    A(LOCAL_SOURCE_CACHE<br/>cachea el codigo fuente Git) 
+    B(LOCAL_CUSTOM_CACHE<br/>cachea directorios que TU eliges<br/>ej. /root/.m2) 
+    C(LOCAL_DOCKER_LAYER_CACHE<br/>cachea capas de imagenes Docker)
+    style B fill:#a6e3a1,color:#1e1e2e
+    style A fill:#89b4fa,color:#1e1e2e
+    style C fill:#cba6f7,color:#1e1e2e
+</div>
+<p>Para dependencias Maven usas
+<strong><code>LOCAL_CUSTOM_CACHE</code></strong> con <code>paths</code>
+apuntando a <code>/root/.m2</code>. Se combina bien con
+<code>LOCAL_SOURCE_CACHE</code> para no re-clonar todo el repo Git cada
+vez.</p>
+<hr />
+<h2 id="la-configuración-correcta-buildspec.yml">La configuración
+correcta (buildspec.yml)</h2>
+<pre class="yaml"><code>version: 0.2
+phases:
+  build:
+    commands:
+      - mvn package
+cache:
+  type: LOCAL
+  modes:
+    - LOCAL_SOURCE_CACHE
+    - LOCAL_CUSTOM_CACHE
+  paths:
+    - &#39;/root/.m2/**/*&#39;</code></pre>
+<p>Detalles importantes:</p>
+<ul>
+<li><code>paths</code> va <strong>dentro de la sección
+<code>cache</code></strong>, NO en <code>artifacts</code> (artifacts es
+para los <em>outputs</em> del build, no para el cache).</li>
+<li><code>/root/.m2/**/*</code> es donde Maven guarda las dependencias
+descargadas.</li>
+</ul>
+<hr />
+<h2 id="por-qué-fallan-las-otras-opciones-etiquetas-corregidas">Por qué
+fallan las otras opciones (etiquetas corregidas)</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Qué propone</th>
+<th>Por qué NO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B</strong></td>
+<td>Docker layer caching (<code>LOCAL_DOCKER_LAYER_CACHE</code>) con
+<code>paths</code> en <code>artifacts</code></td>
+<td>Ese modo cachea <strong>capas de imágenes Docker</strong>, no
+directorios del filesystem como <code>/root/.m2</code>. Además
+<code>paths</code> debe ir en <code>cache</code>, no en
+<code>artifacts</code>. No cachearía las dependencias Maven</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>S3 caching (<code>type: S3</code>) para <code>/root/.m2</code></td>
+<td>Funciona, pero transferir 2 GB desde/hacia S3 <strong>en cada
+build</strong> añade minutos de latencia. S3 es mejor para builds
+ocasionales o cross-region, no para builds frecuentes del mismo
+proyecto</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>S3 + CloudFront delante del bucket</td>
+<td>CloudFront <strong>no se integra</strong> con el mecanismo de cache
+de CodeBuild; CodeBuild accede directo al bucket S3. No hay forma de
+interponer CloudFront. Y seguiría siendo más lento que local</td>
+</tr>
+</tbody>
+</table>
+<div class="mermaid">
+flowchart TB
+    B(B: Docker layer cache) -->|cachea capas Docker,<br/>no /root/.m2| BX(NO cachea deps Maven)
+    C(C: S3 caching) -->|transfiere 2GB por red<br/>en cada build| CX(latencia de minutos)
+    D(D: S3 + CloudFront) -->|CloudFront no se integra<br/>con el cache de CodeBuild| DX(no aplica + lento)
+    style B fill:#f9e2af,color:#1e1e2e
+    style C fill:#f9e2af,color:#1e1e2e
+    style D fill:#f9e2af,color:#1e1e2e
+    style BX fill:#f38ba8,color:#1e1e2e
+    style CX fill:#f38ba8,color:#1e1e2e
+    style DX fill:#f38ba8,color:#1e1e2e
+</div>
+<hr />
+<h2 id="comparación-directa-local-vs-s3-para-este-caso">Comparación
+directa: LOCAL vs S3 para este caso</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th><strong>LOCAL (correcta)</strong></th>
+<th>S3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dónde vive el cache</td>
+<td>Host de build (EBS local)</td>
+<td>Bucket S3</td>
+</tr>
+<tr>
+<td>Transferencia de red</td>
+<td>Ninguna</td>
+<td>Sube/baja el cache cada build</td>
+</tr>
+<tr>
+<td>2 GB reusados seguido</td>
+<td>Casi instantáneo</td>
+<td>Minutos de latencia</td>
+</tr>
+<tr>
+<td>Persiste entre hosts/regiones</td>
+<td>No garantizado</td>
+<td>Sí</td>
+</tr>
+<tr>
+<td>Mejor para</td>
+<td>Builds frecuentes, mismo proyecto/región</td>
+<td>Builds ocasionales o cross-region</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="resumen-de-examen-dva-c02">Resumen de examen (DVA-C02)</h2>
+<p>Regla mnemotécnica:</p>
+<ul>
+<li><strong>Archivos grandes (GB) + builds frecuentes + mismo
+proyecto/región</strong> → <strong>LOCAL caching</strong>.</li>
+<li><strong>Builds ocasionales o cross-region</strong> → <strong>S3
+caching</strong>.</li>
+<li>Dependencias en directorio (Maven <code>.m2</code>, npm
+<code>node_modules</code>, pip cache) →
+<strong><code>LOCAL_CUSTOM_CACHE</code> +
+<code>paths</code></strong>.</li>
+<li><code>LOCAL_DOCKER_LAYER_CACHE</code> = solo capas Docker, no
+filesystem.</li>
+<li><code>paths</code> siempre va en la sección
+<strong><code>cache</code></strong>, nunca en
+<code>artifacts</code>.</li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({ startOnLoad: true, theme: 'default' });
+// Add copy buttons to ALL pre blocks
+document.querySelectorAll('pre').forEach(pre => {
+  if (pre.closest('.mermaid')) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'code-wrapper';
+  pre.parentNode.insertBefore(wrapper, pre);
+  wrapper.appendChild(pre);
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy';
+  btn.onclick = function() {
+    const code = pre.querySelector('code') || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  };
+  wrapper.appendChild(btn);
+});
+</script>
+</body>
+</html>

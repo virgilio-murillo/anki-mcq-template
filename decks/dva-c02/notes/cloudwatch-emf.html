@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Report</title>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #fff; }
+h1 { color: #232f3e; font-size: 22pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color: #0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 2em; }
+h3 { color: #232f3e; font-size: 13pt; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt; }
+th { background-color: #232f3e; color: white; padding: 8px; text-align: left; }
+td { border: 1px solid #ddd; padding: 6px 8px; }
+tr:nth-child(even) { background-color: #f8f8f8; }
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 10pt; color: #c7254e; }
+pre { background: #1e1e2e; padding: 16px; border-radius: 8px; font-size: 9.5pt; white-space: pre-wrap; word-break: break-word; overflow-x: auto; }
+pre code { background: none; color: #cdd6f4; padding: 0; font-size: inherit; }
+blockquote { border-left: 4px solid #0073bb; margin: 12px 0; padding: 8px 16px; background: #f0f7fc; }
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+.mermaid { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0; text-align: center; }
+.code-wrapper { position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: #3498db; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: 8pt; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { background: #27ae60; }
+</style>
+</head>
+<body>
+<h1
+id="cloudwatch-embedded-metric-format-emf-métricas-custom-desde-logs-de-lambda">CloudWatch
+Embedded Metric Format (EMF): métricas custom desde logs de Lambda</h1>
+<h2 id="el-problema">El problema</h2>
+<p>Un equipo quiere:</p>
+<ul>
+<li>extraer <strong>métricas custom</strong> (ej. tiempos de
+procesamiento) directamente de los <strong>logs</strong> de una
+Lambda,</li>
+<li>analizarlas,</li>
+<li>poner <strong>alarmas en tiempo real</strong>.</li>
+</ul>
+<p>¿Qué enfoque usar?</p>
+<p><strong>Respuesta: CloudWatch Embedded Metric Format
+(EMF).</strong></p>
+<hr />
+<h2 id="la-idea-clave">La idea clave</h2>
+<p>Normalmente, para publicar una métrica custom llamas a la API
+<code>PutMetricData</code>: una llamada de red extra por cada
+invocación. En una Lambda (que vive segundos), eso añade
+<strong>latencia y costo</strong>.</p>
+<p>EMF lo resuelve: tu Lambda <strong>escribe un log JSON estructurado
+especial</strong> con las métricas embebidas. CloudWatch Logs
+<strong>detecta ese formato y extrae las métricas
+automáticamente</strong>. Sin llamadas de red extra.</p>
+<div class="mermaid">
+flowchart LR
+    L(Lambda<br/>escribe log EMF en JSON) --> CWL(CloudWatch Logs)
+    CWL -->|extrae metricas<br/>automaticamente| CWM(CloudWatch Metrics)
+    CWM --> AL(Alarmas en tiempo real)
+    CWM --> DB(Dashboards)
+    style L fill:#a6e3a1,color:#1e1e2e
+    style CWL fill:#89b4fa,color:#1e1e2e
+    style CWM fill:#f9e2af,color:#1e1e2e
+    style AL fill:#f38ba8,color:#1e1e2e
+</div>
+<hr />
+<h2 id="por-qué-encaja-perfecto-con-lambda">Por qué encaja perfecto con
+Lambda</h2>
+<p>Las Lambdas son recursos <strong>efímeros</strong>: viven segundos y
+desaparecen. No quieres depender de llamadas API síncronas justo cuando
+la función va a terminar.</p>
+<div class="mermaid">
+flowchart TB
+    subgraph PutMetricData
+        P1(Llamada de red<br/>por invocacion) --> P2(Latencia + costo extra)
+    end
+    subgraph EMF
+        E1(Escribir un log<br/>la Lambda ya lo hace) --> E2(Sin llamada de red<br/>barato y rapido)
+    end
+    style PutMetricData fill:#f38ba8,color:#1e1e2e
+    style EMF fill:#a6e3a1,color:#1e1e2e
+</div>
+<p>AWS provee <strong>librerías open-source</strong> (Python, Node.js,
+Java) que arman el JSON EMF por ti: solo declaras la métrica y la
+librería genera el formato correcto.</p>
+<hr />
+<h2 id="cómo-se-ve-un-log-emf-simplificado">Cómo se ve un log EMF
+(simplificado)</h2>
+<pre class="json"><code>{
+  &quot;_aws&quot;: {
+    &quot;Timestamp&quot;: 1609459200000,
+    &quot;CloudWatchMetrics&quot;: [
+      {
+        &quot;Namespace&quot;: &quot;MiApp&quot;,
+        &quot;Dimensions&quot;: [[&quot;FunctionName&quot;]],
+        &quot;Metrics&quot;: [{ &quot;Name&quot;: &quot;TiempoProcesamiento&quot;, &quot;Unit&quot;: &quot;Milliseconds&quot; }]
+      }
+    ]
+  },
+  &quot;FunctionName&quot;: &quot;procesar-pedidos&quot;,
+  &quot;TiempoProcesamiento&quot;: 245,
+  &quot;mensaje&quot;: &quot;Pedido procesado OK&quot;
+}</code></pre>
+<ul>
+<li>El bloque <code>_aws</code> le dice a CloudWatch <strong>qué
+extraer</strong> como métrica.</li>
+<li><code>TiempoProcesamiento: 245</code> es el valor de la métrica
+embebido.</li>
+<li>El resto (<code>mensaje</code>) sigue siendo un log normal,
+consultable en Logs Insights.</li>
+</ul>
+<p>Un solo log = un log legible <strong>y</strong> una métrica para
+alarmar.</p>
+<hr />
+<h2 id="por-qué-fallan-las-otras-opciones">Por qué fallan las otras
+opciones</h2>
+<div class="mermaid">
+flowchart TB
+    B(Lambda Insights) -->|monitorea CPU, memoria,<br/>cold starts del runtime| BX(NO extrae metricas custom<br/>de tus logs)
+    C(EventBridge + PutMetricData) -->|EventBridge es para eventos;<br/>PutMetricData es de CloudWatch| CX(NO extrae metricas de logs)
+    D(Firehose + Redshift) -->|pipeline de analytics masivo| DX(Excesivo y con latencia alta;<br/>no es tiempo real)
+    style B fill:#f9e2af,color:#1e1e2e
+    style C fill:#f9e2af,color:#1e1e2e
+    style D fill:#f9e2af,color:#1e1e2e
+    style BX fill:#f38ba8,color:#1e1e2e
+    style CX fill:#f38ba8,color:#1e1e2e
+    style DX fill:#f38ba8,color:#1e1e2e
+</div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Opción</th>
+<th>Por qué NO</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>B — Lambda Insights</strong></td>
+<td>Monitorea el rendimiento del runtime (CPU, memoria, duración), no
+tus métricas custom de negocio desde los logs</td>
+</tr>
+<tr>
+<td><strong>C — EventBridge + PutMetricData</strong></td>
+<td>EventBridge es para arquitecturas de eventos;
+<code>PutMetricData</code> es de CloudWatch (mezclan servicios); no
+extrae métricas de logs</td>
+</tr>
+<tr>
+<td><strong>D — Firehose + Redshift</strong></td>
+<td>Pipeline de analytics a gran escala; pesado y con latencia alta;
+incompatible con “tiempo real”</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="emf-vs-putmetricdata-las-dos-formas-de-métricas-custom">EMF vs
+PutMetricData (las dos formas de métricas custom)</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>PutMetricData</th>
+<th><strong>EMF</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cómo publica</td>
+<td>Llamada API directa</td>
+<td>Escribe un log estructurado</td>
+</tr>
+<tr>
+<td>Llamada de red extra</td>
+<td>Sí</td>
+<td><strong>No</strong></td>
+</tr>
+<tr>
+<td>Ideal para</td>
+<td>Código de larga vida</td>
+<td><strong>Lambda / contenedores efímeros</strong></td>
+</tr>
+<tr>
+<td>Log + métrica juntos</td>
+<td>No</td>
+<td><strong>Sí (un solo evento)</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="resumen-de-examen-dva-c02">Resumen de examen (DVA-C02)</h2>
+<p>Señales del enunciado que apuntan a EMF:</p>
+<ul>
+<li><strong>“métricas custom desde los logs”</strong> → EMF extrae
+métricas de logs estructurados.</li>
+<li><strong>“recurso efímero” (Lambda / contenedor)</strong> → EMF evita
+llamadas API síncronas.</li>
+<li><strong>“tiempo real” + “alarmas”</strong> → CloudWatch nativo.</li>
+</ul>
+<p>Regla corta:</p>
+<blockquote>
+<p>Métricas custom embebidas en logs de recursos efímeros + alarmas en
+tiempo real → <strong>Embedded Metric Format (EMF)</strong>.</p>
+</blockquote>
+<p>Matiz clave: <code>PutMetricData</code> = API directa (código de
+larga vida). <strong>EMF = log estructurado
+(Lambda/contenedores).</strong> Si el enunciado enfatiza “desde los
+logs” o “efímero”, es EMF.</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({ startOnLoad: true, theme: 'default' });
+// Add copy buttons to ALL pre blocks
+document.querySelectorAll('pre').forEach(pre => {
+  if (pre.closest('.mermaid')) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'code-wrapper';
+  pre.parentNode.insertBefore(wrapper, pre);
+  wrapper.appendChild(pre);
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy';
+  btn.onclick = function() {
+    const code = pre.querySelector('code') || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  };
+  wrapper.appendChild(btn);
+});
+</script>
+</body>
+</html>

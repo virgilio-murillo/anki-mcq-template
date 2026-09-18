@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Report</title>
+<style>
+body { font-family: -apple-system, "Segoe UI", Helvetica Neue, sans-serif; font-size: 11pt; line-height: 1.6; color: #1a1a1a; max-width: 960px; margin: 40px auto; padding: 0 20px; background: #fff; }
+h1 { color: #232f3e; font-size: 22pt; border-bottom: 3px solid #ff9900; padding-bottom: 8px; }
+h2 { color: #0073bb; border-bottom: 2px solid #0073bb; padding-bottom: 4px; font-size: 16pt; margin-top: 2em; }
+h3 { color: #232f3e; font-size: 13pt; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0; font-size: 10pt; }
+th { background-color: #232f3e; color: white; padding: 8px; text-align: left; }
+td { border: 1px solid #ddd; padding: 6px 8px; }
+tr:nth-child(even) { background-color: #f8f8f8; }
+code { background: #f0f0f0; padding: 2px 5px; border-radius: 3px; font-size: 10pt; color: #c7254e; }
+pre { background: #1e1e2e; padding: 16px; border-radius: 8px; font-size: 9.5pt; white-space: pre-wrap; word-break: break-word; overflow-x: auto; }
+pre code { background: none; color: #cdd6f4; padding: 0; font-size: inherit; }
+blockquote { border-left: 4px solid #0073bb; margin: 12px 0; padding: 8px 16px; background: #f0f7fc; }
+img { max-width: 100%; height: auto; display: block; margin: 12px auto; }
+.mermaid { background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #e0e0e0; margin: 16px 0; text-align: center; }
+.code-wrapper { position: relative; }
+.copy-btn { position: absolute; top: 8px; right: 8px; background: #3498db; color: #fff; border: none; border-radius: 4px; padding: 4px 10px; font-size: 8pt; cursor: pointer; opacity: 0.7; transition: opacity 0.2s; }
+.copy-btn:hover { opacity: 1; }
+.copy-btn.copied { background: #27ae60; }
+</style>
+</head>
+<body>
+<h1
+id="step-functions-capturar-el-error-y-juntar-todo-en-un-solo-output">Step
+Functions: capturar el error y juntar todo en un solo output</h1>
+<h2 id="el-problema">El problema</h2>
+<p>Tienes un workflow con 4 estados. Si el proceso
+<strong>falla</strong>, quieres que el output final contenga
+<strong>todo lo que pasó</strong>:</p>
+<ul>
+<li>el <strong>input</strong> que entró al estado,</li>
+<li>el <strong>error</strong> que ocurrió,</li>
+<li>el <strong>output</strong> que ya se había generado.</li>
+</ul>
+<p>Todo junto, en una sola estructura. ¿Qué campos de Step Functions
+usas?</p>
+<p><strong>Respuesta: <code>Catch</code> (para capturar el error) +
+<code>ResultPath</code> (para combinar input + resultado en vez de
+sobreescribir).</strong></p>
+<hr />
+<h2 id="las-dos-piezas-clave">Las dos piezas clave</h2>
+<div class="mermaid">
+flowchart LR
+    A(Catch<br/>captura el error) --> C(Un solo output<br/>input + error + output)
+    B(ResultPath<br/>combina en vez de reemplazar) --> C
+    style A fill:#f38ba8,color:#1e1e2e
+    style B fill:#89b4fa,color:#1e1e2e
+    style C fill:#a6e3a1,color:#1e1e2e
+</div>
+<h3 id="catch-captura-el-error"><code>Catch</code> — captura el
+error</h3>
+<ul>
+<li>Válido en estados <strong><code>Task</code>, <code>Parallel</code> y
+<code>Map</code></strong>.</li>
+<li>Es un <strong>array de “catchers”</strong>. Cada catcher tiene:
+<ul>
+<li><code>ErrorEquals</code>: qué tipos de error atrapa (ej.
+<code>States.ALL</code>).</li>
+<li><code>Next</code>: a qué estado ir cuando ocurre el error.</li>
+<li><code>ResultPath</code>: dónde colocar la info del error.</li>
+</ul></li>
+<li>Sin <code>Catch</code>, un error <strong>termina el workflow
+completo</strong> de inmediato.</li>
+</ul>
+<h3
+id="resultpath-combina-en-lugar-de-reemplazar"><code>ResultPath</code> —
+combina en lugar de reemplazar</h3>
+<ul>
+<li>Controla <strong>dónde</strong> se guarda el resultado (o el error)
+dentro del JSON de estado.</li>
+<li>Si NO lo usas, el resultado <strong>reemplaza</strong> todo el
+input.</li>
+<li>Si lo usas (ej. <code>"ResultPath": "$.error"</code>), el resultado
+se <strong>agrega</strong> al input original bajo esa clave,
+<strong>conservando el input</strong>.</li>
+</ul>
+<hr />
+<h2 id="cómo-fluye-el-estado-con-catch-resultpath">Cómo fluye el estado
+con Catch + ResultPath</h2>
+<div class="mermaid">
+sequenceDiagram
+    participant Input as Input del estado
+    participant Task as Task state
+    participant Catch as Catcher
+    participant Out as Output combinado
+    Input->>Task: { "pedido": 123 }
+    Note over Task: El Task FALLA
+    Task->>Catch: se dispara Catch<br/>(ErrorEquals coincide)
+    Note over Catch: ResultPath: $.error<br/>agrega el error SIN borrar el input
+    Catch->>Out: { "pedido": 123,<br/> "error": { causa, mensaje } }
+    Note over Out: input + error juntos<br/>en un solo output
+</div>
+<hr />
+<h2 id="ejemplo-de-definición-json">Ejemplo de definición (JSON)</h2>
+<pre class="json"><code>{
+  &quot;StartAt&quot;: &quot;ProcesarPedido&quot;,
+  &quot;States&quot;: {
+    &quot;ProcesarPedido&quot;: {
+      &quot;Type&quot;: &quot;Task&quot;,
+      &quot;Resource&quot;: &quot;arn:aws:lambda:...:function:procesar&quot;,
+      &quot;Catch&quot;: [
+        {
+          &quot;ErrorEquals&quot;: [&quot;States.ALL&quot;],
+          &quot;Next&quot;: &quot;ManejarError&quot;,
+          &quot;ResultPath&quot;: &quot;$.error&quot;
+        }
+      ],
+      &quot;ResultPath&quot;: &quot;$.resultado&quot;,
+      &quot;Next&quot;: &quot;Siguiente&quot;
+    },
+    &quot;ManejarError&quot;: {
+      &quot;Type&quot;: &quot;Pass&quot;,
+      &quot;End&quot;: true
+    }
+  }
+}</code></pre>
+<ul>
+<li><code>"ResultPath": "$.error"</code> dentro del <code>Catch</code>:
+agrega el error bajo la clave <code>error</code>,
+<strong>manteniendo</strong> el input original.</li>
+<li><code>"ResultPath": "$.resultado"</code> en el camino de éxito:
+agrega el resultado bajo <code>resultado</code>, <strong>sin
+borrar</strong> el input.</li>
+</ul>
+<h3 id="diferencia-visual-de-resultpath">Diferencia visual de
+ResultPath</h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Sin ResultPath</th>
+<th>Con <code>ResultPath: $.resultado</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Input: <code>{ "pedido": 123 }</code></td>
+<td>Input: <code>{ "pedido": 123 }</code></td>
+</tr>
+<tr>
+<td>Resultado reemplaza todo</td>
+<td>Resultado se agrega</td>
+</tr>
+<tr>
+<td>Output: <code>{ "status": "ok" }</code></td>
+<td>Output:
+<code>{ "pedido": 123, "resultado": { "status": "ok" } }</code></td>
+</tr>
+<tr>
+<td>Se <strong>pierde</strong> el input</td>
+<td>Se <strong>conserva</strong> el input</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="por-qué-las-otras-opciones-fallan">Por qué las otras opciones
+fallan</h2>
+<div class="mermaid">
+flowchart TB
+    P(Parameters) -->|solo arma pares clave-valor<br/>para la integracion| PX(NO captura errores)
+    I(ItemsPath) -->|solo itera una lista<br/>en un Map state| IX(NO aplica aqui)
+    style P fill:#f9e2af,color:#1e1e2e
+    style I fill:#f9e2af,color:#1e1e2e
+    style PX fill:#f38ba8,color:#1e1e2e
+    style IX fill:#f38ba8,color:#1e1e2e
+</div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Campo</th>
+<th>Para qué sirve realmente</th>
+<th>¿Sirve aquí?</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Catch</strong></td>
+<td>Capturar errores en Task/Parallel/Map</td>
+<td><strong>Sí</strong></td>
+</tr>
+<tr>
+<td><strong>ResultPath</strong></td>
+<td>Combinar input + resultado (no reemplazar)</td>
+<td><strong>Sí</strong></td>
+</tr>
+<tr>
+<td>Parameters</td>
+<td>Construir clave-valor (estático o del input) para la
+integración</td>
+<td>No captura errores</td>
+</tr>
+<tr>
+<td>ItemsPath</td>
+<td>Iterar sobre una lista (solo en Map state)</td>
+<td>No agrega input+output</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Parameters + ItemsPath</strong> (opciones A y D en parte)
+falla por partida doble: ni captura el error ni corresponde al
+caso.</li>
+<li><strong>Parameters + ResultPath</strong> (opción C): ResultPath sí
+sirve, pero <strong>Parameters no captura el error</strong>. Falta el
+<code>Catch</code>.</li>
+</ul>
+<hr />
+<h2 id="resumen-de-examen-dva-c02">Resumen de examen (DVA-C02)</h2>
+<p>Regla mnemotécnica:</p>
+<ul>
+<li><strong>Capturar un error</strong> → <code>Catch</code>.</li>
+<li><strong>Combinar input + resultado en el output</strong> (sin perder
+el input) → <code>ResultPath</code>.</li>
+<li><strong>Iterar sobre una lista</strong> → <code>ItemsPath</code>
+(solo en <code>Map</code>).</li>
+<li><strong>Armar clave-valor para la integración</strong> →
+<code>Parameters</code>.</li>
+</ul>
+<p>Extras útiles:</p>
+<ul>
+<li><code>Retry</code> reintenta antes de rendirse; <code>Catch</code>
+actúa cuando ya falló.</li>
+<li><code>Catch</code> solo existe en <code>Task</code>,
+<code>Parallel</code> y <code>Map</code>.</li>
+<li>Si ves “juntar input + error + output en una sola salida” → piensa
+<strong>Catch + ResultPath</strong>.</li>
+</ul>
+
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+mermaid.initialize({ startOnLoad: true, theme: 'default' });
+// Add copy buttons to ALL pre blocks
+document.querySelectorAll('pre').forEach(pre => {
+  if (pre.closest('.mermaid')) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'code-wrapper';
+  pre.parentNode.insertBefore(wrapper, pre);
+  wrapper.appendChild(pre);
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = 'Copy';
+  btn.onclick = function() {
+    const code = pre.querySelector('code') || pre;
+    navigator.clipboard.writeText(code.textContent).then(() => {
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  };
+  wrapper.appendChild(btn);
+});
+</script>
+</body>
+</html>

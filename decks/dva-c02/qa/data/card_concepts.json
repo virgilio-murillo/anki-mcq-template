@@ -1,0 +1,1130 @@
+[
+ {
+  "idx": 0,
+  "key": "048684b6491a307a",
+  "concept": "Lambda environment variables: pasar configuración específica del entorno sin modificar código",
+  "text": "Una Lambda corre en DEV, UAT y PROD usando parámetros que varían por entorno y que están hardcoded. ¿Cómo referenciar los parámetros correctos sin modificar el código cada vez?"
+ },
+ {
+  "idx": 1,
+  "key": "894542a30e744800",
+  "concept": "Lambda environment variables vs Alias vs Stage variable vs Lambda Layers: solo environment variables pasan configuración",
+  "text": "¿Cuál de estos elementos de Lambda / API Gateway sirve para pasar valores de configuración que cambian por entorno a una función?"
+ },
+ {
+  "idx": 2,
+  "key": "9b2d30a91c936a3e",
+  "concept": "API Gateway cache invalidation: header Cache-Control max-age=0 fuerza respuesta fresca del backend",
+  "text": "Un cliente de API Gateway quiere saltarse la caché y obtener la respuesta más reciente del backend. ¿Qué header debe enviar?"
+ },
+ {
+  "idx": 3,
+  "key": "8a6247f8d3d8b5cf",
+  "concept": "API Gateway cache invalidation authorization: Require Authorization checkbox previene invalidación no autorizada con max-age=0",
+  "text": "Solo clientes autorizados deben poder invalidar una entrada de caché de API Gateway. ¿Qué combinación lo logra? (elige la opción que junta las DOS piezas correctas)"
+ },
+ {
+  "idx": 4,
+  "key": "06445288d8497ad7",
+  "concept": "Elastic Beanstalk worker environment: cron.yaml define tareas periódicas programadas en worker tier",
+  "text": "En un worker environment de Elastic Beanstalk necesitas encolar mensajes según un horario (tareas periódicas a intervalos regulares). ¿Qué archivo de configuración agregas al source bundle?"
+ },
+ {
+  "idx": 5,
+  "key": "b414706d700757c5",
+  "concept": "CodeDeploy appspec.yml: define lifecycle hooks del despliegue (no Elastic Beanstalk)",
+  "text": "¿Cuál archivo se usa con AWS CodeDeploy para definir el despliegue como hooks de eventos del ciclo de vida (no con Elastic Beanstalk)?"
+ },
+ {
+  "idx": 6,
+  "key": "635d1974abea50b0",
+  "concept": "Lambda VPC integration: internet access requires private subnet route to NAT Gateway in public subnet plus security group outbound rules",
+  "text": "Una Lambda se conectó a una VPC (para una base privada) y perdió el acceso a internet. ¿Qué par de acciones lo arregla?"
+ },
+ {
+  "idx": 7,
+  "key": "c7ce374f7205b3d8",
+  "concept": "Security groups: outbound rules control Lambda egress traffic to internet regardless of NAT Gateway configuration",
+  "text": "Tienes NAT gateway y ruta correcta, pero la Lambda en VPC sigue sin salir a internet. ¿Qué revisas en el security group ?"
+ },
+ {
+  "idx": 8,
+  "key": "106d55b7285c9b92",
+  "concept": "Lambda VPC integration: AWS automatically creates ENIs (Elastic Network Interfaces) with private IPs when Lambda is configured with subnets",
+  "text": "Al integrar una Lambda con una VPC, ¿quién crea las ENIs (interfaces de red) que la conectan a la red privada?"
+ },
+ {
+  "idx": 9,
+  "key": "9d63ed0ac44b4941",
+  "concept": "DynamoDB: schema-less NoSQL design enables flexible schema changes without table alterations unlike rigid relational databases",
+  "text": "Una app de trading de alto rendimiento necesita una base que escale globalmente, maneje cambios frecuentes de esquema , persistencia rápida de sesión y alto throughput con esquema flexible. ¿Cuál eliges?"
+ },
+ {
+  "idx": 10,
+  "key": "a61660e71cffa26d",
+  "concept": "DynamoDB: schema flexibility allows independent item-level attribute changes without global table structure modifications",
+  "text": "¿Por qué una base NoSQL como DynamoDB se adapta mejor que una relacional cuando el esquema cambia con frecuencia ?"
+ },
+ {
+  "idx": 11,
+  "key": "18f5657c06da0a68",
+  "concept": "ElastiCache Redis: persistence to disk, read replicas, and automatic failover provide session durability unlike Memcached",
+  "text": "¿Por qué Redis es preferible a Memcached para un almacén de sesiones ?"
+ },
+ {
+  "idx": 12,
+  "key": "b86c35a3da3230e4",
+  "concept": "Application Load Balancer sticky sessions con caché local pierde sesiones al fallar la instancia versus sesión distribuida en ElastiCache",
+  "text": "¿Por qué Sticky Sessions con caché local no es una buena solución de alta disponibilidad para sesiones?"
+ },
+ {
+  "idx": 13,
+  "key": "fceccfb60104d822",
+  "concept": "Cognito Identity Pool con unauthenticated access entrega credenciales AWS temporales para usuarios federados (IdPs sociales) e invitados",
+  "text": "Usuarios deben autenticarse con IdPs sociales (Facebook, Google, etc.), luego subir archivos a S3 con credenciales AWS temporales, y además permitir acceso de invitados (guest). ¿Qué haces?"
+ },
+ {
+  "idx": 14,
+  "key": "616699500f3510bb",
+  "concept": "Cognito Identity Pool entrega credenciales AWS temporales y permite acceso unauthenticated versus User Pool que solo autentica usuarios",
+  "text": "En Amazon Cognito, ¿cuál componente entrega credenciales AWS temporales y permite acceso de invitado (unauthenticated)?"
+ },
+ {
+  "idx": 15,
+  "key": "5f055d54dd3adaa3",
+  "concept": "Custom identity broker con STS AssumeRole es necesario solo cuando el IdP no soporta SAML 2.0 ni OIDC versus Cognito para estándares",
+  "text": "¿Cuándo necesitarías un custom identity broker con STS en lugar de Amazon Cognito?"
+ },
+ {
+  "idx": 16,
+  "key": "d6792eabf2387d75",
+  "concept": "S3 Object Lambda redacta PII en tiempo real durante GET sin almacenar copias versus soluciones que duplican objetos",
+  "text": "Un servicio interno necesita redactar PII de archivos en S3 antes de procesarlos, sin almacenar copias redactadas, de la forma más costo-eficiente . ¿Qué solución eliges?"
+ },
+ {
+  "idx": 17,
+  "key": "1344cb157a80b80c",
+  "concept": "S3 Object Lambda para redacción interna es más costo-eficiente que Lambda@Edge diseñado para usuarios finales en CloudFront edge",
+  "text": "Para redactar PII antes de que la consuma un servicio interno , ¿por qué S3 Object Lambda es mejor que Lambda@Edge?"
+ },
+ {
+  "idx": 18,
+  "key": "e5e6c00199635dd5",
+  "concept": "S3 Object Lambda permite redactar PII on-demand sin crear copias adicionales ni incurrir en costos de almacenamiento duplicado",
+  "text": "¿Por qué NO conviene usar AWS Glue o copiar archivos redactados a otro bucket para redactar PII on-demand ?"
+ },
+ {
+  "idx": 19,
+  "key": "de9bf03cb913bb5e",
+  "concept": "ElastiCache for Redis externaliza sesiones de aplicación para alta disponibilidad y escalabilidad horizontal sin sticky sessions",
+  "text": "App legada con miles de usuarios y sesiones en memoria; el servidor on-prem llega a 100% CPU en picos. Tras migrar a AWS, ¿cómo re-factorizar la gestión de sesión para rendimiento y alta disponibilidad?"
+ },
+ {
+  "idx": 20,
+  "key": "",
+  "concept": "CloudFront Viewer Protocol Policy Redirect HTTP to HTTPS y HTTPS Only habilitan HTTPS obligatorio entre viewers y CloudFront",
+  "text": "Un sitio detrás de un ALB usa CloudFront con su nombre de dominio por defecto (ej. d111.cloudfront.net ). Tiene mal ranking por no usar HTTPS. ¿Qué DOS acciones habilitan HTTPS entre los viewers y CloudFront ?"
+ },
+ {
+  "idx": 21,
+  "key": "",
+  "concept": "CloudFront dominio por defecto (*.cloudfront.net) incluye certificado SSL/TLS preconfigurado para el tramo viewer-to-CloudFront",
+  "text": "En CloudFront, HTTPS tiene DOS tramos: viewer↔CloudFront y CloudFront↔origen. ¿Cuál afirmación es correcta sobre los certificados?"
+ },
+ {
+  "idx": 22,
+  "key": "",
+  "concept": "CloudFront origen personalizado rechaza certificados autofirmados y requiere certificados de ACM o CA de confianza pública",
+  "text": "Para HTTPS entre CloudFront y un origen personalizado (ej. un ALB), ¿qué tipo de certificado NO se acepta?"
+ },
+ {
+  "idx": 23,
+  "key": "",
+  "concept": "CloudFront Viewer Protocol Policy HTTP and HTTPS (Allow All) acepta ambos protocolos sin forzar redirección a HTTPS",
+  "text": "El Viewer Protocol Policy de un cache behavior de CloudFront tiene tres valores. ¿Cuál permite HTTP y HTTPS a la vez (sin forzar HTTPS)?"
+ },
+ {
+  "idx": 24,
+  "key": "",
+  "concept": "Lambda concurrency calculation: concurrent executions = invocations per second × average duration in seconds",
+  "text": "Una Lambda invocada por API Gateway recibe 10 peticiones por segundo y cada una tarda hasta 50 segundos . ¿Qué debe hacer el desarrollador para evitar el throttling ?"
+ },
+ {
+  "idx": 25,
+  "key": "",
+  "concept": "Lambda concurrency calculation: concurrent executions = invocations per second × average duration in seconds",
+  "text": "Una Lambda recibe 20 invocaciones por segundo y cada una dura en promedio 4 segundos . ¿Cuántas ejecuciones concurrentes usará aproximadamente?"
+ },
+ {
+  "idx": 26,
+  "key": "",
+  "concept": "Lambda default regional concurrency limit is 1000 across all functions, adjustable via Service Quotas",
+  "text": "¿Cuál es el límite por defecto de ejecuciones concurrentes de Lambda por región (a travoés de todas las funciones) y cómo se sube?"
+ },
+ {
+  "idx": 27,
+  "key": "",
+  "concept": "Lambda reserved concurrency subtracts from account-level unreserved concurrency pool causing throttling in other functions",
+  "text": "Dos Lambdas idénticas en una cuenta nueva; la segunda sufre Throttles mientras la primera va bien. ¿Qué DOS acciones lo arreglan? (cuenta con límite por defecto 1000)"
+ },
+ {
+  "idx": 28,
+  "key": "",
+  "concept": "CloudWatch custom namespace isolates metrics between applications preventing aggregation across apps",
+  "text": "5 apps en EC2; quieres una representación gráfica de métricas por app, aisladas entre sí, en un solo panel de CloudWatch. ¿Qué configuras?"
+ },
+ {
+  "idx": 29,
+  "key": "",
+  "concept": "DynamoDB Streams NEW_IMAGE view type captures only post-modification item state for real-time analytics via Kinesis Adapter",
+  "text": "App de analítica en tiempo real (en EKS) debe capturar SOLO los datos nuevos de items modificados en DynamoDB multi-región. ¿Cómo la configuras?"
+ },
+ {
+  "idx": 30,
+  "key": "",
+  "concept": "Elastic Beanstalk CLI deployment: eb deploy command requires ZIP or WAR artifact format, not tar",
+  "text": "¿Cómo se despliega correctamente una nueva versión a Elastic Beanstalk vía CLI?"
+ },
+ {
+  "idx": 31,
+  "key": "",
+  "concept": "Lambda Invoke API: InvocationType=Event for asynchronous invocation vs RequestResponse for synchronous",
+  "text": "Necesitas invocar una Lambda de forma asíncrona . ¿Qué API e InvocationType usas?"
+ },
+ {
+  "idx": 32,
+  "key": "",
+  "concept": "Kinesis Data Streams: PutRecord with SequenceNumberForOrdering guarantees ordered writes vs PutRecords batch",
+  "text": "App de subastas en tiempo real con Kinesis Data Streams: cada puja se procesa una sola vez y en orden . ¿Qué solución cumple?"
+ },
+ {
+  "idx": 33,
+  "key": "",
+  "concept": "IAM Policy Simulator: evaluates SCP impact on IAM and resource policies before applying in Organizations",
+  "text": "Con AWS Organizations, quieres probar el impacto de SCPs sobre tus políticas IAM y de recursos ANTES de aplicarlas. ¿Qué servicio usas?"
+ },
+ {
+  "idx": 34,
+  "key": "",
+  "concept": "DynamoDB batch operations: BatchGetItem and BatchWriteItem reduce network round-trips for multiple items",
+  "text": "Una app lee items uno por uno de DynamoDB y escribe a otra tabla, repitiendo 100+ veces (lento). ¿Cómo acelerarla con mínima configuración ?"
+ },
+ {
+  "idx": 35,
+  "key": "",
+  "concept": "DynamoDB optimistic locking: version attribute with @DynamoDBVersionAttribute prevents concurrent overwrites without blocking",
+  "text": "App Java muy intensiva en escritura sobre DynamoDB sobrescribe datos obsoletos. ¿Cómo proteger las escrituras sin afectar el rendimiento ?"
+ },
+ {
+  "idx": 36,
+  "key": "",
+  "concept": "Kinesis Data Streams scaling requiere aumentar shards (resharding) Y capacidad de instancia EC2 simultáneamente cuando hay CPU al 100% y throughput insuficiente",
+  "text": "EC2 con KCL procesa un stream de Kinesis: la CPU está al máximo y faltan shards para el ritmo de datos. ¿Mejor acción para resolverlo y prevenirlo?"
+ },
+ {
+  "idx": 37,
+  "key": "",
+  "concept": "Elastic Beanstalk Blue/Green deployment permite cambio de runtime major version con swap de CNAME para tráfico instantáneo y rollback rápido",
+  "text": "En Elastic Beanstalk debes subir el runtime de Java 7 a Java 8 , mandar TODO el tráfico a la nueva versión de inmediato y poder revertir rápido si falla. ¿Qué haces?"
+ },
+ {
+  "idx": 38,
+  "key": "",
+  "concept": "Kinesis Data Streams resharding usa split shard para aumentar capacidad (hot shards) y merge shards para disminuir capacidad (cold shards)",
+  "text": "Sobre el resharding de Kinesis Data Streams, ¿qué DOS afirmaciones son correctas?"
+ },
+ {
+  "idx": 39,
+  "key": "",
+  "concept": "EC2 instance profile credentials pueden ser sobrescritas por AWS CLI static credentials configuradas localmente en la instancia",
+  "text": "Cambiaste el IAM Role de una EC2 para que solo acceda al bucket de desarrollo, pero la instancia sigue escribiendo en ambos buckets. ¿Causa más probable?"
+ },
+ {
+  "idx": 40,
+  "key": "",
+  "concept": "Kinesis Data Streams retención por defecto de 24 horas causa pérdida de datos si consumidor procesa con intervalo mayor que retention period",
+  "text": "Un consumidor de Kinesis procesa datos cada dos días y guarda en S3, pero S3 solo recibe la mitad; los sensores envían bien en tiempo real. ¿Causa más probable?"
+ },
+ {
+  "idx": 41,
+  "key": "",
+  "concept": "Elastic Beanstalk RDS desacoplamiento requiere Blue/Green deployment con deletion protection y snapshot antes de terminar entorno original",
+  "text": "Un entorno de Elastic Beanstalk tiene un RDS acoplado (si terminas el entorno, cae la BD). ¿Cómo desacoplar la BD del entorno sin pérdida de datos ?"
+ },
+ {
+  "idx": 42,
+  "key": "",
+  "concept": "AWS SAM CodeDeploy Linear deployment strategy shifts traffic in equal increments at equal intervals",
+  "text": "Con AWS SAM + CodeDeploy, en cada despliegue debe desplazarse 10% del tráfico cada 10 minutos hasta migrar todo. ¿Qué configuración de despliegue usas?"
+ },
+ {
+  "idx": 43,
+  "key": "",
+  "concept": "S3 API list-objects pagination uses --page-size to reduce per-call items and --max-items to limit CLI output with NextToken",
+  "text": "aws s3api list-objects hace timeout por el volumen. Para paginar y controlar cuántos resultados vuelven, ¿qué DOS parámetros usas?"
+ },
+ {
+  "idx": 44,
+  "key": "",
+  "concept": "DynamoDB RCU capacity: 1 RCU = 1 strongly consistent read or 2 eventually consistent reads per second for items up to 4 KB",
+  "text": "Tabla DynamoDB con 10 RCU provisionadas e items de 4 KB . ¿Cuántas lecturas por segundo soporta?"
+ },
+ {
+  "idx": 45,
+  "key": "",
+  "concept": "DynamoDB partition key best practice: high cardinality unique attribute like employee_id distributes data evenly across partitions",
+  "text": "Para una tabla DynamoDB de perfiles de empleados, ¿cuál es el MEJOR atributo como partition key ?"
+ },
+ {
+  "idx": 46,
+  "key": "",
+  "concept": "ECS binpack task placement strategy minimizes number of instances by filling existing instances before using new ones",
+  "text": "En ECS quieres una task placement strategy eficiente en costo que use el menor número de instancias (la alta disponibilidad no importa aquí). ¿Cuál usas?"
+ },
+ {
+  "idx": 47,
+  "key": "",
+  "concept": "S3 Cross-Region Replication requires versioning enabled on both buckets, different regions, and IAM role with replication permissions",
+  "text": "¿Cuáles son los requisitos para habilitar Cross-Region Replication (CRR) en S3?"
+ },
+ {
+  "idx": 48,
+  "key": "",
+  "concept": "S3 Replication (CRR/SRR) requiere versioning habilitado en buckets origen y destino como prerequisito",
+  "text": "¿Qué característica de S3 debe activarse antes de poder configurar cualquier tipo de replicación (CRR o SRR)?"
+ },
+ {
+  "idx": 49,
+  "key": "",
+  "concept": "AWS CLI S3 usa multipart upload automáticamente para archivos grandes (100+ GB)",
+  "text": "Subir un archivo grande (100+ GB) con aws s3 cp a un bucket con SSE-KMS da Access Denied , pero archivos pequeños sí suben. ¿Qué hace el CLI con archivos grandes que causa esto?"
+ },
+ {
+  "idx": 50,
+  "key": "",
+  "concept": "SSE-KMS multipart upload requiere permisos kms:Decrypt y kms:GenerateDataKey* para reutilizar data key entre partes",
+  "text": "Un multipart upload a un bucket con SSE-KMS da Access Denied. ¿Qué permisos de KMS necesita el usuario para que funcione?"
+ },
+ {
+  "idx": 51,
+  "key": "",
+  "concept": "SSE-KMS usa envelope encryption con GenerateDataKey en lugar de kms:Encrypt directo (límite 4 KB)",
+  "text": "En un upload a bucket SSE-KMS, ¿por qué NO se necesita el permiso kms:Encrypt ?"
+ },
+ {
+  "idx": 52,
+  "key": "",
+  "concept": "CloudFront origin failover con origin group elimina HTTP 504 cambiando automáticamente a origen secundario",
+  "text": "App con CloudFront cuyo origen a veces no responde y devuelve HTTP 504 al servir contenido (peticiones GET). ¿Qué acción costo-eficiente resuelve esos 504?"
+ },
+ {
+  "idx": 53,
+  "key": "",
+  "concept": "Lambda@Edge ejecuta funciones en ubicaciones edge de CloudFront para reducir latencia en autenticación global",
+  "text": "En la misma app CloudFront, la queja principal es que el login es lento para usuarios globales. ¿Qué opción costo-eficiente acerca la autenticación a los usuarios?"
+ },
+ {
+  "idx": 54,
+  "key": "",
+  "concept": "CloudFront Cache-Control max-age no acelera procesos dinámicos de autenticación porque estos no se cachean",
+  "text": "Ante logins lentos en CloudFront, ¿por qué aumentar el Cache-Control max-age NO resuelve el problema?"
+ },
+ {
+  "idx": 55,
+  "key": "",
+  "concept": "DynamoDB conditional writes con condition expression validan reglas de negocio atómicamente antes de escribir",
+  "text": "App de subastas: cada nueva puja debe ser mayor que la puja actual . ¿Cómo se implementa esto de forma más efectiva en las llamadas a DynamoDB?"
+ },
+ {
+  "idx": 56,
+  "key": "",
+  "concept": "DynamoDB optimistic locking compara version number para detectar cambios concurrentes pero no valida condiciones de negocio arbitrarias",
+  "text": "Para la regla \"nueva puja > puja actual\", ¿por qué optimistic locking NO es la solución adecuada?"
+ },
+ {
+  "idx": 57,
+  "key": "",
+  "concept": "DynamoDB LSI consulta una sola partición con sort key alternativo y soporta consistencia fuerte o eventual",
+  "text": "Necesitas consultar una sola partición (por su partition key) con otro sort key , admitiendo lecturas eventuales y fuertes . ¿Qué usas?"
+ },
+ {
+  "idx": 58,
+  "key": "",
+  "concept": "DynamoDB LSI solo se crea al crear la tabla mientras GSI se puede agregar o eliminar después",
+  "text": "Sobre el momento de creación de los índices en DynamoDB, ¿qué es correcto?"
+ },
+ {
+  "idx": 59,
+  "key": "",
+  "concept": "DynamoDB LSI consulta una partición con consistencia fuerte/eventual mientras GSI consulta toda la tabla con consistencia eventual únicamente",
+  "text": "¿Cuál es la diferencia clave entre LSI y GSI respecto a alcance de consulta y consistencia?"
+ },
+ {
+  "idx": 60,
+  "key": "",
+  "concept": "Lambda concurrency with Kinesis Data Streams is limited by shard count (one concurrent execution per shard)",
+  "text": "Una Lambda procesa un stream de Kinesis Data Streams con 100 shards activos (10 s por invocación, 50 items/seg). ¿Qué es cierto sobre la concurrencia?"
+ },
+ {
+  "idx": 61,
+  "key": "",
+  "concept": "Lambda concurrency model differs between poll-based sources (shard-limited for Kinesis/DynamoDB Streams) and push-based sources (rate × duration for API Gateway/S3)",
+  "text": "¿En qué se diferencia la concurrencia de Lambda entre fuentes poll-based (Kinesis/DynamoDB Streams) y push-based (API Gateway/S3)?"
+ },
+ {
+  "idx": 62,
+  "key": "",
+  "concept": "Kinesis Data Streams capacity and Lambda concurrency increase via shard splitting in provisioned mode",
+  "text": "Para aumentar la capacidad de datos de un Kinesis Data Stream (y con ello la concurrencia de la Lambda que lo consume), ¿qué haces con los shards?"
+ },
+ {
+  "idx": 63,
+  "key": "",
+  "concept": "SSL/TLS certificates from third-party CAs can be imported into ACM or IAM certificate store",
+  "text": "Un desarrollador tiene un certificado SSL/TLS de una CA de terceros (autoridad certificadora externa) listo para importar a AWS. ¿En qué servicio puede importarlo de forma segura (además del IAM certificate store)?"
+ },
+ {
+  "idx": 64,
+  "key": "",
+  "concept": "IAM certificate store is used for SSL/TLS certificates only when ACM is unavailable in the region",
+  "text": "¿Cuándo se usa el IAM certificate store en vez de ACM para un certificado SSL/TLS?"
+ },
+ {
+  "idx": 65,
+  "key": "",
+  "concept": "DynamoDB eventually consistent read capacity calculation divides strongly consistent RCU by 2",
+  "text": "Items de 3.5 KB ; se necesitan 150 lecturas eventualmente consistentes por segundo . Un compañero calculó 150 RCU (deberían ser 75). ¿Qué error de cálculo cometió?"
+ },
+ {
+  "idx": 66,
+  "key": "",
+  "concept": "DynamoDB RCU: 1 RCU = 1 lectura fuertemente consistente o 2 lecturas eventualmente consistentes para ítems ≤4 KB; lectura transaccional consume 2 RCU",
+  "text": "En DynamoDB, ¿qué representa 1 RCU (Read Capacity Unit) para un item de hasta 4 KB?"
+ },
+ {
+  "idx": 67,
+  "key": "",
+  "concept": "S3 Cross-Region Replication (CRR) requiere versioning habilitado en bucket origen y destino",
+  "text": "put-bucket-replication falla en un bucket S3 (pero funciona en otros) al configurar Cross-Region Replication (CRR) . ¿Causa más probable?"
+ },
+ {
+  "idx": 68,
+  "key": "",
+  "concept": "DynamoDB RCU provisioning: redondear tamaño ítem al múltiplo de 4 KB, dividir entre 2 para lecturas eventualmente consistentes, multiplicar por lecturas/segundo",
+  "text": "Tabla DynamoDB, items de 3.5 KB , se esperan 150 lecturas eventualmente consistentes por segundo . ¿Cuántas RCU hay que aprovisionar?"
+ },
+ {
+  "idx": 69,
+  "key": "",
+  "concept": "CodePipeline aprobación manual con SNS notification para revisión humana antes de continuar etapa",
+  "text": "En un pipeline de CodePipeline necesitas que alguien apruebe (revisión de código) antes de pasar a la siguiente etapa: si aprueba, el pipeline sigue; si rechaza, se detiene. ¿Qué solución es la más adecuada?"
+ },
+ {
+  "idx": 70,
+  "key": "",
+  "concept": "CodePipeline aprobación manual: timeout de 7 días sin respuesta resulta en acción fallida",
+  "text": "En una acción de aprobación manual de CodePipeline, ¿qué pasa si nadie aprueba ni rechaza dentro del plazo límite?"
+ },
+ {
+  "idx": 71,
+  "key": "",
+  "concept": "X-Ray tracing: segment documents con subsegments para recursos downstream, enviados vía X-Ray daemon",
+  "text": "Debes trazar en X-Ray todas las peticiones de tu app, incluyendo las llamadas a recursos AWS aguas abajo . ¿Qué acción implementas?"
+ },
+ {
+  "idx": 72,
+  "key": "",
+  "concept": "AWS X-Ray: segment registra trabajo de la aplicación principal, subsegment registra llamadas a servicios downstream dentro del segment",
+  "text": "En AWS X-Ray, ¿cuál es la diferencia entre un segment y un subsegment ?"
+ },
+ {
+  "idx": 73,
+  "key": "",
+  "concept": "RDS Enhanced Monitoring: agente en la instancia captura métricas de CPU y memoria por proceso individual del sistema operativo",
+  "text": "Necesitas ver cómo los procesos individuales de una instancia RDS usan la CPU (porcentaje de CPU y memoria consumida por cada proceso ). ¿Qué usas?"
+ },
+ {
+  "idx": 74,
+  "key": "",
+  "concept": "RDS métricas de CPU: CloudWatch recolecta desde hipervisor (agregado), Enhanced Monitoring desde agente en instancia (por proceso)",
+  "text": "¿En qué se diferencian las métricas de CPU de CloudWatch y de Enhanced Monitoring en RDS?"
+ },
+ {
+  "idx": 75,
+  "key": "",
+  "concept": "Write-through caching con TTL: actualizar base de datos y luego cache.set con TTL para mantener consistencia y expirar datos poco leídos",
+  "text": "Quieres que la caché nunca sirva datos obsoletos (que siempre refleje la última escritura), y que las entradas poco leídas expiren solas de la caché con un TTL. ¿Cuál pseudocódigo implementa write-through con TTL?"
+ },
+ {
+  "idx": 76,
+  "key": "",
+  "concept": "Write-through TTL: expira automáticamente items poco leídos de la caché para evitar desperdiciar memoria",
+  "text": "En caching, ¿por qué se añade un TTL a los items en una estrategia write-through?"
+ },
+ {
+  "idx": 77,
+  "key": "",
+  "concept": "AWS AppSync: GraphQL gestionado con actualizaciones en tiempo real y sincronización colaborativa multi-usuario sobre datos compartidos",
+  "text": "Una app de juego debe sincronizar preferencias y estado entre dispositivos, y además permitir que varios usuarios colaboren sobre datos compartidos en tiempo real . ¿Qué servicio usas?"
+ },
+ {
+  "idx": 78,
+  "key": "",
+  "concept": "Amazon Cognito Sync sincroniza datos de un solo usuario entre dispositivos; AWS AppSync sincroniza datos multi-usuario en tiempo real con colaboración compartida",
+  "text": "¿Cuál es la diferencia clave entre AWS AppSync y Amazon Cognito Sync para sincronizar datos?"
+ },
+ {
+  "idx": 79,
+  "key": "",
+  "concept": "SAM deploy ejecuta el flujo completo: comprime código, sube a S3, genera plantilla empaquetada y despliega vía CloudFormation en un solo comando",
+  "text": "Necesitas un solo comando que comprima el código, lo suba a S3, genere la plantilla empaquetada y la despliegue . ¿Cuál usas?"
+ },
+ {
+  "idx": 80,
+  "key": "",
+  "concept": "RDS SQL Server Transparent Data Encryption (TDE) cifra datos a nivel de base de datos automáticamente antes de escribir a disco y descifra al leer",
+  "text": "En RDS for SQL Server necesitas cifrar los datos antes de escribirlos a disco y descifrarlos al leerlos , a nivel de la base de datos. ¿Qué habilitas?"
+ },
+ {
+  "idx": 81,
+  "key": "",
+  "concept": "DynamoDB Global Secondary Index (GSI) en modo provisioned requiere WCU del GSI mayor o igual al WCU de la tabla base para evitar throttling en escrituras",
+  "text": "Creas un GSI en una tabla DynamoDB en modo provisioned con muchas escrituras. Para evitar throttling, ¿cómo debes fijar la capacidad del índice?"
+ },
+ {
+  "idx": 82,
+  "key": "",
+  "concept": "DynamoDB Global Secondary Index (GSI) con WCU insuficiente throttlea las escrituras en la tabla base porque cada escritura debe propagarse al GSI consumiendo su capacidad",
+  "text": "Si un GSI en modo provisioned tiene WCU insuficiente , ¿qué se ve afectado?"
+ },
+ {
+  "idx": 83,
+  "key": "",
+  "concept": "S3 Object Lambda Access Point transforma datos al vuelo en peticiones GET sin crear copias adicionales, permitiendo redacción de PII diferenciada por rol",
+  "text": "Debes redactar PII de registros en S3 de forma distinta por rol , cada usuario ve solo lo suyo, y manteniendo una sola copia de los datos. ¿Qué combinación usas? (marca la pieza del Object Lambda )"
+ },
+ {
+  "idx": 84,
+  "key": "",
+  "concept": "S3 Object Lambda ejecuta transformación en tiempo real durante GET sin almacenar copias adicionales del objeto",
+  "text": "¿Qué hace exactamente S3 Object Lambda y por qué evita duplicar los datos?"
+ },
+ {
+  "idx": 85,
+  "key": "",
+  "concept": "CloudFormation drift detection identifica recursos modificados fuera del stack que no coinciden con la plantilla",
+  "text": "Los IAM roles de unas Lambdas gestionadas por CloudFormation fueron modificados a mano . Necesitas identificar esos cambios no autorizados y ver qué recursos ya no coinciden con el stack. ¿Qué haces?"
+ },
+ {
+  "idx": 86,
+  "key": "",
+  "concept": "CloudTrail registra llamadas API (autoría) vs CloudFormation drift detection detecta desviación de configuración del stack",
+  "text": "Para saber quién (qué llamada API) modificó un IAM role, versus saber si un recurso ya no coincide con la plantilla de CloudFormation, ¿qué servicio corresponde a cada caso?"
+ },
+ {
+  "idx": 87,
+  "key": "",
+  "concept": "CloudFormation cross-stack reference usa Outputs con Export y Fn::ImportValue para compartir valores entre stacks en misma cuenta/región",
+  "text": "Quieres que el endpoint de una API creado en un stack de CloudFormation pueda referenciarse desde otros stacks (misma cuenta y región). ¿Qué haces?"
+ },
+ {
+  "idx": 88,
+  "key": "",
+  "concept": "DynamoDB strongly consistent read calcula RCU redondeando tamaño item al múltiplo de 4KB superior y dividiendo entre 4KB por lectura",
+  "text": "Una Lambda hace 320 lecturas fuertemente consistentes/seg a una tabla con RCU provisionado = 5440 ; items de 17 KB promedio. Para bajar costo manteniendo el rendimiento, ¿a cuánto ajustas el RCU?"
+ },
+ {
+  "idx": 89,
+  "key": "",
+  "concept": "DynamoDB eventually consistent read consume mitad de RCU que strongly consistent read para mismo throughput",
+  "text": "En el mismo caso (320 lecturas/seg, items de 17 KB), ¿por qué 800 RCU es incorrecto si el requisito es lectura fuertemente consistente ?"
+ },
+ {
+  "idx": 90,
+  "key": "",
+  "concept": "DynamoDB projection expression selecciona qué atributos devolver en GetItem/Query/Scan",
+  "text": "Tus consultas a DynamoDB devuelven todos los atributos por defecto, pero solo quieres traer ciertos atributos (ej. course_id y price). ¿Qué usas?"
+ },
+ {
+  "idx": 91,
+  "key": "",
+  "concept": "DynamoDB projection expression filtra atributos (columnas) vs filter expression filtra items (filas) post-lectura",
+  "text": "En DynamoDB, ¿cuál es la diferencia entre un projection expression y un filter expression ?"
+ },
+ {
+  "idx": 92,
+  "key": "",
+  "concept": "ECS task role permite asignar un IAM role distinto por task definition para permisos granulares",
+  "text": "Tienes 4 tareas ECS con Fargate y cada una necesita acceder a recursos AWS distintos . ¿Cuál es la forma más eficiente de darles acceso?"
+ },
+ {
+  "idx": 93,
+  "key": "",
+  "concept": "IAM user access keys en ~/.aws/credentials para aplicaciones on-premises que usan AWS SDK",
+  "text": "Una app Node.js corre en un servidor Linux on-premises (fuera de AWS) y usa el AWS SDK para acceder a S3, DynamoDB y ElastiCache. ¿Cuál es la forma más adecuada de darle acceso?"
+ },
+ {
+  "idx": 94,
+  "key": "",
+  "concept": "ElastiCache for Redis soporta replicación Multi-AZ con latencia sub-milisegundo",
+  "text": "Quieres una capa de caché frente a un RDS MySQL que soporte replicación Multi-AZ con respuesta sub-milisegundo, con el menor esfuerzo . ¿Qué eliges?"
+ },
+ {
+  "idx": 95,
+  "key": "",
+  "concept": "ElastiCache for Redis soporta replicación y Multi-AZ failover vs Memcached no soporta replicación",
+  "text": "Entre ElastiCache for Redis y ElastiCache for Memcached , ¿cuál soporta replicación y alta disponibilidad Multi-AZ?"
+ },
+ {
+  "idx": 96,
+  "key": "",
+  "concept": "CloudFront Functions ejecutan en Viewer Request/Response en edge locations para validación ligera (JWT) antes de alcanzar el origen",
+  "text": "Fargate detrás de un ALB, con CloudFront delante. Un aluvión de logins no autenticados dispara la CPU de Fargate. Para validar el JWT y quitar carga de la forma más eficiente, ¿qué haces?"
+ },
+ {
+  "idx": 97,
+  "key": "",
+  "concept": "CloudFront Functions (JavaScript ligero, viewer request/response solamente) vs Lambda@Edge (más CPU/red, cuatro eventos CloudFront)",
+  "text": "¿En qué se diferencian CloudFront Functions y Lambda@Edge , y cuándo conviene cada uno?"
+ },
+ {
+  "idx": 98,
+  "key": "",
+  "concept": "S3 CORS AllowedMethod especifica los métodos HTTP (GET, PUT, POST, DELETE) permitidos desde el origen cross-origin",
+  "text": "Una config CORS de un bucket S3 tiene AllowedOrigin=https://tutorialsdojo.com , AllowedMethod = GET, PUT, POST, DELETE, AllowedHeader=* , MaxAgeSeconds=3600 . ¿Qué DOS afirmaciones son ciertas? (marca la de los metodos )"
+ },
+ {
+  "idx": 99,
+  "key": "",
+  "concept": "S3 CORS ExposeHeader permite que el código JavaScript del cliente lea headers específicos de la respuesta (ej. ETag)",
+  "text": "En una regla CORS de S3, ¿qué hace exactamente el elemento ExposeHeader (ej. ExposeHeader=ETag )?"
+ },
+ {
+  "idx": 100,
+  "key": "",
+  "concept": "S3 CORS define orígenes/métodos permitidos por el navegador pero no autoriza acciones (autorización viene de IAM/bucket policies)",
+  "text": "¿Qué hace (y qué NO hace) una configuración CORS en un bucket S3?"
+ },
+ {
+  "idx": 101,
+  "key": "",
+  "concept": "S3 SSE-KMS con header x-amz-server-side-encryption: aws:kms usa la KMS key por defecto cuando no se especifica key-id",
+  "text": "Un job debe subir archivos a un bucket con SSE-KMS usando la KMS key por defecto . Con la MENOR configuración , ¿qué header incluyes en la petición de subida?"
+ },
+ {
+  "idx": 102,
+  "key": "",
+  "concept": "S3 server-side encryption: x-amz-server-side-encryption header values map to SSE-KMS (aws:kms), SSE-S3 (AES256), and SSE-C (customer-* headers)",
+  "text": "Al subir a S3, ¿qué valor del header x-amz-server-side-encryption corresponde a cada tipo de cifrado del lado servidor?"
+ },
+ {
+  "idx": 103,
+  "key": "",
+  "concept": "DynamoDB ReturnConsumedCapacity parameter: INDEXES value returns total WCU consumed with subtotals for table and each secondary index",
+  "text": "En una operación de escritura de DynamoDB (UpdateItem/PutItem/DeleteItem) quieres el total de write capacity units consumidos, con subtotales para la tabla y cada índice secundario afectado. ¿Qué valor pones en el parámetro ReturnConsumedCapacity ?"
+ },
+ {
+  "idx": 104,
+  "key": "",
+  "concept": "DynamoDB ReturnConsumedCapacity parameter: default value is NONE (no capacity information returned unless explicitly requested)",
+  "text": "En DynamoDB, ¿cuál es el valor por defecto del parámetro ReturnConsumedCapacity y qué hace?"
+ },
+ {
+  "idx": 105,
+  "key": "",
+  "concept": "S3 Object Lambda Access Point: enables per-role data transformation using Lambda functions without storing multiple copies",
+  "text": "Debes servir a cada rol una versión redactada distinta de los mismos registros PII en S3, manteniendo una sola copia de los datos, aplicando una Lambda RedactPII-[role] por rol. ¿Qué combinación de recursos S3 usas?"
+ },
+ {
+  "idx": 106,
+  "key": "",
+  "concept": "S3 Object Lambda: client uses standard GetObject API against Object Lambda Access Point to retrieve transformed data",
+  "text": "Con S3 Object Lambda, ¿qué API usa el cliente para obtener el dato ya transformado (redactado) a través del Object Lambda Access Point?"
+ },
+ {
+  "idx": 107,
+  "key": "",
+  "concept": "S3 Object Lambda vs S3 Event Notification: Object Lambda executes on GET/retrieval operations; Event Notification triggers on write/state-change events",
+  "text": "¿En qué se diferencia S3 Object Lambda de una S3 Event Notification que invoca una Lambda, respecto a cuándo actua?"
+ },
+ {
+  "idx": 108,
+  "key": "",
+  "concept": "DynamoDB Global Secondary Index: las queries y scans consumen RCU/WCU del propio GSI, no de la tabla base",
+  "text": "Al usar un Global Secondary Index (GSI) en DynamoDB, ¿de dónde se consumen las unidades de capacidad de las queries/scans sobre ese índice?"
+ },
+ {
+  "idx": 109,
+  "key": "",
+  "concept": "DynamoDB Global Secondary Index: soporta solo eventual consistency en lecturas, nunca strong consistency",
+  "text": "¿Qué consistencia de lectura soporta un Global Secondary Index (GSI) de DynamoDB?"
+ },
+ {
+  "idx": 110,
+  "key": "",
+  "concept": "DynamoDB GSI vs LSI: GSI permite partition key distinta de la tabla base; LSI comparte la misma partition key",
+  "text": "Respecto a la partition key : ¿en qué se diferencian un GSI y un LSI de DynamoDB?"
+ },
+ {
+  "idx": 111,
+  "key": "",
+  "concept": "API Gateway Lambda custom (non-proxy) integration: requiere configurar mapping templates en integration request/response para transformar datos",
+  "text": "En API Gateway con backend Lambda, necesitas especificar cómo se mapean los datos de la petición entrante a la integración y la respuesta de la integración al método. ¿Qué tipo de integración usas?"
+ },
+ {
+  "idx": 112,
+  "key": "",
+  "concept": "API Gateway Lambda proxy vs custom integration: proxy pasa petición sin transformación; custom permite configurar mapping templates",
+  "text": "En API Gateway con backend Lambda, ¿qué diferencia hay entre Lambda proxy y Lambda custom (non-proxy) integration?"
+ },
+ {
+  "idx": 113,
+  "key": "",
+  "concept": "S3 hotlinking protection: CloudFront signed URLs o signed cookies controlan acceso escalable mediante firma y expiración",
+  "text": "Otros sitios están hotlinkeando tus fotos alojadas en S3 (las enlazan desde sus páginas), subiendo tus costos de transferencia. Quieres controlar el acceso de forma escalable . ¿Qué solución es la más efectiva?"
+ },
+ {
+  "idx": 114,
+  "key": "",
+  "concept": "CloudFront signed URLs para archivo individual vs signed cookies para múltiples archivos",
+  "text": "En CloudFront, ¿cuándo usas signed URL y cuándo signed cookies para restringir contenido?"
+ },
+ {
+  "idx": 115,
+  "key": "",
+  "concept": "CloudFront hotlinking mitigation: Network ACL por IP es evadible y CORS abierto no controla acceso",
+  "text": "Para frenar el hotlinking de tus imágenes en CloudFront, ¿por qué una Network ACL por IP y CORS abierto a todos son malas soluciones?"
+ },
+ {
+  "idx": 116,
+  "key": "",
+  "concept": "X-Ray filter expressions con annotations indexadas y GetTraceSummaries API para obtener trace IDs programáticamente",
+  "text": "Quieres filtrar trazas de X-Ray por annotations con la mínima configuración , y obtener los trace IDs y annotations programáticamente. ¿Qué dos acciones eliges? (elige el par correcto)"
+ },
+ {
+  "idx": 117,
+  "key": "",
+  "concept": "X-Ray GetTraceSummaries filtra por tiempo/FilterExpression vs BatchGetTraces recupera trazas completas por trace IDs",
+  "text": "En X-Ray, ¿cuál es la diferencia entre las APIs GetTraceSummaries y BatchGetTraces ?"
+ },
+ {
+  "idx": 118,
+  "key": "",
+  "concept": "AWS WAF inspecciona capa 7 HTTP/HTTPS y bloquea SQL injection y XSS en CloudFront/ALB/API Gateway",
+  "text": "Tu portal (detrás de ALB/CloudFront/API Gateway) recibe muchos intentos de SQL injection y cross-site scripting (XSS) . ¿Qué servicio mitiga estos ataques a nivel de capa 7?"
+ },
+ {
+  "idx": 119,
+  "key": "",
+  "concept": "AWS WAF bloquea peticiones web, GuardDuty detecta amenazas sin bloquear, Firewall Manager administra reglas WAF centralmente",
+  "text": "Distingue el rol de AWS WAF , Amazon GuardDuty y AWS Firewall Manager . ¿Cuál describe correctamente a cada uno?"
+ },
+ {
+  "idx": 120,
+  "key": "",
+  "concept": "CloudFront origin selection: S3 es origen nativo optimizado para contenido estático global; EC2/EFS/Glacier no (EC2 es regional/dinámico, EFS no es origen nativo, Glacier es archivado)",
+  "text": "Para servir contenido estático global con baja latencia, ¿por qué EC2 , EFS y Glacier NO son buenos como almacenamiento/origen frente a S3?"
+ },
+ {
+  "idx": 121,
+  "key": "",
+  "concept": "AWS SAM: framework que define Lambda + API Gateway + DynamoDB con sintaxis abreviada YAML en un solo stack versionado",
+  "text": "Necesitas un framework simple y nativo de AWS para definir Lambda + API Gateway + DynamoDB en un solo stack, compartir config (memoria, timeouts) y desplegar todo como una única entidad versionada . ¿Qué usas?"
+ },
+ {
+  "idx": 122,
+  "key": "",
+  "concept": "AWS SAM Transform: declara Transform: AWS::Serverless-2016-10-31 para expandir recursos SAM a CloudFormation completo en deploy",
+  "text": "¿Qué relación tiene AWS SAM con CloudFormation al desplegar?"
+ },
+ {
+  "idx": 123,
+  "key": "",
+  "concept": "Custom identity broker + STS: solución para integrar identity store sin SAML 2.0 con AWS IAM mediante autenticación LDAP y llamadas STS",
+  "text": "Debes integrar un directorio LDAP on-premises con AWS IAM, pero el identity store no es compatible con SAML 2.0 . ¿Cuál es la solución más adecuada?"
+ },
+ {
+  "idx": 124,
+  "key": "",
+  "concept": "STS AssumeRole/GetFederationToken: APIs que devuelven credenciales temporales (access key, secret key, session token) con expiración en custom identity broker",
+  "text": "En un custom identity broker, ¿qué llamadas de STS se usan para obtener credenciales temporales de AWS y qué devuelven?"
+ },
+ {
+  "idx": 125,
+  "key": "",
+  "concept": "DynamoDB Local Secondary Index (LSI): índice con misma partition key + sort key alterna + strong consistency, solo creado junto con la tabla (requiere nueva tabla + migración de datos)",
+  "text": "Necesitas consultar con la misma partition key pero una sort key alterna y con strong consistency . La tabla ya existe con datos. ¿Qué haces?"
+ },
+ {
+  "idx": 126,
+  "key": "",
+  "concept": "DynamoDB GSI se puede crear/eliminar en cualquier momento; LSI solo se define al crear la tabla",
+  "text": "Sobre los índices secundarios de DynamoDB: ¿cuál se puede añadir o borrar en cualquier momento y cuál solo se crea junto con la tabla ?"
+ },
+ {
+  "idx": 127,
+  "key": "",
+  "concept": "X-Ray registra llamadas downstream (RDS, HTTP, AWS SDK) en subsegments; annotations son indexadas y filtrables, metadata no",
+  "text": "En X-Ray quieres que la llamada downstream a RDS (incluida la query SQL ) quede registrada como una unidad de trabajo propia y además buscable con filter expressions . ¿Dónde la registras y con qué tipo de dato?"
+ },
+ {
+  "idx": 128,
+  "key": "",
+  "concept": "X-Ray annotations son pares clave-valor indexados y filtrables; metadata son pares clave-valor no indexados",
+  "text": "En X-Ray, ¿cuál es la diferencia entre annotations y metadata ?"
+ },
+ {
+  "idx": 129,
+  "key": "",
+  "concept": "ECS task placement strategy random coloca tareas al azar respetando constraints con mínima configuración",
+  "text": "En ECS quieres colocar tareas en instancias con recursos suficientes, respetando las constraints (implícitas o explícitas), con la menor configuración posible. ¿Qué task placement strategy usas?"
+ },
+ {
+  "idx": 130,
+  "key": "",
+  "concept": "ECS task placement strategies: binpack optimiza utilización de recursos, spread distribuye por atributo (AZ), random coloca al azar",
+  "text": "En ECS, ¿para qué sirve cada task placement strategy: binpack , spread y random ?"
+ },
+ {
+  "idx": 131,
+  "key": "",
+  "concept": "SAM deployment flujo: sam build local → sam package sube a S3 → sam deploy desde S3 vía CloudFormation",
+  "text": "Ya tienes una plantilla SAM y el código Lambda en local. ¿Cuál es el flujo correcto de despliegue de una app SAM?"
+ },
+ {
+  "idx": 132,
+  "key": "",
+  "concept": "SAM CLI: sam build compila localmente, sam package sube a S3 y reemplaza referencias, sam deploy crea/actualiza stack CloudFormation, sam publish publica al Serverless Application Repository",
+  "text": "¿Qué hace cada comando de la SAM CLI: sam build , sam package , sam deploy y sam publish ?"
+ },
+ {
+  "idx": 133,
+  "key": "",
+  "concept": "DynamoDB optimistic locking: escritura condicional basada en atributo de versión para prevenir sobrescritura concurrente",
+  "text": "Varios usuarios actualizan el mismo item de DynamoDB concurrentemente y unos sobrescriben los cambios de otros. Quieres que una escritura solo tenga éxito si el item no cambió desde que lo leíste. ¿Qué estrategia usas?"
+ },
+ {
+  "idx": 134,
+  "key": "",
+  "concept": "DynamoDB global tables: reconciliación last-writer-wins ignora optimistic locking entre regiones",
+  "text": "¿Por qué el optimistic locking por número de versión no funciona como esperas con DynamoDB global tables ?"
+ },
+ {
+  "idx": 135,
+  "key": "",
+  "concept": "DynamoDB RCU: 1 RCU = 1 lectura fuertemente consistente/segundo de item hasta 4 KB (o 2 lecturas eventualmente consistentes)",
+  "text": "En DynamoDB, con lecturas fuertemente consistentes : ¿cuántas lecturas por segundo cubre 1 RCU y de qué tamaño de item?"
+ },
+ {
+  "idx": 136,
+  "key": "",
+  "concept": "DynamoDB RCU cálculo: item 17 KB requiere 5 bloques de 4 KB, 320 lecturas fuertes/seg = 1600 RCU",
+  "text": "Una Lambda hace 320 lecturas fuertemente consistentes/seg de items de 17 KB . ¿Cuántos RCU necesitas (valor óptimo para bajar costo sin perder rendimiento)?"
+ },
+ {
+  "idx": 137,
+  "key": "",
+  "concept": "DynamoDB tamaño de bloque: RCU usa bloques de 4 KB, WCU usa bloques de 1 KB (item 17 KB = 5 bloques RCU, 17 bloques WCU)",
+  "text": "Un item de 17 KB : ¿cuántos bloques cuenta para RCU (bloque 4 KB) y cuántos para WCU (bloque 1 KB)?"
+ },
+ {
+  "idx": 138,
+  "key": "",
+  "concept": "X-Ray daemon requiere la managed policy AWSXRayDaemonWriteAccess para subir segmentos de trazas a X-Ray",
+  "text": "En Elastic Beanstalk corres el X-Ray daemon en las instancias para subir trazas a X-Ray, usando el instance profile por defecto. ¿Qué managed policy de IAM necesita el daemon para subir datos ?"
+ },
+ {
+  "idx": 139,
+  "key": "",
+  "concept": "X-Ray usa AWSXRayReadOnlyAccess para ver service maps y AWSXRayFullAccess para configurar encryption settings y sampling rules",
+  "text": "Para X-Ray, ¿qué managed policy usas para (a) solo ver el service map en la consola y (b) configurar encryption y sampling rules?"
+ },
+ {
+  "idx": 140,
+  "key": "",
+  "concept": "CloudFormation AWS::Lambda::Function usa la propiedad Code.ZipFile para escribir código Python o Node.js inline en la plantilla",
+  "text": "En una plantilla CloudFormation con AWS::Lambda::Function , quieres escribir el código Python inline (unas pocas líneas) dentro de la plantilla. ¿Qué parámetro usas?"
+ },
+ {
+  "idx": 141,
+  "key": "",
+  "concept": "CloudFormation usa la propiedad Code (con ZipFile/S3Bucket) mientras que SAM usa CodeUri para especificar ubicación del código Lambda",
+  "text": "¿A qué recurso pertenece cada propiedad: Code (con ZipFile/S3Bucket) y CodeUri ?"
+ },
+ {
+  "idx": 142,
+  "key": "",
+  "concept": "DynamoDB 1 WCU cubre 1 escritura/segundo de hasta 1 KB, calculando WCU redondeando tamaño del item hacia arriba en bloques de 1 KB",
+  "text": "En DynamoDB, ¿cuánto cubre 1 WCU y cómo calculas las WCU para 10 escrituras/seg de items de 2 KB ?"
+ },
+ {
+  "idx": 143,
+  "key": "",
+  "concept": "DynamoDB lecturas eventualmente consistentes dividen entre 2 el cálculo de RCU después de redondear tamaño en bloques de 4 KB",
+  "text": "Para 20 lecturas eventualmente consistentes/seg de items de 2 KB en DynamoDB, ¿cuántos RCU necesitas?"
+ },
+ {
+  "idx": 144,
+  "key": "",
+  "concept": "DynamoDB transactional operations (TransactGetItems/TransactWriteItems) consume double capacity units compared to standard reads/writes",
+  "text": "En DynamoDB, ¿cómo cambia el costo de capacidad para operaciones transaccionales (TransactGetItems / TransactWriteItems) frente a lecturas fuertes / escrituras normales?"
+ },
+ {
+  "idx": 145,
+  "key": "",
+  "concept": "S3 SSE-C and client-side encryption allow customer-provided and customer-managed encryption keys (not AWS-managed)",
+  "text": "Debes cifrar datos en reposo en S3 con una clave de cifrado provista y gestionada por tu empresa (no por AWS), con AES-256. ¿Qué dos opciones cumplen? (elige el par correcto)"
+ },
+ {
+  "idx": 146,
+  "key": "",
+  "concept": "S3 encryption key management: SSE-S3 and SSE-KMS are AWS-managed; SSE-C and client-side encryption are customer-managed",
+  "text": "En el cifrado de S3, ¿quién gestiona la clave en cada opción: SSE-S3, SSE-KMS, SSE-C y client-side encryption?"
+ },
+ {
+  "idx": 147,
+  "key": "",
+  "concept": "S3 + CloudFront combination delivers static content with lowest global latency via edge caching",
+  "text": "Sirves un sitio estático (imágenes, videos, HTML, JS) con la menor latencia posible para usuarios globales . ¿Qué combinación de servicios usas?"
+ },
+ {
+  "idx": 148,
+  "key": "",
+  "concept": "Cognito Identity Pools provide temporary AWS credentials for both authenticated and unauthenticated (guest) users",
+  "text": "Un juego móvil necesita entregar credenciales AWS temporales tanto a usuarios autenticados por redes sociales (Facebook, Google) como a usuarios invitados sin autenticar (guest). ¿Qué servicio AWS usas?"
+ },
+ {
+  "idx": 149,
+  "key": "",
+  "concept": "Cognito User Pool authenticates users and returns JWT tokens; Identity Pool exchanges identity for temporary AWS credentials via STS",
+  "text": "En Amazon Cognito, ¿cuál es la diferencia principal entre un User Pool y un Identity Pool ?"
+ },
+ {
+  "idx": 150,
+  "key": "",
+  "concept": "KMS envelope encryption: datos cifrados con data key simétrica, data key cifrada con root key que permanece en claro dentro de KMS",
+  "text": "¿Cuál describe correctamente el proceso de envelope encryption (cifrado en sobre)?"
+ },
+ {
+  "idx": 151,
+  "key": "",
+  "concept": "KMS envelope encryption: re-cifrar solo la data key (pequeña) en lugar del dato completo reduce tiempo de operación al rotar claves",
+  "text": "En envelope encryption con AWS KMS, ¿por qué conviene cifrar el mismo dato bajo varias claves reencriptando solo la data key en vez de reencriptar el dato completo?"
+ },
+ {
+  "idx": 152,
+  "key": "",
+  "concept": "API Gateway Lambda Authorizer tipo TOKEN: recibe identidad del llamador mediante bearer token (JWT/OAuth) en header para autenticación",
+  "text": "Con un API Gateway Lambda Authorizer , necesitas una estrategia de autenticación similar a OAuth o SAML (el llamador envía un bearer token, ej. un JWT). ¿Qué tipo de autorizador usas?"
+ },
+ {
+  "idx": 153,
+  "key": "",
+  "concept": "API Gateway Lambda Authorizer tipo REQUEST: obtiene identidad del llamador de headers + query strings + stageVariables + $context variables",
+  "text": "En API Gateway, ¿de dónde obtiene la identidad del llamador un REQUEST authorizer (autorizador basado en parámetros de la petición)?"
+ },
+ {
+  "idx": 154,
+  "key": "",
+  "concept": "CloudWatch Agent: requiere política IAM CloudWatchAgentServerPolicy en el instance role para permisos PutMetricData y PutLogEvents",
+  "text": "Instancias EC2 en un Auto Scaling group tienen instalado el CloudWatch agent para publicar métricas personalizadas, pero las instancias recién lanzadas fallan al enviar las métricas a CloudWatch. ¿Qué cambio lo corrige?"
+ },
+ {
+  "idx": 155,
+  "key": "",
+  "concept": "EC2 IAM role via instance profile: proporciona credenciales temporales rotadas automáticamente por STS en lugar de claves de acceso de larga duración",
+  "text": "¿Por qué se asocia un IAM role (vía instance profile) a una instancia EC2 en lugar de incrustar claves de acceso de larga duración en la instancia?"
+ },
+ {
+  "idx": 156,
+  "key": "",
+  "concept": "Application Auto Scaling escala EC2 Spot Fleet (instancias) y DynamoDB (RCU/WCU) automáticamente según demanda para elasticidad costo-eficiente",
+  "text": "Buscas los servicios que aporten MAYOR elasticidad (ajustar oferta de recursos a la demanda) manteniendo costo-eficiencia. ¿Cuáles dos aplican mejor? (elige el par correcto)"
+ },
+ {
+  "idx": 157,
+  "key": "",
+  "concept": "Elasticidad time-based apaga recursos cuando no se usan vs volume-based ajusta magnitud/escala según intensidad de demanda",
+  "text": "En elasticidad AWS, ¿qué distingue la elasticidad basada en tiempo (time-based) de la basada en volumen (volume-based)?"
+ },
+ {
+  "idx": 158,
+  "key": "",
+  "concept": "DynamoDB Query con eventual consistency consume menor RCU que Scan al buscar por primary key en lugar de recorrer toda la tabla",
+  "text": "Una app recibe ProvisionedThroughputExceeded por picos de RCU en DynamoDB. Necesitas buscar ítems por valores de primary key usando la MENOR cantidad de RCU . ¿Qué haces?"
+ },
+ {
+  "idx": 159,
+  "key": "",
+  "concept": "DynamoDB Scan examina todos los ítems de la tabla antes de filtrar vs Query busca directamente por primary key",
+  "text": "En DynamoDB, ¿por qué una operación Scan suele ser mucho más costosa e ineficiente que una Query ?"
+ },
+ {
+  "idx": 160,
+  "key": "",
+  "concept": "Cadena de credenciales SDK/CLI prioriza claves estáticas configuradas sobre credenciales temporales del IAM role de instancia EC2",
+  "text": "Una instancia EC2 tenía un IAM role para escribir en los buckets S3 de dev y prod, y además tiene claves de acceso configuradas en el AWS CLI . Le asignas un nuevo IAM role que solo permite el bucket dev, pero la app sigue escribiendo en ambos buckets. ¿Causa más probable?"
+ },
+ {
+  "idx": 161,
+  "key": "",
+  "concept": "EC2 instance profile asocia un único IAM role activo por instancia que suministra credenciales temporales a todas las aplicaciones",
+  "text": "¿Qué es un instance profile en EC2 y cuántos IAM roles puede entregar a la instancia a la vez?"
+ },
+ {
+  "idx": 162,
+  "key": "",
+  "concept": "Lambda memory allocation scales CPU proportionally—no independent CPU control exists",
+  "text": "Necesitas aumentar la CPU disponible para una función Lambda que procesa registros en un fan-out desde un Kinesis data stream. ¿Cuál es la MEJOR forma de lograrlo?"
+ },
+ {
+  "idx": 163,
+  "key": "",
+  "concept": "Lambda concurrent executions measure parallel invocations, not CPU per invocation",
+  "text": "En AWS Lambda, ¿qué significan las concurrent executions (ejecuciones concurrentes) y cómo se relacionan con la CPU?"
+ },
+ {
+  "idx": 164,
+  "key": "",
+  "concept": "Cognito Adaptive Authentication calculates risk score to require MFA only for suspicious sign-ins",
+  "text": "Una app usa Cognito User Pools con MFA desactivado . Tras una filtración de datos ajena, temen que atacantes usen credenciales robadas. Quieren exigir MFA solo a los inicios de sesión sospechosos , no a todos. ¿Qué habilitas?"
+ },
+ {
+  "idx": 165,
+  "key": "",
+  "concept": "Cross-account access via IAM role with trust policy enables AssumeRole from another account",
+  "text": "Una empresa tiene 3 cuentas AWS propias (A=Dev, B=Test, C=Prod). Un developer necesita acceso para auditar los despliegues en las cuentas B y C. ¿Cuál es la forma MÁS eficiente de darle ese acceso?"
+ },
+ {
+  "idx": 166,
+  "key": "",
+  "concept": "STS GetSessionToken returns temporary credentials for MFA-protected programmatic API calls",
+  "text": "Un developer quiere usar MFA para proteger llamadas programáticas a operaciones como ec2:StopInstances . Necesita una API donde enviar el código MFA de su dispositivo y recibir credenciales temporales para luego llamar a operaciones que exigen MFA. ¿Qué API de STS usa?"
+ },
+ {
+  "idx": 167,
+  "key": "",
+  "concept": "CodeDeploy Linear deployment configuration shifts traffic in equal increments at fixed intervals",
+  "text": "Una app serverless (varias Lambda) se despliega con SAM y CodeDeploy. En cada despliegue debe desplazarse 10% del tráfico a la nueva versión cada 10 minutos hasta migrar todo. ¿Qué deployment configuration de CodeDeploy usas?"
+ },
+ {
+  "idx": 168,
+  "key": "",
+  "concept": "Kinesis Data Streams PutRecord con SequenceNumberForOrdering garantiza orden estricto de registros en un shard",
+  "text": "App de subastas en tiempo real con Kinesis Data Streams. Reglas: cada puja se procesa una sola vez y un consumidor EC2 debe procesarlas en el mismo orden en que llegaron. ¿Qué solución cumple?"
+ },
+ {
+  "idx": 169,
+  "key": "",
+  "concept": "RDS Read Replica descarga lecturas de la instancia principal mediante replicación asíncrona de solo lectura",
+  "text": "Un sitio (ALB + Auto Scaling EC2 + RDS MySQL) va lento al leer artículos por un alto número de lecturas en la BD. Quieren aliviar la carga de lectura con el mínimo cambio de código . ¿Qué haces?"
+ },
+ {
+  "idx": 170,
+  "key": "",
+  "concept": "DynamoDB TTL elimina items expirados automáticamente sin consumir throughput ni costo adicional",
+  "text": "Una app usa Amplify DataStore que sincroniza estado de sesión en una tabla DynamoDB. La tabla crece muchísimo. Debes reducir el almacenamiento y el costo de datos irrelevantes SIN usar provisioned throughput . ¿Qué solución es la más costo-efectiva?"
+ },
+ {
+  "idx": 171,
+  "key": "",
+  "concept": "Elastic Beanstalk Blue/Green Deployment permite cambio de runtime major version con rollback rápido mediante swap de entornos",
+  "text": "Una app en Elastic Beanstalk corre en runtime Java 7 y debe subir a Java 8 (cambio de runtime). Todo el tráfico debe ir de inmediato a la nueva versión y, si hay problemas, poder revertir rápido . ¿Qué acción es la más apropiada?"
+ },
+ {
+  "idx": 172,
+  "key": "",
+  "concept": "CodeDeploy soporta EC2 y on-premises con despliegue in-place; Lambda solo usa blue/green traffic shifting",
+  "text": "Sobre AWS CodeDeploy, ¿cuáles DOS afirmaciones son correctas? (elige el par correcto)"
+ },
+ {
+  "idx": 173,
+  "key": "",
+  "concept": "IAM Policy Simulator evalúa permisos efectivos de políticas IAM y resource policies sin ejecutar acciones reales",
+  "text": "Usando AWS Organizations, quieres probar el impacto de SCPs sobre tus IAM policies y resource policies antes de aplicarlas , sin ejecutar acciones reales. ¿Qué servicio usas para probar y depurar políticas IAM y basadas en recursos?"
+ },
+ {
+  "idx": 174,
+  "key": "",
+  "concept": "Step Functions Catch field with ResultPath to merge input, output, and error data into a single state output",
+  "text": "Un workflow de Step Functions con 4 states maneja la lógica y los errores. Si el proceso falla , hay que agregar en un solo output todos los datos que pasaron por los nodos (input + error + output). ¿Qué usas?"
+ },
+ {
+  "idx": 175,
+  "key": "",
+  "concept": "Step Functions Amazon States Language fields: Catch for error handling transitions, Retry for same-state retries, ResultPath for input-output merging, ItemsPath for Map state array selection",
+  "text": "En Amazon States Language (Step Functions), ¿para qué sirve cada campo: Catch , Retry , ResultPath y ItemsPath ?"
+ },
+ {
+  "idx": 176,
+  "key": "",
+  "concept": "AWS CDK cdk bootstrap command provisions deployment resources (S3 bucket, IAM roles, ECR) in new account/region before first deploy",
+  "text": "Un equipo despliega una app serverless con AWS CDK ( cdk deploy ). En una cuenta AWS nueva el primer despliegue falla con NoSuchBucket . No cambiaron el código ni la config del CDK. ¿Qué comando del CDK CLI hay que correr primero?"
+ },
+ {
+  "idx": 177,
+  "key": "",
+  "concept": "AWS CDK CLI commands: bootstrap provisions environment resources, synth generates CloudFormation template, context caches environment metadata, import incorporates existing resources into stack",
+  "text": "En AWS CDK, ¿qué hace cada comando: bootstrap , synth , context e import ?"
+ },
+ {
+  "idx": 178,
+  "key": "",
+  "concept": "AWS CDK cdk synth generates CloudFormation template for SAM CLI sam local invoke to test Lambda functions locally",
+  "text": "Una API serverless está definida con constructs L2 de AWS CDK. El desarrollador quiere probar localmente algunas funciones Lambda (SAM y CDK ya configurados). ¿Qué dos acciones combina? (marca el par correcto)"
+ },
+ {
+  "idx": 179,
+  "key": "",
+  "concept": "Lambda Function URL with AuthType NONE enables direct HTTPS endpoint for custom webhook signature validation in function code",
+  "text": "Una plataforma externa manda webhooks por HTTPS a una Lambda y firma cada request con una clave secreta en los headers . La función debe ejecutar la lógica solo si el request viene de un origen válido, con el mínimo esfuerzo . ¿Qué haces?"
+ },
+ {
+  "idx": 180,
+  "key": "",
+  "concept": "Lambda Function URL: AWS_IAM requiere firma SigV4 de identidades IAM autorizadas; NONE permite invocación pública sin autenticación de AWS",
+  "text": "En una Lambda Function URL , ¿qué diferencia hay entre los tipos de autorización AWS_IAM y NONE ?"
+ },
+ {
+  "idx": 181,
+  "key": "",
+  "concept": "DynamoDB BatchGetItem: reintentos con exponential backoff + jitter y uso del AWS SDK manejan UnprocessedKeys por límites de throughput o tamaño",
+  "text": "Un script usa la API de bajo nivel BatchGetItem de DynamoDB y a menudo recibe resultados parciales: buena parte de las claves vuelve en UnprocessedKeys . ¿Qué dos enfoques dan la recuperación MÁS fiable? (marca el par correcto)"
+ },
+ {
+  "idx": 182,
+  "key": "",
+  "concept": "DynamoDB Scan: parallel scan con múltiples segmentos y rate limiting aprovecha todas las particiones sin afectar throughput de operaciones normales",
+  "text": "Un developer quiere reducir el tiempo de un Scan de DynamoDB en horas de baja demanda sin afectar las cargas normales. El scan consume la mitad de los RCU fuertemente consistentes en horario normal. ¿Cómo lo mejora?"
+ },
+ {
+  "idx": 183,
+  "key": "",
+  "concept": "DynamoDB fine-grained access control: dynamodb:LeadingKeys en IAM policy condition restringe acceso a items cuya partition key coincide con el user ID federado",
+  "text": "Con Web Identity Federation, cada usuario debe acceder solo a los items cuya partition key es su propio user ID en una tabla DynamoDB. ¿Qué condition key pones en la política IAM del rol del proveedor de identidad?"
+ },
+ {
+  "idx": 184,
+  "key": "",
+  "concept": "AWS STS DecodeAuthorizationMessage: decodifica mensajes cifrados en errores UnauthorizedOperation para revelar detalles de fallo de autorización IAM",
+  "text": "Al correr stop-instance por el AWS CLI recibes un UnauthorizedOperation con un mensaje de fallo adicional en texto cifrado (encoded) . ¿Cómo decodificas ese mensaje?"
+ },
+ {
+  "idx": 185,
+  "key": "",
+  "concept": "CloudWatch Embedded Metric Format (EMF): extrae métricas personalizadas automáticamente desde logs estructurados JSON en Lambda sin llamadas API adicionales",
+  "text": "Un equipo necesita extraer métricas personalizadas (p. ej. tiempos de procesamiento) directamente de los logs de una Lambda, analizarlas y poner alarmas en tiempo real. ¿Qué enfoque usas?"
+ },
+ {
+  "idx": 186,
+  "key": "",
+  "concept": "STS GetSessionToken: API que devuelve credenciales temporales a un usuario IAM existente y soporta MFA para operaciones protegidas",
+  "text": "Un developer quiere proteger con MFA llamadas programáticas a operaciones como ec2:StopInstances . Necesita una API donde enviar el código MFA de su dispositivo y recibir credenciales temporales para luego llamar a operaciones que exigen MFA. ¿Qué API de STS usa?"
+ },
+ {
+  "idx": 187,
+  "key": "",
+  "concept": "STS APIs: AssumeRole (usuario IAM asume rol con MFA), AssumeRoleWithWebIdentity (IdP público/OIDC), AssumeRoleWithSAML (IdP corporativo SAML 2.0), GetFederationToken (credenciales federadas), GetSessionToken (usuario IAM con MFA)",
+  "text": "Distingue las APIs de AWS STS: AssumeRole , AssumeRoleWithWebIdentity , AssumeRoleWithSAML , GetFederationToken y GetSessionToken . ¿Cuál afirmación es correcta?"
+ }
+]

@@ -1,0 +1,199 @@
+[
+ {
+  "key": "dva09-4fbdba59",
+  "topic": "DynamoDB Streams como fuente de eventos para Lambda",
+  "ok": false,
+  "issues": [
+   "R3b - Distractor B (EventBridge Scheduler): La refutación es correcta en concepto pero EventBridge Scheduler es específicamente para tareas programadas/cron. Debería mencionar que EventBridge Scheduler no es el servicio apropiado para polling continuo (se usaría EventBridge Rules con Lambda o CloudWatch Events), aunque el argumento de ineficiencia del polling sigue siendo válido.",
+   "R3c - Distractor D (DAX): La refutación es técnicamente correcta pero incompleta. Falta mencionar explícitamente que DAX es un write-through cache que NO intercepta escrituras directas a DynamoDB - solo cachea lecturas. Las escrituras van directamente a DynamoDB, por lo que DAX nunca 've' los cambios para poder generar triggers.",
+   "R4 - Precisión técnica en respuesta correcta: Falta mencionar que Lambda polls el DynamoDB Stream (no es push puro). AWS Lambda service polls los shards del stream y invoca la función con batches. Esto es importante para entender el modelo de invocación y diferenciarlo de servicios push verdaderos como SNS."
+  ],
+  "tech_error": "La explicación de la opción A debería aclarar que aunque es 'automático', Lambda actúa como consumidor que hace polling del stream (pull model) en lugar de ser invocado directamente por DynamoDB (push model). AWS gestiona este polling automáticamente, pero técnicamente no es una invocación directa. Según la documentación oficial: 'Lambda reads records from the stream and invokes your function synchronously with an event that contains stream records' - esto implica un modelo de polling gestionado por AWS, no push directo."
+ },
+ {
+  "key": "dva09-0c7c0a0b",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-1a0aee4b",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-e2a6d52c",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-10613d68",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-4af54018",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-879a0d56",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-9b08f2e9",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-303491a1",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-61baa595",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-302e5592",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-a26e79a4",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-2a46aa39",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-f61f7b1c",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-e470b12f",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-b9f08ce9",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-d10caea5",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-68ee6010",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-bc3c8a7b",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-586a57c8",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-2d4efbd2",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-d4712472",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-921bc16b",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-4e81de94",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-7e41b8d8",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-7943aa9f",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-a17f9dc4",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-0321f18d",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-3b210dc3",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-b0f28e7b",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-9dd7d9cf",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-117f2eb9",
+  "ok": true,
+  "issues": [],
+  "tech_error": null
+ }
+]

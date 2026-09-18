@@ -1,0 +1,270 @@
+[
+ {
+  "key": "dva09-4fbdba59",
+  "topic": "DynamoDB Streams como fuente de eventos para Lambda",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-0c7c0a0b",
+  "topic": "Arquitecturas serverless event-driven con SNS y Lambda",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-1a0aee4b",
+  "topic": "Configuración de proveedores de identidad social en Cognito User Pools",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-e2a6d52c",
+  "topic": "Optimización de tiempos de build en CodeBuild mediante imágenes personalizadas",
+  "ok": false,
+  "issues": [
+   "R3a DEFINE TERMINOS: No define 'Amazon ECR' (Elastic Container Registry) antes de mencionarlo. No explica qué es 'LOCAL_SOURCE_CACHE' ni 'LOCAL_CUSTOM_CACHE' antes de refutarlos.",
+   "R3b CONECTA ESCENARIO-SOLUCION: Aunque explica el mecanismo general (dependencias pre-instaladas eliminan descarga), no conecta explícitamente cómo esto resuelve los '5 minutos de 8 totales' del escenario. Falta cuantificar: 'reduce el build de 8 a ~3 minutos eliminando los 5 minutos de npm install'.",
+   "R3c REFUTA CADA DISTRACTOR: La refutación de opción B es débil técnicamente - no existe 'VPC endpoint para npm registry' como servicio AWS (npm registry es externo). Debería refutar que VPC endpoints solo funcionan para servicios AWS (S3, DynamoDB, etc.), no para registros externos de terceros. La refutación de D es imprecisa: LOCAL_CUSTOM_CACHE SÍ persiste entre builds del mismo proyecto (no solo 'mismo host'), pero requiere configuración explícita de rutas y la primera ejecución sigue siendo lenta."
+  ],
+  "tech_error": "Imprecisión menor: LOCAL_CUSTOM_CACHE en CodeBuild SÍ persiste entre builds del mismo proyecto (no depende de 'mismo host' como afirma). El cache se almacena en S3 internamente. Sin embargo, la conclusión es correcta: opción A sigue siendo superior porque elimina completamente el tiempo vs. solo reducirlo después del primer build."
+ },
+ {
+  "key": "dva09-10613d68",
+  "topic": "Dead-Letter Queues (DLQ) con SQS",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-4af54018",
+  "topic": "Roles de ejecución de Lambda y permisos IAM",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-879a0d56",
+  "topic": "Políticas de despliegue en Elastic Beanstalk",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-9b08f2e9",
+  "topic": "Integración de certificados SSL/TLS de ACM con Application Load Balancer",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-303491a1",
+  "topic": "Secrets Manager para rotación automática de credenciales",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-61baa595",
+  "topic": "Compatibilidad entre AWS Encryption SDK y S3 encryption client",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-302e5592",
+  "topic": "Requisitos de sincronización de tiempo para operaciones de CodeDeploy",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-a26e79a4",
+  "topic": "Control de acceso basado en atributos (ABAC) con Cognito Identity Pools",
+  "ok": false,
+  "issues": [
+   "R3a DEFINE TERMINOS: El reverso usa 'ABAC' y 'Principal Tags' sin definirlos primero. Debe explicar que ABAC = Control de Acceso Basado en Atributos (Attribute-Based Access Control) y que Principal Tags son etiquetas que se pueden asignar a una sesión IAM desde atributos de Cognito antes de usarlos en el contexto.",
+   "R3b CONECTA ESCENARIO-SOLUCION: Falta explicar el MECANISMO completo de cómo Cognito mapea atributos personalizados a Principal Tags. No menciona que se debe configurar explícitamente el 'Tag Mapping' en el Identity Pool para que el atributo 'department' se convierta en un Principal Tag disponible como ${aws:PrincipalTag/department}. Sin esta configuración, la variable no funcionaría.",
+   "R3c REFUTA CADA DISTRACTOR: La refutación de la opción B es débil. Dice 'no escala eficientemente' pero no explica que las reglas de mapeo basadas en claims SÍ son una solución válida de AWS, solo que requiere más mantenimiento. La refutación debe ser más técnica: 'Aunque las reglas de mapeo basadas en claims (Choose role with rules) son funcionales y soportadas por Cognito, requieren crear un rol IAM por departamento y mantener reglas de mapeo para cada uno, lo cual aumenta la sobrecarga operativa comparado con ABAC que usa un solo rol con permisos dinámicos'."
+  ],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-2a46aa39",
+  "topic": "Optimización de latencia en funciones Lambda con conexiones a bases de datos",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-f61f7b1c",
+  "topic": "Configuración de Availability Zones en Application Load Balancer",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-e470b12f",
+  "topic": "Cognito Identity Pools - Flujo de autenticación federada para credenciales AWS temporales",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-b9f08ce9",
+  "topic": "Paquetes de despliegue de Lambda",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-d10caea5",
+  "topic": "Cifrado de CloudWatch Logs con claves KMS administradas por el cliente",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-68ee6010",
+  "topic": "Trust policy vs access policy en roles IAM para Cognito Identity Pools",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-bc3c8a7b",
+  "topic": "Ubicación de archivos de configuración buildspec.yml y appspec.yml",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-586a57c8",
+  "topic": "Secciones de plantillas CloudFormation",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-2d4efbd2",
+  "topic": "Manejo de duplicados en SQS con visibility timeout y deduplicación a nivel de aplicación",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-d4712472",
+  "topic": "Lambda Layers para compartir dependencias",
+  "ok": false,
+  "issues": [
+   "R3c: Falta refutación técnica concreta para la opción D. El reverso dice 'requiere cambiar completamente el modelo de despliegue' y 'redesplegar cada función cuando cambian dependencias', pero no explica que Container Images SÍ permite compartir dependencias mediante capas de Docker cacheadas, y que el problema real es la complejidad operacional innecesaria (gestión de registry ECR, builds de imágenes, tamaños mayores ~100MB+ vs Layers) para un caso de uso que Layers resuelve nativamente. La refutación actual es débil porque Container Images técnicamente SÍ centraliza dependencias."
+  ],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-921bc16b",
+  "topic": "Políticas de bucket de S3 para forzar cifrado en tránsito",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-4e81de94",
+  "topic": "API Gateway caching",
+  "ok": false,
+  "issues": [
+   "R3c: Falta refutación técnica concreta para la opción C (ElastiCache). La tarjeta dice que 'requiere modificar la lógica de aplicación (código Lambda) para implementar la capa de caché, lo cual sí modifica la infraestructura', pero esto es impreciso. Modificar código Lambda NO es modificar 'infraestructura de base de datos' (que es lo que dice la pregunta). La refutación debería ser: ElastiCache SÍ reduce carga en RDS efectivamente, PERO requiere cambios en el código de la función Lambda para implementar la lógica de cache-aside (verificar cache, consultar RDS si miss, escribir a cache), mientras que API Gateway caching es completamente transparente y no requiere ningún cambio de código. La pregunta dice 'sin modificar la infraestructura de base de datos', no 'sin modificar nada'."
+  ],
+  "tech_error": null
+ },
+ {
+  "key": "dva09-7e41b8d8",
+  "topic": "Estrategias de caching en CodeBuild para optimizar tiempos de build",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-7943aa9f",
+  "topic": "Garantías de entrega en SQS: Standard vs FIFO queues",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-a17f9dc4",
+  "topic": "Ejecución paralela de acciones dentro de un stage en CodePipeline",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-0321f18d",
+  "topic": "Programación de tareas periódicas con EventBridge y Lambda",
+  "ok": false,
+  "issues": [
+   "R3c: Falta refutación técnica concreta para la opción C (Systems Manager Maintenance Window). La tarjeta dice 'no es tan serverless como Lambda' y 'agrega complejidad operativa innecesaria', pero SSM Maintenance Windows ES una solución serverless válida que cumple todos los requisitos del enunciado. La refutación debe explicar por qué Lambda+EventBridge es SUPERIOR técnicamente, no solo diferente en implementación.",
+   "R4: Error técnico en la justificación de la opción correcta. La tarjeta implica que Lambda debe 'conectarse vía SSH, APIs internas o cualquier protocolo TCP/UDP' a las instancias EC2, pero esto es incorrecto para el caso de uso descrito. Para ejecutar scripts de mantenimiento en instancias EC2, Lambda típicamente invocaría SSM Run Command via API (no conexión directa SSH), o usaría otros métodos de orquestación. La conexión VPC por sí sola no resuelve la ejecución de scripts en instancias remotas sin un mecanismo adicional."
+  ],
+  "tech_error": "La opción A (Lambda con VPC) no es técnicamente suficiente para 'ejecutar un script de mantenimiento en instancias EC2' sin especificar el mecanismo de ejecución (SSM Run Command API, user data, SSH con credenciales, etc.). La opción C (SSM Maintenance Window + Run Command) es técnicamente más directa y completa para este caso de uso específico, ya que Run Command está diseñado precisamente para ejecutar scripts en instancias EC2. Ambas soluciones son serverless según la definición de AWS."
+ },
+ {
+  "key": "dva09-3b210dc3",
+  "topic": "Canary deployments en API Gateway con versiones de Lambda",
+  "ok": false,
+  "issues": [
+   "R3a DEFINE TERMINOS: No define 'baseline' ni 'canary' antes de usarlos. Aunque son términos comunes en deployment, el estándar exige definición explícita para estudiantes que pueden no conocerlos.",
+   "R3c REFUTA CADA DISTRACTOR: La refutación de A es incompleta/incorrecta. Afirma que 'weighted aliases requieren dos versiones publicadas (no $LATEST)', pero esto es técnicamente FALSO: los alias weighted SÍ pueden apuntar a $LATEST junto con una versión numerada. La refutación debería enfocarse en que Lambda weighted aliases NO se integran con las capacidades de canary deployment de API Gateway (métricas separadas, promoción/rollback UI, stage variables canary)."
+  ],
+  "tech_error": "La afirmación 'weighted aliases requieren dos versiones publicadas (no $LATEST)' es incorrecta. AWS Lambda permite configurar weighted aliases donde un peso apunta a una versión numerada (ej: versión 2) y otro peso a $LATEST. La documentación oficial lo confirma: un alias puede distribuir tráfico entre cualquier combinación de versiones, incluyendo $LATEST."
+ },
+ {
+  "key": "dva09-b0f28e7b",
+  "topic": "Archivos de configuración .ebextensions en Elastic Beanstalk",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-9dd7d9cf",
+  "topic": "Stage variables en API Gateway",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ },
+ {
+  "key": "dva09-117f2eb9",
+  "topic": "Server-Side Encryption con claves proporcionadas por el cliente (SSE-C) en S3",
+  "ok": true,
+  "issues": [],
+  "tech_error": null,
+  "_audit_failed": true
+ }
+]
