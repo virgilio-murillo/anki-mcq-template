@@ -168,7 +168,7 @@ cards = [
             "SageMaker AI Automatic Model Tuning para buscar los hiperparametros optimos",
             "Un notebook de SageMaker AI con una busqueda aleatoria de hiperparametros propia",
             "SageMaker Autopilot ejecutado con su configuracion por defecto de candidatos",
-            "SageMaker Autopilot con <code>TabularJobConfig.ProblemType</code> = BinaryClassification",
+            "SageMaker Experiments para registrar y comparar corridas de entrenamiento",
         ],
         correct=0,
         key="mla03-q28",
@@ -180,7 +180,7 @@ cards = [
             '<ul>'
             '<li><b>Notebook con busqueda aleatoria propia:</b> exige escribir codigo, gestionar la busqueda y analizar resultados a mano; mas esfuerzo, y random search suele ser menos eficiente.</li>'
             '<li><b>Autopilot por defecto:</b> prueba distintos algoritmos y tipos de modelo para hallar el mejor, por lo que cambiaria el tipo de modelo; incumple el requisito.</li>'
-            '<li><b>Autopilot con ProblemType = BinaryClassification:</b> aun asi Autopilot explora varios tipos de modelo; no garantiza mantener el mismo tipo de modelo.</li>'
+            '<li><b>SageMaker Experiments:</b> registra y compara corridas y sus metricas, pero no busca por si mismo la mejor combinacion de hiperparametros; solo lo harias tu a mano.</li>'
             '</ul>'
             '<div class="extra"><span class="h">Exam tip</span>Solo optimizar hiperparametros con mismo modelo y minimo esfuerzo: Automatic Model Tuning (HPO). Autopilot cambia de algoritmo/modelo, asi que no aplica cuando el tipo debe quedar fijo.</div>'
             '<div class="links"><span class="h">Links</span>'
@@ -249,10 +249,10 @@ cards = [
     card(
         question="Evaluacion - se comparan dos modelos de <b>traduccion automatica</b> (SageMaker seq2seq) que traducen articulos de noticias a varios idiomas. &iquest;Que metrica conviene usar para comparar su calidad?",
         options=[
-            "BLEU (bilingual evaluation understudy) score",
-            "F1 score",
-            "Recall",
-            "RMSE (root mean square error)",
+            "BLEU score",
+            "ROUGE score",
+            "Perplexity del modelo de lenguaje",
+            "METEOR score",
         ],
         correct=0,
         key="mla03-q34",
@@ -262,11 +262,11 @@ cards = [
             '<p><b>Por que la respuesta sirve:</b> <b>BLEU</b> es la metrica estandar para evaluar traduccion automatica: compara la salida del modelo con una o mas referencias humanas y puntua la coincidencia. Es la adecuada para comparar los dos modelos de traduccion.</p>'
             '<p><b>Por que NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>F1 score:</b> equilibra precision y recall en clasificacion (tipicamente binaria); no evalua la calidad de una traduccion.</li>'
-            '<li><b>Recall:</b> mide la proporcion de positivos reales detectados en clasificacion; no aplica a traduccion.</li>'
-            '<li><b>RMSE:</b> sirve para modelos de regresion (error sobre valores continuos); no se usa para comparar traducciones.</li>'
+            '<li><b>ROUGE:</b> mide solapamiento de n-gramas orientado al recall; es el estandar para resumen automatico, no para traduccion.</li>'
+            '<li><b>Perplexity:</b> evalua cuan bien un modelo de lenguaje predice el texto; mide fluidez del modelo, no la fidelidad de una traduccion frente a referencias.</li>'
+            '<li><b>METEOR:</b> es una metrica de generacion valida que corrige limitaciones de BLEU, pero BLEU sigue siendo la referencia estandar pedida para comparar sistemas de traduccion.</li>'
             '</ul>'
-            '<div class="extra"><span class="h">Exam tip</span>Traduccion automatica: BLEU. Clasificacion: F1/precision/recall. Regresion: RMSE/MAE. Empareja siempre la metrica con el tipo de tarea.</div>'
+            '<div class="extra"><span class="h">Exam tip</span>Traduccion automatica: BLEU. Resumen: ROUGE. Fluidez del LM: perplexity. METEOR es alternativa a BLEU, pero BLEU es el estandar por defecto para traduccion.</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/seq-2-seq.html">docs.aws seq2seq y BLEU</a></div>'
         ),
@@ -491,6 +491,373 @@ cards = [
             '<li><b>Serverless inference:</b> timeout de 60 segundos y payload maximo de 4 MB; muy por debajo del tama&ntilde;o requerido.</li>'
             '</ul>'
             '<div class="extra"><span class="h">Exam tip</span>Payload grande (hasta 1 GB) y proceso largo (hasta 1 h) con endpoint persistente: Asynchronous inference. Real-time y serverless topan en pocos MB y 60 s.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/async-inference.html">docs.aws Asynchronous Inference</a></div>'
+        ),
+    ),
+    # ============================================================
+    # REFUERZOS (cartas 2-3 por pregunta, derivadas de los rationales)
+    # ============================================================
+    # --- Q3b: direccion de scale_pos_weight ---
+    card(
+        question="XGBoost - en un dataset desbalanceado con la clase positiva minoritaria, &iquest;que efecto tiene <b>subir</b> el hiperparametro <code>scale_pos_weight</code>?",
+        options=[
+            "Da mas peso a la clase positiva, aumentando la penalizacion por clasificar mal la clase minoritaria",
+            "Da menos peso a la clase positiva, reduciendo los falsos positivos sobre la clase mayoritaria",
+            "Reduce la profundidad de los arboles para evitar el sobreajuste del modelo",
+            "Acelera la convergencia del entrenamiento aumentando el tama&ntilde;o del paso de optimizacion",
+        ],
+        correct=0,
+        key="mla03-q3b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - mas peso a la clase positiva, mayor penalizacion por errarla.</div>'
+            '<p><b>El problema:</b> entender que hace exactamente <code>scale_pos_weight</code> al subirlo en un dataset desbalanceado.</p>'
+            '<p><b>Por que la respuesta sirve:</b> <code>scale_pos_weight</code> escala el peso de la clase positiva en la funcion de perdida. Al aumentarlo, los errores sobre la clase positiva (minoritaria) penalizan mas, forzando al modelo a detectarla mejor.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>Menos peso a la positiva:</b> eso es lo que hace <b>bajar</b> el valor, no subirlo; ademas empeoraria la deteccion de la minoritaria.</li>'
+            '<li><b>Reducir profundidad de arboles:</b> eso lo controla <code>max_depth</code>, no <code>scale_pos_weight</code>.</li>'
+            '<li><b>Acelerar convergencia con mayor paso:</b> eso es el <code>learning rate</code> (eta), no el peso de clase.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Regla practica: <code>scale_pos_weight</code> = (num negativos / num positivos). Subelo cuando la clase positiva es minoritaria.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/xgboost_hyperparameters.html">docs.aws XGBoost hiperparametros</a></div>'
+        ),
+    ),
+    # --- Q12b: Serverless bajo demanda vs provisioned concurrency ---
+    card(
+        question="SageMaker Serverless Inference - &iquest;cual es la diferencia clave entre <b>bajo demanda</b> (sin provisioned concurrency) y <b>con provisioned concurrency</b>?",
+        options=[
+            "Bajo demanda escala a cero y puede tener cold starts; con provisioned concurrency se reserva capacidad caliente (costo continuo) para evitarlos",
+            "Bajo demanda soporta instancias aceleradas GPU y escala a cero; con provisioned concurrency solo se admite CPU y nunca hay cold starts en ningun caso",
+            "Bajo demanda permite payloads de hasta 1 GB por peticion; con provisioned concurrency el limite baja a 6 MB y se pierde el escalado automatico",
+            "Bajo demanda esta pensado para entrenamiento por lotes de larga duracion; con provisioned concurrency se habilita la inferencia en tiempo real de baja latencia",
+        ],
+        correct=0,
+        key="mla03-q12b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - bajo demanda escala a cero (posibles cold starts); PC reserva capacidad caliente con costo continuo.</div>'
+            '<p><b>El problema:</b> distinguir cuando conviene cada modo de Serverless Inference.</p>'
+            '<p><b>Por que la respuesta sirve:</b> el modo bajo demanda no paga computo en reposo (escala a cero) pero puede sufrir cold starts; la provisioned concurrency mantiene copias precalentadas para latencia predecible, a cambio de facturar esa reserva de forma continua.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>Instancias aceleradas:</b> Serverless Inference no soporta GPU en ningun modo; la diferencia no es CPU vs GPU.</li>'
+            '<li><b>Limites de payload distintos:</b> el limite de payload de serverless es el mismo (unos 4 MB) en ambos modos; no cambia por activar PC.</li>'
+            '<li><b>Entrenamiento vs inferencia:</b> ambos modos son de inferencia; ninguno corre training jobs.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Trafico impredecible y barato en reposo: bajo demanda. Rafagas predecibles con latencia critica: provisioned concurrency (pagas la reserva).</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/serverless-endpoints.html">docs.aws Serverless Inference</a></div>'
+        ),
+    ),
+    # --- Q16b: seleccion de tecnica de transformacion por tipo de dato ---
+    card(
+        question="Preprocesamiento - relaciona el objetivo con la tecnica: se necesita <b>capturar interacciones entre variables categoricas</b> para crear nuevas features. &iquest;Que transformacion es la adecuada?",
+        options=[
+            "Producto cartesiano que combina los niveles de dos columnas",
+            "Transformacion logaritmica que comprime el rango de una columna",
+            "Quantile binning que discretiza una columna en intervalos iguales",
+            "Normalizacion min-max que reescala una columna a un rango fijo",
+        ],
+        correct=0,
+        key="mla03-q16b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - producto cartesiano.</div>'
+            '<p><b>El problema:</b> elegir la transformacion cuyo proposito es crear features de interaccion entre variables categoricas o de texto.</p>'
+            '<p><b>Por que la respuesta sirve:</b> el producto cartesiano combina categorias de dos o mas variables para generar features nuevas que capturan su interaccion (por ejemplo, ciudad x tipo_producto).</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>Transformacion logaritmica:</b> corrige sesgo comprimiendo el rango de una variable numerica continua; no cruza columnas.</li>'
+            '<li><b>Quantile binning:</b> discretiza una variable continua en intervalos con igual numero de observaciones; no cruza columnas.</li>'
+            '<li><b>Normalizacion min-max:</b> reescala una columna a un rango fijo; no genera features de interaccion.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Empareja objetivo con tecnica: interacciones categoricas = producto cartesiano; sesgo numerico = log; discretizar = binning; escalar = min-max/estandarizacion.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/machine-learning/latest/dg/data-transformations-reference.html">docs.aws transformaciones de datos</a></div>'
+        ),
+    ),
+    # --- Q18b: supervisado vs no supervisado (built-in algorithms) ---
+    card(
+        question="SageMaker algoritmos integrados - &iquest;cual de estos es un algoritmo <b>no supervisado</b> (no usa etiquetas)?",
+        options=[
+            "K-means (agrupamiento por proximidad)",
+            "K-nearest neighbors (clasificacion por vecinos)",
+            "XGBoost (clasificacion con arboles)",
+            "Linear Learner (regresion lineal)",
+        ],
+        correct=0,
+        key="mla03-q18b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - K-means es no supervisado.</div>'
+            '<p><b>El problema:</b> separar algoritmos integrados supervisados (usan etiquetas) de los no supervisados.</p>'
+            '<p><b>Por que la respuesta sirve:</b> K-means agrupa datos en clusters por proximidad <b>sin usar etiquetas</b>; es no supervisado. Se usa para descubrir estructura, no para predecir una clase conocida.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>k-NN (clasificacion):</b> supervisado; asigna la clase segun las etiquetas de los vecinos mas cercanos.</li>'
+            '<li><b>XGBoost:</b> supervisado; entrena arboles con etiquetas para clasificar o regresionar.</li>'
+            '<li><b>Linear Learner (regresion):</b> supervisado; aprende de datos etiquetados para predecir un valor continuo.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>No supervisados built-in tipicos: K-means, Random Cut Forest, PCA, IP Insights. Supervisados: XGBoost, Linear Learner, k-NN, Factorization Machines.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/algos.html">docs.aws algoritmos integrados</a></div>'
+        ),
+    ),
+    # --- Q23b: limite de 15 minutos de Lambda ---
+    card(
+        question="Serverless - un paso de procesamiento de datos tarda <b>varias horas</b> en completarse. &iquest;Por que AWS Lambda NO es adecuado para ejecutarlo directamente?",
+        options=[
+            "Lambda tiene un tiempo maximo de ejecucion de 15 minutos por invocacion",
+            "Lambda tiene un maximo de 10 GB de memoria asignable por funcion",
+            "El paquete de despliegue zip de Lambda topa en 250 MB descomprimido",
+            "El almacenamiento temporal en <code>/tmp</code> de Lambda llega a 10 GB",
+        ],
+        correct=0,
+        key="mla03-q23b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - Lambda topa en 15 minutos por invocacion.</div>'
+            '<p><b>El problema:</b> identificar el limite duro que descarta a Lambda para tareas de larga duracion.</p>'
+            '<p><b>Por que la respuesta sirve:</b> el timeout maximo de una funcion Lambda es 15 minutos; una tarea que tarda horas no cabe en una sola invocacion, por lo que Lambda no aplica sin trocear artificialmente el trabajo.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>Maximo de 10 GB de memoria:</b> es un limite real de Lambda, pero la memoria no es lo que impide una tarea de horas; el bloqueo es el timeout.</li>'
+            '<li><b>Zip de 250 MB descomprimido:</b> limite real del deployment package, pero afecta al tama&ntilde;o del codigo, no a la duracion del proceso.</li>'
+            '<li><b>10 GB en <code>/tmp</code>:</b> limite real de almacenamiento efimero, irrelevante para una tarea cuyo problema es que dura mas de 15 minutos.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Regla de examen: proceso &gt; 15 min descarta Lambda. Usa SageMaker Processing/Pipelines, Step Functions con tareas de larga duracion, Batch o Fargate.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html">docs.aws limites de Lambda</a></div>'
+        ),
+    ),
+    # --- Q28b: Automatic Model Tuning vs Autopilot ---
+    card(
+        question="SageMaker - &iquest;cual es la diferencia clave entre <b>Automatic Model Tuning</b> y <b>Autopilot</b>?",
+        options=[
+            "Automatic Model Tuning optimiza hiperparametros con el tipo de modelo fijo; Autopilot prueba varios algoritmos y modelos",
+            "Automatic Model Tuning elige por ti el mejor algoritmo entre varios; Autopilot en cambio requiere que fijes el algoritmo de antemano",
+            "Automatic Model Tuning define solo, sin tu intervencion, los rangos de cada hiperparametro; Autopilot te obliga a especificarlos manualmente",
+            "Automatic Model Tuning genera los datos de entrenamiento sinteticos; Autopilot parte del dataset que tu proporcionas",
+        ],
+        correct=0,
+        key="mla03-q28b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - AMT fija el modelo y busca hiperparametros; Autopilot explora algoritmos y tipos de modelo.</div>'
+            '<p><b>El problema:</b> saber cuando el requisito de "mantener el mismo tipo de modelo" descarta Autopilot.</p>'
+            '<p><b>Por que la respuesta sirve:</b> Automatic Model Tuning (HPO) parte de un algoritmo definido y busca la mejor combinacion de hiperparametros. Autopilot automatiza el AutoML completo: prueba distintos algoritmos y tipos de modelo para hallar el mejor, por lo que puede cambiar el tipo de modelo.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>AMT elige el algoritmo:</b> invertido; es Autopilot quien prueba y elige algoritmos, mientras AMT parte de un algoritmo que tu defines.</li>'
+            '<li><b>AMT define los rangos por si solo:</b> al reves; en AMT tu declaras los rangos a explorar; Autopilot es quien decide internamente su espacio de busqueda.</li>'
+            '<li><b>AMT genera datos sinteticos:</b> falso; ninguno de los dos fabrica datos; ambos parten del dataset que proporcionas.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Mismo modelo, solo tunear hiperparametros: Automatic Model Tuning. Dejar que AWS elija el mejor modelo de cero: Autopilot.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/automatic-model-tuning.html">docs.aws Automatic Model Tuning</a></div>'
+        ),
+    ),
+    # --- Q31b: inference components vs multi-model endpoint ---
+    card(
+        question="Inferencia - se necesitan politicas de <b>auto scaling independientes por modelo</b> (no solo a nivel de instancia) dentro de un endpoint. &iquest;Que caracteristica lo permite?",
+        options=[
+            "Inference components (un componente por modelo, cada uno con su auto scaling)",
+            "Multi-model endpoints (varios modelos cargados desde S3 en un endpoint)",
+            "Serverless Inference con provisioned concurrency",
+            "Batch transform con particionado por clave de S3",
+        ],
+        correct=0,
+        key="mla03-q31b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - inference components.</div>'
+            '<p><b>El problema:</b> escalar cada modelo por separado dentro de un mismo endpoint.</p>'
+            '<p><b>Por que la respuesta sirve:</b> cada inference component representa un modelo con su propio numero de copias y politica de auto scaling, de modo que el escalado es <b>por modelo</b>, no compartido a nivel de instancia.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>Multi-model endpoints:</b> cargan/descargan modelos bajo demanda desde S3 y solo escalan a nivel de instancia, no por modelo individual.</li>'
+            '<li><b>Serverless con PC:</b> no soporta instancias aceleradas y no ofrece escalado independiente por modelo dentro de un endpoint compartido.</li>'
+            '<li><b>Batch transform:</b> es inferencia por lotes sin endpoint persistente ni auto scaling en tiempo real.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Escalado y capacidad por modelo dentro de un endpoint: inference components. Multi-model endpoint solo escala la instancia compartida.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/realtime-endpoints.html">docs.aws inferencia en tiempo real</a></div>'
+        ),
+    ),
+    # --- Q33b: ShardedByS3Key vs FullyReplicated ---
+    card(
+        question="SageMaker Training - se lanza un entrenamiento distribuido en varias instancias y se quiere que <b>cada instancia reciba una copia COMPLETA</b> del dataset. &iquest;Que valor de <code>S3DataDistributionType</code> se usa?",
+        options=[
+            "FullyReplicated",
+            "ShardedByS3Key",
+            "RoundRobinByRecord",
+            "PartitionedByPrefix",
+        ],
+        correct=0,
+        key="mla03-q33b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - FullyReplicated.</div>'
+            '<p><b>El problema:</b> distinguir el valor que replica el dataset completo del que lo reparte.</p>'
+            '<p><b>Por que la respuesta sirve:</b> <code>FullyReplicated</code> copia el dataset entero en cada instancia, util cuando cada worker necesita ver todos los datos.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>ShardedByS3Key:</b> hace lo contrario: reparte particiones distintas por instancia.</li>'
+            '<li><b>RoundRobinByRecord:</b> no es un valor valido de <code>S3DataDistributionType</code>.</li>'
+            '<li><b>PartitionedByPrefix:</b> tampoco existe como valor de este campo.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Solo dos valores reales: <code>FullyReplicated</code> (copia completa por instancia) y <code>ShardedByS3Key</code> (reparte por instancia).</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_S3DataSource.html">docs.aws S3DataSource</a></div>'
+        ),
+    ),
+    # --- Q34b: metrica por tipo de tarea ---
+    card(
+        question="Evaluacion - relaciona la metrica con la tarea: se evalua un modelo de <b>regresion</b> que predice un valor continuo. &iquest;Que metrica es la adecuada?",
+        options=[
+            "RMSE (root mean square error)",
+            "BLEU score",
+            "F1 score",
+            "AUC-ROC",
+        ],
+        correct=0,
+        key="mla03-q34b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - RMSE para regresion.</div>'
+            '<p><b>El problema:</b> emparejar cada metrica con el tipo de tarea de ML.</p>'
+            '<p><b>Por que la respuesta sirve:</b> RMSE mide el error promedio entre el valor predicho y el real en problemas de regresion (valores continuos), penalizando mas los errores grandes.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>BLEU:</b> especifica de traduccion automatica; compara texto generado con referencias.</li>'
+            '<li><b>F1 score:</b> para clasificacion; equilibra precision y recall, no aplica a regresion.</li>'
+            '<li><b>AUC-ROC:</b> para clasificacion binaria; mide la separacion de clases, no el error continuo.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Regresion: RMSE/MAE. Clasificacion: F1/precision/recall/AUC. Traduccion: BLEU. Empareja siempre metrica con tarea.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/machine-learning/latest/dg/regression-model-insights.html">docs.aws metricas de regresion</a></div>'
+        ),
+    ),
+    # --- Q43b: RAG (Kendra Retrieve) vs fine-tuning ---
+    card(
+        question="GenAI - para responder preguntas sobre un corpus propio de documentos <b>citando su contenido actualizado</b>, &iquest;por que se prefiere recuperacion (RAG, por ejemplo Kendra Retrieve) sobre hacer fine-tuning del modelo con esos documentos?",
+        options=[
+            "RAG recupera pasajes relevantes en tiempo de consulta y se actualiza al reindexar el corpus, sin reentrenar el modelo",
+            "El fine-tuning suele resultar mas economico que una tuberia de recuperacion cuando el corpus de documentos se actualiza con frecuencia",
+            "RAG reduce las alucinaciones lo suficiente como para poder prescindir de citar la fuente concreta de cada respuesta que se genera",
+            "El fine-tuning incorpora el corpus en los pesos y permite luego citar el documento exacto del que proviene cada respuesta",
+        ],
+        correct=0,
+        key="mla03-q43b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - RAG recupera pasajes en tiempo de consulta y se actualiza sin reentrenar; el fine-tuning no recupera documentos.</div>'
+            '<p><b>El problema:</b> elegir entre recuperacion (RAG) y fine-tuning para responder sobre un corpus propio y cambiante.</p>'
+            '<p><b>Por que la respuesta sirve:</b> RAG busca los fragmentos relevantes en un indice (por ejemplo Kendra) y se los pasa al modelo como contexto; si el corpus cambia, basta reindexar, sin reentrenar. El fine-tuning graba patrones en los pesos y no es un mecanismo de recuperacion ni cita documentos.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>Fine-tuning mas economico ante cambios frecuentes:</b> al contrario; reentrenar cada vez que cambia el corpus sale mas caro que reindexar en RAG.</li>'
+            '<li><b>RAG permite prescindir de citar la fuente:</b> falso; RAG reduce alucinaciones justamente porque aporta y permite citar los pasajes recuperados.</li>'
+            '<li><b>Fine-tuning permite citar el documento exacto:</b> falso; grabar patrones en los pesos no conserva ni referencia los documentos originales.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Conocimiento propio y cambiante que hay que citar: RAG (recuperacion + LLM). Fine-tuning: adaptar estilo/formato/tarea, no incorporar un corpus consultable.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/kendra/latest/APIReference/API_Retrieve.html">docs.aws Kendra Retrieve API</a></div>'
+        ),
+    ),
+    # --- Q51b: SSML break vs prosody ---
+    card(
+        question="Amazon Polly (SSML) - &iquest;cual es la diferencia entre las etiquetas <code>&lt;break&gt;</code> y <code>&lt;prosody&gt;</code>?",
+        options=[
+            "<code>&lt;break&gt;</code> inserta una pausa de duracion definida; <code>&lt;prosody&gt;</code> ajusta volumen, tono y velocidad",
+            "<code>&lt;break&gt;</code> cambia el idioma de la voz sintetizada; <code>&lt;prosody&gt;</code> cambia la persona o identidad de voz (voice id) usada en la salida",
+            "<code>&lt;break&gt;</code> personaliza la pronunciacion de palabras concretas; <code>&lt;prosody&gt;</code> es lo que inserta los silencios entre frases del guion",
+            "<code>&lt;break&gt;</code> genera los speech marks de sincronizacion; <code>&lt;prosody&gt;</code> convierte el audio de entrada de vuelta a texto transcrito",
+        ],
+        correct=0,
+        key="mla03-q51b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - break inserta pausa; prosody ajusta volumen, tono y velocidad.</div>'
+            '<p><b>El problema:</b> distinguir dos etiquetas SSML de Polly que suelen confundirse.</p>'
+            '<p><b>Por que la respuesta sirve:</b> <code>&lt;break time="..."&gt;</code> agrega un silencio de duracion controlada; <code>&lt;prosody&gt;</code> modifica caracteristicas del habla (rate, pitch, volume) sin insertar pausas.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>Cambiar idioma/voice id:</b> eso se hace con <code>&lt;lang&gt;</code> o eligiendo la voz, no con break/prosody.</li>'
+            '<li><b>Pronunciacion de palabras:</b> eso son los lexicons o <code>&lt;phoneme&gt;</code>, no break.</li>'
+            '<li><b>Speech marks / voz a texto:</b> los speech marks son metadatos de salida y la transcripcion es de Amazon Transcribe, no de estas etiquetas.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Pausa = <code>&lt;break&gt;</code>. Cambiar como suena (rapido/lento/agudo/grave/fuerte) = <code>&lt;prosody&gt;</code>. Pronunciacion = lexicons/<code>&lt;phoneme&gt;</code>.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/polly/latest/dg/supportedtags.html">docs.aws Polly SSML tags</a></div>'
+        ),
+    ),
+    # --- Q52b: Comprehend PII sincrono vs asincrono ---
+    card(
+        question="Amazon Comprehend PII - &iquest;cuando conviene un <b>analysis job asincrono</b> (<code>StartPiiEntitiesDetectionJob</code>) en lugar de la API sincrona <code>DetectPiiEntities</code>?",
+        options=[
+            "Para procesar por lote muchos documentos en un prefijo de S3 y escribir los resultados de vuelta a S3",
+            "Para obtener la respuesta en milisegundos sobre un unico fragmento de texto en una peticion interactiva",
+            "Para convertir automaticamente PDF a texto antes de analizarlo",
+            "Para entrenar un modelo personalizado de deteccion de PII con datos propios",
+        ],
+        correct=0,
+        key="mla03-q52b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - job asincrono para procesar por lote muchos documentos en S3.</div>'
+            '<p><b>El problema:</b> elegir entre la API sincrona y el analysis job asincrono de PII en Comprehend.</p>'
+            '<p><b>Por que la respuesta sirve:</b> el job asincrono lee un conjunto de documentos de un prefijo de S3, los procesa por lote y escribe la salida a S3; es lo adecuado para volumenes grandes y flujos automatizados.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>Respuesta en milisegundos sobre un texto:</b> ese es el caso de <code>DetectPiiEntities</code> sincrono, no del job por lote.</li>'
+            '<li><b>Convertir PDF a texto:</b> eso lo hace Textract; no es la funcion del job de PII.</li>'
+            '<li><b>Entrenar modelo propio de PII:</b> la deteccion de PII es una capacidad preentrenada; no requiere entrenar un modelo.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Muchos documentos en S3 = analysis job asincrono. Texto unico en tiempo real = <code>DetectPiiEntities</code> sincrono.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-pii.html">docs.aws Comprehend deteccion de PII</a></div>'
+        ),
+    ),
+    # --- Q54b: Collections vs tags en Model Registry ---
+    card(
+        question="SageMaker Model Registry - &iquest;por que las <b>collections</b> organizan mejor los model groups por categoria que agregar <b>tags</b> a los model packages?",
+        options=[
+            "Las collections crean una jerarquia navegable de model groups sin alterar su estructura; los tags son metadatos planos para filtrar/costos, no una organizacion jerarquica descubrible",
+            "Los tags anidan los model groups en subcategorias jerarquicas navegables, igual que las collections pero con un limite menor de niveles",
+            "Los tags mueven cada model group a la coleccion indicada en su clave, de modo que reetiquetar reorganiza fisicamente el registro",
+            "Los tags aplicados a un model group se propagan de forma automatica a todas sus versiones y crean enlaces navegables entre grupos relacionados",
+        ],
+        correct=0,
+        key="mla03-q54b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - collections dan jerarquia navegable sin tocar la estructura; los tags son metadatos planos.</div>'
+            '<p><b>El problema:</b> comparar collections y tags para organizar y descubrir modelos a escala.</p>'
+            '<p><b>Por que la respuesta sirve:</b> las collections agrupan model groups en categorias logicas navegables preservando sus relaciones, lo que mejora la descubribilidad. Los tags son pares clave-valor para filtrar o asignar costos, sin construir una jerarquia de exploracion.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>Tags anidan en subcategorias navegables:</b> falso; los tags son pares clave-valor planos y no forman una jerarquia navegable; eso es lo propio de las collections.</li>'
+            '<li><b>Reetiquetar reorganiza el registro:</b> falso; un tag es solo metadato y no mueve ni reubica los model groups.</li>'
+            '<li><b>Tags crean enlaces navegables entre grupos:</b> falso; los tags no expresan relaciones entre grupos ni ofrecen navegacion por categoria.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Organizar y explorar model groups por categoria a escala: collections. Tags: filtrado y asignacion de costos, no jerarquia de descubrimiento.</div>'
+            '<div class="links"><span class="h">Links</span>'
+            '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-collections.html">docs.aws Model Registry collections</a></div>'
+        ),
+    ),
+    # --- Q64b: limites de payload/timeout por opcion de inferencia ---
+    card(
+        question="SageMaker inferencia - relaciona la opcion con su limite: &iquest;cual admite payloads de hasta <b>1 GB</b> y procesos de hasta <b>1 hora</b> sobre un endpoint persistente?",
+        options=[
+            "Asynchronous inference",
+            "Real-time inference",
+            "Serverless inference",
+            "Batch transform",
+        ],
+        correct=0,
+        key="mla03-q64b",
+        answer=(
+            '<div class="verdict">Correcta: {{L}} - Asynchronous inference (hasta 1 GB y 1 hora, endpoint persistente).</div>'
+            '<p><b>El problema:</b> recordar los limites de payload y tiempo de cada opcion de inferencia.</p>'
+            '<p><b>Por que la respuesta sirve:</b> Asynchronous inference acepta payloads grandes (hasta 1 GB) y procesos largos (hasta 1 hora) con un endpoint persistente que encola las peticiones.</p>'
+            '<p><b>Por que NO las otras, una por una:</b></p>'
+            '<ul>'
+            '<li><b>Real-time:</b> maximo 6 MB de payload y timeout de 60 s; no cubre payloads grandes ni procesos largos.</li>'
+            '<li><b>Serverless:</b> maximo 4 MB y 60 s; aun mas limitado.</li>'
+            '<li><b>Batch transform:</b> maneja grandes volumenes pero sin endpoint persistente.</li>'
+            '</ul>'
+            '<div class="extra"><span class="h">Exam tip</span>Payload grande + proceso largo + endpoint persistente = Asynchronous. Real-time y serverless topan en pocos MB y 60 s; batch transform no es persistente.</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/async-inference.html">docs.aws Asynchronous Inference</a></div>'
         ),

@@ -47,9 +47,9 @@ cards = [
         question="<b>ML - concepto:</b> al contrastar un <b>modelo simple</b> con uno <b>complejo</b> en machine learning, &iquest;qu&eacute; compensaci&oacute;n (trade-off) los distingue?",
         options=[
             "El simple suele ser m&aacute;s explicable y r&aacute;pido pero puede perder exactitud; el complejo suele ser m&aacute;s exacto pero dif&iacute;cil de interpretar",
-            "El modelo complejo siempre es preferible cuando hay GPUs disponibles, porque su mayor exactitud compensa cualquier p&eacute;rdida de interpretabilidad",
-            "La interpretabilidad no influye en la elecci&oacute;n del modelo en banca; solo importa minimizar el error de validaci&oacute;n del modelo elegido",
-            "Un modelo simple entrena m&aacute;s r&aacute;pido, as&iacute; que siempre generaliza mejor a datos nuevos que un modelo complejo con m&aacute;s par&aacute;metros",
+            "El complejo suele ser m&aacute;s explicable porque tiene m&aacute;s par&aacute;metros, y cada uno describe con detalle una parte de la decisi&oacute;n del modelo",
+            "El simple suele generalizar peor porque, al tener pocos par&aacute;metros, casi siempre sobreajusta (overfitting) los datos de entrenamiento",
+            "La explicabilidad y la exactitud tienden a subir juntas, as&iacute; que un modelo m&aacute;s exacto resulta adem&aacute;s m&aacute;s f&aacute;cil de interpretar",
         ],
         correct=0,
         key="mla01-q1b",
@@ -59,9 +59,9 @@ cards = [
             '<p><b>Por qu&eacute; la respuesta sirve:</b> un modelo simple produce resultados r&aacute;pidos y explicables, pero puede ser menos exacto; uno complejo puede ser muy exacto, pero sus resultados son dif&iacute;ciles de comunicar.</p>'
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>Complejo siempre preferible con GPU:</b> falso, tener c&oacute;mputo no elimina el requisito de interpretabilidad; en banca regulada la explicabilidad puede pesar m&aacute;s que unos puntos de exactitud.</li>'
-            '<li><b>La interpretabilidad no influye:</b> falso, en dominios regulados es un criterio de selecci&oacute;n de primer orden, no solo el error de validaci&oacute;n.</li>'
-            '<li><b>Simple entrena r&aacute;pido, luego generaliza mejor:</b> falso, la velocidad de entrenamiento no implica mejor generalizaci&oacute;n; eso depende de datos, sesgo/varianza y regularizaci&oacute;n.</li>'
+            '<li><b>Complejo m&aacute;s explicable por tener m&aacute;s par&aacute;metros:</b> suena razonable pero es al rev&eacute;s; m&aacute;s par&aacute;metros hacen la relaci&oacute;n entrada-salida m&aacute;s opaca (caja negra), no m&aacute;s f&aacute;cil de justificar factor por factor.</li>'
+            '<li><b>Simple generaliza peor por sobreajustar:</b> matizado pero incorrecto; el sobreajuste es t&iacute;pico de modelos con MUCHA capacidad; un modelo simple tiende a sub-ajustar, no a sobreajustar por tener pocos par&aacute;metros.</li>'
+            '<li><b>Explicabilidad y exactitud suben juntas:</b> parece intuitivo pero suele haber un trade-off; ganar exactitud con modelos complejos normalmente cuesta interpretabilidad, no la mejora.</li>'
             '</ul>'
             '<div class="extra"><span class="h">Exam tip</span> Piensa en el eje "caja transparente vs caja negra": simple = transparente; complejo = negra pero potente.</div>'
             '<div class="links"><span class="h">Links</span>'
@@ -127,10 +127,10 @@ cards = [
     card(
         question="<b>ML en producci&oacute;n:</b> un equipo de salud discute el ciclo de vida de modelos en producci&oacute;n. &iquest;Qu&eacute; afirmaci&oacute;n refleja correctamente los requisitos para mantener modelos de ML en producci&oacute;n?",
         options=[
-            "Los datos de producci&oacute;n siempre son consistentes con los de entrenamiento, por lo que reentrenar es innecesario",
-            "Basta con reentrenar una sola vez, la primera vez que el modelo produce un error de predicci&oacute;n en producci&oacute;n",
+            "Basta con monitorear la exactitud y reentrenar una sola vez, cuando caiga por debajo de un umbral dado",
+            "El data drift solo afecta a modelos de deep learning; los &aacute;rboles y modelos lineales son inmunes y no requieren reentrenamiento",
             "Los modelos de ML deben reentrenarse peri&oacute;dicamente a medida que los datos cambian con el tiempo",
-            "Una vez desplegado, un modelo de ML sigue siendo efectivo indefinidamente sin actualizaciones",
+            "Reentrenar con m&aacute;s datos frescos cada vez elimina el drift de forma permanente, sin necesidad de volver a monitorear despu&eacute;s",
         ],
         correct=2,
         key="mla01-q4",
@@ -140,9 +140,9 @@ cards = [
             '<p><b>Por qu&eacute; la respuesta sirve:</b> reentrenar peri&oacute;dicamente adapta el modelo a los nuevos patrones y mantiene su exactitud; herramientas como <b>SageMaker Model Monitor</b> avisan cu&aacute;ndo es necesario.</p>'
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>Producci&oacute;n siempre consistente:</b> falso, estacionalidad, tendencias e influencias externas cambian los datos.</li>'
-            '<li><b>Reentrenar una sola vez al primer error:</b> falso, el drift es gradual y continuo; un solo reentrenamiento no cubre cambios posteriores de la distribuci&oacute;n.</li>'
-            '<li><b>Efectivo indefinidamente:</b> falso, sin actualizaci&oacute;n el modelo se vuelve obsoleto.</li>'
+            '<li><b>Reentrenar una sola vez al cruzar un umbral:</b> monitorear la exactitud es correcto, pero el drift es continuo; un &uacute;nico reentrenamiento no cubre los cambios de distribuci&oacute;n posteriores, hace falta un ciclo peri&oacute;dico.</li>'
+            '<li><b>Solo afecta a deep learning:</b> falso, el drift degrada a cualquier modelo (&aacute;rboles, lineales, ensembles) porque cambia la distribuci&oacute;n de entrada, no el tipo de algoritmo.</li>'
+            '<li><b>Reentrenar elimina el drift permanentemente:</b> falso, reentrenar corrige el momento actual pero la distribuci&oacute;n vuelve a cambiar; hay que seguir monitoreando y reentrenando.</li>'
             '</ul>'
             '<div class="extra"><span class="h">Exam tip</span> Data drift = la distribuci&oacute;n de entrada cambia respecto al entrenamiento. Se&ntilde;al de reentrenar. Model Monitor lo detecta.</div>'
             '<div class="links"><span class="h">Links</span>'
@@ -184,19 +184,19 @@ cards = [
             "Separar los datos en carpetas por tipo de archivo, procesar cada carpeta por separado con DataBrew y guardar la salida en Apache Parquet",
             "Procesar los datos en la carpeta actual con DataBrew y guardar la salida directamente en formato Apache Parquet",
             "Procesar los datos en la carpeta actual con DataBrew y guardar la salida directamente en formato JSON",
-            "Subir todos los archivos a una sola carpeta y convertirlos a JSON con Glue antes de procesarlos con DataBrew",
+            "Separar los datos en carpetas por tipo de archivo, procesar cada carpeta por separado con DataBrew y guardar la salida en CSV",
         ],
         correct=0,
         key="mla01-q6",
         answer=(
             '<div class="verdict">Correcta: {{L}} - Separar por tipo de archivo, procesar cada carpeta y salir en Parquet.</div>'
-            '<p><b>El problema:</b> un dataset de DataBrew espera archivos de un <b>mismo formato</b> por carpeta; mezclar CSV/JSON/XLSX/Parquet en una sola carpeta rompe el procesamiento.</p>'
-            '<p><b>Por qu&eacute; la respuesta sirve:</b> al separar por tipo, cada dataset de DataBrew es homog&eacute;neo; guardar en <b>Parquet</b> (columnar) da compatibilidad y eficiencia para los jobs de Glue posteriores.</p>'
+            '<p><b>El problema:</b> un dataset de DataBrew espera archivos de un <b>mismo formato</b> por carpeta; mezclar CSV/JSON/XLSX/Parquet en una sola carpeta rompe el procesamiento. Adem&aacute;s, la salida debe ser eficiente para los jobs de Glue posteriores.</p>'
+            '<p><b>Por qu&eacute; la respuesta sirve:</b> al separar por tipo, cada dataset de DataBrew es homog&eacute;neo; guardar en <b>Parquet</b> (columnar y comprimido) da compatibilidad y eficiencia para los jobs de Glue posteriores.</p>'
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
             '<li><b>Procesar la carpeta mixta y salir en Parquet:</b> el formato de salida es correcto, pero mezclar tipos en una carpeta hace fallar el dataset de DataBrew.</li>'
-            '<li><b>Procesar la carpeta mixta y salir en JSON:</b> mismo problema de entrada mixta, y JSON no es tan eficiente como Parquet para downstream.</li>'
-            '<li><b>Convertir todo a JSON con Glue antes:</b> a&ntilde;ade un paso extra y elige un formato menos eficiente que Parquet.</li>'
+            '<li><b>Procesar la carpeta mixta y salir en JSON:</b> falla por partida doble: entrada mixta que rompe DataBrew, y salida JSON menos eficiente que Parquet para downstream.</li>'
+            '<li><b>Separar por tipo pero salir en CSV:</b> resuelve bien la entrada (carpetas homog&eacute;neas), pero elige un formato de salida <b>por filas y sin compresi&oacute;n</b>; para los jobs anal&iacute;ticos de Glue posteriores CSV rinde peor que Parquet, por eso el discriminador es el FORMATO DE SALIDA.</li>'
             '</ul>'
             '<div class="extra"><span class="h">Exam tip</span> Parquet (columnar, comprimido) es el formato por defecto para analytics/ML en AWS; separa entradas por formato antes de DataBrew.</div>'
             '<div class="links"><span class="h">Links</span>'
@@ -794,7 +794,7 @@ cards = [
 
     # ===================== Q26: Ordered split =====================
     card(
-        question="<b>Split cronol&oacute;gico:</b> datos ordenados por fecha de alta; el split train/validation debe <b>preservar estrictamente el orden temporal</b> para evitar fuga de datos futuros y overfitting. &iquest;Qu&eacute; transform de Data Wrangler usar?",
+        question="<b>Split cronol&oacute;gico:</b> datos ordenados por fecha de alta; el split train/validation debe <b>preservar estrictamente el orden temporal</b> para evitar fuga de datos futuros y overfitting, <b>con el m&iacute;nimo esfuerzo operativo</b>. &iquest;Qu&eacute; transform de Data Wrangler usar?",
         options=[
             "Usar el transform Ordered split de Amazon SageMaker Data Wrangler para respetar el orden temporal",
             "Ejecutar un script Python en un SageMaker Processing job para dividir el dataset por una clave",
@@ -809,7 +809,7 @@ cards = [
             '<p><b>Por qu&eacute; la respuesta sirve:</b> el <b>Ordered split</b> divide respetando la secuencia (entrena con el pasado, valida con el futuro), evitando la fuga.</p>'
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>Script en Processing job:</b> aunque un script en un Processing job podr&iacute;a transformar datos, el escenario exige una herramienta VISUAL dedicada de preparaci&oacute;n sin c&oacute;digo, por lo que el script queda descartado por requerir desarrollo manual y no cumplir el requisito de m&iacute;nimo esfuerzo.</li>'
+            '<li><b>Script en Processing job:</b> un script a medida s&iacute; puede dividir cronol&oacute;gicamente, pero exige escribir y mantener c&oacute;digo y <b>reimplementar a mano</b> el split ordenado que Data Wrangler ya ofrece como transform administrado; es m&aacute;s esfuerzo operativo para el mismo resultado.</li>'
             '<li><b>Stratified split:</b> preserva proporci&oacute;n de clases, no el orden temporal; puede reordenar y filtrar futuro.</li>'
             '<li><b>Split aleatorio en DataBrew:</b> lo aleatorio rompe la cronolog&iacute;a, justo lo que se quiere evitar.</li>'
             '</ul>'
@@ -1204,9 +1204,9 @@ cards = [
         question="<b>Beneficios de Amazon Bedrock:</b> un retailer quiere <b>fine-tune de modelos de terceros</b> para su chatbot, con privacidad de los datos. &iquest;Qu&eacute; par de beneficios de Bedrock le sirven?",
         options=[
             "Ofrece amplia variedad de foundation models de m&uacute;ltiples proveedores y permite personalizarlos de forma privada",
-            "Expone una API distinta para cada foundation model, obligando a reescribir la integraci&oacute;n al cambiar de modelo",
-            "Obliga a exponer los datos de entrenamiento p&uacute;blicamente para poder ajustar los modelos con Bedrock",
-            "Solo permite usar un &uacute;nico modelo propietario y no admite personalizaci&oacute;n ni fine-tuning con datos propios",
+            "Ofrece FMs de varios proveedores, pero al hacer fine-tuning env&iacute;a tus datos de entrenamiento al proveedor del modelo base",
+            "Da acceso solo a foundation models open source de la comunidad, sin incluir modelos propietarios de proveedores comerciales",
+            "Permite fine-tuning de los FMs, pero &uacute;nicamente con datos que ya sean p&uacute;blicos, no con datos privados de la empresa",
         ],
         correct=0,
         key="mla01-q40",
@@ -1216,9 +1216,9 @@ cards = [
             '<p><b>Por qu&eacute; la respuesta sirve:</b> Bedrock ofrece un cat&aacute;logo de foundation models de m&uacute;ltiples proveedores y permite personalizaci&oacute;n/fine-tuning privado (prompts y datos permanecen confidenciales).</p>'
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>API distinta por cada FM:</b> falso, Bedrock expone una API unificada de invocaci&oacute;n para los distintos FMs, precisamente para no reescribir la integraci&oacute;n al cambiar de modelo.</li>'
-            '<li><b>Obliga a exponer datos p&uacute;blicamente:</b> falso, la personalizaci&oacute;n es privada y segura.</li>'
-            '<li><b>Un solo modelo sin fine-tuning:</b> falso, ofrece muchos modelos y soporta personalizaci&oacute;n.</li>'
+            '<li><b>El fine-tuning env&iacute;a tus datos al proveedor del modelo:</b> incorrecto; el fine-tuning en Bedrock ocurre en tu entorno de AWS y tus datos NO se comparten con el proveedor del FM ni se usan para reentrenar el modelo base.</li>'
+            '<li><b>Solo FMs open source:</b> incorrecto; Bedrock incluye tanto modelos open source como <b>propietarios</b> de proveedores comerciales (Anthropic, AI21, Cohere, Amazon, etc.).</li>'
+            '<li><b>Fine-tuning solo con datos p&uacute;blicos:</b> incorrecto; justamente puedes ajustar con tus <b>datos privados</b> de forma segura, sin necesidad de que sean p&uacute;blicos.</li>'
             '</ul>'
             '<div class="extra"><span class="h">Exam tip</span> Ventajas clave de Bedrock: multi-proveedor de FMs con API unificada, serverless (sin infraestructura) y personalizaci&oacute;n privada de modelos.</div>'
             '<div class="links"><span class="h">Links</span>'
@@ -1228,26 +1228,26 @@ cards = [
 
     # ===================== Q41: Bedrock (servicio) =====================
     card(
-        question="<b>Elegir servicio de IA generativa:</b> una empresa de salud quiere <b>elegir entre varios modelos predictivos</b>, garantizar <b>confidencialidad</b> al hacer fine-tuning y <b>no gestionar infraestructura</b> ML. &iquest;Qu&eacute; servicio cumple mejor?",
+        question="<b>Elegir servicio de IA generativa:</b> una empresa de salud quiere probar y comparar distintos <b>foundation models</b>, adaptarlos a sus datos clinicos manteniendo esos datos privados, y consumirlos <b>pagando por uso, sin aprovisionar ni operar servidores ni endpoints</b>. &iquest;Qu&eacute; servicio encaja mejor?",
         options=[
-            "Amazon SageMaker Canvas, que ofrece varios modelos administrados sin escribir c&oacute;digo, aunque no permite fine-tuning privado de foundation models",
-            "Amazon Bedrock, acceso serverless a m&uacute;ltiples foundation models con personalizaci&oacute;n privada y sin gestionar infraestructura",
-            "Amazon SageMaker JumpStart, cat&aacute;logo de foundation models que ajustas de forma privada y despliegas en endpoints de tu cuenta",
-            "Amazon SageMaker Studio, entorno administrado donde eliges entre varios modelos y los ajustas sin operar servidores directamente",
+            "Amazon Bedrock: acceso por API a varios foundation models, con fine-tuning privado y consumo serverless pagando por uso",
+            "Amazon SageMaker JumpStart: catalogo de foundation models con fine-tuning privado que despliegas en endpoints en tu cuenta",
+            "Amazon SageMaker Canvas: interfaz no-code con modelos administrados para construir y personalizar modelos sin escribir codigo",
+            "Amazon SageMaker Studio: IDE administrado para elegir, entrenar y ajustar modelos gestionando el computo desde un solo lugar",
         ],
-        correct=1,
+        correct=0,
         key="mla01-q41",
         answer=(
             '<div class="verdict">Correcta: {{L}} - Amazon Bedrock.</div>'
-            '<p><b>El problema:</b> elegir entre varios foundation models, fine-tuning <b>privado</b> y <b>sin administrar infraestructura</b>. Varias opciones prometen algo de esto; el matiz es qui&eacute;n lo combina todo de forma serverless.</p>'
-            '<p><b>Por qu&eacute; la respuesta sirve:</b> Bedrock es <b>serverless</b>, expone m&uacute;ltiples FMs por API y permite personalizaci&oacute;n privada sin que provisiones ni gestiones servidores ni endpoints.</p>'
+            '<p><b>El problema:</b> las cuatro opciones dan acceso a varios modelos y alguna forma de personalizacion, asi que el nombre del servicio no basta. El discriminador real es UNO: consumir los FMs de forma <b>serverless (por API, pagando por uso, sin desplegar ni operar endpoints)</b>.</p>'
+            '<p><b>Por qu&eacute; la respuesta sirve:</b> <b>Bedrock</b> es el unico de los cuatro que es <b>serverless</b>: llamas a los foundation models por API y puedes hacer fine-tuning privado (tus datos no se usan para reentrenar el modelo base), sin aprovisionar ni mantener infraestructura ni endpoints.</p>'
             '<p><b>Por qu&eacute; NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>SageMaker Canvas:</b> es no-code y da varios modelos administrados, pero est&aacute; orientado a ML tabular y <b>no</b> ofrece fine-tuning privado de foundation models generativos.</li>'
-            '<li><b>SageMaker JumpStart:</b> s&iacute; ofrece FMs y ajuste privado, pero el modelo se <b>despliega en endpoints de tu cuenta</b> que t&uacute; dimensionas y mantienes; no es acceso serverless.</li>'
-            '<li><b>SageMaker Studio:</b> es un entorno administrado para construir/entrenar; aun as&iacute; implica gestionar recursos de c&oacute;mputo y c&oacute;digo, m&aacute;s operaci&oacute;n que el consumo por API de Bedrock.</li>'
+            '<li><b>SageMaker JumpStart:</b> tambien ofrece foundation models y fine-tuning privado, PERO el modelo ajustado se <b>despliega en un endpoint en TU cuenta</b> que dimensionas y pagas mientras este activo; no es consumo serverless por uso.</li>'
+            '<li><b>SageMaker Canvas:</b> es no-code y da modelos administrados, pero esta orientado a ML tabular/predictivo y a generar predicciones, no a comparar y hacer fine-tuning privado de foundation models generativos por API.</li>'
+            '<li><b>SageMaker Studio:</b> es un IDE administrado para construir/entrenar/ajustar; aun asi TU eliges y pagas el computo (kernels, training jobs, endpoints), es decir gestionas infraestructura, lo contrario de serverless por uso.</li>'
             '</ul>'
-            '<div class="extra"><span class="h">Exam tip</span> El discriminador es "serverless por API": elegir entre varios FMs + fine-tune privado <b>sin</b> desplegar ni operar endpoints = Amazon Bedrock.</div>'
+            '<div class="extra"><span class="h">Exam tip</span> Cuando varias opciones "dan varios modelos", el desempate suele ser el modelo de consumo: <b>serverless por API pagando por uso</b> = Amazon Bedrock; si hay que <b>desplegar en un endpoint propio</b> = JumpStart/SageMaker.</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-bedrock.html">Qu&eacute; es Amazon Bedrock</a></div>'
         ),

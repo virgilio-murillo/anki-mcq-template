@@ -77,10 +77,10 @@ cards = [
     card(
         question="SageMaker - se necesita <b>identificar un articulo en una imagen y dar su ubicacion</b> (bounding box) en estanterias en tiempo real. &iquest;Que algoritmo integrado conviene?",
         options=[
-            "Object Detection - MXNet",
-            "Object2Vec (embeddings de objetos discretos)",
-            "K-Means Clustering (agrupamiento no supervisado)",
-            "Random Cut Forest (deteccion de anomalias)",
+            "Object Detection - MXNet (detecta y localiza objetos con bounding boxes)",
+            "Object2Vec (aprende embeddings vectoriales de objetos discretos para similitud)",
+            "K-Means Clustering (agrupa vectores numericos por similitud, no supervisado)",
+            "Random Cut Forest (detecta anomalias en series de tiempo y datos tabulares)",
         ],
         correct=0,
         key="mla02-q2",
@@ -867,17 +867,17 @@ cards = [
     card(
         question="Dataset sensible en un bucket de S3 en la region <b>us-east-1</b>, pero las instancias de entrenamiento de SageMaker corren en una VPC de <b>us-west-2</b> (otra region). El trafico hacia S3 NO debe exponerse a internet publico en ningun momento, sin duplicar los datos ni cambiar de servicio de transferencia. &iquest;Que solucion aporta el acceso privado <b>entre regiones</b>?",
         options=[
-            "Deshabilitar el acceso directo a internet y crear un interface endpoint (PrivateLink) en la VPC hacia S3",
-            "Deshabilitar el acceso directo a internet y crear un gateway endpoint en la VPC para comunicarse con S3",
-            "Replicar los datos con S3 Cross-Region Replication y entrenar el modelo en una copia local",
-            "Usar AWS Transfer Family para transferir los datos mediante SFTP seguro antes de entrenar",
+            "Deshabilitar el acceso directo a internet y usar un interface endpoint (PrivateLink) combinado con VPC peering / Transit Gateway hacia la VPC de la region del bucket",
+            "Deshabilitar el acceso directo a internet y crear un gateway endpoint en la VPC de us-west-2, agregando su prefix list a la tabla de rutas para llegar al bucket",
+            "Replicar el bucket con S3 Cross-Region Replication hacia us-west-2 y entrenar el modelo sobre esa copia local dentro de la misma VPC del training job",
+            "Usar AWS Transfer Family con un endpoint SFTP para copiar el dataset a un bucket local en us-west-2 de forma segura antes de lanzar el entrenamiento",
         ],
         correct=0,
         key="mla02-q23",
         answer=(
-            '<div class="verdict">Correcta: {{L}} - interface endpoint (PrivateLink) en la VPC hacia S3, sin internet directo.</div>'
+            '<div class="verdict">Correcta: {{L}} - interface endpoint (PrivateLink) con VPC peering / Transit Gateway hacia la region del bucket, sin internet directo.</div>'
             '<p><b>El problema:</b> el training job en us-west-2 debe alcanzar un bucket de S3 en us-east-1 (OTRA region) sin que el trafico salga a internet publico, sin duplicar los datos y sin cambiar de servicio.</p>'
-            '<p><b>Por que sirve:</b> un <b>interface VPC endpoint</b> (AWS PrivateLink) crea una <b>ENI con IP privada</b> en tus subredes; combinado con conectividad entre regiones (VPC peering o Transit Gateway) permite que SageMaker en us-west-2 llegue de forma privada al S3 de us-east-1, sin internet gateway ni NAT. Es la unica de las 4 opciones que da acceso privado cross-region sin duplicar datos ni cambiar de servicio.</p>'
+            '<p><b>Por que sirve:</b> un <b>interface VPC endpoint</b> (AWS PrivateLink) crea una <b>ENI con IP privada</b> en tus subredes; como es regional, se combina con conectividad entre regiones (<b>VPC peering</b> o <b>Transit Gateway</b>) para que SageMaker en us-west-2 llegue de forma privada al S3 de us-east-1, sin internet gateway ni NAT. La opcion nombra ambas piezas, por eso es tecnicamente completa y la unica que da acceso privado cross-region sin duplicar datos ni cambiar de servicio.</p>'
             '<p><b>Por que un gateway endpoint NO basta aqui:</b> el gateway endpoint es <b>intra-region</b> y se aplica solo por la <b>tabla de rutas</b> de la VPC hacia el S3 de <b>su propia region</b>. Como el bucket vive en otra region (us-east-1) que la VPC (us-west-2), un gateway endpoint no puede alcanzarlo; ademas no ofrece IP privada/ENI ni acceso desde otra VPC.</p>'
             '<p><b>Por que NO las otras, una por una:</b></p>'
             '<ul>'
@@ -1312,23 +1312,23 @@ cards = [
     # Q37 - inline policy en execution role del dominio Studio
     # ============================================================
     card(
-        question="En un SageMaker Studio con varios dominios, dar a un <b>dominio especifico</b> acceso a un bucket S3 sin afectar a otros dominios/usuarios, con permisos en el entorno de computo (no en usuarios). &iquest;Que enfoque?",
+        question="En un SageMaker Studio con varios dominios, hay que <b>aislar los permisos de un solo dominio de Studio</b> para darle acceso a un bucket S3 sin afectar a otros dominios/usuarios, ligando los permisos al entorno de computo (no a usuarios). &iquest;Que enfoque?",
         options=[
-            "Adjuntar la policy de acceso al execution role del dominio especifico de SageMaker Studio",
+            "Adjuntar la policy de acceso al execution role del dominio de Studio que se quiere aislar",
             "Adjuntar la misma policy a un execution role compartido por todos los dominios de Studio",
-            "Aplicar una managed policy directamente al usuario IAM que opera el notebook de Studio",
+            "Adjuntar la policy al execution role a nivel de user profile dentro del dominio de Studio",
             "Poner una resource-based policy en el bucket S3 que conceda acceso al usuario IAM",
         ],
         correct=0,
         key="mla02-q37",
         answer=(
-            '<div class="verdict">Correcta: {{L}} - policy en el execution role especifico del dominio de Studio.</div>'
+            '<div class="verdict">Correcta: {{L}} - policy en el execution role del dominio que se quiere aislar.</div>'
             '<p><b>El problema:</b> los permisos deben ligarse al <b>computo</b> (el dominio) y no a usuarios, y solo a ESE dominio, sin afectar a otros. La clave es <b>a que rol se adjunta la policy</b>: al execution role propio del dominio.</p>'
-            '<p><b>Por que sirve:</b> adjuntar la policy al <b>execution role del dominio especifico</b> concede permisos unicamente a las cargas que corren en ese dominio, alineado con least privilege. El aislamiento lo da el <b>alcance del rol</b>, no el tipo de policy (inline o managed logran lo mismo si se pegan al mismo rol).</p>'
+            '<p><b>Por que sirve:</b> adjuntar la policy al <b>execution role a nivel de dominio</b> concede permisos unicamente a las cargas que corren en ese dominio, alineado con least privilege. El aislamiento lo da el <b>alcance del rol</b>, no el tipo de policy (inline o managed logran lo mismo si se pegan al mismo rol).</p>'
             '<p><b>Por que NO las otras, una por una:</b></p>'
             '<ul>'
             '<li><b>Policy a un role compartido por todos los dominios de Studio:</b> otorgaria esos permisos a cargas de otros dominios, rompiendo el aislamiento pedido.</li>'
-            '<li><b>Managed policy al usuario IAM:</b> da permisos amplios al usuario mas alla del dominio Studio, y el computo actua con el execution role, no con el usuario; viola el aislamiento.</li>'
+            '<li><b>Policy al execution role a nivel de user profile:</b> combina execution role y dominio, pero baja el alcance al <b>perfil de usuario</b>; aplicarla ah&iacute; solo cubre a ese usuario y no aisla el dominio completo como pide el escenario (los permisos deben ligarse al dominio, no a un profile).</li>'
             '<li><b>Resource-based policy en el bucket concediendo al usuario:</b> abre el recurso a un principal (el usuario) en vez de acotar el permiso al computo del dominio; no cumple "permisos al computo, aislados por dominio".</li>'
             '</ul>'
             '<div class="extra"><span class="h">Exam tip</span>Permisos al computo (no a usuarios) + aislar un dominio = policy en el <b>execution role especifico del dominio</b>. El aislamiento depende del rol, no de si la policy es inline o managed.</div>'
