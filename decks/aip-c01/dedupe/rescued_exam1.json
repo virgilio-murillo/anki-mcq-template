@@ -1,0 +1,506 @@
+[
+  {
+    "n": 16,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A multinational publishing company is developing an internal AI-powered assistant to help employees retrieve, summarize, and analyze research documents. The company’s data-science team already relies on Amazon SageMaker Ground Truth to label training data and improve metadata accuracy. The next development phase involves integrating AI agents in Amazon Bedrock that can autonomously answer questions, summarize lengthy documents, and recommend related content. To achieve this, the team requires a mechanism that can represent both user queries and document content as semantic embeddings that capture contextual relationships between concepts and terms. The solution must be fully managed, scalable, and easily integrated with existing AWS services to support downstream retrieval-augmented generation (RAG) workflows. Given the large volume of documents, the team also needs to optimize performance by implementing appropriate data distribution and query-handling strategies. Which approach best satisfies these requirements?",
+    "options": [
+      {
+        "text": "Implement Amazon Kendra to index research documents, support natural-language queries, and enable AI agents to retrieve relevant results via the service's managed semantic search and ranking capabilities.",
+        "rationale": "because Amazon Kendra is primarily designed as an enterprise search service that indexes and retrieves documents from data sources using natural-language queries. While it supports semantic search through ranking and FAQ matching, it does not generate or manage vector embeddings required for semantic retrieval or integration with AI agents in Amazon Bedrock for context-aware reasoning."
+      },
+      {
+        "text": "Deploy SageMaker JumpStart to fine-tune and host a pre-trained language model for summarization and text generation, integrating it with AI agents for enhanced content discovery workflows.",
+        "rationale": "because Amazon SageMaker JumpStart only provides pre-trained models for quick deployment and fine-tuning within SageMaker. Although it accelerates model customization and hosting, it does not handle embedding generation or perform vector similarity searches necessary for retrieval-augmented generation workflows in Amazon Bedrock."
+      },
+      {
+        "text": "Leverage Amazon Titan Text Embeddings in Bedrock to convert text into semantic vectors and store them in Amazon OpenSearch Service for context-aware retrieval and reasoning by AI agents. Implement OpenSearch sharding strategies to distribute the vector index across multiple nodes for optimal query performance and horizontal scalability.",
+        "rationale": ""
+      },
+      {
+        "text": "Configure SageMaker Data Wrangler to preprocess textual data, extract engineered features through clustering, and allow AI agents to analyze document similarity within structured datasets and grouped content.",
+        "rationale": "because Amazon SageMaker Data Wrangler is typically used for preparing, cleaning, and transforming data before model training. It supports visualization and feature engineering but does not create or store text embeddings, nor does it enable vector-based search or semantic reasoning capabilities for generative AI agents."
+      }
+    ],
+    "correct_index": 2,
+    "correct_text": "Leverage Amazon Titan Text Embeddings in Bedrock to convert text into semantic vectors and store them in Amazon OpenSearch Service for context-aware retrieval and reasoning by AI agents. Implement OpenSearch sharding strategies to distribute the vector index across multiple nodes for optimal query performance and horizontal scalability.",
+    "tipo_rescate": "A",
+    "razon_rescate": "El objetivo distintivo es la estrategia de sharding de OpenSearch para escalabilidad horizontal; ninguna carta lo ensena.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 20,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A social media platform is developing an ML model to moderate user-generated content. The platform stores large volumes of textual and document data in Amazon S3. It uses Amazon Textract to extract text from uploaded PDFs or images, and Amazon SageMaker AI to train custom language models that classify comments based on sentiment, context, and topic relevance. The moderation team aims to enhance safety by detecting toxic or harmful language in real-time, including hate speech, harassment, and explicit threats. The solution must integrate seamlessly with the existing SageMaker AI inference pipeline, handle high throughput, and provide confidence scores for each classification, allowing content flagged as toxic to be reviewed or blocked automatically. Which of the solutions provides a managed solution for detecting toxicity in text to support this ML pipeline with safety classifiers?",
+    "options": [
+      {
+        "text": "Utilize Amazon Comprehend sentiment analysis to detect negative comments and block content automatically.",
+        "rationale": "because sentiment analysis only identifies the overall tone of text as positive, negative, or neutral. It does not specifically detect abusive or toxic language, so relying on it would typically miss harmful content or misclassify non-toxic negative comments as toxic."
+      },
+      {
+        "text": "Use Amazon Translate to convert text into another language before moderation to reduce offensive content.",
+        "rationale": ". Amazon Translation does not inherently detect toxicity. It simply converts text from one language to another, which would only change the language but not address abusive or harmful content. Moderation would remain ineffective if the goal is to identify toxic text."
+      },
+      {
+        "text": "Utilize Amazon Comprehend toxicity detection to identify abusive or harmful language in text.",
+        "rationale": ""
+      },
+      {
+        "text": "Use Amazon Bedrock to fine-tune a foundation model for general language understanding.",
+        "rationale": ". While Bedrock can be used to fine-tune foundation models, it does not automatically detect toxic language. Fine-tuning for general language understanding only provides broader NLP capabilities, and toxicity detection would require additional custom development, which is typically more complex and time-consuming than using a managed service like Comprehend."
+      }
+    ],
+    "correct_index": 2,
+    "correct_text": "Utilize Amazon Comprehend toxicity detection to identify abusive or harmful language in text.",
+    "tipo_rescate": "A",
+    "razon_rescate": "La feature exacta (toxicity detection de Comprehend) no se ensena; la carta solo define Comprehend como NLP de sentimiento.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 23,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A large retail company is looking to leverage Amazon SageMaker AI notebooks and Amazon Comprehend to process and analyze customer feedback data. The company uses Amazon S3 buckets to store large datasets of customer reviews, and the data needs to be accessed securely for machine learning analysis. Given the sensitivity of the data, the company mandates that all resources must remain within a secure Amazon Virtual Private Cloud (VPC). Additionally, all communication must occur over the AWS network. Which solution will satisfy the given requirements?",
+    "options": [
+      {
+        "text": "Deploy the SageMaker AI notebook in a private subnet with a route to an internet gateway and ensure that all data requests to S3 are routed through an external proxy.",
+        "rationale": "because routing through an internet gateway and external proxy exposes traffic to the public internet, violating the requirement that all communication must occur over a private AWS network."
+      },
+      {
+        "text": "Deploy the SageMaker AI notebook in a private subnet within a VPC and use a VPC Peering connection with another VPC where S3 is accessible.",
+        "rationale": "because VPC peering does not typically provide private access to AWS services like S3. Accessing S3 through a peered VPC still requires public endpoints unless VPC endpoints are configured, which this option does not guarantee."
+      },
+      {
+        "text": "Deploy the SageMaker AI notebook in a private subnet within a VPC and ensure that the VPC has private endpoints for both SageMaker AI and S3.",
+        "rationale": ""
+      },
+      {
+        "text": "Deploy the SageMaker AI notebook in a private subnet, use a NAT gateway to provide outbound internet access for S3, and restrict access to only specific S3 buckets.",
+        "rationale": "because using a NAT gateway primarily involves public internet routing, which contradicts the mandate for a private AWS network. Even with bucket restrictions, the traffic path does not meet the security requirements."
+      }
+    ],
+    "correct_index": 2,
+    "correct_text": "Deploy the SageMaker AI notebook in a private subnet within a VPC and ensure that the VPC has private endpoints for both SageMaker AI and S3.",
+    "tipo_rescate": "A",
+    "razon_rescate": "El objetivo exacto (endpoints privados tanto de SageMaker como de S3 en subnet privada) no lo ensena ninguna carta de este bloque; la mas cercana ensena network isolation mode, un mecanismo distinto.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 39,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A software development team is building a customer support chatbot for a large e-commerce platform. The chatbot needs to provide real-time, contextually accurate answers to customer inquiries based on product documentation, frequently asked questions, and order history. The team decides to implement a retrieval-augmented generation (RAG) architecture to enhance the chatbot’s ability to understand customer queries and generate precise, context-aware responses. The chatbot must query a vector database to retrieve relevant documents based on the user’s query, analyze the retrieved context for important entities and sentiments using Amazon Comprehend, and then feed this refined context to a foundation model deployed to an Amazon SageMaker AI real-time inference endpoint for response generation. The solution should enable the chatbot to operate in real-time and provide accurate answers based on the user’s query context. Which solution will best integrate Pinecone into this RAG-based system to provide context for the Llama 2 model?",
+    "options": [
+      {
+        "text": "Use Pinecone to index product documentation, retrieve pertinent information based on the query, analyze the context with Comprehend, and provide the refined context to a Llama 2 model deployed to a SageMaker AI real-time inference endpoint for response generation.",
+        "rationale": ""
+      },
+      {
+        "text": "Utilize Pinecone to conduct similarity searches on customer queries, retrieve relevant context, use Comprehend to analyze sentiment, and relay this information to the chatbot application, which will then interact with the Llama 2 model hosted on Amazon EC2.",
+        "rationale": "because it uses Amazon EC2 to host the Llama 2 model instead of the Amazon SageMaker AI real-time inference endpoint specified in the scenario. While EC2 can be used for hosting models, it requires manual setup and management, which defeats the purpose of using AWS-managed services like SageMaker AI. SageMaker AI provides managed model hosting and real-time inference endpoints that simplify model deployment, scaling, and monitoring, which directly satisfies the architecture specified in the scenario. Therefore, using EC2 instead of SageMaker AI results in additional complexity and does not leverage the full capabilities of the AWS ecosystem for model deployment."
+      },
+      {
+        "text": "Deploy Pinecone to conduct similarity searches on customer queries, gather the relevant context, and pass this data to Amazon Lex for processing the intent before submitting it to Llama 2 for response generation.",
+        "rationale": "because Amazon Lex is primarily designed for conversational AI, handling tasks such as intent recognition and managing dialogues with users. While Lex is great for building chatbots and virtual assistants, its primary function is not to process the context for a generative model like Llama 2. In this scenario, the goal is to pass rich context retrieved from Pinecone (through similarity search) to the foundation model for response generation, not for managing user interactions or intents. Lex introduces unnecessary complexity and does not provide value in the context of enhancing generative model outputs based on document retrieval. The proper step would be to use Amazon SageMaker AI for handling the inference process with Llama 2, which is better suited for this use case."
+      },
+      {
+        "text": "Utilize Pinecone to catalog product documentation, retrieve contextually relevant information, and translate the data using Amazon Translate before forwarding it to Llama 2 for response generation.",
+        "rationale": "because Amazon Translate is a machine translation service that is designed to translate text between languages, not for sentiment analysis or entity extraction. The scenario requires enhancing the retrieved context with sentiment and key entity analysis, tasks for which Amazon Comprehend is specifically designed. Using Translate simply introduces an unnecessary step, as the system’s goal is not translation but rather enriching the context with deeper insights to improve the generative model’s understanding. Translation is irrelevant unless the data in the retrieved documents is in multiple languages, but this was not specified in the scenario. Thus, Comprehend should be used instead to analyze the context and extract sentiment and entities, not Translate."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Use Pinecone to index product documentation, retrieve pertinent information based on the query, analyze the context with Comprehend, and provide the refined context to a Llama 2 model deployed to a SageMaker AI real-time inference endpoint for response generation.",
+    "tipo_rescate": "A",
+    "razon_rescate": "Los servicios/modelos exactos (Pinecone y Llama 2 en SageMaker endpoint) no se ensenan en ninguna carta.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 41,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A global economic research organization is developing an AI-driven financial insights engine that generates analytical summaries from earnings disclosures, market indicators, and corporate filings. The system uses Amazon SageMaker Processing for large-scale data preparation and Amazon Textract to extract structured financial data. From the outset, the architecture team evaluates the solution using the Generative AI Security Scoping Matrix to classify risk categories, determine validation requirements, and outline controls needed to manage accuracy-related concerns. Early testing reveals statements affected by hallucinations regarding projected revenue and risk exposure, prompting the engineering team to design an automated verification layer that ensures generated insights consistently align with authoritative financial documents. To meet compliance and audit requirements, the organization mandates a verification mechanism capable of detecting unsupported claims, performing document-level cross-checking, and producing traceable metadata for downstream auditing. The solution must validate each generated response against trusted enterprise sources while maintaining consistent governance as defined in the scoping matrix. Which solution best satisfies these requirements?",
+    "options": [
+      {
+        "text": "Implement an accuracy-verification workflow that uses a retrieval-augmented grounding system backed by Amazon Bedrock Knowledge Bases.",
+        "rationale": ""
+      },
+      {
+        "text": "Use Amazon Comprehend custom classification to categorize generated responses based on financial topics and route low-confidence classifications to a SageMaker endpoint for evaluation.",
+        "rationale": "because Amazon Comprehend provides text classification and entity extraction, which primarily identify categories or linguistic patterns in documents rather than performing document-grounded fact verification. Comprehend models do not retrieve authoritative context or validate the correctness of generated claims, and therefore cannot ensure alignment between model outputs and trusted enterprise sources."
+      },
+      {
+        "text": "Run Amazon Athena SQL validation checks on numerical values in generated insights and use Amazon EventBridge to trigger alerts when results deviate from historical patterns.",
+        "rationale": "because Amazon Athena can query structured data but it typically validates numerical fields or statistical deviations rather than verifying text-based generative statements. EventBridge can trigger responses to query results, yet this workflow cannot confirm whether narrative or explanatory content produced by a foundation model is factually grounded in authoritative documents."
+      },
+      {
+        "text": "Deploy a SageMaker Model Monitor pipeline that compares embeddings from each generated response against historical vectors and triggers alerts for mismatches, storing metadata in Amazon DynamoDB.",
+        "rationale": "because Amazon SageMaker Model Monitor only detects issues such as data drift, feature drift, and model-quality degradation during inference but does not assess factual correctness or perform retrieval-based grounding. Comparing embeddings cannot validate whether statements match authoritative financial documents, which is essential for detecting hallucinations in generative AI outputs."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Implement an accuracy-verification workflow that uses a retrieval-augmented grounding system backed by Amazon Bedrock Knowledge Bases.",
+    "tipo_rescate": "A",
+    "razon_rescate": "El objetivo (grounding/verificacion anti-alucinacion con Bedrock Knowledge Bases) no lo ensena ninguna carta de este bloque.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 42,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A financial services company needs to build a predictive model to identify fraudulent transactions using historical customer data, which includes sensitive information such as credit card numbers. The company plans to use Amazon SageMaker AI to train the model and Amazon Comprehend to extract features from the text-based data in the dataset. The company must ensure that all customer data is securely encrypted and that any personally identifiable information (PII), including credit card numbers, is redacted before the data is used for model training. Which solution will meet this requirement?",
+    "options": [
+      {
+        "text": "Use SageMaker AI Data Wrangler to process the customer data and apply encryption using a custom algorithm. Use AWS CLI to automate the upload of the encrypted data to Amazon S3, then train the model using the encrypted dataset.",
+        "rationale": "because SageMaker AI Data Wrangler is a data preparation tool and is not designed for PII redaction or encryption. Applying a custom encryption algorithm does not meet compliance standards for securing sensitive financial data — AWS KMS is the recommended approach for managed encryption. Additionally, while AWS CLI can automate S3 uploads, it plays no role in addressing the core requirements of PII redaction or secure encryption."
+      },
+      {
+        "text": "Use Comprehend to detect and redact PII from the customer data, then store the redacted data in Amazon S3 and train the model using SageMaker AI. Encrypt the customer data using a custom algorithm.",
+        "rationale": "because although Amazon Comprehend is typically suitable for PII detection and redaction, the use of a custom encryption algorithm introduces risk. Custom encryption may not be compliant with industry standards and could complicate integration with AWS services. AWS KMS is the preferred method for encryption in secure ML workflows."
+      },
+      {
+        "text": "Use SageMaker AI Principal Component Analysis (PCA) algorithm to reduce the dimensionality of the customer data before training the model. Ensure that sensitive information, like credit card numbers, is removed during the PCA process and the data is stored in Amazon S3.",
+        "rationale": "because PCA is primarily a dimensionality reduction technique, not a data sanitization or redaction tool. It does not guarantee the removal of PII such as credit card numbers. Relying on PCA for PII removal is not secure or compliant with data protection standards."
+      },
+      {
+        "text": "Encrypt customer data with AWS KMS in Amazon S3 before importing it into SageMaker AI. Use AWS Glue to redact credit card numbers from the customer data before using it for model training.",
+        "rationale": ""
+      }
+    ],
+    "correct_index": 3,
+    "correct_text": "Encrypt customer data with AWS KMS in Amazon S3 before importing it into SageMaker AI. Use AWS Glue to redact credit card numbers from the customer data before using it for model training.",
+    "tipo_rescate": "A",
+    "razon_rescate": "La feature exacta (AWS Glue para redactar PII) no se ensena; la carta apunta a Macie que solo descubre PII, no redacta con Glue.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 43,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A national utility company manages hourly power consumption data for 150 types of smart meters deployed across multiple regions. Over the past 30 years, the company has collected a large volume of historical usage data enriched with weather metrics, regional energy prices, and maintenance logs. The data science team currently uses Amazon SageMaker AI Data Wrangler to perform feature engineering and data preprocessing, and SageMaker AI Canvas (a no-code ML service) to generate baseline forecasts for monthly energy demand. However, the team now plans to build a custom machine learning (ML) model that can forecast future meter-usage patterns across all meter types. Which option satisfies the requirement with the LEAST operational overhead?",
+    "options": [
+      {
+        "text": "Build a single global forecasting model using the SageMaker AI DeepAR forecasting algorithm trained on all meter types to capture shared consumption patterns.",
+        "rationale": ""
+      },
+      {
+        "text": "Train multiple forecasting models using the SageMaker AI Prophet algorithm, one for each meter type, to capture seasonal consumption patterns for individual devices.",
+        "rationale": "because it introduces significant operational overhead. Managing 150 separate models increases complexity in training, deployment, and maintenance. Prophet is also better suited for simpler, univariate time series and doesn’t scale as efficiently as DeepAR for large, multi-series datasets."
+      },
+      {
+        "text": "Use SageMaker AI Autopilot to automatically create and tune a single predictive model for all meter types using the combined dataset.",
+        "rationale": "because Autopilot is primarily optimized for tabular data and classification/regression tasks, not time series forecasting. It lacks native support for temporal dependencies and seasonality, which are critical for accurate meter usage predictions."
+      },
+      {
+        "text": "Create a single global forecasting model using the SageMaker AI XGBoost algorithm trained on all meter types to predict future consumption patterns.",
+        "rationale": "because XGBoost is a powerful algorithm for tabular data, but not inherently designed for time series forecasting. You would typically need to manually engineer time-based features, which increases complexity and operational burden."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Build a single global forecasting model using the SageMaker AI DeepAR forecasting algorithm trained on all meter types to capture shared consumption patterns.",
+    "tipo_rescate": "A",
+    "razon_rescate": "El algoritmo exacto (SageMaker DeepAR) no se ensena en ninguna carta.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 45,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A hospital network is building a clinical research assistant with Amazon Bedrock to help physicians review treatment protocols and medication guidance. The assistant must answer questions using only approved clinical guidelines and internal medical references. Every recommendation must cite specific sources so physicians can verify the supporting documentation. The company also wants to reduce the risk that the model will hallucinate unsupported medical information and prefers a managed approach that requires minimal custom retrieval logic. Which approach will satisfy these requirements while minimizing operational effort?",
+    "options": [
+      {
+        "text": "Store the approved clinical documents in Amazon S3 and include selected document excerpts directly in each Bedrock prompt. Instruct the model to cite the document names when generating recommendations.",
+        "rationale": "because this approach would simply require the application to build its own retrieval, prompt assembly, and source-attribution logic. Asking the model to produce citation text also does not provide the same structured citations and retrieved-reference metadata that RetrieveAndGenerate returns from the knowledge base."
+      },
+      {
+        "text": "Fine-tune a Bedrock foundation model using approved clinical documentation and require the model to include source references in every generated response.",
+        "rationale": "because fine-tuning primarily changes model behavior rather than dynamically grounding each response in retrieved source documents. It also does not inherently return citations that point to the exact approved clinical passages supporting each data claim."
+      },
+      {
+        "text": "Use Amazon Kendra to index the approved clinical documents and retrieve relevant passages. Pass the retrieved content to Bedrock through custom application logic and generate citations separately in the application.",
+        "rationale": "because this design would typically require additional integration and citation-generation code. Amazon Bedrock Knowledge Bases already provides a managed retrieval-and-generation workflow with native source citations, making it more appropriate when minimizing operational effort is a requirement."
+      },
+      {
+        "text": "Create a Bedrock Knowledge Base using the approved clinical references as its data source. Invoke the RetrieveAndGenerate API to ground responses in retrieved evidence and include citations that point back to the relevant source documents.",
+        "rationale": ""
+      }
+    ],
+    "correct_index": 3,
+    "correct_text": "Create a Bedrock Knowledge Base using the approved clinical references as its data source. Invoke the RetrieveAndGenerate API to ground responses in retrieved evidence and include citations that point back to the relevant source documents.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "La API exacta (RetrieveAndGenerate) y las citas a fuentes no se ensenan; las cartas solo describen RAG generico. | La carta define Bedrock KB/RAG generico pero no ensena la API especifica RetrieveAndGenerate ni las citas; la pregunta evalua esa sub-feature.",
+    "feature_faltante": "API RetrieveAndGenerate de Bedrock y generacion de citas a documentos fuente"
+  },
+  {
+    "n": 49,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A company has developed a machine learning-based recommendation system designed to personalize content for users. The model has been trained using Amazon SageMaker AI built-in algorithms and a custom dataset, with real-time inference being performed within SageMaker AI. As part of the system, the company also intends to leverage Amazon Comprehend for natural language processing to analyze customer reviews and sentiment, which will further enhance the recommendation engine. To meet strict security and compliance requirements, the company must ensure that both the training and inference environments, as well as all associated services, are deployed within a secure Amazon Virtual Private Cloud (VPC). Furthermore, the solution must completely block all access to the internet or any external resources to protect sensitive user data and ensure compliance with regulatory standards. Which of the following will satisfy the given requirements with the LEAST development effort?",
+    "options": [
+      {
+        "text": "Set up SageMaker AI within a VPC only mode and establish a VPC peering connection to enable Comprehend access in a different VPC.",
+        "rationale": "because VPC peering introduces additional complexity in routing, security group configuration, and maintenance. It typically requires careful setup to ensure no unintended internet access is allowed, which increases development effort and risk."
+      },
+      {
+        "text": "Deploy SageMaker AI in VPC only mode and configure an internet gateway with restrictive security group rules to block external access.",
+        "rationale": "because the presence of an internet gateway contradicts the requirement to completely block internet access. Security group rules alone cannot guarantee full isolation, and the existence of an internet gateway introduces the possibility of misconfiguration or accidental exposure, which would fail compliance audits."
+      },
+      {
+        "text": "Activate SageMaker AI network isolation mode to block all external access and establish a VPC endpoint for Comprehend within the same VPC.",
+        "rationale": ""
+      },
+      {
+        "text": "Use VPC only mode for SageMaker AI, configure a network access control list (NACL) to block internet access, and allow traffic to Comprehend.",
+        "rationale": "because NACLs (Network Access Control Lists) are not sufficient to fully block all external access and provide the same level of security as SageMaker’s network isolation mode. While NACLs can primarily restrict internet access, they do not provide complete isolation from external resources, as traffic could still flow via routes other than the NACLs. Moreover, this option does not use VPC endpoints to securely connect to Amazon Comprehend, leaving room for potential security risks."
+      }
+    ],
+    "correct_index": 2,
+    "correct_text": "Activate SageMaker AI network isolation mode to block all external access and establish a VPC endpoint for Comprehend within the same VPC.",
+    "tipo_rescate": "A",
+    "razon_rescate": "El objetivo exacto (network isolation mode + VPC endpoint para Comprehend) no lo ensena ninguna carta de este bloque.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 50,
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "stem": "A global e-commerce company is developing a product return prediction model using the Amazon SageMaker XGBoost algorithm to identify which orders are most likely to result in customer returns. Transactional and behavioral data are stored in Amazon Redshift, and the data engineering team utilizes SageMaker Data Wrangler to clean and prepare training features, including product category, customer sentiment, and delivery delays. After deploying the model, the team observes that while the training Area Under the Curve (AUC) is exceptionally high, the validation performance drops significantly. Model explainability reports from SageMaker Clarify reveal that the model is overly sensitive to a few dominant features like product price and region, suggesting overfitting to patterns in the training set. The team decides to tune the model’s hyperparameters to reduce model complexity and improve its ability to generalize to new data. Which hyperparameter modification would best help reduce overfitting and improve validation performance for this XGBoost model?",
+    "options": [
+      {
+        "text": "Increase the max_depth hyperparameter to allow deeper trees that can better capture relationships between rare features.",
+        "rationale": ". Increasing max_depth would typically make each tree more complex and more prone to overfitting. While deeper trees can capture rare feature interactions, they also simply memorize noise and outliers from the training data rather than learning general patterns. In this scenario, where the model already performs exceptionally well on training data but poorly on validation data, increasing max_depth would only worsen overfitting instead of reducing it."
+      },
+      {
+        "text": "Decrease the min_child_weight parameter to allow each leaf node to split more easily, capturing additional complexity in the dataset.",
+        "rationale": ". Reducing min_child_weight lowers the minimum number of observations required to create a new leaf node, which typically increases the model’s complexity. Doing so encourages the model to just create more splits, even for insignificant variations in data, leading to deeper trees and more overfitting. Since the goal is to simplify the model and prevent overfitting, decreasing min_child_weight moves in the opposite direction of what’s needed."
+      },
+      {
+        "text": "Increase the colsample_bytree parameter to ensure each tree uses a greater subset of features and improves model variance.",
+        "rationale": ". Increasing colsample_bytree allows the model to use a larger fraction of available features for each tree, which primarily increases feature diversity rather than reducing overfitting. Although this can sometimes help stabilize training, it does not directly limit model complexity. In fact, allowing more features per tree can simply make the model more likely to overfit on correlated inputs if dominant features consistently drive splits."
+      },
+      {
+        "text": "Decrease the value of the max_depth hyperparameter to limit tree complexity and prevent overfitting on dominant patterns in the training data.",
+        "rationale": ""
+      }
+    ],
+    "correct_index": 3,
+    "correct_text": "Decrease the value of the max_depth hyperparameter to limit tree complexity and prevent overfitting on dominant patterns in the training data.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "El hiperparametro exacto (max_depth de XGBoost) no se ensena en ninguna carta. | La pregunta evalua un parametro concreto de tuning de XGBoost que ninguna carta ensena; las cartas solo tocan XGBoost como algoritmo en un pipeline.",
+    "feature_faltante": "hiperparametro max_depth de XGBoost para reducir overfitting"
+  },
+  {
+    "n": 56,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A global e-commerce company is building a multilingual product description generator using Amazon Titan Text on Amazon Bedrock. The team plans to enhance the model’s domain understanding by fine-tuning it with proprietary product data in Amazon SageMaker AI before deploying it to production through Bedrock’s managed API. For compliance reasons, all model artifacts must be encrypted using AWS KMS, and API calls to the Bedrock endpoint must be logged and auditable. The company also wants to continuously monitor model latency and throughput across different regions to ensure consistent performance. Which solution provides a secure, compliant, and observable architecture for deploying and monitoring the Titan-based generative AI model?",
+    "options": [
+      {
+        "text": "Fine-tune the Titan model in SageMaker AI using training data stored in Amazon S3 with KMS encryption, deploy the model through Bedrock with a customer-managed KMS key, enable AWS CloudTrail for API auditing, and use Amazon CloudWatch metrics for Bedrock such as InvocationLatency to continuously monitor latency and throughput across regions.",
+        "rationale": ""
+      },
+      {
+        "text": "Fine-tune the Titan model in SageMaker AI using data encrypted with SSE-S3, deploy it through an API Gateway endpoint in front of Bedrock, and use Amazon Macie to monitor for data exfiltration events.",
+        "rationale": "because SSE-S3 lacks customer-managed key control and granular auditability that SSE-KMS provides, API Gateway is unnecessary in front of Bedrock’s managed endpoint, and Amazon Macie primarily focuses on discovering sensitive data in S3 rather than monitoring model invocations or performance."
+      },
+      {
+        "text": "Deploy the Titan model directly on Bedrock without fine-tuning, use AWS IAM roles to restrict access, and rely on AWS CloudTrail logs to monitor API calls. Monitor the model using the GenAI Observability feature in Amazon CloudWatch via the InvocationLatency, InputTokenCount and OutputTokenCount metrics.",
+        "rationale": "because it simply omits the required domain adaptation via fine-tuning and does not address encryption of training artifacts with customer-managed KMS keys, even though logging with CloudTrail is valid."
+      },
+      {
+        "text": "Train the Titan model entirely within SageMaker AI, export it to an Amazon EC2-based inference server with Amazon EBS encryption, and use AWS Config for compliance monitoring.",
+        "rationale": "because moving inference to EC2 forfeits Bedrock’s managed security/scale and does not meet the requirement to deploy “through Bedrock’s managed API”; AWS Config tracks configuration state, not real-time model latency/throughput, which should be monitored via CloudWatch."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Fine-tune the Titan model in SageMaker AI using training data stored in Amazon S3 with KMS encryption, deploy the model through Bedrock with a customer-managed KMS key, enable AWS CloudTrail for API auditing, and use Amazon CloudWatch metrics for Bedrock such as InvocationLatency to continuously monitor latency and throughput across regions.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "El componente distintivo (monitoreo con la metrica CloudWatch InvocationLatency de Bedrock por region) no lo ensena ninguna carta. | El nivel de la pregunta incluye observabilidad con una metrica CloudWatch concreta de Bedrock que las cartas no ensenan.",
+    "feature_faltante": "metrica CloudWatch InvocationLatency de Bedrock para monitoreo cross-region"
+  },
+  {
+    "n": 60,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A global e-commerce platform utilizes Amazon SageMaker AI to implement a real-time recommendation system that provides personalized product suggestions. The model is developed using SageMaker Studio. Once trained, the model is hosted on a SageMaker endpoint, enabling it to deliver inferences in real time. Additionally, the company employs Amazon Comprehend to analyze customer feedback and sentiment derived from reviews and product ratings. This analysis helps the company better understand customer preferences and enhance its recommendations. As the business prepares for major sales events, the operations team observes that increased customer activity results in significant delays when retrieving product recommendations, ultimately leading to a poor user experience. To address this issue, there is a need to adjust the target tracking scaling policy on the SageMaker endpoint. The goal is to ensure effective scaling during high-traffic periods, preventing latency from adversely affecting the customer experience. Which solution will best optimize the scaling of the SageMaker inference endpoint?",
+    "options": [
+      {
+        "text": "Configure a scheduled scaling policy to increase the capacity of the SageMaker inference endpoint before the sales events begin.",
+        "rationale": ""
+      },
+      {
+        "text": "Use AWS Lambda to periodically restart the SageMaker endpoint during peak traffic to refresh instance performance.",
+        "rationale": "because restarting the endpoint does not improve scalability or performance. It introduces unnecessary downtime and does not address the root cause of latency, which is insufficient capacity during peak load."
+      },
+      {
+        "text": "Implement a step scaling policy for the SageMaker inference endpoint that scales based on resource utilization metrics such as CPU and memory usage.",
+        "rationale": "because SageMaker endpoints do not expose granular CPU or memory metrics for scaling. Instead, scaling should be typically based on metrics like invocations per instance, which are more relevant to inference workloads."
+      },
+      {
+        "text": "Increase the instance size of the SageMaker endpoint to a larger instance type to accommodate higher traffic during sales events.",
+        "rationale": "because while it may temporarily improve performance, it’s a static solution that lacks flexibility. It doesn’t dynamically adjust to changing traffic patterns and may only lead to overprovisioning or underutilization outside peak periods."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Configure a scheduled scaling policy to increase the capacity of the SageMaker inference endpoint before the sales events begin.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "La feature exacta (scheduled scaling policy) no se ensena; las cartas ensenan target-tracking/auto scaling generico. | La pregunta evalua una politica de escalado especifica (scheduled scaling) que las cartas no ensenan; solo cubren auto scaling generico.",
+    "feature_faltante": "scheduled scaling policy (vs target tracking) para pre-escalar el endpoint"
+  },
+  {
+    "n": 62,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A financial services company is developing a machine learning (ML) model in Amazon SageMaker AI to detect real-time fraudulent transactions. The company plans to integrate this model with Amazon Kinesis Data Streams for continuous transaction data ingestion and Amazon DynamoDB for storing transaction metadata. The model must be trained on an extensive historical dataset stored in Amazon S3. The company must ensure that all data is encrypted in transit and at rest, and that access to sensitive data and model results is strictly controlled. AWS Encryption SDK is being considered for additional client-side encryption of sensitive data before uploading it to S3. There’s also a need to track model performance over time to ensure it remains effective and predictions align with business rules. Which solution will secure the ML workflow, control access, and allow for continuous monitoring of model performance?",
+    "options": [
+      {
+        "text": "Use SageMaker AI to train the model with data from S3, enable S3 server-side encryption (SSE-KMS) for data at rest, configure IAM roles to control access to the model and data, and use Amazon CloudWatch to monitor model performance metrics and logging.",
+        "rationale": ""
+      },
+      {
+        "text": "Use SageMaker AI to train the model with data from S3, enable S3 server-side encryption (SSE-S3) for data at rest, store model results in S3 with IAM roles to control access, and use Amazon Macie for monitoring sensitive data exposure.",
+        "rationale": ". While SSE-S3 provides encryption for data at rest, it does not offer the same level of fine-grained access control and auditability as SSE-KMS. SSE-KMS allows for customer-managed encryption keys, which are crucial for compliance requirements in industries like financial services, where audit trails and access control are necessary. Additionally, Amazon Macie is a service primarily designed to identify and protect sensitive data within Amazon S3, such as PII (Personally Identifiable Information), but it does not monitor model performance or control access to the model itself. Therefore, Amazon Macie is not the right tool for ensuring the security and performance monitoring of the model in this scenario."
+      },
+      {
+        "text": "Utilize SageMaker AI to train the model with data from S3, store the model and metadata in DynamoDB, and configure Amazon VPC endpoints for secure communication between the SageMaker AI instance, DynamoDB, and Kinesis Data Streams. Use AWS CloudTrail to monitor access and activity.",
+        "rationale": "because DynamoDB is not optimized for storing large ML models. DynamoDB is more suitable for fast access to small pieces of data, like metadata, rather than large model artifacts. Storing the model in S3 is more appropriate as it is designed for scalable storage of large objects, including model files. Additionally, CloudTrail is typically used to monitor API activity, not to monitor model performance, which is a critical aspect of maintaining an effective ML model. In this scenario, Amazon CloudWatch is the appropriate service for monitoring the model’s performance metrics and ensuring it continues to meet business requirements."
+      },
+      {
+        "text": "Use SageMaker AI to train the model with data from S3, configure Amazon Data Firehose to ingest the transaction data into SageMaker AI, and use AWS Glue to catalog the transaction data. Use Amazon CloudWatch for model performance monitoring and IAM policies to restrict access.",
+        "rationale": "because Amazon Data Firehose is just used for streaming data into services like Amazon S3 or Amazon Redshift, but it is not necessary for real-time fraud detection or training the model in Amazon SageMaker AI. The model can ingest data directly from Kinesis Data Streams or S3 without the need for Data Firehose. Additionally, AWS Glue is primarily a service for data cataloging and ETL (Extract, Transform, Load), which is not required for the real-time transaction data ingestion in this fraud detection scenario. The focus should be on SageMaker AI’s ability to directly integrate with data sources like S3 and Kinesis for training and inference."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Use SageMaker AI to train the model with data from S3, enable S3 server-side encryption (SSE-KMS) for data at rest, configure IAM roles to control access to the model and data, and use Amazon CloudWatch to monitor model performance metrics and logging.",
+    "tipo_rescate": "A",
+    "razon_rescate": "Ninguna carta ensena la decision combinada del workflow seguro de ML (SSE-KMS + IAM + CloudWatch monitoring); solo tocan piezas en escenarios distintos.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 67,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A retail analytics company is training a recommendation model using Amazon SageMaker AI, with training data stored in an Amazon S3 bucket. The team uses SageMaker Automatic Model Tuning (AMT) to optimize hyperparameters such as learning rate and maximum depth, and tracks the best-performing models in the SageMaker Model Registry. During tuning, many jobs continue running even after early validation results indicate poor performance, resulting in unnecessary GPU usage. The company wants a tuning strategy that automatically stops underperforming trials and reallocates resources to promising configurations to reduce compute costs. Which tuning strategy should be employed to enhance optimization efficiency and expedite hyperparameter search?",
+    "options": [
+      {
+        "text": "Implement Bayesian optimization to refine the hyperparameter search space iteratively.",
+        "rationale": ". Bayesian optimization is a powerful tuning strategy that efficiently explores the hyperparameter space by building a probabilistic model of performance. However, it does not automatically terminate underperforming trials early. It focuses primarily on selecting the following promising configuration based on prior results rather than dynamically reallocating compute resources. In this scenario, where cost efficiency and early stopping are crucial, Bayesian optimization alone would not prevent unnecessary GPU usage."
+      },
+      {
+        "text": "Utilize the Hyperband strategy in SageMaker AI to allocate resources efficiently and early stop weak trials.",
+        "rationale": ""
+      },
+      {
+        "text": "Use grid search to evaluate all possible hyperparameter combinations without early stopping exhaustively.",
+        "rationale": ". Grid search simply tests every combination of hyperparameters in a predefined range, which makes it highly inefficient for large search spaces. It typically consumes excessive computational resources and time because every job runs to completion regardless of performance. This brute-force method is useful for small experiments but does not support early stopping or adaptive resource allocation, making it unsuitable for efficiently optimizing complex models."
+      },
+      {
+        "text": "Utilize random search to sample hyperparameter combinations uniformly across the search space.",
+        "rationale": ". While it can sometimes find good configurations faster than grid search, it still lacks any built-in mechanism to stop poorly performing jobs early. It simply runs each trial to completion, which typically wastes resources on weak configurations. Random search does not provide the intelligent resource management and adaptive early stopping offered by Hyperband, making it less cost-effective for large-scale tuning tasks."
+      }
+    ],
+    "correct_index": 1,
+    "correct_text": "Utilize the Hyperband strategy in SageMaker AI to allocate resources efficiently and early stop weak trials.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "La estrategia exacta (Hyperband) no se ensena en ninguna carta. | La pregunta evalua una estrategia HPO concreta (Hyperband) que ninguna carta ensena; las cartas solo definen AMT/HPO generico.",
+    "feature_faltante": "estrategia de tuning Hyperband con early stopping"
+  },
+  {
+    "n": 68,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A developer is working on an advanced machine learning project using Amazon SageMaker AI. The project involves training a deep learning model using large datasets stored in Amazon S3. Additionally, the developer needs to store model artifacts, logs, and evaluation results back to a different S3 bucket upon completion of the training job. To ensure security and proper access control, the developer must grant the SageMaker notebook instance appropriate permissions to read from and write to the specific S3 buckets. Which approach should be used to securely enable this access?",
+    "options": [
+      {
+        "text": "Define a bucket policy on the S3 bucket that allows the SageMaker AI notebook instance by its ARN to perform s3:GetObject, s3:PutObject, and s3:ListBucket actions.",
+        "rationale": "because while bucket policies can typically grant access, they are better suited for cross-account access or broader permissions. Managing access through IAM roles is more maintainable, secure, and aligned with AWS best practices for service-to-service communication."
+      },
+      {
+        "text": "Create an S3 access point for the SageMaker notebook instance, granting it access to the necessary data, and configure the access point to allow only the required actions (s3:GetObject, s3:PutObject, and s3:ListBucket).",
+        "rationale": "because S3 Access Points are primarily designed for managing access to shared datasets at scale, especially in multi-tenant environments. For a single SageMaker notebook instance, using an IAM role is simpler, more direct, and avoids unnecessary complexity."
+      },
+      {
+        "text": "Allow the SageMaker notebook instance to perform s3:GetObject, s3:PutObject, and s3:ListBucket operations by attaching a policy to its associated IAM role that grants access to the designated S3 buckets.",
+        "rationale": ""
+      },
+      {
+        "text": "Use AWS IAM identity federation to provide temporary access to the S3 bucket by configuring the SageMaker notebook instance to assume a federated role for accessing the data.",
+        "rationale": "because IAM identity federation is intended for external identities (e.g., corporate users or third-party apps), not for AWS services like SageMaker AI. SageMaker AI should use its IAM role for access, not federated identities."
+      }
+    ],
+    "correct_index": 2,
+    "correct_text": "Allow the SageMaker notebook instance to perform s3:GetObject, s3:PutObject, and s3:ListBucket operations by attaching a policy to its associated IAM role that grants access to the designated S3 buckets.",
+    "tipo_rescate": "A",
+    "razon_rescate": "La carta responde a un objetivo distinto (fix de KMS) y solo cubre lectura; el s3:PutObject (escritura al segundo bucket) esta ausente.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 69,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "An e-commerce company leverages both Amazon SageMaker AI to train a machine learning (ML) model that predicts product-interest scores for users, and Amazon Personalize to generate real-time personalized product recommendations based on that model’s output. The AI developer wants to visualize recommendation results across four distinct dimensions: the user’s interest score (first dimension) plotted against the product’s prior conversion rate (second dimension), then visualize a third dimension (product category) via color, and a fourth dimension (number of impressions for that product) via the size of each data point. The goal is to spot segments where high-interest, high-conversion products still receive low impressions. Which approach best satisfies the given requirements?",
+    "options": [
+      {
+        "text": "Visualize the data using the SageMaker Data Wrangler scatter plot visualization and color data points by the third feature to represent all four dimensions.",
+        "rationale": "because it only mentions using color to represent the third feature (product category) and does not account for the fourth dimension (number of impressions). Without mapping point size, the visualization misses a key aspect of the analysis."
+      },
+      {
+        "text": "Use the SageMaker Canvas Box Plot visualization to compare distributions and use a fill pattern for the third dimension.",
+        "rationale": "because box plots are primarily designed to show statistical distributions (e.g., median, quartiles) and are not suited for plotting relationships between multiple continuous variables. They also lack native support for mapping size or color to individual data points in the way scatter plots do."
+      },
+      {
+        "text": "Use the SageMaker Canvas Bar Chart visualization to group products by category and simultaneously apply bar color and height to represent interest score and conversion rate.",
+        "rationale": "because bar charts are typically limited to two dimensions. They cannot represent both interest score and conversion rate simultaneously with clarity, nor can they encode impressions as size."
+      },
+      {
+        "text": "Apply the SageMaker Canvas scatter plot visualization and map the third dimension (product category) to scatter point color and the fourth dimension (number of impressions) to scatter point size.",
+        "rationale": ""
+      }
+    ],
+    "correct_index": 3,
+    "correct_text": "Apply the SageMaker Canvas scatter plot visualization and map the third dimension (product category) to scatter point color and the fourth dimension (number of impressions) to scatter point size.",
+    "tipo_rescate": "A",
+    "razon_rescate": "La feature exacta (SageMaker Canvas scatter plot con dimensiones de color/tamano) no se ensena.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 72,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A telecommunications company is developing a generative AI troubleshooting assistant that uses RAG to answer questions from network manuals, incident reports, and engineering runbooks indexed in Amazon OpenSearch Service. The application currently relies on vector similarity search to retrieve relevant documents. Engineers report that searches often return documents with similar meaning but miss records containing exact device codes, protocol names, product identifiers, and technical acronyms. The company needs to improve retrieval accuracy by preserving semantic relevance while also matching precise terminology. The solution must continue to provide low end-user latency as the knowledge repository grows. Which solution will best meet these requirements?",
+    "options": [
+      {
+        "text": "Increase the number of results returned by the vector similarity search and apply a higher similarity-score threshold to reduce semantically unrelated documents before passing the results to the RAG workflow.",
+        "rationale": "because this approach simply adjusts how vector search results are selected. Vector search is designed to identify semantically similar content based on embeddings, so increasing the result count or modifying the similarity threshold does not add the lexical matching needed for exact device codes, protocol names, and acronyms."
+      },
+      {
+        "text": "Use hybrid search to combine vector similarity search with keyword-based retrieval, improving semantic relevance while accurately matching exact terms and acronyms.",
+        "rationale": ""
+      },
+      {
+        "text": "Use keyword-only search with the BM25 algorithm in OpenSearch Service to prioritize exact technical terms, device codes, and acronyms before sending the retrieved documents to the generative AI application.",
+        "rationale": "because BM25 is primarily based on lexical relevance. Although it is effective for exact keywords and identifiers, using it alone sacrifices the semantic understanding required to retrieve documents that express the same concept using different terminology. Hybrid search combines BM25-style keyword matching with semantic retrieval to address both requirements."
+      },
+      {
+        "text": "Configure semantic search in OpenSearch Service with neural queries to improve understanding of user intent and retrieve documents based primarily on contextual similarity.",
+        "rationale": "because semantic search only addresses the contextual side of the retrieval problem. Neural search improves understanding of meaning and intent, but it does not provide the same combination of semantic relevance and precise lexical matching required for exact technical identifiers and acronyms. Hybrid search is specifically designed to combine keyword and semantic search capabilities."
+      }
+    ],
+    "correct_index": 1,
+    "correct_text": "Use hybrid search to combine vector similarity search with keyword-based retrieval, improving semantic relevance while accurately matching exact terms and acronyms.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "La tecnica exacta (hybrid search combinando vector y keyword) no se ensena en ninguna carta. | La pregunta evalua una tecnica de recuperacion concreta (hybrid search) ausente; las cartas solo ensenan busqueda vectorial pura.",
+    "feature_faltante": "hybrid search (combinacion vector + keyword) en OpenSearch"
+  },
+  {
+    "n": 73,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A global e-commerce enterprise is preparing a major product launch and requires a large-scale system for continuous monitoring of customer feedback across multiple social media platforms. Social media posts are already collected and stored in an Amazon S3 bucket. Amazon Rekognition will extract visual sentiment indicators from images and videos within the collected posts, and Amazon Kendra will retrieve contextually relevant posts from a broad corpus of unstructured text, with semantic retrieval supported by an Inverted File with Flat Compression (IVFFlat) vector index. The analytics group must perform sentiment scoring across all retrieved content and must generate long-term trend visualizations for leadership teams that track sentiment changes across product categories, geographic regions, and marketing campaigns. Automated alarms based on predefined sentiment thresholds must also be configured to support rapid incident response for negative sentiment spikes during critical launch periods. Which combination of AWS services best meets these requirements?",
+    "options": [
+      {
+        "text": "Run an AWS Glue job when new social media posts are added to the S3 bucket. Use Glue ETL scripts to preprocess the text and call an Amazon SageMaker Processing job to compute sentiment scores. Store the processed sentiment data in Amazon DynamoDB and use Amazon QuickSight for visualization. Configure manual dashboards in QuickSight for analysts to monitor trends.",
+        "rationale": "because this workflow primarily focuses on batch ETL and BI-style reporting rather than real-time sentiment monitoring. Amazon DynamoDB is optimized for fast key-value lookups and does not support the same level of analytical querying and trend visualization needed for ongoing sentiment analysis. QuickSight, while effective for visualizing historical data, lacks built-in alerting or continuous threshold evaluation needed for immediate sentiment-based notifications. This means the solution would lack the rapid, automated response capability required for sentiment spikes during high-impact events."
+      },
+      {
+        "text": "Trigger an AWS Lambda function whenever S3 receives a new post, and use Amazon Comprehend for sentiment detection. Save the analysis results back into S3 and publish the sentiment scores as corresponding Amazon CloudWatch metrics. Enable CloudWatch alarms to alert analysts based on configured sentiment thresholds automatically.",
+        "rationale": ""
+      },
+      {
+        "text": "Configure an S3 event notification to trigger Amazon SQS when new social media posts arrive. Use Amazon Comprehend to analyze sentiment directly from the messages in the queue and store the results in a separate S3 bucket. Visualize sentiment trends in Amazon QuickSight dashboards and schedule periodic reports for trend monitoring.",
+        "rationale": "because this design only supports asynchronous message buffering and periodic analytical reporting. Amazon SQS is intended for reliable ingestion and decoupling of workloads, not for real-time monitoring workflows or immediate reaction to sentiment changes. QuickSight emphasizes business intelligence dashboards and scheduled reports, which means sentiment shifts would be discovered during review cycles rather than through instantaneous detection. This results in delayed awareness of negative sentiment spikes, which does not align with the requirement for rapid visibility during critical launch periods."
+      },
+      {
+        "text": "Create a BlazingText-based sentiment model in Amazon SageMaker AI and expose the model through a hosted endpoint. Each time new data arrives in S3, invoke an AWS Lambda function to query this endpoint. Capture the sentiment results in an Amazon DynamoDB table and push them to an Amazon CloudWatch custom metric for monitoring and alerting.",
+        "rationale": "because this approach simply introduces unnecessary model-building complexity using SageMaker. Amazon Comprehend already provides built-in sentiment analysis without requiring training, endpoint hosting, or model maintenance, while BlazingText demands dataset preparation and tuning that increase operational overhead. Storing results in DynamoDB also limits analytical flexibility, as it is designed for key-value access patterns rather than trend analysis across categories or regions."
+      }
+    ],
+    "correct_index": 1,
+    "correct_text": "Trigger an AWS Lambda function whenever S3 receives a new post, and use Amazon Comprehend for sentiment detection. Save the analysis results back into S3 and publish the sentiment scores as corresponding Amazon CloudWatch metrics. Enable CloudWatch alarms to alert analysts based on configured sentiment thresholds automatically.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "El diseno combinado (Comprehend -> metricas custom de CloudWatch -> alarmas por umbral de sentimiento) no lo ensena ninguna carta. | La pregunta evalua una decision de diseno de produccion (publicar sentiment como metricas CloudWatch y alarmas) que ninguna carta ensena.",
+    "feature_faltante": "diseno de pipeline sentiment->metricas CloudWatch->alarmas por umbral con Lambda/Comprehend"
+  }
+]

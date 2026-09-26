@@ -1,0 +1,702 @@
+[
+  {
+    "exam": "exam1",
+    "n": 45,
+    "kind": "RESC",
+    "key": "aip01r-q45",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "_score": 59.392304845413264,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 72,
+    "kind": "RESC",
+    "key": "aip01r-q72",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "_score": 59.392304845413264,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 61,
+    "kind": "NEW",
+    "key": "aip01-q61",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "LangChain + LangGraph orquestacion con estado",
+    "_score": 54.0,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 56,
+    "kind": "RESC",
+    "key": "aip01r-q56",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "_score": 53.392304845413264,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 25,
+    "kind": "RESC",
+    "key": "aip02r-q25",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "_score": 53.392304845413264,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 39,
+    "kind": "RESC",
+    "key": "aip01r-q39",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "_score": 52.41640786499874,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 59,
+    "kind": "NEW",
+    "key": "aip01-q59",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Inference params: temperature y top_k para determinismo",
+    "_score": 51.874507866387546,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 19,
+    "kind": "NEW",
+    "key": "aip01-q19",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Model Context Protocol (MCP) expone tools a Bedrock",
+    "_score": 50.696938456699066,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 14,
+    "kind": "NEW",
+    "key": "aip02-q14",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Step Functions + Comprehend PII + embeddings + OpenSearch Serverless",
+    "_score": 50.696938456699066,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 47,
+    "kind": "NEW",
+    "key": "aip02-q47",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "OpenSearch Serverless vector + Bedrock KB RAG multilingue",
+    "_score": 50.696938456699066,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 21,
+    "kind": "NEW",
+    "key": "aip01-q21",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock cross-region inference profile data residency",
+    "_score": 49.41640786499874,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 64,
+    "kind": "NEW",
+    "key": "aip01-q64",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock Prompt Management templates versionados",
+    "_score": 49.41640786499874,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 13,
+    "kind": "NEW",
+    "key": "aip02-q13",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock KB metadata filtering para retrieval",
+    "_score": 49.41640786499874,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 55,
+    "kind": "NEW",
+    "key": "aip02-q55",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "pgvector en Aurora PostgreSQL con indice HNSW",
+    "_score": 49.41640786499874,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 67,
+    "kind": "NEW",
+    "key": "aip03-q67",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Pinecone RAG + Comprehend + endpoint Llama2",
+    "_score": 49.41640786499874,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 71,
+    "kind": "RESC",
+    "key": "aip03r-q71",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "_score": 49.0,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 11,
+    "kind": "NEW",
+    "key": "aip01-q11",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "IAM policy exige bedrock:GuardrailIdentifier",
+    "_score": 48.0,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 48,
+    "kind": "NEW",
+    "key": "aip01-q48",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock Guardrails content filters + automated reasoning",
+    "_score": 48.0,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 52,
+    "kind": "NEW",
+    "key": "aip01-q52",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock agent traces (Pre/Orchestration/Post) + golden dataset",
+    "_score": 48.0,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 7,
+    "kind": "NEW",
+    "key": "aip02-q7",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Comprehend PII + Rekognition moderacion + Bedrock Guardrails",
+    "_score": 48.0,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 8,
+    "kind": "NEW",
+    "key": "aip02-q8",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock Knowledge Base con Retrieve API busqueda vectorial",
+    "_score": 48.0,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 10,
+    "kind": "NEW",
+    "key": "aip02-q10",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "AgentCore Identity OIDC inbound + max tokens",
+    "_score": 48.0,
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 54,
+    "kind": "RESC",
+    "key": "aip03r-q54",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "",
+    "_score": 58.48528137423857,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 26,
+    "kind": "NEW",
+    "key": "aip01-q26",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Custom Model Import + AgentCore",
+    "_score": 45.696938456699066,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 65,
+    "kind": "NEW",
+    "key": "aip01-q65",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock provisioned model ARN en modelId",
+    "_score": 44.41640786499874,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 71,
+    "kind": "NEW",
+    "key": "aip02-q71",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Custom Model Import + Provisioned Throughput",
+    "_score": 44.41640786499874,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 68,
+    "kind": "NEW",
+    "key": "aip02-q68",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "AWS Strands Agents SDK agente autonomo con Bedrock",
+    "_score": 43.0,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 73,
+    "kind": "NEW",
+    "key": "aip02-q73",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Text-to-SQL + Bedrock Custom Model Import + Guardrails",
+    "_score": 43.0,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 3,
+    "kind": "NEW",
+    "key": "aip03-q3",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Data Automation ingesta continua",
+    "_score": 43.0,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 6,
+    "kind": "NEW",
+    "key": "aip01-q6",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock multi-agent collaboration",
+    "_score": 41.392304845413264,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 46,
+    "kind": "NEW",
+    "key": "aip01-q46",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "MCP servers stateless en ECS + Cloud Control API",
+    "_score": 41.392304845413264,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 62,
+    "kind": "NEW",
+    "key": "aip02-q62",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock InvokeModelWithResponseStream via WebSocket",
+    "_score": 41.392304845413264,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 69,
+    "kind": "NEW",
+    "key": "aip02-q69",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "CDK + CodePipeline multi-stage con Bedrock FoundationModel",
+    "_score": 41.392304845413264,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 3,
+    "kind": "NEW",
+    "key": "aip01-q3",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Instancias Trn (Trainium) para fine-tuning LLM",
+    "_score": 39.48528137423857,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 3,
+    "kind": "NEW",
+    "key": "aip02-q3",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Payload >256KB Step Functions con S3 URI/ResultPath",
+    "_score": 39.48528137423857,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 11,
+    "kind": "NEW",
+    "key": "aip02-q11",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock KB query decomposition + Bedrock flow",
+    "_score": 39.48528137423857,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 15,
+    "kind": "NEW",
+    "key": "aip02-q15",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Step Functions state machine para patron ReAct de FM",
+    "_score": 39.48528137423857,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 17,
+    "kind": "NEW",
+    "key": "aip02-q17",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Prompt Management versioning/alias",
+    "_score": 39.48528137423857,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 30,
+    "kind": "NEW",
+    "key": "aip02-q30",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Data Automation + Transcribe/Textract + AppSync",
+    "_score": 39.48528137423857,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 63,
+    "kind": "NEW",
+    "key": "aip02-q63",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Step Functions human-in-the-loop waitForTaskToken para revision de output FM",
+    "_score": 39.48528137423857,
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 54,
+    "kind": "NEW",
+    "key": "aip02-q54",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock provisioned throughput + Guardrails + Prompt Management",
+    "_score": 43.0,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam1",
+    "n": 47,
+    "kind": "NEW",
+    "key": "aip01-q47",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Generative AI Security Scoping Matrix Scope 4",
+    "_score": 40.874507866387546,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam3",
+    "n": 15,
+    "kind": "RESC",
+    "key": "aip03r-q15",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "_score": 40.48528137423857,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 60,
+    "kind": "NEW",
+    "key": "aip02-q60",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock invocation logging + guardrails grounding + CloudWatch anomaly",
+    "_score": 39.696938456699066,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam3",
+    "n": 13,
+    "kind": "NEW",
+    "key": "aip03-q13",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Latency-optimized inference + prompt caching",
+    "_score": 39.696938456699066,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 9,
+    "kind": "NEW",
+    "key": "aip02-q9",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock native data privacy (no retencion prompt/output)",
+    "_score": 38.41640786499874,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 28,
+    "kind": "NEW",
+    "key": "aip02-q28",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "LLM-as-a-judge en Bedrock Model Evaluation",
+    "_score": 38.41640786499874,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 64,
+    "kind": "NEW",
+    "key": "aip02-q64",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Comprehend toxicity + prompt safety classification + PII redaccion",
+    "_score": 38.41640786499874,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam3",
+    "n": 22,
+    "kind": "RESC",
+    "key": "aip03r-q22",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "_score": 38.0,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 5,
+    "kind": "NEW",
+    "key": "aip02-q5",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock model evaluation robustness metrics",
+    "_score": 37.0,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 27,
+    "kind": "NEW",
+    "key": "aip02-q27",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock guardrails dinamicas por grupo Cognito + KB sync",
+    "_score": 37.0,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 51,
+    "kind": "NEW",
+    "key": "aip02-q51",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock Guardrails PII filters mask/block por region",
+    "_score": 37.0,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 66,
+    "kind": "NEW",
+    "key": "aip02-q66",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock Prompt Management plantillas parametrizadas + Guardrails + CloudTrail",
+    "_score": 37.0,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam1",
+    "n": 41,
+    "kind": "RESC",
+    "key": "aip01r-q41",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "_score": 36.48528137423857,
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 56,
+    "kind": "RESC",
+    "key": "aip02r-q56",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "_score": 44.696938456699066,
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 73,
+    "kind": "RESC",
+    "key": "aip01r-q73",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "_score": 44.48528137423857,
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 53,
+    "kind": "NEW",
+    "key": "aip02-q53",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Semantic caching con MemoryDB vector search",
+    "_score": 33.97056274847714,
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 33,
+    "kind": "NEW",
+    "key": "aip02-q33",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Claude Haiku + hybrid search + inference profile CRIS",
+    "_score": 32.874507866387546,
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 59,
+    "kind": "NEW",
+    "key": "aip02-q59",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Semantic caching de prompts para reusar salidas FM",
+    "_score": 32.874507866387546,
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 65,
+    "kind": "RESC",
+    "key": "aip02r-q65",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "_score": 32.48528137423857,
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 43,
+    "kind": "RESC",
+    "key": "aip03r-q43",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "_score": 32.48528137423857,
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 64,
+    "kind": "RESC",
+    "key": "aip03r-q64",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "_score": 32.48528137423857,
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 38,
+    "kind": "RESC",
+    "key": "aip02r-q38",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "",
+    "_score": 37.48528137423857,
+    "_dom": "Testing, Validation"
+  },
+  {
+    "exam": "exam3",
+    "n": 37,
+    "kind": "RESC",
+    "key": "aip03r-q37",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "",
+    "_score": 37.48528137423857,
+    "_dom": "Testing, Validation"
+  },
+  {
+    "exam": "exam2",
+    "n": 21,
+    "kind": "NEW",
+    "key": "aip02-q21",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "Bedrock KB semantic chunking",
+    "_score": 32.97056274847714,
+    "_dom": "Testing, Validation"
+  },
+  {
+    "exam": "exam1",
+    "n": 40,
+    "kind": "NEW",
+    "key": "aip01-q40",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "Bedrock Model Evaluations job (accuracy/robustness)",
+    "_score": 31.874507866387546,
+    "_dom": "Testing, Validation"
+  },
+  {
+    "exam": "exam1",
+    "n": 50,
+    "kind": "RESC",
+    "key": "aip01r-q50",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "",
+    "_score": 29.0,
+    "_dom": "Testing, Validation"
+  },
+  {
+    "exam": "exam1",
+    "n": 71,
+    "kind": "NEW",
+    "key": "aip01-q71",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "Bedrock AgentCore Observability traces FM",
+    "_score": 28.0,
+    "_dom": "Testing, Validation"
+  },
+  {
+    "exam": "exam1",
+    "n": 35,
+    "kind": "NEW",
+    "key": "aip01-q35",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "SageMaker Ground Truth Plus human-in-the-loop",
+    "_score": 24.48528137423857,
+    "_dom": "Testing, Validation"
+  },
+  {
+    "exam": "exam3",
+    "n": 8,
+    "kind": "NEW",
+    "key": "aip03-q8",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "SageMaker multi-variant endpoint A/B",
+    "_score": 22.0,
+    "_dom": "Testing, Validation"
+  }
+]

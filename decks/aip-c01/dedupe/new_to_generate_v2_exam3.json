@@ -1,0 +1,470 @@
+[
+  {
+    "n": 2,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A data science team is developing an automated pipeline that integrates Amazon SageMaker AI and Amazon Comprehend to analyze large volumes of customer feedback data. The team first uses a PySpark script running on Amazon EMR to perform text preprocessing, tokenization, and feature engineering on millions of feedback records stored in Amazon S3. The preprocessed data is then passed to Comprehend for sentiment and entity extraction, and subsequently used to train multiple sentiment classification models in SageMaker AI. The AI developer must determine how varying the PySpark feature transformation parameters and sample sizes affects overall model accuracy and inference performance. Which solution will meet this requirement most effectively?",
+    "options": [
+      {
+        "text": "Use SageMaker Debugger hook to capture feature engineering metrics and execution logs during PySpark script execution within a SageMaker training job.",
+        "rationale": "because SageMaker Debugger is primarily designed to monitor and profile training jobs, not preprocessing scripts. It captures internal model states like tensors and gradients, but it doesn’t support logging PySpark parameters or tracking preprocessing variations in a structured way."
+      },
+      {
+        "text": "Use SageMaker Experiments tracker to log PySpark parameters and model metrics while executing the script as a SageMaker processing job.",
+        "rationale": ""
+      },
+      {
+        "text": "Use SageMaker Model Monitor to detect differences in PySpark data transformation parameters before each training iteration.",
+        "rationale": "because Model Monitor is typically used for post-deployment monitoring of data drift and model quality in production endpoints. It does not track preprocessing parameters or support experimentation during training or processing jobs."
+      },
+      {
+        "text": "Use SageMaker Autopilot to automatically choose the best PySpark preprocessing configuration and feature-engineering parameters for model optimization.",
+        "rationale": "because Autopilot automates preprocessing and model selection using its own internal logic. It does not support custom PySpark scripts or manual control over feature engineering parameters, which are essential for the team’s experimentation goals."
+      }
+    ],
+    "correct_index": 1,
+    "correct_text": "Use SageMaker Experiments tracker to log PySpark parameters and model metrics while executing the script as a SageMaker processing job.",
+    "concepto": "SageMaker Experiments tracking PySpark params"
+  },
+  {
+    "n": 3,
+    "category": "AIP – Implementation and Integration",
+    "stem": "A company uses a customer relationship management (CRM) platform to manage its sales pipeline, support tickets, and account health. The company is developing a generative AI assistant that can compose personalized email outreach, summarize recent customer interactions, and provide actionable recommendations for account management. Sales and support data are stored in Amazon S3 and other internal file storage. The engineering team requires the data pipelines to run continuously, ensuring the assistant always has access to fresh data for generation and training, while minimizing manual ETL tasks. To enhance the solution, the team plans to leverage Amazon Comprehend to extract sentiment, customer issues, and entity metadata from unstructured support logs. Amazon SageMaker AI is used to train predictive models for customer engagement scoring based on historical interactions and CRM activity. The solution must automatically ingest and process CRM data, combine insights from Comprehend and SageMaker AI, and feed the results into a foundation model pipeline for retraining or inference without requiring constant manual intervention. Which approach offers the most scalable and reliable method for automating the CRM data processing pipeline?",
+    "options": [
+      {
+        "text": "Use Amazon EventBridge to trigger AWS Lambda functions whenever new CRM data is added to S3. Set up a Lambda function to preprocess the data, call Comprehend for sentiment analysis, and push the output to SageMaker AI for model retraining.",
+        "rationale": ". Using Lambda to orchestrate preprocessing, Comprehend analysis, and SageMaker retraining introduces operational complexity and is simply not ideal for large volumes of CRM data. Lambda functions have execution time limits and concurrency constraints, making this method only partially automated and less reliable for continuous retraining pipelines."
+      },
+      {
+        "text": "Export CRM data to S3 every week, run a SageMaker Notebook to transform the data, call Comprehend, and feed the output into the foundation model retraining.",
+        "rationale": ". This workflow is just a periodic, manual process that updates models on a weekly schedule. It does not provide the continuous data availability that a production-ready generative AI assistant requires. As a result, insights and retrained models can become outdated, making this approach typically inefficient for real-time decision-making and personalized recommendations."
+      },
+      {
+        "text": "Connect to CRM data using SageMaker Data Wrangler, perform transformations, and analyze text with Comprehend. Run SageMaker AI training jobs separately and manually trigger foundation model retraining in Amazon Bedrock.",
+        "rationale": ". This method offers some automation for data transformation but still depends on manual execution for model training and foundation model retraining. It is simply not fully integrated into an end-to-end automated workflow, which increases operational burden. This approach is primarily suitable for experimental or development environments rather than a scalable, production-grade AI solution."
+      },
+      {
+        "text": "Configure Amazon Bedrock Data Automation to continuously ingest CRM data from S3. Apply preprocessing, including sentiment and entity extraction with Comprehend, and automatically load the enriched data into retraining pipelines for SageMaker AI and foundation models.",
+        "rationale": ""
+      }
+    ],
+    "correct_index": 3,
+    "correct_text": "Configure Amazon Bedrock Data Automation to continuously ingest CRM data from S3. Apply preprocessing, including sentiment and entity extraction with Comprehend, and automatically load the enriched data into retraining pipelines for SageMaker AI and foundation models.",
+    "concepto": "Bedrock Data Automation ingesta continua"
+  },
+  {
+    "n": 8,
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "stem": "A data analytics company is developing a personalized news recommendation platform that delivers tailored article suggestions to readers. The AI development team uses Amazon Comprehend to perform sentiment analysis and entity recognition on articles and reader feedback data. The extracted insights are then stored in Amazon S3 and used by an Amazon Personalize solution to generate ranked recommendations for each user session. The company has trained multiple recommendation models to improve model accuracy and wants to evaluate the effectiveness through A/B testing in a beta production environment. The system must route live inference traffic between multiple model variants, monitor real-time engagement metrics, and seamlessly direct 100% of traffic to the best-performing model. Which solution will meet these requirements in the most operationally efficient way?",
+    "options": [
+      {
+        "text": "Use Amazon SageMaker AI multi-variant endpoints to deploy all model versions behind a single endpoint. Configure traffic weights for A/B testing and update routing to send all inference requests to the best-performing model once identified.",
+        "rationale": ""
+      },
+      {
+        "text": "Deploy the models on Amazon EC2 instances behind an Application Load Balancer (ALB) to perform A/B testing, then manually adjust the ALB weights when a model shows higher engagement.",
+        "rationale": "because it requires significant manual setup and ongoing management. You would need to handle model deployment, scaling, monitoring, and traffic routing yourself, which increases operational complexity and reduces efficiency compared to managed services like SageMaker."
+      },
+      {
+        "text": "Create a separate Amazon SageMaker AI endpoint for each model and configure Amazon API Gateway to distribute traffic for A/B testing based on weighted routing rules.",
+        "rationale": "because while technically feasible, it introduces unnecessary complexity. Managing multiple endpoints and configuring API Gateway for traffic splitting and monitoring typically adds operational overhead. It also lacks the native integration and streamlined monitoring that SageMaker multi-variant endpoints provide."
+      },
+      {
+        "text": "Use AWS CodeDeploy with blue/green deployment strategies and an Application Load Balancer (ALB) to alternate traffic between model versions during A/B testing. Gradually route 100% of traffic to the model with the highest engagement metrics.",
+        "rationale": "because CodeDeploy’s blue/green strategy is primarily designed for application deployments, not real-time ML inference. It doesn’t support fine-grained traffic splitting or real-time inference metric tracking, making it unsuitable for dynamic A/B testing of ML models."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Use Amazon SageMaker AI multi-variant endpoints to deploy all model versions behind a single endpoint. Configure traffic weights for A/B testing and update routing to send all inference requests to the best-performing model once identified.",
+    "concepto": "SageMaker multi-variant endpoint A/B"
+  },
+  {
+    "n": 9,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A media technology company is building a real-time generative AI (GenAI) application that enhances live video streams with contextual overlays. The application uses a foundation model (FM) in Amazon Bedrock to generate captions and insights from incoming video frames. The solution must achieve ultra-low latency of under 20 milliseconds for mobile users, process inference requests as close to end users as possible, provide shared file storage for intermediate artifacts, and optimize prompt handling to reduce token usage during high-traffic bursts. Which solution best meets these requirements?",
+    "options": [
+      {
+        "text": "Deploy the application in AWS Wavelength Zones using Amazon EC2 integrated with Bedrock for inference. Use Amazon EFS for shared file storage of intermediate artifacts and implement context pruning to dynamically reduce prompt size during high-traffic bursts.",
+        "rationale": ""
+      },
+      {
+        "text": "Deploy the application in a single AWS Region using Amazon EC2 instances and integrate with Bedrock. Store intermediate artifacts in Amazon S3 and increase model response size limits to improve output quality.",
+        "rationale": ""
+      },
+      {
+        "text": "Use AWS Lambda with Bedrock in a centralized Region. Store session data in Redis OSS on Amazon ElastiCache and apply fixed-size chunking to all prompts to standardize processing.",
+        "rationale": "because centralized Lambda execution does not meet ultra-low latency requirements. Fixed-size chunking primarily lacks adaptability and can result in inefficient token usage compared to dynamic techniques such as context pruning."
+      },
+      {
+        "text": "Deploy the application across multiple Availability Zones within a Region using Amazon EC2. Use Amazon EBS for shared storage across instances and rely on token burst patterns to manage peak request volumes.",
+        "rationale": "because Availability Zones are still confined within a Region and do not provide edge-level latency. Amazon EBS does not support shared access across multiple instances, and token burst patterns simply describe traffic behavior rather than optimizing token usage."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Deploy the application in AWS Wavelength Zones using Amazon EC2 integrated with Bedrock for inference. Use Amazon EFS for shared file storage of intermediate artifacts and implement context pruning to dynamically reduce prompt size during high-traffic bursts.",
+    "concepto": "Wavelength + EFS + context pruning GenAI"
+  },
+  {
+    "n": 13,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A streaming media company is using Amazon Bedrock to power a customer support chatbot. The chatbot must handle over 60,000 subscriber inquiries daily, with spikes reaching 180,000 inquiries per day during major content releases. Analysis of historical logs shows that 35% of inquiries share nearly identical context, such as billing questions or password reset requests. A GenAI engineer must design a solution that ensures low latency and consistent performance during these traffic spikes. The team briefly considered Bedrock Agents to orchestrate multi-step inquiry handling but determined it added unnecessary complexity for this particular latency and cost problem. Which of the following solutions will meet these requirements MOST cost-effectively?",
+    "options": [
+      {
+        "text": "Turn on latency-optimized inference for the chatbot's requests by switching the performance configuration's latency setting to optimized when invoking Amazon Bedrock. Pair this with prompt caching so previously seen conversation context does not need to be reprocessed for similar inquiries.",
+        "rationale": ""
+      },
+      {
+        "text": "Acquire Provisioned Throughput with several model units (MUs) large enough to absorb the highest expected traffic volume. Layer in Amazon ElastiCache (Redis OSS) as a separate caching tier to serve answers to commonly repeated questions.",
+        "rationale": ". Provisioned Throughput requires committing to and paying for a fixed level of model capacity, which is a fit for steady, predictable workloads, not workloads that spike from 60,000 to 180,000 inquiries a day. Sizing model units for peak load means paying for idle capacity during normal periods, which is not cost-effective. Adding a self-managed Amazon ElastiCache layer also introduces infrastructure the team must provision, secure, and maintain, unlike Bedrock’s built-in prompt caching."
+      },
+      {
+        "text": "Configure Bedrock Intelligent Prompt Routing to automatically direct inquiries to the most cost-effective foundation model based on complexity. Combine this with cross-Region inference to distribute traffic across Regions.",
+        "rationale": ". Amazon Bedrock Intelligent Prompt Routing is simply designed to route each request to the FM best suited for it based on complexity, optimizing cost and quality trade-offs, not specifically to reduce latency during traffic spikes. While cross-Region inference helps distribute load, this option does not directly address the repetitive-context inquiries the way prompt caching does, making it a less targeted solution for this specific cost and latency requirement."
+      },
+      {
+        "text": "Use Bedrock Model Distillation to create a smaller, distilled model from a larger teacher model, and route all customer inquiries through the distilled model to reduce response time.",
+        "rationale": ". Amazon Bedrock Model Distillation is intended primarily to produce a smaller, cheaper, faster model trained on outputs from a larger teacher model, which requires a training and evaluation process before deployment. It is not designed as an immediate, on-demand latency control for unpredictable daily traffic spikes, and it does not specifically exploit the repeated-context nature of 35-40% of the inquiries the way prompt caching does. Building and validating a distilled model also adds development time and ongoing maintenance compared to enabling built-in latency-optimized inference and prompt caching."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Turn on latency-optimized inference for the chatbot's requests by switching the performance configuration's latency setting to optimized when invoking Amazon Bedrock. Pair this with prompt caching so previously seen conversation context does not need to be reprocessed for similar inquiries.",
+    "concepto": "Latency-optimized inference + prompt caching"
+  },
+  {
+    "n": 20,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A national utility company manages hourly power consumption data for 150 types of smart meters deployed across multiple regions. Over the past 30 years, the company has collected a large volume of historical usage data enriched with weather metrics, regional energy prices, and maintenance logs. The data science team currently uses Amazon SageMaker AI Data Wrangler to perform feature engineering and data preprocessing, and SageMaker AI Canvas (a no-code ML service) to generate baseline forecasts for monthly energy demand. However, the team now plans to build a custom machine learning (ML) model that can forecast future meter-usage patterns across all meter types. Which option satisfies the requirement with the LEAST operational overhead?",
+    "options": [
+      {
+        "text": "Build a single global forecasting model using the SageMaker AI DeepAR forecasting algorithm trained on all meter types to capture shared consumption patterns.",
+        "rationale": ""
+      },
+      {
+        "text": "Train multiple forecasting models using the SageMaker AI Prophet algorithm, one for each meter type, to capture seasonal consumption patterns for individual devices.",
+        "rationale": "because it introduces significant operational overhead. Managing 150 separate models increases complexity in training, deployment, and maintenance. Prophet is also better suited for simpler, univariate time series and doesn’t scale as efficiently as DeepAR for large, multi-series datasets."
+      },
+      {
+        "text": "Use SageMaker AI Autopilot to automatically create and tune a single predictive model for all meter types using the combined dataset.",
+        "rationale": "because Autopilot is primarily optimized for tabular data and classification/regression tasks, not time series forecasting. It lacks native support for temporal dependencies and seasonality, which are critical for accurate meter usage predictions."
+      },
+      {
+        "text": "Create a single global forecasting model using the SageMaker AI XGBoost algorithm trained on all meter types to predict future consumption patterns.",
+        "rationale": "because XGBoost is a powerful algorithm for tabular data, but not inherently designed for time series forecasting. You would typically need to manually engineer time-based features, which increases complexity and operational burden."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Build a single global forecasting model using the SageMaker AI DeepAR forecasting algorithm trained on all meter types to capture shared consumption patterns.",
+    "concepto": "SageMaker DeepAR forecasting global"
+  },
+  {
+    "n": 27,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "An organization is deploying a generative AI application that requires specific configuration flags to be updated dynamically without restarting the application. The infrastructure team needs to ensure that any configuration changes are validated against a schema before being deployed to the environment to prevent runtime errors. The application is running on an Amazon EC2 instance. Which solution should be implemented to manage these configurations efficiently?",
+    "options": [
+      {
+        "text": "Use AWS CloudFormation Guard to validate the configuration files and push updates via Amazon S3.",
+        "rationale": "because CloudFormation Guard is primarily a policy-as-code tool used to validate CloudFormation templates and infrastructure-as-code (IaC) against compliance rules, not to manage dynamic application-level runtime configurations."
+      },
+      {
+        "text": "Implement AppConfig Agent on the EC2 instance to retrieve and cache configurations with pre-deployment validation.",
+        "rationale": ""
+      },
+      {
+        "text": "Utilize Amazon DynamoDB Streams to trigger an AWS Lambda function that updates local configuration files.",
+        "rationale": "because while Amazon DynamoDB Streams can track changes, it is an over-engineered solution for configuration management that does not provide the built-in validation, deployment strategies, or caching mechanisms offered by AppConfig."
+      },
+      {
+        "text": "Use Amazon Bedrock Prompt Management to store application environment variables and configuration flags.",
+        "rationale": "because Bedrock Prompt Management is simply designed for versioning and managing generative AI prompts, not for general application environment variables or infrastructure configuration flags."
+      }
+    ],
+    "correct_index": 1,
+    "correct_text": "Implement AppConfig Agent on the EC2 instance to retrieve and cache configurations with pre-deployment validation.",
+    "concepto": "AppConfig agent config dinamica validada"
+  },
+  {
+    "n": 28,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A global e-commerce company is building a multilingual product description generator using Amazon Titan Text on Amazon Bedrock. The team plans to enhance the model’s domain understanding by fine-tuning it with proprietary product data in Amazon SageMaker AI before deploying it to production through Bedrock’s managed API. For compliance reasons, all model artifacts must be encrypted using AWS KMS, and API calls to the Bedrock endpoint must be logged and auditable. The company also wants to continuously monitor model latency and throughput across different regions to ensure consistent performance. Which solution provides a secure, compliant, and observable architecture for deploying and monitoring the Titan-based generative AI model?",
+    "options": [
+      {
+        "text": "Fine-tune the Titan model in SageMaker AI using training data stored in Amazon S3 with KMS encryption, deploy the model through Bedrock with a customer-managed KMS key, enable AWS CloudTrail for API auditing, and use Amazon CloudWatch metrics for Bedrock such as InvocationLatency to continuously monitor latency and throughput across regions.",
+        "rationale": ""
+      },
+      {
+        "text": "Fine-tune the Titan model in SageMaker AI using data encrypted with SSE-S3, deploy it through an API Gateway endpoint in front of Bedrock, and use Amazon Macie to monitor for data exfiltration events.",
+        "rationale": "because SSE-S3 lacks customer-managed key control and granular auditability that SSE-KMS provides, API Gateway is unnecessary in front of Bedrock’s managed endpoint, and Amazon Macie primarily focuses on discovering sensitive data in S3 rather than monitoring model invocations or performance."
+      },
+      {
+        "text": "Deploy the Titan model directly on Bedrock without fine-tuning, use AWS IAM roles to restrict access, and rely on AWS CloudTrail logs to monitor API calls. Monitor the model using the GenAI Observability feature in Amazon CloudWatch via the InvocationLatency, InputTokenCount and OutputTokenCount metrics.",
+        "rationale": "because it simply omits the required domain adaptation via fine-tuning and does not address encryption of training artifacts with customer-managed KMS keys, even though logging with CloudTrail is valid."
+      },
+      {
+        "text": "Train the Titan model entirely within SageMaker AI, export it to an Amazon EC2-based inference server with Amazon EBS encryption, and use AWS Config for compliance monitoring.",
+        "rationale": "because moving inference to EC2 forfeits Bedrock’s managed security/scale and does not meet the requirement to deploy “through Bedrock’s managed API”; AWS Config tracks configuration state, not real-time model latency/throughput, which should be monitored via CloudWatch."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Fine-tune the Titan model in SageMaker AI using training data stored in Amazon S3 with KMS encryption, deploy the model through Bedrock with a customer-managed KMS key, enable AWS CloudTrail for API auditing, and use Amazon CloudWatch metrics for Bedrock such as InvocationLatency to continuously monitor latency and throughput across regions.",
+    "concepto": "Fine-tune Titan Bedrock KMS/CloudTrail"
+  },
+  {
+    "n": 30,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A global clinical research organization (CRO) is designing a generative AI (GenAI) portal using Amazon Bedrock to analyze and extract insights from clinical trial protocols for various research teams. The portal must output structured records that contain a study design overview, a classification of patient safety risks, and operational bottlenecks flagged for investigator review. The generated output must adapt in vocabulary and style depending on the viewing audience, such as clinical investigators, biostatisticians, or regulatory compliance officers. Additionally, the portal must filter out toxic language, off-topic discussions, and protected health information (PHI). The organization wants to avoid hardcoding or decentralized management of prompt templates across different study teams. They also want to eliminate custom-written post-processing scripts to sanitize model outputs and require a mechanism to dynamically update safety and compliance filters without redeploying the core application. Which of the following solutions will meet these requirements with the LEAST maintenance overhead?",
+    "options": [
+      {
+        "text": "Set up Amazon Bedrock Prompt Management to build reusable prompt templates along with variants tailored to each department. Enable Amazon Bedrock Guardrails with content category filters and sensitive information filters to prevent disallowed content from reaching users.",
+        "rationale": ""
+      },
+      {
+        "text": "Leverage Amazon Bedrock Prompt Management to establish baseline prompt templates. Achieve department-specific tone adjustments through system prompt variables. Set up Amazon Bedrock Guardrails to perform threshold tuning based on the target audience. Handle guardrail configuration changes through a custom-built internal administration API.",
+        "rationale": ". It correctly uses Prompt Management and Guardrails, but adds a redundant custom-built internal administration API. Guardrails already exposes native APIs for creating and updating guardrails. Create a guardrail to detect and filter harmful content in your generative AI application. So a separate administration layer only adds unnecessary maintenance overhead. amazon"
+      },
+      {
+        "text": "Use Bedrock Agents to orchestrate department-based instruction injection. Store response formatting rules in Amazon DynamoDB. Use AWS Step Functions to validate responses. Use Bedrock Guardrails only as a post-processing step after the GenAI concierge generates responses.",
+        "rationale": ". Bedrock Agents is meant for orchestrating multi-step tasks and tool/API invocation, not simple prompt templating. Storing formatting rules in DynamoDB and validating with Step Functions requires custom schema design and state machine maintenance that Prompt Management already handles natively, and applying Guardrails only after generation means harmful content could already be produced before filtering."
+      },
+      {
+        "text": "Use Bedrock Knowledge Bases to store custom prompt templates. Create one AWS Lambda function to select department-specific prompts. Create a second Lambda function to call Amazon Comprehend to filter prohibited content from responses.",
+        "rationale": ". Knowledge Bases is built for Retrieval-Augmented Generation (RAG), not for storing structured prompt templates. Maintaining two separate Lambda functions for prompt selection and Comprehend-based moderation also adds custom code and tuning effort that built-in Guardrails filtering already eliminates."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Set up Amazon Bedrock Prompt Management to build reusable prompt templates along with variants tailored to each department. Enable Amazon Bedrock Guardrails with content category filters and sensitive information filters to prevent disallowed content from reaching users.",
+    "concepto": "Bedrock Prompt Management + Guardrails"
+  },
+  {
+    "n": 34,
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "stem": "A global e-commerce company is developing a product return prediction model using the Amazon SageMaker XGBoost algorithm to identify which orders are most likely to result in customer returns. Transactional and behavioral data are stored in Amazon Redshift, and the data engineering team utilizes SageMaker Data Wrangler to clean and prepare training features, including product category, customer sentiment, and delivery delays. After deploying the model, the team observes that while the training Area Under the Curve (AUC) is exceptionally high, the validation performance drops significantly. Model explainability reports from SageMaker Clarify reveal that the model is overly sensitive to a few dominant features like product price and region, suggesting overfitting to patterns in the training set. The team decides to tune the model’s hyperparameters to reduce model complexity and improve its ability to generalize to new data. Which hyperparameter modification would best help reduce overfitting and improve validation performance for this XGBoost model?",
+    "options": [
+      {
+        "text": "Increase the max_depth hyperparameter to allow deeper trees that can better capture relationships between rare features.",
+        "rationale": ". Increasing max_depth would typically make each tree more complex and more prone to overfitting. While deeper trees can capture rare feature interactions, they also simply memorize noise and outliers from the training data rather than learning general patterns. In this scenario, where the model already performs exceptionally well on training data but poorly on validation data, increasing max_depth would only worsen overfitting instead of reducing it."
+      },
+      {
+        "text": "Decrease the min_child_weight parameter to allow each leaf node to split more easily, capturing additional complexity in the dataset.",
+        "rationale": ". Reducing min_child_weight lowers the minimum number of observations required to create a new leaf node, which typically increases the model’s complexity. Doing so encourages the model to just create more splits, even for insignificant variations in data, leading to deeper trees and more overfitting. Since the goal is to simplify the model and prevent overfitting, decreasing min_child_weight moves in the opposite direction of what’s needed."
+      },
+      {
+        "text": "Increase the colsample_bytree parameter to ensure each tree uses a greater subset of features and improves model variance.",
+        "rationale": ". Increasing colsample_bytree allows the model to use a larger fraction of available features for each tree, which primarily increases feature diversity rather than reducing overfitting. Although this can sometimes help stabilize training, it does not directly limit model complexity. In fact, allowing more features per tree can simply make the model more likely to overfit on correlated inputs if dominant features consistently drive splits."
+      },
+      {
+        "text": "Decrease the value of the max_depth hyperparameter to limit tree complexity and prevent overfitting on dominant patterns in the training data.",
+        "rationale": ""
+      }
+    ],
+    "correct_index": 3,
+    "correct_text": "Decrease the value of the max_depth hyperparameter to limit tree complexity and prevent overfitting on dominant patterns in the training data.",
+    "concepto": "XGBoost max_depth reducir overfitting"
+  },
+  {
+    "n": 36,
+    "category": "AIP – Implementation and Integration",
+    "stem": "A healthcare technology company processes insurance claims through an API backed by generative AI. As part of modernizing this pipeline, the company wants to roll out new Amazon Bedrock model versions gradually rather than switching over all at once. The rollout mechanism needs to automatically shift traffic based on live inference metrics, historical traffic behavior, and the overall health of the service. Traffic sent to a newly released model version should keep climbing as long as things look healthy, and should pull back the moment performance dips below what’s acceptable. Beyond the traffic shifts themselves, the team wants full visibility into inference latency and error rates throughout each rollout. And if something goes wrong, the pipeline needs to stop the rollout and automatically fall back to the prior model version, with no one needing to step in. Which of the following solutions will meet these requirements?",
+    "options": [
+      {
+        "text": "Host the model versions on Bedrock using provisioned throughput. Wire up an Amazon EventBridge rule so that whenever a new model version ships, it kicks off an AWS Step Functions workflow. Within that workflow, shift traffic in stages, pause for a set duration between stages, and call an AWS Lambda function to pull the latest Amazon CloudWatch metrics. Have the workflow branch to send more traffic when metrics look good, or roll traffic back automatically when they fall short.",
+        "rationale": ""
+      },
+      {
+        "text": "Wrap each Bedrock model version in its own versioned AWS Lambda function, then use AWS CodeDeploy with a Lambda alias to gradually move invocation traffic from the old function version to the new one on a fixed linear schedule. Set up Amazon CloudWatch alarms so CodeDeploy reverts the alias automatically if error rates climb.",
+        "rationale": ". AWS CodeDeploy with Lambda aliases only shifts traffic between two versions of the Lambda function’s code, not between the underlying Bedrock model versions the function calls, so it typically cannot evaluate real-time inference metrics or historical traffic patterns the way the scenario requires."
+      },
+      {
+        "text": "Represent each Bedrock model version as an Amazon SageMaker AI endpoint variant, and control the traffic split through variant weights. Track performance with Amazon CloudWatch and rely on SageMaker Model Monitor to trigger an AWS Lambda function that rolls back the deployment once metrics cross a defined threshold. Add an Amazon EventBridge rule to trigger a rollback whenever an anomaly is flagged.",
+        "rationale": ". SageMaker endpoint variants simply apply to models hosted on SageMaker endpoints, not to Amazon Bedrock’s fully managed foundation models, so this mechanism cannot actually shift traffic between Bedrock model versions."
+      },
+      {
+        "text": "Keep the traffic-split percentage for each Bedrock model version as a feature flag inside AWS AppConfig, and let an AppConfig deployment strategy roll that percentage out gradually over time. Tie Amazon CloudWatch alarms to the deployment so that AppConfig pauses the rollout automatically if metrics start to slip.",
+        "rationale": ". AWS AppConfig is primarily built to deploy application configuration values and feature flags, not to actively invoke or route traffic between Bedrock model versions, so the application would still need custom logic to read the flag and route requests, and an alarm-triggered halt just stops the configuration deployment rather than orchestrating an in-flight traffic rollback."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Host the model versions on Bedrock using provisioned throughput. Wire up an Amazon EventBridge rule so that whenever a new model version ships, it kicks off an AWS Step Functions workflow. Within that workflow, shift traffic in stages, pause for a set duration between stages, and call an AWS Lambda function to pull the latest Amazon CloudWatch metrics. Have the workflow branch to send more traffic when metrics look good, or roll traffic back automatically when they fall short.",
+    "concepto": "EventBridge/Step Functions rollout Bedrock"
+  },
+  {
+    "n": 45,
+    "category": "AIP – Implementation and Integration",
+    "stem": "A financial technology company manages a large-scale payment platform that processes millions of transactions daily. The company uses Amazon Comprehend to analyze unstructured text data from customer reviews and support tickets to identify sentiment trends and potential user disputes. Amazon SageMaker AI is also used to generate periodic behavior-based risk scores for customer accounts. Recently, the company has noticed an increasing number of fraudulent transactions, especially from newly registered accounts attempting high-value payments. The existing batch-based model in SageMaker cannot flag these activities quickly enough to prevent losses. The data science team is looking for a real-time fraud detection solution that can automatically assess and reject fraudulent transactions at the moment of occurrence. The solution must require minimal operational effort. Which option satisfies these requirements?",
+    "options": [
+      {
+        "text": "Use SageMaker AI to train a new supervised model for fraud detection and deploy it on Amazon EC2 using custom inference code.",
+        "rationale": "because it introduces significant operational complexity. Deploying on EC2 requires managing infrastructure, scaling, and custom code, which contradicts the requirement for minimal operational effort and may still fall short of real-time responsiveness."
+      },
+      {
+        "text": "Use Comprehend to extract entities from transaction metadata and forward them to SageMaker AI to retrain a fraud detection model.",
+        "rationale": "because Amazon Comprehend is primarily designed for natural language processing tasks like sentiment analysis and entity recognition, not for structured transactional fraud detection. This approach also remains batch-oriented and lacks the real-time decisioning needed."
+      },
+      {
+        "text": "Use the Amazon Fraud Detector prediction API to automatically approve or deny transactions that are identified as fraudulent.",
+        "rationale": ""
+      },
+      {
+        "text": "Use Amazon Lookout for Vision to detect anomalies in uploaded transaction receipt images and classify them as fraudulent or legitimate.",
+        "rationale": "because Lookout for Vision is typically built for visual anomaly detection in images, such as manufacturing defects, not for analyzing structured transaction data or behavioral patterns. It doesn’t address the core issue of real-time fraud detection for payment flows."
+      }
+    ],
+    "correct_index": 2,
+    "correct_text": "Use the Amazon Fraud Detector prediction API to automatically approve or deny transactions that are identified as fraudulent.",
+    "concepto": "Amazon Fraud Detector prediction API"
+  },
+  {
+    "n": 51,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A research organization is developing an image classification solution by integrating Amazon Rekognition with Amazon SageMaker AI. The team uses Rekognition to automatically label thousands of wildlife images stored in Amazon S3, generating a high-quality annotated dataset. This labeled dataset is then used to train a supervised learning algorithm in SageMaker AI to classify different species of animals for ecological analysis. After several training runs, the ML team observes that the model achieves 98% accuracy on the training dataset but only 76% accuracy on the validation dataset. The data scientists confirm that the dataset is clean, balanced, and correctly split. There is a suspicion that the model has become too complex and is memorizing specific image features from the training data instead of learning general patterns. Which of the following should be implemented?",
+    "options": [
+      {
+        "text": "Increase the model complexity by adding more convolutional layers to capture detailed patterns.",
+        "rationale": "because simply increasing model complexity will likely worsen the overfitting problem. The model is already performing too well on the training data and poorly on the validation data, which suggests it’s memorizing rather than generalizing. Adding more layers would make the model even more prone to overfitting."
+      },
+      {
+        "text": "Adjust model hyperparameters to introduce stronger regularization and retrain the model to minimize overfitting.",
+        "rationale": ""
+      },
+      {
+        "text": "Reassign a portion of the training samples to the validation dataset. Adjust the split to 75% for training and 25% for validation to achieve a better balance.",
+        "rationale": "because the data scientists have already confirmed that the dataset is correctly split and balanced. Changing the split ratio won’t address the underlying issue of overfitting caused by model complexity."
+      },
+      {
+        "text": "Modify the Rekognition labeling configuration to generate fewer image labels for simplicity.",
+        "rationale": "because reducing the number of labels typically oversimplify the classification task and reduce the model’s ability to learn meaningful distinctions between classes. This doesn’t directly address the overfitting problem and may degrade model performance."
+      }
+    ],
+    "correct_index": 1,
+    "correct_text": "Adjust model hyperparameters to introduce stronger regularization and retrain the model to minimize overfitting.",
+    "concepto": "Regularizacion mas fuerte contra overfitting"
+  },
+  {
+    "n": 53,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A travel booking company uses Amazon Bedrock with Anthropic Claude to power a generative AI (GenAI) application that recommends vacation packages to travelers. However, users are reporting slow response times. They also note that the system frequently recommends packages that are either irrelevant to their travel preferences or no longer available in the company’s active inventory. An internal investigation reveals that the interactions between travelers and the GenAI solution are highly unique. It also confirms that the model is hallucinating vacation packages that are not bookable. The engineering team wants to resolve these accuracy and latency issues. While they evaluated deploying a standalone Amazon OpenSearch Service cluster, they require a solution that integrates natively with their GenAI workflow. Which solution will meet these requirements?",
+    "options": [
+      {
+        "text": "Strengthen grounding settings within Bedrock Guardrails. Turn on Automated Reasoning checks. Provision dedicated throughput capacity for the model.",
+        "rationale": ". Bedrock Guardrails’ contextual grounding check evaluates whether a response is grounded in a supplied source, but it is just a post-generation validation and filtering layer, it does not give the model access to real, current inventory data to base its recommendations on in the first place. Amazon Bedrock Guardrails offer hallucination detection with contextual grounding checks, which can be seamlessly applied using Amazon Bedrock APIs (such as Converse or InvokeModel) or embedded into workflows. After an LLM generates a response, these workflows perform a check to see if hallucinations occurred. Automated Reasoning checks validate logical consistency against defined rules, not live inventory accuracy, and provisioning dedicated throughput capacity addresses request volume, not the root cause of recommending nonexistent packages."
+      },
+      {
+        "text": "Configure a Bedrock Agent with a custom action group backed by an AWS Lambda function that queries the inventory system, and rely on prompt engineering to keep responses limited to bookable packages.",
+        "rationale": ". Amazon Bedrock Agents with action groups are designed for orchestrating multi-step tasks and invoking external APIs on demand, which is a valid pattern for live lookups, but this option still leans on prompt engineering to constrain the final response to bookable packages. Since the model generates the final wording itself rather than being restricted to only retrieved, verified content the way a knowledge base with RAG grounds its output, there’s no guarantee the model won’t still describe or invent a package outside what the Lambda function returned. It also introduces custom Lambda code and action-group configuration to build and maintain, which is more operational overhead than a managed Bedrock knowledge base."
+      },
+      {
+        "text": "Build a Bedrock knowledge base and implement Retrieval Augmented Generation (RAG) against the live inventory data. Configure the PerformanceConfigLatency parameter for optimization.",
+        "rationale": ""
+      },
+      {
+        "text": "Index the inventory catalog in Amazon Kendra and manually inject the top retrieved snippets into each prompt sent to Bedrock, then cache responses in Amazon DynamoDB.",
+        "rationale": ". Amazon Kendra is an intelligent enterprise search service, not a native vector store integration for Amazon Bedrock Knowledge Bases, so manually retrieving snippets and injecting them into prompts requires custom integration code instead of a managed RAG pipeline. Caching responses in DynamoDB also has limited benefit here. Since the company already found that most traveler interactions are unique, cached answers would rarely be reused, and this approach still leaves the company building and maintaining its own retrieval-and-injection logic rather than using Bedrock’s native, fully managed capability."
+      }
+    ],
+    "correct_index": 2,
+    "correct_text": "Build a Bedrock knowledge base and implement Retrieval Augmented Generation (RAG) against the live inventory data. Configure the PerformanceConfigLatency parameter for optimization.",
+    "concepto": "Bedrock KB RAG + PerformanceConfigLatency"
+  },
+  {
+    "n": 59,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A global online publishing company is developing a generative AI-based content recommendation system to suggest relevant tags for articles. The raw data for the articles, stored in JSON format, is housed in an Amazon S3 bucket. The data scientist is using the Amazon SageMaker Neural Topic Model (NTM) algorithm to build a model that can generate the most appropriate tags for each article. To enhance the model’s performance, Amazon Titan is being utilized to improve natural language understanding and generate contextual insights from the article content, leveraging Titan’s powerful pre-trained models for tag suggestions. During the evaluation phase, the model’s recommendations include common stopwords such as “and,” “of,” and “in,” along with some rare words that appear only in a few specific articles. After working with the content team to review the model’s output, the data scientist determines that while the rare words are unusual, the words could still be valuable for generating more relevant tags. The challenge is to find a way to exclude the stopwords from the model’s tag predictions while still retaining the rare but meaningful words. How can the model be refined to exclude stopwords and retain rare words in tags?",
+    "options": [
+      {
+        "text": "Index the article content using Amazon OpenSearch, configuring it to filter out stopwords and retain rare terms during indexing, then store the indexed data in the S3 bucket.",
+        "rationale": "because OpenSearch is typically used as a search and analytics service designed to index and search large datasets efficiently. While OpenSearch can filter out stopwords during the indexing process, it is not optimized for text preprocessing tasks such as removing stopwords and preserving rare words for machine learning tasks. OpenSearch is used mainly for search queries and data exploration and does not focus on cleaning text data for model training."
+      },
+      {
+        "text": "Use Amazon Comprehend’s entity detection capabilities to detect the keywords while removing stopwords from the articles, and then update the data in the S3 bucket with the cleaned version.",
+        "rationale": "because is primarily designed for extracting insights such as entities, sentiment, and key phrases. It is not optimized for text cleaning tasks like stopword removal or retaining rare words for model training. Comprehend excels at analyzing the text, but it does not offer the necessary functionality for fine-tuning text by removing stopwords while keeping important rare terms intact, which is essential for tasks like generating accurate tags."
+      },
+      {
+        "text": "Apply SageMaker Processing to run a custom script that removes stopwords and filters out irrelevant terms, while preserving rare but meaningful words, and then store the cleaned data in an S3 bucket.",
+        "rationale": "because SageMaker Processing is simply a managed service that can execute custom scripts for various data processing tasks. While it can certainly process text data, it is only ideal for more complex workflows such as feature engineering, model evaluation, and large-scale data transformation. SageMaker Processing may be overkill because it involves setting up and running an entire processing pipeline, which can add unnecessary complexity to simple text-cleaning tasks."
+      },
+      {
+        "text": "Employ the CountVectorizer function from scikit-learn to preprocess the articles by removing stopwords while retaining rare words, then upload the processed data back to the S3 bucket.",
+        "rationale": ""
+      }
+    ],
+    "correct_index": 3,
+    "correct_text": "Employ the CountVectorizer function from scikit-learn to preprocess the articles by removing stopwords while retaining rare words, then upload the processed data back to the S3 bucket.",
+    "concepto": "CountVectorizer scikit-learn stopwords"
+  },
+  {
+    "n": 65,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A financial services company is developing an intelligent document analysis platform that uses Amazon Kendra to index and retrieve regulatory documents and Amazon Bedrock to generate responses. The system must handle two distinct workloads: approximately 10,000 daily simple queries requiring quick metadata extraction and summarization (averaging 500 input tokens and 200 output tokens), and 500 complex analytical queries requiring deep reasoning and multi-step analysis (averaging 2,000 input tokens and 1,500 output tokens). The development team needs to optimize for both cost-efficiency and consistent low-latency performance while ensuring compliance with the AWS Well-Architected Framework principles for Generative AI workloads. Which architecture approach should the team implement?",
+    "options": [
+      {
+        "text": "Deploy a single Anthropic Claude Sonnet model with Provisioned Throughput configured at 3 model units, create a cross-region inference profile for high availability, and route all queries through a single endpoint that dynamically adjusts response parameters based on query complexity detected by Amazon Comprehend sentiment analysis.",
+        "rationale": "because using only Claude Sonnet for all queries is cost-inefficient when Claude Haiku can handle simple tasks at significantly lower per-token pricing. Amazon Comprehend sentiment analysis determines emotional tone (positive, negative, neutral) in text and is not designed for classifying query complexity or making routing decisions. While cross-region inference profiles provide high availability, they don’t address the cost optimization problem of using an expensive model for straightforward tasks."
+      },
+      {
+        "text": "Deploy two separate inference endpoints: use Anthropic Claude Haiku on-demand for the high-volume simple queries, and deploy Anthropic Claude Sonnet with Provisioned Throughput configured at 1 model unit for the complex analytical queries, implementing request routing logic based on query classification performed by Amazon Comprehend custom classification.",
+        "rationale": ""
+      },
+      {
+        "text": "Deploy Anthropic Claude Sonnet exclusively using on-demand pricing for both workload types, implement Amazon Kendra's query suggestions feature to reduce token consumption, and use AWS Lambda response streaming to minimize perceived latency for end users.",
+        "rationale": "because on-demand Sonnet introduces latency variability and potential throttling for complex queries that require consistent performance, while missing cost savings from using Haiku for simple tasks. Amazon Kendra’s query suggestions operate at the retrieval layer to help refine searches and do not reduce Bedrock’s token consumption, which occurs during the separate text generation phase. Lambda response streaming improves perceived latency but doesn’t solve the underlying issues of cost inefficiency and lack of guaranteed throughput for business-critical workloads."
+      },
+      {
+        "text": "Create a cross-region inference profile combining Anthropic Claude Haiku and Anthropic Claude Sonnet models, configure automatic failover between model variants based on response quality metrics, and use Amazon Comprehend entity recognition to determine which model variant processes each request.",
+        "rationale": "because cross-region inference profiles primarily provide geographic redundancy for the same model across regions—they cannot combine different model variants like Haiku and Sonnet within a single profile. Automatic failover based on response quality metrics is not a native Bedrock capability and would require a complex custom implementation. Amazon Comprehend entity recognition extracts specific entities (names, dates, locations) from text and is not designed for determining query complexity or routing decisions."
+      }
+    ],
+    "correct_index": 1,
+    "correct_text": "Deploy two separate inference endpoints: use Anthropic Claude Haiku on-demand for the high-volume simple queries, and deploy Anthropic Claude Sonnet with Provisioned Throughput configured at 1 model unit for the complex analytical queries, implementing request routing logic based on query classification performed by Amazon Comprehend custom classification.",
+    "concepto": "Claude Haiku/Sonnet + Provisioned Throughput routing"
+  },
+  {
+    "n": 67,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A software development team is building a customer support chatbot for a large e-commerce platform. The chatbot needs to provide real-time, contextually accurate answers to customer inquiries based on product documentation, frequently asked questions, and order history. The team decides to implement a retrieval-augmented generation (RAG) architecture to enhance the chatbot’s ability to understand customer queries and generate precise, context-aware responses. The chatbot must query a vector database to retrieve relevant documents based on the user’s query, analyze the retrieved context for important entities and sentiments using Amazon Comprehend, and then feed this refined context to a foundation model deployed to an Amazon SageMaker AI real-time inference endpoint for response generation. The solution should enable the chatbot to operate in real-time and provide accurate answers based on the user’s query context. Which solution will best integrate Pinecone into this RAG-based system to provide context for the Llama 2 model?",
+    "options": [
+      {
+        "text": "Use Pinecone to index product documentation, retrieve pertinent information based on the query, analyze the context with Comprehend, and provide the refined context to a Llama 2 model deployed to a SageMaker AI real-time inference endpoint for response generation.",
+        "rationale": ""
+      },
+      {
+        "text": "Utilize Pinecone to conduct similarity searches on customer queries, retrieve relevant context, use Comprehend to analyze sentiment, and relay this information to the chatbot application, which will then interact with the Llama 2 model hosted on Amazon EC2.",
+        "rationale": "because it uses Amazon EC2 to host the Llama 2 model instead of the Amazon SageMaker AI real-time inference endpoint specified in the scenario. While EC2 can be used for hosting models, it requires manual setup and management, which defeats the purpose of using AWS-managed services like SageMaker AI. SageMaker AI provides managed model hosting and real-time inference endpoints that simplify model deployment, scaling, and monitoring, which directly satisfies the architecture specified in the scenario. Therefore, using EC2 instead of SageMaker AI results in additional complexity and does not leverage the full capabilities of the AWS ecosystem for model deployment."
+      },
+      {
+        "text": "Deploy Pinecone to conduct similarity searches on customer queries, gather the relevant context, and pass this data to Amazon Lex for processing the intent before submitting it to Llama 2 for response generation.",
+        "rationale": "because Amazon Lex is primarily designed for conversational AI, handling tasks such as intent recognition and managing dialogues with users. While Lex is great for building chatbots and virtual assistants, its primary function is not to process the context for a generative model like Llama 2. In this scenario, the goal is to pass rich context retrieved from Pinecone (through similarity search) to the foundation model for response generation, not for managing user interactions or intents. Lex introduces unnecessary complexity and does not provide value in the context of enhancing generative model outputs based on document retrieval. The proper step would be to use Amazon SageMaker AI for handling the inference process with Llama 2, which is better suited for this use case."
+      },
+      {
+        "text": "Utilize Pinecone to catalog product documentation, retrieve contextually relevant information, and translate the data using Amazon Translate before forwarding it to Llama 2 for response generation.",
+        "rationale": "because Amazon Translate is a machine translation service that is designed to translate text between languages, not for sentiment analysis or entity extraction. The scenario requires enhancing the retrieved context with sentiment and key entity analysis, tasks for which Amazon Comprehend is specifically designed. Using Translate simply introduces an unnecessary step, as the system’s goal is not translation but rather enriching the context with deeper insights to improve the generative model’s understanding. Translation is irrelevant unless the data in the retrieved documents is in multiple languages, but this was not specified in the scenario. Thus, Comprehend should be used instead to analyze the context and extract sentiment and entities, not Translate."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Use Pinecone to index product documentation, retrieve pertinent information based on the query, analyze the context with Comprehend, and provide the refined context to a Llama 2 model deployed to a SageMaker AI real-time inference endpoint for response generation.",
+    "concepto": "Pinecone RAG + Comprehend + endpoint Llama2"
+  },
+  {
+    "n": 69,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "An e-commerce company leverages both Amazon SageMaker AI to train a machine learning (ML) model that predicts product-interest scores for users, and Amazon Personalize to generate real-time personalized product recommendations based on that model’s output. The AI developer wants to visualize recommendation results across four distinct dimensions: the user’s interest score (first dimension) plotted against the product’s prior conversion rate (second dimension), then visualize a third dimension (product category) via color, and a fourth dimension (number of impressions for that product) via the size of each data point. The goal is to spot segments where high-interest, high-conversion products still receive low impressions. Which approach best satisfies the given requirements?",
+    "options": [
+      {
+        "text": "Visualize the data using the SageMaker Data Wrangler scatter plot visualization and color data points by the third feature to represent all four dimensions.",
+        "rationale": "because it only mentions using color to represent the third feature (product category) and does not account for the fourth dimension (number of impressions). Without mapping point size, the visualization misses a key aspect of the analysis."
+      },
+      {
+        "text": "Use the SageMaker Canvas Box Plot visualization to compare distributions and use a fill pattern for the third dimension.",
+        "rationale": "because box plots are primarily designed to show statistical distributions (e.g., median, quartiles) and are not suited for plotting relationships between multiple continuous variables. They also lack native support for mapping size or color to individual data points in the way scatter plots do."
+      },
+      {
+        "text": "Use the SageMaker Canvas Bar Chart visualization to group products by category and simultaneously apply bar color and height to represent interest score and conversion rate.",
+        "rationale": "because bar charts are typically limited to two dimensions. They cannot represent both interest score and conversion rate simultaneously with clarity, nor can they encode impressions as size."
+      },
+      {
+        "text": "Apply the SageMaker Canvas scatter plot visualization and map the third dimension (product category) to scatter point color and the fourth dimension (number of impressions) to scatter point size.",
+        "rationale": ""
+      }
+    ],
+    "correct_index": 3,
+    "correct_text": "Apply the SageMaker Canvas scatter plot visualization and map the third dimension (product category) to scatter point color and the fourth dimension (number of impressions) to scatter point size.",
+    "concepto": "SageMaker Canvas scatter plot 4 dimensiones"
+  }
+]

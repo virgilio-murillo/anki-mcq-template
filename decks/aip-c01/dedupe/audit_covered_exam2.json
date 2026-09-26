@@ -1,0 +1,582 @@
+[
+  {
+    "n": 6,
+    "category": "AIP – Implementation and Integration",
+    "stem": "A transportation company is building an Amazon Bedrock agent that provides dispatch recommendations based on live vehicle data. The agent uses Amazon SageMaker AI to generate ETA predictions and Amazon Comprehend to interpret driver feedback. The system must also integrate a custom telemetry tool that maintains a long-lived WebSocket connection to stream continuous GPS events into the agent. The development team tested serverless options but encountered connection timeouts due to execution limits. A deployment approach is needed that supports persistent network sessions without requiring server management. Which solution will meet these requirements?",
+    "correct_text": "Deploy the telemetry tool as a containerized application on Amazon ECS using the AWS Fargate launch type to support long-lived WebSocket connections.",
+    "concepto": "ECS Fargate para conexiones persistentes/WebSocket",
+    "top_cos": 0.659,
+    "candidates": [
+      {
+        "src": "anki",
+        "rrf": 0.02929,
+        "cos": 0.659,
+        "sem_rank": 2,
+        "bm_rank": 16,
+        "text": "Auditoria - una app de chat con Amazon Bedrock consulta info de EC2. Por cumplimiento hay que auditar todas las interacciones de usuario y actividad de API de los agentes y knowledge bases de Bedrock . Que solucion conviene? A. Usar CloudTrail management events para registrar las llamadas de API de Bedrock y guardarlas en Amazon S3 B. Habilitar CloudTrail Insights para detectar y registrar patrone"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02736,
+        "cos": 0.548,
+        "sem_rank": 29,
+        "bm_rank": 2,
+        "text": "The department of education is building a learning portal in AWS to supplement their on-premises network . They need a highly available cloud infrastructure with multiple Availability Zones . Requirements: aggregate logs , automate log analysis for errors , and immediately notify IT Operations when errors breach thresholds . Which solution BEST meets these requirements? A. Amazon Managed Service f"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.0252,
+        "cos": 0.546,
+        "sem_rank": 30,
+        "bm_rank": 11,
+        "text": "When should you choose Amazon ECS over AWS Lambda for containerized applications? A. When you need event-driven, stateless functions with automatic scaling B. When you have long-running processes, persistent connections, or need full container control C. When you want to avoid managing any infrastructure whatsoever D. When you need sub-second response times for simple compute tasks ✅ B. When you h"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02404,
+        "cos": 0.584,
+        "sem_rank": 14,
+        "bm_rank": 35,
+        "text": "Servicios AWS de ML - que servicio es el mas adecuado para analizar feedback de clientes (sentimiento e insights de texto) ? A. Amazon Lex (interfaces conversacionales y chatbots) B. Amazon Rekognition (analisis de imagenes y video) C. Amazon Comprehend (NLP: sentimiento, entidades, frases clave) D. Amazon SageMaker AI (construir, entrenar y desplegar modelos propios)"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02292,
+        "cos": 0.534,
+        "sem_rank": 39,
+        "bm_rank": 18,
+        "text": "Requirements: Cloud contact center with automatic speech recognition , natural language understanding , intent recognition , and ability to maintain conversation context across multiple interactions. Which AWS service meets ALL these requirements for conversational AI? A. Amazon Transcribe B. Amazon Polly C. Amazon Lex D. Amazon Comprehend ✅ C. Amazon Lex 🎯 Why: Amazon Lex provides ASR (speech-to-"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02221,
+        "cos": 0.555,
+        "sem_rank": 24,
+        "bm_rank": 37,
+        "text": "A telecommunications company is hosting a WordPress website on Amazon ECS Cluster using Fargate launch type . Database credentials must be provided via environment variables , kept secure and not viewable on the cluster. Requirements: dedicated storage with lifecycle management and key rotation . Which solution provides secure credential storage with the least effort? A. Store credentials in AWS S"
+      }
+    ]
+  },
+  {
+    "n": 12,
+    "category": "AIP – Implementation and Integration",
+    "stem": "A company is building an AI-powered customer support platform that uses AWS Amplify AI Kit on the front end to integrate with Amazon Bedrock for generating human-like responses. The platform’s front end is connected to Amazon API Gateway, which triggers an AWS Lambda function. This function then calls the Bedrock API to construct responses to customer queries. During load testing, the team notices intermittent latency issues and ThrottlingException errors when the Lambda function makes requests to the Bedrock API. These issues arise primarily during peak usage hours when there is a high volume of concurrent requests, impacting the system’s ability to generate real-time responses efficiently. The team needs to ensure that the platform can handle peak traffic while reducing the frequency of ThrottlingException errors and maintaining fast response times. Which of the following should be implemented?",
+    "correct_text": "Initialize the exponential backoff with jitter in the AWS SDK for retry management, and set up per-client throttling limits in API Gateway to control the request rate during high-traffic periods.",
+    "concepto": "Exponential backoff + API Gateway throttling",
+    "top_cos": 0.724,
+    "candidates": [
+      {
+        "src": "anki",
+        "rrf": 0.02782,
+        "cos": 0.637,
+        "sem_rank": 4,
+        "bm_rank": 22,
+        "text": "Auditoria - una app de chat con Amazon Bedrock consulta info de EC2. Por cumplimiento hay que auditar todas las interacciones de usuario y actividad de API de los agentes y knowledge bases de Bedrock . Que solucion conviene? A. Usar CloudTrail management events para registrar las llamadas de API de Bedrock y guardarlas en Amazon S3 B. Habilitar CloudTrail Insights para detectar y registrar patrone"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02681,
+        "cos": 0.724,
+        "sem_rank": 1,
+        "bm_rank": 36,
+        "text": "Amazon Bedrock - un cientifico de datos procesa feedback de clientes en S3 (gobernado por Lake Formation) enviando prompts a un LLM para generar insights, con el menor esfuerzo posible . Que opcion cumple el requisito? A. Orquestar con Step Functions un flujo que invoque el LLM con InvokeModel de Bedrock y guarde los resultados en RDS B. Usar los batch inference jobs de Bedrock con la API CreateMo"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02654,
+        "cos": 0.615,
+        "sem_rank": 9,
+        "bm_rank": 23,
+        "text": "Una aplicaci n serverless utiliza Amazon API Gateway para exponer una API REST que consulta datos de una base de datos RDS mediante funciones Lambda. Durante picos de tr fico, la base de datos experimenta alta carga y latencia. Qu acci n reduce la carga en el backend con el m nimo esfuerzo de implementaci n? A. Configurar un Application Load Balancer delante de RDS para distribuir las consultas en"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02579,
+        "cos": 0.606,
+        "sem_rank": 12,
+        "bm_rank": 24,
+        "text": "A company is decommissioning its legacy web application (Auto Scaling EC2 + ALB) and building a new serverless architecture using AWS Lambda , API Gateway , and DynamoDB . The solution requires a CI/CD pipeline to automate builds and support gradual deployments . Which is the most suitable way to build, test, and deploy the new architecture? A. Use AWS Serverless Application Repository to organize"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02107,
+        "cos": 0.576,
+        "sem_rank": 32,
+        "bm_rank": 38,
+        "text": "A tech startup is launching a global mobile marketplace using AWS Amplify . Backend APIs will be deployed to multiple AWS regions to process sales and financial transactions in the region closest to users. Transactions made in one region must be automatically replicated to other regions. Expected to have millions of users across North America, South America, Europe, and Asia. Which is the most sca"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01639,
+        "cos": 0.519,
+        "sem_rank": null,
+        "bm_rank": 1,
+        "text": "A company runs a hybrid mobile application with a 3TB MySQL database on-premises handling write-intensive requests, connected to AWS via VPN . AWS components include Lambda functions , API Gateway , and DynamoDB . The company notices exponential Lambda costs due to 4.5-minute execution times with most time being wait time from latency to the on-premises MySQL server. User traffic is unpredictable "
+      }
+    ]
+  },
+  {
+    "n": 25,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A legal research company is preparing large volumes of unstructured data, including case files, deposition transcripts, regulatory documents, and legal opinions stored in Amazon S3. The organization is building an Amazon Bedrock application that will help attorneys search, summarize, and analyze this content. Before the documents are supplied to the foundation model, the company needs to automatically discover and catalog the source files, generate auditable metadata, and apply custom transformation and text chunking logic. The solution must also validate the processed datasets and continuously track data metrics to identify quality issues before the content is used by the application. The company wants to minimize custom development and infrastructure management. Which solution will satisfy these requirements while minimizing development effort?",
+    "correct_text": "Use an AWS Glue crawler to discover the source data and register its metadata in the Glue Data Catalog. Configure Glue ETL jobs to apply the required custom transformations and text-chunking logic, then use Glue Data Quality to evaluate the processed data and track quality metrics. After validation, make the transformed content available to the Bedrock application.",
+    "concepto": "Glue crawler + Data Catalog + Glue Data Quality ETL",
+    "top_cos": 0.669,
+    "candidates": [
+      {
+        "src": "anki",
+        "rrf": 0.02762,
+        "cos": 0.636,
+        "sem_rank": 2,
+        "bm_rank": 27,
+        "text": "Servicios de datos - ETL: hay que extraer y combinar datos de Amazon RDS, DynamoDB y otras fuentes en un dataset unificado para entrenar un modelo. Qu servicio encaja mejor? A. Amazon Athena, motor de consultas SQL sin servidor para analizar datos que ya residen en Amazon S3 B. AWS Glue, servicio de ETL administrado con Data Catalog para descubrir, transformar y unificar datos C. Amazon EMR, cl st"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02075,
+        "cos": 0.49,
+        "sem_rank": 40,
+        "bm_rank": 33,
+        "text": "A company needs to process variable workloads with unpredictable timing , wants to minimize management overhead , and requires automatic scaling for containerized batch jobs. Which service best addresses this requirement? A. Amazon ECS with manual scaling B. AWS Batch with Managed Compute Environments C. Amazon EKS with Cluster Autoscaler D. EC2 Auto Scaling Groups with custom scripts ✅ B. AWS Bat"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01639,
+        "cos": 0.669,
+        "sem_rank": 1,
+        "bm_rank": null,
+        "text": "Amazon Bedrock - un cientifico de datos procesa feedback de clientes en S3 (gobernado por Lake Formation) enviando prompts a un LLM para generar insights, con el menor esfuerzo posible . Que opcion cumple el requisito? A. Orquestar con Step Functions un flujo que invoque el LLM con InvokeModel de Bedrock y guarde los resultados en RDS B. Usar los batch inference jobs de Bedrock con la API CreateMo"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01639,
+        "cos": 0.314,
+        "sem_rank": null,
+        "bm_rank": 1,
+        "text": "A company needs to migrate an Oracle database to PostgreSQL in AWS. This is a heterogeneous migration requiring schema and code transformation before data migration can begin. Which approach is most suitable for this database migration? A. Use AWS SAM to transform database to PostgreSQL using Lambda functions, then migrate with DMS B. Use AWS Schema Conversion Tool (SCT) to convert source schema, "
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01613,
+        "cos": 0.362,
+        "sem_rank": null,
+        "bm_rank": 2,
+        "text": "A print media company wants to migrate their on-premises web application to AWS. The app allows global users to search and retrieve newspaper pages stored as PNG images with OCR-converted text files . Their OCR license expires soon and they need a scalable, durable, highly available AWS architecture. Which is the best option to achieve this requirement? A. Store images in S3, use Amazon Kendra for"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01587,
+        "cos": 0.635,
+        "sem_rank": 3,
+        "bm_rank": null,
+        "text": "Preparaci n de datos - menor overhead: pron stico de demanda diaria con datos hist ricos de ventas que tienen timestamps irregulares y valores faltantes . Qu enfoque cumple con el MENOR esfuerzo operativo? A. Preparar y analizar los datos con Amazon SageMaker Data Wrangler (transformaciones visuales listas) B. Visualizar y pronosticar directamente con Amazon QuickSight sin una etapa dedicada de li"
+      }
+    ]
+  },
+  {
+    "n": 34,
+    "category": "AIP – Implementation and Integration",
+    "stem": "A financial technology company operates a customer-facing loan eligibility platform that uses an Amazon SageMaker AI model to generate real-time premium estimates. The model’s training data is stored in an Amazon S3 bucket and continuously grows as new customer records are collected. The company wants to eliminate manual retraining cycles by building an automated pipeline that triggers retraining and redeploys the updated model to the application whenever an analyst uploads a new dataset file to the S3 bucket. Which solution satisfies these requirements?",
+    "correct_text": "Create an AWS Step Functions Standard workflow. Configure the first state to invoke an AWS Lambda function with webhook handlers to respond when an analyst uploads a new file to the S3 bucket. Use SageMaker AI Pipelines to retrain and redeploy the updated model to the application. Use the next state in the workflow to execute the pipeline after the first state receives a response.",
+    "concepto": "SageMaker Pipelines retrain/redeploy con Step Functions/Lambda",
+    "top_cos": 0.635,
+    "candidates": [
+      {
+        "src": "anki",
+        "rrf": 0.0303,
+        "cos": 0.62,
+        "sem_rank": 6,
+        "bm_rank": 6,
+        "text": "SageMaker AI - un job de entrenamiento de k-means usa un dataset de 100 GB en S3 (10 archivos de 10 GB) y tarda demasiado. Hay que reducir el tiempo de entrenamiento con el MENOR esfuerzo operativo . Que opcion conviene? A. Comprimir el dataset en el bucket de S3 y asegurar almacenamiento para la version comprimida y la descomprimida B. Fijar el input mode a fast file mode y asegurar que la instan"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02921,
+        "cos": 0.635,
+        "sem_rank": 3,
+        "bm_rank": 15,
+        "text": "Pipelines - hay que construir un pipeline de ingestion que prepare datos crudos de S3 y ademas un pipeline de despliegue para entrenar y desplegar el modelo en tiempo real. Que servicios usar? A. Amazon Data Firehose para entregar los datos a S3 y SageMaker Batch Transform para servir la inferencia B. Amazon QuickSight para preparar los datos y una funcion AWS Lambda para desplegar el modelo C. Am"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02712,
+        "cos": 0.618,
+        "sem_rank": 7,
+        "bm_rank": 22,
+        "text": "MLOps - en un pipeline de despliegue se necesita un paso de aprobacion manual de la version del modelo antes de desplegar. Que enfoque cumple? A. Crear una SageMaker AI pipeline y actualizar el approval status de la version del modelo a Approved con Boto3 tras registrarla B. Configurar una accion de aprobacion manual en AWS CodePipeline que publique a un topic de Amazon SNS C. Usar SageMaker Studi"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02582,
+        "cos": 0.608,
+        "sem_rank": 8,
+        "bm_rank": 30,
+        "text": "Acceso a datos - se hace fine-tuning de un modelo BERT en SageMaker con 150 GB de texto en S3. El entrenamiento es lento y hay que optimizar el acceso a datos para acelerarlo sin aumentar la complejidad operativa . Que solucion requiere el MENOR overhead? A. Configurar fast file mode en el training job y asegurar suficiente almacenamiento en la instancia B. Usar AWS Glue para preprocesar el datase"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02479,
+        "cos": 0.594,
+        "sem_rank": 16,
+        "bm_rank": 26,
+        "text": "Modelo de 2 GB con trafico impredecible (picos en horario laboral, casi nulo de noche/fin de semana); debe escalar solo y ser barato en reposo. Que despliegue conviene? A. Endpoint serverless de SageMaker AI CON Provisioned Concurrency B. AWS Lambda alojando el modelo, cargandolo desde S3 en cada invocacion C. Endpoint real-time de SageMaker AI con auto-scaling habilitado D. Endpoint serverless de"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02398,
+        "cos": 0.542,
+        "sem_rank": 31,
+        "bm_rank": 17,
+        "text": "Entrenamiento con datos sensibles que debe estar aislado de redes externas (sin acceso a internet durante el training). Que solucion cumple el requisito? A. Habilitar el modo network isolation de SageMaker AI en el training job B. Usar el cifrado en reposo y en transito integrado de SageMaker C. Usar SageMaker Canvas con un VPC interface endpoint para bloquear internet D. Guardar los datos de entr"
+      }
+    ]
+  },
+  {
+    "n": 38,
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "stem": "A company is developing a generative AI assistant that delivers personalized product recommendations, promotional messages, and customer support summaries. The assistant leverages structured purchase history, behavioral data, and unstructured customer reviews to generate customized content in real time. To ensure outputs are accurate, relevant, and unbiased, the team plans to conduct systematic model evaluation across multiple AI model versions before deploying to the full customer base. The solution integrates Amazon Comprehend to extract sentiment, entities, and key themes from reviews and messages, and Amazon SageMaker AI to train predictive models that score engagement likelihood and product interest. The team requires a deployment strategy that enables safe testing of multiple AI model versions while collecting performance and evaluation metrics to inform decision-making. Which deployment strategy is most appropriate for this scenario?",
+    "correct_text": "Utilize an A/B testing strategy to route different user segments to multiple AI model versions simultaneously, collect metrics such as sentiment, entity recognition, and predicted engagement using Comprehend and SageMaker AI, and select the best-performing model based on the comparison.",
+    "concepto": "A/B testing de versiones de modelo con Comprehend/SageMaker",
+    "top_cos": 0.579,
+    "candidates": [
+      {
+        "src": "anki",
+        "rrf": 0.03126,
+        "cos": 0.579,
+        "sem_rank": 3,
+        "bm_rank": 5,
+        "text": "Servicios AWS de ML - que servicio es el mas adecuado para analizar feedback de clientes (sentimiento e insights de texto) ? A. Amazon Lex (interfaces conversacionales y chatbots) B. Amazon Rekognition (analisis de imagenes y video) C. Amazon Comprehend (NLP: sentimiento, entidades, frases clave) D. Amazon SageMaker AI (construir, entrenar y desplegar modelos propios)"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02985,
+        "cos": 0.554,
+        "sem_rank": 7,
+        "bm_rank": 7,
+        "text": "Privacidad - la empresa no quiere que SageMaker AI recolecte metadata sobre el uso de las librerias provistas por AWS durante los training jobs. Que debe hacer en la API CreateTrainingJob? A. Fijar la variable de entorno OPT_OUT_TRACKING en 1 B. Configurar como privada la subnet usada por SageMaker AI mediante la opcion VpcConfig C. Fijar la variable de entorno OPT_OUT_TRACKING en 0 D. Deshabilita"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02844,
+        "cos": 0.502,
+        "sem_rank": 23,
+        "bm_rank": 1,
+        "text": "When building conversational AI interfaces, when should you choose Amazon Lex over Amazon Comprehend? A. When you need to analyze sentiment in customer reviews B. When you need real-time speech recognition and intent understanding C. When you need to extract entities from documents D. When you need to classify text into categories ✅ B. When you need real-time speech recognition and intent understa"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02804,
+        "cos": 0.561,
+        "sem_rank": 5,
+        "bm_rank": 19,
+        "text": "A company wants to build an Interactive Voice Response (IVR) system where customers can speak naturally to check account balances and update personal information without speaking to agents. Which AWS service combination is specifically designed for this use case? A. Amazon Polly + Amazon Transcribe B. Amazon Connect + Amazon Lex C. Amazon Comprehend + Amazon Translate D. AWS Alexa for Business + A"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02797,
+        "cos": 0.504,
+        "sem_rank": 21,
+        "bm_rank": 4,
+        "text": "Requirements: Cloud contact center with automatic speech recognition , natural language understanding , intent recognition , and ability to maintain conversation context across multiple interactions. Which AWS service meets ALL these requirements for conversational AI? A. Amazon Transcribe B. Amazon Polly C. Amazon Lex D. Amazon Comprehend ✅ C. Amazon Lex 🎯 Why: Amazon Lex provides ASR (speech-to-"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02765,
+        "cos": 0.505,
+        "sem_rank": 20,
+        "bm_rank": 6,
+        "text": "Modelo de 2 GB con trafico impredecible (picos en horario laboral, casi nulo de noche/fin de semana); debe escalar solo y ser barato en reposo. Que despliegue conviene? A. Endpoint serverless de SageMaker AI CON Provisioned Concurrency B. AWS Lambda alojando el modelo, cargandolo desde S3 en cada invocacion C. Endpoint real-time de SageMaker AI con auto-scaling habilitado D. Endpoint serverless de"
+      }
+    ]
+  },
+  {
+    "n": 48,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A retail enterprise utilizes a generative AI (GenAI) foundation model (FM) to automatically write product catalog descriptions. The DevOps group uses Amazon CloudWatch to monitor technical metrics, including token consumption, inference latency, and fault rates. Concurrently, the sales department measures commercial metrics, such as click-through rates and total revenue impact, in separate external systems. The enterprise requires a unified observability framework to correlate system performance directly with commercial results. This framework must provide holistic visibility across both domains and automatically alert key personnel whenever operational metrics indicate abnormal degradation. Which of the following solutions satisfies the enterprise’s requirements?",
+    "correct_text": "Build custom CloudWatch dashboards that aggregate both the operational data and the imported commercial metrics to achieve unified observability. Establish CloudWatch composite alarms enhanced with anomaly detection to evaluate the correlated data. Utilize Amazon SNS to dispatch alerts to relevant personnel when performance anomalies occur.",
+    "concepto": "CloudWatch dashboards + composite alarms anomaly + SNS",
+    "top_cos": 0.607,
+    "candidates": [
+      {
+        "src": "anki",
+        "rrf": 0.02649,
+        "cos": 0.5,
+        "sem_rank": 32,
+        "bm_rank": 4,
+        "text": "An accounting firm runs 200+ EC2 instances (Windows and Linux) in production. They need monthly performance checks collecting system details like memory usage, disk space , and other metrics. System logs must be analyzed with AWS Analytics tools and results stored in S3 . Which is the most efficient way to collect and analyze logs with minimal effort? A. Set up unified CloudWatch Logs agent on eac"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02614,
+        "cos": 0.497,
+        "sem_rank": 33,
+        "bm_rank": 5,
+        "text": "A company needs to immediately notify operations teams when application error rates exceed 5% based on log analysis. Which AWS service best provides this immediate notification capability? A. Amazon SNS with manual monitoring B. CloudWatch Alarms with automated thresholds C. QuickSight dashboards with scheduled reports D. EventBridge rules with batch processing ✅ B. CloudWatch Alarms with automate"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02134,
+        "cos": 0.488,
+        "sem_rank": 39,
+        "bm_rank": 29,
+        "text": "A web application is experiencing sudden traffic spikes that overwhelm individual EC2 instances, causing application timeouts and poor user experience during peak periods. Which AWS service best addresses this scaling challenge? A. Amazon CloudWatch with custom metrics B. Application Load Balancer (ALB) with Auto Scaling C. Amazon ElastiCache for session management D. AWS Lambda for serverless pro"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01639,
+        "cos": 0.591,
+        "sem_rank": 1,
+        "bm_rank": null,
+        "text": "Preparaci n de datos - menor overhead: pron stico de demanda diaria con datos hist ricos de ventas que tienen timestamps irregulares y valores faltantes . Qu enfoque cumple con el MENOR esfuerzo operativo? A. Preparar y analizar los datos con Amazon SageMaker Data Wrangler (transformaciones visuales listas) B. Visualizar y pronosticar directamente con Amazon QuickSight sin una etapa dedicada de li"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01639,
+        "cos": 0.471,
+        "sem_rank": null,
+        "bm_rank": 1,
+        "text": "An accounting firm has 200+ mixed Windows/Linux EC2 instances in production. Need to conduct monthly performance checks collecting system details like memory usage, disk space, and metrics . Logs will be analyzed using AWS Analytics tools and stored in S3. Must implement with minimal effort . Which is the most efficient way to collect and analyze logs from instances with minimal effort? A. Set up "
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01613,
+        "cos": 0.59,
+        "sem_rank": 2,
+        "bm_rank": null,
+        "text": "GenAI - una empresa ya tiene un indice de busqueda semantica empresarial de Amazon Kendra alimentado, mediante conectores, por sus fuentes internas (SharePoint, S3, wikis) con miles de documentos legales. Quiere hacer consultas en lenguaje natural y generar respuestas reutilizando ese indice existente. Que solucion recupera los fragmentos relevantes y los pasa a un modelo para la respuesta generat"
+      }
+    ]
+  },
+  {
+    "n": 56,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A media streaming company runs a personalized content recommendation engine on Amazon EC2 instances. Each instance mounts an Amazon EBS volume that stores a local cache of pre-computed customer preference vectors, which the application reads at query time to enrich prompts before calling Amazon Bedrock foundation models for final recommendation scoring. The engineering team has observed intermittent periods in which recommendation quality degrades, and customers receive off-target suggestions, but the team cannot determine whether the root cause is EBS I/O latency starving the feature retrieval pipeline or FM behavioral drift in the Bedrock model responses. The company needs an observability solution that automatically discovers and monitors both the EC2 compute layer and the attached EBS volumes as a unified application stack, detects performance deviations from established baselines using historical patterns rather than static thresholds, and generates correlated alerts within 10 minutes when anomalies are detected across any layer of the stack. The solution must minimize the effort required for manual monitoring configuration. Which solution satisfies these requirements?",
+    "correct_text": "Enable Amazon CloudWatch Application Insights on the resource group containing the EC2 instances and attached EBS volumes. Configure custom recommendation quality metrics using the embedded metric format with dimensions for customer segment and FM model ID. Use Application Insights' ML-powered anomaly detection to automatically baseline performance patterns across the EC2, EBS, and FM metric layers and generate correlated alerts when deviations are detected.",
+    "concepto": "CloudWatch Application Insights anomaly detection EC2/EBS",
+    "top_cos": 0.607,
+    "candidates": [
+      {
+        "src": "anki",
+        "rrf": 0.03151,
+        "cos": 0.553,
+        "sem_rank": 5,
+        "bm_rank": 2,
+        "text": "Requirements: 500GB shared dataset , multiple EC2 instances in Auto Scaling group, cost optimization , immediate access at boot , file-level operations . Which storage solution meets ALL requirements? A. Amazon S3 with download via user data script B. Amazon EFS mounted at instance launch C. Amazon EBS volumes attached to each instance D. Instance store volumes with data replication ✅ B. Amazon EF"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.0315,
+        "cos": 0.583,
+        "sem_rank": 3,
+        "bm_rank": 4,
+        "text": "An online media streaming startup has deployed hundreds of containerized microservices using Amazon ECS with AWS Fargate . As new features roll out, the number of running ECS tasks steadily increases. The engineering team needs to be alerted when the number of concurrently running Fargate vCPUs exceeds 75% of the service quota's maximum limit . Which solution most efficiently monitors and alerts w"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02826,
+        "cos": 0.552,
+        "sem_rank": 7,
+        "bm_rank": 15,
+        "text": "A media streaming startup runs hundreds of containerized microservices on Amazon ECS with AWS Fargate . They need to be alerted when Fargate vCPUs exceed 75% of service quota limits to prevent disruptions. The company plans to use ECS Anywhere for on-premises workloads. Which solution is MOST operationally efficient? A. Use CloudWatch to monitor AWS/Usage metrics. Set alarm when metricId/SERVICE_Q"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02731,
+        "cos": 0.528,
+        "sem_rank": 18,
+        "bm_rank": 9,
+        "text": "A web application is experiencing sudden traffic spikes that overwhelm individual EC2 instances, causing application timeouts and poor user experience during peak periods. Which AWS service best addresses this scaling challenge? A. Amazon CloudWatch with custom metrics B. Application Load Balancer (ALB) with Auto Scaling C. Amazon ElastiCache for session management D. AWS Lambda for serverless pro"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02639,
+        "cos": 0.508,
+        "sem_rank": 29,
+        "bm_rank": 6,
+        "text": "A company hosts its online immigration system on one large EC2 instance with attached EBS volumes . The system accepts documents and photos, performs automated verification, but becomes unavailable during surges . Processing takes too long and EBS storage is insufficient for growing data uploads. Which option provides high availability and scalable storage? A. Upgrade to EBS with Provisioned IOPS "
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01639,
+        "cos": 0.607,
+        "sem_rank": 1,
+        "bm_rank": null,
+        "text": "Preparaci n de datos - menor overhead: pron stico de demanda diaria con datos hist ricos de ventas que tienen timestamps irregulares y valores faltantes . Qu enfoque cumple con el MENOR esfuerzo operativo? A. Preparar y analizar los datos con Amazon SageMaker Data Wrangler (transformaciones visuales listas) B. Visualizar y pronosticar directamente con Amazon QuickSight sin una etapa dedicada de li"
+      }
+    ]
+  },
+  {
+    "n": 57,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "An AI engineer trains a Convolutional Neural Network (CNN)–based computer vision model to generate detailed object representations for a custom dataset. The dataset consists of millions of high-resolution labeled images stored in Amazon S3. The engineer uses Amazon Rekognition for feature extraction on raw images before feeding it into an Amazon SageMaker training job for model fine-tuning. During training, the engineer observed that model training took significantly longer than expected due to slow data reads from S3. The training job uses an Amazon EC2 On-Demand Instance and currently accesses data using File mode. The engineer wants to improve I/O performance during training without modifying the model architecture, data preprocessing scripts, or the training infrastructure. Which action should the engineer take to optimize training performance most efficiently?",
+    "correct_text": "Change the SageMaker training job’s data input configuration to FastFile mode to stream data directly from S3 without other changes.",
+    "concepto": "SageMaker training FastFile mode desde S3",
+    "top_cos": 0.561,
+    "candidates": [
+      {
+        "src": "anki",
+        "rrf": 0.02817,
+        "cos": 0.561,
+        "sem_rank": 10,
+        "bm_rank": 12,
+        "text": "SageMaker AI - un job de entrenamiento de k-means usa un dataset de 100 GB en S3 (10 archivos de 10 GB) y tarda demasiado. Hay que reducir el tiempo de entrenamiento con el MENOR esfuerzo operativo . Que opcion conviene? A. Comprimir el dataset en el bucket de S3 y asegurar almacenamiento para la version comprimida y la descomprimida B. Fijar el input mode a fast file mode y asegurar que la instan"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02802,
+        "cos": 0.524,
+        "sem_rank": 26,
+        "bm_rank": 1,
+        "text": "Acceso a datos - se hace fine-tuning de un modelo BERT en SageMaker con 150 GB de texto en S3. El entrenamiento es lento y hay que optimizar el acceso a datos para acelerarlo sin aumentar la complejidad operativa . Que solucion requiere el MENOR overhead? A. Configurar fast file mode en el training job y asegurar suficiente almacenamiento en la instancia B. Usar AWS Glue para preprocesar el datase"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02599,
+        "cos": 0.524,
+        "sem_rank": 27,
+        "bm_rank": 9,
+        "text": "GenAI - se quiere hacer fine-tuning de un LLM para un chatbot de soporte con un enfoque low-code / no-code que automatice el entrenamiento y aproveche modelos preconstruidos. Que combinacion usar? A. SageMaker Processing jobs con scripts propios de Python y SageMaker Debugger para depurar el entrenamiento B. Amazon SageMaker Autopilot para automatizar el entrenamiento y SageMaker JumpStart para pa"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02469,
+        "cos": 0.539,
+        "sem_rank": 21,
+        "bm_rank": 21,
+        "text": "Privacidad - la empresa no quiere que SageMaker AI recolecte metadata sobre el uso de las librerias provistas por AWS durante los training jobs. Que debe hacer en la API CreateTrainingJob? A. Fijar la variable de entorno OPT_OUT_TRACKING en 1 B. Configurar como privada la subnet usada por SageMaker AI mediante la opcion VpcConfig C. Fijar la variable de entorno OPT_OUT_TRACKING en 0 D. Deshabilita"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.0234,
+        "cos": 0.533,
+        "sem_rank": 24,
+        "bm_rank": 27,
+        "text": "A media company with a hybrid architecture has 50+ TB of digital videos stored on on-premises tape library. They want to implement automated facial recognition catalog with minimal disruption to existing MAM system and least management overhead . Eventually migrate to AWS. Which solution provides the least ongoing management overhead with minimal disruption? A. Use Amazon Kinesis Video Streams for"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01639,
+        "cos": 0.642,
+        "sem_rank": 1,
+        "bm_rank": null,
+        "text": "Detectar y marcar automaticamente imagenes que violan las guias de comunidad subidas por usuarios, con minimo esfuerzo. Que enfoque conviene? A. Entrenar una CNN a medida en SageMaker para clasificar y marcar las imagenes B. Usar Amazon Bedrock para generar insights de moderacion de imagenes C. Usar las reglas integradas de Amazon SageMaker Debugger para monitorear la calidad de imagen D. Usar las"
+      }
+    ]
+  },
+  {
+    "n": 65,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A global retail company is transforming its customer support system with a conversational AI chatbot built using Amazon Lex for natural language understanding and automated conversation flows. Amazon Transcribe is integrated for speech-to-text conversion, allowing customers to voice inquiries and interact naturally with the system. This setup improves the customer experience by enabling spoken communication, but the company now aims to automate the chatbot’s responses by leveraging its vast knowledge base of product documentation, FAQs, and support articles. The solution must quickly and accurately retrieve relevant information from the company’s documentation library. It should seamlessly integrate with existing AWS tools to provide real-time, dynamic responses to customer queries, reducing the need for manual updates or custom model training. What approach will provide the desired result with the least amount of development work?",
+    "correct_text": "Utilize Amazon Kendra for indexing company documents and integrate it with the chatbot through the Kendra Query API for dynamic response generation.",
+    "concepto": "Amazon Kendra indexado + Query API para chatbot",
+    "top_cos": 0.674,
+    "candidates": [
+      {
+        "src": "anki",
+        "rrf": 0.03202,
+        "cos": 0.674,
+        "sem_rank": 1,
+        "bm_rank": 4,
+        "text": "A company wants to build an Interactive Voice Response (IVR) system where customers can speak naturally to check account balances and update personal information without speaking to agents. Which AWS service combination is specifically designed for this use case? A. Amazon Polly + Amazon Transcribe B. Amazon Connect + Amazon Lex C. Amazon Comprehend + Amazon Translate D. AWS Alexa for Business + A"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.03175,
+        "cos": 0.599,
+        "sem_rank": 4,
+        "bm_rank": 2,
+        "text": "When building conversational AI interfaces, when should you choose Amazon Lex over Amazon Comprehend? A. When you need to analyze sentiment in customer reviews B. When you need real-time speech recognition and intent understanding C. When you need to extract entities from documents D. When you need to classify text into categories ✅ B. When you need real-time speech recognition and intent understa"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.03175,
+        "cos": 0.628,
+        "sem_rank": 3,
+        "bm_rank": 3,
+        "text": "Requirements: Cloud contact center with automatic speech recognition , natural language understanding , intent recognition , and ability to maintain conversation context across multiple interactions. Which AWS service meets ALL these requirements for conversational AI? A. Amazon Transcribe B. Amazon Polly C. Amazon Lex D. Amazon Comprehend ✅ C. Amazon Lex 🎯 Why: Amazon Lex provides ASR (speech-to-"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.03031,
+        "cos": 0.575,
+        "sem_rank": 7,
+        "bm_rank": 5,
+        "text": "A BPO startup needs a scalable call center system on AWS that can handle thousands of inbound calls with self-service capabilities (password changes, balance checks) without agents. Requirements: automatic speech recognition (ASR) , natural language understanding , and integration with business applications . Which solution should the Solutions Architect implement? A. AWS Ground Station + Amazon A"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.03028,
+        "cos": 0.51,
+        "sem_rank": 12,
+        "bm_rank": 1,
+        "text": "Which statement about Amazon Connect contact flows is correct? A. Contact flows can only handle voice calls, not chat or text interactions B. Contact flows are comprised of blocks that define customer interaction steps and can invoke Lambda functions or Lex bots C. Contact flows must be programmed using AWS SDK and cannot use visual interfaces D. Contact flows are limited to simple menu options an"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02964,
+        "cos": 0.539,
+        "sem_rank": 9,
+        "bm_rank": 6,
+        "text": "A BPO startup needs a scalable cloud contact center for thousands of inbound calls. Requirements: IVR capabilities for self-service tasks (password changes, balance checks), automatic speech recognition (ASR) , natural language understanding for conversational interactions, and integration with business applications . Which solution BEST meets all requirements? A. AWS Ground Station + Amazon Alexa"
+      }
+    ]
+  },
+  {
+    "n": 70,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A healthcare organization is implementing a generative AI solution to process and analyze sensitive medical records, including patient histories and diagnostic images. The solution uses Amazon Rekognition for image analysis to extract features from diagnostic images and Amazon Textract for extracting text from scanned medical forms. The organization must ensure that only authorized users and services have access to specific subsets of sensitive medical data stored in Amazon S3, with the ability to classify sensitive datasets (e.g., patient health information, diagnostic images, billing records) using metadata. The team requires a solution that provides granular control over data access, ensuring that only authorized users and services can access specific portions of sensitive data for processing and inference. The solution must allow secure data access management, with the ability to monitor and audit all data access events to maintain privacy and security. Which solution best achieves these requirements?",
+    "correct_text": "Leverage AWS Lake Formation with LF-Tag-based to apply fine-grained access control policies, enabling comprehensive data governance with built-in auditing and encryption for compliance.",
+    "concepto": "Lake Formation LF-Tag fine-grained access control",
+    "top_cos": 0.69,
+    "candidates": [
+      {
+        "src": "anki",
+        "rrf": 0.02602,
+        "cos": 0.59,
+        "sem_rank": 5,
+        "bm_rank": 34,
+        "text": "A company has thousands of scanned PDF invoices and needs to automatically extract vendor names, amounts, and line items for processing in their accounting system. Which AWS service best addresses this requirement? A. Amazon Rekognition B. Amazon Textract C. Amazon Comprehend D. Amazon Kendra ✅ B. Amazon Textract 🎯 Key trigger: \"Extract structured data from scanned documents\" maps directly to Text"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02535,
+        "cos": 0.521,
+        "sem_rank": 16,
+        "bm_rank": 22,
+        "text": "An IT consulting company uses AWS Organizations with multiple accounts grouped into OUs. Security team discovered an unauthorized third-party account was added to the organization with high-level access privileges . No damage occurred yet, but they need to implement monitoring for organizational changes . Which actions should be taken to set up proper monitoring? (Select TWO.) A. Create a trail in"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.02109,
+        "cos": 0.486,
+        "sem_rank": 31,
+        "bm_rank": 39,
+        "text": "An IT consulting company uses AWS Organizations with multiple accounts grouped into OUs. Security team discovered an unauthorized third-party AWS account was added to the organization with high-level access privileges. No detrimental actions occurred yet. Which actions should the solutions architect take to set up monitoring for changes to AWS accounts ? (Select TWO.) A. Create a trail in Amazon C"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01639,
+        "cos": 0.69,
+        "sem_rank": 1,
+        "bm_rank": null,
+        "text": "Elegir servicio de IA generativa: una empresa de salud quiere probar y comparar distintos foundation models , adaptarlos a sus datos clinicos manteniendo esos datos privados, y consumirlos pagando por uso, sin aprovisionar ni operar servidores ni endpoints . Qu servicio encaja mejor? A. Amazon SageMaker Canvas: interfaz no-code con modelos administrados para construir y personalizar modelos sin es"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01639,
+        "cos": 0.302,
+        "sem_rank": null,
+        "bm_rank": 1,
+        "text": "A company needs to ensure log file integrity for compliance audits, prevent accidental deletion of critical audit logs, and maintain confidentiality of sensitive API call data stored in S3. Which combination of S3 security features best meets ALL requirements? A. S3 Object Lock with Legal Hold and bucket-level public read blocking B. MFA Delete, IAM roles with least privilege, and S3 bucket polici"
+      },
+      {
+        "src": "anki",
+        "rrf": 0.01613,
+        "cos": 0.661,
+        "sem_rank": 2,
+        "bm_rank": null,
+        "text": "Etiquetado - hay que etiquetar un gran dataset de imagenes medicas con una fuerza laboral externa y escalable sin gestionar a los trabajadores directamente, escalando rapido y evitando reclutar/entrenar/monitorear personas. Que opcion conviene? A. Usar Amazon Mechanical Turk para aprovechar un gran pool externo de trabajadores para etiquetado escalable B. Crear una fuerza laboral privada con IAM p"
+      }
+    ]
+  }
+]

@@ -1,0 +1,1557 @@
+[
+  {
+    "exam": "exam1",
+    "n": 2,
+    "kind": "NEW",
+    "key": "aip01-q2",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "CloudWatch Application Insights + anomaly detection FM observability",
+    "stem": "A travel booking company runs an AI-powered trip recommendation platform on Amazon EC2 instances. The application makes API calls to Amazon Bedrock foundation models to analyze traveler preferences, destination data, and booking history before generating personalized itinerary suggestions. The company occasionally sees lower-quality recommendations, unexpected increases in token consumption, and slower model responses for certain trip types and customer segments. The operations team needs a centralized observability solution that can correlate application health with model behavior, detect unusual deviations from established performance patterns, and analyze logs to identify recurring causes of degraded recommendations. Which approach will provide the required observability with the LEAST operational effort?"
+  },
+  {
+    "exam": "exam1",
+    "n": 3,
+    "kind": "NEW",
+    "key": "aip01-q3",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Instancias Trn (Trainium) para fine-tuning LLM",
+    "stem": "A global media company is designing a generative AI platform to automate the creation of video scripts and personalized marketing content. The platform relies on Amazon SageMaker AI to fine-tune a proprietary large language model (LLM) using terabytes of internal marketing and audience data. Meanwhile, Amazon Comprehend is used to perform real-time sentiment analysis and extract entity information from customer feedback. This enables the LLM to generate content that is contextually relevant and aligned with audience sentiment. The training dataset is extensive, and the model contains hundreds of billions of parameters, requiring highly optimized and scalable infrastructure to minimize training time and cost. Which Amazon EC2 instance type is the most appropriate choice for the fine-tuning workload?"
+  },
+  {
+    "exam": "exam1",
+    "n": 4,
+    "kind": "NEW",
+    "key": "aip01-q4",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "SageMaker ProductionVariant traffic weight (A/B test)",
+    "stem": "A financial analytics firm uses Amazon SageMaker AI and Amazon Comprehend to detect potential fraud patterns across millions of real-time financial transactions. Comprehend extracts critical text features such as transaction context, merchant type, and sentiment from unstructured financial notes, while SageMaker AI consumes this enriched dataset to train and deploy a fraud detection model that classifies transactions as legitimate or suspicious. A newly optimized model version has recently been retrained in SageMaker AI using improved training features and hyperparameters. The data science team must evaluate the new model’s prediction accuracy and latency in production without impacting the throughput of the currently deployed model. Additionally, the deployment process must introduce minimal operational overhead and must not require any changes to the way the inference endpoint is invoked by clients. Which of the following options will satisfy the given requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 6,
+    "kind": "NEW",
+    "key": "aip01-q6",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock multi-agent collaboration",
+    "stem": "An enterprise is modernizing its internal operations by building a generative AI assistant using Amazon Bedrock Agents. Employees will use the assistant to handle complex customer service and operational requests, such as: Retrieving customer account and transaction data from internal systems. Applying regulatory and compliance checks before responding. Generating customer-friendly explanations using a foundation model. Triggering downstream actions such as opening support tickets, sending notifications, or updating CRM records. Each of these steps requires different permissions, tools, APIs, and reasoning logic. The goal is to design a modular, scalable, and easy to evolve as business rules and compliance requirements change. Minimizing custom orchestration code outside of Bedrock is also important. Which solution design should the enterprise use to meet these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 7,
+    "kind": "NEW",
+    "key": "aip01-q7",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock AgentCore Runtime/Memory/Gateway/Observability",
+    "stem": "A company is modernizing its customer support assistant for product troubleshooting, delivery updates, and return requests. The assistant processes thousands of daily queries, retrieves frequently updated product documentation, and accesses order information through an internal API. The solution must preserve context across multi-turn interactions, retrieve current product information, perform order-related operations, and maintain detailed audit trails showing which knowledge sources and backend tools contributed to each response. The company wants to minimize custom orchestration and infrastructure management. Which approach will best satisfy these requirements while minimizing operational effort?"
+  },
+  {
+    "exam": "exam1",
+    "n": 8,
+    "kind": "NEW",
+    "key": "aip01-q8",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Prompt versioning y evaluacion benchmark",
+    "stem": "A healthcare network uses Amazon Bedrock to generate discharge summaries from physician notes, lab results, and imaging reports. The current prompt works well for routine cases, but complex patient records produce noticeable inconsistencies in completeness, terminology, and key clinical details. The company wants to determine which prompt changes improve summary quality across difficult cases, compare prompt versions against measurable quality targets, and retain a history of prompt changes and evaluation results for future review. Which approach will best meet these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 10,
+    "kind": "NEW",
+    "key": "aip01-q10",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock Prompt Management governance + CodePipeline approval",
+    "stem": "A digital publishing company uses Amazon Bedrock to generate articles, advertisements, and social media content. Several development teams maintain hundreds of reusable prompt templates and deploy approved templates to applications in multiple AWS Regions. The company requires a centralized governance process that preserves prompt versions, standardizes prompt variables and inference configurations, and prevents unapproved templates from reaching production. Reviewers must receive notifications when a prompt is awaiting approval. The governance team must also be able to determine which identity created, modified, approved, or deployed each prompt. Which architecture should the company implement to satisfy these governance objectives?"
+  },
+  {
+    "exam": "exam1",
+    "n": 11,
+    "kind": "NEW",
+    "key": "aip01-q11",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "IAM policy exige bedrock:GuardrailIdentifier",
+    "stem": "A regulated financial services organization is rolling out AI governance policies to control how internal applications interact with foundation models (FMs). The governance team mandates that all FM interactions must be protected by guardrails to ensure responsible AI usage and prevent policy violations. The company uses Amazon Bedrock guardrails and allows application teams to directly call Bedrock APIs. Security architects must design a solution that: Enforces guardrail usage for all FM interactions Applies to both InvokeModel and Converse API calls Prevents any request from bypassing guardrails Which solution enforces these requirements with the least operational overhead?"
+  },
+  {
+    "exam": "exam1",
+    "n": 13,
+    "kind": "NEW",
+    "key": "aip01-q13",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock Provisioned Throughput baja latencia",
+    "stem": "A large online gaming company is developing a generative AI assistant that provides real-time coaching and support during live multiplayer sessions. The assistant must generate responses with very low latency during sudden traffic surges caused by tournaments and major game releases. The company wants predictable model capacity during sustained peak demand while staying within a fixed monthly compute budget. The overall architecture must also preserve auto-scaling capabilities so application components can expand or contract as traffic changes without manual intervention. Which approach will meet these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 14,
+    "kind": "NEW",
+    "key": "aip01-q14",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock Guardrails cross-Region + logging intervenciones",
+    "stem": "A financial services organization is developing a generative AI chatbot using Amazon Bedrock to answer confidential customer questions. The solution must implement layered protection mechanisms to prevent advanced prompt injection attacks targeting the model. Security engineers also require detailed audit records whenever safety rules intervene, such as when model input or output is blocked or modified. In addition, the architecture must support multi-Region resilience so the AI assistant continues functioning if a Region becomes unavailable. Which architecture satisfies these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 19,
+    "kind": "NEW",
+    "key": "aip01-q19",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Model Context Protocol (MCP) expone tools a Bedrock",
+    "stem": "A multinational financial services company is developing an AI-powered assistant to assist risk analysts in reviewing and monitoring client portfolios. The system uses Amazon Bedrock to run a foundation model for natural-language reasoning and Amazon SageMaker JumpStart to fine-tune embeddings on historical portfolio data, regulatory filings, and market research. Analysts require access to multiple data sources, including live stock and bond prices streamed through Amazon Kinesis Data Streams, as well as operational alerts from Amazon CloudWatch. The architecture must allow the foundation model to query these sources dynamically, securely, and consistently, without embedding API calls, SQL queries, or credentials directly into the prompts. Which design approach best meets these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 21,
+    "kind": "NEW",
+    "key": "aip01-q21",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock cross-region inference profile data residency",
+    "stem": "A global e-commerce company has deployed a customer service chatbot powered by Amazon Bedrock for real-time query processing. The application uses server-sent events to stream generated responses to client interfaces as they become available. The chatbot uses Amazon SageMaker AI for model training and inference and utilizes a cross-region inference profile to optimize throughput. The company must ensure that input prompts and output results are transmitted securely across regions, with data remaining within the designated geography (the US) to meet compliance requirements. Additionally, the system must stay scalable and responsive during peak traffic bursts, leveraging AWS services to handle traffic fluctuations and ensure consistent performance during high-demand periods. Which approach should satisfy the requirement?"
+  },
+  {
+    "exam": "exam1",
+    "n": 24,
+    "kind": "NEW",
+    "key": "aip01-q24",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "InvokeModelWithResponseStream via WebSocket API",
+    "stem": "A company is developing an incident analysis assistant that uses Amazon Bedrock foundation models (FMs) to provide real-time AI assistance to security analysts investigating alerts and suspicious activity. The assistant generates remediation guidance and investigation summaries, but complex requests can take several seconds to complete. The analysts need AI-generated responses to appear incrementally as generated so it can begin reviewing recommendations immediately. The application must handle thousands of concurrent analyst sessions while maintaining minimal latency and avoiding long waits for complete model responses. Which architecture will best satisfy these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 25,
+    "kind": "NEW",
+    "key": "aip01-q25",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Amazon A2I human review para baja confianza Textract",
+    "stem": "A global insurance provider processes tens of thousands of scanned policy agreements, claim submissions, and regulatory filings every day. To extract textual content from a variety of unstructured documents, the company utilizes Amazon Textract. After the data is extracted, Amazon Comprehend analyzes it to identify and classify key entities such as policy identifiers and coverage terms, while Comprehend Medical focuses on identifying medical conditions and related terminology. However, challenges arise due to inconsistent formatting, variations in terminology, abbreviations, and inaccuracies in optical character recognition (OCR), which can impede accurate entity recognition and large-scale data extraction. Certain documents fail automated validation workflows, necessitating intervention by a team of human analysts. This manual review process creates operational bottlenecks, prolongs turnaround times, and increases processing costs. The organization seeks to streamline document processing. The new workflow should reduce reliance on manual review while maintaining high precision and recall in extracted data, ensuring that downstream systems can reliably consume the information for decision-making and compliance purposes. What is the most effective way to improve automated insurance application processing?"
+  },
+  {
+    "exam": "exam1",
+    "n": 26,
+    "kind": "NEW",
+    "key": "aip01-q26",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Custom Model Import + AgentCore",
+    "stem": "A retail company is developing an AI-based recommendation system using Amazon Bedrock AgentCore. The system will leverage a large language model (LLM) fine-tuned in Amazon SageMaker AI to generate personalized product recommendations based on user browsing behavior. The solution must ensure secure, real-time inference within the Bedrock environment, while also maintaining scalability and operational efficiency. Additionally, the company wants to monitor the inference latency and model performance metrics in real-time using Amazon CloudWatch. The architecture team has also evaluated AWS Agent Squad for potential multi-agent orchestration capabilities in future recommendation workflows. Which solution ensures secure and scalable inference while minimizing operational overhead?"
+  },
+  {
+    "exam": "exam1",
+    "n": 27,
+    "kind": "NEW",
+    "key": "aip01-q27",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock cross-region inference profile por capacidad",
+    "stem": "A global retail analytics organization relies on Amazon SageMaker AI for training complex demand forecasting models while Amazon Comprehend processes multilingual customer feedback across several continents. During a major international sales period, the generative AI assistant that the company operates using Amazon Bedrock experiences a sudden and unpredictable rise in inference requests originating from users in Europe and the Asia Pacific region. The engineering teams must ensure that the assistant continues to provide low-latency responses for all global users while meeting strict data residency requirements with the least operational overhead. Which solution will meet this requirement?"
+  },
+  {
+    "exam": "exam1",
+    "n": 30,
+    "kind": "NEW",
+    "key": "aip01-q30",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "SageMaker Asynchronous Inference endpoint",
+    "stem": "A digital media company operates a web platform where customers upload high-resolution product and marketing images that require automated text generation for accessibility and search optimization. Each uploaded image can reach up to 60 MB in size, and the platform experiences unpredictable spikes in traffic during global promotional campaigns. All uploaded images are securely stored in an Amazon S3 bucket, which acts as the central repository for incoming media files. The company uses Amazon Rekognition to analyze images, detecting objects, scenes, and other visual features that form the foundation of metadata. The extracted information is passed to Amazon Bedrock, which uses a foundation model to generate detailed natural language captions describing the image content accurately and contextually. The ML workflow automatically starts processing when new images are uploaded to the S3 bucket. The GenAI developer must design a solution that scales automatically to handle fluctuating workloads, maintains high availability during traffic spikes, and operates with minimal infrastructure management overhead. Which solution fulfills these requirements with minimal infrastructure management and operational effort?"
+  },
+  {
+    "exam": "exam1",
+    "n": 32,
+    "kind": "NEW",
+    "key": "aip01-q32",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock model invocation logging a S3 y CloudWatch",
+    "stem": "An AI development team has deployed a large language model via Amazon Bedrock to generate summaries of internal documents. The team also integrates Amazon SageMaker AI for fine‑tuning smaller custom models and Amazon Comprehend for sentiment analysis of generated summaries. Regulatory compliance requires full traceability of each Bedrock invocation (input prompt, output response, metadata) and storage of the logs for audit, query, and long‑term retention. The team must pick a logging architecture that: ensures all Bedrock model invocations (via Converse, ConverseStream, InvokeModel, InvokeModelWithResponseStream) are logged allows storage of large binary image outputs when documents include scanned pages supports query‑capable log analytics later on for audit metrics and token counts. Which solution will meet this requirement?"
+  },
+  {
+    "exam": "exam1",
+    "n": 34,
+    "kind": "NEW",
+    "key": "aip01-q34",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Amazon Q Business ACL por prefijo S3 (acl.json)",
+    "stem": "A global consulting firm is using Amazon Q Business to build an internal AI assistant that allows employees to search company policies and project documents by using natural language prompts. The documents are stored in an Amazon S3 bucket, with separate folders for Finance, Legal, Human Resources, and Engineering. Each department is represented by a distinct S3 prefix. Employees authenticate through AWS IAM Identity Center, and each department maps to a specific IAM Identity Center group. The company needs Q Business to return information only from the S3 prefix that corresponds to the signed-in employee’s group membership. The solution should avoid maintaining separate access-control metadata for every individual document. Which solution will satisfy these requirements with minimal administrative effort?"
+  },
+  {
+    "exam": "exam1",
+    "n": 35,
+    "kind": "NEW",
+    "key": "aip01-q35",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "SageMaker Ground Truth Plus human-in-the-loop",
+    "stem": "An AI developer is tasked with building a generative AI system to summarize patient medical records for physicians. The system uses Amazon SageMaker AI to fine-tune a large language model (LLM) on sensitive clinical notes stored in Amazon S3. Amazon Comprehend Medical is used to extract key medical entities from clinical notes, enriching the dataset for training. After generating summaries, the developer must ensure outputs are clinically relevant, accurate, and compliant with regulatory standards. Due to the high stakes of medical decision-making, a robust process is required to enable healthcare professionals to review and correct AI-generated summaries before full deployment. The solution must scale to handle large volumes of records and integrate seamlessly with existing SageMaker pipelines for smooth retraining and deployment. Which approach will best satisfy these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 37,
+    "kind": "NEW",
+    "key": "aip01-q37",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock KB con reranking y citaciones",
+    "stem": "A pharmaceutical company is developing a regulatory intelligence assistant using Amazon Bedrock. The application retrieves information from internal reports, regulatory submissions, and policy documents across multiple enterprise data sources. Every recommendation and data claim must cite specific sources that analysts can trace to the original documents. The company also wants retrieval to prioritize only highly relevant content and must store the generated rationale and citations for auditing with minimal custom development. Which architecture will best satisfy these requirements with the LEAST operational effort?"
+  },
+  {
+    "exam": "exam1",
+    "n": 40,
+    "kind": "NEW",
+    "key": "aip01-q40",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "Bedrock Model Evaluations job (accuracy/robustness)",
+    "stem": "A large fintech company is building a conversational AI assistant to answer regulatory compliance questions and summarize policy changes. The team uses Amazon SageMaker Unified Studio for training several domain-specific fine-tuned models, while also leveraging Amazon Bedrock to deploy and manage different foundation models, including both out-of-the-box and customized models. The company wants to assess the performance of different configurations, including factors such as model variant, temperature, and prompt strategies. Specifically, the goal is to evaluate how well the models handle accuracy and robustness, given a dataset of compliance-related queries. Which solution will meet this requirement for evaluating different model configurations systematically?"
+  },
+  {
+    "exam": "exam1",
+    "n": 46,
+    "kind": "NEW",
+    "key": "aip01-q46",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "MCP servers stateless en ECS + Cloud Control API",
+    "stem": "A large enterprise is expanding an internal developer platform that relies on Model Context Protocol (MCP) servers to power toolchains used for resource analysis, troubleshooting automation, and infrastructure validation. The organization already uses Amazon SageMaker AI for model experimentation and Amazon Comprehend for text-analysis enrichment, both of which feed structured metadata that the MCP servers consume. To add deeper AWS resource awareness, the engineering team is integrating the AWS Cloud Control API MCP Server, enabling standardized inspection, visualization, and modification of AWS resources through LLM-driven workflows. During testing, MCP servers occasionally experience slow or incomplete Cloud Control API responses when handling large-scale or multi-region resource inventories. Developer tools also require predictable latency so that LLM agents can reliably generate code, validate resource configurations, and perform automated reasoning over live AWS infrastructure. The architecture requires stateless MCP servers to ensure horizontal scalability and seamless failover across the distributed platform. Leadership requires a solution that improves throughput, concurrency handling, and consistency when MCP servers query the Cloud Control API. Which approach best meets these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 47,
+    "kind": "NEW",
+    "key": "aip01-q47",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Generative AI Security Scoping Matrix Scope 4",
+    "stem": "A large financial services company is developing an internal generative AI application to assist customer support agents in drafting responses to complex client inquiries. Historical support-ticket transcripts and sensitive client data are stored in Amazon S3. Data engineers preprocess the transcripts in Amazon SageMaker Studio, performing tokenization, anonymization, and vector embedding. The company fine-tunes a foundation model obtained via SageMaker JumpStart on this proprietary dataset and deploys it as a real-time endpoint. Agents interact with the model through an internal chat UI, which integrates a company knowledge base via a vector search index in Amazon OpenSearch Service. To comply with internal security policies and industry regulations, the company must accurately map the Generative AI Security Scoping Matrix and implement all necessary security controls, including data handling, encryption, and model governance. Which best describes the appropriate scope and key security responsibility for this generative AI workload?"
+  },
+  {
+    "exam": "exam1",
+    "n": 48,
+    "kind": "NEW",
+    "key": "aip01-q48",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock Guardrails content filters + automated reasoning",
+    "stem": "A financial services company is building a generative-AI-powered assistant using Amazon SageMaker AI for fine‑tuning domain‑specific models and Amazon Kendra for semantic search on its internal regulatory documents. The assistant will answer customer questions about investment products, compliance rules, and risk disclosures. Because these topics are highly regulated and sensitive, the company must implement content safety frameworks to prevent the model from giving inaccurate advice, leaking personal investor data, or responding to prompt‑injection attacks. Which solution will meet these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 52,
+    "kind": "NEW",
+    "key": "aip01-q52",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock agent traces (Pre/Orchestration/Post) + golden dataset",
+    "stem": "A retail enterprise deploys an Amazon Bedrock agent to automate customer support interactions across multiple channels. Recently, the enterprise observed inconsistent responses and an increasing number of customer complaints related to inaccurate or fabricated answers. The engineering team must implement an observability solution that provides: End-to-end visibility into how the agent interprets prompts, reasons through tasks, and generates responses The ability to analyze and reduce hallucinations Measurement and investigation of the agent’s hallucination rate over time A systematic way to validate the agent’s behavior against expected reasoning and outcomes The solution must expose the internal reasoning flow of the agent rather than relying only on output-level monitoring. Which of the following will satisfy the given requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 53,
+    "kind": "NEW",
+    "key": "aip01-q53",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Transfer learning BERT: reemplazar capa final",
+    "stem": "A large-scale e-commerce platform is developing an AI-powered email filtering system that automatically identifies and flags malicious, spam, and phishing emails before reaching end users. The AI development team will implement this solution using Amazon SageMaker AI for model training and deployment, taking advantage of SageMaker’s managed environment for building and fine-tuning machine learning models. The system will rely on Amazon Comprehend to extract key entities and sentiment from incoming emails, helping the model identify potential threats. The training dataset consists of several thousand human-labeled emails, where each email is paired with a label of “spam” or “not spam”. The AI development team aims to improve the model’s performance by applying transfer learning using a Bidirectional Encoder Representations from Transformers (BERT) model that was pretrained on a large corpus of text data. The goal is to fine-tune the pretrained BERT model on the labeled email dataset, which will allow the model to learn how to better classify email content. The pretrained BERT model weights need to be correctly loaded and used as the initialization point for fine-tuning, ensuring the model can effectively detect spam without requiring a full retraining process. Which approach will correctly initialize the BERT model to achieve this requirement?"
+  },
+  {
+    "exam": "exam1",
+    "n": 54,
+    "kind": "NEW",
+    "key": "aip01-q54",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Data Automation (BDA) multimedia + KB",
+    "stem": "A global publishing company manages a large repository of multimedia content, including PDFs, images, audio files, and video recordings from news articles, interviews, and webinars. The company seeks to automate the extraction of insights such as key topics and relevant entities to help journalists and editors quickly access information. The company aims to build a generative AI-powered research assistant capable of answering natural language queries like, “Which article mentioned climate adaptation in Southeast Asia and included aerial images?” The company plans to use Amazon Bedrock Data Automation (BDA) for processing unstructured media and extracting structured insights, and Amazon SageMaker AI to host the generative AI model for context‑aware response generation. Which approach will best meet the requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 55,
+    "kind": "NEW",
+    "key": "aip01-q55",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "AppConfig routing dinamico de FMs + failover",
+    "stem": "An e-commerce platform is developing a generative AI (GenAI) application designed to improve the shopping experience. The application will handle customer requests such as personalized product recommendations, real-time language translation, and automated product descriptions. Each task will be managed by a distinct foundation model (FM). The platform is powered by AWS services such as Amazon API Gateway, AWS Lambda, and Amazon Bedrock to orchestrate these tasks, while Amazon Personalize is utilized to scale personalized recommendations across multiple regions. The application must meet the following requirements: Direct inference requests to specific foundation models (FMs) based on task type (e.g., translation, product recommendations) and customer configuration. Alter the routing behavior at runtime without redeploying or restarting the system. Optimize for low response times, system reliability, and cross-region operation across multiple providers. Implement failover mechanisms to switch to a standby model or AWS Region in case of primary model or region failure. Which approach delivers the needed functionality with the least operational effort?"
+  },
+  {
+    "exam": "exam1",
+    "n": 57,
+    "kind": "NEW",
+    "key": "aip01-q57",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "SageMaker LoRA adapters / inference components",
+    "stem": "A global e-commerce company is using Amazon SageMaker Unified Studio together with SageMaker JumpStart to develop an advanced generative customer-service assistant. The AI development team has already deployed a large foundation model as a real-time inference endpoint with SageMaker AI Real‑Time Inference. The company wants to personalize the assistant for each of its five regional markets (e.g., Japan, Brazil, Germany, India, the US) using parameter-efficient adaptation techniques (such as LoRA adapters) rather than retraining the full model for each region. The goal is to keep the base model unchanged and dynamically invoke the correct adapter at inference time without creating entirely separate endpoints for each region. Which solution will meet this requirement?"
+  },
+  {
+    "exam": "exam1",
+    "n": 59,
+    "kind": "NEW",
+    "key": "aip01-q59",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Inference params: temperature y top_k para determinismo",
+    "stem": "A company operates a customer support chatbot that uses Amazon Bedrock to send user queries to an Amazon Nova Pro large language model (LLM) for generating conversational responses. The chatbot is integrated with Amazon Kendra to retrieve relevant knowledge base articles, which are appended to the prompt before the request is sent to the model. Users have reported that when similar questions are asked multiple times, different responses are sometimes returned, even though the retrieved Kendra results remain unchanged. The generative AI developer must configure the system to produce responses that are more consistent, deterministic, and less random, without modifying the knowledge retrieval process. What approach solves these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 61,
+    "kind": "NEW",
+    "key": "aip01-q61",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "LangChain + LangGraph orquestacion con estado",
+    "stem": "A global investment advisory firm is developing a generative AI assistant to support analysts and high-net-worth clients. The assistant must ingest quarterly filings, fund performance summaries, and investor presentations stored in Amazon S3, convert the documents into text, generate embeddings, and leverage these embeddings for retrieval-augmented generation (RAG) during advisory sessions. It must maintain long-term memory of each client’s historical decisions, risk tolerance, and portfolio preferences, while preserving all changes as versioned artifacts for audit and compliance purposes. To support these requirements, the development team relies on Amazon SageMaker Feature Store to manage and standardize embedding feature vectors across datasets, and SageMaker AI with managed MLflow to track model lineage, behavior changes, and evaluation metadata. The inference layer uses Amazon Bedrock foundation models for LLM-powered responses. The solution requires a framework capable of managing the full RAG lifecycle, orchestrating agent-based workflows with graph execution, maintaining durable state, and enabling controlled rollback and replay in regulated environments. Which solution provides the most suitable framework to meet these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 64,
+    "kind": "NEW",
+    "key": "aip01-q64",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock Prompt Management templates versionados",
+    "stem": "An AI developer is tasked with developing a virtual health assistant to help patients manage chronic conditions. The assistant must answer complex medical questions by retrieving relevant information from an internal document repository and generating patient-friendly explanations. The solution uses Amazon Kendra to index and search the repository for relevant documents, and a foundation model hosted in Amazon Bedrock to produce natural-language responses. The organization requires standardized, version-controlled, and reusable prompt templates across multiple clinical workflows. Model parameters such as temperature and max_tokens must also be adjustable depending on the query complexity. Which solution is most appropriate for implementing the required workflow and managing prompt templates effectively?"
+  },
+  {
+    "exam": "exam1",
+    "n": 65,
+    "kind": "NEW",
+    "key": "aip01-q65",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock provisioned model ARN en modelId",
+    "stem": "A legal technology company uses Amazon Bedrock to analyze and summarize large batches of contracts for enterprise customers. During weekday processing windows, the application receives a predictable request volume and requires consistent throughput so document review jobs finish within defined processing deadlines. The company purchases provisioned throughput by using the CreateProvisionedModelThroughput API. After enabling the capacity, Amazon CloudWatch metrics indicate that the provisioned model is barely being used, while inference requests continue to experience throttling issues. The operations team discovers that the application still passes the original foundation model identifier in the modelId field when calling Bedrock. The company needs to ensure that all inference requests consume the purchased provisioned capacity without changing the existing prompts or request payloads. Which configuration change will satisfy these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 66,
+    "kind": "NEW",
+    "key": "aip01-q66",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock Guardrails: denied topics, PII mask, filtros",
+    "stem": "A healthcare technology company is building an AI-powered patient support assistant on top of Amazon Bedrock. Company policy requires that the assistant never discuss specific medical diagnoses with patients. It must also block harmful or inappropriate content, mask personally identifiable information (PII) wherever it appears, and preserve audit trails to satisfy healthcare compliance reporting requirements. Both what patients type in and what the model generates in response must undergo content filtering based on the content’s sensitivity. To meet these needs, the company wants a Bedrock guardrails setup that enforces its policies reliably while keeping false positives to a minimum. The chosen approach must also support different handling strategies depending on the type and sensitivity of the content involved. Which of the following solutions will meet these requirements?"
+  },
+  {
+    "exam": "exam1",
+    "n": 71,
+    "kind": "NEW",
+    "key": "aip01-q71",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "Bedrock AgentCore Observability traces FM",
+    "stem": "A global logistics analytics platform is developing an intelligent freight-routing assistant that generates optimized route summaries across multiple regions. The application integrates a foundation model hosted in Amazon Bedrock for text-based reasoning and uses Amazon Rekognition Custom Labels to classify visual cargo documentation. During expansion into new markets, intermittent FM invocation failures emerged. Several requests returned malformed inference outputs, while others produced inconsistent routing recommendations when identical inputs were supplied. Amazon CloudWatch Logs recorded multiple 400- and 500-level errors, but the traces lacked sufficient contextual metadata to isolate failing API calls. These inconsistencies created operational risk for downstream routing systems that rely on validated, deterministic model responses. The engineering division must identify the exact root cause of the FM integration issues, validate whether dynamically constructed payloads are incompatible, analyze model responses, and implement a mechanism that provides granular observability into the entire invocation path. The required solution must deliver request–response inspection, detailed tracing, and actionable diagnostics to ensure stable and predictable performance across all Generative AI components. Which solution will meet this requirement?"
+  },
+  {
+    "exam": "exam1",
+    "n": 16,
+    "kind": "RESC",
+    "key": "aip01r-q16",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "stem": "A multinational publishing company is developing an internal AI-powered assistant to help employees retrieve, summarize, and analyze research documents. The company’s data-science team already relies on Amazon SageMaker Ground Truth to label training data and improve metadata accuracy. The next development phase involves integrating AI agents in Amazon Bedrock that can autonomously answer questions, summarize lengthy documents, and recommend related content. To achieve this, the team requires a mechanism that can represent both user queries and document content as semantic embeddings that capture contextual relationships between concepts and terms. The solution must be fully managed, scalable, and easily integrated with existing AWS services to support downstream retrieval-augmented generation (RAG) workflows. Given the large volume of documents, the team also needs to optimize performance by implementing appropriate data distribution and query-handling strategies. Which approach best satisfies these requirements?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 20,
+    "kind": "RESC",
+    "key": "aip01r-q20",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A social media platform is developing an ML model to moderate user-generated content. The platform stores large volumes of textual and document data in Amazon S3. It uses Amazon Textract to extract text from uploaded PDFs or images, and Amazon SageMaker AI to train custom language models that classify comments based on sentiment, context, and topic relevance. The moderation team aims to enhance safety by detecting toxic or harmful language in real-time, including hate speech, harassment, and explicit threats. The solution must integrate seamlessly with the existing SageMaker AI inference pipeline, handle high throughput, and provide confidence scores for each classification, allowing content flagged as toxic to be reviewed or blocked automatically. Which of the solutions provides a managed solution for detecting toxicity in text to support this ML pipeline with safety classifiers?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 23,
+    "kind": "RESC",
+    "key": "aip01r-q23",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A large retail company is looking to leverage Amazon SageMaker AI notebooks and Amazon Comprehend to process and analyze customer feedback data. The company uses Amazon S3 buckets to store large datasets of customer reviews, and the data needs to be accessed securely for machine learning analysis. Given the sensitivity of the data, the company mandates that all resources must remain within a secure Amazon Virtual Private Cloud (VPC). Additionally, all communication must occur over the AWS network. Which solution will satisfy the given requirements?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 39,
+    "kind": "RESC",
+    "key": "aip01r-q39",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "stem": "A software development team is building a customer support chatbot for a large e-commerce platform. The chatbot needs to provide real-time, contextually accurate answers to customer inquiries based on product documentation, frequently asked questions, and order history. The team decides to implement a retrieval-augmented generation (RAG) architecture to enhance the chatbot’s ability to understand customer queries and generate precise, context-aware responses. The chatbot must query a vector database to retrieve relevant documents based on the user’s query, analyze the retrieved context for important entities and sentiments using Amazon Comprehend, and then feed this refined context to a foundation model deployed to an Amazon SageMaker AI real-time inference endpoint for response generation. The solution should enable the chatbot to operate in real-time and provide accurate answers based on the user’s query context. Which solution will best integrate Pinecone into this RAG-based system to provide context for the Llama 2 model?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 41,
+    "kind": "RESC",
+    "key": "aip01r-q41",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A global economic research organization is developing an AI-driven financial insights engine that generates analytical summaries from earnings disclosures, market indicators, and corporate filings. The system uses Amazon SageMaker Processing for large-scale data preparation and Amazon Textract to extract structured financial data. From the outset, the architecture team evaluates the solution using the Generative AI Security Scoping Matrix to classify risk categories, determine validation requirements, and outline controls needed to manage accuracy-related concerns. Early testing reveals statements affected by hallucinations regarding projected revenue and risk exposure, prompting the engineering team to design an automated verification layer that ensures generated insights consistently align with authoritative financial documents. To meet compliance and audit requirements, the organization mandates a verification mechanism capable of detecting unsupported claims, performing document-level cross-checking, and producing traceable metadata for downstream auditing. The solution must validate each generated response against trusted enterprise sources while maintaining consistent governance as defined in the scoping matrix. Which solution best satisfies these requirements?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 42,
+    "kind": "RESC",
+    "key": "aip01r-q42",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A financial services company needs to build a predictive model to identify fraudulent transactions using historical customer data, which includes sensitive information such as credit card numbers. The company plans to use Amazon SageMaker AI to train the model and Amazon Comprehend to extract features from the text-based data in the dataset. The company must ensure that all customer data is securely encrypted and that any personally identifiable information (PII), including credit card numbers, is redacted before the data is used for model training. Which solution will meet this requirement?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 43,
+    "kind": "RESC",
+    "key": "aip01r-q43",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A national utility company manages hourly power consumption data for 150 types of smart meters deployed across multiple regions. Over the past 30 years, the company has collected a large volume of historical usage data enriched with weather metrics, regional energy prices, and maintenance logs. The data science team currently uses Amazon SageMaker AI Data Wrangler to perform feature engineering and data preprocessing, and SageMaker AI Canvas (a no-code ML service) to generate baseline forecasts for monthly energy demand. However, the team now plans to build a custom machine learning (ML) model that can forecast future meter-usage patterns across all meter types. Which option satisfies the requirement with the LEAST operational overhead?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 45,
+    "kind": "RESC",
+    "key": "aip01r-q45",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "stem": "A hospital network is building a clinical research assistant with Amazon Bedrock to help physicians review treatment protocols and medication guidance. The assistant must answer questions using only approved clinical guidelines and internal medical references. Every recommendation must cite specific sources so physicians can verify the supporting documentation. The company also wants to reduce the risk that the model will hallucinate unsupported medical information and prefers a managed approach that requires minimal custom retrieval logic. Which approach will satisfy these requirements while minimizing operational effort?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "API RetrieveAndGenerate de Bedrock y generacion de citas a documentos fuente"
+  },
+  {
+    "exam": "exam1",
+    "n": 49,
+    "kind": "RESC",
+    "key": "aip01r-q49",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A company has developed a machine learning-based recommendation system designed to personalize content for users. The model has been trained using Amazon SageMaker AI built-in algorithms and a custom dataset, with real-time inference being performed within SageMaker AI. As part of the system, the company also intends to leverage Amazon Comprehend for natural language processing to analyze customer reviews and sentiment, which will further enhance the recommendation engine. To meet strict security and compliance requirements, the company must ensure that both the training and inference environments, as well as all associated services, are deployed within a secure Amazon Virtual Private Cloud (VPC). Furthermore, the solution must completely block all access to the internet or any external resources to protect sensitive user data and ensure compliance with regulatory standards. Which of the following will satisfy the given requirements with the LEAST development effort?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 50,
+    "kind": "RESC",
+    "key": "aip01r-q50",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "",
+    "stem": "A global e-commerce company is developing a product return prediction model using the Amazon SageMaker XGBoost algorithm to identify which orders are most likely to result in customer returns. Transactional and behavioral data are stored in Amazon Redshift, and the data engineering team utilizes SageMaker Data Wrangler to clean and prepare training features, including product category, customer sentiment, and delivery delays. After deploying the model, the team observes that while the training Area Under the Curve (AUC) is exceptionally high, the validation performance drops significantly. Model explainability reports from SageMaker Clarify reveal that the model is overly sensitive to a few dominant features like product price and region, suggesting overfitting to patterns in the training set. The team decides to tune the model’s hyperparameters to reduce model complexity and improve its ability to generalize to new data. Which hyperparameter modification would best help reduce overfitting and improve validation performance for this XGBoost model?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "hiperparametro max_depth de XGBoost para reducir overfitting"
+  },
+  {
+    "exam": "exam1",
+    "n": 56,
+    "kind": "RESC",
+    "key": "aip01r-q56",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "stem": "A global e-commerce company is building a multilingual product description generator using Amazon Titan Text on Amazon Bedrock. The team plans to enhance the model’s domain understanding by fine-tuning it with proprietary product data in Amazon SageMaker AI before deploying it to production through Bedrock’s managed API. For compliance reasons, all model artifacts must be encrypted using AWS KMS, and API calls to the Bedrock endpoint must be logged and auditable. The company also wants to continuously monitor model latency and throughput across different regions to ensure consistent performance. Which solution provides a secure, compliant, and observable architecture for deploying and monitoring the Titan-based generative AI model?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "metrica CloudWatch InvocationLatency de Bedrock para monitoreo cross-region"
+  },
+  {
+    "exam": "exam1",
+    "n": 60,
+    "kind": "RESC",
+    "key": "aip01r-q60",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A global e-commerce platform utilizes Amazon SageMaker AI to implement a real-time recommendation system that provides personalized product suggestions. The model is developed using SageMaker Studio. Once trained, the model is hosted on a SageMaker endpoint, enabling it to deliver inferences in real time. Additionally, the company employs Amazon Comprehend to analyze customer feedback and sentiment derived from reviews and product ratings. This analysis helps the company better understand customer preferences and enhance its recommendations. As the business prepares for major sales events, the operations team observes that increased customer activity results in significant delays when retrieving product recommendations, ultimately leading to a poor user experience. To address this issue, there is a need to adjust the target tracking scaling policy on the SageMaker endpoint. The goal is to ensure effective scaling during high-traffic periods, preventing latency from adversely affecting the customer experience. Which solution will best optimize the scaling of the SageMaker inference endpoint?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "scheduled scaling policy (vs target tracking) para pre-escalar el endpoint"
+  },
+  {
+    "exam": "exam1",
+    "n": 62,
+    "kind": "RESC",
+    "key": "aip01r-q62",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A financial services company is developing a machine learning (ML) model in Amazon SageMaker AI to detect real-time fraudulent transactions. The company plans to integrate this model with Amazon Kinesis Data Streams for continuous transaction data ingestion and Amazon DynamoDB for storing transaction metadata. The model must be trained on an extensive historical dataset stored in Amazon S3. The company must ensure that all data is encrypted in transit and at rest, and that access to sensitive data and model results is strictly controlled. AWS Encryption SDK is being considered for additional client-side encryption of sensitive data before uploading it to S3. There’s also a need to track model performance over time to ensure it remains effective and predictions align with business rules. Which solution will secure the ML workflow, control access, and allow for continuous monitoring of model performance?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 67,
+    "kind": "RESC",
+    "key": "aip01r-q67",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A retail analytics company is training a recommendation model using Amazon SageMaker AI, with training data stored in an Amazon S3 bucket. The team uses SageMaker Automatic Model Tuning (AMT) to optimize hyperparameters such as learning rate and maximum depth, and tracks the best-performing models in the SageMaker Model Registry. During tuning, many jobs continue running even after early validation results indicate poor performance, resulting in unnecessary GPU usage. The company wants a tuning strategy that automatically stops underperforming trials and reallocates resources to promising configurations to reduce compute costs. Which tuning strategy should be employed to enhance optimization efficiency and expedite hyperparameter search?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "estrategia de tuning Hyperband con early stopping"
+  },
+  {
+    "exam": "exam1",
+    "n": 68,
+    "kind": "RESC",
+    "key": "aip01r-q68",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A developer is working on an advanced machine learning project using Amazon SageMaker AI. The project involves training a deep learning model using large datasets stored in Amazon S3. Additionally, the developer needs to store model artifacts, logs, and evaluation results back to a different S3 bucket upon completion of the training job. To ensure security and proper access control, the developer must grant the SageMaker notebook instance appropriate permissions to read from and write to the specific S3 buckets. Which approach should be used to securely enable this access?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 69,
+    "kind": "RESC",
+    "key": "aip01r-q69",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "An e-commerce company leverages both Amazon SageMaker AI to train a machine learning (ML) model that predicts product-interest scores for users, and Amazon Personalize to generate real-time personalized product recommendations based on that model’s output. The AI developer wants to visualize recommendation results across four distinct dimensions: the user’s interest score (first dimension) plotted against the product’s prior conversion rate (second dimension), then visualize a third dimension (product category) via color, and a fourth dimension (number of impressions for that product) via the size of each data point. The goal is to spot segments where high-interest, high-conversion products still receive low impressions. Which approach best satisfies the given requirements?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam1",
+    "n": 72,
+    "kind": "RESC",
+    "key": "aip01r-q72",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "stem": "A telecommunications company is developing a generative AI troubleshooting assistant that uses RAG to answer questions from network manuals, incident reports, and engineering runbooks indexed in Amazon OpenSearch Service. The application currently relies on vector similarity search to retrieve relevant documents. Engineers report that searches often return documents with similar meaning but miss records containing exact device codes, protocol names, product identifiers, and technical acronyms. The company needs to improve retrieval accuracy by preserving semantic relevance while also matching precise terminology. The solution must continue to provide low end-user latency as the knowledge repository grows. Which solution will best meet these requirements?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "hybrid search (combinacion vector + keyword) en OpenSearch"
+  },
+  {
+    "exam": "exam1",
+    "n": 73,
+    "kind": "RESC",
+    "key": "aip01r-q73",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A global e-commerce enterprise is preparing a major product launch and requires a large-scale system for continuous monitoring of customer feedback across multiple social media platforms. Social media posts are already collected and stored in an Amazon S3 bucket. Amazon Rekognition will extract visual sentiment indicators from images and videos within the collected posts, and Amazon Kendra will retrieve contextually relevant posts from a broad corpus of unstructured text, with semantic retrieval supported by an Inverted File with Flat Compression (IVFFlat) vector index. The analytics group must perform sentiment scoring across all retrieved content and must generate long-term trend visualizations for leadership teams that track sentiment changes across product categories, geographic regions, and marketing campaigns. Automated alarms based on predefined sentiment thresholds must also be configured to support rapid incident response for negative sentiment spikes during critical launch periods. Which combination of AWS services best meets these requirements?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "diseno de pipeline sentiment->metricas CloudWatch->alarmas por umbral con Lambda/Comprehend"
+  },
+  {
+    "exam": "exam2",
+    "n": 1,
+    "kind": "NEW",
+    "key": "aip02-q1",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "VPC endpoints Bedrock + Lake Formation cross-account",
+    "stem": "An enterprise runs a generative AI (GenAI) document summarization workload in a dedicated application AWS account using Amazon Bedrock. The architecture consists of an Amazon API Gateway REST API that routes requests to AWS Lambda functions deployed within private VPC subnets. The workload processes confidential customer records stored in a governed data lake hosted in a separate, centralized AWS data storage account that has Amazon S3, Amazon Athena, and AWS Glue enabled. All Bedrock API calls from the application must travel exclusively over private network paths without traversing the public internet. The governed data lake must enforce fine-grained column-level access controls that apply consistently across both AWS accounts. Which solution meets these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 2,
+    "kind": "NEW",
+    "key": "aip02-q2",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Glue Data Catalog + CloudTrail para linaje GenAI/RAG",
+    "stem": "A financial services organization is developing a generative AI (GenAI) application that generates insights from multiple datasets by combining information retrieved from Amazon S3 and third-party SaaS platforms integrated using Amazon AppFlow within a Retrieval-Augmented Generation (RAG) workflow. The application requires a centralized registry to manage registered data sources and must apply metadata tagging to link generated outputs back to the originating datasets. The system must preserve end-to-end data lineage across all processing stages. All data access and system activity must also be immutably logged to support compliance and auditing requirements. Which solution provides the most appropriate architecture for these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 3,
+    "kind": "NEW",
+    "key": "aip02-q3",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Payload >256KB Step Functions con S3 URI/ResultPath",
+    "stem": "A retail company is integrating Amazon Bedrock into an existing e-commerce platform to power a generative AI (GenAI) application. To automate product listing creation, the team designed a multi-agent workflow using AWS Step Functions. Three agents run in sequence: a content creator, a technical validator, and a brand alignment reviewer, each building on the reasoning traces and outputs of the previous agent. All processing artifacts and final outputs are stored in an Amazon S3 bucket. During a testing phase, the team begins seeing consistent workflow failures. Investigation reveals that intermediate payloads passed between states regularly exceed the 256 KB Step Functions quota, halting execution before completion. To address this, a GenAI Engineer is tasked with reworking the architecture so that large payloads no longer trigger execution failures. The solution must also retain end-to-end workflow observability and maintain the multi-agent reasoning and acting (ReAct) pattern. Which of the following architectural modifications fulfills these specifications while minimizing operational overhead?"
+  },
+  {
+    "exam": "exam2",
+    "n": 5,
+    "kind": "NEW",
+    "key": "aip02-q5",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock model evaluation robustness metrics",
+    "stem": "A GenAI developer maintains a customer-facing assistant powered by a foundation model (FM) in Amazon Bedrock. During routine evaluations, the developer notices that the assistant occasionally produces different answers for prompts that have only minor wording differences. To investigate this behavior, the developer assembles a structured prompt dataset containing several closely related variants of each query and configures Amazon SNS to receive notifications whenever new evaluation batches are initiated. The goal is to run a quantitative robustness analysis to determine how sensitive the FM is to these small variations and to measure the consistency of its generated responses. Which solution will quantitatively evaluate the model’s output across these closely related prompt variations?"
+  },
+  {
+    "exam": "exam2",
+    "n": 7,
+    "kind": "NEW",
+    "key": "aip02-q7",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Comprehend PII + Rekognition moderacion + Bedrock Guardrails",
+    "stem": "A digital publishing company is building a content creation platform that allows contributors to upload article drafts and supporting images. The platform uses Amazon Bedrock to transform the submitted material into summaries, promotional copy, and visual content descriptions. All uploaded files enter the application through an existing Amazon S3 storage workflow. Before any content is processed or published, the company must detect and remove personally identifiable information (PII) from submitted text, identify inappropriate or unsafe images, and prevent Bedrock from accepting or generating harmful content. The company wants to coordinate these checks automatically while minimizing the amount of infrastructure it must operate. Which approach will meet these requirements while minimizing infrastructure management?"
+  },
+  {
+    "exam": "exam2",
+    "n": 8,
+    "kind": "NEW",
+    "key": "aip02-q8",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock Knowledge Base con Retrieve API busqueda vectorial",
+    "stem": "A company operates a global e-learning marketplace that helps learners discover courses and instructors. The platform has 40 million monthly active users and manages a catalog of 15 million courses and 150 million learner reviews currently stored in a PostgreSQL database. The company wants to implement a semantic search solution that lets learners find courses via natural-language queries such as “beginner-friendly machine learning course with project-based labs.” The solution must handle complex natural-language queries and return results for at least 95% of queries within 500 milliseconds. The company also wants to continuously validate the application’s end-to-end search experience and response latency using Amazon CloudWatch Synthetics canaries. Course details and ratings are updated hourly, and the index must reflect those updates. The solution must also scale cost-effectively during peak enrollment periods. Which solution satisfies these requirements with the lowest development effort?"
+  },
+  {
+    "exam": "exam2",
+    "n": 9,
+    "kind": "NEW",
+    "key": "aip02-q9",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock native data privacy (no retencion prompt/output)",
+    "stem": "A research group operates TD Owl, a secure analytics platform that processes highly confidential regulatory documents, internal valuation reports, and sensitive liquidity forecasts. As part of a new analytical initiative, the organization incorporated foundation model (FM) capabilities to derive structured insights from sensitive financial content. The environment already uses Amazon SageMaker Feature Store to manage feature vectors and Amazon Textract to extract critical fields from regulated documents, but a security review revealed concerns about how FM interactions handle confidential material. The assessment noted that certain FM-generated outputs include references to internal identifiers that must not persist beyond a single inference request due to strict confidentiality mandates. Regulatory requirements prohibit retaining prompts, storing outputs, or allowing sensitive financial data to influence future FM behavior. To meet compliance standards, the architecture team must implement an approach that ensures FM interactions remain fully isolated, prevents any form of data retention, and relies on managed AWS capabilities that inherently protect sensitive inputs and outputs without requiring custom-built sanitization systems. Which solution BEST meets this requirement for securing foundation model interactions?"
+  },
+  {
+    "exam": "exam2",
+    "n": 10,
+    "kind": "NEW",
+    "key": "aip02-q10",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "AgentCore Identity OIDC inbound + max tokens",
+    "stem": "A multinational healthcare provider is building an AI agent using Amazon Bedrock AgentCore Runtime to help care coordinators answer patient questions, schedule follow‑ups, and explain coverage terms. The organization wants to enforce its corporate SSO via an OpenID Connect (OIDC) identity provider (IdP) so that only authenticated staff can use the agent. The system also runs Amazon SageMaker AI to generate personalized health plan summaries and Amazon Translate to support multi-language responses for global users. To secure the agent, Bedrock AgentCore must only accept inbound tokens from the IdP when the token’s audience matches the specific application ID. At the same time, the maximum tokens parameter should be optimized to control the length of agent responses and reduce downstream generation costs. Which configuration should be used?"
+  },
+  {
+    "exam": "exam2",
+    "n": 11,
+    "kind": "NEW",
+    "key": "aip02-q11",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock KB query decomposition + Bedrock flow",
+    "stem": "A finance company is deploying a Generative AI research tool to assist portfolio managers with market data analysis. It must deliver insights in under 1.5 seconds and handle up to 500 simultaneous analytical requests during market open. The application should address multi-part financial inquiries by referencing internal Securities and Exchange Commission (SEC) filings and earnings reports, accurately break down these prompts, and avoid semantic dilution to achieve high accuracy. Which solution satisfies these requirements while minimizing operational complexity?"
+  },
+  {
+    "exam": "exam2",
+    "n": 13,
+    "kind": "NEW",
+    "key": "aip02-q13",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock KB metadata filtering para retrieval",
+    "stem": "A manufacturing company uses Amazon Bedrock to power a Retrieval Augmented Generation (RAG) assistant for maintenance engineers. The Bedrock knowledge base uses an Amazon S3 bucket as its data source, containing equipment manuals, inspection reports, repair logs, and safety procedures collected across multiple factories and equipment models. The current semantic search frequently evaluates documents for unrelated facilities, machine types, and maintenance periods, which reduces retrieval accuracy and increases the amount of irrelevant content returned to the application. Each document already has descriptive attributes such as facility, equipment category, model number, document type, and revision date. The company wants to use these attributes to narrow retrieval results without replacing the existing embedding model or redesigning the knowledge base. Which solution will improve retrieval relevance with the fewest changes to the existing architecture?"
+  },
+  {
+    "exam": "exam2",
+    "n": 14,
+    "kind": "NEW",
+    "key": "aip02-q14",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Step Functions + Comprehend PII + embeddings + OpenSearch Serverless",
+    "stem": "An insurance company is building a Retrieval-Augmented Generation (RAG) assistant that uses Amazon Bedrock foundation models to help claims specialists search historical customer interactions and policy-support records. Approximately 60 GB of archived claim conversations are stored in an Amazon S3 bucket as JSON files, and the company plans to use the processed content as its retrieval corpus. Before the records can be indexed, the processing workflow must identify and remove personally identifiable information (PII), generate embeddings for vector storage, and make the resulting vectors available for low-latency similarity searches. The company wants a managed workflow that can coordinate these processing stages and minimize the amount of custom infrastructure required. Which approach will meet these requirements while minimizing operational effort?"
+  },
+  {
+    "exam": "exam2",
+    "n": 15,
+    "kind": "NEW",
+    "key": "aip02-q15",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Step Functions state machine para patron ReAct de FM",
+    "stem": "A research organization is building an automated knowledge pipeline for its TDiscover platform. Each incoming dataset is first processed by Amazon Rekognition to extract visual details that help guide downstream analysis. After this initial step, the workflow sends a request to a foundation model (FM) in Amazon Bedrock so the system can generate structured insights and interpret the extracted information. The development team wants the FM to follow a clear reasoning pattern by breaking each task into a sequence of logical steps. The evaluation process includes reviewing different workflow designs and considering the use of AWS Step Functions to reliably coordinate each stage, validate transitions, and ensure all reasoning steps are performed in a consistent manner. Which approach will deliver this structured reasoning behavior in the most reliable manner?"
+  },
+  {
+    "exam": "exam2",
+    "n": 16,
+    "kind": "NEW",
+    "key": "aip02-q16",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock multimodal FMs via Step Functions",
+    "stem": "An AI development team within a global fashion intelligence organization ingests extensive collections of videos and photos from international runway seasons, couture exhibitions, and street-style archives. The team applies a vision-oriented model to identify garment elements, fabric textures, and accessory groupings, along with a foundation-model workflow that interprets higher-level trend indicators detected in the visual data. Insights generated from this pipeline must support the creation of a fashion analytics dashboard used by research units to examine evolving patterns, evaluate regional differences, and forecast long-term style directions. Additionally, the platform also uses AWS App Runner for serving web-based analytics tools to users. Which of the following will satisfy this requirement with MINIMAL operational overhead?"
+  },
+  {
+    "exam": "exam2",
+    "n": 17,
+    "kind": "NEW",
+    "key": "aip02-q17",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Prompt Management versioning/alias",
+    "stem": "A company is developing a generative AI customer service application using Amazon Bedrock. The development team needs to frequently update the system prompts to refine the AI’s behavior and tone. The organization wants to decouple the prompt engineering lifecycle from the core application code deployment. Business analysts must be able to test different prompt variations, save specific versions, and transition these versions from a development environment to production seamlessly without requiring the engineering team to deploy new application code. Which solution will meet these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 18,
+    "kind": "NEW",
+    "key": "aip02-q18",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Cross-Region Inference profiles + batching Bedrock",
+    "stem": "A global SaaS provider is designing a real-time virtual assistant powered by Amazon Bedrock using the Anthropic Claude 3 Haiku model. The assistant supports customer interactions across multiple continents and is expected to handle unpredictable traffic bursts. Under normal conditions, the system handles a consistent flow of requests, but during promotional campaigns and regional peak periods, request volume can surge to more than triple the usual rate. The application must consistently deliver responses within 2 seconds to maintain user experience SLAs (Service Level Agreements). Recent performance testing reveals that during sudden spikes, the model endpoints saturate, leading to throttling, increased latency, and intermittent request failures. The architecture must support seamless scaling across multiple AWS Regions while maximizing throughput efficiency and avoiding complex custom retry or routing mechanisms. Which solution provides the MOST effective way to handle these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 19,
+    "kind": "NEW",
+    "key": "aip02-q19",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock intelligent prompt routing Haiku/Sonnet",
+    "stem": "A company is building a customer support AI-powered chatbot using Amazon Bedrock. The chatbot should be able to respond to simple product inquiries and more complex, reasoning-based questions. Simple product queries account for 75% of the total queries, while the more advanced queries make up 25%. The solution needs to be cost-effective, with minimal operational overhead, and must maintain high-quality responses. Additionally, the platform integrates Amazon Comprehend for sentiment analysis to further enhance the chatbot’s ability to understand customer intent and tone. Which approach would best address these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 21,
+    "kind": "NEW",
+    "key": "aip02-q21",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "Bedrock KB semantic chunking",
+    "stem": "An enterprise is developing a RAG-based chatbot to provide answers from internal technical documentation, including PDF design documents, architecture diagrams, and policy manuals stored in Amazon S3. The company uses Amazon Bedrock Knowledge Bases for retrieval, with embeddings stored in S3 Vectors to help reduce retrieval costs. During ingestion, a fixed-chunking approach splits related sentences or clauses into separate chunks, causing some answers to lack context. Amazon SageMaker AI is also used to preprocess scanned documents using Amazon Textract endpoints, while a Bedrock foundation model generates responses from retrieved chunks. The enterprise seeks a configuration that ensures coherent retrieval, keeps answers relevant, and minimizes costs in this RAG document analysis workflow. Which configuration best meets the enterprise requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 23,
+    "kind": "NEW",
+    "key": "aip02-q23",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock Guardrails PII masking + Macie + S3 Lifecycle",
+    "stem": "A development team is designing an AI-powered assistance platform that uses Amazon Bedrock to analyze customer inquiries and produce real-time replies. Several incoming messages contain personally identifiable information (PII), and the platform must comply with the company’s strict privacy rules. The solution must ensure that PII is masked before the model processes any input, that any sensitive information is removed from the model’s responses, and that stored interaction logs are kept only for the minimum retention window. The organization also requires that all log data follow approved PII storage and retention controls. To enhance downstream analytics, the team plans to incorporate Amazon SageMaker Clarify for detecting bias and monitoring the quality of processed data. Which approach satisfies these constraints?"
+  },
+  {
+    "exam": "exam2",
+    "n": 24,
+    "kind": "NEW",
+    "key": "aip02-q24",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock cross-region inference para resiliencia",
+    "stem": "A global SaaS company is deploying a customer‑support Amazon Bedrock–based chatbot to assist users in Europe, Asia, and North America. The chatbot uses Amazon SageMaker AI to run a risk‑scoring model on customer account data, and Amazon Comprehend to classify the support request’s sentiment and detect urgency. Recently, customers in one AWS Region have begun seeing error messages indicating API throttling and higher latency when calling the Amazon Bedrock API, particularly during peak hours. To improve resilience and reliability, the architecture team wants a deployment strategy that prevents a single Region from becoming a bottleneck or single point of failure while maintaining compliance within each geographic area. The solution must also ensure that failover remains transparent to the application without requiring manual routing logic in the client. Which solution will best address these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 26,
+    "kind": "NEW",
+    "key": "aip02-q26",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "S3 Object Lock residencia + Macie + CloudTrail para GenAI",
+    "stem": "A global telecommunications provider is building a generative AI (GenAI) application using Amazon Bedrock to detect usage anomalies and predict subscriber churn across its international customer base. The application ingests and processes billions of subscriber activity records daily across AWS Regions in Europe, North America, and Asia, then stores all outputs in Amazon S3. Regional telecommunications regulations mandate that subscriber data must be processed and stored exclusively within the AWS Region where it originates. The application must also maintain a tamper-proof audit trail of all AI-generated outputs and automatically discover and classify personally identifiable subscriber data at rest within each Region-specific S3 bucket. Which approach satisfies all of these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 27,
+    "kind": "NEW",
+    "key": "aip02-q27",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock guardrails dinamicas por grupo Cognito + KB sync",
+    "stem": "A healthcare technology organization is developing a generative AI assistant to analyze medical procedure reports involving its devices. These reports are securely transferred from on-premises clinical record systems to an Amazon S3 bucket using AWS DataSync immediately after publication and are indexed using an Amazon Bedrock Knowledge Bases configuration. The application adheres to strict privacy policies. Surgeons must be able to view patient information, while engineers must receive responses where patient information is masked using PII detection controls. The assistant authenticates users with Amazon Cognito. The AI assistant must reference only medical reports published within the last three years. Which solution satisfies these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 28,
+    "kind": "NEW",
+    "key": "aip02-q28",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "LLM-as-a-judge en Bedrock Model Evaluation",
+    "stem": "An organization is developing an AI-driven system for content moderation and product description generation. The system produces refined product descriptions, safety disclaimers, and localization-ready translations for millions of seller-submitted listings. To ensure outputs comply with marketplace policies across regions and product categories, the compliance team must evaluate multiple foundation models. The organization integrates Amazon Rekognition to analyze product images for unsafe or restricted items and Amazon Translate to generate multilingual reference descriptions for testing cross-language consistency. The team has also considered reranker models to compare output consistency across foundation models. The solution requires an automated, scalable method to assess model outputs for correctness, policy alignment, harmful content detection, and multilingual fidelity, as manual review and keyword-based filtering are insufficient. Which solution best satisfies the compliance and evaluation requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 30,
+    "kind": "NEW",
+    "key": "aip02-q30",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Data Automation + Transcribe/Textract + AppSync",
+    "stem": "A company is developing a generative AI (GenAI) application that converts large-scale academic content into structured learning materials. The application ingests heterogeneous data formats, including PDFs, presentation slides, word processing documents, and recorded video sessions. The system processes more than 10,000 content items per day with bursts of up to 500 concurrent uploads. The solution must interpret both textual and audio-based inputs, extract main points, and generate accurate summaries. The application uses prompt flows to standardize summarization logic across different content types. The processed outputs must support version tracking. The application must also enable multiple users to collaborate on the generated materials in real time. Which solution satisfies these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 32,
+    "kind": "NEW",
+    "key": "aip02-q32",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock Guardrails content/word filters + grounding",
+    "stem": "A financial technology enterprise is modernizing its analytics and customer-engagement platforms. As part of this transformation, the organization is integrating Amazon Bedrock with Amazon SageMaker pipelines to support a new conversational AI system capable of processing regulated financial data. The AI system will respond to customer inquiries, summarize account-related insights, and provide guidance about financial products. The security team requires strict prevention of harmful output, elimination of unauthorized sensitive data disclosures, and automated detection and blocking of any content that may indicate illegal activity. Which of the following will satisfy the given requirements with MINIMAL effort?"
+  },
+  {
+    "exam": "exam2",
+    "n": 33,
+    "kind": "NEW",
+    "key": "aip02-q33",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Claude Haiku + hybrid search + inference profile CRIS",
+    "stem": "A fintech company is developing a customer support chatbot that must provide accurate, context-aware responses by retrieving information from its extensive knowledge base of financial product documentation, regulatory guidelines, and customer FAQs. The solution uses Amazon Bedrock with Anthropic Claude Sonnet for response generation and requires real-time inference with sub-second latency to maintain user engagement. The development team has implemented a retrieval-augmented generation (RAG) architecture using a vector store to search through 50,000+ document chunks, but the solution is experiencing inference latency issues averaging 3-4 seconds per query, which exceeds the 1-second SLA. The team needs to optimize the solution while maintaining response accuracy and ensuring the system can scale to handle 10,000 concurrent users during peak hours. What should the development team implement to meet the sub-second latency SLA while maintaining response accuracy and supporting peak load?"
+  },
+  {
+    "exam": "exam2",
+    "n": 35,
+    "kind": "NEW",
+    "key": "aip02-q35",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock KB built-in reranking models",
+    "stem": "A law firm operates an internal Retrieval Augmented Generation (RAG) assistant built on Amazon Bedrock Knowledge Bases, enabling staff to search through regulatory documents and compliance guidance stored in the firm’s knowledge repository. The repository contains tens of thousands of documents that are continuously updated as new guidance is issued. The assistant streams answers through the RetrieveAndGenerateStream API. The assistant is producing suboptimal responses and occasional hallucinations because the initial retrieval step relies solely on semantic similarity, surfacing documents that appear contextually close to the query but are not actually relevant to the question. The firm wants to improve retrieval accuracy with the least possible additional infrastructure. Which approach achieves this outcome with the minimum operational overhead?"
+  },
+  {
+    "exam": "exam2",
+    "n": 36,
+    "kind": "NEW",
+    "key": "aip02-q36",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Semantic cache con OpenSearch k-NN para respuestas FM",
+    "stem": "An e-commerce company uses Amazon Bedrock to power an AI assistant that answers product, shipping, and return questions. Usage analysis shows that many customers submit semantically equivalent questions using different wording, causing the application to make repeated requests to the foundation model for answers that have already been generated. The company wants to reduce redundant model calls, return consistent answers for similar questions, and maintain low latency during periods of heavy customer traffic. The solution should reuse previously generated query-response pairs whenever a new query is sufficiently similar to an earlier request. Which approach will satisfy these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 37,
+    "kind": "NEW",
+    "key": "aip02-q37",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "CloudWatch Logs Insights + X-Ray + Q Developer para FM",
+    "stem": "A development team is tasked with enhancing the troubleshooting capabilities of the foundation model (FM) application. The application is designed to manage customer interactions in real-time, incorporating both AI-driven natural language processing (NLP) for analyzing customer inquiries and machine vision for detecting product issues. The team needs to address issues related to analyzing error patterns in the system, tracing API calls, and improving troubleshooting efficiency. The solution should enable the team to analyze logs from multiple sources, trace API calls across different services, and detect GenAI-specific error patterns automatically. The ideal solution should also support the application’s evolving AI models and enhance response time to identified issues."
+  },
+  {
+    "exam": "exam2",
+    "n": 41,
+    "kind": "NEW",
+    "key": "aip02-q41",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock KB query decomposition + Bedrock flow",
+    "stem": "A company is developing a generative AI (GenAI) application to resolve complex healthcare questions. To prevent semantic dilution and minimize ambiguity, the application must cross-reference highly technical medical terminology against a private database of clinical documents. Furthermore, the underlying infrastructure must sustain a throughput of 1,000 queries per minute while maintaining a strict response latency of under 2 seconds. Which solution satisfies these demands with the LEAST operational overhead?"
+  },
+  {
+    "exam": "exam2",
+    "n": 44,
+    "kind": "NEW",
+    "key": "aip02-q44",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "S3 access logging + CloudTrail + Bedrock Prompt Management linaje",
+    "stem": "An AI development team is building a large-scale customer feedback summarization system using Amazon Bedrock and Amazon SageMaker AI. The system processes prompts from various sources, including social media posts, surveys, and online reviews. These prompts, along with the corresponding generated summaries, are stored in Amazon S3 for analysis and auditing purposes. Due to new regulatory requirements, the team needs to implement a robust governance framework that ensures all interactions with Bedrock are logged for compliance and that the lineage of each prompt and summary is traceable. Additionally, the team must be able to track the template versions and model invocations used to generate the summaries. Which of the following will satisfy the given requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 46,
+    "kind": "NEW",
+    "key": "aip02-q46",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock guardrails + Model Evaluations + DynamoDB TTL + CloudWatch",
+    "stem": "A banking institution plans to launch a generative AI (GenAI) solution built on Amazon Bedrock to empower customer support representatives with personalized financial guidance. To comply with industry regulations, the bank requires a governance and content safety architecture that aligns with responsible AI standards. The framework should incorporate proactive controls to screen for and block harmful content while also detecting and mitigating hallucinations in generated financial advice. The solution must also provide real-time monitoring of both model behavior and response drift, and maintain an immutable, audit-ready log of all prompt-response interactions for regulatory compliance. The institution must fulfill these requirements within a 60-day timeline, maintain end-to-end response latency below 200 ms, and provide seamless integration with existing internal compliance dashboards. Which approach satisfies these conditions with the LEAST operational overhead?"
+  },
+  {
+    "exam": "exam2",
+    "n": 47,
+    "kind": "NEW",
+    "key": "aip02-q47",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "OpenSearch Serverless vector + Bedrock KB RAG multilingue",
+    "stem": "A fintech company is developing an AI-powered compliance assistant that performs a semantic search over a collection of regulatory documents to answer customer inquiries. The system must connect to Amazon Bedrock for natural language response generation. Document retrieval must function across three languages: English, Spanish, and Portuguese. The solution must support metadata-based filtering using fields such as issue date, governing authority, and document category. The underlying knowledge base contains approximately 10 million vector embeddings, requiring automated index optimization routines to sustain sub-second query performance without manual index tuning. The engineering team requires a fully managed approach to reduce the burden of infrastructure management. The solution must also return results with minimal latency to support real-time customer interactions. Which solution satisfies all of these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 49,
+    "kind": "NEW",
+    "key": "aip02-q49",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Lake Formation LF-Tags column masking para acceso de FM",
+    "stem": "A financial institution manages a centralized data lake on AWS Lake Formation, organizing sensitive transaction records and account data across multiple databases and tables to serve various business divisions and geographic regions. The organization plans to integrate an Amazon Bedrock foundation model (FM) to enhance its anti-money laundering (AML) detection capabilities. The FM requires access to financial records within the data lake, including certain datasets that contain customer personally identifiable information (PII), such as account holder names and identification numbers. To ensure compliance, the institution must establish a data access governance framework that masks PII fields at the column level and restricts the FM’s access to only authorized subsets of data. Additionally, all data access events must be logged and retained for regulatory audit purposes. Which of the following approaches fulfills these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 50,
+    "kind": "NEW",
+    "key": "aip02-q50",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock KB hybrid search + Kendra metadata + Personalize",
+    "stem": "An organization is developing a generative AI-powered customer support assistant to answer complex inquiries and provide personalized product guidance. The assistant must retrieve relevant content from large volumes of structured and unstructured support data, including user manuals, help tickets, and technical notes. To enhance relevance and personalization, the team integrates Amazon Kendra to surface documents based on query intent and Amazon Personalize to recommend the most useful articles for individual customers based on historical interactions. The architecture must seamlessly integrate retrieval, personalization, and generative content generation to deliver accurate, timely responses at scale. The development team uses AWS CodeBuild to automate the assistant’s build and deployment pipelines. Which solution best meets these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 51,
+    "kind": "NEW",
+    "key": "aip02-q51",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock Guardrails PII filters mask/block por region",
+    "stem": "A financial services firm recently deployed an AI-powered customer support chatbot built on Amazon Bedrock. The chatbot handles inquiries related to account balances, transaction records, and billing history. As part of the firm’s regulatory obligations, data residency policies strictly prohibit AI inference across AWS Region boundaries; all model processing must occur within the same Region where a customer’s data is stored. Before the chatbot is made available to end users, the firm’s compliance team wants to run a structured evaluation to determine how reliably the chatbot identifies and suppresses personally identifiable information (PII) in its generated responses. Which of the following solutions fulfills these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 52,
+    "kind": "NEW",
+    "key": "aip02-q52",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock model invocation logging a S3",
+    "stem": "A startup is building a customer-support chatbot using Amazon Bedrock foundation models. Users send messages via a REST API powered by Amazon API Gateway, which triggers an AWS Lambda function. The Lambda function calls the Bedrock InvokeModel API to generate responses. Separately, Amazon Comprehend is used to perform sentiment analysis on each user input before passing it to the Bedrock model. Recently, in production, the application started returning unexpected model outputs, but there is no visibility into which prompts are being sent to Bedrock or into the raw responses returned. A logging mechanism is required to debug, audit, and trace the full content of the prompts and the model’s completions for each Lambda-invoked Bedrock call, without modifying the business logic. Which approach is most effective for achieving this?"
+  },
+  {
+    "exam": "exam2",
+    "n": 53,
+    "kind": "NEW",
+    "key": "aip02-q53",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Semantic caching con MemoryDB vector search",
+    "stem": "A large enterprise is building a conversational support agent that leverages Amazon SageMaker JumpStart to train custom embeddings from its internal knowledge base and uses Amazon Bedrock to power large‑language‑model responses. The application receives thousands of near‑duplicate semantic queries each day from customer service channels, and every invocation of the foundation model (FM) in Bedrock incurs significant costs and adds latency. The team wants to minimize repeated model calls by recognizing semantically similar queries that have been answered previously and serving cached responses quickly, while still allowing fresh model generation when truly new questions arrive. Which solution will meet this requirement?"
+  },
+  {
+    "exam": "exam2",
+    "n": 54,
+    "kind": "NEW",
+    "key": "aip02-q54",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock provisioned throughput + Guardrails + Prompt Management",
+    "stem": "A beverage company runs a mobile application that generates personalized drink formulation recommendations using Amazon Bedrock with a three-stage prompt chain. The prompt chain transforms customer health goals and flavor preferences into structured metadata, retrieves relevant historical formulation logs, and produces a tailored drink recommendation. Customers across several AWS Regions have experienced a range of issues: inconsistent formulation recommendations for identical inputs, high retrieval latency, and unsafe outputs – such as formulations with ingredient concentrations exceeding safe limits. To resolve these issues, the company must deploy validated safety controls to prevent hallucinated or unsafe recommendations, ensure output consistency of at least 99.5% for identical inputs, and decrease inference latency to less than one second. Which of the following solutions satisfies all of these specifications?"
+  },
+  {
+    "exam": "exam2",
+    "n": 55,
+    "kind": "NEW",
+    "key": "aip02-q55",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "pgvector en Aurora PostgreSQL con indice HNSW",
+    "stem": "A large industrial‑equipment provider has built an operational expert system using Amazon SageMaker AI to generate embeddings from service‑log text and document archives, and uses Amazon Bedrock to deliver answers via a foundation‑model interface. The provider stores millions of maintenance and fault‑analysis records and requires semantic retrieval of relevant content plus metadata filtering (equipment type, date, severity) for rapid context delivery into the Bedrock prompt. The team needs to choose a vector store that supports efficient embedding loading, high‑speed approximate nearest neighbor (ANN) search, and direct integration with the relational metadata environment. Which solution will meet this requirement for deploying and configuring the vector search infrastructure?"
+  },
+  {
+    "exam": "exam2",
+    "n": 58,
+    "kind": "NEW",
+    "key": "aip02-q58",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Bedrock invocation logging + guardrails grounding + CloudWatch anomaly",
+    "stem": "A medical enterprise utilizes an Amazon Bedrock application to summarize patient records. However, the system suffers from intermittent output degradation, specifically generating factual hallucinations. The operational expenses have surpassed the monthly budget by 40%. A GenAI Engineer needs a near-real-time observability strategy to uncover these factual hallucinations, monitor the utilization of the system’s token processing capacity, and issue early alerts for unexpected cost spikes. The chosen architecture must minimize custom scripting and ongoing operational burden. Which solution satisfies these requirements with the LEAST operational overhead?"
+  },
+  {
+    "exam": "exam2",
+    "n": 59,
+    "kind": "NEW",
+    "key": "aip02-q59",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Semantic caching de prompts para reusar salidas FM",
+    "stem": "An organization is scaling GenAI workloads to generate real-time insights from economic filings, market sentiment reports, and regulatory disclosures. The pipeline uses Amazon Titan Embeddings for vectorizing textual data and Amazon Rekognition to extract features from financial charts. After preprocessing, the inputs are routed to a foundation model (FM) in Amazon Bedrock. Internal telemetry reveals that many FM invocations come from recurring workflows with prompts that are phrased differently but express the same underlying intent, leading to cost overruns and latency spikes that impact downstream systems requiring fast model responses. To address this issue, the architecture team must implement a caching strategy that avoids redundant FM calls for prompts that convey the same meaning, even if the phrasing differs. The solution must support multi-region workloads, generate consistent cache keys, and ensure reliable cached outputs for subsequent GenAI operations. The selected approach must directly optimize cost, latency, and response consistency across highly distributed GenAI pipelines handling both structured and unstructured financial data. Which strategy best meets these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 60,
+    "kind": "NEW",
+    "key": "aip02-q60",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock invocation logging + guardrails grounding + CloudWatch anomaly",
+    "stem": "A financial services company uses Amazon Bedrock to generate risk assessment summaries from loan application documents. Even with response size controls configured on model inference parameters to cap generation lengths, the application produces inconsistent output quality with occasional fabricated financial details in the summaries, and monthly inference costs are exceeding projections by 35%. A GenAI developer must implement a near-real-time monitoring solution to detect hallucinations, identify abnormal token consumption, and provide early warnings of cost anomalies. The solution should minimize the need for custom development and ongoing maintenance. Which solution satisfies these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 61,
+    "kind": "NEW",
+    "key": "aip02-q61",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock agent action group Lambda OAuth + InvokeAgent",
+    "stem": "An organization is developing an AI-powered customer support assistant that leverages Amazon Bedrock for providing real-time responses to customer queries. The assistant must fetch product details from an organization’s backend infrastructure, available only via a secure REST API. This API requires authentication with an API key that expires every 30 minutes and must be refreshed regularly. To maintain secure, seamless access to the API, the company needs to fetch a new API key from an OAuth provider dynamically. The entire solution should be integrated into an Amazon API Gateway method that ensures secure API access, manages token updates, and provides low latency for real-time customer interactions. What is the best approach to meet these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 62,
+    "kind": "NEW",
+    "key": "aip02-q62",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock InvokeModelWithResponseStream via WebSocket",
+    "stem": "A financial services company is building an AI assistant using Amazon Bedrock to help clients manage investment portfolios. The assistant leverages the foundation models (FMs) available within Bedrock to handle complex queries related to stock performance, market trends, and risk assessments. The setup also includes Amazon Polly to provide text-to-speech responses, allowing users to hear immediate updates as the assistant handles client interactions. The assistant currently processes each request in full before providing any feedback, resulting in significant delays that negatively affect the user experience. To improve satisfaction, the company wants to deliver partial insights or preliminary responses while the assistant continues processing, enabling users to receive timely feedback without waiting for the full analysis to complete. Which solution will meet these objectives while minimizing development effort?"
+  },
+  {
+    "exam": "exam2",
+    "n": 63,
+    "kind": "NEW",
+    "key": "aip02-q63",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Step Functions human-in-the-loop waitForTaskToken para revision de output FM",
+    "stem": "A government agency responsible for disaster risk reduction has built an AI assistant application using Amazon Bedrock to process real-time environmental sensor data and generate early warning recommendations for floods, earthquakes, and landslides. Telemetry from field sensors and monitoring stations is continuously streamed into Amazon Kinesis Data Streams for ingestion and processing. In accordance with newly enacted public safety regulations, all AI-generated recommendations must be reviewed and formally approved by a certified disaster response officer before issuing any emergency alerts to the public. Additionally, the agency is required to maintain a comprehensive record of every officer’s review decision to ensure post-incident auditability and accountability. Which approach satisfies these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 64,
+    "kind": "NEW",
+    "key": "aip02-q64",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Comprehend toxicity + prompt safety classification + PII redaccion",
+    "stem": "An e-commerce business recently launched an AI-powered customer support portal, powered by an Amazon Bedrock Foundation Model (FM), to handle the growing volume of customer inquiries. The portal processes customer-submitted messages, extracts key concerns, and generates draft responses for agent review. As part of its responsible AI framework, the business wants to introduce a multi-layered content filtering pipeline powered by Amazon Comprehend to screen all incoming messages before those messages are passed to the FM. The filtering pipeline must address three specific requirements: it must detect and suppress offensive or harmful language, it must identify and redact any personally identifiable information (PII) to comply with customer data privacy policies, and it must flag messages that solicit inappropriate advice, including those that encourage fraudulent activity, unethical conduct, or manipulative behavior toward other customers. To avoid degrading the customer experience, the entire filtering pipeline must complete within the pre-processing stage and must not introduce delays that would push filtering beyond the point of FM invocation. Which of the following architectures will achieve these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 66,
+    "kind": "NEW",
+    "key": "aip02-q66",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock Prompt Management plantillas parametrizadas + Guardrails + CloudTrail",
+    "stem": "A digital marketing agency uses Amazon Bedrock and Amazon SageMaker AI to generate personalized content for clients across various industries. The agency recently conducted an architecture review using the AWS WA Tool Generative AI Lens to evaluate its generative AI workloads against best practices. The agency requires a solution within Bedrock Prompt Management that enables the creation and maintenance of reusable, parameterized prompt templates. These templates must accommodate client-specific customizations, such as tone, product features, and promotional guidelines. Additionally, the agency needs to enforce strict style rules, such as tone restrictions and keyword exclusions, to ensure consistency across all content. The company also needs to track template usage and changes for compliance purposes, ensuring that updates to prompt templates go through a formal review and approval process before activation. Which solution will meet these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 67,
+    "kind": "NEW",
+    "key": "aip02-q67",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "ApplyGuardrail por grupo Cognito + S3 Lifecycle + KB sync",
+    "stem": "A pharmaceutical research firm has integrated clinical trial documentation into an AI assistant powered by an Amazon Bedrock knowledge base. The documentation contains sensitive patient data, and the firm must ensure that personally identifiable information (PII) is visible only to authorized medical researchers, while compliance auditors interacting with the same assistant must receive responses with all PII automatically redacted. The AI assistant must only draw from clinical documents published within the last 3 years. Reports are uploaded to an Amazon S3 bucket upon completion, and Amazon Cognito is used to manage and authenticate user identities. Which approach satisfies these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 68,
+    "kind": "NEW",
+    "key": "aip02-q68",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "AWS Strands Agents SDK agente autonomo con Bedrock",
+    "stem": "A firm utilizes Amazon SageMaker AI for building credit‑risk models and Amazon Rekognition for validating identity documents submitted by customers. The organization now seeks to deploy a fully autonomous investigation agent. Whenever a flagged account transaction occurs, the agent must trigger the risk‑model inference in SageMaker AI, retrieve relevant identity‑verification images from Rekognition, call internal APIs to gather customer data, and decide whether to escalate the case for manual review or automatically close the account. The solution needs to integrate seamlessly with AWS services, allow for custom tool integrations, and support the selection of multiple foundation models for reasoning and decision‑making. Which solution will meet this requirement in the most appropriate way?"
+  },
+  {
+    "exam": "exam2",
+    "n": 69,
+    "kind": "NEW",
+    "key": "aip02-q69",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "CDK + CodePipeline multi-stage con Bedrock FoundationModel",
+    "stem": "A company is building a generative AI (GenAI) content moderation system that analyzes user-submitted text and flags policy violations. The application integrates with Amazon Bedrock to evaluate responses using multiple Foundation Models (FMs) with varying safety and accuracy characteristics. The system must be deployed across separate staging and production environments. Each environment must support multi-model evaluation to compare moderation quality, including analysis of latency-to-quality ratios. The application supports model-specific parameter configuration to standardize evaluation and tuning across different models. Product managers must be able to switch between models without modifying application code. The deployment process must be automated and maintain consistency across environments. Which solution provides the most appropriate architecture for these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 71,
+    "kind": "NEW",
+    "key": "aip02-q71",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Custom Model Import + Provisioned Throughput",
+    "stem": "A biotech company has developed a custom Meta Llama model to help scientists generate research summaries from large genomic datasets. The model was trained and fine-tuned using Amazon SageMaker AI, and the resulting weights were exported in Hugging Face format with .safetensors files. All model artifacts, including configuration files and tokenizer data, are stored securely in Amazon S3. The company wants to deploy this model in Amazon Bedrock for production use, providing scientists with a responsive AI assistant. The workload is predictable, and the organization wants to avoid managing underlying infrastructure while ensuring low-latency, high-throughput inference that supports multiple simultaneous requests. Which solution will best meet these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 72,
+    "kind": "NEW",
+    "key": "aip02-q72",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock KB con conectores de data source + sync automatico",
+    "stem": "A regional compliance oversight bureau is developing an AI-driven assistant to streamline policy interpretation and regulatory review workflows. The bureau must integrate several knowledge bases, including internal regulatory guidance, historical enforcement summaries, and department-maintained compliance wikis containing frequently updated rule interpretations. The goal is to have a consistent access layer for all content, minimal manual maintenance, and the ability for the AI assistant to reference the most current information at all times. Which of the following should be implemented?"
+  },
+  {
+    "exam": "exam2",
+    "n": 73,
+    "kind": "NEW",
+    "key": "aip02-q73",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Text-to-SQL + Bedrock Custom Model Import + Guardrails",
+    "stem": "A software-as-a-service (SaaS) company is building a personalized cabin-upgrade recommendation system powered by Amazon SageMaker AI for a travel management platform. The system is designed to help airline partners identify and target eligible passengers with tailored upgrade offers based on individual travel behavior. Models developed and trained in SageMaker AI will be imported using the Amazon Bedrock Custom Model Import feature, allowing the company to utilize Bedrock’s native inference and content safety capabilities. Passenger travel history, including previous bookings, seat preferences, and loyalty status, is stored in an Amazon RDS database and must be queried to generate personalized recommendations. The system is expected to provide accurate, consistent, and contextually relevant upgrade suggestions for all supported airline partners and passenger segments. Which approach fulfills these requirements?"
+  },
+  {
+    "exam": "exam2",
+    "n": 75,
+    "kind": "NEW",
+    "key": "aip02-q75",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Transcribe partial-result streaming + InvokeModelWithResponseStream",
+    "stem": "A large company is developing a real-time generative AI assistant to help contact center agents respond to customers during claims and policy inquiries. The application must transcribe live customer speech and begin analyzing partial conversation context before the customer finishes speaking so agents can receive suggestions as quickly as possible. The company must minimize end-to-end latency from incoming speech to the first generated suggestion displayed on the agent’s screen. The solution must use managed AWS services and support bidirectional streaming so transcription fragments and generated response updates can flow continuously during an active call. Which solution will provide the required real-time performance and streaming capabilities?"
+  },
+  {
+    "exam": "exam2",
+    "n": 6,
+    "kind": "RESC",
+    "key": "aip02r-q6",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "",
+    "stem": "A transportation company is building an Amazon Bedrock agent that provides dispatch recommendations based on live vehicle data. The agent uses Amazon SageMaker AI to generate ETA predictions and Amazon Comprehend to interpret driver feedback. The system must also integrate a custom telemetry tool that maintains a long-lived WebSocket connection to stream continuous GPS events into the agent. The development team tested serverless options but encountered connection timeouts due to execution limits. A deployment approach is needed that supports persistent network sessions without requiring server management. Which solution will meet these requirements?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam2",
+    "n": 12,
+    "kind": "RESC",
+    "key": "aip02r-q12",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "",
+    "stem": "A company is building an AI-powered customer support platform that uses AWS Amplify AI Kit on the front end to integrate with Amazon Bedrock for generating human-like responses. The platform’s front end is connected to Amazon API Gateway, which triggers an AWS Lambda function. This function then calls the Bedrock API to construct responses to customer queries. During load testing, the team notices intermittent latency issues and ThrottlingException errors when the Lambda function makes requests to the Bedrock API. These issues arise primarily during peak usage hours when there is a high volume of concurrent requests, impacting the system’s ability to generate real-time responses efficiently. The team needs to ensure that the platform can handle peak traffic while reducing the frequency of ThrottlingException errors and maintaining fast response times. Which of the following should be implemented?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam2",
+    "n": 25,
+    "kind": "RESC",
+    "key": "aip02r-q25",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "stem": "A legal research company is preparing large volumes of unstructured data, including case files, deposition transcripts, regulatory documents, and legal opinions stored in Amazon S3. The organization is building an Amazon Bedrock application that will help attorneys search, summarize, and analyze this content. Before the documents are supplied to the foundation model, the company needs to automatically discover and catalog the source files, generate auditable metadata, and apply custom transformation and text chunking logic. The solution must also validate the processed datasets and continuously track data metrics to identify quality issues before the content is used by the application. The company wants to minimize custom development and infrastructure management. Which solution will satisfy these requirements while minimizing development effort?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "Glue Data Quality (validacion + tracking de metricas de calidad) y logica de text-chunking"
+  },
+  {
+    "exam": "exam2",
+    "n": 34,
+    "kind": "RESC",
+    "key": "aip02r-q34",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "",
+    "stem": "A financial technology company operates a customer-facing loan eligibility platform that uses an Amazon SageMaker AI model to generate real-time premium estimates. The model’s training data is stored in an Amazon S3 bucket and continuously grows as new customer records are collected. The company wants to eliminate manual retraining cycles by building an automated pipeline that triggers retraining and redeploys the updated model to the application whenever an analyst uploads a new dataset file to the S3 bucket. Which solution satisfies these requirements?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "AWS Step Functions Standard como orquestador con estados y handler de evento S3"
+  },
+  {
+    "exam": "exam2",
+    "n": 38,
+    "kind": "RESC",
+    "key": "aip02r-q38",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "",
+    "stem": "A company is developing a generative AI assistant that delivers personalized product recommendations, promotional messages, and customer support summaries. The assistant leverages structured purchase history, behavioral data, and unstructured customer reviews to generate customized content in real time. To ensure outputs are accurate, relevant, and unbiased, the team plans to conduct systematic model evaluation across multiple AI model versions before deploying to the full customer base. The solution integrates Amazon Comprehend to extract sentiment, entities, and key themes from reviews and messages, and Amazon SageMaker AI to train predictive models that score engagement likelihood and product interest. The team requires a deployment strategy that enables safe testing of multiple AI model versions while collecting performance and evaluation metrics to inform decision-making. Which deployment strategy is most appropriate for this scenario?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "Estrategia de despliegue A/B testing y model evaluation entre versiones de modelo"
+  },
+  {
+    "exam": "exam2",
+    "n": 48,
+    "kind": "RESC",
+    "key": "aip02r-q48",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A retail enterprise utilizes a generative AI (GenAI) foundation model (FM) to automatically write product catalog descriptions. The DevOps group uses Amazon CloudWatch to monitor technical metrics, including token consumption, inference latency, and fault rates. Concurrently, the sales department measures commercial metrics, such as click-through rates and total revenue impact, in separate external systems. The enterprise requires a unified observability framework to correlate system performance directly with commercial results. This framework must provide holistic visibility across both domains and automatically alert key personnel whenever operational metrics indicate abnormal degradation. Which of the following solutions satisfies the enterprise’s requirements?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam2",
+    "n": 56,
+    "kind": "RESC",
+    "key": "aip02r-q56",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A media streaming company runs a personalized content recommendation engine on Amazon EC2 instances. Each instance mounts an Amazon EBS volume that stores a local cache of pre-computed customer preference vectors, which the application reads at query time to enrich prompts before calling Amazon Bedrock foundation models for final recommendation scoring. The engineering team has observed intermittent periods in which recommendation quality degrades, and customers receive off-target suggestions, but the team cannot determine whether the root cause is EBS I/O latency starving the feature retrieval pipeline or FM behavioral drift in the Bedrock model responses. The company needs an observability solution that automatically discovers and monitors both the EC2 compute layer and the attached EBS volumes as a unified application stack, detects performance deviations from established baselines using historical patterns rather than static thresholds, and generates correlated alerts within 10 minutes when anomalies are detected across any layer of the stack. The solution must minimize the effort required for manual monitoring configuration. Which solution satisfies these requirements?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "CloudWatch Application Insights (autodescubrimiento de stack, anomaly detection ML, EMF)"
+  },
+  {
+    "exam": "exam2",
+    "n": 65,
+    "kind": "RESC",
+    "key": "aip02r-q65",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A global retail company is transforming its customer support system with a conversational AI chatbot built using Amazon Lex for natural language understanding and automated conversation flows. Amazon Transcribe is integrated for speech-to-text conversion, allowing customers to voice inquiries and interact naturally with the system. This setup improves the customer experience by enabling spoken communication, but the company now aims to automate the chatbot’s responses by leveraging its vast knowledge base of product documentation, FAQs, and support articles. The solution must quickly and accurately retrieve relevant information from the company’s documentation library. It should seamlessly integrate with existing AWS tools to provide real-time, dynamic responses to customer queries, reducing the need for manual updates or custom model training. What approach will provide the desired result with the least amount of development work?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "Amazon Kendra indexing + Kendra Query API para recuperacion sobre knowledge base"
+  },
+  {
+    "exam": "exam2",
+    "n": 70,
+    "kind": "RESC",
+    "key": "aip02r-q70",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A healthcare organization is implementing a generative AI solution to process and analyze sensitive medical records, including patient histories and diagnostic images. The solution uses Amazon Rekognition for image analysis to extract features from diagnostic images and Amazon Textract for extracting text from scanned medical forms. The organization must ensure that only authorized users and services have access to specific subsets of sensitive medical data stored in Amazon S3, with the ability to classify sensitive datasets (e.g., patient health information, diagnostic images, billing records) using metadata. The team requires a solution that provides granular control over data access, ensuring that only authorized users and services can access specific portions of sensitive data for processing and inference. The solution must allow secure data access management, with the ability to monitor and audit all data access events to maintain privacy and security. Which solution best achieves these requirements?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 2,
+    "kind": "NEW",
+    "key": "aip03-q2",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "SageMaker Experiments tracking PySpark params",
+    "stem": "A data science team is developing an automated pipeline that integrates Amazon SageMaker AI and Amazon Comprehend to analyze large volumes of customer feedback data. The team first uses a PySpark script running on Amazon EMR to perform text preprocessing, tokenization, and feature engineering on millions of feedback records stored in Amazon S3. The preprocessed data is then passed to Comprehend for sentiment and entity extraction, and subsequently used to train multiple sentiment classification models in SageMaker AI. The AI developer must determine how varying the PySpark feature transformation parameters and sample sizes affects overall model accuracy and inference performance. Which solution will meet this requirement most effectively?"
+  },
+  {
+    "exam": "exam3",
+    "n": 3,
+    "kind": "NEW",
+    "key": "aip03-q3",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Bedrock Data Automation ingesta continua",
+    "stem": "A company uses a customer relationship management (CRM) platform to manage its sales pipeline, support tickets, and account health. The company is developing a generative AI assistant that can compose personalized email outreach, summarize recent customer interactions, and provide actionable recommendations for account management. Sales and support data are stored in Amazon S3 and other internal file storage. The engineering team requires the data pipelines to run continuously, ensuring the assistant always has access to fresh data for generation and training, while minimizing manual ETL tasks. To enhance the solution, the team plans to leverage Amazon Comprehend to extract sentiment, customer issues, and entity metadata from unstructured support logs. Amazon SageMaker AI is used to train predictive models for customer engagement scoring based on historical interactions and CRM activity. The solution must automatically ingest and process CRM data, combine insights from Comprehend and SageMaker AI, and feed the results into a foundation model pipeline for retraining or inference without requiring constant manual intervention. Which approach offers the most scalable and reliable method for automating the CRM data processing pipeline?"
+  },
+  {
+    "exam": "exam3",
+    "n": 8,
+    "kind": "NEW",
+    "key": "aip03-q8",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "SageMaker multi-variant endpoint A/B",
+    "stem": "A data analytics company is developing a personalized news recommendation platform that delivers tailored article suggestions to readers. The AI development team uses Amazon Comprehend to perform sentiment analysis and entity recognition on articles and reader feedback data. The extracted insights are then stored in Amazon S3 and used by an Amazon Personalize solution to generate ranked recommendations for each user session. The company has trained multiple recommendation models to improve model accuracy and wants to evaluate the effectiveness through A/B testing in a beta production environment. The system must route live inference traffic between multiple model variants, monitor real-time engagement metrics, and seamlessly direct 100% of traffic to the best-performing model. Which solution will meet these requirements in the most operationally efficient way?"
+  },
+  {
+    "exam": "exam3",
+    "n": 9,
+    "kind": "NEW",
+    "key": "aip03-q9",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Wavelength + EFS + context pruning GenAI",
+    "stem": "A media technology company is building a real-time generative AI (GenAI) application that enhances live video streams with contextual overlays. The application uses a foundation model (FM) in Amazon Bedrock to generate captions and insights from incoming video frames. The solution must achieve ultra-low latency of under 20 milliseconds for mobile users, process inference requests as close to end users as possible, provide shared file storage for intermediate artifacts, and optimize prompt handling to reduce token usage during high-traffic bursts. Which solution best meets these requirements?"
+  },
+  {
+    "exam": "exam3",
+    "n": 13,
+    "kind": "NEW",
+    "key": "aip03-q13",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Latency-optimized inference + prompt caching",
+    "stem": "A streaming media company is using Amazon Bedrock to power a customer support chatbot. The chatbot must handle over 60,000 subscriber inquiries daily, with spikes reaching 180,000 inquiries per day during major content releases. Analysis of historical logs shows that 35% of inquiries share nearly identical context, such as billing questions or password reset requests. A GenAI engineer must design a solution that ensures low latency and consistent performance during these traffic spikes. The team briefly considered Bedrock Agents to orchestrate multi-step inquiry handling but determined it added unnecessary complexity for this particular latency and cost problem. Which of the following solutions will meet these requirements MOST cost-effectively?"
+  },
+  {
+    "exam": "exam3",
+    "n": 20,
+    "kind": "NEW",
+    "key": "aip03-q20",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "SageMaker DeepAR forecasting global",
+    "stem": "A national utility company manages hourly power consumption data for 150 types of smart meters deployed across multiple regions. Over the past 30 years, the company has collected a large volume of historical usage data enriched with weather metrics, regional energy prices, and maintenance logs. The data science team currently uses Amazon SageMaker AI Data Wrangler to perform feature engineering and data preprocessing, and SageMaker AI Canvas (a no-code ML service) to generate baseline forecasts for monthly energy demand. However, the team now plans to build a custom machine learning (ML) model that can forecast future meter-usage patterns across all meter types. Which option satisfies the requirement with the LEAST operational overhead?"
+  },
+  {
+    "exam": "exam3",
+    "n": 27,
+    "kind": "NEW",
+    "key": "aip03-q27",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "AppConfig agent config dinamica validada",
+    "stem": "An organization is deploying a generative AI application that requires specific configuration flags to be updated dynamically without restarting the application. The infrastructure team needs to ensure that any configuration changes are validated against a schema before being deployed to the environment to prevent runtime errors. The application is running on an Amazon EC2 instance. Which solution should be implemented to manage these configurations efficiently?"
+  },
+  {
+    "exam": "exam3",
+    "n": 28,
+    "kind": "NEW",
+    "key": "aip03-q28",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Fine-tune Titan Bedrock KMS/CloudTrail",
+    "stem": "A global e-commerce company is building a multilingual product description generator using Amazon Titan Text on Amazon Bedrock. The team plans to enhance the model’s domain understanding by fine-tuning it with proprietary product data in Amazon SageMaker AI before deploying it to production through Bedrock’s managed API. For compliance reasons, all model artifacts must be encrypted using AWS KMS, and API calls to the Bedrock endpoint must be logged and auditable. The company also wants to continuously monitor model latency and throughput across different regions to ensure consistent performance. Which solution provides a secure, compliant, and observable architecture for deploying and monitoring the Titan-based generative AI model?"
+  },
+  {
+    "exam": "exam3",
+    "n": 30,
+    "kind": "NEW",
+    "key": "aip03-q30",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "Bedrock Prompt Management + Guardrails",
+    "stem": "A global clinical research organization (CRO) is designing a generative AI (GenAI) portal using Amazon Bedrock to analyze and extract insights from clinical trial protocols for various research teams. The portal must output structured records that contain a study design overview, a classification of patient safety risks, and operational bottlenecks flagged for investigator review. The generated output must adapt in vocabulary and style depending on the viewing audience, such as clinical investigators, biostatisticians, or regulatory compliance officers. Additionally, the portal must filter out toxic language, off-topic discussions, and protected health information (PHI). The organization wants to avoid hardcoding or decentralized management of prompt templates across different study teams. They also want to eliminate custom-written post-processing scripts to sanitize model outputs and require a mechanism to dynamically update safety and compliance filters without redeploying the core application. Which of the following solutions will meet these requirements with the LEAST maintenance overhead?"
+  },
+  {
+    "exam": "exam3",
+    "n": 34,
+    "kind": "NEW",
+    "key": "aip03-q34",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "XGBoost max_depth reducir overfitting",
+    "stem": "A global e-commerce company is developing a product return prediction model using the Amazon SageMaker XGBoost algorithm to identify which orders are most likely to result in customer returns. Transactional and behavioral data are stored in Amazon Redshift, and the data engineering team utilizes SageMaker Data Wrangler to clean and prepare training features, including product category, customer sentiment, and delivery delays. After deploying the model, the team observes that while the training Area Under the Curve (AUC) is exceptionally high, the validation performance drops significantly. Model explainability reports from SageMaker Clarify reveal that the model is overly sensitive to a few dominant features like product price and region, suggesting overfitting to patterns in the training set. The team decides to tune the model’s hyperparameters to reduce model complexity and improve its ability to generalize to new data. Which hyperparameter modification would best help reduce overfitting and improve validation performance for this XGBoost model?"
+  },
+  {
+    "exam": "exam3",
+    "n": 36,
+    "kind": "NEW",
+    "key": "aip03-q36",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "EventBridge/Step Functions rollout Bedrock",
+    "stem": "A healthcare technology company processes insurance claims through an API backed by generative AI. As part of modernizing this pipeline, the company wants to roll out new Amazon Bedrock model versions gradually rather than switching over all at once. The rollout mechanism needs to automatically shift traffic based on live inference metrics, historical traffic behavior, and the overall health of the service. Traffic sent to a newly released model version should keep climbing as long as things look healthy, and should pull back the moment performance dips below what’s acceptable. Beyond the traffic shifts themselves, the team wants full visibility into inference latency and error rates throughout each rollout. And if something goes wrong, the pipeline needs to stop the rollout and automatically fall back to the prior model version, with no one needing to step in. Which of the following solutions will meet these requirements?"
+  },
+  {
+    "exam": "exam3",
+    "n": 45,
+    "kind": "NEW",
+    "key": "aip03-q45",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "Amazon Fraud Detector prediction API",
+    "stem": "A financial technology company manages a large-scale payment platform that processes millions of transactions daily. The company uses Amazon Comprehend to analyze unstructured text data from customer reviews and support tickets to identify sentiment trends and potential user disputes. Amazon SageMaker AI is also used to generate periodic behavior-based risk scores for customer accounts. Recently, the company has noticed an increasing number of fraudulent transactions, especially from newly registered accounts attempting high-value payments. The existing batch-based model in SageMaker cannot flag these activities quickly enough to prevent losses. The data science team is looking for a real-time fraud detection solution that can automatically assess and reject fraudulent transactions at the moment of occurrence. The solution must require minimal operational effort. Which option satisfies these requirements?"
+  },
+  {
+    "exam": "exam3",
+    "n": 51,
+    "kind": "NEW",
+    "key": "aip03-q51",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Regularizacion mas fuerte contra overfitting",
+    "stem": "A research organization is developing an image classification solution by integrating Amazon Rekognition with Amazon SageMaker AI. The team uses Rekognition to automatically label thousands of wildlife images stored in Amazon S3, generating a high-quality annotated dataset. This labeled dataset is then used to train a supervised learning algorithm in SageMaker AI to classify different species of animals for ecological analysis. After several training runs, the ML team observes that the model achieves 98% accuracy on the training dataset but only 76% accuracy on the validation dataset. The data scientists confirm that the dataset is clean, balanced, and correctly split. There is a suspicion that the model has become too complex and is memorizing specific image features from the training data instead of learning general patterns. Which of the following should be implemented?"
+  },
+  {
+    "exam": "exam3",
+    "n": 53,
+    "kind": "NEW",
+    "key": "aip03-q53",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Bedrock KB RAG + PerformanceConfigLatency",
+    "stem": "A travel booking company uses Amazon Bedrock with Anthropic Claude to power a generative AI (GenAI) application that recommends vacation packages to travelers. However, users are reporting slow response times. They also note that the system frequently recommends packages that are either irrelevant to their travel preferences or no longer available in the company’s active inventory. An internal investigation reveals that the interactions between travelers and the GenAI solution are highly unique. It also confirms that the model is hallucinating vacation packages that are not bookable. The engineering team wants to resolve these accuracy and latency issues. While they evaluated deploying a standalone Amazon OpenSearch Service cluster, they require a solution that integrates natively with their GenAI workflow. Which solution will meet these requirements?"
+  },
+  {
+    "exam": "exam3",
+    "n": 59,
+    "kind": "NEW",
+    "key": "aip03-q59",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "CountVectorizer scikit-learn stopwords",
+    "stem": "A global online publishing company is developing a generative AI-based content recommendation system to suggest relevant tags for articles. The raw data for the articles, stored in JSON format, is housed in an Amazon S3 bucket. The data scientist is using the Amazon SageMaker Neural Topic Model (NTM) algorithm to build a model that can generate the most appropriate tags for each article. To enhance the model’s performance, Amazon Titan is being utilized to improve natural language understanding and generate contextual insights from the article content, leveraging Titan’s powerful pre-trained models for tag suggestions. During the evaluation phase, the model’s recommendations include common stopwords such as “and,” “of,” and “in,” along with some rare words that appear only in a few specific articles. After working with the content team to review the model’s output, the data scientist determines that while the rare words are unusual, the words could still be valuable for generating more relevant tags. The challenge is to find a way to exclude the stopwords from the model’s tag predictions while still retaining the rare but meaningful words. How can the model be refined to exclude stopwords and retain rare words in tags?"
+  },
+  {
+    "exam": "exam3",
+    "n": 65,
+    "kind": "NEW",
+    "key": "aip03-q65",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "Claude Haiku/Sonnet + Provisioned Throughput routing",
+    "stem": "A financial services company is developing an intelligent document analysis platform that uses Amazon Kendra to index and retrieve regulatory documents and Amazon Bedrock to generate responses. The system must handle two distinct workloads: approximately 10,000 daily simple queries requiring quick metadata extraction and summarization (averaging 500 input tokens and 200 output tokens), and 500 complex analytical queries requiring deep reasoning and multi-step analysis (averaging 2,000 input tokens and 1,500 output tokens). The development team needs to optimize for both cost-efficiency and consistent low-latency performance while ensuring compliance with the AWS Well-Architected Framework principles for Generative AI workloads. Which architecture approach should the team implement?"
+  },
+  {
+    "exam": "exam3",
+    "n": 67,
+    "kind": "NEW",
+    "key": "aip03-q67",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "Pinecone RAG + Comprehend + endpoint Llama2",
+    "stem": "A software development team is building a customer support chatbot for a large e-commerce platform. The chatbot needs to provide real-time, contextually accurate answers to customer inquiries based on product documentation, frequently asked questions, and order history. The team decides to implement a retrieval-augmented generation (RAG) architecture to enhance the chatbot’s ability to understand customer queries and generate precise, context-aware responses. The chatbot must query a vector database to retrieve relevant documents based on the user’s query, analyze the retrieved context for important entities and sentiments using Amazon Comprehend, and then feed this refined context to a foundation model deployed to an Amazon SageMaker AI real-time inference endpoint for response generation. The solution should enable the chatbot to operate in real-time and provide accurate answers based on the user’s query context. Which solution will best integrate Pinecone into this RAG-based system to provide context for the Llama 2 model?"
+  },
+  {
+    "exam": "exam3",
+    "n": 69,
+    "kind": "NEW",
+    "key": "aip03-q69",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "SageMaker Canvas scatter plot 4 dimensiones",
+    "stem": "An e-commerce company leverages both Amazon SageMaker AI to train a machine learning (ML) model that predicts product-interest scores for users, and Amazon Personalize to generate real-time personalized product recommendations based on that model’s output. The AI developer wants to visualize recommendation results across four distinct dimensions: the user’s interest score (first dimension) plotted against the product’s prior conversion rate (second dimension), then visualize a third dimension (product category) via color, and a fourth dimension (number of impressions for that product) via the size of each data point. The goal is to spot segments where high-interest, high-conversion products still receive low impressions. Which approach best satisfies the given requirements?"
+  },
+  {
+    "exam": "exam3",
+    "n": 12,
+    "kind": "RESC",
+    "key": "aip03r-q12",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "",
+    "stem": "A company manages a large-scale analytics platform that stores high-volume transaction data in a PostgreSQL database. The dataset includes hundreds of millions of records with customer details, purchase amounts, product categories, and regions. The analytics team wants to use Amazon SageMaker AI to predict which customers are likely to churn in the next 90 days and improve retention strategies. The company needs a solution that automates data extraction and preparation from the PostgreSQL database for scheduled cleaning, normalization, and handling of missing values. After refining the data, the team considers using SageMaker Feature Store to store and manage customer features for consistent inputs in machine learning workflows. Analysts should then be able to build and deploy a no-code churn-prediction model and easily generate predictions on new customer data without support from data scientists. Some architects also evaluated Amazon DocumentDB for the future modernization of application workloads. Which is the best option to achieve this requirement?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 15,
+    "kind": "RESC",
+    "key": "aip03r-q15",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A healthcare organization is building an enterprise search tool using Amazon Bedrock Knowledge Bases. The underlying corporate data resides in an Amazon S3 data lake, which is cataloged using AWS Glue. The organization must enforce strict access controls to ensure that different departments can only query documents that correspond to specific departmental data. The security team wants to implement fine-grained access control at the database, table, and column level using a scalable, attribute-based approach rather than managing complex AWS IAM policies for every individual user and resource combination. Which solution will securely meet these requirements with the least operational overhead?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "Lake Formation LF-Tags; knowledge base"
+  },
+  {
+    "exam": "exam3",
+    "n": 18,
+    "kind": "RESC",
+    "key": "aip03r-q18",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A company has developed a machine learning-based recommendation system designed to personalize content for users. The model has been trained using Amazon SageMaker AI built-in algorithms and a custom dataset, with real-time inference being performed within SageMaker AI. As part of the system, the company also intends to leverage Amazon Comprehend for natural language processing to analyze customer reviews and sentiment, which will further enhance the recommendation engine. To meet strict security and compliance requirements, the company must ensure that both the training and inference environments, as well as all associated services, are deployed within a secure Amazon Virtual Private Cloud (VPC). Furthermore, the solution must completely block all access to the internet or any external resources to protect sensitive user data and ensure compliance with regulatory standards. Which of the following will satisfy the given requirements with the LEAST development effort?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 19,
+    "kind": "RESC",
+    "key": "aip03r-q19",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A large retail company is looking to leverage Amazon SageMaker AI notebooks and Amazon Comprehend to process and analyze customer feedback data. The company uses Amazon S3 buckets to store large datasets of customer reviews, and the data needs to be accessed securely for machine learning analysis. Given the sensitivity of the data, the company mandates that all resources must remain within a secure Amazon Virtual Private Cloud (VPC). Additionally, all communication must occur over the AWS network. Which solution will satisfy the given requirements?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 22,
+    "kind": "RESC",
+    "key": "aip03r-q22",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A data science team is leveraging Amazon SageMaker AI to build and deploy machine learning models for predictive analytics. The team also uses Amazon Comprehend to perform natural language processing (NLP) on text data as part of an analysis pipeline. The SageMaker notebook instances are deployed within an isolated Amazon VPC to ensure that the development work is secure. VPC interface endpoints were set up to establish private connectivity between the VPC and the SageMaker API. The team is also exploring the AWS Strands API as part of broader AI tooling initiatives. The team later discovers that unauthorized users from outside the VPC can still access the notebook instances through the internet, raising security concerns. How can the team limit access to the SageMaker notebook instances, ensuring only authorized VPC users can connect?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "IAM policy condicionada a VPC endpoint sobre acciones sagemaker:*; strands"
+  },
+  {
+    "exam": "exam3",
+    "n": 26,
+    "kind": "RESC",
+    "key": "aip03r-q26",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A Generative AI engineering team is developing a supervised image recognition model to accurately identify pandas from a diverse dataset of wildlife photographs. Amazon SageMaker Ground Truth is used to label 1,000 panda images and split the data into training and testing sets, reserving 100 images as a constant test set. Amazon Rekognition Custom Labels is then configured to train a custom image classification model capable of recognizing distinctive panda features such as fur patterns, posture, and environmental background. During the evaluation phase, the engineering team observes that the image classifier misclassifies several test images. A closer analysis reveals that in more than 75% of the misclassified images, the pandas appear upside down, indicating the model’s sensitivity to image orientation. The team must enhance the model’s ability to correctly identify pandas regardless of orientation, without collecting an entirely new dataset or extensively modifying the existing training pipeline. Which approach will most effectively enhance the model’s accuracy in addressing this specific misclassification issue?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 37,
+    "kind": "RESC",
+    "key": "aip03r-q37",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "",
+    "stem": "An AI developer is tasked with building a generative AI system to summarize patient medical records for physicians. The system uses Amazon SageMaker AI to fine-tune a large language model (LLM) on sensitive clinical notes stored in Amazon S3. Amazon Comprehend Medical is used to extract key medical entities from clinical notes, enriching the dataset for training. After generating summaries, the developer must ensure outputs are clinically relevant, accurate, and compliant with regulatory standards. Due to the high stakes of medical decision-making, a robust process is required to enable healthcare professionals to review and correct AI-generated summaries before full deployment. The solution must scale to handle large volumes of records and integrate seamlessly with existing SageMaker pipelines for smooth retraining and deployment. Which approach will best satisfy these requirements?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "SageMaker Ground Truth Plus; human-in-the-loop; fine-tune"
+  },
+  {
+    "exam": "exam3",
+    "n": 38,
+    "kind": "RESC",
+    "key": "aip03r-q38",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "",
+    "stem": "A data science team at a retail company wants to predict customer churn based on various historical transactional data. The dataset contains 10,000 records, each with 1,500 attributes, such as demographic information, purchasing patterns, and customer service interactions. The team is looking for an automated way to build a model using Amazon SageMaker AI, which can predict whether a customer will churn while also identifying the most relevant features contributing to the prediction. To deepen insights, the team uses Amazon Comprehend to analyze sentiment and key phrases in customer interactions. Which of the following solutions will best fulfill these requirements while minimizing manual effort?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 39,
+    "kind": "RESC",
+    "key": "aip03r-q39",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A developer is working on an advanced machine learning project using Amazon SageMaker AI. The project involves training a deep learning model using large datasets stored in Amazon S3. Additionally, the developer needs to store model artifacts, logs, and evaluation results back to a different S3 bucket upon completion of the training job. To ensure security and proper access control, the developer must grant the SageMaker notebook instance appropriate permissions to read from and write to the specific S3 buckets. Which approach should be used to securely enable this access?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 40,
+    "kind": "RESC",
+    "key": "aip03r-q40",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A financial services company is developing a machine learning (ML) model in Amazon SageMaker AI to detect real-time fraudulent transactions. The company plans to integrate this model with Amazon Kinesis Data Streams for continuous transaction data ingestion and Amazon DynamoDB for storing transaction metadata. The model must be trained on an extensive historical dataset stored in Amazon S3. The company must ensure that all data is encrypted in transit and at rest, and that access to sensitive data and model results is strictly controlled. AWS Encryption SDK is being considered for additional client-side encryption of sensitive data before uploading it to S3. There’s also a need to track model performance over time to ensure it remains effective and predictions align with business rules. Which solution will secure the ML workflow, control access, and allow for continuous monitoring of model performance?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 41,
+    "kind": "RESC",
+    "key": "aip03r-q41",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "An AI developer is building a fraud detection model using Amazon SageMaker Autopilot to generate and evaluate candidate models automatically. To further refine model performance, the developer integrates automatic model tuning (AMT) in Amazon SageMaker AI to optimize several hyperparameters related to model learning rate, batch size, and regularization strength. The team also applies canary testing to validate top-performing candidate models before full deployment. During multiple tuning jobs, the developer notices that some training jobs run unnecessarily long when the model’s validation accuracy stops improving early in the process. The tuning configuration must be adjusted appropriately to optimize resource usage and reduce overall tuning time, allowing SageMaker AI to decide automatically when to stop poorly performing training jobs. Which configuration step should be taken to address this requirement?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "TrainingJobEarlyStoppingType=AUTO; early stopping"
+  },
+  {
+    "exam": "exam3",
+    "n": 42,
+    "kind": "RESC",
+    "key": "aip03r-q42",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A retail analytics company is training a recommendation model using Amazon SageMaker AI, with training data stored in an Amazon S3 bucket. The team uses SageMaker Automatic Model Tuning (AMT) to optimize hyperparameters such as learning rate and maximum depth, and tracks the best-performing models in the SageMaker Model Registry. During tuning, many jobs continue running even after early validation results indicate poor performance, resulting in unnecessary GPU usage. The company wants a tuning strategy that automatically stops underperforming trials and reallocates resources to promising configurations to reduce compute costs. Which tuning strategy should be employed to enhance optimization efficiency and expedite hyperparameter search?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "Estrategia Hyperband"
+  },
+  {
+    "exam": "exam3",
+    "n": 43,
+    "kind": "RESC",
+    "key": "aip03r-q43",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A research division is continuously retraining a Generative Forecasting Foundation model pipeline built on Amazon SageMaker AI, where base embedding creation happens in SageMaker Processing, feature encoding is performed inside the SageMaker Feature Store ingestion pipeline, and final supervised regression is trained in SageMaker Training. Last quarter, this same regression model was tuned using SageMaker AI automatic model tuning (AMT), and the results produced a known stable set of high-performing hyperparameters that were saved. A new quarter dataset is now being ingested, and it is larger, has a different distribution, and must be used for the next model update. However, the engineering pillar requires that a new hyperparameter tuning job cannot start from zero because the compute budget is limited. There is also a requirement that if the model’s validation loss does not improve anymore, the tuning must automatically stop without manual intervention. Which hyperparameter tuning job configuration should be used?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "warm start; TRANSFER_LEARNING warm start type; early stopping"
+  },
+  {
+    "exam": "exam3",
+    "n": 44,
+    "kind": "RESC",
+    "key": "aip03r-q44",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A social media platform is developing an ML model to moderate user-generated content. The platform stores large volumes of textual and document data in Amazon S3. It uses Amazon Textract to extract text from uploaded PDFs or images, and Amazon SageMaker AI to train custom language models that classify comments based on sentiment, context, and topic relevance. The moderation team aims to enhance safety by detecting toxic or harmful language in real-time, including hate speech, harassment, and explicit threats. The solution must integrate seamlessly with the existing SageMaker AI inference pipeline, handle high throughput, and provide confidence scores for each classification, allowing content flagged as toxic to be reviewed or blocked automatically. Which of the solutions provides a managed solution for detecting toxicity in text to support this ML pipeline with safety classifiers?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 47,
+    "kind": "RESC",
+    "key": "aip03r-q47",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A global enterprise is building an internal generative AI environment that performs text insights and embedding generation by using Amazon Titan models running on Amazon Bedrock. Multiple engineering divisions intend to integrate these capabilities into various business applications. The organization manages all cloud accounts through AWS Organizations, with distinct organizational units (OUs) representing each department. Executive leadership requires an access framework that enforces the principle of least privilege and restricts interaction with selected foundation models (FMs). The access approach must follow strict role-based access control (RBAC) standards and must integrate seamlessly with the centralized identity provider (IdP) to maintain unified governance across the enterprise environment. Only department-approved development teams must be authorized to invoke specific models, and every model interaction must be recorded for auditing and compliance evaluations. Which action ensures the requirements are met in the most secure manner?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 49,
+    "kind": "RESC",
+    "key": "aip03r-q49",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "stem": "A multinational digital payments provider is designing a real-time fraud detection platform using Amazon SageMaker AI for training and hosting machine learning models, and Amazon Comprehend for analyzing unstructured transaction descriptions. The AI development team has consolidated years of historical transaction data from multiple regions into a single data lake. Each record in this dataset contains the following fields: client_identifier (string) account_category (integer) payment_value (float) account_duration (integer) operation_status (string) with possible values “legitimate” or “suspicious” Before deploying the model to production, the AI developer must prepare the data to ensure compatibility with SageMaker AI built-in algorithms and maintain a valid label structure for classification. Which preprocessing step should the AI developer perform before training the model in SageMaker AI?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 52,
+    "kind": "RESC",
+    "key": "aip03r-q52",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "concepto": "",
+    "stem": "A generative AI developer manages a production generative model endpoint in Amazon SageMaker AI, with Model Monitor and Amazon SageMaker Clarify enabled. The developer recently deployed a newly retrained model to replace an older version, and Model Monitor has been configured to track data quality and distribution drift. SageMaker Clarify continues to provide explainability and bias metrics for the same endpoint. The team also monitors for response drift to detect any unexpected shifts in model output patterns following the retraining. Despite the model being updated and serving new inference traffic based on a more current dataset, the monitoring job continues to show violations. The developer has confirmed that the new dataset is statistically representative of the current traffic, but the violations still persist. Which corrective action should the developer take to resolve the persistent violations in Model Monitor?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 54,
+    "kind": "RESC",
+    "key": "aip03r-q54",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "",
+    "stem": "A global broadcasting enterprise, TD Studios, operates an intelligent content-management platform built on Amazon SageMaker and Amazon Bedrock AgentCore. The platform uses SageMaker to coordinate large-scale data preparation and model-training workflows, enabling automated feature extraction and experimentation across thousands of multimedia assets. At the same time, Bedrock AgentCore serves as the orchestration layer that connects multiple AWS AI services, allowing agents to invoke specialized models and enrich content with generative summaries and metadata for semantic search. The enterprise recently expanded its media repository with several petabytes of newly acquired, unlabeled images, videos, podcasts, and written transcripts stored in Amazon S3. The Research and Curation division, composed primarily of content analysts with limited machine learning expertise, must now enable automatic tagging and indexing of this data to support entity-based search and cross-referencing. The enterprise wants to extend its existing Bedrock AgentCore workflow to handle this new data without performing any model training, manual labeling, or infrastructure provisioning. The solution must deliver accurate tagging across multiple modalities and achieve rapid implementation suitable for a non-specialized research team. Which solution provides the fastest and most effective approach to automatically index and categorize the multimedia assets?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "Combinacion de servicios AI multimodal; agentcore"
+  },
+  {
+    "exam": "exam3",
+    "n": 56,
+    "kind": "RESC",
+    "key": "aip03r-q56",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A global insurance technology company built a claims automation system using Amazon SageMaker AI endpoint and Amazon Rekognition. Rekognition analyzes uploaded vehicle images to detect the severity and type of damage, while SageMaker uses this information, along with other structured features such as vehicle age, mileage, and estimated repair cost, to predict claim approval probability and estimated settlement time. During initial training, the model assigned greater weight to the damage severity score and repair cost estimate as the most influential features for decision-making. However, recent observations suggest that the deployed model on the SageMaker AI endpoint might now be emphasizing vehicle age more heavily than damage severity, resulting in inconsistent predictions and potential policy compliance issues. The data science team must implement a monitoring solution that detects when the feature weight or attribution importance of input variables shifts in production and automatically triggers alerts for investigation. Which of the following should be implemented?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "ModelExplainabilityMonitor class; baseline SHAP"
+  },
+  {
+    "exam": "exam3",
+    "n": 60,
+    "kind": "RESC",
+    "key": "aip03r-q60",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "concepto": "",
+    "stem": "A financial services company needs to build a predictive model to identify fraudulent transactions using historical customer data, which includes sensitive information such as credit card numbers. The company plans to use Amazon SageMaker AI to train the model and Amazon Comprehend to extract features from the text-based data in the dataset. The company must ensure that all customer data is securely encrypted and that any personally identifiable information (PII), including credit card numbers, is redacted before the data is used for model training. Which solution will meet this requirement?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 61,
+    "kind": "RESC",
+    "key": "aip03r-q61",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "stem": "A data science team is developing a computer vision model using Amazon SageMaker AI to classify product images that customers upload. In addition to image features, the team plans to integrate Amazon Comprehend to analyze customer feedback text associated with each image. During data preparation, the team noticed that one of the numerical features representing image brightness seemed to affect the model’s convergence rate during training. The lead ML engineer wants to explore how the brightness values are distributed in the dataset before deciding to apply normalization. The engineer uses SageMaker Data Wrangler for feature engineering and data preprocessing. Which actions should the engineer take to best understand the range and distribution of the brightness feature values before transformation?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 64,
+    "kind": "RESC",
+    "key": "aip03r-q64",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A digital media company operates a web platform where customers upload high-resolution product and marketing images that require automated text generation for accessibility and search optimization. Each uploaded image can reach up to 60 MB in size, and the platform experiences unpredictable spikes in traffic during global promotional campaigns. All uploaded images are securely stored in an Amazon S3 bucket, which acts as the central repository for incoming media files. The company uses Amazon Rekognition to analyze images, detecting objects, scenes, and other visual features that form the foundation of metadata. The extracted information is passed to Amazon Bedrock, which uses a foundation model to generate detailed natural language captions describing the image content accurately and contextually. The ML workflow automatically starts processing when new images are uploaded to the S3 bucket. The GenAI developer must design a solution that scales automatically to handle fluctuating workloads, maintains high availability during traffic spikes, and operates with minimal infrastructure management overhead. Which solution fulfills these requirements with minimal infrastructure management and operational effort?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "Asynchronous Inference endpoint + scaling policy"
+  },
+  {
+    "exam": "exam3",
+    "n": 66,
+    "kind": "RESC",
+    "key": "aip03r-q66",
+    "category": "AIP – Implementation and Integration",
+    "concepto": "",
+    "stem": "A data science team is running an anti-financial crime workload using Amazon SageMaker Training and SageMaker Feature Store. The team stores transactional features inside the Feature Store offline store, and those features are periodically retrieved and consumed by SageMaker model training jobs inside a scheduled retraining pipeline. The binary classifier is used for real-time fraud detection involving regulated payment flows, but the team is consistently observing a very high count of false negatives, even though the overall model accuracy is greater than 96%. The core issue is the severe class imbalance condition, where fraud transactions represent less than one-half of one percent of the entire dataset, and historical fraud samples remain extremely limited. The goal is to increase the model’s ability to correctly detect fraudulent cases. The team wants to directly correct this imbalance problem before running the next retraining cycle. Which solution will increase the fraudulent case detection performance?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "SMOTE (Synthetic Minority Oversampling Technique)"
+  },
+  {
+    "exam": "exam3",
+    "n": 71,
+    "kind": "RESC",
+    "key": "aip03r-q71",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "stem": "A team of AI engineers is developing a churn prediction model using Amazon SageMaker AI. The team imports customer interaction and billing data into SageMaker Data Wrangler for data preparation and feature engineering. During exploratory data analysis, the team discovered that only about 8% of customers in the dataset have churned, causing a significant class imbalance. The team plans to launch a SageMaker training job using an XGBoost model to predict churn. However, initial training results show that the model consistently predicts the majority “non-churn” class, leading to poor recall for churned customers. The data scientist must address the imbalance to improve model performance and ensure the training dataset adequately represents both classes. Which approach should the team take to resolve this issue before starting the SageMaker training job?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "SMOTE en Data Wrangler"
+  },
+  {
+    "exam": "exam3",
+    "n": 72,
+    "kind": "RESC",
+    "key": "aip03r-q72",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "concepto": "",
+    "stem": "A global market research firm stores thousands of recorded analyst briefings in Amazon S3. The data science division uses Amazon SageMaker AI JumpStart to experiment with pretrained NLP models for text classification and Amazon Polly to synthesize sample voice outputs for model validation. Before processing, the team uses AWS Glue Data Quality to validate and standardize incoming audio metadata and transcript outputs to ensure consistency across all recordings. The next project phase requires grouping all recorded discussions by the conversation themes, such as equity strategy, macroeconomic policy, and currency trends. The AI developer must choose an approach that automatically categorizes these recordings by topic, while minimizing custom development effort. Which solution will meet this requirement most efficiently?",
+    "tipo_rescate": "A",
+    "feature_faltante": ""
+  },
+  {
+    "exam": "exam3",
+    "n": 73,
+    "kind": "RESC",
+    "key": "aip03r-q73",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "concepto": "",
+    "stem": "A global e-commerce platform utilizes Amazon SageMaker AI to implement a real-time recommendation system that provides personalized product suggestions. The model is developed using SageMaker Studio. Once trained, the model is hosted on a SageMaker endpoint, enabling it to deliver inferences in real time. Additionally, the company employs Amazon Comprehend to analyze customer feedback and sentiment derived from reviews and product ratings. This analysis helps the company better understand customer preferences and enhance its recommendations. As the business prepares for major sales events, the operations team observes that increased customer activity results in significant delays when retrieving product recommendations, ultimately leading to a poor user experience. To address this issue, there is a need to adjust the target tracking scaling policy on the SageMaker endpoint. The goal is to ensure effective scaling during high-traffic periods, preventing latency from adversely affecting the customer experience. Which solution will best optimize the scaling of the SageMaker inference endpoint?",
+    "tipo_rescate": "AB",
+    "feature_faltante": "scheduled scaling policy"
+  }
+]

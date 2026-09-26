@@ -1,0 +1,112 @@
+{
+  "generated_at": "2026-09-25T21:38:16Z",
+  "policy": {
+    "borderline_default": "exclude"
+  },
+  "deck_roots_snapshot": [
+    "AWS SAP-C02 — Improved Study Deck",
+    "CCNA 200-301",
+    "DVA-C02",
+    "Default",
+    "Docker",
+    "Koiné Griego",
+    "MLA-C01",
+    "Networking Fundamentals",
+    "SAW",
+    "biblia",
+    "contabilidad"
+  ],
+  "decks": [
+    {
+      "deck": "AWS SAP-C02 — Improved Study Deck",
+      "relevant": true,
+      "confidence": 0.99,
+      "review": false,
+      "reason": "AWS Solutions Architect Professional cert",
+      "pinned": true
+    },
+    {
+      "deck": "CCNA 200-301",
+      "relevant": false,
+      "confidence": 1.0,
+      "review": false,
+      "reason": "baneado permanentemente por el usuario",
+      "pinned": true,
+      "banned": true
+    },
+    {
+      "deck": "DVA-C02",
+      "relevant": true,
+      "confidence": 0.99,
+      "review": false,
+      "reason": "AWS Developer Associate cert",
+      "pinned": true
+    },
+    {
+      "deck": "Default",
+      "relevant": false,
+      "confidence": 0.9,
+      "review": false,
+      "reason": "empty default deck",
+      "pinned": true
+    },
+    {
+      "deck": "Docker",
+      "relevant": false,
+      "confidence": 1.0,
+      "review": false,
+      "reason": "baneado permanentemente por el usuario",
+      "pinned": true,
+      "banned": true
+    },
+    {
+      "deck": "Koiné Griego",
+      "relevant": false,
+      "confidence": 0.99,
+      "review": false,
+      "reason": "ancient Greek language deck",
+      "pinned": true
+    },
+    {
+      "deck": "MLA-C01",
+      "relevant": true,
+      "confidence": 0.99,
+      "review": false,
+      "reason": "AWS ML Engineer Associate cert",
+      "pinned": true
+    },
+    {
+      "deck": "Networking Fundamentals",
+      "relevant": false,
+      "confidence": 1.0,
+      "review": false,
+      "reason": "baneado permanentemente por el usuario",
+      "pinned": true,
+      "banned": true
+    },
+    {
+      "deck": "SAW",
+      "relevant": true,
+      "confidence": 0.8,
+      "review": false,
+      "reason": "AWS support automation workflows",
+      "pinned": true
+    },
+    {
+      "deck": "biblia",
+      "relevant": false,
+      "confidence": 0.99,
+      "review": false,
+      "reason": "religious content",
+      "pinned": true
+    },
+    {
+      "deck": "contabilidad",
+      "relevant": false,
+      "confidence": 0.99,
+      "review": false,
+      "reason": "accounting, not IT",
+      "pinned": true
+    }
+  ]
+}

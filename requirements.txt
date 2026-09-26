@@ -1,1 +1,7 @@
 genanki==0.13.1
+
+# Dedup HIBRIDO (retrieval semantico + BM25 + juez LLM) — usado por decks/*/dedupe/
+# Ver decks/aip-c01/dedupe/ (build_vector_store.py, hybrid_retrieve.py).
+sentence-transformers>=3.0,<4.0   # embeddings cross-lingual (paraphrase-multilingual-MiniLM-L12-v2)
+rank-bm25>=0.2.2,<0.3             # retrieval lexico BM25 para la fusion RRF
+# numpy y torch entran como dependencias transitivas de sentence-transformers.

@@ -21,6 +21,37 @@ from .engine import (
 from .create_deck import create
 from .verify_deck import verify_cards, verify_apkg
 from .sync_deck import sync
+from .universe import (
+    build_universe,
+    get_deck_roots,
+    union_cards,
+    extract_id,
+    sha16,
+    normalize,
+    strip_html,
+    strip_cloze,
+    pick_question_field,
+    AnkiWriteAttempt,
+    AnkiUnreachable,
+)
+from .deck_classifier import (
+    build_relevant_decks,
+    heuristic_classify,
+    relevant_roots,
+    CLASSIFIER_PROMPT,
+)
+from .extract import (
+    segment_exam,
+    classify_block_type,
+    reconcile,
+    normalize as extract_normalize,
+    token_overlap,
+    contained,
+    load_jsonl,
+    write_canonical,
+    SegmentationError,
+    EXTRACTION_PROMPT,
+)
 
 __all__ = [
     "card",
@@ -34,4 +65,31 @@ __all__ = [
     "verify_cards",
     "verify_apkg",
     "sync",
+    # universe builder
+    "build_universe",
+    "get_deck_roots",
+    "union_cards",
+    "extract_id",
+    "sha16",
+    "normalize",
+    "strip_html",
+    "strip_cloze",
+    "pick_question_field",
+    "AnkiWriteAttempt",
+    "AnkiUnreachable",
+    "build_relevant_decks",
+    "heuristic_classify",
+    "relevant_roots",
+    "CLASSIFIER_PROMPT",
+    # exam extraction
+    "segment_exam",
+    "classify_block_type",
+    "reconcile",
+    "extract_normalize",
+    "token_overlap",
+    "contained",
+    "load_jsonl",
+    "write_canonical",
+    "SegmentationError",
+    "EXTRACTION_PROMPT",
 ]

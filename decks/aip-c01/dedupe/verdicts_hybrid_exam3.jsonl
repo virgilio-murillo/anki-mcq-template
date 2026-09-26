@@ -1,0 +1,61 @@
+{"n": 2, "verdict": "NEW", "concepto": "SageMaker Experiments tracking PySpark params", "top_cos": 0.717, "razon": "Candidatas cubren servicios ML/pipelines pero no Experiments para comparar params/metricas"}
+{"n": 3, "verdict": "NEW", "concepto": "Bedrock Data Automation ingesta continua", "top_cos": 0.589, "razon": "BDA es GenAI-especifico; candidatas solo NLP clasico/contact center"}
+{"n": 4, "verdict": "NEW", "concepto": "GenAI Security Scoping Matrix Scope 4", "top_cos": 0.657, "razon": "Matriz de scoping GenAI/responsible-AI no cubierta por infra/seguridad clasica"}
+{"n": 5, "verdict": "NEW", "concepto": "SageMaker ProductionVariant pesos de trafico", "top_cos": 0.624, "razon": "A/B con ProductionVariant/InitialVariantWeight no aparece en candidatas"}
+{"n": 8, "verdict": "NEW", "concepto": "SageMaker multi-variant endpoint A/B", "top_cos": 0.689, "razon": "Multi-variant endpoints con pesos de trafico no cubierto; candidatas solo Comprehend/NLP"}
+{"n": 9, "verdict": "NEW", "concepto": "Wavelength + EFS + context pruning GenAI", "top_cos": 0.665, "razon": "Wavelength edge y prompt/context pruning GenAI no cubiertos; candidatas media/video clasico"}
+{"n": 10, "verdict": "NEW", "concepto": "Amazon A2I revision humana low-confidence", "top_cos": 0.654, "razon": "A2I human-in-the-loop no cubierto; candidatas solo Textract/NLP"}
+{"n": 12, "verdict": "COVERED", "concepto": "Glue DataBrew + SageMaker Canvas no-code", "top_cos": 0.562, "razon": "DataBrew y Canvas no-code ya estudiados como prep/ML clasico"}
+{"n": 13, "verdict": "NEW", "concepto": "Latency-optimized inference + prompt caching", "top_cos": 0.593, "razon": "Optimizaciones Bedrock GenAI puras no cubiertas por candidatas de escalado/RAG"}
+{"n": 14, "verdict": "COVERED", "concepto": "SageMaker Model Monitor data drift", "top_cos": 0.697, "razon": "Coincidencia casi exacta: Model Monitor vs baseline y CloudWatch"}
+{"n": 15, "verdict": "COVERED", "concepto": "Lake Formation LF-Tags acceso fino", "top_cos": 0.682, "razon": "Lake Formation y gobierno de acceso ya estudiados (seguridad/infra)"}
+{"n": 16, "verdict": "NEW", "concepto": "Bedrock guardrails anti prompt injection", "top_cos": 0.674, "razon": "Guardrails GenAI; candidatas son WAF/Shield para ataques de red, distinto objetivo"}
+{"n": 18, "verdict": "COVERED", "concepto": "SageMaker network isolation + VPC endpoint", "top_cos": 0.675, "razon": "Modo network isolation y VPC endpoints ya estudiados"}
+{"n": 19, "verdict": "COVERED", "concepto": "SageMaker subnet privada + VPC endpoints", "top_cos": 0.712, "razon": "Acceso privado SageMaker/S3 sin internet ya estudiado (seguridad)"}
+{"n": 20, "verdict": "NEW", "concepto": "SageMaker DeepAR forecasting global", "top_cos": 0.569, "razon": "Algoritmo DeepAR para forecasting no cubierto en candidatas"}
+{"n": 21, "verdict": "NEW", "concepto": "Bedrock guardrails denied topics/PII", "top_cos": 0.707, "razon": "Configuracion de guardrails GenAI (topicos, filtros) no cubierta; candidatas ML clasico"}
+{"n": 22, "verdict": "COVERED", "concepto": "IAM restringir notebook a VPC endpoint", "top_cos": 0.733, "razon": "Aislamiento de red y VPC endpoints de SageMaker ya estudiados"}
+{"n": 26, "verdict": "COVERED", "concepto": "Data augmentation rotacion/flip imagenes", "top_cos": 0.617, "razon": "Transforms de imagen en Data Wrangler y vision clasica ya estudiados"}
+{"n": 27, "verdict": "NEW", "concepto": "AppConfig agent config dinamica validada", "top_cos": 0.661, "razon": "AWS AppConfig no cubierto; candidatas son CodeDeploy/SSM patching"}
+{"n": 28, "verdict": "NEW", "concepto": "Fine-tune Titan Bedrock KMS/CloudTrail", "top_cos": 0.718, "razon": "Despliegue/monitoreo Bedrock Titan GenAI central; auditoria sola no cubre objetivo"}
+{"n": 29, "verdict": "NEW", "concepto": "BERT transfer learning inicializacion", "top_cos": 0.609, "razon": "Reuso de pesos BERT y capa clasificadora custom no cubierto"}
+{"n": 30, "verdict": "NEW", "concepto": "Bedrock Prompt Management + Guardrails", "top_cos": 0.642, "razon": "Prompt Management y guardrails GenAI no cubiertos por RAG/Kendra genericos"}
+{"n": 31, "verdict": "COVERED", "concepto": "Model Monitor Data Capture reentreno", "top_cos": 0.636, "razon": "Model Monitor con Data Capture para reentrenar ya estudiado"}
+{"n": 32, "verdict": "NEW", "concepto": "Bedrock Data Automation + KB semantic search", "top_cos": 0.626, "razon": "BDA + Bedrock Knowledge Bases GenAI no cubierto; candidatas media/OCR clasico"}
+{"n": 34, "verdict": "NEW", "concepto": "XGBoost max_depth reducir overfitting", "top_cos": 0.666, "razon": "Ajuste de max_depth contra overfitting no cubierto en candidatas"}
+{"n": 35, "verdict": "COVERED", "concepto": "SageMaker Studio VPC + S3 Gateway Endpoint", "top_cos": 0.683, "razon": "Trafico privado SageMaker/S3 y VPC endpoints ya estudiados"}
+{"n": 36, "verdict": "NEW", "concepto": "EventBridge/Step Functions rollout Bedrock", "top_cos": 0.586, "razon": "Rollout gradual de versiones Bedrock con orquestacion no cubierto"}
+{"n": 37, "verdict": "COVERED", "concepto": "Ground Truth Plus human-in-the-loop", "top_cos": 0.596, "razon": "Ground Truth y flujos de etiquetado/revision humana ya estudiados"}
+{"n": 38, "verdict": "COVERED", "concepto": "SageMaker Autopilot + Clarify feature importance", "top_cos": 0.585, "razon": "Autopilot y Clarify ya estudiados como ML clasico"}
+{"n": 39, "verdict": "COVERED", "concepto": "IAM role S3 GetObject/PutObject notebook", "top_cos": 0.740, "razon": "Permisos IAM S3 para SageMaker ya estudiados (seguridad)"}
+{"n": 40, "verdict": "COVERED", "concepto": "SSE-KMS + IAM + CloudWatch flujo ML", "top_cos": 0.701, "razon": "Cifrado KMS, IAM y monitoreo CloudWatch ya estudiados"}
+{"n": 41, "verdict": "COVERED", "concepto": "AMT early stopping TrainingJobEarlyStoppingType", "top_cos": 0.604, "razon": "Automatic Model Tuning y su optimizacion ya estudiados"}
+{"n": 42, "verdict": "COVERED", "concepto": "AMT estrategia Hyperband early stop", "top_cos": 0.733, "razon": "Automatic Model Tuning HPO ya estudiado como ML clasico"}
+{"n": 43, "verdict": "COVERED", "concepto": "AMT warm start transfer learning + early stop", "top_cos": 0.718, "razon": "Tuning AMT y early stopping ya estudiados"}
+{"n": 44, "verdict": "COVERED", "concepto": "Comprehend toxicity detection", "top_cos": 0.652, "razon": "Comprehend para analisis de texto/NLP ya estudiado"}
+{"n": 45, "verdict": "NEW", "concepto": "Amazon Fraud Detector prediction API", "top_cos": 0.617, "razon": "Servicio Amazon Fraud Detector no aparece en candidatas"}
+{"n": 46, "verdict": "COVERED", "concepto": "SageMaker async endpoint en VPC", "top_cos": 0.755, "razon": "Endpoint asincrono para payload grande y proceso largo ya estudiado casi identico"}
+{"n": 47, "verdict": "COVERED", "concepto": "IAM Identity Center SAML + SCP RBAC", "top_cos": 0.612, "razon": "Organizations, SCP e identidad federada ya estudiados (seguridad)"}
+{"n": 48, "verdict": "COVERED", "concepto": "Comprehend DetectPiiEntities redactar PII", "top_cos": 0.675, "razon": "Deteccion/redaccion de PII con Comprehend ya estudiada"}
+{"n": 49, "verdict": "COVERED", "concepto": "Preprocesar: quitar id, encode label", "top_cos": 0.580, "razon": "Codificacion de categoricas y prep de datos ya estudiada"}
+{"n": 50, "verdict": "NEW", "concepto": "Model Context Protocol tools para Bedrock", "top_cos": 0.664, "razon": "MCP como capa de herramientas para FM es GenAI puro, no cubierto"}
+{"n": 51, "verdict": "NEW", "concepto": "Regularizacion mas fuerte contra overfitting", "top_cos": 0.589, "razon": "Ajuste de regularizacion por overfitting no cubierto en candidatas"}
+{"n": 52, "verdict": "COVERED", "concepto": "Rebaseline en Model Monitor", "top_cos": 0.677, "razon": "Model Monitor y baseline/constraints ya estudiados"}
+{"n": 53, "verdict": "NEW", "concepto": "Bedrock KB RAG + PerformanceConfigLatency", "top_cos": 0.549, "razon": "RAG nativo Bedrock KB contra inventario vivo es GenAI, no cubierto"}
+{"n": 54, "verdict": "COVERED", "concepto": "Comprehend+Transcribe+Rekognition tagging", "top_cos": 0.489, "razon": "Servicios AI (Comprehend, Transcribe, Rekognition) ya estudiados para tagging multimodal"}
+{"n": 55, "verdict": "COVERED", "concepto": "FSx for Lustre ligado a S3 para training", "top_cos": 0.621, "razon": "Optimizar acceso a datos de training desde S3 (fast file mode/FSx) ya estudiado"}
+{"n": 56, "verdict": "COVERED", "concepto": "ModelExplainabilityMonitor feature attribution drift", "top_cos": 0.607, "razon": "Feature attribution drift y Clarify/Model Monitor ya estudiados"}
+{"n": 59, "verdict": "NEW", "concepto": "CountVectorizer scikit-learn stopwords", "top_cos": 0.579, "razon": "Preprocesamiento con CountVectorizer para stopwords/rare words no cubierto"}
+{"n": 60, "verdict": "COVERED", "concepto": "KMS cifrado + redaccion PII para training", "top_cos": 0.642, "razon": "Cifrado KMS y redaccion de PII ya estudiados (seguridad)"}
+{"n": 61, "verdict": "COVERED", "concepto": "Data Wrangler histograma de distribucion", "top_cos": 0.668, "razon": "Data Wrangler para inspeccion/prep de datos ya estudiado"}
+{"n": 62, "verdict": "COVERED", "concepto": "SageMaker object detection bounding boxes", "top_cos": 0.526, "razon": "Algoritmo Object Detection con bounding boxes ya estudiado"}
+{"n": 64, "verdict": "COVERED", "concepto": "SageMaker Async Inference autoscaling", "top_cos": 0.661, "razon": "Endpoint asincrono con escalado ya estudiado como despliegue"}
+{"n": 65, "verdict": "NEW", "concepto": "Claude Haiku/Sonnet + Provisioned Throughput routing", "top_cos": 0.710, "razon": "Seleccion de modelos Bedrock y provisioned throughput GenAI no cubierto"}
+{"n": 66, "verdict": "COVERED", "concepto": "SMOTE oversampling clase minoritaria", "top_cos": 0.638, "razon": "Desbalance de clases y oversampling ya estudiados en training"}
+{"n": 67, "verdict": "NEW", "concepto": "Pinecone RAG + Comprehend + endpoint Llama2", "top_cos": 0.632, "razon": "RAG con vector DB externo Pinecone y FM es GenAI, no cubierto"}
+{"n": 68, "verdict": "NEW", "concepto": "Instancias Trn (Trainium) para LLM", "top_cos": 0.606, "razon": "Trainium para fine-tuning de LLM no cubierto en candidatas"}
+{"n": 69, "verdict": "NEW", "concepto": "SageMaker Canvas scatter plot 4 dimensiones", "top_cos": 0.695, "razon": "Visualizacion scatter multidimensional en Canvas no cubierta"}
+{"n": 70, "verdict": "COVERED", "concepto": "SageMaker serverless endpoint deploy modelo", "top_cos": 0.518, "razon": "Hosting de modelo de fraude en endpoint serverless ya estudiado"}
+{"n": 71, "verdict": "COVERED", "concepto": "SMOTE en Data Wrangler para imbalance", "top_cos": 0.739, "razon": "Desbalance de clases y oversampling en Data Wrangler ya estudiados"}
+{"n": 72, "verdict": "COVERED", "concepto": "Transcribe + Comprehend topic detection", "top_cos": 0.667, "razon": "Transcribe y Comprehend (topic/NLP) ya estudiados"}
+{"n": 73, "verdict": "COVERED", "concepto": "Scheduled scaling policy en endpoint", "top_cos": 0.730, "razon": "Auto scaling de endpoints SageMaker ya estudiado"}

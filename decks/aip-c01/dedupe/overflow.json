@@ -1,0 +1,730 @@
+[
+  {
+    "exam": "exam2",
+    "n": 23,
+    "kind": "NEW",
+    "key": "aip02-q23",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 61,
+    "kind": "NEW",
+    "key": "aip02-q61",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 16,
+    "kind": "RESC",
+    "key": "aip01r-q16",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 2,
+    "kind": "NEW",
+    "key": "aip01-q2",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 27,
+    "kind": "NEW",
+    "key": "aip01-q27",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 57,
+    "kind": "NEW",
+    "key": "aip01-q57",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 24,
+    "kind": "NEW",
+    "key": "aip02-q24",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 75,
+    "kind": "NEW",
+    "key": "aip02-q75",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 28,
+    "kind": "NEW",
+    "key": "aip03-q28",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 53,
+    "kind": "NEW",
+    "key": "aip03-q53",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 59,
+    "kind": "NEW",
+    "key": "aip03-q59",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 8,
+    "kind": "NEW",
+    "key": "aip01-q8",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 24,
+    "kind": "NEW",
+    "key": "aip01-q24",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 34,
+    "kind": "NEW",
+    "key": "aip01-q34",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 37,
+    "kind": "NEW",
+    "key": "aip01-q37",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 1,
+    "kind": "NEW",
+    "key": "aip02-q1",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 2,
+    "kind": "NEW",
+    "key": "aip02-q2",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 36,
+    "kind": "NEW",
+    "key": "aip02-q36",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 44,
+    "kind": "NEW",
+    "key": "aip02-q44",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 72,
+    "kind": "NEW",
+    "key": "aip02-q72",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 53,
+    "kind": "NEW",
+    "key": "aip01-q53",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 16,
+    "kind": "NEW",
+    "key": "aip02-q16",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 49,
+    "kind": "RESC",
+    "key": "aip03r-q49",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 72,
+    "kind": "RESC",
+    "key": "aip03r-q72",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 61,
+    "kind": "RESC",
+    "key": "aip03r-q61",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "_dom": "Foundation Model Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 36,
+    "kind": "NEW",
+    "key": "aip03-q36",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 34,
+    "kind": "RESC",
+    "key": "aip02r-q34",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 66,
+    "kind": "RESC",
+    "key": "aip03r-q66",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 4,
+    "kind": "NEW",
+    "key": "aip01-q4",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam1",
+    "n": 54,
+    "kind": "NEW",
+    "key": "aip01-q54",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 37,
+    "kind": "NEW",
+    "key": "aip02-q37",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 6,
+    "kind": "RESC",
+    "key": "aip02r-q6",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam2",
+    "n": 12,
+    "kind": "RESC",
+    "key": "aip02r-q12",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 12,
+    "kind": "RESC",
+    "key": "aip03r-q12",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 38,
+    "kind": "RESC",
+    "key": "aip03r-q38",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 45,
+    "kind": "NEW",
+    "key": "aip03-q45",
+    "category": "AIP – Implementation and Integration",
+    "_dom": "Implementation and Integration"
+  },
+  {
+    "exam": "exam3",
+    "n": 30,
+    "kind": "NEW",
+    "key": "aip03-q30",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam1",
+    "n": 49,
+    "kind": "RESC",
+    "key": "aip01r-q49",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam3",
+    "n": 18,
+    "kind": "RESC",
+    "key": "aip03r-q18",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam1",
+    "n": 66,
+    "kind": "NEW",
+    "key": "aip01-q66",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 32,
+    "kind": "NEW",
+    "key": "aip02-q32",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 67,
+    "kind": "NEW",
+    "key": "aip02-q67",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 70,
+    "kind": "RESC",
+    "key": "aip02r-q70",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam3",
+    "n": 47,
+    "kind": "RESC",
+    "key": "aip03r-q47",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam1",
+    "n": 7,
+    "kind": "NEW",
+    "key": "aip01-q7",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 49,
+    "kind": "NEW",
+    "key": "aip02-q49",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 26,
+    "kind": "NEW",
+    "key": "aip02-q26",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam1",
+    "n": 20,
+    "kind": "RESC",
+    "key": "aip01r-q20",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam1",
+    "n": 23,
+    "kind": "RESC",
+    "key": "aip01r-q23",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam1",
+    "n": 62,
+    "kind": "RESC",
+    "key": "aip01r-q62",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam3",
+    "n": 19,
+    "kind": "RESC",
+    "key": "aip03r-q19",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam3",
+    "n": 40,
+    "kind": "RESC",
+    "key": "aip03r-q40",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam3",
+    "n": 44,
+    "kind": "RESC",
+    "key": "aip03r-q44",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam1",
+    "n": 42,
+    "kind": "RESC",
+    "key": "aip01r-q42",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam1",
+    "n": 68,
+    "kind": "RESC",
+    "key": "aip01r-q68",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam3",
+    "n": 39,
+    "kind": "RESC",
+    "key": "aip03r-q39",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam3",
+    "n": 60,
+    "kind": "RESC",
+    "key": "aip03r-q60",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "_dom": "AI Safety, Security, and Governance"
+  },
+  {
+    "exam": "exam2",
+    "n": 46,
+    "kind": "NEW",
+    "key": "aip02-q46",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 9,
+    "kind": "NEW",
+    "key": "aip03-q9",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 14,
+    "kind": "NEW",
+    "key": "aip01-q14",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 35,
+    "kind": "NEW",
+    "key": "aip02-q35",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 58,
+    "kind": "NEW",
+    "key": "aip02-q58",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 48,
+    "kind": "RESC",
+    "key": "aip02r-q48",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 60,
+    "kind": "RESC",
+    "key": "aip01r-q60",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 56,
+    "kind": "RESC",
+    "key": "aip03r-q56",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 73,
+    "kind": "RESC",
+    "key": "aip03r-q73",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 32,
+    "kind": "NEW",
+    "key": "aip01-q32",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 55,
+    "kind": "NEW",
+    "key": "aip01-q55",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 65,
+    "kind": "NEW",
+    "key": "aip03-q65",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 10,
+    "kind": "NEW",
+    "key": "aip01-q10",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 30,
+    "kind": "NEW",
+    "key": "aip01-q30",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 18,
+    "kind": "NEW",
+    "key": "aip02-q18",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 52,
+    "kind": "NEW",
+    "key": "aip02-q52",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 43,
+    "kind": "RESC",
+    "key": "aip01r-q43",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 13,
+    "kind": "NEW",
+    "key": "aip01-q13",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 19,
+    "kind": "NEW",
+    "key": "aip02-q19",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 50,
+    "kind": "NEW",
+    "key": "aip02-q50",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 2,
+    "kind": "NEW",
+    "key": "aip03-q2",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 67,
+    "kind": "RESC",
+    "key": "aip01r-q67",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 41,
+    "kind": "RESC",
+    "key": "aip03r-q41",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 42,
+    "kind": "RESC",
+    "key": "aip03r-q42",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 25,
+    "kind": "NEW",
+    "key": "aip01-q25",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam2",
+    "n": 41,
+    "kind": "NEW",
+    "key": "aip02-q41",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 27,
+    "kind": "NEW",
+    "key": "aip03-q27",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 69,
+    "kind": "NEW",
+    "key": "aip03-q69",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam1",
+    "n": 69,
+    "kind": "RESC",
+    "key": "aip01r-q69",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 20,
+    "kind": "NEW",
+    "key": "aip03-q20",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 51,
+    "kind": "NEW",
+    "key": "aip03-q51",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 26,
+    "kind": "RESC",
+    "key": "aip03r-q26",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "_dom": "Operational Efficiency"
+  },
+  {
+    "exam": "exam3",
+    "n": 52,
+    "kind": "RESC",
+    "key": "aip03r-q52",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "_dom": "Testing, Validation"
+  },
+  {
+    "exam": "exam3",
+    "n": 34,
+    "kind": "NEW",
+    "key": "aip03-q34",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "_dom": "Testing, Validation"
+  }
+]

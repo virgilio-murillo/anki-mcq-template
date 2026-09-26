@@ -1,0 +1,254 @@
+[
+  {
+    "n": 6,
+    "category": "AIP – Implementation and Integration",
+    "stem": "A transportation company is building an Amazon Bedrock agent that provides dispatch recommendations based on live vehicle data. The agent uses Amazon SageMaker AI to generate ETA predictions and Amazon Comprehend to interpret driver feedback. The system must also integrate a custom telemetry tool that maintains a long-lived WebSocket connection to stream continuous GPS events into the agent. The development team tested serverless options but encountered connection timeouts due to execution limits. A deployment approach is needed that supports persistent network sessions without requiring server management. Which solution will meet these requirements?",
+    "options": [
+      {
+        "text": "Deploy the telemetry tool on Amazon EC2 with a custom script to keep the WebSocket session alive.",
+        "rationale": ". While EC2 can support long-lived connections, this approach primarily requires manual server management, including provisioning, patching, scaling, and monitoring. It is typically more operationally intensive than using ECS with Fargate and introduces a higher risk of downtime or misconfiguration. Although EC2 could maintain WebSocket sessions, it is simply not as efficient or automated as a fully managed container service."
+      },
+      {
+        "text": "Run the telemetry tool in AWS Lambda and refresh the WebSocket session with scheduled invocations.",
+        "rationale": ". Lambda is primarily designed for short-lived, event-driven workloads. Because Lambda functions have execution time limits, maintaining a long-lived WebSocket connection is simply not feasible. Using scheduled invocations to refresh the connection adds complexity and can result in intermittent connection failures, making this approach only partially effective for continuous streaming telemetry."
+      },
+      {
+        "text": "Deploy the telemetry tool on Amazon App Runner as a containerized service. Configure automatic scaling to manage WebSocket connections and handle variable workloads.",
+        "rationale": ". App Runner is designed for HTTP-based applications and can scale automatically, but it is typically optimized for stateless web traffic rather than persistent, stateful WebSocket connections. Maintaining long-lived network sessions through App Runner may lead to instability or unexpected disconnects."
+      },
+      {
+        "text": "Deploy the telemetry tool as a containerized application on Amazon ECS using the AWS Fargate launch type to support long-lived WebSocket connections.",
+        "rationale": ""
+      }
+    ],
+    "correct_index": 3,
+    "correct_text": "Deploy the telemetry tool as a containerized application on Amazon ECS using the AWS Fargate launch type to support long-lived WebSocket connections.",
+    "tipo_rescate": "A",
+    "razon_rescate": "La carta ensena ECS para conexiones persistentes, pero el discriminador de la respuesta AIP (Fargate como opcion serverless 'sin gestion de servidores') no aparece en ninguna carta; la carta describe ECS como 'full container control', lo opuesto al requisito serverless.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 12,
+    "category": "AIP – Implementation and Integration",
+    "stem": "A company is building an AI-powered customer support platform that uses AWS Amplify AI Kit on the front end to integrate with Amazon Bedrock for generating human-like responses. The platform’s front end is connected to Amazon API Gateway, which triggers an AWS Lambda function. This function then calls the Bedrock API to construct responses to customer queries. During load testing, the team notices intermittent latency issues and ThrottlingException errors when the Lambda function makes requests to the Bedrock API. These issues arise primarily during peak usage hours when there is a high volume of concurrent requests, impacting the system’s ability to generate real-time responses efficiently. The team needs to ensure that the platform can handle peak traffic while reducing the frequency of ThrottlingException errors and maintaining fast response times. Which of the following should be implemented?",
+    "options": [
+      {
+        "text": "Enable AWS Global Accelerator to optimize traffic routing and improve API response times by reducing the number of hops during high-traffic events.",
+        "rationale": "because it primarily improves network pathing and latency to the edge, not service-side rate limits. Bedrock throttling is due to request volume, and faster routing can even increase the rate of inbound calls, worsening ThrottlingException errors."
+      },
+      {
+        "text": "Use AWS Step Functions to manage request flow, with a fixed-interval retry mechanism to ensure the system remains responsive during periods of high load.",
+        "rationale": "because fixed-interval retries cause synchronized retry storms and add orchestration latency. For synchronous API traffic, Step Functions are a poor fit and do not implement the adaptive, jittered backoff required to alleviate throttling."
+      },
+      {
+        "text": "Initialize the exponential backoff with jitter in the AWS SDK for retry management, and set up per-client throttling limits in API Gateway to control the request rate during high-traffic periods.",
+        "rationale": ""
+      },
+      {
+        "text": "Implement exponential retry in the AWS SDK, using steadily increasing wait times between retries to manage throttling during peak load.",
+        "rationale": "because exponential retry lacks jitter, meaning multiple clients may typically retry at the same intervals. This synchronization can create retry storms, amplifying throttling issues instead of reducing them."
+      }
+    ],
+    "correct_index": 2,
+    "correct_text": "Initialize the exponential backoff with jitter in the AWS SDK for retry management, and set up per-client throttling limits in API Gateway to control the request rate during high-traffic periods.",
+    "tipo_rescate": "A",
+    "razon_rescate": "El objetivo AIP es una combinacion de dos mecanismos; la carta cubre solo la mitad (throttling en API Gateway). El exponential backoff con jitter en el SDK para gestion de reintentos no se ensena en ninguna carta.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 25,
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "stem": "A legal research company is preparing large volumes of unstructured data, including case files, deposition transcripts, regulatory documents, and legal opinions stored in Amazon S3. The organization is building an Amazon Bedrock application that will help attorneys search, summarize, and analyze this content. Before the documents are supplied to the foundation model, the company needs to automatically discover and catalog the source files, generate auditable metadata, and apply custom transformation and text chunking logic. The solution must also validate the processed datasets and continuously track data metrics to identify quality issues before the content is used by the application. The company wants to minimize custom development and infrastructure management. Which solution will satisfy these requirements while minimizing development effort?",
+    "options": [
+      {
+        "text": "Use an AWS Glue crawler to discover the source data and register its metadata in the Glue Data Catalog. Configure Glue ETL jobs to apply the required custom transformations and text-chunking logic, then use Glue Data Quality to evaluate the processed data and track quality metrics. After validation, make the transformed content available to the Bedrock application.",
+        "rationale": ""
+      },
+      {
+        "text": "Use AWS Lambda functions triggered by S3 uploads to parse the unstructured documents, generate metadata, and perform custom text chunking. Store processing results in Amazon DynamoDB, publish data quality metrics to Amazon CloudWatch, and send validated content to the Bedrock application.",
+        "rationale": "because this approach would typically require the company to build and maintain its own metadata extraction, chunking, validation, and quality-monitoring logic. It also spreads the workflow across Lambda, DynamoDB, and CloudWatch instead of using AWS Glue’s integrated cataloging, ETL, and data-quality capabilities."
+      },
+      {
+        "text": "Use Amazon EMR Serverless with Apache Spark jobs to discover and transform the S3 documents. Implement custom validation rules and text chunking in Spark, store processing metadata in S3, and provide the transformed output to Bedrock.",
+        "rationale": "because the company would primarily be responsible for implementing its own metadata management and data-quality framework in Spark. EMR Serverless can run scalable Spark transformations, but it does not provide the same integrated crawler, Data Catalog, and AWS Glue Data Quality workflow required to minimize development effort."
+      },
+      {
+        "text": "Use Amazon Athena to query the source data in S3 and maintain document metadata in AWS Glue Data Catalog tables. Run scheduled AWS Lambda functions to perform data validation and text chunking, then write the processed content back to S3 for use by the Bedrock application.",
+        "rationale": "because Athena is simply a query service and does not replace the managed discovery, ETL, and data-quality workflow required in the scenario. The design would still require custom Lambda code for validation and text processing, increasing development and maintenance effort compared with using AWS Glue ETL jobs and AWS Glue Data Quality."
+      }
+    ],
+    "correct_index": 0,
+    "correct_text": "Use an AWS Glue crawler to discover the source data and register its metadata in the Glue Data Catalog. Configure Glue ETL jobs to apply the required custom transformations and text-chunking logic, then use Glue Data Quality to evaluate the processed data and track quality metrics. After validation, make the transformed content available to the Bedrock application.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "La carta ensena Glue ETL + Data Catalog (mismo tema), pero el discriminador de la respuesta AIP (Glue Data Quality para validar y trackear metricas de calidad, y la logica de chunking) no esta en ninguna carta. | La carta solo DEFINE Glue como ETL con Data Catalog. La pregunta AIP evalua una sub-fea",
+    "feature_faltante": "Glue Data Quality (validacion + tracking de metricas de calidad) y logica de text-chunking"
+  },
+  {
+    "n": 34,
+    "category": "AIP – Implementation and Integration",
+    "stem": "A financial technology company operates a customer-facing loan eligibility platform that uses an Amazon SageMaker AI model to generate real-time premium estimates. The model’s training data is stored in an Amazon S3 bucket and continuously grows as new customer records are collected. The company wants to eliminate manual retraining cycles by building an automated pipeline that triggers retraining and redeploys the updated model to the application whenever an analyst uploads a new dataset file to the S3 bucket. Which solution satisfies these requirements?",
+    "options": [
+      {
+        "text": "Set up an Amazon EventBridge rule that monitors the S3 bucket for new file uploads and routes the event directly to SageMaker AI Pipelines. Configure SageMaker AI Pipelines to automatically retrain the model on the updated dataset and update the deployed endpoint upon pipeline completion.",
+        "rationale": "because it primarily skips the durable orchestration layer that the retraining workflow depends on. SageMaker AI Pipelines is not a native EventBridge target in the same direct way that services such as AWS Lambda or AWS Step Functions are, meaning this routing would require additional glue logic anyway. Without Step Functions Standard acting as the orchestration backbone, there is no mechanism to guarantee that a failed retraining run is retried, logged, or escalated."
+      },
+      {
+        "text": "Create an AWS Step Functions Standard workflow. Configure the first state to invoke an AWS Lambda function with webhook handlers to respond when an analyst uploads a new file to the S3 bucket. Use SageMaker AI Pipelines to retrain and redeploy the updated model to the application. Use the next state in the workflow to execute the pipeline after the first state receives a response.",
+        "rationale": ""
+      },
+      {
+        "text": "Use AWS Glue to catalog and profile each newly uploaded dataset file. Invoke a Glue DataBrew job to prepare and normalize the data, then call the existing SageMaker AI endpoint directly using the prepared dataset to generate updated predictions without retraining the underlying model.",
+        "rationale": "because calling a SageMaker endpoint with new data simply performs inference without updating the model’s weights or internal parameters. This approach only produces new predictions from an unchanged model rather than retraining it on the expanded dataset. The scenario explicitly states that the model must be continuously retrained and redeployed whenever new data arrives, meaning the underlying model artifact must be updated, and a new or refreshed endpoint must be deployed. DataBrew alone addresses data preparation but does nothing to trigger or execute the retraining and redeployment lifecycle."
+      },
+      {
+        "text": "Create an AWS Step Functions Express workflow with AWS SDK integrations to retrieve the customer data from the S3 bucket when an analyst uploads a new file. Use a SageMaker AI Data Wrangler flow to export the data from the S3 bucket to SageMaker AI Autopilot. Use SageMaker AI Autopilot to redeploy the model after it has been retrained on the updated customer dataset.",
+        "rationale": "because Express workflows just lack the durable state and execution history required for long-running ML retraining jobs. Model training on a rapidly growing dataset can easily exceed the Express workflow time constraints and will not retain execution history for auditability."
+      }
+    ],
+    "correct_index": 1,
+    "correct_text": "Create an AWS Step Functions Standard workflow. Configure the first state to invoke an AWS Lambda function with webhook handlers to respond when an analyst uploads a new file to the S3 bucket. Use SageMaker AI Pipelines to retrain and redeploy the updated model to the application. Use the next state in the workflow to execute the pipeline after the first state receives a response.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "Las cartas cubren SageMaker Pipelines y aprobacion en MLOps, pero el objetivo AIP se decide por Step Functions Standard como orquestador con manejo de eventos S3; ninguna carta ensena Step Functions. | Las cartas ensenan SageMaker Pipelines y aprobacion en MLOps a nivel de eleccion de servicio, pero",
+    "feature_faltante": "AWS Step Functions Standard como orquestador con estados y handler de evento S3"
+  },
+  {
+    "n": 38,
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "stem": "A company is developing a generative AI assistant that delivers personalized product recommendations, promotional messages, and customer support summaries. The assistant leverages structured purchase history, behavioral data, and unstructured customer reviews to generate customized content in real time. To ensure outputs are accurate, relevant, and unbiased, the team plans to conduct systematic model evaluation across multiple AI model versions before deploying to the full customer base. The solution integrates Amazon Comprehend to extract sentiment, entities, and key themes from reviews and messages, and Amazon SageMaker AI to train predictive models that score engagement likelihood and product interest. The team requires a deployment strategy that enables safe testing of multiple AI model versions while collecting performance and evaluation metrics to inform decision-making. Which deployment strategy is most appropriate for this scenario?",
+    "options": [
+      {
+        "text": "Deploy the new AI model using a Blue/Green strategy, running it in parallel with the current model, and switch all traffic after verifying stability and metrics from Comprehend and SageMaker AI.",
+        "rationale": ". Blue/Green deployment is primarily designed to ensure a smooth switch between model versions with minimal downtime. While it provides operational safety, it simply does not allow simultaneous comparison of multiple AI model versions. It evaluates only a single model in production at a time, limiting systematic evaluation and preventing direct comparisons of metrics such as sentiment, entity recognition, and predicted engagement."
+      },
+      {
+        "text": "Deploy the new AI model as a Canary Release to a small subset of users, monitor sentiment, entity extraction, and engagement scores with Comprehend and SageMaker AI, and gradually increase traffic if results meet quality standards.",
+        "rationale": ". Canary deployment is typically used to release a new model to a small subset of users first, gradually increasing traffic while monitoring metrics. Although it helps detect early issues and reduce risk, it only evaluates one model version at a time, making it unsuitable for systematic comparison across multiple AI models. It does not support real-time evaluation of competing models for data-driven decision-making."
+      },
+      {
+        "text": "Utilize an A/B testing strategy to route different user segments to multiple AI model versions simultaneously, collect metrics such as sentiment, entity recognition, and predicted engagement using Comprehend and SageMaker AI, and select the best-performing model based on the comparison.",
+        "rationale": ""
+      },
+      {
+        "text": "Implement a Linear deployment. Gradually shift user traffic to the new AI model in fixed increments and monitor the performance and engagement metrics.",
+        "rationale": ". Linear deployment gradually shifts user traffic to the new model in fixed increments. This approach focuses solely on a safe, incremental rollout, providing controlled exposure to the latest model. However, it does not support parallel evaluation of multiple versions, which is essential for systematic model evaluation. Linear deployment is primarily about risk mitigation rather than model comparison or optimization."
+      }
+    ],
+    "correct_index": 2,
+    "correct_text": "Utilize an A/B testing strategy to route different user segments to multiple AI model versions simultaneously, collect metrics such as sentiment, entity recognition, and predicted engagement using Comprehend and SageMaker AI, and select the best-performing model based on the comparison.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "El solape es solo de vocabulario/escenario (Comprehend, SageMaker). El objetivo examinable (estrategia de despliegue A/B testing y evaluacion de modelos) no lo ensena ninguna carta. | Las cartas solo DEFINEN que servicio hace sentimiento (Comprehend vs Lex) a nivel de seleccion. La pregunta AIP eval",
+    "feature_faltante": "Estrategia de despliegue A/B testing y model evaluation entre versiones de modelo"
+  },
+  {
+    "n": 48,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A retail enterprise utilizes a generative AI (GenAI) foundation model (FM) to automatically write product catalog descriptions. The DevOps group uses Amazon CloudWatch to monitor technical metrics, including token consumption, inference latency, and fault rates. Concurrently, the sales department measures commercial metrics, such as click-through rates and total revenue impact, in separate external systems. The enterprise requires a unified observability framework to correlate system performance directly with commercial results. This framework must provide holistic visibility across both domains and automatically alert key personnel whenever operational metrics indicate abnormal degradation. Which of the following solutions satisfies the enterprise’s requirements?",
+    "options": [
+      {
+        "text": "Implement AWS X-Ray traces to aggregate application latency and error rates. Export the sales department metrics into an Amazon DynamoDB table. Trigger an Amazon EventBridge rule to execute an AWS Step Functions state machine to achieve unified observability.",
+        "rationale": "because AWS X-Ray is primarily designed for distributed tracing of individual requests, not for aggregating high-level business and operational metrics into a unified observability dashboard. Furthermore, DynamoDB and AWS Step Functions do not natively provide anomaly detection alerting for metrics."
+      },
+      {
+        "text": "Deploy Amazon Managed Grafana to build unified observability dashboards that combine CloudWatch operational data with external sales metrics. Establish Grafana alerts that trigger AWS Lambda functions to autonomously run remediation scripts when metrics exceed static thresholds.",
+        "rationale": "because while Amazon Managed Grafana can visualize both datasets, the scenario explicitly requires automatic alerts to stakeholders upon degradation, not autonomous remediation scripts via AWS Lambda. Additionally, static thresholds simply do not adapt to historical baselines as effectively as anomaly detection."
+      },
+      {
+        "text": "Export all operational metrics and sales data into CloudWatch Logs. Train and deploy a custom machine learning model using Amazon SageMaker AI to detect anomalies in incoming log streams. Configure the SageMaker AI endpoint to trigger Amazon SNS notifications to achieve unified observability.",
+        "rationale": "because transforming numerical metrics into log data and building a custom machine learning model on Amazon SageMaker AI specifically for anomaly detection introduces immense and unnecessary operational overhead. Amazon CloudWatch natively supports metric aggregation and anomaly detection without requiring custom model training."
+      },
+      {
+        "text": "Build custom CloudWatch dashboards that aggregate both the operational data and the imported commercial metrics to achieve unified observability. Establish CloudWatch composite alarms enhanced with anomaly detection to evaluate the correlated data. Utilize Amazon SNS to dispatch alerts to relevant personnel when performance anomalies occur.",
+        "rationale": ""
+      }
+    ],
+    "correct_index": 3,
+    "correct_text": "Build custom CloudWatch dashboards that aggregate both the operational data and the imported commercial metrics to achieve unified observability. Establish CloudWatch composite alarms enhanced with anomaly detection to evaluate the correlated data. Utilize Amazon SNS to dispatch alerts to relevant personnel when performance anomalies occur.",
+    "tipo_rescate": "A",
+    "razon_rescate": "Las cartas ensenan CloudWatch Alarms basados en umbral estatico + SNS, pero el discriminador AIP (composite alarms con anomaly detection y correlacion de metricas heterogeneas) no aparece en ninguna carta.",
+    "feature_faltante": ""
+  },
+  {
+    "n": 56,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A media streaming company runs a personalized content recommendation engine on Amazon EC2 instances. Each instance mounts an Amazon EBS volume that stores a local cache of pre-computed customer preference vectors, which the application reads at query time to enrich prompts before calling Amazon Bedrock foundation models for final recommendation scoring. The engineering team has observed intermittent periods in which recommendation quality degrades, and customers receive off-target suggestions, but the team cannot determine whether the root cause is EBS I/O latency starving the feature retrieval pipeline or FM behavioral drift in the Bedrock model responses. The company needs an observability solution that automatically discovers and monitors both the EC2 compute layer and the attached EBS volumes as a unified application stack, detects performance deviations from established baselines using historical patterns rather than static thresholds, and generates correlated alerts within 10 minutes when anomalies are detected across any layer of the stack. The solution must minimize the effort required for manual monitoring configuration. Which solution satisfies these requirements?",
+    "options": [
+      {
+        "text": "Enable Amazon CloudWatch Container Insights on the EC2 instances. Configure Container Insights to collect CPU, memory, and disk I/O metrics at the instance level. Set CloudWatch alarms on Container Insights metrics with static latency thresholds to alert when EBS read latency exceeds a defined limit.",
+        "rationale": "because it is primarily designed for containerized workloads on ECS, EKS, and Kubernetes platforms, not for standalone EC2 and EBS application stacks. It does not monitor EBS volume performance metrics, does not integrate FM invocation telemetry, and does not provide ML-powered cross-layer anomaly detection and automated correlation dashboards like Application Insights."
+      },
+      {
+        "text": "Enable Amazon CloudWatch Application Insights on the resource group containing the EC2 instances and attached EBS volumes. Configure custom recommendation quality metrics using the embedded metric format with dimensions for customer segment and FM model ID. Use Application Insights' ML-powered anomaly detection to automatically baseline performance patterns across the EC2, EBS, and FM metric layers and generate correlated alerts when deviations are detected.",
+        "rationale": ""
+      },
+      {
+        "text": "Deploy AWS X-Ray tracing across the EC2 application processes. Route trace segments to Amazon Data Firehose and deliver them to Amazon QuickSight. Build custom QuickSight dashboards with manually configured alert rules to monitor EBS read latency trends and FM response times.",
+        "rationale": "because X-Ray does not perform ML-powered anomaly detection, and the QuickSight pipeline imposes substantial manual build and maintenance overhead. The architecture simply cannot automatically correlate EBS I/O anomalies with FM behavioral deviations or trigger alerts within 10 minutes based on dynamic baselines."
+      },
+      {
+        "text": "Provision an Amazon OpenSearch Service cluster with the Observability plugin. Configure Amazon Data Firehose to ingest Amazon CloudWatch metrics for EC2 and EBS alongside Bedrock invocation logs. Write custom OpenSearch anomaly detectors and alerting rules to surface multi-layer performance correlations.",
+        "rationale": "because it only introduces high ongoing operational overhead for cluster provisioning, index management, and custom anomaly rule authoring that directly contradicts the requirement to minimize manual configuration effort. The same outcome can be achieved natively in CloudWatch Application Insights with significantly less setup."
+      }
+    ],
+    "correct_index": 1,
+    "correct_text": "Enable Amazon CloudWatch Application Insights on the resource group containing the EC2 instances and attached EBS volumes. Configure custom recommendation quality metrics using the embedded metric format with dimensions for customer segment and FM model ID. Use Application Insights' ML-powered anomaly detection to automatically baseline performance patterns across the EC2, EBS, and FM metric layers and generate correlated alerts when deviations are detected.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "El servicio/feature exacto de la respuesta (CloudWatch Application Insights, autodescubrimiento de stack, anomaly detection ML) no lo ensena ninguna carta; el solape es de escenario (EC2/EBS, streaming) y CloudWatch generico. | Aunque el tema (monitoreo EC2/EBS con CloudWatch) se vio, la profundidad",
+    "feature_faltante": "CloudWatch Application Insights (autodescubrimiento de stack, anomaly detection ML, EMF)"
+  },
+  {
+    "n": 65,
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "stem": "A global retail company is transforming its customer support system with a conversational AI chatbot built using Amazon Lex for natural language understanding and automated conversation flows. Amazon Transcribe is integrated for speech-to-text conversion, allowing customers to voice inquiries and interact naturally with the system. This setup improves the customer experience by enabling spoken communication, but the company now aims to automate the chatbot’s responses by leveraging its vast knowledge base of product documentation, FAQs, and support articles. The solution must quickly and accurately retrieve relevant information from the company’s documentation library. It should seamlessly integrate with existing AWS tools to provide real-time, dynamic responses to customer queries, reducing the need for manual updates or custom model training. What approach will provide the desired result with the least amount of development work?",
+    "options": [
+      {
+        "text": "Train a Bidirectional Attention Flow (BiDAF) model using customer questions and company documentation, deploy it via Amazon SageMaker AI, and integrate it with the chatbot through the SageMaker Runtime InvokeEndpoint API to provide responses.",
+        "rationale": "because it requires significant custom development for model training and deployment. Custom model training using SageMaker typically involves complex processes like data preparation, feature engineering, and optimization, which increases the overall development effort compared to using a service like Amazon Kendra, which is designed for document search and retrieval with minimal setup. Also, while Bedrock Knowledge Base is useful for managing knowledge and leveraging large language models (LLMs), it is not designed for storing and indexing large volumes of unstructured documentation."
+      },
+      {
+        "text": "Store the company documentation in an Amazon Bedrock Knowledge Base, then use Amazon Comprehend to analyze the customer queries and extract relevant insights from the documentation to provide accurate responses.",
+        "rationale": "because Amazon Comprehend is primarily used for text analysis, such as sentiment detection or entity extraction, rather than for document retrieval. Using Comprehend to extract insights would require manual intervention to link it to the chatbot and is simply less efficient than using Amazon Kendra, which is specifically designed for document indexing and search, providing more accurate results for dynamic query answering."
+      },
+      {
+        "text": "Utilize Amazon Kendra for indexing company documents and integrate it with the chatbot through the Kendra Query API for dynamic response generation.",
+        "rationale": ""
+      },
+      {
+        "text": "Use a BERT-based model in Amazon SageMaker AI, store documentation in Amazon S3, and rely on Lex to handle queries and invoke the SageMaker endpoint for responses.",
+        "rationale": "because this approach involves building and training a custom BERT-based model, which requires significant time and expertise. Simply storing documentation in S3 and using SageMaker for inference introduces unnecessary complexity compared to using Amazon Kendra, which can index documents directly and provide relevant answers through a more efficient API, without the need for custom model training."
+      }
+    ],
+    "correct_index": 2,
+    "correct_text": "Utilize Amazon Kendra for indexing company documents and integrate it with the chatbot through the Kendra Query API for dynamic response generation.",
+    "tipo_rescate": "AB",
+    "razon_rescate": "El servicio exacto de la respuesta (Amazon Kendra + Query API) no aparece en ninguna carta; el solape es solo el escenario de chatbot/Lex. La recuperacion sobre knowledge base no se ensena. | El tema conversacional (Lex/Connect) se vio con detalle, pero la pregunta AIP evalua una feature distinta y ",
+    "feature_faltante": "Amazon Kendra indexing + Kendra Query API para recuperacion sobre knowledge base"
+  },
+  {
+    "n": 70,
+    "category": "AIP – AI Safety, Security, and Governance",
+    "stem": "A healthcare organization is implementing a generative AI solution to process and analyze sensitive medical records, including patient histories and diagnostic images. The solution uses Amazon Rekognition for image analysis to extract features from diagnostic images and Amazon Textract for extracting text from scanned medical forms. The organization must ensure that only authorized users and services have access to specific subsets of sensitive medical data stored in Amazon S3, with the ability to classify sensitive datasets (e.g., patient health information, diagnostic images, billing records) using metadata. The team requires a solution that provides granular control over data access, ensuring that only authorized users and services can access specific portions of sensitive data for processing and inference. The solution must allow secure data access management, with the ability to monitor and audit all data access events to maintain privacy and security. Which solution best achieves these requirements?",
+    "options": [
+      {
+        "text": "Implement S3 bucket policies to enforce object-level access control for sensitive medical data, complemented by AWS KMS for data encryption at rest to ensure secure storage.",
+        "rationale": "because S3 bucket policies are only limited to controlling access at the object level and do not provide the fine-grained access management needed for large-scale data governance. They lack the ability to enforce granular access at the table or column level, which is necessary for securely managing sensitive healthcare data across an entire data lake and ensuring compliance with privacy regulations like HIPAA."
+      },
+      {
+        "text": "Leverage AWS Lake Formation with LF-Tag-based to apply fine-grained access control policies, enabling comprehensive data governance with built-in auditing and encryption for compliance.",
+        "rationale": ""
+      },
+      {
+        "text": "Configure AWS IAM roles and VPC endpoints to establish secure, private connectivity for accessing medical data, ensuring that only authorized services can interact with the data.",
+        "rationale": "because, while IAM roles and VPC endpoints provide network-level access control and can restrict which services can connect to Amazon S3, they do not offer the centralized, fine-grained access control or auditing features needed to manage data access at scale. This solution primarily focuses on network security, not on managing detailed access policies across datasets, which AWS Lake Formation provides."
+      },
+      {
+        "text": "Utilize AWS Secrets Manager to securely manage API keys and credentials, while implementing access controls to ensure compliant, secure interactions with sensitive data.",
+        "rationale": "because AWS Secrets Manager is designed to securely store and manage API keys, credentials, and other secrets, but it does not provide the fine-grained access control needed for managing large datasets, especially in a data lake environment. While it can protect access credentials, it just lacks the comprehensive data governance and access control features, such as role-based permissions and auditing, required for managing sensitive healthcare data across multiple services."
+      }
+    ],
+    "correct_index": 1,
+    "correct_text": "Leverage AWS Lake Formation with LF-Tag-based to apply fine-grained access control policies, enabling comprehensive data governance with built-in auditing and encryption for compliance.",
+    "tipo_rescate": "A",
+    "razon_rescate": "El servicio/feature exacto (AWS Lake Formation, LF-Tag-based fine-grained access control) no lo ensena ninguna carta; el solape es de escenario (S3, datos sensibles, Textract/Rekognition).",
+    "feature_faltante": ""
+  }
+]

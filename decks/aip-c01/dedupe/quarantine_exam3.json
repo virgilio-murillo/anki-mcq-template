@@ -1,0 +1,87 @@
+[
+  {
+    "n": 1,
+    "reason": "sin marcador Incorrect/Correct (no se pudo delimitar opciones)",
+    "stem": "A GenAI developer is building a generative AI platform that automates regulatory summaries and internal compliance reporting. The developer recently fine-tuned a new foundation model in Amazon Bedrock and must determine whether it is suitable to replace the currently deployed production model. As part of the organization’s governance and audit requirements, large volumes of historical evaluation d"
+  },
+  {
+    "n": 6,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A publishing company is developing an internal generative AI platform to automate the creation of research article drafts and editorial summaries. The company uses Amazon Comprehend for text preprocessing and data cleaning, and Amazon Bedrock Agents to automate content retrieval, citation validation, and orchestration of large language model (LLM) tasks across the editorial workflow. An AI develop",
+    "category": "AIP – Implementation and Integration",
+    "n_options": 7
+  },
+  {
+    "n": 7,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A global e-commerce enterprise is building an intelligent natural language processing (NLP) system to enhance its customer engagement platform, TD-Assistance. The company uses Amazon Bedrock to access a foundation model for generative conversational responses and Amazon SageMaker AI to fine-tune a Bidirectional Encoder Representations from Transformers (BERT) model on proprietary chat transcripts ",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 9
+  },
+  {
+    "n": 11,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A financial services enterprise is standardizing on Amazon SageMaker AI for feature engineering and model lifecycle, while a custom fraud detection model deployed as a SageMaker AI real-time inference endpoint scores card transactions as they arrive. Fraud decisions are published to Amazon Simple Notification Service (SNS) topics to fan out alerts to downstream fraud case management systems. Data ",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 8
+  },
+  {
+    "n": 17,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "An agricultural technology company runs several Amazon Bedrock-powered generative AI tools spread across different regional teams, covering crop advisory chat, equipment manual summarization, and yield report drafting. Some of these tools show token spending that spikes without a clear pattern.",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 7
+  },
+  {
+    "n": 23,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A customer support division recently deployed an AI-assisted workspace to help agents quickly understand ongoing cases. Incoming files are first processed using Amazon Textract to extract structured text before being stored as document embeddings in a third-party vector index. The system uses a custom RAG pipeline that retrieves the most relevant chunks by ranking the top-k results, and a model ho",
+    "category": "",
+    "n_options": 7
+  },
+  {
+    "n": 24,
+    "reason": "sin marcador Incorrect/Correct (no se pudo delimitar opciones)",
+    "stem": "A financial technology organization is building a generative AI platform that processes high-volume advisory requests from consumer banking portals, investment dashboards, and loan assessment tools. The system relies on Amazon Bedrock for foundation model inference and uses Amazon OpenSearch Service and Amazon DynamoDB to support retrieval and metadata lookups. As usage grows, system costs escalat"
+  },
+  {
+    "n": 25,
+    "reason": "sin marcador Incorrect/Correct (no se pudo delimitar opciones)",
+    "stem": "A GenAI developer is building a RAG solution to power an internal generative AI assistant that answers technical questions using product manuals, support logs, and engineering change documentation. The assistant must use Amazon Bedrock for generation and Amazon OpenSearch Service for retrieval. To improve accuracy, the organization needs a hybrid search that combines semantic matching with dense e"
+  },
+  {
+    "n": 33,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A company is developing an internal generative AI assistant to assist compliance analysts in reviewing customer communications for potential regulatory violations. The assistant must process large volumes of emails, chat transcripts, and scanned documents, identify sensitive data using Amazon Comprehend PII detection, and label the exact textual spans in which personal information appears. The com",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 7
+  },
+  {
+    "n": 57,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "An ML engineering team is building a secure, multi-service pipeline that uses Amazon SageMaker AI for model training and Amazon Comprehend for entity extraction. The pipeline is triggered by Amazon EventBridge and orchestrated using AWS Step Functions.",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 7
+  },
+  {
+    "n": 58,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "An international media company is developing a generative AI model to provide personalized sci-fi series recommendations based on user preferences. The company is utilizing AWS services, specifically Amazon SageMaker for model training and Amazon Comprehend for natural language processing (NLP) tasks, including sentiment analysis. The dataset consists of a large collection of sci-fi series reviews",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "n_options": 8
+  },
+  {
+    "n": 63,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A global logistics company is developing an AI-powered fleet safety monitoring platform to improve driver safety and minimize accident-related costs. The platform analyzes dashboard camera feeds from delivery trucks to detect behaviors that indicate driver distraction or fatigue. The system is being tested on long-haul trucks that operate primarily on overnight routes, where drivers encounter chal",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "n_options": 7
+  },
+  {
+    "n": 74,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A Generative AI engineering team at TD GenAILabs is developing a large-scale natural language processing system designed to process multilingual customer feedback from global data sources. The workflow uses Amazon SageMaker Data Wrangler to automate text cleaning, normalization, and tokenization, ensuring that all transformations are applied consistently before model training. The workflow also in",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "n_options": 8
+  }
+]

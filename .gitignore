@@ -36,3 +36,17 @@ decks/*/backups/
 
 # dedup: regenerable knowledge-base corpus
 decks/*/dedupe/existing_corpus/
+
+# dedup: regenerable universe artifacts (rebuilt from Anki + local anytime)
+decks/*/dedupe/universe_cards.json
+decks/*/dedupe/universe_skipped.json
+decks/*/dedupe/universe_conflicts.json
+
+# dedup: regenerable vector stores (embeddings, rebuilt by build_vector_store*.py)
+decks/*/dedupe/vecstore/
+decks/*/dedupe/vecstore_v2/
+
+# exam extractor scratch (regenerable from the pasted exam)
+decks/*/dedupe/blocks/
+decks/*/dedupe/extracted.jsonl
+decks/*/dedupe/segments.json

@@ -1,0 +1,150 @@
+[
+  {
+    "n": 4,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A GenAI developer must use Amazon Q Business to enhance an internal content management system (CMS) for a company. The company wants users to be able to search, query, and receive AI-assisted insights from the company's data. The company has technical documentation in the CMS and internal knowledge ",
+    "correct_letters": [
+      "D",
+      "E"
+    ]
+  },
+  {
+    "n": 8,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A healthcare company is using Amazon Bedrock to run a customer service AI assistant. A GenAI developer must use Amazon Bedrock Guardrails to ensure compliance with the following guidelines: The assistant must comply with healthcare regulations regarding patient privacy. The assistant should not expo",
+    "correct_letters": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "n": 23,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A company is implementing a data pipeline to feed customer transaction data into Amazon Bedrock FMs. The company wants to generate personalized recommendations for customers. A GenAI developer wants to avoid data quality issues that could affect model output accuracy. The GenAI developer wants to im",
+    "correct_letters": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "n": 28,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A company developed a tool to assist customer support representatives. The tool summarizes relevant support documents for the case that a customer support representative works on. The tool uses a custom RAG system. The system is backed by a third-party vector store that stores document embeddings. T",
+    "correct_letters": [
+      "A",
+      "E"
+    ]
+  },
+  {
+    "n": 32,
+    "reason": "tipo no soportado (matching)",
+    "stem": "Matching Time to answer: 0 seconds Answer status: Incorrect Question A company is designing an advanced vector database architecture for FM augmentation. A GenAI developer must configure each architectural requirement.Select the correct AWS service configuration from the following list for each arch"
+  },
+  {
+    "n": 44,
+    "reason": "multi-respuesta (3 correctas)",
+    "stem": "A travel company is developing a new AI-powered travel recommendation application by using Amazon Bedrock Agents. Customers can use the application to input travel preferences and receive personalized itinerary suggestions. The company wants to avoid prompt injection attacks that could manipulate th",
+    "correct_letters": [
+      "B",
+      "C",
+      "E"
+    ]
+  },
+  {
+    "n": 46,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A medical company that operates multiple clinics runs a generative AI (GenAI) application on AWS. The application uses AWS Step Functions to orchestrate two AWS Lambda functions. One function calls Amazon Transcribe Medical to transcribe clinic audio data. The second function uses the Amazon Nova Pr",
+    "correct_letters": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "n": 50,
+    "reason": "multi-respuesta (3 correctas)",
+    "stem": "A GenAI developer is implementing a real-time AI assistant application. The application uses Amazon API Gateway WebSocket APIs to stream responses from an AWS Lambda function that calls an Amazon Bedrock FM with response streaming. The application must support connection management, including sessio",
+    "correct_letters": [
+      "A",
+      "D",
+      "F"
+    ]
+  },
+  {
+    "n": 52,
+    "reason": "tipo no soportado (ordering)",
+    "stem": "Ordering Time to answer: 0 seconds Answer status: Incorrect Question A company wants to enhance a customer support AI assistant with up-to-date product information. A GenAI developer must implement a custom RAG solution by using Amazon Bedrock and Amazon OpenSearch Service. The GenAI developer needs"
+  },
+  {
+    "n": 56,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A company receives large merged PDF files from employees. Each PDF file includes multiple pages with distinct content types, including images and text. The images and text can be categorized into a predefined list. A GenAI developer creates an Amazon Bedrock Data Automation (BDA) project. The GenAI ",
+    "correct_letters": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "n": 59,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A software company is launching an AI assistant by using Amazon Bedrock. The AI assistant will help users troubleshoot issues by quickly exploring logs and documentation, and then recommending actions for remediation. A GenAI developer wants to set up Amazon Bedrock Guardrails. The GenAI developer w",
+    "correct_letters": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "n": 60,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A large social media company runs multiple RAG pipelines across different applications. Each pipeline uses an FM embedding endpoint deployed on an Amazon SageMaker AI real-time endpoint. A GenAI developer uses the endpoint to generate embeddings. The GenAI developer stores the embeddings in multiple",
+    "correct_letters": [
+      "A",
+      "B"
+    ]
+  },
+  {
+    "n": 62,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A retail company is implementing a generative AI (GenAI) powered customer service system by using Amazon Bedrock. The system must handle product inquiries and answer various customer questions through the company's website. The system will have significant traffic load level variations throughout th",
+    "correct_letters": [
+      "A",
+      "C"
+    ]
+  },
+  {
+    "n": 65,
+    "reason": "multi-respuesta (3 correctas)",
+    "stem": "A retail company is using Amazon Bedrock to develop a generative AI (GenAI) application that will provide fashion recommendations to customers. The company wants to evaluate the quality of responses from two different FMs to determine which FM provides better fashion advice. Fashion experts who work",
+    "correct_letters": [
+      "C",
+      "D",
+      "E"
+    ]
+  },
+  {
+    "n": 69,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A GenAI developer is designing a customer-facing application for a company. The GenAI developer uses an FM that is deployed on Amazon SageMaker AI. The application will deliver automated advisory services to customers. The company requires AI governance controls to ensure compliance with internal po",
+    "correct_letters": [
+      "B",
+      "E"
+    ]
+  },
+  {
+    "n": 74,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A large company is using Amazon Bedrock. The company wants to limit access to FMs to specific AWS and Anthropic models within designated development accounts. The company strictly prohibits third-party marketplace models. The company requires comprehensive logging of all model interactions for audit",
+    "correct_letters": [
+      "B",
+      "E"
+    ]
+  },
+  {
+    "n": 75,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "An airline company uses AWS Organizations to manage multiple AWS accounts. The company wants to use generative AI (GenAI) and Amazon Bedrock to enhance a computerized maintenance management system (CMMS). The company has an existing identity provider (IdP) based on Microsoft Entra ID. The company ne",
+    "correct_letters": [
+      "B",
+      "D"
+    ]
+  }
+]

@@ -1,0 +1,66 @@
+[
+  {
+    "n": 15,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A company is designing a solution that uses foundation models (FMs) to support multiple AI workloads. Some FMs must be invoked on demand and in real time. Other FMs require consistent high-throughput access for batch processing. The solution must support hybrid deployment patterns and run workloads ",
+    "correct_letters": [
+      "B",
+      "C"
+    ]
+  },
+  {
+    "n": 22,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A financial services company is developing an AI-powered search assistant application to help investment advisors quickly retrieve investment data. The application runs as an AWS Lambda function. The company is using Amazon Bedrock to develop the application by using an Amazon Bedrock knowledge base",
+    "correct_letters": [
+      "B",
+      "E"
+    ]
+  },
+  {
+    "n": 25,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A company uses Amazon Bedrock to generate technical content for customers. The company has recently experienced a surge in hallucination outputs when the company's model generates summaries of long technical documents. The model outputs include inaccurate or fabricated details. The company's current",
+    "correct_letters": [
+      "A",
+      "D"
+    ]
+  },
+  {
+    "n": 32,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A company uses an organization in AWS Organizations with all features enabled to manage multiple AWS accounts. Employees use Amazon Bedrock across multiple accounts. The company must prevent specific topics and proprietary information from being included in prompts to Amazon Bedrock models. The comp",
+    "correct_letters": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "n": 67,
+    "reason": "multi-respuesta (3 correctas)",
+    "stem": "A company is building a co-pilot agent to assist human customer service representatives. The co-pilot agent must extract context from summaries of previous conversations with customers about specific claims and queries. The co-pilot agent must provide suggested remediations actions to human agents. ",
+    "correct_letters": [
+      "A",
+      "B",
+      "F"
+    ]
+  },
+  {
+    "n": 69,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "A healthcare technology company operates a patient diagnosis application that uses Amazon Bedrock foundation models (FMs). The application processes thousands of medical imaging requests daily across multiple AWS Regions to serve a global user base. The company needs to design a highly resilient sol",
+    "correct_letters": [
+      "C",
+      "E"
+    ]
+  },
+  {
+    "n": 75,
+    "reason": "multi-respuesta (2 correctas)",
+    "stem": "An ecommerce company is using an Anthropic Claude Sonnet model in Amazon Bedrock to generate product recommendations. An AWS Lambda function retrieves customer purchase data from Amazon DynamoDB, product reviews from Amazon S3, and customer profile information from Amazon RDS. Then the function send",
+    "correct_letters": [
+      "A",
+      "D"
+    ]
+  }
+]

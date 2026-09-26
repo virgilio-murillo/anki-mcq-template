@@ -1,0 +1,61 @@
+{"n": 2, "verdict": "NEW", "concepto": "SageMaker Experiments tracker en processing job", "razon": "Candidatas ensenan Comprehend/hosting, no el tracker de Experiments para params/metricas."}
+{"n": 3, "verdict": "NEW", "concepto": "Bedrock Data Automation ingesta continua", "razon": "BDA para pipelines GenAI no cubierto por certs previas."}
+{"n": 4, "verdict": "NEW", "concepto": "Generative AI Security Scoping Matrix Scope 4", "razon": "Marco de gobernanza GenAI para fine-tuned models, no tocado antes."}
+{"n": 5, "verdict": "NEW", "concepto": "SageMaker ProductionVariant traffic weighting", "razon": "Variantes de produccion/A-B por peso de trafico no aparecen en candidatas."}
+{"n": 8, "verdict": "NEW", "concepto": "SageMaker multi-variant endpoint A/B", "razon": "Despliegue de multiples variantes con pesos de trafico no cubierto."}
+{"n": 9, "verdict": "NEW", "concepto": "Wavelength Zones + context pruning GenAI", "razon": "Inferencia ultra-baja latencia en Wavelength y poda de prompts es GenAI/edge nuevo."}
+{"n": 10, "verdict": "NEW", "concepto": "Amazon A2I revision humana confianza baja", "razon": "Candidatas ensenan Textract pero no Augmented AI human-in-the-loop."}
+{"n": 12, "verdict": "NEW", "concepto": "SageMaker Canvas modelo no-code churn", "razon": "Canvas no-code para analistas no cubierto; solo DataBrew tangencial."}
+{"n": 13, "verdict": "NEW", "concepto": "Bedrock latency-optimized inference + prompt caching", "razon": "Optimizacion de latencia y caching de prompts es GenAI-nativo."}
+{"n": 14, "verdict": "COVERED", "concepto": "SageMaker Model Monitor drift vs baseline", "razon": "Candidata ensena Model Monitor comparando datos vivos contra baseline/constraints."}
+{"n": 15, "verdict": "NEW", "concepto": "Lake Formation LF-Tags acceso fino columna", "razon": "Candidatas cubren SCP/IAM/Organizations, no Lake Formation con LF-Tags."}
+{"n": 16, "verdict": "NEW", "concepto": "Bedrock Guardrails cross-Region + logging", "razon": "Guardrails contra prompt injection y perfil cross-Region es GenAI-nativo."}
+{"n": 18, "verdict": "COVERED", "concepto": "SageMaker network isolation mode + VPC endpoint", "razon": "Candidata ensena network isolation para bloquear internet/VPC en SageMaker."}
+{"n": 19, "verdict": "COVERED", "concepto": "VPC private endpoints SageMaker y S3", "razon": "Endpoints privados VPC para trafico interno AWS ya cubiertos en la red."}
+{"n": 20, "verdict": "NEW", "concepto": "SageMaker DeepAR forecasting global", "razon": "Algoritmo DeepAR y modelo global de forecasting no cubierto por candidatas."}
+{"n": 21, "verdict": "NEW", "concepto": "Bedrock Guardrails filtros, denied topics, PII", "razon": "Configuracion detallada de Guardrails (topics/PII/filtros) es GenAI-nativa."}
+{"n": 22, "verdict": "NEW", "concepto": "IAM CreatePresignedNotebookInstanceUrl desde VPC", "razon": "Accion IAM especifica de presigned URL de notebook no aparece; candidatas genericas VPC."}
+{"n": 26, "verdict": "NEW", "concepto": "Data augmentation para invarianza de orientacion", "razon": "Aumento de datos (rotacion/flip) no cubierto; candidatas son transforms de imagen distintos."}
+{"n": 27, "verdict": "NEW", "concepto": "AppConfig Agent config dinamica validada", "razon": "AppConfig con validacion pre-deploy no cubierto por candidatas."}
+{"n": 28, "verdict": "NEW", "concepto": "Bedrock InvocationLatency y fine-tune Titan", "razon": "Observabilidad de latencia Bedrock y despliegue de FM fine-tuned es GenAI-nativo."}
+{"n": 29, "verdict": "NEW", "concepto": "Transfer learning BERT reemplazar capa final", "razon": "Inicializacion/transfer learning de FM no cubierto por candidatas."}
+{"n": 30, "verdict": "NEW", "concepto": "Bedrock Prompt Management + Guardrails", "razon": "Gestion centralizada de prompts y guardrails es GenAI-nativo."}
+{"n": 31, "verdict": "COVERED", "concepto": "Model Monitor + Data Capture reentrenamiento", "razon": "Candidata ensena Model Monitor comparando contra baseline para detectar drift."}
+{"n": 32, "verdict": "NEW", "concepto": "BDA + Bedrock Knowledge Bases busqueda semantica", "razon": "Pipeline RAG con BDA y Knowledge Bases es GenAI-nativo."}
+{"n": 34, "verdict": "COVERED", "concepto": "XGBoost max_depth para overfitting", "razon": "Candidata ensena reducir max_depth en XGBoost para mejorar generalizacion."}
+{"n": 35, "verdict": "COVERED", "concepto": "SageMaker VPC + S3 Gateway Endpoint", "razon": "Trafico privado SageMaker-S3 via endpoint VPC ya cubierto en red."}
+{"n": 36, "verdict": "NEW", "concepto": "Rollout gradual Bedrock con Step Functions", "razon": "Despliegue canario de versiones de FM Bedrock con orquestacion es GenAI-nativo."}
+{"n": 37, "verdict": "COVERED", "concepto": "SageMaker Ground Truth human-in-the-loop", "razon": "Candidata ensena Ground Truth para etiquetado/validacion humana."}
+{"n": 38, "verdict": "NEW", "concepto": "SageMaker Autopilot + Clarify feature importance", "razon": "Autopilot AutoML y Clarify de importancia no aparecen en candidatas."}
+{"n": 39, "verdict": "COVERED", "concepto": "IAM role S3 GetObject/PutObject/ListBucket", "razon": "Candidata ensena permisos S3 en el execution role de SageMaker."}
+{"n": 40, "verdict": "COVERED", "concepto": "SSE-KMS + IAM + CloudWatch en ML", "razon": "Cifrado SSE-KMS, IAM y monitoreo CloudWatch ya cubiertos como bases de seguridad."}
+{"n": 41, "verdict": "COVERED", "concepto": "AMT early stopping AUTO", "razon": "Candidata ensena early stopping cuando la accuracy deja de mejorar en tuning."}
+{"n": 42, "verdict": "COVERED", "concepto": "Estrategia Hyperband en AMT", "razon": "Candidata ensena explicitamente la estrategia Hyperband para tuning."}
+{"n": 43, "verdict": "COVERED", "concepto": "Warm start TRANSFER_LEARNING + early stopping", "razon": "Candidata coincide casi exacta: warm start TRANSFER_LEARNING y detener si no mejora."}
+{"n": 44, "verdict": "NEW", "concepto": "Comprehend toxicity detection", "razon": "Deteccion de toxicidad como safety classifier no cubierta; candidatas solo sentimiento/entidades."}
+{"n": 45, "verdict": "NEW", "concepto": "Amazon Fraud Detector prediction API", "razon": "Fraud Detector no cubierto por candidatas."}
+{"n": 46, "verdict": "COVERED", "concepto": "SageMaker async endpoint en VPC", "razon": "Candidata coincide: payload 5-10MB, hasta 20min, VPC -> async endpoint."}
+{"n": 47, "verdict": "COVERED", "concepto": "SAML IAM Identity Center + SCP RBAC", "razon": "Federacion SAML/Identity Center y SCP para restringir servicios ya cubiertos."}
+{"n": 48, "verdict": "COVERED", "concepto": "Comprehend DetectPiiEntities redaccion PII", "razon": "Candidata ensena DetectPiiEntities para detectar/redactar PII en S3."}
+{"n": 49, "verdict": "NEW", "concepto": "Preprocesado: drop ID y encode labels", "razon": "Codificar etiquetas y excluir identificadores para built-in algo no cubierto por candidatas."}
+{"n": 50, "verdict": "NEW", "concepto": "Model Context Protocol (MCP) tools para Bedrock", "razon": "Exponer fuentes como tools MCP para un FM es GenAI-nativo."}
+{"n": 51, "verdict": "COVERED", "concepto": "Regularizacion contra overfitting", "razon": "Candidata ensena regularizacion/ajuste de hiperparametros contra sobreajuste."}
+{"n": 52, "verdict": "COVERED", "concepto": "Re-baseline de Model Monitor", "razon": "Baselines y constraints de Model Monitor ya cubiertos por candidatas."}
+{"n": 53, "verdict": "NEW", "concepto": "Bedrock Knowledge Base RAG + PerformanceConfigLatency", "razon": "RAG nativo de Bedrock con parametro de latencia es GenAI-nativo."}
+{"n": 54, "verdict": "COVERED", "concepto": "Comprehend/Transcribe/Rekognition tagging", "razon": "Servicios AI administrados para catalogar multimedia ya presentes en el universo."}
+{"n": 55, "verdict": "COVERED", "concepto": "FSx for Lustre sobre S3 para training", "razon": "Candidata ensena FSx for Lustre para alto throughput de training ML."}
+{"n": 56, "verdict": "COVERED", "concepto": "Feature attribution drift (SHAP)", "razon": "Candidatas ensenan feature attribution drift y su monitoreo/alerta."}
+{"n": 59, "verdict": "NEW", "concepto": "CountVectorizer stopwords/rare words NLP", "razon": "Preprocesado NLP con CountVectorizer/stopwords no cubierto por candidatas."}
+{"n": 60, "verdict": "COVERED", "concepto": "KMS en S3 + Glue redactar PII", "razon": "Cifrado KMS y redaccion de PII con Glue ya cubiertos en el universo."}
+{"n": 61, "verdict": "COVERED", "concepto": "Data Wrangler histograma para distribucion", "razon": "EDA/transforms de Data Wrangler ya cubiertos por candidatas."}
+{"n": 62, "verdict": "COVERED", "concepto": "SageMaker Object Detection bounding boxes", "razon": "Candidata ensena algoritmo Object Detection con bounding boxes."}
+{"n": 64, "verdict": "COVERED", "concepto": "SageMaker Asynchronous Inference autoscaling", "razon": "Async inference endpoint ya cubierto como opcion de inferencia."}
+{"n": 65, "verdict": "NEW", "concepto": "Bedrock on-demand vs Provisioned Throughput routing", "razon": "Seleccion de modelos Bedrock y provisioned throughput es GenAI-nativo."}
+{"n": 66, "verdict": "COVERED", "concepto": "SMOTE oversampling clase minoritaria", "razon": "Candidata ensena oversampling para desbalance de clases antes del training."}
+{"n": 67, "verdict": "COVERED", "concepto": "RAG con vector DB feeding FM", "razon": "Concepto RAG (embeddings/vector store recupera contexto) ya presente en el universo."}
+{"n": 68, "verdict": "NEW", "concepto": "Instancias Trainium (Trn) para LLM", "razon": "Familia Trn optimizada para entrenar LLM no cubierta por candidatas."}
+{"n": 69, "verdict": "COVERED", "concepto": "Scatter plot con color y tamano", "razon": "Candidata ensena scatter plot como tecnica de visualizacion."}
+{"n": 70, "verdict": "COVERED", "concepto": "SageMaker serverless endpoint modelo pequeno", "razon": "Candidata coincide: modelo de fraude on-prem <GB -> serverless endpoint."}
+{"n": 71, "verdict": "COVERED", "concepto": "SMOTE en Data Wrangler para churn imbalance", "razon": "Candidata ensena oversampling para desbalance antes del training job."}
+{"n": 72, "verdict": "COVERED", "concepto": "Transcribe + Comprehend topic detection", "razon": "Pipeline audio->texto->NLP (topics) ya cubierto por catalogo de audio en universo."}
+{"n": 73, "verdict": "COVERED", "concepto": "Scheduled scaling antes de eventos", "razon": "Candidata coincide casi exacta: scheduled scaling que aumenta capacidad antes del evento."}

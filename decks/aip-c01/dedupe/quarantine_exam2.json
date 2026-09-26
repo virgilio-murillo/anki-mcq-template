@@ -1,0 +1,70 @@
+[
+  {
+    "n": 4,
+    "reason": "sin marcador Incorrect/Correct (no se pudo delimitar opciones)",
+    "stem": "A nationwide property management firm manages a broad portfolio of commercial spaces and residential complexes distributed across several metropolitan areas. The organization recently integrated Amazon SageMaker Clarify into the analytics workflow to support ongoing evaluations of bias trends within tenant survey datasets. As the modernization program progresses, leadership aims to streamline the "
+  },
+  {
+    "n": 20,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "An enterprise manages several AWS accounts through AWS Organizations with all features enabled. Development teams deploy generative AI workloads using Amazon Bedrock across these accounts. The organization must block restricted subjects and confidential business data from appearing in model prompts. Additionally, only a pre-approved set of foundation models may be invoked. Central administration o",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 6
+  },
+  {
+    "n": 22,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A global technology firm is expanding its internal artificial-intelligence ecosystem by combining several AWS ML services, including Amazon Comprehend for automated document classification and Amazon Kendra for semantic enterprise search. As part of its next-generation GenAI initiative, the firm plans to deploy Amazon Q Business as an intelligent assistant that can surface insights from technical ",
+    "category": "AIP – Implementation and Integration",
+    "n_options": 7
+  },
+  {
+    "n": 29,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A global company recently launched an initiative to modernize its content-review workflow by integrating Amazon Translate with Amazon Bedrock foundation models (FMs), enabling multilingual script processing, concept exploration, and automated summarization. Leadership later issued a strict governance rule to keep experimentation controlled. Only specific AWS and Meta Llama models are approved for ",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 7
+  },
+  {
+    "n": 31,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A company is building a personalized recommendation system for its e-commerce platform using Amazon Bedrock and Amazon SageMaker AI. The customer transaction data is stored in Amazon S3 and cataloged using AWS Glue Data Catalog.",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "n_options": 7
+  },
+  {
+    "n": 39,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A major analytics firm is developing an intelligent reporting engine that transforms regulatory filings into structured financial assessments. The system uses Amazon Bedrock for foundation model inference and Amazon SageMaker Processing to prepare metadata, financial tables, and multi-section narratives for model consumption. As the architecture expands, the engineering division begins refining th",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "n_options": 7
+  },
+  {
+    "n": 42,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A digital archiving team processes incoming multi-page PDFs that contain a mix of scanned diagrams, handwritten notes, and typed paragraphs. A Generative AI developer on the team uses Amazon Bedrock Data Automation (BDA) to classify each page and extract structured information. To improve quality monitoring, the developer also integrates Amazon Augmented AI (A2I) to sample extracted pages for huma",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "n_options": 9
+  },
+  {
+    "n": 43,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A nationwide electronics distributor is developing a generative AI (GenAI) support platform that relies on core GenAI functionality such as natural-language interpretation, dynamic answer generation, and automated troubleshooting assistance. To maintain consistent and multilingual product information, the engineering team preprocesses catalog data with Amazon Translate before passing it to Amazon ",
+    "category": "AIP – Operational Efficiency and Optimization for Generative AI Applications",
+    "n_options": 7
+  },
+  {
+    "n": 45,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "An insurance company operates a large network of customer support agents who handle policy inquiries over the phone. At the end of each call, the audio is saved as an MP3 file directly into an Amazon S3 bucket. Business stakeholders require that Amazon Bedrock foundation models (FMs) automatically generate summaries and sentiment analysis for each recorded conversation immediately upon landing in ",
+    "category": "AIP – Implementation and Integration",
+    "n_options": 6
+  },
+  {
+    "n": 74,
+    "reason": "sin 'Hence, the correct answer is:' (correcta no identificable)",
+    "stem": "A multinational financial services firm is expanding its internal AI capabilities by introducing several generative AI assistants tailored to five independently operated regional subsidiaries spanning North America and the European Union. Each assistant is powered by Amazon Bedrock and relies on a RAG architecture to retrieve answers from subsidiary-specific document repositories holding terabytes",
+    "category": "AIP – Implementation and Integration",
+    "n_options": 4
+  }
+]

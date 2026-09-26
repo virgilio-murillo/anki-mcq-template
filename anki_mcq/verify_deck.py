@@ -26,7 +26,7 @@ import os
 import shutil
 import zipfile
 
-from .engine import render_options
+from .engine import render_options, _LETTERS
 
 _VERDICT_RE = re.compile(r'class="verdict">\s*(?:Correct|Correcta):\s*([A-D])\b')
 _MARKED_RE = re.compile(r'class="opt correct"><span class="k">([A-D])')
@@ -54,6 +54,48 @@ def _check_answer_html(answer_html):
         if '<a href=' not in after:
             issues.append("bloque links sin href")
     return issues
+
+
+# Tokens that identify a specific answer (service/API/CamelCase/code/acronyms).
+_SALIENT_RE = re.compile(
+    r'[A-Z][a-z]{2,}[A-Z][A-Za-z]+'      # CamelCase e.g. CreateModelInvocationJob
+    r'|[a-z]+:[a-zA-Z]+'                  # code ns e.g. s3:GetObject, validation:rmse
+    r'|[A-Z][a-zA-Z]{3,}'                 # Proper nouns e.g. Pipelines, Clarify, Athena
+    r'|[A-Z]{2,}'                         # Acronyms e.g. ROC, DMS, ECR, PCA
+)
+# Generic words that are not give-aways even if capitalized/shared.
+_GIVEAWAY_STOP = {
+    "Amazon", "AWS", "SageMaker", "Use", "Using", "The", "This", "With",
+    "Configure", "Create", "Deploy", "Set", "Usar", "Crear", "Para", "Que",
+    "ML", "AI", "API", "Que", "For", "And",
+}
+
+
+def _salient_tokens(text):
+    plain = re.sub(r'<[^>]+>', '', text or '')
+    return {t for t in _SALIENT_RE.findall(plain) if t not in _GIVEAWAY_STOP}
+
+
+def _extra_giveaway(cards_options, correct_idx, answer_html):
+    """Flag if the Exam-tip (extra) block re-names a token UNIQUE to the correct
+    option (i.e. not shared by any distractor). That leaks the answer by pointing
+    the reader straight at the correct choice's proper name in the 'tip'.
+    """
+    m = re.search(r'class="extra">(.*?)</div>', answer_html, re.S)
+    if not m:
+        return None
+    tip = m.group(1)
+    correct = cards_options[correct_idx]
+    distractor_tokens = set()
+    for j, o in enumerate(cards_options):
+        if j != correct_idx:
+            distractor_tokens |= _salient_tokens(o)
+    unique_correct = _salient_tokens(correct) - distractor_tokens
+    tip_tokens = _salient_tokens(tip)
+    leaked = sorted(unique_correct & tip_tokens)
+    if leaked:
+        return f"exam tip delata la respuesta (nombra {leaked} exclusivo de la correcta)"
+    return None
 
 
 def verify_cards(cards, shuffle_seed_base=1):
@@ -92,6 +134,15 @@ def verify_cards(cards, shuffle_seed_base=1):
             problems.append((idx, f"verdict dice {mv.group(1)} pero la correcta es {letter}"))
         for iss in _check_answer_html(answer):
             problems.append((idx, iss))
+        _leak = _extra_giveaway(c["options"], c["correct"], answer)
+        if _leak:
+            problems.append((idx, _leak))
+        # No emphasis markup inside options: bold/code/italic/underline on the
+        # front would visually flag one option (the answer). Options must be
+        # uniform plain text.
+        for _oi, _o in enumerate(c["options"]):
+            if re.search(r'</?(b|strong|code|i|em|u|mark)\b', _o, re.I):
+                problems.append((idx, f"opcion {_LETTERS[_oi]} tiene markup de enfasis (delata/desnivela); las opciones deben ser texto plano"))
         key = c.get("key") or c["question"]
         if key in seen_keys:
             problems.append((idx, f"key duplicada: {key!r}"))

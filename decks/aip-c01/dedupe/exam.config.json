@@ -1,0 +1,10 @@
+{
+  "cert": "AIP-C01",
+  "deck_root": "AIP-C01",
+  "keyprefix": "aip",
+  "exams": [
+    {"file": "../../../AIP-C01/exam1.txt", "deck": "AIP-C01::01", "keyprefix": "aip01"},
+    {"file": "../../../AIP-C01/exam2.txt", "deck": "AIP-C01::02", "keyprefix": "aip02"},
+    {"file": "../../../AIP-C01/exam3.txt", "deck": "AIP-C01::03", "keyprefix": "aip03"}
+  ]
+}

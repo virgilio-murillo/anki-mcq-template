@@ -1,0 +1,63 @@
+[
+  {
+    "n": 15,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A GenAI developer working for a global technology enterprise is designing a real-time conversational AI assistant that must support thousands of concurrent interactions across multiple business units. Incoming text inputs are enriched with entity and sentiment analysis through Amazon Comprehend, while specialized classification tasks are handled by hosted models on Amazon SageMaker AI. The assista",
+    "category": "AIP – Implementation and Integration",
+    "n_options": 8
+  },
+  {
+    "n": 18,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A financial services enterprise is standardizing on Amazon SageMaker AI for feature engineering and model lifecycle, while a custom fraud detection model deployed as a SageMaker AI real-time inference endpoint scores card transactions as they arrive. Fraud decisions are published to Amazon Simple Notification Service (SNS) topics to fan out alerts to downstream fraud case management systems. Data ",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 8
+  },
+  {
+    "n": 22,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "An international media company is developing a generative AI model to provide personalized sci-fi series recommendations based on user preferences. The company is utilizing AWS services, specifically Amazon SageMaker for model training and Amazon Comprehend for natural language processing (NLP) tasks, including sentiment analysis. The dataset consists of a large collection of sci-fi series reviews",
+    "category": "AIP – Testing, Validation, and Troubleshooting",
+    "n_options": 8
+  },
+  {
+    "n": 29,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "An ML engineering team is building a secure, multi-service pipeline that uses Amazon SageMaker AI for model training and Amazon Comprehend for entity extraction. The pipeline is triggered by Amazon EventBridge and orchestrated using AWS Step Functions.",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 7
+  },
+  {
+    "n": 31,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A global e-commerce enterprise is building an intelligent natural language processing (NLP) system to enhance its customer engagement platform, TD-Assistance. The company uses Amazon Bedrock to access a foundation model for generative conversational responses and Amazon SageMaker AI to fine-tune a Bidirectional Encoder Representations from Transformers (BERT) model on proprietary chat transcripts ",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 9
+  },
+  {
+    "n": 36,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A pharmaceutical research company is building an AI assistant to accelerate clinical trial analysis. The assistant must analyze patient lab results stored in Amazon S3, calculate summary statistics, and generate visualizations to identify trends in adverse events. It also needs to retrieve the latest clinical trial publications and regulatory updates from public websites to ensure trial protocols ",
+    "category": "AIP – Foundation Model Integration, Data Management, and Compliance",
+    "n_options": 7
+  },
+  {
+    "n": 44,
+    "reason": "sin marcador Incorrect/Correct (no se pudo delimitar opciones)",
+    "stem": "A rapidly growing e-commerce platform has deployed a customer support chatbot built on Amazon Lex and powered by a generative AI model. The chatbot handles a high volume of customer interactions across multiple channels, including questions about product specifications, stock availability, order statuses, and account management. To improve understanding of user intent, the development team leverag"
+  },
+  {
+    "n": 63,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A publishing company is developing an internal generative AI platform to automate the creation of research article drafts and editorial summaries. The company uses Amazon Comprehend for text preprocessing and data cleaning, and Amazon Bedrock Agents to automate content retrieval, citation validation, and orchestration of large language model (LLM) tasks across the editorial workflow. An AI develop",
+    "category": "AIP – Implementation and Integration",
+    "n_options": 7
+  },
+  {
+    "n": 70,
+    "reason": "multi-select (motor soporta 1 correcta)",
+    "stem": "A digital health startup is developing a compliance pipeline to process patient documents, including scanned intake forms, handwritten prescriptions, and clinical notes. The organization uses Amazon Textract to extract text and structured data from the scanned documents and Amazon Rekognition to detect and blur faces appearing in uploaded medical images.",
+    "category": "AIP – AI Safety, Security, and Governance",
+    "n_options": 7
+  }
+]
