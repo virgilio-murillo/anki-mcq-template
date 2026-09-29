@@ -19,7 +19,9 @@ from .engine import (
     CSS,
 )
 from .create_deck import create
-from .verify_deck import verify_cards, verify_apkg
+from .verify_deck import verify_cards, verify_apkg, check_distribution, concepts_preserved
+from .normalize_deck import normalize as normalize_deck
+from .gold_reference import load_gold_reference
 from .sync_deck import sync
 from .universe import (
     build_universe,
@@ -64,6 +66,10 @@ __all__ = [
     "create",
     "verify_cards",
     "verify_apkg",
+    "check_distribution",
+    "concepts_preserved",
+    "normalize_deck",
+    "load_gold_reference",
     "sync",
     # universe builder
     "build_universe",

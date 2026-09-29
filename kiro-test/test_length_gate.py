@@ -108,6 +108,46 @@ check("correct cambio" in v_correct, "_validate_rewrite catches changed correct"
 r = normalize(longish, ref, plan_only=True)
 check(r["rewritten"] is longish, "normalize plan_only leaves cards untouched")
 
+# --- Reproducibility fixes (investigation ba80172f) ---
+from anki_mcq.gold_reference import load_gold_reference
+from anki_mcq.llm_shorten import llm_shorten, set_backend, _extract_json_object
+from anki_mcq.verify_deck import concept_tokens
+
+# 12) gold_reference loads the MLA deck with no side effects
+gold = load_gold_reference()
+check(len(gold) > 100, "load_gold_reference returns the MLA cards", f"{len(gold)} cards")
+check(all(c.get("key") for c in gold), "every gold card has a stable key")
+check(check_distribution(gold) == [], "gold reference passes distribution (valid shape ref)")
+
+# 13) H5: normalize short-circuits when the deck already matches the reference shape
+called = {"n": 0}
+def _counting_llm(card_dict, prompt):
+    called["n"] += 1
+    return card_dict
+r2 = normalize(ref, ref, llm_shorten=_counting_llm)  # ref already gold-shaped
+check(called["n"] == 0, "normalize makes 0 LLM calls on an already-good deck (H5)")
+check(r2["rewritten"] is ref, "normalize returns cards untouched when shape is fine")
+
+# 14) H4: concept detection now sees ports, CIDR, protocol versions, CLI tools
+check("puerto 443" in concept_tokens("abrir el puerto 443"), "port value is an examinable token")
+check(any("/16" in t for t in concept_tokens("bloque 10.0.0.0/16")), "CIDR is an examinable token")
+check("systemctl" in concept_tokens("reiniciar con systemctl"), "CLI tool is an examinable token")
+# a Spanish verb conjugation is NOT a concept
+check("Configura" not in concept_tokens("Configura el grupo"), "verb conjugation 'Configura' is not a concept")
+
+# 15) H2: llm_shorten errors clearly with no backend, and preserves key/correct with one
+try:
+    llm_shorten({"key": "k", "correct": 1, "options": [1, 2, 3, 4], "answer": "a", "question": "q"}, "p")
+    check(False, "llm_shorten raises without a backend")
+except RuntimeError:
+    check(True, "llm_shorten raises a clear error without a backend")
+set_backend(lambda prompt: '{"question":"corto","options":["a","b","c","d"],"correct":0,"answer":"","key":"HACK"}')
+_old = {"key": "real", "correct": 2, "options": ["w", "x", "y", "z"], "answer": "dorso", "question": "largo"}
+_new = llm_shorten(_old, "p")
+check(_new["key"] == "real" and _new["correct"] == 2, "llm_shorten forces original key/correct (H2 safety)")
+check(_new["answer"] == "dorso", "llm_shorten restores dropped answer")
+set_backend(None)  # reset
+
 if _fail == 0:
     print("\nALL LENGTH-GATE TESTS PASSED", flush=True)
     sys.exit(0)

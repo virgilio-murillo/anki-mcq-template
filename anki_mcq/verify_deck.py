@@ -351,13 +351,45 @@ _CONCEPT_STOP = {
     "IA", "ML", "AI", "FM", "LLM", "NLP", "JSON", "GenAI", "REST", "SDK",
     "Modelos", "Funciones", "Lambdas", "Regiones", "MENOR", "MENORES",
     "SALIDAS", "RRHH", "Europa", "Fine",
+    # Spanish verb CONJUGATIONS (3rd person / imperative) seen at option/stem
+    # start in non-AWS domains (networking, security, Linux). Infinitives above
+    # are not enough; a deck may say "Configura...", "Ejecuta...".
+    "Configura", "Ejecuta", "Crea", "Habilita", "Aplica", "Usa", "Rota",
+    "Valida", "Escala", "Despliega", "Reinicia", "Monitorea", "Registra",
+    "Almacena", "Recupera", "Procesa", "Analiza", "Optimiza", "Integra",
+    "Genera", "Define", "Permite", "Mantiene", "Reduce", "Envia", "Activa",
+    "Verifica", "Automatiza", "Orquesta", "Construye", "Implementa", "Utiliza",
 }
+
+# Examinable NON-CamelCase values that _CONCEPT_RE misses: network ports, CIDR
+# blocks, protocol versions, common CLI tools. Changing "puerto 443" -> "puerto 53"
+# or "/16" -> "/24" IS an examinable change; these regexes make it visible so
+# concepts_preserved can catch it in networking/security/Linux decks.
+_VALUE_RES = [
+    re.compile(r'\bpuerto\s+\d{1,5}\b', re.IGNORECASE),          # puerto 443
+    re.compile(r'\bport\s+\d{1,5}\b', re.IGNORECASE),            # port 22
+    re.compile(r'\b\d{1,3}(?:\.\d{1,3}){3}/\d{1,2}\b'),          # 10.0.0.0/16
+    re.compile(r'/\d{1,2}\b'),                                   # bare /16 mask
+    re.compile(r'\b(?:TLS|SSL|HTTP|HTTPS|IPv|TCP|UDP|SSH|BGP)\s*[0-9.]*\b', re.IGNORECASE),
+    re.compile(r'\b(?:systemctl|systemd|nginx|kubectl|chmod|chown|iptables|'
+               r'crontab|journalctl|firewalld|selinux)\b', re.IGNORECASE),
+]
+
+
+def _value_tokens(plain):
+    out = set()
+    for rx in _VALUE_RES:
+        for m in rx.findall(plain):
+            out.add(m.strip().lower() if isinstance(m, str) else m)
+    return out
 
 
 def concept_tokens(text):
-    """Salient examinable tokens (service/API/acronym names) in a text."""
+    """Salient examinable tokens (service/API/acronym names + network/CLI values)."""
     plain = _plain(text)
-    return {t for t in _CONCEPT_RE.findall(plain) if t not in _CONCEPT_STOP}
+    toks = {t for t in _CONCEPT_RE.findall(plain) if t not in _CONCEPT_STOP}
+    toks |= _value_tokens(plain)
+    return toks
 
 
 def concepts_preserved(old_card, new_card):

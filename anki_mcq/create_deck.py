@@ -30,7 +30,7 @@ import os
 import urllib.request
 
 from .engine import build_deck
-from .verify_deck import verify_cards, verify_apkg, warn_cards
+from .verify_deck import verify_cards, verify_apkg, warn_cards, check_distribution
 
 ANKICONNECT = "http://localhost:8765"
 
@@ -46,11 +46,37 @@ def _invoke(action, **params):
     return data["result"]
 
 
-def create(deck_name, cards, out_path, do_import=True, verbose=True):
+def create(deck_name, cards, out_path, do_import=True, verbose=True,
+           ref_cards=None, llm_shorten=None, enforce_distribution=True):
     """Build -> verify -> (optionally) import a deck straight into `deck_name`.
 
     Returns the count of cards on success. Raises if verification fails.
+
+    NORMALIZATION (see DECK_STANDARDS.md section 11): pass `ref_cards` (the gold
+    reference deck, e.g. from gold_reference.load_gold_reference()) to normalize
+    this deck's length distribution toward it BEFORE building. If `llm_shorten`
+    is also given, over-budget cards are shortened (one model call each, concepts
+    preserved); without it, normalization only plans (no rewrite) but the
+    distribution gate below still runs.
+
+    DISTRIBUTION GATE: when `ref_cards` is given and `enforce_distribution` is
+    True (default), `check_distribution` runs as a HARD gate so a deck that is
+    uniformly too long (the "everything is verbose" regression) fails loudly
+    instead of shipping. When `ref_cards` is None the gate is skipped (backward
+    compatible with existing per-deck scripts that do not pass a reference).
     """
+    # 0) Normalize toward the gold reference (optional, but recommended). This is
+    #    the step that keeps a freshly generated deck from being 2x denser than
+    #    the gold. See DECK_STANDARDS.md section 11.
+    if ref_cards is not None:
+        from .normalize_deck import normalize
+        result = normalize(cards, ref_cards, llm_shorten=llm_shorten)
+        cards = result["rewritten"]
+        if result["review"] and verbose:
+            print(f">> normalizacion: {len(result['review'])} card(s) para revision manual:")
+            for key, reason in result["review"]:
+                print(f"   - {key}: {reason}")
+
     # 1) Quality gate on the cards themselves.
     problems = verify_cards(cards)
     if problems:
@@ -62,6 +88,16 @@ def create(deck_name, cards, out_path, do_import=True, verbose=True):
         print(f">> {len(warnings)} advertencia(s) (no bloquean):")
         for idx, w in warnings:
             print(f"   - card {idx}: {w}")
+
+    # 1c) Distribution gate: fail a deck whose SHAPE is far from the gold. Only
+    #     enforced when a reference is provided (so legacy calls are unaffected).
+    if ref_cards is not None and enforce_distribution:
+        dist_issues = check_distribution(cards)
+        if dist_issues:
+            raise SystemExit(
+                "check_distribution failed (la baraja es mas densa que la de "
+                f"referencia): {dist_issues}"
+            )
 
     # 2) Build the .apkg with the FULL subdeck name and a unique, stable deck id.
     build_deck(deck_name, cards, out_path, verbose=verbose)

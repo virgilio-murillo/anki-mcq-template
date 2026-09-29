@@ -212,6 +212,34 @@ card, each card has a verdict, and each back refutes its distractors.
 `create()` runs this automatically before importing. Do not import a deck that
 fails verification.
 
+## Keep new decks as concise as the gold deck (normalization)
+
+A freshly generated deck (especially from an exam dump) tends to be uniformly
+verbose. The per-card gate only catches extreme outliers, so a deck can pass it
+yet be ~2x denser than the hand-tuned gold deck and tiring to study. To prevent
+that, normalize a new deck against the gold reference (MLA-C01) BEFORE importing.
+Full rules in [docs/DECK_STANDARDS.md](docs/DECK_STANDARDS.md) sections 10-11.
+
+The one-shot way is to pass `ref_cards` (and, to actually rewrite, `llm_shorten`)
+to `create()`. It normalizes the length distribution toward the gold, runs
+`check_distribution` as a hard gate, then builds/verifies/imports:
+
+```python
+from anki_mcq import create
+from anki_mcq.gold_reference import load_gold_reference
+from anki_mcq.llm_shorten import llm_shorten, set_backend
+
+set_backend(my_model_fn)   # my_model_fn(prompt:str) -> str; see llm_shorten.py for a Bedrock example
+create(deck_name="SAA-C03::01", cards=new_cards, out_path="out/saa_01.apkg",
+       ref_cards=load_gold_reference(), llm_shorten=llm_shorten)
+```
+
+Guarantees: `key` and `correct` never change (review progress preserved), no
+examinable concept is deleted (moved to the card back instead; verified by
+`concepts_preserved`), and at most one model call per over-budget card. Cards the
+model cannot safely shorten are reported for human review, never silently broken.
+If you omit `ref_cards`, `create()` behaves exactly as before (no normalization).
+
 ## Requirements
 
 - Python 3.8+

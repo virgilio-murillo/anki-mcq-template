@@ -191,6 +191,13 @@ def normalize(new_cards, ref_cards, llm_shorten=None, plan_only=False):
     if plan_only or llm_shorten is None:
         return {"plan": plan, "rewritten": new_cards, "review": []}
 
+    # H5: if the deck already matches the reference SHAPE, do not rewrite anything.
+    # budget_for_deck is per-card and stricter than the deck-level distribution
+    # gate, so a deck that already passes check_distribution would otherwise
+    # trigger dozens of needless LLM calls. Skip when the shape is already good.
+    if not check_distribution(new_cards):
+        return {"plan": plan, "rewritten": new_cards, "review": []}
+
     out = []
     review = []
     for card, p in zip(new_cards, plan):

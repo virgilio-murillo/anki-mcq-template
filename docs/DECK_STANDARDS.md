@@ -230,8 +230,25 @@ Usage sketch:
 
 ```python
 from anki_mcq.normalize_deck import normalize
-result = normalize(new_cards, reference_cards=mla_cards, llm_shorten=my_llm_fn)
-# my_llm_fn(card_dict, prompt_str) -> rewritten card_dict, called <=1x per card
+from anki_mcq.gold_reference import load_gold_reference
+from anki_mcq.llm_shorten import llm_shorten
+
+mla_cards = load_gold_reference()          # 224 MLA cards, no side effects
+# NOTE: ref_cards is POSITIONAL (not reference_cards=).
+result = normalize(new_cards, mla_cards, llm_shorten=llm_shorten)
+# llm_shorten(card_dict, prompt_str) -> rewritten card_dict, called <=1x per card
+new_cards = result["rewritten"]
 for key, reason in result["review"]:
     ...  # human-review the few cards the LLM could not safely shorten
+```
+
+Or let `create()` do it in one shot (see `create_deck.create(ref_cards=...)`):
+
+```python
+from anki_mcq import create
+from anki_mcq.gold_reference import load_gold_reference
+from anki_mcq.llm_shorten import llm_shorten
+create(deck_name="SAA-C03::01", cards=new_cards, out_path="out/saa_01.apkg",
+       ref_cards=load_gold_reference(), llm_shorten=llm_shorten)
+# create() normalizes, runs check_distribution as a hard gate, builds, verifies, imports.
 ```
