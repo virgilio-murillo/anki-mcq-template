@@ -22,6 +22,7 @@ from .create_deck import create
 from .verify_deck import verify_cards, verify_apkg, check_distribution, concepts_preserved
 from .normalize_deck import normalize as normalize_deck
 from .refocus_deck import refocus as refocus_deck, needs_refocus
+from .clarity_pass import clarity as clarity_pass, needs_clarity
 from .gold_reference import load_gold_reference
 from .sync_deck import sync
 from .universe import (
@@ -72,6 +73,8 @@ __all__ = [
     "normalize_deck",
     "refocus_deck",
     "needs_refocus",
+    "clarity_pass",
+    "needs_clarity",
     "load_gold_reference",
     "sync",
     # universe builder

@@ -186,6 +186,48 @@ vr = _validate_refocus(
     {"key": "k", "correct": 1, "options": ["a", "b", "c", "d"], "question": "q", "answer": "x"})
 check("correct cambio" in vr, "_validate_refocus catches changed correct", vr)
 
+# --- Clarity pass tests ---
+from anki_mcq.clarity_pass import (needs_clarity, clarity_defects, stem_is_fragment,
+                                   option_is_namedrop, repeated_tail, has_typo, clarity, _validate_clarity)
+
+# 20) telegraphic stem detected; well-formed stem not
+frag = mk("Deteccion de fraude a 1000 tps sub-500 ms, datos europeos en Europa. Que cumple?",
+          ["Amazon Athena para SQL", "Amazon Redshift", "Amazon EMR", "AWS Glue"])
+frag["key"] = "cl-frag"
+check(stem_is_fragment(frag["question"]), "telegraphic stem detected")
+wellformed = mk("Una app necesita consultar datos en S3 con SQL. Que servicio conviene?",
+                ["Amazon Athena para SQL", "Amazon Redshift", "Amazon EMR", "AWS Glue"])
+check(not stem_is_fragment(wellformed["question"]), "well-formed stem not flagged")
+
+# 21) name-drop option detected; glossed option not
+check(option_is_namedrop("PreProcessingTrace y OrchestrationTrace"), "name-drop option detected")
+check(not option_is_namedrop("Amazon Athena para consultar S3 con SQL"), "glossed option not flagged")
+
+# 22) repeated tail across options detected
+rt = repeated_tail(["X contra un golden dataset", "Y contra un golden dataset",
+                    "Z contra un golden dataset", "W distinto"])
+check(rt == "un golden dataset", "repeated tail detected", str(rt))
+
+# 23) typo detector: broken n~ flagged, real 'Sonnet' NOT flagged
+check(has_typo(mk("q", ["salida daninna", "b", "c", "d"])), "broken n~ 'daninna' flagged as typo")
+check(not has_typo(mk("Claude Sonnet para X", ["a", "b", "c", "d"])), "real name 'Sonnet' NOT a typo")
+
+# 24) clarity plan_only lists candidates, no LLM call
+cl_called = {"n": 0}
+def _cl_llm(cd, pr):
+    cl_called["n"] += 1
+    return cd
+clp = clarity([frag, wellformed], plan_only=True)
+check(frag["key"] in clp["candidates"], "clarity candidates include the fragment card")
+check(cl_called["n"] == 0, "clarity plan_only makes 0 LLM calls")
+
+# 25) _validate_clarity catches a weakened back
+vc2 = _validate_clarity(
+    {"key": "k", "correct": 0, "options": ["a", "b", "c", "d"], "question": "q",
+     "answer": "una explicacion larga con muchas palabras que refuta cada distractor en detalle aqui"},
+    {"key": "k", "correct": 0, "options": ["a", "b", "c", "d"], "question": "q", "answer": "corto"})
+check("empobrecio" in vc2, "_validate_clarity catches a weakened back", vc2)
+
 if _fail == 0:
     print("\nALL LENGTH-GATE TESTS PASSED", flush=True)
     sys.exit(0)

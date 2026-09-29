@@ -59,10 +59,10 @@ cards.append(card(
 cards.append(card(
     question="Un asistente GenAI necesita un pipeline <b>continuo</b> que enriquezca S3 con Comprehend y alimente un FM, <b>con minimo ETL manual</b>. &iquest;Que enfoque es mas escalable?",
     options=[
-        "Amazon Bedrock Data Automation: ingesta continua de S3 y enriquecimiento",
+        "Amazon Bedrock Data Automation, que ingiere S3 y enriquece en continuo",
         "Amazon EventBridge que dispara AWS Lambda ante datos nuevos en S3",
-        "Exportar el CRM a S3 cada semana y un SageMaker Notebook",
-        "SageMaker Data Wrangler y reentrenamiento manual del FM en Bedrock",
+        "Exportar el CRM a S3 cada semana y procesar en un SageMaker Notebook",
+        "SageMaker Data Wrangler que transforma, con reentrenamiento manual del FM en Bedrock",
     ],
     correct=0,
     key="aip03-q3",
@@ -236,7 +236,7 @@ cards.append(card(
 # Q28 - Bedrock InvocationLatency y fine-tune Titan
 # ============================================================
 cards.append(card(
-    question="Fine-tuning de Titan Text por la API de Bedrock. Cumplimiento: <b>cifrar con KMS</b>, <b>auditar llamadas a Bedrock</b> y <b>monitorear latencia por Region</b>. &iquest;Que es seguro?",
+    question="Un equipo hace fine-tuning de Titan Text por la API de Bedrock y por Cumplimiento debe <b>cifrar con KMS</b>, <b>auditar las llamadas a Bedrock</b> y <b>monitorear latencia por Region</b>. &iquest;Que opcion es segura?",
     options=[
         "Datos en S3 con KMS, Bedrock con CMK, CloudTrail y CloudWatch",
         "SSE-S3, despliegue tras API Gateway, Macie y logs de API Gateway",
@@ -327,9 +327,9 @@ cards.append(card(
     question="El modelo por lotes de una fintech no marca el fraude a tiempo. Buscan deteccion <b>en tiempo real</b> que <b>rechace al momento</b>, con <b>minimo esfuerzo</b>. &iquest;Que cumple?",
     options=[
         "La API de prediccion de Amazon Fraud Detector",
-        "Un modelo supervisado en SageMaker AI desplegado en EC2 a medida",
+        "Un modelo supervisado propio en SageMaker AI que clasifica en EC2",
         "Comprehend para extraer entidades y reentrenar en SageMaker AI",
-        "Amazon Lookout for Vision sobre imagenes de comprobantes",
+        "Amazon Lookout for Vision, que detecta defectos en imagenes",
     ],
     correct=0,
     key="aip03-q45",
@@ -358,9 +358,9 @@ cards.append(card(
     question="Una app GenAI de viajes en Bedrock da <b>respuestas lentas</b> y <b>alucina paquetes no reservables</b>. Se descarto OpenSearch propio; se requiere <b>integracion nativa</b>. &iquest;Que cumple?",
     options=[
         "Una Bedrock Knowledge Base con RAG y el parametro PerformanceConfigLatency",
-        "Grounding de Guardrails, Automated Reasoning checks y throughput dedicado",
+        "Grounding de Guardrails y Automated Reasoning que validan respuestas, con throughput dedicado",
         "Un Bedrock Agent con action group sobre Lambda y prompt engineering",
-        "Indexar en Amazon Kendra, inyectar snippets y cachear en DynamoDB",
+        "Indexar en Amazon Kendra para reducir latencia, con snippets y cache en DynamoDB",
     ],
     correct=0,
     key="aip03-q53",
@@ -387,9 +387,9 @@ cards.append(card(
 cards.append(card(
     question="Un Neural Topic Model (NTM) de SageMaker mezcla <b>stopwords</b> con <b>palabras raras valiosas</b>. Hay que <b>excluir stopwords conservando las raras</b>. &iquest;Como refinar el modelo?",
     options=[
-        "La funcion CountVectorizer de scikit-learn",
+        "CountVectorizer de scikit-learn, que filtra stopwords",
         "Indexar con Amazon OpenSearch filtrando stopwords",
-        "La deteccion de entidades de Amazon Comprehend",
+        "Amazon Comprehend, que detecta entidades en el texto",
         "SageMaker Processing con un script a medida",
     ],
     correct=0,
@@ -477,8 +477,8 @@ cards.append(card(
     question="Un clasificador en SageMaker logra <b>98% en entrenamiento y 76% en validacion</b> con datos limpios: <b>memoriza por exceso de complejidad</b>. &iquest;Que conviene?",
     options=[
         "A&ntilde;adir mas capas convolucionales para capturar mas detalle",
-        "Regularizacion mas fuerte via hiperparametros y reentrenar",
-        "Reasignar muestras cambiando la division a 75/25",
+        "Regularizacion mas fuerte que reduce el sobreajuste, y reentrenar",
+        "Reasignar muestras cambiando la division a 75/25 para validar mejor",
         "Configurar Rekognition para generar menos etiquetas por imagen",
     ],
     correct=1,
@@ -690,12 +690,12 @@ cards.append(card(
 # Q22r - Politica IAM condicionada a VPC endpoint sobre acciones sagemaker
 # ============================================================
 cards.append(card(
-    question="Notebooks de SageMaker AI en una VPC con interface endpoints, pero usuarios <b>fuera de la VPC</b> aun entran por Internet. &iquest;Como limitarlo a <b>solo la VPC</b>?",
+    question="Los Notebooks de SageMaker AI estan en una VPC con interface endpoints, pero usuarios <b>fuera de la VPC</b> aun pueden entrar por Internet. &iquest;Como limitar el acceso a <b>solo la VPC</b>?",
     options=[
-        "Una politica IAM sobre sagemaker:CreatePresignedNotebookInstanceUrl, solo desde el VPC endpoint",
-        "Actualizar el security group de las instancias notebook a los bloques CIDR de la VPC",
+        "Una politica IAM que permita sagemaker:CreatePresignedNotebookInstanceUrl solo desde el VPC endpoint",
+        "Actualizar el security group que filtra las instancias notebook a los CIDR de la VPC",
         "Configurar VPC Traffic Mirroring para capturar e identificar accesos no autorizados",
-        "Aplicar VPC Endpoint Policies IAM sobre el acceso al interface endpoint de SageMaker AI",
+        "VPC Endpoint Policies IAM que restringen el acceso al interface endpoint de SageMaker AI",
     ],
     correct=0,
     key="aip03r-q22",
@@ -722,10 +722,10 @@ cards.append(card(
 cards.append(card(
     question="Un clasificador con Rekognition Custom Labels falla con imagenes <b>boca abajo</b>. Deben mejorarlo <b>sin datos nuevos ni tocar el pipeline</b>. &iquest;Que enfoque es mas efectivo?",
     options=[
-        "Data augmentation: rotacion, volteo (flip) y escalado de imagenes",
+        "Data augmentation que genera variantes (rotacion, volteo, escalado)",
         "Normalizacion para una escala y brillo comunes",
         "Aumentar los epochs de entrenamiento",
-        "Transfer learning reutilizando las capas base de un modelo de vision",
+        "Transfer learning para reusar las capas base de un modelo de vision",
     ],
     correct=0,
     key="aip03r-q26",
@@ -934,8 +934,8 @@ cards.append(card(
 cards.append(card(
     question="Se reusa un tuning AMT previo pero el dataset <b>cambio de tama&ntilde;o y distribucion</b>. <b>No debe empezar de cero</b> y <b>debe parar solo</b> si la validation loss no mejora. &iquest;Que configuracion usar?",
     options=[
-        "Warm start tipo TRANSFER_LEARNING y AMT Early Stopping",
-        "Warm start modo IDENTICAL_DATA_AND_ALGORITHM y AMT Early Stopping",
+        "Warm start TRANSFER_LEARNING, que admite datos cambiados, con AMT Early Stopping",
+        "Warm start IDENTICAL_DATA_AND_ALGORITHM, que exige mismos datos, con AMT Early Stopping",
         "Un tuning job con espacio ampliado y optimizacion bayesiana desde cero",
         "Un nuevo tuning job con Hyperband, sin el warm start previo",
     ],
@@ -964,8 +964,8 @@ cards.append(card(
 cards.append(card(
     question="Una plataforma social quiere <b>detectar lenguaje toxico en tiempo real</b> con <b>puntajes de confianza</b> para bloquear o revisar. &iquest;Que solucion gestionada detecta toxicidad en texto?",
     options=[
-        "La deteccion de toxicidad de Amazon Comprehend",
-        "El analisis de sentimiento de Amazon Comprehend",
+        "Amazon Comprehend, que detecta contenido toxico con puntajes",
+        "Amazon Comprehend, que clasifica el sentimiento del texto",
         "Amazon Translate para convertir el texto antes de moderar",
         "Amazon Bedrock para fine-tuning de un modelo fundacional",
     ],
@@ -994,8 +994,8 @@ cards.append(card(
 cards.append(card(
     question="Titan en Bedrock con AWS Organizations. Exige RBAC con <b>IdP central</b>, que solo equipos aprobados invoquen ciertos FMs y <b>registrar todo</b>. &iquest;Que accion es la mas segura?",
     options=[
-        "Federacion SAML a AWS IAM Identity Center, permission sets por OU y una SCP",
-        "Amazon Cognito user pools por departamento, politicas IAM y CloudWatch Logs",
+        "Federacion SAML a AWS IAM Identity Center para acceso central, permission sets por OU y una SCP",
+        "Amazon Cognito user pools por departamento para autenticar, politicas IAM y CloudWatch Logs",
         "Politicas IAM por tags de recurso en los modelos Bedrock y AWS Config",
         "Politicas IAM con Bedrock Guardrails, reglas de EventBridge y AWS CloudTrail",
     ],
@@ -1085,9 +1085,9 @@ cards.append(card(
 cards.append(card(
     question="Petabytes de multimedia <b>sin etiquetar</b> en S3. Analistas <b>no expertos en ML</b> deben taggear varias modalidades <b>sin entrenar, etiquetar ni aprovisionar</b>. &iquest;Que es lo mas rapido?",
     options=[
-        "Amazon Comprehend, Amazon Transcribe y Amazon Rekognition gestionados",
+        "Amazon Comprehend, Transcribe y Rekognition gestionados, que analizan cada modalidad",
         "AWS Batch para correr scripts Python en contenedores periodicamente",
-        "Amazon Polly, Amazon Translate y Amazon Lex en un pipeline de SageMaker",
+        "Amazon Polly, Translate y Lex, que generan voz y traduccion, en un pipeline de SageMaker",
         "Amazon Transcribe y entrenar Neural Topic Model (NTM) y Object Detection",
     ],
     correct=0,
@@ -1204,7 +1204,7 @@ cards.append(card(
 # Q64r - SageMaker Asynchronous Inference (payload grande + picos)
 # ============================================================
 cards.append(card(
-    question="Se procesan imagenes de <b>hasta 60 MB</b> con Rekognition y Bedrock, con <b>picos impredecibles</b> y <b>minima infraestructura</b>. &iquest;Que solucion tiene menor operacion?",
+    question="Una app procesa imagenes de <b>hasta 60 MB</b> con Rekognition y Bedrock, con <b>picos impredecibles</b> y <b>minima infraestructura</b>. &iquest;Que solucion tiene menor operacion?",
     options=[
         "Un endpoint de SageMaker Asynchronous Inference con scaling policy",
         "Un pipeline en Amazon ECS on Fargate por schedule hacia Aurora",
@@ -1265,9 +1265,9 @@ cards.append(card(
 cards.append(card(
     question="En SageMaker Data Wrangler solo ~8% hizo churn (<b>desbalance</b>) y el XGBoost tiene <b>mala recall</b>. &iquest;Que enfoque lo resuelve <b>antes</b> del training job?",
     options=[
-        "SMOTE en SageMaker Data Wrangler antes del training job",
+        "SMOTE en SageMaker Data Wrangler, que genera muestras sinteticas, antes del training job",
         "SageMaker Model Monitor para detectar el desbalance tras el despliegue",
-        "Random Undersampling eliminando muestras de la clase mayoritaria",
+        "Random Undersampling, que reduce la clase mayoritaria quitando muestras",
         "SageMaker Clarify para analizar el desbalance y metricas de sesgo",
     ],
     correct=0,
@@ -1328,8 +1328,8 @@ cards.append(card(
     options=[
         "Una scheduled scaling policy que sube la capacidad antes del evento",
         "AWS Lambda para reiniciar el endpoint durante el trafico pico",
-        "Una step scaling policy segun uso de CPU y memoria",
-        "Aumentar el tama&ntilde;o de instancia del endpoint a un tipo mas grande",
+        "Una step scaling policy que reacciona al uso de CPU y memoria",
+        "Aumentar el tama&ntilde;o de instancia del endpoint para mas capacidad",
     ],
     correct=0,
     key="aip03r-q73",

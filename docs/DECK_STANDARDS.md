@@ -306,3 +306,37 @@ create(deck_name="SAA-C03::01", cards=new_cards, out_path="out/saa_01.apkg",
 `verify_deck.warn_cards` also emits a non-blocking advisory (the cover-the-options
 test) whenever a token leads every option, so a future deck surfaces the issue
 even if refocus is not run.
+
+
+## 13. Clarity: short does NOT mean cryptic
+
+Aggressive length compression can trade away readability. Two failure modes to
+avoid (they are separate from length and from convergence cues):
+
+- **Telegraphic stem**: the scenario becomes a comma-dump of constraints with no
+  conjugated verb, e.g. "Deteccion de fraude a 1000 tps sub-500 ms, datos
+  europeos solo en Europa. Que cumple?". Fix: write the setup as ONE sentence
+  with a subject and a verb, then a question starting with Que/Cual/Como. This
+  usually does NOT add words.
+- **Name-drop options**: an option that only lists API/service names without
+  saying what they do, e.g. "PreProcessingTrace, OrchestrationTrace y
+  PostProcessingTrace". For a concept the learner has not seen, that teaches
+  nothing. Fix: add a MINIMAL 2-4 word gloss of the function
+  ("Traces de las 3 fases del agente"). Only where the bare name is not clear.
+
+Also factor a repeated option tail (>=3 options ending the same) up into the
+stem (cover-the-options), and keep proper UTF-8 accents (no ASCII-ification, no
+broken "n~" for "ñ").
+
+Minimum-information does NOT mean telegraphic: it means ONE clear idea per card.
+The goal is short AND clear, not short AND cryptic. Adding clarity is not adding
+length: factoring tails and turning fragments into sentences can reduce words;
+only the 2-4 word glosses add a little, and only where a bare name would not
+teach the concept.
+
+`anki_mcq/clarity_pass.py` implements this as a pass (one LLM call per flagged
+card, same safety contract: key/correct unchanged, no concept dropped, back not
+weakened). `verify_deck.warn_cards` emits non-blocking advisories for
+telegraphic stems, name-drop options, and repeated tails so the issue surfaces
+in future decks. In `create()`, pass `clarity_llm=llm_shorten` (with a backend
+set) to run it; it runs after refocus and before normalization.

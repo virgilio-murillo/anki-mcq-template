@@ -48,7 +48,7 @@ def _invoke(action, **params):
 
 def create(deck_name, cards, out_path, do_import=True, verbose=True,
            ref_cards=None, llm_shorten=None, enforce_distribution=False,
-           refocus_llm=None):
+           refocus_llm=None, clarity_llm=None):
     """Build -> verify -> (optionally) import a deck straight into `deck_name`.
 
     Returns the count of cards on success. Raises if verification fails.
@@ -87,6 +87,19 @@ def create(deck_name, cards, out_path, do_import=True, verbose=True,
         if rf["review"] and verbose:
             print(f">> reenfoque: {len(rf['review'])} card(s) para revision manual:")
             for key, reason in rf["review"]:
+                print(f"   - {key}: {reason}")
+
+    # 0a2) Clarity pass: fix telegraphic stems, name-drop options, repeated
+    #      tails and typos WITHOUT inflating length. See DECK_STANDARDS.md sec 13.
+    if clarity_llm is not None:
+        from .clarity_pass import clarity
+        cl = clarity(cards, llm=clarity_llm)
+        cards = cl["rewritten"]
+        if verbose and cl["candidates"]:
+            print(f">> claridad: {len(cl['candidates'])} card(s) con defectos de claridad")
+        if cl["review"] and verbose:
+            print(f">> claridad: {len(cl['review'])} card(s) para revision manual:")
+            for key, reason in cl["review"]:
                 print(f"   - {key}: {reason}")
 
     # 0b) Normalize toward the gold reference (optional, but recommended). This

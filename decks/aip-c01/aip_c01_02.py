@@ -69,7 +69,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Un FM de Bedrock responde distinto ante prompts casi iguales. Con un dataset de variantes, <b>medir robustez de forma cuantitativa</b>. &iquest;Que lo logra?",
+        question="Un FM de Bedrock da respuestas distintas ante prompts casi iguales y el equipo <b>quiere medir su robustez de forma cuantitativa</b> con un dataset de variantes. &iquest;Que lo logra?",
         options=[
             "Job de model evaluation de Bedrock con metricas de robustez",
             "Claude a temperatura 0 y Lambda con distancia de Levenshtein",
@@ -84,7 +84,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Plataforma con Bedrock, antes de publicar, debe <b>quitar PII</b>, <b>moderar imagenes</b> y <b>bloquear salida daninna del FM</b>, con minima infraestructura. &iquest;Que cumple?",
+        question="Plataforma con Bedrock, antes de publicar, debe <b>quitar PII</b>, <b>moderar imagenes</b> y <b>bloquear salida dañina del FM</b>, con minima infraestructura. &iquest;Que cumple?",
         options=[
             "Step Functions con Comprehend, Rekognition y Bedrock Guardrails",
             "Lambda por evento S3 con Comprehend, Rekognition y reglas propias",
@@ -94,7 +94,7 @@ cards = [
         correct=0,
         key="aip02-q7",
         answer=(
-            "<div class=\"verdict\">Correcta: {{L}} - Step Functions + Comprehend (PII) + Rekognition (imagenes) + Bedrock Guardrails.</div><p><b>El problema:</b> encadenar tres controles (PII en texto, moderacion de imagenes y seguridad del FM) de forma automatica y sin montar infraestructura pesada.</p><p><b>Por que la respuesta sirve:</b> <b>Step Functions</b> coordina los pasos sin servidores. <b>Amazon Comprehend</b> detecta y redacta PII; <b>Amazon Rekognition</b> modera imagenes; y <b>Bedrock Guardrails</b> es el control gestionado que filtra entradas y salidas del modelo para bloquear contenido daninno. Todo con servicios administrados.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Lambda con reglas propias:</b> reescribir filtros de contenido daninno en Lambda duplica lo que Guardrails ya hace de forma gestionada, y hay que mantener esas reglas.</li><li><b>EventBridge a Lambdas separadas:</b> requiere coordinacion extra para saber si cada moderacion termino bien y omite Bedrock Guardrails, dejando sin proteger las entradas/salidas del FM.</li><li><b>Servicio en ECS:</b> introduce mas infraestructura que desplegar, escalar y mantener, y sustituye Guardrails por logica propia.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Seguridad de contenido de un FM = usar el guardrail gestionado (Comprehend para PII en texto, Rekognition para imagenes ya aparecen en varias opciones). La orquestacion serverless debe coordinar los pasos sin reimplementar filtros a mano.</div><div class=\"citas\"><span class=\"h\">Conceptos citados</span>Terminos relacionados que tambien aparecen en este escenario o entre los distractores: Disparar.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html\">docs.aws Bedrock Guardrails</a></div>"
+            "<div class=\"verdict\">Correcta: {{L}} - Step Functions + Comprehend (PII) + Rekognition (imagenes) + Bedrock Guardrails.</div><p><b>El problema:</b> encadenar tres controles (PII en texto, moderacion de imagenes y seguridad del FM) de forma automatica y sin montar infraestructura pesada.</p><p><b>Por que la respuesta sirve:</b> <b>Step Functions</b> coordina los pasos sin servidores. <b>Amazon Comprehend</b> detecta y redacta PII; <b>Amazon Rekognition</b> modera imagenes; y <b>Bedrock Guardrails</b> es el control gestionado que filtra entradas y salidas del modelo para bloquear contenido dañino. Todo con servicios administrados.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Lambda con reglas propias:</b> reescribir filtros de contenido dañino en Lambda duplica lo que Guardrails ya hace de forma gestionada, y hay que mantener esas reglas.</li><li><b>EventBridge a Lambdas separadas:</b> requiere coordinacion extra para saber si cada moderacion termino bien y omite Bedrock Guardrails, dejando sin proteger las entradas/salidas del FM.</li><li><b>Servicio en ECS:</b> introduce mas infraestructura que desplegar, escalar y mantener, y sustituye Guardrails por logica propia.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Seguridad de contenido de un FM = usar el guardrail gestionado (Comprehend para PII en texto, Rekognition para imagenes ya aparecen en varias opciones). La orquestacion serverless debe coordinar los pasos sin reimplementar filtros a mano.</div><div class=\"citas\"><span class=\"h\">Conceptos citados</span>Terminos relacionados que tambien aparecen en este escenario o entre los distractores: Disparar.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html\">docs.aws Bedrock Guardrails</a></div>"
         ),
     ),
     # ============================================================
@@ -116,7 +116,7 @@ cards = [
     card(
         question="Contenido financiero confidencial en un FM. Por regulacion las interacciones deben ser <b>aisladas, sin retener prompts ni salidas</b>, gestionado. &iquest;Cual es la MEJOR?",
         options=[
-            "Funciones nativas de privacidad de datos de Amazon Bedrock",
+            "Privacidad nativa de Amazon Bedrock que no retiene prompts",
             "Logging de eventos de datos de AWS CloudTrail",
             "AWS KMS en S3 con ciclo de vida que borra tras procesar",
             "Lambda que enmascara antes del FM y guarda salidas",
@@ -133,7 +133,7 @@ cards = [
         options=[
             "Cognito user pools como IdP entrante, audience = application ID",
             "Solo IAM en AgentCore Runtime, validando con SigV4",
-            "AgentCore Identity entrante OIDC, audiences = application ID",
+            "AgentCore Identity que valida OIDC entrante, audiences = application ID",
             "AgentCore Identity solo para autenticacion OIDC saliente",
         ],
         correct=2,
@@ -162,8 +162,8 @@ cards = [
         question="RAG sobre una Bedrock KB trae documentos <b>no relacionados</b> aunque cada documento ya tiene atributos. Acotar <b>sin tocar embeddings ni la KB</b>. &iquest;Que da MENOS cambios?",
         options=[
             "Habilitar reranking y traer mas resultados",
-            "Ingerir metadata asociada y aplicar filtrado por metadata",
-            "Query decomposition sobre toda la fuente de S3",
+            "Ingerir metadata asociada y filtrar el retrieval por esa metadata",
+            "Query decomposition que divide la pregunta, sobre toda la fuente de S3",
             "Rehacer chunks mas pequenos y resincronizar la KB",
         ],
         correct=1,
@@ -174,7 +174,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="RAG de seguros prepara ~60 GB de JSON en S3: <b>quitar PII</b>, generar <b>embeddings</b> e indexar para similitud, gestionado. &iquest;Que cumple?",
+        question="Un RAG de seguros necesita preparar ~60 GB de JSON en S3: <b>quitar PII</b>, generar <b>embeddings</b> e indexar para similitud, todo gestionado. &iquest;Que cumple?",
         options=[
             "Lambdas con Comprehend y Bedrock, embeddings en DynamoDB y similitud propia",
             "Jobs de Glue ETL, embeddings en S3 y Amazon Athena",
@@ -234,7 +234,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Asistente con Claude 3 Haiku en Bedrock, picos globales y SLA &lt; 2 s, sufre throttling. Escalar entre Regiones <b>sin routing propio</b>. &iquest;Que es MAS efectivo?",
+        question="Un asistente con Claude 3 Haiku en Bedrock sufre throttling con picos globales y SLA &lt; 2 s, y necesita escalar entre Regiones <b>sin routing propio</b>. &iquest;Que es MAS efectivo?",
         options=[
             "Provisioned throughput en una sola Region con backoff y circuit breaker",
             "Batching de prompts y Cross-Region Inference con inference profiles",
@@ -268,7 +268,7 @@ cards = [
         options=[
             "Desactivar chunking e ingerir documentos completos, con RetrieveAndGenerate",
             "Claude de contexto maximo y summarizacion recursiva antes de ingerir",
-            "Semantic chunking en la Bedrock Knowledge Base",
+            "Semantic chunking que corta por significado, en la Bedrock Knowledge Base",
             "Hierarchical chunking con chunks hijos y padre",
         ],
         correct=2,
@@ -282,8 +282,8 @@ cards = [
         question="Plataforma con Bedrock recibe PII. Debe <b>enmascararla antes del modelo</b>, <b>redactarla de las salidas</b> y retener logs el minimo. &iquest;Que cumple?",
         options=[
             "Amazon Textract sobre los logs en S3, con EventBridge y S3 Lifecycle",
-            "Bedrock Guardrails (mask PII in/out), S3, Amazon Macie y S3 Lifecycle",
-            "Analisis de Rekognition sobre logs, KMS y S3 Lifecycle a Glacier",
+            "Bedrock Guardrails que enmascara PII in/out, con S3, Amazon Macie y S3 Lifecycle",
+            "Rekognition que analiza logs, con KMS y S3 Lifecycle a Glacier",
             "Bedrock Guardrails PII in/out, KMS, CloudTrail y Macie",
         ],
         correct=1,
@@ -299,7 +299,7 @@ cards = [
             "Route 53 latency-based routing entre Regiones",
             "Route 53 weighted con failover a una secundaria",
             "Una sola Region escalada con alarmas de CloudWatch",
-            "Cross-region inference dentro de la misma geografia",
+            "Cross-region inference que enruta dentro de la misma geografia",
         ],
         correct=3,
         key="aip02-q24",
@@ -312,9 +312,9 @@ cards = [
         question="App GenAI multi-Region (Europa, Norteamerica, Asia) en S3 exige <b>residencia por Region</b>, <b>auditoria inmutable</b> y <b>PII en reposo</b>. &iquest;Que cumple todo?",
         options=[
             "Cross-Region inference limitado a la Region, IAM boundaries y Comprehend",
-            "SCPs de AWS Organizations, un modelo por Region y CloudTrail inmutable",
-            "S3 Object Lock con politicas por Region, Amazon Macie y CloudTrail inmutable",
-            "Glue crawlers, Athena por Region y AWS Config",
+            "SCPs de AWS Organizations que restringen Regiones, con un modelo por Region y CloudTrail",
+            "S3 Object Lock que fija residencia por Region, con Amazon Macie y CloudTrail inmutable",
+            "Glue crawlers que catalogan, con Athena por Region y AWS Config",
         ],
         correct=2,
         key="aip02-q26",
@@ -324,7 +324,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Asistente medico sobre una Bedrock KB: <b>PII visible a cirujanos y oculta a ingenieros</b>, solo reportes de 3 anos y autenticacion con Cognito. &iquest;Que cumple?",
+        question="Un asistente medico sobre una Bedrock KB debe mostrar <b>PII visible a cirujanos y oculta a ingenieros</b>, retener solo reportes de 3 anos y autenticar con Cognito. &iquest;Que cumple?",
         options=[
             "Deteccion de Macie y Lambda que redacta PII permanente al ingerir",
             "Lambda que sincroniza la KB, otra con Comprehend y S3 Lifecycle a 3 anos",
@@ -349,7 +349,7 @@ cards = [
         correct=3,
         key="aip02-q28",
         answer=(
-            "<div class=\"verdict\">Correcta: {{L}} - LLM-as-a-judge en Bedrock Model Evaluation.</div><p><b>El problema:</b> evaluar automaticamente y a escala salidas de varios FMs en dimensiones semanticas (politicas, seguridad, multilingue, consistencia), no solo coincidencias literales.</p><p><b>Por que la respuesta sirve:</b> <b>LLM-as-a-judge</b> dentro de Bedrock Model Evaluation usa un modelo juez para puntuar automaticamente la calidad de las salidas segun criterios como cumplimiento de politicas, seguridad contextual, fidelidad multilingue y consistencia. Es la evaluacion automatizada y escalable pedida.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>RAG evaluation:</b> mide exactitud de recuperacion y cobertura documental, no razonamiento, cumplimiento de politicas ni contenido daninno.</li><li><b>Lambdas con keywords/regex:</b> solo marcan violaciones obvias y metricas basicas; no entienden contexto, matices de daninno ni fidelidad multilingue.</li><li><b>OpenSearch full-text:</b> compara similitud textual superficial, no correccion ni alineacion con politicas de la organizacion.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Evaluacion cualitativa automatica y escalable de salidas (politicas, seguridad, multilingue): usar un modelo juez dentro del servicio de evaluacion de modelos. Keywords/regex o similitud textual no capturan la semantica.</div><div class=\"citas\"><span class=\"h\">Conceptos citados</span>Terminos relacionados que tambien aparecen en este escenario o entre los distractores: Correr.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html\">docs.aws Bedrock Model Evaluation</a></div>"
+            "<div class=\"verdict\">Correcta: {{L}} - LLM-as-a-judge en Bedrock Model Evaluation.</div><p><b>El problema:</b> evaluar automaticamente y a escala salidas de varios FMs en dimensiones semanticas (politicas, seguridad, multilingue, consistencia), no solo coincidencias literales.</p><p><b>Por que la respuesta sirve:</b> <b>LLM-as-a-judge</b> dentro de Bedrock Model Evaluation usa un modelo juez para puntuar automaticamente la calidad de las salidas segun criterios como cumplimiento de politicas, seguridad contextual, fidelidad multilingue y consistencia. Es la evaluacion automatizada y escalable pedida.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>RAG evaluation:</b> mide exactitud de recuperacion y cobertura documental, no razonamiento, cumplimiento de politicas ni contenido dañino.</li><li><b>Lambdas con keywords/regex:</b> solo marcan violaciones obvias y metricas basicas; no entienden contexto, matices de dañino ni fidelidad multilingue.</li><li><b>OpenSearch full-text:</b> compara similitud textual superficial, no correccion ni alineacion con politicas de la organizacion.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Evaluacion cualitativa automatica y escalable de salidas (politicas, seguridad, multilingue): usar un modelo juez dentro del servicio de evaluacion de modelos. Keywords/regex o similitud textual no capturan la semantica.</div><div class=\"citas\"><span class=\"h\">Conceptos citados</span>Terminos relacionados que tambien aparecen en este escenario o entre los distractores: Correr.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/model-evaluation.html\">docs.aws Bedrock Model Evaluation</a></div>"
         ),
     ),
     # ============================================================
@@ -357,7 +357,7 @@ cards = [
         question="App con Bedrock Data Automation procesa &gt;10,000 items/dia y necesita <b>versionado de salidas</b> y <b>colaboracion multiusuario en tiempo real</b>. &iquest;Que solucion cumple?",
         options=[
             "Suscripciones GraphQL de AWS AppSync, artefactos versionados en S3",
-            "Mensajeria SNS/SQS entre clientes, versionado en DynamoDB",
+            "Mensajeria SNS/SQS que notifica entre clientes, versionado en DynamoDB",
             "WebSockets propios en API Gateway con Lambda, versionando en Aurora",
             "Distribucion via CloudFront con eventos de EventBridge",
         ],
@@ -369,17 +369,17 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Fintech con Bedrock sobre datos regulados exige <b>evitar salida daninna, no divulgar datos sensibles y bloquear actividad ilegal</b>, con MENOR esfuerzo. &iquest;Que cumple?",
+        question="Fintech con Bedrock sobre datos regulados exige <b>evitar salida dañina, no divulgar datos sensibles y bloquear actividad ilegal</b>, con MENOR esfuerzo. &iquest;Que cumple?",
         options=[
-            "Amazon Macie sobre las respuestas y alertas de Amazon SNS",
+            "Amazon Macie que clasifica datos, sobre las respuestas y alertas de Amazon SNS",
             "Safe completion generico en Bedrock Guardrails, AWS WAF y CloudWatch",
-            "SageMaker Clarify, limites de prompt y metric filters de CloudWatch",
+            "SageMaker Clarify que mide sesgo, con limites de prompt y metric filters de CloudWatch",
             "Bedrock Guardrails: content filters, word filters y contextual grounding checks",
         ],
         correct=3,
         key="aip02-q32",
         answer=(
-            "<div class=\"verdict\">Correcta: {{L}} - content filters + word filters + contextual grounding de Bedrock Guardrails.</div><p><b>El problema:</b> bloquear contenido daninno, evitar divulgaciones sensibles y detectar/bloquear contenido ilegal, con minimo esfuerzo.</p><p><b>Por que la respuesta sirve:</b> Bedrock Guardrails resuelve los tres con funciones nativas: <b>content filters</b> interceptan contenido daninno/restringido, <b>word filters</b> bloquean terminos prohibidos o ilegales, y <b>contextual grounding checks</b> ayudan a que la respuesta no revele informacion sensible ni alucine. Todo en un solo servicio gestionado.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Macie + SNS + prompt basico:</b> Macie es para clasificar datos en S3, no para inspeccionar respuestas conversacionales en tiempo real; requiere integraciones y esfuerzo manual.</li><li><b>Guardrails generico + WAF + CloudWatch + Lambda:</b> usa Guardrails, pero sumar WAF, CloudWatch y Lambda anade complejidad y overhead innecesarios.</li><li><b>SageMaker Clarify + metric filters:</b> Clarify es para sesgo/explicabilidad de modelos ML, no filtrado en tiempo real; los metric filters son reactivos y el contenido inseguro puede llegar al cliente.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Seguridad de contenido de un FM con minimo esfuerzo: content filters + word filters + contextual grounding de Bedrock Guardrails (todo nativo). Macie/Clarify no filtran respuestas en tiempo real.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-components.html\">docs.aws Guardrails components</a></div>"
+            "<div class=\"verdict\">Correcta: {{L}} - content filters + word filters + contextual grounding de Bedrock Guardrails.</div><p><b>El problema:</b> bloquear contenido dañino, evitar divulgaciones sensibles y detectar/bloquear contenido ilegal, con minimo esfuerzo.</p><p><b>Por que la respuesta sirve:</b> Bedrock Guardrails resuelve los tres con funciones nativas: <b>content filters</b> interceptan contenido dañino/restringido, <b>word filters</b> bloquean terminos prohibidos o ilegales, y <b>contextual grounding checks</b> ayudan a que la respuesta no revele informacion sensible ni alucine. Todo en un solo servicio gestionado.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Macie + SNS + prompt basico:</b> Macie es para clasificar datos en S3, no para inspeccionar respuestas conversacionales en tiempo real; requiere integraciones y esfuerzo manual.</li><li><b>Guardrails generico + WAF + CloudWatch + Lambda:</b> usa Guardrails, pero sumar WAF, CloudWatch y Lambda anade complejidad y overhead innecesarios.</li><li><b>SageMaker Clarify + metric filters:</b> Clarify es para sesgo/explicabilidad de modelos ML, no filtrado en tiempo real; los metric filters son reactivos y el contenido inseguro puede llegar al cliente.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Seguridad de contenido de un FM con minimo esfuerzo: content filters + word filters + contextual grounding de Bedrock Guardrails (todo nativo). Macie/Clarify no filtran respuestas en tiempo real.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-components.html\">docs.aws Guardrails components</a></div>"
         ),
     ),
     # ============================================================
@@ -403,8 +403,8 @@ cards = [
         options=[
             "Cross-encoder de reranking propio en un endpoint de SageMaker",
             "Amazon Neptune para relaciones y ranking por centralidad",
-            "Retrieve API y Bedrock Rerank API como llamada aparte",
-            "Reranking integrado de las Bedrock Knowledge Bases",
+            "Retrieve API que recupera y Bedrock Rerank API como llamada aparte",
+            "Reranking integrado que reordena por relevancia en las Bedrock Knowledge Bases",
         ],
         correct=3,
         key="aip02-q35",
@@ -414,7 +414,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Asistente en Bedrock recibe muchas preguntas <b>equivalentes en significado</b> con distinta redaccion, causando llamadas repetidas. Reutilizar pares previos por similitud. &iquest;Que enfoque conviene?",
+        question="Un asistente en Bedrock recibe muchas preguntas <b>equivalentes en significado</b> con distinta redaccion y quiere reutilizar pares previos por similitud para evitar llamadas repetidas. &iquest;Que enfoque conviene?",
         options=[
             "Preguntas y respuestas en DynamoDB con texto normalizado como clave",
             "Cachear en ElastiCache con un hash de la consulta como clave",
@@ -429,11 +429,11 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Troubleshooting de una app de FM: analizar logs de varias fuentes, <b>trazar API entre servicios</b> y detectar patrones de error de GenAI. &iquest;Que conviene?",
+        question="Para depurar una app de FM el equipo necesita analizar logs de varias fuentes, <b>trazar API entre servicios</b> y detectar patrones de error de GenAI. &iquest;Que conviene?",
         options=[
             "CloudWatch Logs Insights, SageMaker AI para anomalias y Lambda",
-            "CloudWatch Logs Insights, AWS X-Ray y Amazon Q Developer",
-            "CloudWatch Logs Insights, AWS X-Ray y AWS Glue",
+            "CloudWatch Logs Insights con AWS X-Ray y Amazon Q Developer que detecta patrones",
+            "CloudWatch Logs Insights con AWS X-Ray y AWS Glue que hace ETL",
             "CloudWatch Logs Insights, AWS X-Ray y Amazon Kinesis",
         ],
         correct=1,
@@ -444,12 +444,12 @@ cards = [
     ),
     # ============================================================
     card(
-        question="App GenAI de salud cruza terminologia medica con documentos clinicos privados, evitando dilucion semantica, a 1,000 consultas/min con MENOR overhead. &iquest;Que conviene?",
+        question="Una app GenAI de salud debe cruzar terminologia medica con documentos clinicos privados evitando dilucion semantica, a 1,000 consultas/min y con MENOR overhead. &iquest;Que conviene?",
         options=[
             "Indice de Kendra y un Bedrock agent que descompone con Step Functions",
             "Knowledge base con query decomposition nativa y un Bedrock flow",
             "Modelos ML propios de descomposicion en SageMaker AI y una KB",
-            "Coleccion vectorial de OpenSearch Serverless y un Bedrock agent",
+            "Coleccion vectorial de OpenSearch Serverless con un Bedrock agent que descompone",
         ],
         correct=1,
         key="aip02-q41",
@@ -459,7 +459,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Resumen de feedback con Bedrock guarda datos en S3. Regulacion: <b>registrar toda interaccion</b>, linaje de prompt/resumen y versiones de plantilla e invocaciones. &iquest;Que cumple?",
+        question="Una app de resumen de feedback con Bedrock guarda datos en S3 y por regulacion debe <b>registrar toda interaccion</b>, el linaje prompt/resumen y las versiones de plantilla e invocaciones. &iquest;Que cumple?",
         options=[
             "Data Firehose a S3, Lambda que loguea invocaciones en DynamoDB y CloudWatch",
             "Kinesis Data Stream captura prompts/resumenes y Athena para auditar",
@@ -474,7 +474,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Banco lanza GenAI en Bedrock: bloquear dano, <b>detectar alucinaciones</b>, monitorear drift y log inmutable, con latencia &lt; 200 ms. &iquest;Que cumple?",
+        question="Un banco lanza GenAI en Bedrock y debe bloquear dano, <b>detectar alucinaciones</b>, monitorear drift y guardar log inmutable, con latencia &lt; 200 ms. &iquest;Que cumple?",
         options=[
             "Bedrock Guardrails, Model Evaluations, logs en DynamoDB con TTL y CloudWatch",
             "Lambdas propias, SageMaker Model Monitor para drift y pares en S3",
@@ -484,7 +484,7 @@ cards = [
         correct=0,
         key="aip02-q46",
         answer=(
-            "<div class=\"verdict\">Correcta: {{L}} - Guardrails + Model Evaluations + DynamoDB (TTL) + CloudWatch.</div><p><b>El problema:</b> seguridad de contenido, deteccion de alucinaciones, monitoreo de comportamiento/drift y auditoria inmutable, en 60 dias, baja latencia y minimo overhead.</p><p><b>Por que la respuesta sirve:</b> <b>Bedrock Guardrails</b> filtra contenido daninno de forma nativa; <b>Model Evaluations</b> evalua calidad y descubre alucinaciones; <b>DynamoDB con TTL</b> guarda los pares para auditoria con retencion automatica; y <b>metricas custom en CloudWatch</b> monitorean comportamiento y drift, integrando con el dashboard. Es la ruta de menor overhead que cumple todo.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Lambdas propias + SageMaker Model Monitor:</b> filtrar toxicidad y exactitud a mano es enorme desarrollo (dificil en 60 dias) y varias Lambdas sincronas pueden exceder los 200 ms.</li><li><b>Clasificador propio + OpenSearch + QuickSight:</b> entrenar/mantener un clasificador de seguridad y montar OpenSearch/QuickSight es mucho mas overhead que Guardrails + DynamoDB + CloudWatch.</li><li><b>WAF + Macie + RDS:</b> WAF no evalua semanticamente el texto GenAI, Macie descubre PII en S3 (no detecta alucinaciones/drift) y RDS para logging de alta velocidad suma overhead y latencia.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Marco responsable con minimo overhead: el guardrail gestionado (seguridad) + evaluacion de modelos (calidad/alucinaciones) + un store con expiracion automatica (auditoria) + CloudWatch (drift). WAF/Macie no evaluan contenido GenAI.</div><div class=\"citas\"><span class=\"h\">Conceptos citados</span>Terminos relacionados que tambien aparecen en este escenario o entre los distractores: Base, Knowledge.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html\">docs.aws Bedrock Guardrails</a></div>"
+            "<div class=\"verdict\">Correcta: {{L}} - Guardrails + Model Evaluations + DynamoDB (TTL) + CloudWatch.</div><p><b>El problema:</b> seguridad de contenido, deteccion de alucinaciones, monitoreo de comportamiento/drift y auditoria inmutable, en 60 dias, baja latencia y minimo overhead.</p><p><b>Por que la respuesta sirve:</b> <b>Bedrock Guardrails</b> filtra contenido dañino de forma nativa; <b>Model Evaluations</b> evalua calidad y descubre alucinaciones; <b>DynamoDB con TTL</b> guarda los pares para auditoria con retencion automatica; y <b>metricas custom en CloudWatch</b> monitorean comportamiento y drift, integrando con el dashboard. Es la ruta de menor overhead que cumple todo.</p><p><b>Por que NO las otras, una por una:</b></p><ul><li><b>Lambdas propias + SageMaker Model Monitor:</b> filtrar toxicidad y exactitud a mano es enorme desarrollo (dificil en 60 dias) y varias Lambdas sincronas pueden exceder los 200 ms.</li><li><b>Clasificador propio + OpenSearch + QuickSight:</b> entrenar/mantener un clasificador de seguridad y montar OpenSearch/QuickSight es mucho mas overhead que Guardrails + DynamoDB + CloudWatch.</li><li><b>WAF + Macie + RDS:</b> WAF no evalua semanticamente el texto GenAI, Macie descubre PII en S3 (no detecta alucinaciones/drift) y RDS para logging de alta velocidad suma overhead y latencia.</li></ul><div class=\"extra\"><span class=\"h\">Exam tip</span>Marco responsable con minimo overhead: el guardrail gestionado (seguridad) + evaluacion de modelos (calidad/alucinaciones) + un store con expiracion automatica (auditoria) + CloudWatch (drift). WAF/Macie no evaluan contenido GenAI.</div><div class=\"citas\"><span class=\"h\">Conceptos citados</span>Terminos relacionados que tambien aparecen en este escenario o entre los distractores: Base, Knowledge.</div><div class=\"links\"><span class=\"h\">Links</span><a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html\">docs.aws Bedrock Guardrails</a></div>"
         ),
     ),
     # ============================================================
@@ -519,11 +519,11 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Asistente de soporte recupera contenido estructurado y no estructurado integrando <b>Kendra (intencion)</b> y <b>Personalize (personalizacion)</b> con generacion, cohesivo y a escala. &iquest;Que solucion conviene?",
+        question="Un asistente de soporte necesita recuperar contenido estructurado y no estructurado integrando <b>Kendra (intencion)</b> y <b>Personalize (personalizacion)</b> con la generacion, de forma cohesiva y a escala. &iquest;Que solucion conviene?",
         options=[
             "Bedrock Model Customizations y ranking de Kendra/Personalize aparte",
-            "Bedrock Knowledge Base con hybrid search y metadata de Kendra y Personalize",
-            "Bedrock Data Automation, Personalize y Kendra de forma independiente",
+            "Bedrock Knowledge Base que combina hybrid search con metadata de Kendra y Personalize",
+            "Bedrock Data Automation que procesa, con Personalize y Kendra de forma independiente",
             "Bedrock Prompt Flows con Kendra y Personalize fuera de una KB",
         ],
         correct=1,
@@ -549,7 +549,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Chatbot con Bedrock InvokeModel desde Lambda no registra prompts ni respuestas crudas. Loggear el contenido completo <b>sin tocar el codigo</b>. &iquest;Que es mas efectivo?",
+        question="Un chatbot con Bedrock InvokeModel desde Lambda no registra prompts ni respuestas crudas y debe loggear el contenido completo <b>sin tocar el codigo</b>. &iquest;Que es mas efectivo?",
         options=[
             "Sentencias de logging de CloudWatch en la Lambda",
             "AWS X-Ray para trazar las ejecuciones de la Lambda",
@@ -564,7 +564,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Agente de soporte (embeddings de SageMaker JumpStart + Bedrock) recibe miles de consultas casi duplicadas/dia. Servir la cacheada y generar solo lo nuevo. &iquest;Que cumple?",
+        question="Un agente de soporte (embeddings de SageMaker JumpStart + Bedrock) recibe miles de consultas casi duplicadas al dia y quiere servir la cacheada y generar solo lo nuevo. &iquest;Que cumple?",
         options=[
             "Cache clave-valor en memoria de strings exactos",
             "Embeddings en una base relacional con coincidencia exacta de string",
@@ -609,7 +609,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="App medica en Bedrock alucina y gasta 40% de mas. Observabilidad casi en tiempo real para <b>detectar alucinaciones y picos de tokens</b>. &iquest;Que cumple?",
+        question="Una app medica en Bedrock alucina y gasta 40% de mas, por lo que necesita observabilidad casi en tiempo real para <b>detectar alucinaciones y picos de tokens</b>. &iquest;Que cumple?",
         options=[
             "Alarmas de CloudWatch sobre InputTokenCount/OutputTokenCount y Glue + Athena",
             "Bedrock Model Evaluation continuo e invocation logs a CloudWatch Logs",
@@ -624,12 +624,12 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Pipeline GenAI multi-Region repite prompts con <b>mismo intento pero distinta redaccion</b>, causando sobrecostos. Caching que evite llamadas redundantes del mismo significado. &iquest;Que estrategia conviene?",
+        question="Un pipeline GenAI multi-Region repite prompts con <b>mismo intento pero distinta redaccion</b> y busca un caching que evite llamadas redundantes del mismo significado. &iquest;Que estrategia conviene?",
         options=[
             "Hashing determinista de solicitudes",
             "Semantic caching que empareja prompts similares",
-            "Edge caching en ubicaciones distribuidas",
-            "Prompt caching de cada prompt exacto",
+            "Edge caching que sirve desde ubicaciones distribuidas",
+            "Prompt caching que reutiliza solo cada prompt exacto",
         ],
         correct=1,
         key="aip02-q59",
@@ -654,7 +654,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Asistente en Bedrock consume una REST API interna cuya <b>API key OAuth expira cada 30 min</b>, via API Gateway. &iquest;Cual es el mejor enfoque?",
+        question="Un asistente en Bedrock consume una REST API interna via API Gateway y esta <b>API key OAuth expira cada 30 min</b>. &iquest;Cual es el mejor enfoque?",
         options=[
             "API Gateway con Lambda proxy que autentica OAuth y pasa el token",
             "Lambda con API Gateway que genera el token OAuth como header custom",
@@ -684,7 +684,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Portal filtra mensajes con Comprehend antes del FM: <b>suprimir toxicidad, redactar PII y marcar consejo inapropiado</b>, sin retrasar el FM. &iquest;Que cumple?",
+        question="Un portal filtra mensajes con Comprehend antes del FM y debe <b>suprimir toxicidad, redactar PII y marcar consejo inapropiado</b> sin retrasar al FM. &iquest;Que cumple?",
         options=[
             "Todo en paralelo con APIs asincronas: toxicity, prompt safety y PII",
             "Lambda contra blocklist en DynamoDB y luego toxicity detection",
@@ -714,7 +714,7 @@ cards = [
     ),
     # ============================================================
     card(
-        question="Asistente sobre una Bedrock KB clinica: <b>PII visible a investigadores y redactada a auditores</b>, solo documentos de 3 anos, con Cognito. &iquest;Que cumple?",
+        question="Un asistente sobre una Bedrock KB clinica debe mostrar <b>PII visible a investigadores y redactada a auditores</b>, retener solo documentos de 3 anos y usar Cognito. &iquest;Que cumple?",
         options=[
             "Lambda con Rekognition al subir, KBs separadas por Cognito y S3 Lifecycle",
             "Bedrock agent que lee el grupo de Cognito y Comprehend, con S3 Lifecycle",
@@ -849,7 +849,7 @@ cards = [
     ),
     # Q12r - Exponential backoff con jitter (SDK) + throttling por cliente (API Gateway)
     card(
-        question="API Gateway dispara Lambda que llama a Bedrock; en picos aparece <b>ThrottlingException</b>. Manejar el pico y reducir el throttling sin perder velocidad. &iquest;Que implementar?",
+        question="API Gateway dispara una Lambda que llama a Bedrock y en picos aparece <b>ThrottlingException</b>; el equipo debe manejar el pico y reducir el throttling sin perder velocidad. &iquest;Que implementar?",
         options=[
             "Exponential backoff con jitter en el SDK y throttling en API Gateway",
             "AWS Global Accelerator para optimizar el enrutamiento",
@@ -864,7 +864,7 @@ cards = [
     ),
     # Q25r - Glue Data Quality + chunking (angulo avanzado B)
     card(
-        question="Firma legal prepara datos no estructurados en S3 para Bedrock: <b>descubrir/catalogar, transformar/chunkear y validar calidad</b>, minimizando desarrollo. &iquest;Que solucion cumple?",
+        question="Una firma legal necesita preparar datos no estructurados en S3 para Bedrock: <b>descubrir/catalogar, transformar/chunkear y validar calidad</b>, minimizando el desarrollo. &iquest;Que solucion cumple?",
         options=[
             "Crawler de Glue, jobs de Glue ETL y AWS Glue Data Quality",
             "Lambdas por subida a S3 con metadata en DynamoDB y CloudWatch",
@@ -912,7 +912,7 @@ cards = [
         question="FM de catalogo: DevOps mide en CloudWatch (tokens, latencia) y ventas mide negocio (CTR, ingresos) aparte. Se busca <b>observabilidad unificada</b> con alerta anomala. &iquest;Que cumple?",
         options=[
             "Dashboards de CloudWatch con composite alarms, anomaly detection y SNS",
-            "Trazas de X-Ray, ventas en DynamoDB y EventBridge a Step Functions",
+            "Trazas de X-Ray que siguen requests, con ventas en DynamoDB y EventBridge a Step Functions",
             "Managed Grafana con alertas por umbrales estaticos",
             "CloudWatch Logs, un modelo propio en SageMaker AI y Amazon SNS",
         ],

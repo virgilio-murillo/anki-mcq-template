@@ -32,7 +32,7 @@ cards = []
 # Q1 - BDA parser + structured data retrieval (RAG multimodal)
 # ============================================================
 cards.append(card(
-    question="Un RAG en Bedrock Knowledge Bases lee PDF con <b>graficos, tablas y texto</b> y <b>datos relacionales</b>, con el <b>MENOR esfuerzo operativo</b>. &iquest;Que solucion cumple?",
+    question="Un RAG en Bedrock Knowledge Bases <b>debe</b> leer PDF con <b>graficos, tablas y texto</b> y <b>datos relacionales</b>, con el <b>MENOR esfuerzo operativo</b>. &iquest;Que solucion cumple?",
     options=[
         "Usar Amazon Bedrock Data Automation como parser multimodal mas structured data retrieval",
         "Usar Anthropic Claude Sonnet como parser con chunking por defecto y consultas federadas",
@@ -121,8 +121,8 @@ cards.append(card(
 cards.append(card(
     question="Un sistema de GenAI en Amazon Bedrock debe dar <b>linaje de datos</b>, <b>filtrar PII en tiempo real</b> y <b>audit trails</b> con reporte automatico. &iquest;Que solucion cumple?",
     options=[
-        "Glue Data Catalog, Bedrock Guardrails, CloudTrail, Macie y dashboards de CloudWatch",
-        "Athena, metricas custom de CloudWatch, OpenTelemetry y Rekognition Custom Labels",
+        "Glue Data Catalog para linaje, Bedrock Guardrails, CloudTrail, Macie y dashboards de CloudWatch",
+        "Athena para consultar, metricas custom de CloudWatch, OpenTelemetry y Rekognition Custom Labels",
         "DataSync, Macie, Systems Manager Session Manager y Textract con Step Functions",
         "AWS Config, AWS WAF, EventBridge y Comprehend Medical con Lambda programado",
     ],
@@ -148,7 +148,7 @@ cards.append(card(
 # Q5 - Provisioned throughput + geographic inference profile EU
 # ============================================================
 cards.append(card(
-    question="Deteccion de fraude en Amazon Bedrock a 1000 tps sub-500 ms, <b>alta disponibilidad</b> ante cortes y datos europeos <b>solo en Regiones de Europa</b>. &iquest;Que solucion cumple?",
+    question="Una deteccion de fraude en Amazon Bedrock <b>necesita</b> 1000 tps sub-500 ms, <b>alta disponibilidad</b> ante cortes y datos europeos <b>solo en Regiones de Europa</b>. &iquest;Que solucion cumple?",
     options=[
         "Usar Provisioned throughput por Region, un ALB custom y failover regional con EventBridge",
         "Provisioned throughput mas geographic inference profile de Europa y failover cross-Region con EventBridge y Lambda",
@@ -210,8 +210,8 @@ cards.append(card(
 cards.append(card(
     question="Un hospital genera reportes con Amazon Nova Pro en Bedrock, con <b>picos</b>; hay que <b>abaratar</b>, <b>escalar</b> y <b>mantener calidad</b>. &iquest;Que solucion cumple?",
     options=[
-        "Distillation de Nova Pro a un Llama 70B desplegado en SageMaker JumpStart",
-        "Crear Few-shot incluyendo ejemplos de un dataset JSONL en cada prompt a Nova Pro",
+        "Distillation de Nova Pro que despliega un Llama 70B en SageMaker JumpStart",
+        "Few-shot que incluye ejemplos de un dataset JSONL en cada prompt a Nova Pro",
         "Distillation de Nova Pro a Nova Lite con inferencia on-demand",
         "Crear Fine-tuning de Nova Pro y despliegue con provisioned throughput",
     ],
@@ -413,7 +413,7 @@ cards.append(card(
 # Q14 - Strands supervisor agent en AgentCore Runtime
 # ============================================================
 cards.append(card(
-    question="Un asesor en Amazon Bedrock <b>delega en agentes por tema</b>, manteniendo <b>contexto</b> y <b>metricas por agente</b>, con el <b>MENOR codigo y esfuerzo operativo</b>. &iquest;Que solucion cumple?",
+    question="Un asesor en Amazon Bedrock <b>debe</b> delegar en agentes por tema, manteniendo <b>contexto</b> y <b>metricas por agente</b>, con el <b>MENOR codigo y esfuerzo operativo</b>. &iquest;Que solucion cumple?",
     options=[
         "Un agente por tema en Strands tras API Gateway, enrutamiento en Lambda, contexto en DynamoDB",
         "Agentes por tema en AgentCore Runtime con enrutamiento por palabras clave en el frontend",
@@ -500,7 +500,7 @@ cards.append(card(
 # Q18 - Comprehend PII EN/ES + Guardrails en outputs + logs S3
 # ============================================================
 cards.append(card(
-    question="Se resumen 20.000 notas clinicas al dia: <b>remover PII antes</b> de invocar Bedrock, en <b>ingles y espa&ntilde;ol</b>, evitar identificadores en salidas y dar <b>auditoria</b>. &iquest;Que solucion cumple?",
+    question="Al resumir 20.000 notas clinicas al dia se <b>debe</b> <b>remover PII antes</b> de invocar Bedrock, en <b>ingles y espa&ntilde;ol</b>, evitar identificadores en salidas y dar <b>auditoria</b>. &iquest;Que solucion cumple?",
     options=[
         "Amazon Macie antes del FM, AWS WAF sobre las salidas, notas en DynamoDB",
         "AWS Glue DataBrew para enmascarar PII y Lake Formation por columna",
@@ -589,7 +589,7 @@ cards.append(card(
 # Q21 - AgentCore outbound credential provider AssumeRole
 # ============================================================
 cards.append(card(
-    question="Un asistente en Bedrock AgentCore accede a DynamoDB en 25 cuentas y <b>actua por cada usuario preservando su identidad</b>, escalando a 40+, con el <b>MENOR esfuerzo operativo</b>. &iquest;Que solucion cumple?",
+    question="Un asistente en Bedrock AgentCore <b>debe</b> acceder a DynamoDB en 25 cuentas <b>actuando por cada usuario preservando su identidad</b>, escalar a 40+ y con el <b>MENOR esfuerzo operativo</b>. &iquest;Que solucion cumple?",
     options=[
         "SCPs con dynamodb:GetItem y dynamodb:Query por ARN en todas las cuentas",
         "Un outbound credential provider con AssumeRole cross-account, un rol IAM por cuenta y session tags",
@@ -618,7 +618,7 @@ cards.append(card(
 # Q23 - Titan Text Embeddings multilingue sin traducir + semantic chunking
 # ============================================================
 cards.append(card(
-    question="Se recupera literatura medica en <b>ingles, frances y aleman</b> (50.000 documentos), con alta precision y <b>minimo codigo y mantenimiento</b>. &iquest;Que solucion cumple?",
+    question="Se <b>debe</b> recuperar literatura medica en <b>ingles, frances y aleman</b> (50.000 documentos), con alta precision y <b>minimo codigo y mantenimiento</b>. &iquest;Que solucion cumple?",
     options=[
         "Usar Titan Multimodal Embeddings convirtiendo paginas a imagenes con leyendas de texto",
         "Usar Un knowledge base de Bedrock con Amazon Translate y traduccion en cada consulta",
@@ -794,7 +794,7 @@ cards.append(card(
 # Q30 - Guardrails denied topics + S3 logs + PII filter
 # ============================================================
 cards.append(card(
-    question="Un asistente financiero en Bedrock, por regulacion, <b>no da consejos de inversion</b>, <b>no divulga PII</b> y <b>registra todo</b> para auditoria. &iquest;Que solucion cumple?",
+    question="Un asistente financiero en Bedrock, por regulacion, <b>debe</b> no dar consejos de inversion, <b>no divulgar PII</b> y <b>registrar todo</b> para auditoria. &iquest;Que solucion cumple?",
     options=[
         "Bedrock Guardrails con denied topics, model invocation logs en S3 y filtros de PII",
         "Usar Bedrock Guardrails con denied topics y alarmas de CloudWatch sobre los patrones de respuesta",
@@ -854,7 +854,7 @@ cards.append(card(
 # Q33 - Guardrails + Converse API con image logging a S3
 # ============================================================
 cards.append(card(
-    question="Un asistente bancario en Bedrock <b>no envia PII</b>, <b>no da consejos de inversion</b> y <b>registra audit logs</b> de todo (incluidas imagenes), con el <b>MENOR esfuerzo operativo</b>. &iquest;Que solucion cumple?",
+    question="Un asistente bancario en Bedrock <b>debe</b> no enviar PII, <b>no dar consejos de inversion</b> y <b>registrar audit logs</b> de todo (incluidas imagenes), con el <b>MENOR esfuerzo operativo</b>. &iquest;Que solucion cumple?",
     options=[
         "Amazon Macie para redactar PII, prompt engineering y AWS CloudTrail para los logs",
         "Lambda con Comprehend para redactar PII, topic modeling y metricas custom de CloudWatch",
@@ -912,7 +912,7 @@ cards.append(card(
 # Q35 - Transcribe streaming 100ms + InvokeModelWithResponseStream
 # ============================================================
 cards.append(card(
-    question="Un asistente de voz apoya a agentes en llamadas: <b>audio a texto sub-500 ms</b>, sugerencias GenAI, <b>calificacion en vivo</b> y guardar interacciones. &iquest;Que solucion cumple?",
+    question="Un asistente de voz para agentes en llamadas <b>debe</b> pasar <b>audio a texto sub-500 ms</b>, dar sugerencias GenAI, <b>calificacion en vivo</b> y guardar interacciones. &iquest;Que solucion cumple?",
     options=[
         "Transcripcion batch post-llamada con InvokeModel en Lambda y feedback via CloudWatch",
         "Transcripcion en streaming (chunks de 100 ms), InvokeModelWithResponseStream y calificaciones en DynamoDB",
@@ -970,7 +970,7 @@ cards.append(card(
 # Q37 - Text-to-SQL sobre RDS + Guardrails + confidence scoring
 # ============================================================
 cards.append(card(
-    question="Una SaaS hospeda modelos de SageMaker AI en Bedrock via <b>Custom Model Import</b>, analizando historial en <b>Amazon RDS</b> con resultados consistentes. &iquest;Que solucion cumple?",
+    question="Una SaaS con modelos de SageMaker AI en Bedrock via <b>Custom Model Import</b> <b>debe</b> analizar historial en <b>Amazon RDS</b> con resultados consistentes. &iquest;Que solucion cumple?",
     options=[
         "Bedrock Knowledge Bases con RAG y busqueda semantica, Guardrails y Step Functions",
         "Usar OpenSearch Service con busqueda vectorial de embeddings, Guardrails y confidence scoring",
@@ -1030,12 +1030,12 @@ cards.append(card(
 # Q39 - Glue Data Quality + Data Wrangler + Lambda alerts
 # ============================================================
 cards.append(card(
-    question="Un pipeline valida datos para un FM de Bedrock (~5 TB/dia): <b>esquema</b>, <b>anomalias</b>, nulos, <b>reglas configurables</b>, monitoreo y alertas, con la <b>MENOR complejidad operativa</b>. &iquest;Que solucion cumple?",
+    question="Un pipeline para un FM de Bedrock (~5 TB/dia) <b>debe</b> validar <b>esquema</b>, <b>anomalias</b>, nulos y <b>reglas configurables</b>, con monitoreo, alertas y la <b>MENOR complejidad operativa</b>. &iquest;Que solucion cumple?",
     options=[
         "Processing jobs de SageMaker AI y Lambda, metricas en CloudWatch y Step Functions",
-        "Glue Data Quality y SageMaker Data Wrangler, Data Firehose a OpenSearch y dashboards",
-        "SageMaker Data Wrangler y Lambda, metricas en CloudWatch y Step Functions ante fallos",
-        "AWS Glue Data Quality por reglas, SageMaker Data Wrangler, Lambda de alertas y CloudWatch",
+        "Glue Data Quality que valida, Data Wrangler, Data Firehose a OpenSearch y dashboards",
+        "SageMaker Data Wrangler que perfila, Lambda, metricas en CloudWatch y Step Functions ante fallos",
+        "AWS Glue Data Quality que valida por reglas, Data Wrangler, Lambda para alertas y CloudWatch",
     ],
     correct=3,
     key="off1-q39",
@@ -1059,7 +1059,7 @@ cards.append(card(
 # Q40 - Metadata-aware filtering en Bedrock KB
 # ============================================================
 cards.append(card(
-    question="Un RAG en un knowledge base de Bedrock da respuestas <b>lentas e irrelevantes</b> por evaluar demasiados documentos; sin fine-tuning, mejorar precision con <b>cambios minimos</b>. &iquest;Que solucion cumple?",
+    question="Un RAG en un knowledge base de Bedrock <b>genera</b> respuestas <b>lentas e irrelevantes</b> por evaluar demasiados documentos; sin fine-tuning, se <b>debe</b> mejorar precision con <b>cambios minimos</b>. &iquest;Que solucion cumple?",
     options=[
         "Migrar a OpenSearch Service con campos vectoriales y filtros por metadatos",
         "Mejorar los embeddings con un modelo adaptado al dominio de noticias de emergencia",
@@ -1322,7 +1322,7 @@ cards.append(card(
 # Q49 - promptSessionAttributes sin retencion + handoff cifrado
 # ============================================================
 cards.append(card(
-    question="Un asistente en Bedrock AgentCore maneja <b>25.000 sesiones sub-500 ms</b>, <b>transfiere contexto seguro a humanos</b>, multi-Region y <b>no retiene contexto tras la sesion</b>. &iquest;Que solucion cumple?",
+    question="Un asistente en Bedrock AgentCore <b>debe</b> manejar <b>25.000 sesiones sub-500 ms</b>, <b>transferir contexto seguro a humanos</b>, ser multi-Region y <b>no retener contexto tras la sesion</b>. &iquest;Que solucion cumple?",
     options=[
         "Historial en memoria pasado por promptSessionAttributes, con session ID, limpieza y cifrado para el handoff",
         "AgentCore con Lambda que guarde el historial en DynamoDB con TTL, cifrado y optimizacion",
@@ -1411,7 +1411,7 @@ cards.append(card(
 # Q52 - Prompt Management A/B + Evaluations LLM-judge + flow en CI/CD
 # ============================================================
 cards.append(card(
-    question="Un workflow <b>zero-touch</b> promueve prompts a prod solo si mejoran precision en <b>5 idiomas</b>, pasando compliance en el <b>CI/CD</b> existente y con versionado. &iquest;Que solucion cumple?",
+    question="Un workflow <b>zero-touch</b> <b>debe</b> promover prompts a prod solo si mejoran precision en <b>5 idiomas</b>, pasar compliance en el <b>CI/CD</b> existente y versionarlos. &iquest;Que solucion cumple?",
     options=[
         "Usar SageMaker Canvas para comparar visualmente, un dashboard y reuniones semanales de revision",
         "Bedrock Prompt Management con A/B testing y Bedrock Evaluations con jueces LLM, integrado al CI/CD",
@@ -1556,7 +1556,7 @@ cards.append(card(
 # Q57 - SQS + Fargate cascada de modelos por confianza
 # ============================================================
 cards.append(card(
-    question="Un modelo peque&ntilde;o clasifica en Bedrock y lo de <b>confianza &lt;0.65</b> escala a uno caro: alta confianza casi en tiempo real, <b>baja confianza asincrona</b> y <b>desacoplado</b>. &iquest;Que solucion cumple?",
+    question="Un modelo peque&ntilde;o clasifica en Bedrock y lo de <b>confianza &lt;0.65</b> <b>debe</b> escalar a uno caro: alta confianza casi en tiempo real, <b>baja confianza asincrona</b> y <b>desacoplado</b>. &iquest;Que solucion cumple?",
     options=[
         "Step Functions con ramas paralelas que ejecute ambos modelos en cada peticion",
         "Ambos modelos en EC2 con auto scaling y una heuristica por longitud y palabras clave",
@@ -1645,7 +1645,7 @@ cards.append(card(
 # Q60 - Step Functions: Bedrock evals + Synthetics canaries + rollback nightly
 # ============================================================
 cards.append(card(
-    question="Un stage de CodePipeline llama a Step Functions para validar el deploy de un asistente de Bedrock: <b>rollback</b>, replay sintetico, <b>evaluaciones de IA</b> y chequeos de consistencia. &iquest;Que configuracion cumple?",
+    question="Un stage de CodePipeline con Step Functions <b>debe</b> validar el deploy de un asistente de Bedrock con <b>rollback</b>, replay sintetico, <b>evaluaciones de IA</b> y chequeos de consistencia. &iquest;Que configuracion cumple?",
     options=[
         "Correr Solo canaries de Synthetics y chequeos de consistencia con rollback, sin evaluaciones de modelo",
         "Correr Bedrock model evaluations y canaries de Synthetics con aprobacion automatica en exito",
@@ -1674,7 +1674,7 @@ cards.append(card(
 # Q61 - Guardrail multi-strategy: filters medium + denied topics + mask/block
 # ============================================================
 cards.append(card(
-    question="Un asistente financiero en Bedrock <b>no da consejos de inversion</b>, <b>bloquea da&ntilde;ino</b>, <b>enmascara PII</b>, audita y filtra I/O, con <b>minimos falsos positivos</b>. &iquest;Que configuracion de guardrail cumple?",
+    question="Un asistente financiero en Bedrock <b>debe</b> no dar consejos de inversion, <b>bloquear da&ntilde;ino</b>, <b>enmascarar PII</b>, auditar y filtrar I/O, con <b>minimos falsos positivos</b>. &iquest;Que configuracion de guardrail cumple?",
     options=[
         "Varios guardrails por niveles: content filters high que bloquean PII y medium que enmascara",
         "Un unico guardrail con content filters high, denied topics y bloqueo de PII, igual para todo",
@@ -1703,7 +1703,7 @@ cards.append(card(
 # Q62 - Prompt Management variants + Guardrails (formato/tono por BU)
 # ============================================================
 cards.append(card(
-    question="Un asistente en Bedrock resume por unidad: <b>formato consistente</b>, <b>tono por unidad</b>, bloquear odio y PHI, <b>prompts centralizados</b>, con el <b>MENOR mantenimiento</b>. &iquest;Que solucion cumple?",
+    question="Un asistente en Bedrock que resume por unidad <b>debe</b> dar <b>formato consistente</b>, <b>tono por unidad</b>, bloquear odio y PHI, <b>prompts centralizados</b> y el <b>MENOR mantenimiento</b>. &iquest;Que solucion cumple?",
     options=[
         "Tono por variables del system prompt y moderacion gestionada con una API interna propia",
         "Inyectar instrucciones por unidad en cada llamada, con reglas en DynamoDB y Comprehend tras generar",
@@ -1761,7 +1761,7 @@ cards.append(card(
 # Q64 - Glue Data Catalog crawlers + S3 tags + invocation logs Object Lock + CloudTrail integrity
 # ============================================================
 cards.append(card(
-    question="Se resumen documentos tecnicos en Amazon Bedrock: <b>catalogar fuentes con descubrimiento automatico</b>, <b>citas consultables</b> por resumen y <b>audit logs inmutables</b> por invocacion. &iquest;Que solucion cumple?",
+    question="Al resumir documentos tecnicos en Amazon Bedrock se <b>debe</b> <b>catalogar fuentes con descubrimiento automatico</b>, dar <b>citas consultables</b> por resumen y <b>audit logs inmutables</b> por invocacion. &iquest;Que solucion cumple?",
     options=[
         "Comprehend, resumenes en S3 con Object Lock, CloudWatch y sin logs por invocacion",
         "Feature flags de AWS AppConfig para versionar datos, condiciones IAM y mapeo de fuentes en S3",
@@ -1912,8 +1912,8 @@ cards.append(card(
     options=[
         "Reemplazar la recuperacion por resumenes estaticos en S3 servidos con CloudFront",
         "Migrar de OpenSearch a DynamoDB con indices por palabra clave",
-        "Cambiar el chunking a limites semanticos (argumentos, clausulas) y regenerar los embeddings",
-        "Aumentar los embeddings de 768 a 4096 dimensiones sin cambiar el chunking",
+        "Cambiar el chunking a limites semanticos (argumentos, clausulas) para regenerar los embeddings",
+        "Aumentar los embeddings de 768 a 4096 dimensiones para mas detalle, sin cambiar el chunking",
     ],
     correct=2,
     key="off1-q71",
@@ -1997,7 +1997,7 @@ cards.append(card(
 # Q74 - API Gateway REST regional + Lambda authorizers + DynamoDB global
 # ============================================================
 cards.append(card(
-    question="Se integra sentimiento y auto-respuesta de tickets en Bedrock: <b>100 webhooks concurrentes sub-500 ms</b>, 99.9% multi-Region, <b>varios metodos de auth</b> y 250.000 tickets/dia. &iquest;Que solucion cumple?",
+    question="Al integrar sentimiento y auto-respuesta de tickets en Bedrock se <b>debe</b> soportar <b>100 webhooks concurrentes sub-500 ms</b>, 99.9% multi-Region, <b>varios metodos de auth</b> y 250.000 tickets/dia. &iquest;Que solucion cumple?",
     options=[
         "SQS por Region hacia Lambdas con Comprehend y Lex, y EventBridge para reintentar",
         "Un WebSocket API multi-Region con tokens de API, rutas a EventBridge, Lambdas y CloudFront",

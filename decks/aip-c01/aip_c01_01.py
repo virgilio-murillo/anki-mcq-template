@@ -112,8 +112,8 @@ cards = [
         question="Un asistente de soporte debe <b>preservar contexto</b>, recuperar docs, ejecutar pedidos via API y dejar <b>auditoria</b>, con minima infraestructura propia. ¿Que enfoque cumple mejor?",
         options=[
             "Step Functions con historial en DynamoDB, recuperacion aparte y logs a CloudWatch",
-            "AgentCore: Runtime, Memory, Gateway (API y Knowledge Base) y Observability",
-            "Agente en Lambda, sesion en ElastiCache, Bedrock Knowledge Bases y API Gateway propios",
+            "AgentCore, que ejecuta el agente y aporta Memory, Gateway (API y Knowledge Base) y Observability gestionados",
+            "Agente propio en Lambda con sesion en ElastiCache, Knowledge Bases y API Gateway",
             "Bedrock Knowledge Bases, historial en el cliente, pedidos con Lambda y auditoria en S3",
         ],
         correct=1,
@@ -221,12 +221,12 @@ cards = [
     # Q13 - Bedrock Provisioned Throughput baja latencia
     # ============================================================
     card(
-        question="Un asistente en vivo necesita <b>muy baja latencia</b> con <b>capacidad de modelo predecible</b> en pico sostenido, costo fijo y auto scaling de la app. ¿Que enfoque cumple?",
+        question="Un asistente en vivo necesita <b>muy baja latencia</b> con <b>capacidad de modelo predecible</b> en pico sostenido, costo fijo y con auto scaling de la app en todos los casos. ¿Que capa de modelo cumple?",
         options=[
-            "Inferencia on-demand en Bedrock con aumentos de cuota y auto scaling de la app",
-            "Modelo de Bedrock de baja latencia con Provisioned Throughput y auto scaling de la app",
+            "Inferencia on-demand en Bedrock con aumentos de cuota",
+            "Modelo de Bedrock de baja latencia con Provisioned Throughput",
             "Inferencia latency-optimized con cross-Region inference y on-demand en picos",
-            "Batch inference de Bedrock con ventanas programadas y auto scaling de la app",
+            "Batch inference de Bedrock con ventanas programadas",
         ],
         correct=1,
         key="aip01-q13",
@@ -697,12 +697,12 @@ cards = [
     # Q52 - Bedrock Agent traces (Pre/Orchestration/PostProcessing)
     # ============================================================
     card(
-        question="Un agente de Bedrock alucina. Se necesita <b>observabilidad de como interpreta, razona y genera</b> (no solo la salida), medir la tasa y validar contra el razonamiento esperado. ¿Cual cumple?",
+        question="Un agente de Bedrock alucina. Se necesita <b>observabilidad de como interpreta, razona y genera</b> (no solo la salida) y validar contra un golden dataset. ¿Que mecanismo cumple?",
         options=[
-            "Model invocation logs y muestreo, calculando la tasa contra un golden dataset",
-            "GuardrailTrace, RoutingClassifierTrace y ModelInvocationInput, contra un golden dataset",
-            "PreProcessingTrace, OrchestrationTrace y PostProcessingTrace, contra un golden dataset",
-            "Prompt versioning y A/B testing, midiendo la tasa por consistencia entre versiones",
+            "Model invocation logs y muestreo, que miden solo la salida",
+            "GuardrailTrace, RoutingClassifierTrace y ModelInvocationInput, que exponen seguridad y enrutamiento",
+            "Traces de las 3 fases del agente (pre-proceso, orquestacion y post-proceso)",
+            "Prompt versioning y A/B testing, que comparan salidas entre versiones",
         ],
         correct=2,
         key="aip01-q52",
@@ -725,7 +725,7 @@ cards = [
     # Q53 - Transfer learning BERT (reemplazar capa final)
     # ============================================================
     card(
-        question="Se aplica <b>transfer learning con un BERT preentrenado</b> para clasificar correos spam en SageMaker, sin reentrenar desde cero. ¿Que enfoque inicializa correctamente el modelo?",
+        question="Un equipo necesita clasificar correos spam con <b>transfer learning sobre un BERT preentrenado</b> en SageMaker, sin reentrenar desde cero. ¿Que enfoque inicializa correctamente el modelo?",
         options=[
             "Cargar los pesos y poner un clasificador externo sobre la salida; entrenar solo ese",
             "Aplicar los pesos, descartar la capa final, poner un clasificador nuevo y entrenarlo",
@@ -755,10 +755,10 @@ cards = [
     card(
         question="Una editorial con PDFs, imagenes, audio y video quiere un asistente generativo. Ya procesa el contenido con <b>Bedrock Data Automation (BDA)</b> y planea SageMaker AI. ¿Como montar la recuperacion y generacion?",
         options=[
-            "Una base de vectores propia con Lambda y contenido crudo en S3",
-            "Indexar la salida de BDA en Bedrock Knowledge Bases y pasar el contexto a SageMaker AI",
+            "Un vector store propio con Lambda para indexar el contenido crudo en S3",
+            "Indexar la salida de BDA en Knowledge Bases y generar con SageMaker AI",
             "Extraer entidades y sentimiento con Comprehend y servir el modelo en EC2",
-            "Alimentar la salida de BDA directo al modelo, omitiendo la busqueda semantica",
+            "Alimentar la salida de BDA directo al modelo para generar, sin busqueda semantica",
         ],
         correct=1,
         key="aip01-q54",
@@ -811,9 +811,9 @@ cards = [
     card(
         question="Un modelo base en un endpoint real-time de SageMaker se quiere personalizar para cinco mercados con <b>adaptadores LoRA</b> sin reentrenar ni usar endpoints separados. ¿Que solucion cumple?",
         options=[
-            "El modelo base y, por region, un inference component de adaptador LoRA, en el mismo endpoint",
+            "El modelo base con un inference component de adaptador LoRA por region que corre en el mismo endpoint",
             "Un multi-model endpoint, cada adaptador LoRA como artefacto y enrutamiento por contenedor",
-            "El modelo base y los pesos LoRA de cada region en EFS, montando el filesystem",
+            "El modelo base y los pesos LoRA de cada region en EFS que se monta en el endpoint",
             "El modelo base y un Lambda que recupere los pesos del adaptador y los inyecte",
         ],
         correct=0,
@@ -893,7 +893,7 @@ cards = [
     # Q65 - Bedrock provisioned model ARN en modelId
     # ============================================================
     card(
-        question="Se compro Provisioned Throughput en Bedrock pero sigue el <b>throttling</b> y CloudWatch lo muestra sin uso: la app aun pasa el ID del modelo base en modelId. ¿Que cambio consume la capacidad provisionada?",
+        question="Se compro Provisioned Throughput en Bedrock pero la app necesita salir del <b>throttling</b>: CloudWatch no muestra uso porque aun pasa el ID del modelo base en modelId. ¿Que cambio consume la capacidad provisionada?",
         options=[
             "Aumentar los model units y seguir usando el ID del modelo base en modelId",
             "Usar el nombre del modelo provisionado como modelId, sin cambiar el payload",
@@ -1436,11 +1436,11 @@ cards = [
     # Q68r - Rol IAM del notebook con s3:GetObject/PutObject/ListBucket
     # ------------------------------------------------------------
     card(
-        question="Un notebook de SageMaker debe <b>leer de un bucket S3 y escribir en otro distinto</b> de forma segura. ¿Que enfoque conviene para darle permiso?",
+        question="Un notebook de SageMaker debe <b>leer de un bucket S3 y escribir en otro distinto</b> de forma segura, con GetObject, PutObject y ListBucket. ¿Que mecanismo conviene para darle permiso?",
         options=[
-            "Una bucket policy que permita al notebook, por su ARN, GetObject, PutObject y ListBucket",
-            "Un S3 access point para el notebook, permitiendo solo GetObject, PutObject y ListBucket",
-            "Adjuntar una politica al rol de IAM del notebook con GetObject, PutObject y ListBucket",
+            "Una bucket policy que autorice al notebook por su ARN sobre esos buckets",
+            "Un S3 access point dedicado que controle el acceso del notebook",
+            "Adjuntar esos permisos al rol de IAM (execution role) que usa el notebook",
             "Federacion de identidades de IAM para acceso temporal, asumiendo un rol federado",
         ],
         correct=2,
@@ -1464,12 +1464,12 @@ cards = [
     # Q69r - SageMaker Canvas scatter plot (color = 3a dim, size = 4a dim)
     # ------------------------------------------------------------
     card(
-        question="Visualizar recomendaciones en <b>cuatro dimensiones</b>: interes (X), conversion (Y), categoria y numero de impresiones, para detectar alto interes con bajas impresiones. ¿Que enfoque cumple mejor?",
+        question="Un equipo necesita visualizar recomendaciones en <b>cuatro dimensiones</b> (interes X, conversion Y, categoria e impresiones) para detectar alto interes con bajas impresiones. ¿Que enfoque cumple mejor?",
         options=[
-            "El scatter plot de SageMaker Data Wrangler, coloreando por la tercera feature",
+            "El scatter plot de SageMaker Data Wrangler que colorea la tercera feature, sin codificar la cuarta",
             "El Box Plot de SageMaker Canvas con un patron de relleno para la tercera dimension",
             "El Bar Chart de SageMaker Canvas por categoria, con color y altura para dos features",
-            "El scatter plot de SageMaker Canvas: la tercera dimension al color y la cuarta al tamaño",
+            "El scatter plot de SageMaker Canvas que mapea la tercera dimension al color y la cuarta al tamaño",
         ],
         correct=3,
         key="aip01r-q69",

@@ -30,10 +30,10 @@ cards = []
 cards.append(card(
     question="Fine-tuning de un FM en Bedrock con chats de soporte en S3. Se necesita linaje del dataset y solo datos aprobados, con el MENOR esfuerzo. &iquest;Como catalogar y curar?",
     options=[
-        "Consultar y curar con Amazon Athena (SQL)",
-        "Referenciar las transcripciones crudas sin transformarlas",
-        "Crawler de AWS Glue en Data Catalog y Glue ETL a JSONL",
-        "Transformar con Amazon EMR y Apache Spark, linaje aparte",
+        "Consultar y curar con Amazon Athena (SQL sobre S3)",
+        "Referenciar las transcripciones crudas sin transformarlas para fine-tuning",
+        "Crawler de AWS Glue que cataloga y Glue ETL que transforma a JSONL",
+        "Transformar con Amazon EMR y Apache Spark, con linaje aparte",
     ],
     correct=2,
     key="off2-q1",
@@ -60,10 +60,10 @@ cards.append(card(
 cards.append(card(
     question="Un generador de descripciones en Bedrock debe ser creativo pero controlado, coherente con la marca pero con algo de variacion. &iquest;Que parametros logran ese equilibrio?",
     options=[
-        "Temperature 0.5, top-p 0.8 y length penalties",
-        "Temperature 0.9, top-k 50 y sin limite de longitud",
-        "Temperature 0.5, con limites de longitud y diversidad deshabilitada",
-        "Temperature 0.2, top-k 4 y stop sequences estrictas",
+        "Temperature 0.5 y top-p 0.8 con length penalties para controlar la salida",
+        "Temperature 0.9 y top-k 50 sin l&iacute;mite de longitud, priorizando variedad",
+        "Temperature 0.5 con l&iacute;mites de longitud y la diversidad deshabilitada",
+        "Temperature 0.2 y top-k 4 con stop sequences que fuerzan salida fija",
     ],
     correct=0,
     key="off2-q3",
@@ -87,7 +87,7 @@ cards.append(card(
 # Q5 - Model cascading: modelo pequeno auto-evalua complejidad
 # ============================================================
 cards.append(card(
-    question="Enrutar consultas simples a un modelo pequeno (Llama) y complejas a uno grande (Claude), escalable y de baja latencia. &iquest;Que solucion cumple?",
+    question="Un sistema debe enrutar consultas simples a un modelo peque&ntilde;o (Llama) y complejas a uno grande (Claude), y ser escalable y de baja latencia. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
         "Intelligent prompt router de Bedrock entre Llama y Claude",
         "Knowledge base con indicadores de complejidad para enrutar",
@@ -116,7 +116,7 @@ cards.append(card(
 # Q6 - Comprehend entity recognition + normalizar + Bedrock reformatea
 # ============================================================
 cards.append(card(
-    question="Procesar datos de catalogo heterogeneos (formatos e idiomas distintos) para dar entradas consistentes a los FM. &iquest;Que solucion cumple?",
+    question="Un equipo tiene datos de cat&aacute;logo heterog&eacute;neos (formatos e idiomas distintos) y debe dar entradas consistentes a los FM. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
         "Comprehend extrae entidades, normalizar y Bedrock reformatea",
         "Normalizar, clasificacion personalizada de Comprehend y validacion propia",
@@ -148,10 +148,10 @@ cards.append(card(
 cards.append(card(
     question="En prod el acceso a la API de Bedrock no debe pasar por internet publico, y debe cumplirse sin importar los roles IAM ni la app. &iquest;Que solucion cumple?",
     options=[
-        "Interface VPC endpoint mas una SCP en la OU de prod",
-        "Interface VPC endpoint mas una politica IAM por cuenta",
-        "NAT gateway privado y route tables que enrutan Bedrock al NAT",
-        "Interface VPC endpoint con endpoint policies para la app aprobada",
+        "Interface VPC endpoint (ruta privada) mas una SCP que aplica en la OU de prod",
+        "Interface VPC endpoint mas una pol&iacute;tica IAM configurada por cuenta",
+        "NAT gateway privado con route tables que enrutan Bedrock al NAT",
+        "Interface VPC endpoint con endpoint policies que limitan a la app aprobada",
     ],
     correct=0,
     key="off2-q10",
@@ -176,12 +176,12 @@ cards.append(card(
 # Q11 - Reranker + top-5 para reducir tokens sin perder accuracy
 # ============================================================
 cards.append(card(
-    question="Un KB con buen recall pasa 50 resultados al LLM y los tokens se dispararon. Reducir tokens sin perder accuracy, con el MENOR esfuerzo. &iquest;Que solucion cumple?",
+    question="Un KB con buen recall pasa 50 resultados al LLM y los tokens se dispararon; hay que reducir tokens sin perder accuracy, con el MENOR esfuerzo. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
-        "Rehacer el chunking a semantico adaptativo y pasar los 10 primeros",
-        "Configurar el KB para usar semantic search",
-        "Invocar un modelo reranker y pasar al LLM solo los 5 mejores",
-        "Limitar el contexto a los 5 primeros documentos recuperados",
+        "Rehacer el chunking a sem&aacute;ntico adaptativo y pasar los 10 primeros al LLM",
+        "Configurar el KB para que use semantic search puro",
+        "Invocar un modelo reranker que reordena y pasar al LLM solo los 5 mejores",
+        "Limitar el contexto a los 5 primeros documentos recuperados, sin reordenar",
     ],
     correct=2,
     key="off2-q11",
@@ -205,7 +205,7 @@ cards.append(card(
 # Q13 - CloudWatch dashboard + invocation logs para diagnosticar RAG
 # ============================================================
 cards.append(card(
-    question="RAG en prod (Bedrock + OpenSearch) con latencia inconsistente. Diagnosticar la causa raiz con el MENOR esfuerzo. &iquest;Que solucion conviene?",
+    question="Diagnosticar la causa ra&iacute;z de la latencia inconsistente de un RAG en prod (Bedrock + OpenSearch) es el objetivo, con el MENOR esfuerzo. &iquest;Qu&eacute; soluci&oacute;n conviene?",
     options=[
         "Metricas custom de CloudWatch y alarmas compuestas de similitud y tokens",
         "Monitoreo detallado, metric math y deteccion de anomalias",
@@ -234,7 +234,7 @@ cards.append(card(
 # Q15 - Bedrock Prompt Management (compare versions, sin deploy)
 # ============================================================
 cards.append(card(
-    question="Catalogar prompts como plantillas con variables, con versionado, comparacion de versiones y pruebas antes de desplegar, con el MENOR esfuerzo. &iquest;Que solucion cumple?",
+    question="Un equipo quiere catalogar prompts como plantillas con variables, versionarlos, comparar versiones y probarlos antes de desplegar, con el MENOR esfuerzo. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
         "Prompt Management con variables; probar con compare versions sin desplegar",
         "Plantillas JSON en S3, Prompt Management para A/B y Lambda para versionar",
@@ -322,7 +322,7 @@ cards.append(card(
 # Q21 - Semantic chunking + optimizar max tokens (reducir costo retrieval)
 # ============================================================
 cards.append(card(
-    question="El chunking de tamano fijo (1.000 tokens) fragmenta el contenido y los costos de recuperacion subieron. Reducir costos manteniendo accuracy. &iquest;Que solucion cumple?",
+    question="El chunking de tama&ntilde;o fijo (1.000 tokens) fragmenta el contenido y los costos de recuperaci&oacute;n subieron; hay que reducir costos manteniendo accuracy. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
         "Amazon Nova para embedding de chunks y Anthropic Claude para sumarizacion",
         "Habilitar semantic chunking y optimizar el maximo de tokens",
@@ -351,7 +351,7 @@ cards.append(card(
 # Q22 - DynamoDB single-table + GSI + DAX + TTL para historial de chat
 # ============================================================
 cards.append(card(
-    question="Historial de chat: filtrado por metadatos, reanudar desde cualquier punto, baja latencia en lo reciente y borrado al expirar. &iquest;Que implementacion es la MAS escalable?",
+    question="Un historial de chat necesita filtrado por metadatos, reanudar desde cualquier punto, baja latencia en lo reciente y borrado al expirar. &iquest;Qu&eacute; implementaci&oacute;n es la MAS escalable?",
     options=[
         "OpenSearch con metadatos y full-text, indices por tiempo y politicas ISM",
         "DynamoDB single-table con GSI, sort keys jerarquicos, DAX y TTL",
@@ -410,7 +410,7 @@ cards.append(card(
 # Q25 - Step Functions Standard orquestando FM largo (5-15 min)
 # ============================================================
 cards.append(card(
-    question="Documentos que tardan 5 a 15 min con varias llamadas al FM, 1.000 concurrentes en pico, audit trails y resultados disponibles, con el MENOR esfuerzo. &iquest;Que solucion cumple?",
+    question="Documentos que tardan 5 a 15 min con varias llamadas al FM llegan a 1.000 concurrentes en pico y necesitan audit trails y resultados disponibles. &iquest;Qu&eacute; soluci&oacute;n cumple con el MENOR esfuerzo?",
     options=[
         "S3 Event Notifications a Lambda que lanza Step Functions Standard, estado en DynamoDB",
         "API Gateway con WebSocket APIs para mantener la conexion mientras procesa",
@@ -469,7 +469,7 @@ cards.append(card(
 # Q27 - SageMaker Clarify + FMEval (CrowS-Pairs) + CloudWatch (bias)
 # ============================================================
 cards.append(card(
-    question="App GenAI en SageMaker - implementar un framework integral de fairness que detecte sesgos sutiles entre grupos socioeconomicos, edades y regiones, con el MENOR esfuerzo. &iquest;Que solucion cumple?",
+    question="Una app GenAI en SageMaker necesita un framework integral de fairness que detecte sesgos sutiles entre grupos socioecon&oacute;micos, edades y regiones. &iquest;Qu&eacute; soluci&oacute;n cumple con el MENOR esfuerzo?",
     options=[
         "SageMaker Model Monitor ante bias drift con alertas por umbral",
         "Datasets propios por grupo, batch transform y reentrenamiento automatico",
@@ -558,10 +558,10 @@ cards.append(card(
 cards.append(card(
     question="Un asistente sobre Knowledge Bases debe contestar <b>solo con los documentos mas recientes</b> e <b>ignorar los mas antiguos</b>. &iquest;Que solucion cumple?",
     options=[
-        "Un prompt template que instruya a ignorar los documentos desactualizados",
-        "Agregar un metadata filter por modification time",
-        "Fijar el tipo de busqueda en semantic",
-        "Habilitar query modification",
+        "Un prompt template que instruya al modelo a ignorar lo desactualizado",
+        "Agregar un metadata filter que restringe por modification time",
+        "Fijar el tipo de b&uacute;squeda en semantic para emparejar por significado",
+        "Habilitar query modification para reescribir la consulta",
     ],
     correct=1,
     key="off2-q36",
@@ -615,7 +615,7 @@ cards.append(card(
 # Q39 - API Gateway REST non-proxy + mapping templates + Secrets Manager + cache
 # ============================================================
 cards.append(card(
-    question="Enrutar a distintos LLM (Bedrock y terceros) sin cambios de codigo, con API keys seguras, formato de respuesta consistente y cache para costos. &iquest;Que solucion cumple?",
+    question="Enrutar a distintos LLM (Bedrock y terceros) sin cambios de c&oacute;digo es el objetivo, y se necesitan API keys seguras, formato consistente y cache. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
         "REST API non-proxy con mapping templates, stage variables y keys en Secrets Manager",
         "Todos los modelos en endpoints de SageMaker, enrutamiento por path",
@@ -644,7 +644,7 @@ cards.append(card(
 # Q40 - BDA: un proyecto con multiples blueprints (auto-seleccion)
 # ============================================================
 cards.append(card(
-    question="Facturas PDF de electricidad, agua y gas, cada tipo con formato propio. Al subir a S3, identificar el tipo y extraer los campos, con el MENOR esfuerzo. &iquest;Que solucion cumple?",
+    question="Facturas PDF de luz, agua y gas llegan con formato propio, y al subir a S3 hay que identificar el tipo y extraer los campos, con el MENOR esfuerzo. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
         "Rekognition Custom Labels y tres proyectos BDA con InvokeDataAutomationAsync",
         "Un proyecto BDA con multiples blueprints que autoselecciona el blueprint",
@@ -673,7 +673,7 @@ cards.append(card(
 # Q41 - Guardrails + model cards en S3 + InvocationsIntervened + EventBridge
 # ============================================================
 cards.append(card(
-    question="Moderar PII, odio y contenido inseguro (texto e imagen), documentar sesgos del FM con versionado y disparar cumplimiento en segundos tras una intervencion, con el MENOR esfuerzo. &iquest;Que solucion cumple?",
+    question="Moderar PII, odio y contenido inseguro (texto e imagen), documentar sesgos del FM con versionado y disparar cumplimiento en segundos tras intervenir es lo que se necesita. &iquest;Qu&eacute; cumple con el MENOR esfuerzo?",
     options=[
         "Comprehend para PII, Guardrails para el resto, versionado en DynamoDB con GSI",
         "Guardrails multimodal, Rekognition propio y model cards en S3 en paralelo",
@@ -702,12 +702,12 @@ cards.append(card(
 # Q42 - S3 metadata (system/user) + tags jerarquicos + OpenSearch con vectores
 # ============================================================
 cards.append(card(
-    question="Millones de papers en S3: registrar fechas, autoria, clasificacion multinivel, filtrado combinado y contexto para los FM, con la consulta MAS rapida. &iquest;Que diseno de metadatos cumple?",
+    question="Millones de papers en S3 deben registrar fechas, autor&iacute;a y clasificaci&oacute;n multinivel, con filtrado combinado y contexto para los FM. &iquest;Qu&eacute; dise&ntilde;o de metadatos es MAS r&aacute;pido?",
     options=[
-        "Timestamps user metadata; autoria y clasificaciones en DynamoDB; tags; OpenSearch",
-        "Timestamps system metadata; autoria user metadata; tags jerarquicos; OpenSearch con document vectors",
-        "Todos los metadatos en DynamoDB; papers en S3 minimos; SageMaker Feature Store",
-        "Timestamps system metadata; autoria en RDS for PostgreSQL; Amazon Kendra",
+        "Timestamps user metadata; autor&iacute;a y clasificaciones en DynamoDB; tags; OpenSearch",
+        "Timestamps system metadata; autor&iacute;a user metadata; tags jer&aacute;rquicos; OpenSearch con document vectors",
+        "Guardar todos los metadatos en DynamoDB, papers m&iacute;nimos en S3 y features en SageMaker Feature Store",
+        "Timestamps system metadata; autor&iacute;a en RDS for PostgreSQL; buscar con Amazon Kendra",
     ],
     correct=1,
     key="off2-q42",
@@ -732,7 +732,7 @@ cards.append(card(
 # Q45 - Hierarchical chunking para manuales tecnicos anidados
 # ============================================================
 cards.append(card(
-    question="RAG para manuales de aviones: PDFs enormes con secciones anidadas y referencias cruzadas, alta precision de recuperacion y el MENOR esfuerzo. &iquest;Que solucion cumple?",
+    question="Un RAG para manuales de aviones maneja PDFs enormes con secciones anidadas y referencias cruzadas, y necesita alta precisi&oacute;n de recuperaci&oacute;n. &iquest;Qu&eacute; soluci&oacute;n cumple con el MENOR esfuerzo?",
     options=[
         "Knowledge Bases con hierarchical chunking y OpenSearch Serverless",
         "Knowledge Bases con semantic chunking y OpenSearch Serverless",
@@ -761,12 +761,12 @@ cards.append(card(
 # Q51 - Bedrock Prompt Management + Bedrock Flows (encadenar 3 LLM)
 # ============================================================
 cards.append(card(
-    question="Encadenar 3 llamadas a LLM, versionar los prompts y hacer rollback rapido, con el MENOR esfuerzo de desarrollo. &iquest;Que solucion cumple?",
+    question="Un equipo debe encadenar 3 llamadas a LLM con Bedrock Flows, versionar los prompts y hacer rollback r&aacute;pido, con el MENOR esfuerzo. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
-        "Knowledge base, prompts en Parameter Store y orquestar con Bedrock Flows",
-        "Knowledge base, prompts en Prompt Management y orquestar con Step Functions",
-        "Knowledge base, prompts en Prompt Management y orquestar con Bedrock Flows",
-        "Amazon Q Business, prompts en Prompt Management y orquestar con Bedrock Flows",
+        "Knowledge base, prompts en Parameter Store y encadenado con Flows",
+        "Knowledge base, prompts en Prompt Management y encadenado con Step Functions",
+        "Knowledge base, prompts en Prompt Management (versiona y hace rollback)",
+        "Amazon Q Business, prompts en Prompt Management y encadenado con Flows",
     ],
     correct=2,
     key="off2-q51",
@@ -819,7 +819,7 @@ cards.append(card(
 # Q54 - AgentCore Runtime + Strands + prebuilt MCP server (Aurora)
 # ============================================================
 cards.append(card(
-    question="Consultas en lenguaje natural que invocan procesos de supply chain con soporte MCP integrado y minimo mantenimiento, con el inventario en Aurora. &iquest;Que solucion cumple?",
+    question="Consultas en lenguaje natural que invocan procesos de supply chain necesitan soporte MCP integrado y m&iacute;nimo mantenimiento, con inventario en Aurora. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
         "AgentCore Runtime y Strands Agents con un prebuilt MCP server sobre Aurora",
         "Amazon Lex, una Lambda que empuja a SQS y microservicios en ECS sobre Fargate",
@@ -848,7 +848,7 @@ cards.append(card(
 # Q55 - CreateEvaluationJob con evaluator model + Spearman (Lambda)
 # ============================================================
 cards.append(card(
-    question="Evaluar varios FM con calidad, seguridad, juicio tipo humano a escala y validacion estadistica de diferencias, con evaluadores gestionados y el MENOR esfuerzo. &iquest;Que solucion cumple?",
+    question="Un equipo debe evaluar varios FM en calidad, seguridad y juicio tipo humano a escala, con validaci&oacute;n estad&iacute;stica de las diferencias y evaluadores gestionados. &iquest;Qu&eacute; soluci&oacute;n cumple con el MENOR esfuerzo?",
     options=[
         "CreateEvaluationJob con evaluator model consistente y Spearman en Lambda",
         "Batch inference para generar, luego LLM-as-a-judge propio y Spearman en Lambda",
@@ -907,7 +907,7 @@ cards.append(card(
 # Q61 - AWS Config custom rule (RDK) para SSE-KMS con CMK
 # ============================================================
 cards.append(card(
-    question="Asegurar que los datasets de training esten cifrados con KMS customer managed keys, rechazar claves de AWS o sin cifrar y validar continuamente los existentes. &iquest;Que solucion cumple?",
+    question="Asegurar que los datasets de training usen KMS customer managed keys, rechazar claves de AWS o sin cifrar y validar continuamente los existentes es la meta. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
         "Amazon Macie para escanear S3 y reportar los que no usan CMK",
         "EventBridge ante PutObject dispara Step Functions que verifica CMK y notifica por SNS",
@@ -1023,7 +1023,7 @@ cards.append(card(
 # Q68 - Custom chunking via Lambda + LangChain (jerarquia variable)
 # ============================================================
 cards.append(card(
-    question="RAG sobre HTML - articulos con parrafos de longitud muy variable y estructura jerarquica compleja. Preservar la relacion articulo-parrafos y minimizar respuestas irrelevantes o inexactas. &iquest;Que solucion cumple?",
+    question="Preservar la relaci&oacute;n art&iacute;culo-p&aacute;rrafos y minimizar respuestas irrelevantes es la meta en un RAG sobre HTML con p&aacute;rrafos de longitud muy variable y jerarqu&iacute;a compleja. &iquest;Qu&eacute; soluci&oacute;n cumple?",
     options=[
         "Knowledge base de Bedrock con hierarchical chunking integrado, con parent y child chunks de tamanos estimados por la longitud promedio",
         "Amazon Textract para extraer el texto de los HTML, chunks por parrafo en S3 y un knowledge base con la opcion no chunking",
@@ -1081,7 +1081,7 @@ cards.append(card(
 # Q72 - IAM Identity Center + Active Directory + failover regional
 # ============================================================
 cards.append(card(
-    question="Servicios financieros (GenAI multi-cuenta con Bedrock) - los empleados se autentican via Microsoft Active Directory y acceden a los FM por departamento, con permisos consistentes entre cuentas y resiliencia regional de la autenticacion. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Servicios financieros (GenAI multi-cuenta con Bedrock) usan Microsoft Active Directory para autenticar empleados y dan acceso a los FM por departamento, con permisos consistentes entre cuentas y failover regional. &iquest;Qu&eacute; cumple con el MENOR esfuerzo?",
     options=[
         "Federacion SAML 2.0 con IAM en cada cuenta, roles con trust policies por departamento y condition keys que restringen los modelos",
         "Configurar AWS IAM Identity Center federado con Active Directory, permission sets de acceso a modelos por departamento y multi-cuenta con failover regional",

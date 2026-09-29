@@ -258,6 +258,21 @@ def verify_cards(cards, shuffle_seed_base=1):
     return problems
 
 
+# Clarity advisory regexes (used by warn_cards; see anki_mcq.clarity_pass).
+_CLARITY_VERB = re.compile(
+    r'\b(es|son|debe|deben|cumple|conviene|permite|permiten|hace|hacen|necesita|'
+    r'necesitan|requiere|requieren|usa|usan|ofrece|ofrecen|quiere|quieren|busca|'
+    r'buscan|tiene|tienen|falla|fallan|logra|reduce|minimiza|maximiza|garantiza|'
+    r'resuelve|elige|selecciona|esta|estan|hay|puede|pueden|sirve|sirven|exige|'
+    r'exigen|deberia|procesa|entrena|despliega|corre|genera)\b', re.I)
+_CLARITY_FUNC = re.compile(
+    r'\b(para|que|con|mediante|usando|calcul\w+|valid\w+|entren\w+|sirv\w+|filtr\w+|'
+    r'detect\w+|gener\w+|reduc\w+|almacen\w+|convert\w+|clasific\w+|enrut\w+|compar\w+|'
+    r'evalu\w+|analiz\w+|proces\w+|ejecut\w+|invoc\w+|desplieg\w+|orquest\w+|monitor\w+|'
+    r'registr\w+|configur\w+|habilit\w+)\b', re.I)
+_CLARITY_CAMEL = re.compile(r'\b[A-Z][a-zA-Z]+[A-Z][a-zA-Z]+\b')
+
+
 def _shared_leading_token(options):
     """If a meaningful token leads ALL options (a convergence cue), return it.
 
@@ -305,6 +320,27 @@ def warn_cards(cards):
                 f"Si un elemento aparece en TODAS las opciones, va en el enunciado; "
                 f"considera reenfocar (anki_mcq.refocus_deck)"
             )))
+        # Clarity advisories (best effort, non-blocking): telegraphic stem,
+        # name-drop options, repeated option tails. See anki_mcq.clarity_pass.
+        q = c.get("question", "")
+        _parts = re.split(r'(?<=[.?!])\s+', _plain(q))
+        _setup = ' '.join(_parts[:-1]) if len(_parts) > 1 else _plain(q)
+        if _setup and not _CLARITY_VERB.search(_setup):
+            out.append((i + 1, "enunciado telegrafico (setup sin verbo conjugado); redactalo como una frase corta con verbo"))
+        _nd = 0
+        for _o in c.get("options", []):
+            _po = _plain(_o)
+            if not _CLARITY_FUNC.search(_po) and (len(_po.split()) <= 12 or _CLARITY_CAMEL.search(_po)):
+                _nd += 1
+        if _nd >= 2:
+            out.append((i + 1, f"{_nd} opciones name-drop (solo nombran API/servicio sin decir que hacen); anade una glosa minima"))
+        _tails = {}
+        for _o in c.get("options", []):
+            _tk = _plain(_o).lower().split()
+            if len(_tk) >= 3:
+                _t = ' '.join(_tk[-3:]); _tails[_t] = _tails.get(_t, 0) + 1
+        if any(v >= 3 for v in _tails.values()):
+            out.append((i + 1, "3+ opciones terminan igual; factoriza la cola comun al enunciado (cover-the-options)"))
     return out
 
 
