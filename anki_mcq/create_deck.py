@@ -47,26 +47,50 @@ def _invoke(action, **params):
 
 
 def create(deck_name, cards, out_path, do_import=True, verbose=True,
-           ref_cards=None, llm_shorten=None, enforce_distribution=True):
+           ref_cards=None, llm_shorten=None, enforce_distribution=False,
+           refocus_llm=None):
     """Build -> verify -> (optionally) import a deck straight into `deck_name`.
 
     Returns the count of cards on success. Raises if verification fails.
+
+    REFOCUS (see DECK_STANDARDS.md section 12): pass `refocus_llm` (a callable
+    like anki_mcq.llm_shorten.llm_shorten with a backend set) to rewrite, one
+    model call each, only the cards that show the combo-stacking defect (options
+    that all lead with the same service, a convergence cue). Options become
+    competing concepts; key/correct are preserved and no examinable concept is
+    dropped. Best effort: only the few flagged cards are touched.
 
     NORMALIZATION (see DECK_STANDARDS.md section 11): pass `ref_cards` (the gold
     reference deck, e.g. from gold_reference.load_gold_reference()) to normalize
     this deck's length distribution toward it BEFORE building. If `llm_shorten`
     is also given, over-budget cards are shortened (one model call each, concepts
-    preserved); without it, normalization only plans (no rewrite) but the
-    distribution gate below still runs.
+    preserved); without it, normalization only plans (no rewrite).
 
-    DISTRIBUTION GATE: when `ref_cards` is given and `enforce_distribution` is
-    True (default), `check_distribution` runs as a HARD gate so a deck that is
-    uniformly too long (the "everything is verbose" regression) fails loudly
-    instead of shipping. When `ref_cards` is None the gate is skipped (backward
-    compatible with existing per-deck scripts that do not pass a reference).
+    CONCISENESS is BEST EFFORT: when `ref_cards` is given, `check_distribution`
+    reports (as a non-blocking warning) whether the deck still exceeds the
+    conciseness goal, but does NOT fail the build. The only HARD length failures
+    are the per-card caps in verify_cards (stem>70w, opt>32w). Pass
+    `enforce_distribution=True` to turn the shape check into a hard gate. When
+    `ref_cards` is None, normalization and the shape check are skipped entirely
+    (backward compatible with existing per-deck scripts).
     """
-    # 0) Normalize toward the gold reference (optional, but recommended). This is
-    #    the step that keeps a freshly generated deck from being 2x denser than
+    # 0a) Refocus BEFORE compression: rewrite combo-stacking options into
+    #     competing concepts. Runs first because it changes what the options ARE
+    #     (usually shortening them), so compression should act on the refocused
+    #     text. Best effort: only flagged cards get one model call.
+    if refocus_llm is not None:
+        from .refocus_deck import refocus
+        rf = refocus(cards, llm=refocus_llm)
+        cards = rf["rewritten"]
+        if verbose and rf["candidates"]:
+            print(f">> reenfoque: {len(rf['candidates'])} card(s) con convergence cue")
+        if rf["review"] and verbose:
+            print(f">> reenfoque: {len(rf['review'])} card(s) para revision manual:")
+            for key, reason in rf["review"]:
+                print(f"   - {key}: {reason}")
+
+    # 0b) Normalize toward the gold reference (optional, but recommended). This
+    #    is the step that keeps a freshly generated deck from being denser than
     #    the gold. See DECK_STANDARDS.md section 11.
     if ref_cards is not None:
         from .normalize_deck import normalize
@@ -89,15 +113,22 @@ def create(deck_name, cards, out_path, do_import=True, verbose=True,
         for idx, w in warnings:
             print(f"   - card {idx}: {w}")
 
-    # 1c) Distribution gate: fail a deck whose SHAPE is far from the gold. Only
-    #     enforced when a reference is provided (so legacy calls are unaffected).
-    if ref_cards is not None and enforce_distribution:
+    # 1c) Distribution shape check (BEST EFFORT): report if the deck is denser
+    #     than the conciseness goal, but do NOT fail the build. The only hard
+    #     length failures are the per-card caps in verify_cards (stem>70,
+    #     opt>32). Set enforce_distribution=True to make it a hard gate instead.
+    if ref_cards is not None:
         dist_issues = check_distribution(cards)
         if dist_issues:
-            raise SystemExit(
-                "check_distribution failed (la baraja es mas densa que la de "
-                f"referencia): {dist_issues}"
-            )
+            if enforce_distribution:
+                raise SystemExit(
+                    "check_distribution failed (la baraja es mas densa que el "
+                    f"objetivo): {dist_issues}"
+                )
+            elif verbose:
+                print(">> distribucion (best effort, no bloquea) - aun por encima del objetivo:")
+                for d in dist_issues:
+                    print(f"   - {d}")
 
     # 2) Build the .apkg with the FULL subdeck name and a unique, stable deck id.
     build_deck(deck_name, cards, out_path, verbose=verbose)

@@ -914,10 +914,10 @@ cards.append(card(
 cards.append(card(
     question="Un asistente de voz en tiempo real apoya a agentes en llamadas. Debe convertir <b>audio a texto sub-500 ms</b>, dar sugerencias con GenAI, permitir <b>calificacion en vivo</b> del supervisor y guardar las interacciones. &iquest;Que solucion cumple?",
     options=[
-        "Usar Amazon Transcribe batch post-llamada, Lambda con InvokeModel y CloudWatch para el feedback",
-        "Transcribe streaming con chunks de 100 ms, InvokeModelWithResponseStream y calificaciones en DynamoDB",
-        "Usar Transcribe streaming estandar, Bedrock batch para la inferencia y grabaciones en S3 con lifecycle",
-        "Usar Transcribe con Comprehend para sentimiento, SQS para encolar e InvokeModel de Bedrock",
+        "Transcripcion batch post-llamada con InvokeModel en Lambda y feedback via CloudWatch",
+        "Transcripcion en streaming (chunks de 100 ms), InvokeModelWithResponseStream y calificaciones en DynamoDB",
+        "Streaming de transcripcion pero inferencia batch de Bedrock, con grabaciones en S3 con lifecycle",
+        "Encolar con Amazon SQS y usar Comprehend para sentimiento antes de InvokeModel sin streaming",
     ],
     correct=1,
     key="off1-q35",
@@ -1705,10 +1705,10 @@ cards.append(card(
 cards.append(card(
     question="Un asistente interno de Bedrock resume para varias unidades. Debe dar <b>formato consistente</b>, <b>tono por unidad</b> (legal, RRHH, finanzas), bloquear odio y PHI, <b>gestionar prompts centralmente</b> y ajustar la moderacion, con el <b>MENOR mantenimiento</b>. &iquest;Que solucion cumple?",
     options=[
-        "Bedrock Prompt Management, tono por variables del system prompt y Guardrails gestionados por una API interna",
-        "Bedrock con instrucciones por unidad en las llamadas, reglas en DynamoDB y Comprehend tras generar",
-        "Bedrock con plantillas en DynamoDB, una Lambda que elija el prompt y otra con Comprehend",
-        "Bedrock Prompt Management para plantillas y variantes por unidad y Bedrock Guardrails con category filters",
+        "Tono por variables del system prompt y moderacion gestionada con una API interna propia",
+        "Inyectar instrucciones por unidad en cada llamada, con reglas en DynamoDB y Comprehend tras generar",
+        "Guardar plantillas en DynamoDB y usar Lambdas que eligen el prompt y filtran con Comprehend",
+        "Prompt Management con variantes por unidad y Guardrails con category filters y listas de terminos",
     ],
     correct=3,
     key="off1-q62",
@@ -1722,7 +1722,7 @@ cards.append(card(
         '<li><b>Inyeccion por unidad + DynamoDB + Step Functions + Comprehend:</b> mueve el formato a Step Functions y DynamoDB (mas orquestacion y estado) y filtrar con Comprehend despues de generar agrega latencia e integraciones.</li>'
         '<li><b>Plantillas en DynamoDB + Lambdas + Comprehend:</b> enfoque descentralizado con orquestacion de Lambda y filtrado custom continuos; mas mantenimiento y mas dificil de escalar que Prompt Management + Guardrails.</li>'
         '</ul>'
-        '<div class="extra"><span class="h">Exam tip</span>Gestion central de prompts con variantes por equipo + formato consistente + moderacion ajustable sin redeploy = Prompt Management (variantes) + Guardrails. Meter el formato/filtrado en Lambdas, DynamoDB o Comprehend post-generacion suma mantenimiento.</div>'
+        '<div class="extra"><span class="h">Exam tip</span>Gestion central de prompts con variantes por equipo + formato consistente + moderacion ajustable sin redeploy = servicio gestionado de plantillas con variantes + filtros de seguridad nativos. Meter el formato/filtrado en Lambdas, DynamoDB o Comprehend post-generacion suma mantenimiento.</div>'
         '<div class="links"><span class="h">Links</span>'
         '<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-management.html">docs.aws Bedrock Prompt Management</a></div>'
     ),

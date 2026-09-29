@@ -21,6 +21,7 @@ from .engine import (
 from .create_deck import create
 from .verify_deck import verify_cards, verify_apkg, check_distribution, concepts_preserved
 from .normalize_deck import normalize as normalize_deck
+from .refocus_deck import refocus as refocus_deck, needs_refocus
 from .gold_reference import load_gold_reference
 from .sync_deck import sync
 from .universe import (
@@ -69,6 +70,8 @@ __all__ = [
     "check_distribution",
     "concepts_preserved",
     "normalize_deck",
+    "refocus_deck",
+    "needs_refocus",
     "load_gold_reference",
     "sync",
     # universe builder

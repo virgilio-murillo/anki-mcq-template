@@ -78,17 +78,21 @@ def reference_distribution(ref_cards):
     return {"opt": opt, "stem": stem}
 
 
-def budget_for_deck(new_cards, ref_cards, floor_opt=6, floor_stem=12):
+def budget_for_deck(new_cards, ref_cards, floor_opt=4, floor_stem=10, compression=0.55):
     """Compute a per-card word budget by quantile-mapping the NEW deck's length
-    distribution onto the REFERENCE deck's distribution.
+    distribution onto the REFERENCE deck's distribution, then scaling by
+    `compression` for a shorter-than-reference target.
+
+    `compression` (default 0.55) applies the user's "cards should be much
+    shorter" goal: after mapping each card to the reference value at its
+    percentile, the budget is multiplied by this factor (0.55 = aim for ~55% of
+    the earlier length). Set compression=1.0 to match the reference exactly.
 
     Returns a list (parallel to new_cards) of dicts:
       {"key", "stem_now", "stem_budget", "opt_now":[...], "opt_budget":[...],
        "needs_rewrite": bool}
 
-    A field needs shortening only if it currently exceeds its mapped budget by
-    a margin (we do not touch fields already at/under budget). Budgets never go
-    below small floors so we never demand nonsense.
+    Budgets never go below small floors so we never demand nonsense.
     """
     ref = reference_distribution(ref_cards)
     new_opt_sorted = sorted(_words(o) for c in new_cards for o in c.get("options", []))
@@ -99,12 +103,12 @@ def budget_for_deck(new_cards, ref_cards, floor_opt=6, floor_stem=12):
         sw = _words(c.get("question", ""))
         # percentile of this stem within the NEW deck -> reference value at that percentile
         p = _percentile_of(new_stem_sorted, sw)
-        stem_budget = max(floor_stem, _value_at_percentile(ref["stem"], p))
+        stem_budget = max(floor_stem, round(_value_at_percentile(ref["stem"], p) * compression))
         opt_now, opt_budget = [], []
         for o in c.get("options", []):
             ow = _words(o)
             po = _percentile_of(new_opt_sorted, ow)
-            ob = max(floor_opt, _value_at_percentile(ref["opt"], po))
+            ob = max(floor_opt, round(_value_at_percentile(ref["opt"], po) * compression))
             opt_now.append(ow)
             opt_budget.append(ob)
         needs = sw > stem_budget + 3 or any(n > b + 3 for n, b in zip(opt_now, opt_budget))

@@ -28,12 +28,12 @@ cards = []
 # Q1 - Gobernanza del dataset de fine-tuning (Glue Data Catalog + ETL)
 # ============================================================
 cards.append(card(
-    question="Servicios financieros - fine-tuning de un FM de Amazon Bedrock con chats de soporte no estructurados. Por cumplimiento hay que rastrear origen y transformaciones del dataset y usar solo datos aprobados. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Servicios financieros - fine-tuning de un FM de Amazon Bedrock con chats de soporte no estructurados en un bucket S3 gobernado. Por cumplimiento hay que rastrear origen y transformaciones del dataset y usar solo datos aprobados. &iquest;Como catalogar y curar los datos con el MENOR esfuerzo operativo?",
     options=[
-        "Bucket S3 gobernado; curar con Amazon Athena (SQL) al mismo bucket y fine-tuning en Bedrock",
-        "Guardar transcripciones crudas en S3, referenciadas directamente en el job de fine-tuning de Bedrock",
-        "S3 gobernado; crawler de AWS Glue en Glue Data Catalog; curar con Glue ETL a JSONL y fine-tuning en Bedrock",
-        "S3 gobernado; crawler de AWS Glue en Glue Data Catalog; curar con Amazon EMR y Apache Spark a JSONL y fine-tuning en Bedrock",
+        "Consultar y curar con Amazon Athena (SQL) sobre el mismo bucket",
+        "Referenciar las transcripciones crudas directamente en el job de fine-tuning, sin transformarlas",
+        "Crawler de AWS Glue en Glue Data Catalog y curar con Glue ETL serverless a JSONL",
+        "Transformar con Amazon EMR y Apache Spark a JSONL, gestionando el linaje aparte",
     ],
     correct=2,
     key="off2-q1",
@@ -1052,12 +1052,12 @@ cards.append(card(
 # Q71 - S3 presigned + EventBridge + Step Functions (Rekognition + Bedrock)
 # ============================================================
 cards.append(card(
-    question="App de video - los usuarios suben videos cortos y se quiere <b>resumir contenido, generar transcripciones, detectar objetos e identificar celebridades</b>, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
+    question="App de video - los usuarios suben videos cortos y se quiere <b>resumir contenido, generar transcripciones, detectar objetos e identificar celebridades</b> usando Amazon Rekognition (objetos/celebridades) y FMs de Bedrock (resumen/transcripcion), con el MENOR esfuerzo operativo y menor privilegio en la subida. &iquest;Como orquestar el flujo?",
     options=[
-        "S3 presigned URL para subir; S3 Event Notification invoca un blueprint de Bedrock Data Automation (BDA); Rekognition para objetos y celebridades; FMs de Bedrock para resumen y transcripcion",
-        "S3 PutObject; S3 Event Notification invoca un state machine de Step Functions que orquesta Lambdas; Rekognition para objetos y celebridades; FM de Bedrock para resumen y transcripcion",
-        "S3 PutObject; S3 Event Notification invoca Lambdas en paralelo; Step Functions para reintentos; Rekognition para objetos/celebridades; FMs de Bedrock para resumen y transcripcion",
-        "Subida con S3 presigned URL; S3 envia eventos a EventBridge; una regla invoca Step Functions con integracion directa de servicios (Rekognition objetos/celebridades, FMs de Bedrock resumen/transcripcion)",
+        "Disparar un blueprint de Bedrock Data Automation (BDA) desde una Event Notification, con presigned URL",
+        "Un state machine de Step Functions que orquesta Lambdas, disparado por Event Notification tras un PutObject",
+        "Lambdas en paralelo con Step Functions para reintentos, disparadas por Event Notification tras un PutObject",
+        "EventBridge que invoca Step Functions con integracion directa de servicios, subiendo con presigned URL",
     ],
     correct=3,
     key="off2-q71",

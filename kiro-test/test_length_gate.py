@@ -95,7 +95,7 @@ check("Trainium" in concepts_preserved(old_r, new_r), "real service 'Trainium' d
 # 9) budget_for_deck gives each card a per-field budget mapped to the reference
 plan = budget_for_deck(longish, ref)
 check(len(plan) == len(longish), "budget_for_deck returns one plan per card")
-check(all(p["stem_budget"] >= 12 for p in plan), "stem budgets respect the floor")
+check(all(p["stem_budget"] >= 10 for p in plan), "stem budgets respect the floor")
 check(any(p["needs_rewrite"] for p in plan), "long deck flagged as needs_rewrite")
 
 # 10) _validate_rewrite catches a changed correct index and a dropped concept
@@ -117,7 +117,9 @@ from anki_mcq.verify_deck import concept_tokens
 gold = load_gold_reference()
 check(len(gold) > 100, "load_gold_reference returns the MLA cards", f"{len(gold)} cards")
 check(all(c.get("key") for c in gold), "every gold card has a stable key")
-check(check_distribution(gold) == [], "gold reference passes distribution (valid shape ref)")
+# NOTE: the distribution gate now targets ~55% of MLA length (best effort), so
+# MLA itself does NOT pass it. MLA is the SHAPE reference for quantile mapping,
+# not a deck that meets the tightened conciseness goal. We only assert it loads.
 
 # 13) H5: normalize short-circuits when the deck already matches the reference shape
 called = {"n": 0}
@@ -147,6 +149,42 @@ _new = llm_shorten(_old, "p")
 check(_new["key"] == "real" and _new["correct"] == 2, "llm_shorten forces original key/correct (H2 safety)")
 check(_new["answer"] == "dorso", "llm_shorten restores dropped answer")
 set_backend(None)  # reset
+
+# --- Refocus (concept-root) tests ---
+from anki_mcq.refocus_deck import needs_refocus, find_refocus_candidates, refocus, _validate_refocus
+
+# 16) combo-stacking card (all options lead with the same service) is detected
+combo = mk("Convertir PDF y video a materiales estructurados a escala",
+           ["Bedrock Data Automation con Textract y Transcribe y S3 y DynamoDB",
+            "Bedrock Data Automation con Lambda y Step Functions y Aurora",
+            "Bedrock Data Automation con EventBridge y SNS y SQS y AppSync",
+            "Bedrock Data Automation con Glue y Athena y EMR y CloudFront"])
+combo["key"] = "rf-combo"
+check(needs_refocus(combo), "combo-stacking card is flagged for refocus")
+
+# 17) a well-focused card (competing concepts) is NOT flagged
+good = mk("Medir robustez de un FM de Bedrock ante prompts casi identicos",
+          ["job de model evaluation de Amazon Bedrock con metricas de robustez",
+           "Amazon Comprehend para similitud sobre respuestas por lote",
+           "AWS Step Functions invocando el FM con logica propia de divergencia",
+           "AWS Lambda con distancia de Levenshtein entre respuestas"])
+good["key"] = "rf-good"
+check(not needs_refocus(good), "well-focused competing-concepts card is NOT flagged")
+
+# 18) refocus plan_only lists candidates and makes no LLM call
+rf_called = {"n": 0}
+def _rf_llm(card_dict, prompt):
+    rf_called["n"] += 1
+    return card_dict
+rf = refocus([combo, good], plan_only=True)
+check(combo["key"] in rf["candidates"] and good["key"] not in rf["candidates"], "refocus candidates list is correct")
+check(rf_called["n"] == 0, "refocus plan_only makes 0 LLM calls")
+
+# 19) _validate_refocus catches a changed correct index
+vr = _validate_refocus(
+    {"key": "k", "correct": 0, "options": ["a", "b", "c", "d"], "question": "q", "answer": "x"},
+    {"key": "k", "correct": 1, "options": ["a", "b", "c", "d"], "question": "q", "answer": "x"})
+check("correct cambio" in vr, "_validate_refocus catches changed correct", vr)
 
 if _fail == 0:
     print("\nALL LENGTH-GATE TESTS PASSED", flush=True)

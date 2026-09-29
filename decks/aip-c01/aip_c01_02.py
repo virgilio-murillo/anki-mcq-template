@@ -642,26 +642,26 @@ cards = [
     # Q30 - Bedrock Data Automation (BDA) multimodal
     # ============================================================
     card(
-        question="Una app convierte contenido academico heterogeneo (PDF, slides, video) en materiales estructurados a &gt;10,000 items/dia. Debe interpretar texto y audio, resumir, usar prompt flows, dar <b>versionado</b> de salidas y <b>colaboracion multiusuario en tiempo real</b>. &iquest;Que solucion cumple?",
+        question="Una app procesa con <b>Amazon Bedrock Data Automation (BDA)</b> contenido academico heterogeneo (PDF, slides, video) en materiales estructurados a &gt;10,000 items/dia. Debe interpretar texto y audio, resumir, dar <b>versionado</b> de salidas y <b>colaboracion multiusuario en tiempo real</b>. &iquest;Que solucion cumple?",
         options=[
-            "BDA con Lambda para prompt flows, Knowledge Bases para multimedia, salidas versionadas en DynamoDB y colaboracion via SNS + SQS",
-            "BDA con FMs, Transcribe (audio) y Textract (documentos), artefactos en S3 con versioning, metadata en DynamoDB y AWS AppSync (GraphQL)",
-            "BDA con Step Functions, Textract y Transcribe, salidas versionadas en Amazon Aurora y colaboracion via API Gateway WebSocket con Lambda",
-            "BDA con Textract y Transcribe, salidas en S3 con versioning, prompt flows via Amazon EventBridge y Amazon CloudFront con API Gateway",
+            "Sincronizacion gestionada con suscripciones GraphQL de AWS AppSync, artefactos versionados en S3",
+            "Mensajeria por Amazon SNS y SQS entre clientes, con salidas versionadas en DynamoDB",
+            "Conexiones WebSocket propias sobre API Gateway con Lambda, versionando en Amazon Aurora",
+            "Distribucion de cambios via Amazon CloudFront con eventos por Amazon EventBridge",
         ],
-        correct=1,
+        correct=0,
         key="aip02-q30",
         answer=(
-            '<div class="verdict">Correcta: {{L}} - BDA + Transcribe + Textract + S3 versioning + DynamoDB + AppSync.</div>'
-            '<p><b>El problema:</b> procesar multiples formatos (incluido audio), resumir, versionar salidas y habilitar colaboracion en tiempo real, a gran escala.</p>'
-            '<p><b>Por que la respuesta sirve:</b> <b>Bedrock Data Automation</b> con FMs procesa insumos diversos; <b>Transcribe</b> convierte audio a texto y <b>Textract</b> extrae de documentos; <b>S3 con versioning</b> versiona artefactos grandes y <b>DynamoDB</b> guarda metadata; y <b>AppSync</b> con suscripciones GraphQL da sincronizacion multiusuario gestionada en tiempo real.</p>'
+            '<div class="verdict">Correcta: {{L}} - suscripciones GraphQL gestionadas de AWS AppSync + versionado en S3.</div>'
+            '<p><b>El problema:</b> el eje real es como dar <b>colaboracion multiusuario en tiempo real</b> gestionada y versionar salidas grandes, tras procesar el contenido con BDA (Transcribe para audio, Textract para documentos).</p>'
+            '<p><b>Por que la respuesta sirve:</b> <b>AWS AppSync</b> con <b>suscripciones GraphQL</b> da sincronizacion multiusuario gestionada en tiempo real, sin que la app maneje conexiones ni estado. <b>S3 con versioning</b> versiona los artefactos grandes que BDA genera. Es la opcion gestionada de punta a punta frente a montar mensajeria o sockets a mano.</p>'
             '<p><b>Por que NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>KB + DynamoDB + SNS/SQS:</b> las Knowledge Bases son para recuperacion sobre datos indexados, no para procesar multimedia; DynamoDB no es ideal para contenido grande versionado; SNS/SQS son mensajeria, no colaboracion en tiempo real.</li>'
-            '<li><b>Aurora + WebSocket:</b> Aurora es relacional, no optimo para contenido no estructurado grande con versiones; WebSocket exige gestion de estado propia frente a la sincronizacion gestionada de AppSync.</li>'
-            '<li><b>EventBridge + CloudFront:</b> EventBridge enruta eventos, no gestiona prompt flows; CloudFront entrega contenido, no soporta colaboracion en tiempo real.</li>'
+            '<li><b>SNS/SQS + DynamoDB:</b> SNS y SQS son mensajeria asincrona, no colaboracion sincronica en tiempo real; y DynamoDB no es ideal para versionar contenido grande (eso es S3 versioning).</li>'
+            '<li><b>WebSocket propio + Aurora:</b> gestionar conexiones WebSocket sobre API Gateway con Lambda exige manejar estado a mano frente a la sincronizacion gestionada de AppSync; y Aurora es relacional, no optimo para artefactos grandes versionados.</li>'
+            '<li><b>CloudFront + EventBridge:</b> CloudFront entrega contenido y EventBridge enruta eventos; ninguno provee colaboracion multiusuario sincronica en tiempo real.</li>'
             '</ul>'
-            '<div class="extra"><span class="h">Exam tip</span>Colaboracion multiusuario en tiempo real gestionada = suscripciones gestionadas de datos en tiempo real, no SNS/SQS ni sockets a mano. Versionado de artefactos grandes = S3 versioning. Audio = Transcribe; documentos = Textract.</div>'
+            '<div class="extra"><span class="h">Exam tip</span>Colaboracion multiusuario en tiempo real gestionada = servicio de suscripciones gestionadas, no mensajeria (SNS/SQS) ni sockets a mano. Versionado de artefactos grandes = S3 versioning. Audio = Transcribe; documentos = Textract.</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/bda.html">docs.aws Bedrock Data Automation</a></div>'
         ),
@@ -1454,26 +1454,26 @@ cards = [
     # Q75 - Transcribe streaming + InvokeModelWithResponseStream + WebSocket
     # ============================================================
     card(
-        question="Un asistente en tiempo real para call center debe transcribir voz en vivo y empezar a analizar el <b>contexto parcial antes de que el cliente termine de hablar</b>, minimizando la latencia hasta la primera sugerencia, con servicios gestionados y <b>streaming bidireccional</b> continuo. &iquest;Que solucion cumple?",
+        question="Un asistente en tiempo real para call center transcribe voz en vivo con <b>Amazon Transcribe</b> y debe empezar a analizar el <b>contexto parcial antes de que el cliente termine de hablar</b>, minimizando la latencia hasta la primera sugerencia, con servicios gestionados y <b>streaming bidireccional</b> continuo. &iquest;Que patron cumple?",
         options=[
-            "Amazon Transcribe que espera cada segmento final antes de Bedrock con InvokeModel, con respuesta completa via un REST API de API Gateway",
-            "Partial-result streaming de Amazon Transcribe con fragmentos a Bedrock via InvokeModelWithResponseStream y salida en streaming a los agentes por un WebSocket API",
-            "Amazon Transcribe con partial results a Kinesis Data Streams, Lambda que agrupa fragmentos e invoca a Bedrock, y respuesta via WebSocket API",
-            "Transcribe streaming con partial results a Bedrock via InvokeModelWithResponseStream, pero bufferizando los chunks en Lambda y enviando la respuesta completa via WebSocket",
+            "Esperar cada segmento final, invocar el FM con InvokeModel y responder por un REST API de API Gateway",
+            "Enviar partial results al FM via InvokeModelWithResponseStream y transmitir la salida por un WebSocket API",
+            "Encolar los partial results en Kinesis Data Streams y una Lambda que agrupa fragmentos antes de invocar el FM",
+            "Bufferizar los chunks del FM en Lambda y enviar la respuesta completa al final via WebSocket",
         ],
         correct=1,
         key="aip02-q75",
         answer=(
-            '<div class="verdict">Correcta: {{L}} - Transcribe partial-result streaming + InvokeModelWithResponseStream + WebSocket API.</div>'
-            '<p><b>El problema:</b> minimizar la latencia hasta la primera sugerencia, procesando el habla parcial y transmitiendo respuestas de forma bidireccional y continua.</p>'
-            '<p><b>Por que la respuesta sirve:</b> el <b>partial-result streaming</b> de Transcribe entrega segmentos interinos mientras el cliente sigue hablando; <b>InvokeModelWithResponseStream</b> expone los chunks del FM a medida que se generan; y un <b>WebSocket API</b> empuja esos updates a los agentes en tiempo real. Todo gestionado y de minima latencia.</p>'
+            '<div class="verdict">Correcta: {{L}} - partial results a InvokeModelWithResponseStream + salida por WebSocket API.</div>'
+            '<p><b>El problema:</b> minimizar la latencia hasta la primera sugerencia, procesando el habla parcial de Transcribe y transmitiendo respuestas de forma bidireccional y continua.</p>'
+            '<p><b>Por que la respuesta sirve:</b> los <b>partial results</b> de Transcribe entregan segmentos interinos mientras el cliente sigue hablando; enviarlos a <b>InvokeModelWithResponseStream</b> expone los chunks del FM a medida que se generan; y un <b>WebSocket API</b> empuja esos updates a los agentes en tiempo real. Todo gestionado y de minima latencia, frente a esperar, encolar o bufferizar.</p>'
             '<p><b>Por que NO las otras, una por una:</b></p>'
             '<ul>'
             '<li><b>Esperar segmento final + InvokeModel + REST:</b> esperar la finalizacion y usar InvokeModel (respuesta completa) mas un patron REST request-response elimina el streaming e introduce demora en cada etapa.</li>'
             '<li><b>Kinesis + Lambda que agrupa:</b> acumular fragmentos antes de invocar Bedrock retrasa el inicio de la inferencia, contra el objetivo de minima latencia a la primera sugerencia.</li>'
             '<li><b>Bufferizar chunks en Lambda:</b> guardar toda la salida antes de enviarla anula la ventaja del response streaming; los chunks deben fluir en cuanto se generan.</li>'
             '</ul>'
-            '<div class="extra"><span class="h">Exam tip</span>Sugerencias en vivo con minima latencia: Transcribe partial results + InvokeModelWithResponseStream + WebSocket API. Esperar segmentos finales, agrupar fragmentos o bufferizar la salida rompe el streaming.</div>'
+            '<div class="extra"><span class="h">Exam tip</span>Sugerencias en vivo con minima latencia: partial results de Transcribe + invocacion del modelo con respuesta en stream + salida por WebSocket. Esperar segmentos finales, encolar fragmentos o bufferizar la salida rompe el streaming.</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html">docs.aws Transcribe streaming</a></div>'
         ),

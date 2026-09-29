@@ -559,24 +559,24 @@ cards = [
     card(
         question="Un asistente regulatorio en Amazon Bedrock recupera de varias fuentes internas. Cada afirmacion debe <b>citar la fuente</b>, la recuperacion debe <b>priorizar lo mas relevante</b> y hay que <b>guardar razonamiento y citas para auditoria</b> con el <b>MENOR esfuerzo</b>. ¿Que arquitectura cumple mejor?",
         options=[
-            "Bedrock Knowledge Bases, invocar Claude y que la aplicacion arme las citas a mano en Amazon DynamoDB",
-            "Bedrock Knowledge Bases con RetrieveAndGenerate sin reranking, guardando solo la respuesta en Amazon S3",
-            "Bedrock Knowledge Bases con citas y reranking, enviando a Claude via Messages API y auditoria en Amazon S3",
-            "Bedrock Agents con una knowledge base, instrucciones para citar y salida a Amazon CloudWatch Logs",
+            "Armar las citas a mano en la aplicacion, guardando afirmacion y fuente en Amazon DynamoDB",
+            "Recuperacion vectorial propia con OpenSearch Serverless y ensamblado de citas en codigo",
+            "RetrieveAndGenerate de Knowledge Bases con citas nativas y reranking, auditoria en Amazon S3",
+            "Orquestar la recuperacion con Bedrock Agents que sigan instrucciones de citar",
         ],
         correct=2,
         key="aip01-q37",
         answer=(
-            '<div class="verdict">Correcta: {{L}} - Knowledge Bases con citas + reranking + Messages API, auditoria en S3.</div>'
+            '<div class="verdict">Correcta: {{L}} - RetrieveAndGenerate de Knowledge Bases con citas nativas + reranking, auditoria en S3.</div>'
             '<p><b>El problema:</b> RAG con citas trazables, priorizando solo lo mas relevante y guardando razonamiento y citas para auditoria, con minima operacion.</p>'
-            '<p><b>Por que la respuesta sirve:</b> <b>Bedrock Knowledge Bases</b> recupera y devuelve <b>citas</b> al contenido de soporte de forma nativa. Aplicar <b>reranking</b> prioriza los chunks mas relevantes (mejor precision, menor latencia y costo) antes de enviarlos al modelo por la <b>Messages API</b>. Guardar razonamiento y citas en <b>S3</b> conserva artefactos durables para auditoria. Todo con poco desarrollo custom.</p>'
+            '<p><b>Por que la respuesta sirve:</b> <b>RetrieveAndGenerate</b> de <b>Bedrock Knowledge Bases</b> recupera y devuelve <b>citas</b> al contenido de soporte de forma nativa. Aplicar <b>reranking</b> prioriza los chunks mas relevantes (mejor precision, menor latencia y costo) antes de generar. Guardar razonamiento y citas en <b>S3</b> conserva artefactos durables para auditoria. Todo con poco desarrollo custom, frente a los enfoques que ensamblan la recuperacion o las citas a mano.</p>'
             '<p><b>Por que NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>KB + Claude directo + enlaces propios + DynamoDB:</b> recrea a mano la funcionalidad de citas que Knowledge Bases ya ofrece (RetrieveAndGenerate), añadiendo desarrollo y riesgo de desalinear afirmaciones con fuentes.</li>'
-            '<li><b>RetrieveAndGenerate sin reranking + solo respuesta final:</b> devolver todos los chunks deja pasar contenido poco relevante; guardar solo la respuesta omite las citas y el razonamiento requeridos para auditoria.</li>'
-            '<li><b>Bedrock Agents + CloudWatch Logs:</b> los agentes orquestan flujos multi-paso con herramientas; aqui solo hace falta recuperar, rankear, generar, citar y guardar, asi que el agente añade complejidad; ademas S3 es mejor que CloudWatch Logs para retener artefactos estructurados de auditoria.</li>'
+            '<li><b>Citas a mano en la aplicacion + DynamoDB:</b> recrea en codigo la funcionalidad de citas que Knowledge Bases ya ofrece de forma nativa, añadiendo desarrollo y riesgo de desalinear afirmaciones con fuentes.</li>'
+            '<li><b>Recuperacion vectorial propia con OpenSearch Serverless:</b> montar y mantener un vector store y el ensamblado de citas en codigo reproduce a mano lo que RetrieveAndGenerate ya gestiona, con mas operacion.</li>'
+            '<li><b>Orquestar con Bedrock Agents:</b> los agentes orquestan flujos multi-paso con herramientas; aqui solo hace falta recuperar, rankear, generar, citar y guardar, asi que el agente añade complejidad innecesaria.</li>'
             '</ul>'
-            '<div class="extra"><span class="h">Exam tip</span>RAG con citas trazables y minima operacion: Knowledge Bases (RetrieveAndGenerate) + reranking para relevancia. Guarda citas/razonamiento en S3 (durable), no solo la respuesta; evita reinventar las citas a mano.</div>'
+            '<div class="extra"><span class="h">Exam tip</span>RAG con citas trazables y minima operacion: usa la recuperacion gestionada con citas nativas + reranking para relevancia. Guarda citas/razonamiento en un almacen durable, no solo la respuesta; evita reinventar la recuperacion o las citas a mano y no metas un agente para un flujo lineal.</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html">docs.aws Bedrock Knowledge Bases</a></div>'
         ),
@@ -753,26 +753,26 @@ cards = [
     # Q54 - Bedrock Data Automation (BDA) multimedia
     # ============================================================
     card(
-        question="Una editorial gestiona <b>PDFs, imagenes, audio y video</b> y quiere un asistente generativo que responda consultas en lenguaje natural. Planea <b>Amazon Bedrock Data Automation (BDA)</b> para el contenido no estructurado y <b>SageMaker AI</b> para el modelo generativo. ¿Que enfoque cumple mejor?",
+        question="Una editorial gestiona <b>PDFs, imagenes, audio y video</b> y quiere un asistente generativo que responda consultas en lenguaje natural. Ya procesa el contenido no estructurado con <b>Amazon Bedrock Data Automation (BDA)</b> y planea <b>SageMaker AI</b> para el modelo generativo. ¿Como montar la recuperacion y generacion?",
         options=[
-            "BDA, contenido crudo en Amazon S3 y una Lambda que cree tu propia base de vectores fuera de Bedrock Knowledge Bases",
-            "BDA, indexar en Bedrock Knowledge Bases para busqueda semantica y pasar el contexto a un modelo via SageMaker AI",
-            "BDA, Amazon Comprehend para entidades y sentimiento, y un foundation model en Amazon EC2",
-            "Emplear BDA alimentando la salida estructurada a un modelo via SageMaker AI, omitiendo la knowledge base",
+            "Construir una base de vectores propia con Lambda y contenido crudo en Amazon S3",
+            "Indexar la salida en Bedrock Knowledge Bases para busqueda semantica y pasar el contexto a SageMaker AI",
+            "Extraer entidades y sentimiento con Amazon Comprehend y servir el modelo en Amazon EC2",
+            "Alimentar la salida estructurada directo al modelo, omitiendo cualquier busqueda semantica",
         ],
         correct=1,
         key="aip01-q54",
         answer=(
-            '<div class="verdict">Correcta: {{L}} - BDA + indexar en Knowledge Bases + generar via SageMaker AI.</div>'
+            '<div class="verdict">Correcta: {{L}} - indexar la salida de BDA en Knowledge Bases + generar via SageMaker AI.</div>'
             '<p><b>El problema:</b> procesar multimedia heterogeneo y montar un RAG que recupere contexto por busqueda semantica para generar respuestas.</p>'
-            '<p><b>Por que la respuesta sirve:</b> <b>Bedrock Data Automation (BDA)</b> procesa documentos, imagenes, audio y video y extrae insights estructurados. Indexarlos en <b>Bedrock Knowledge Bases</b> habilita la busqueda semantica (recuperacion optimizada), y el contexto recuperado alimenta al foundation model via SageMaker AI para la respuesta. Es el flujo RAG completo y gestionado.</p>'
+            '<p><b>Por que la respuesta sirve:</b> con el contenido ya procesado por <b>BDA</b>, indexarlo en <b>Bedrock Knowledge Bases</b> habilita la busqueda semantica (recuperacion optimizada), y el contexto recuperado alimenta al foundation model via <b>SageMaker AI</b> para la respuesta. Es el flujo RAG completo y gestionado, frente a las alternativas que arman el vector store a mano o saltan la busqueda semantica.</p>'
             '<p><b>Por que NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>BDA + S3 + vector DB propia con Lambda:</b> crear un vector store custom fuera de Knowledge Bases añade complejidad y pasos manuales; Knowledge Bases ya indexa y hace busqueda semantica de forma optimizada.</li>'
-            '<li><b>BDA + Comprehend + FM en EC2:</b> hospedar el FM en EC2 en vez de SageMaker AI suma overhead operativo (provisionar, escalar, mantener); SageMaker AI es el entorno gestionado recomendado.</li>'
-            '<li><b>BDA directo al FM sin knowledge base:</b> omitir la KB elimina el indexado y la busqueda semantica, clave para recuperar contexto relevante; sin ella las respuestas son menos precisas o mas lentas.</li>'
+            '<li><b>Vector DB propia con Lambda + S3:</b> crear un vector store custom fuera de Knowledge Bases añade complejidad y pasos manuales; Knowledge Bases ya indexa y hace busqueda semantica de forma optimizada.</li>'
+            '<li><b>Comprehend + FM en EC2:</b> Comprehend extrae entidades/sentimiento pero no da recuperacion semantica, y hospedar el FM en EC2 suma overhead operativo (provisionar, escalar, mantener) frente a SageMaker AI gestionado.</li>'
+            '<li><b>Directo al FM sin busqueda semantica:</b> omitir el indexado y la recuperacion elimina la busqueda de contexto relevante; sin ella las respuestas son menos precisas o mas lentas.</li>'
             '</ul>'
-            '<div class="extra"><span class="h">Exam tip</span>RAG sobre multimedia (docs/imagenes/audio/video): BDA para procesar + Knowledge Bases para indexar/buscar + FM para generar. No reinventes el vector store ni omitas la KB.</div>'
+            '<div class="extra"><span class="h">Exam tip</span>RAG sobre multimedia (docs/imagenes/audio/video): procesar con BDA + indexar/buscar con la base gestionada + generar con el FM. No reinventes el vector store ni omitas la busqueda semantica.</div>'
             '<div class="links"><span class="h">Links</span>'
             '<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/bda.html">docs.aws Bedrock Data Automation</a></div>'
         ),
@@ -1381,10 +1381,10 @@ cards = [
     card(
         question="Una financiera entrena en SageMaker AI un modelo de fraude, con ingesta por Kinesis Data Streams, metadatos en DynamoDB e historico en S3. Debe cifrar en transito y reposo, controlar acceso y <b>rastrear el rendimiento en el tiempo</b>. ¿Que solucion asegura el flujo y el monitoreo continuo?",
         options=[
-            "Datos en S3 con cifrado SSE-KMS, roles de IAM para el acceso y Amazon CloudWatch para metricas y logging",
-            "Datos en S3 con cifrado SSE-S3, resultados con roles de IAM y Amazon Macie para exposicion de datos",
-            "Datos en S3 y DynamoDB, VPC endpoints entre SageMaker AI, DynamoDB y Kinesis, y AWS CloudTrail para la API",
-            "Datos en S3, Amazon Data Firehose hacia SageMaker AI, AWS Glue para catalogar y CloudWatch mas IAM",
+            "Cifrado SSE-KMS con claves gestionadas, roles de IAM para el acceso y CloudWatch para el rendimiento del modelo",
+            "Cifrado SSE-S3 y Amazon Macie para descubrir datos expuestos, con roles de IAM",
+            "VPC endpoints entre SageMaker AI, DynamoDB y Kinesis, y AWS CloudTrail para auditar la API",
+            "Amazon Data Firehose hacia SageMaker AI y AWS Glue para catalogar, con CloudWatch e IAM",
         ],
         correct=0,
         key="aip01r-q62",
@@ -1395,7 +1395,7 @@ cards = [
             '<p><b>Por que NO las otras, una por una:</b></p>'
             '<ul>'
             '<li><b>SSE-S3 + Macie:</b> SSE-S3 no ofrece el control ni la auditabilidad de claves gestionadas por el cliente de SSE-KMS, y Macie descubre PII en S3, no monitorea el rendimiento del modelo ni controla el acceso al modelo.</li>'
-            '<li><b>Modelo/metadatos en DynamoDB + CloudTrail:</b> DynamoDB no es apto para artefactos grandes de modelo (van en S3), y CloudTrail audita actividad de API, no el rendimiento del modelo (eso es CloudWatch).</li>'
+            '<li><b>VPC endpoints + CloudTrail:</b> los VPC endpoints aislan el trafico pero no cifran en reposo con claves gestionadas, y CloudTrail audita actividad de API, no el rendimiento del modelo (eso es CloudWatch).</li>'
             '<li><b>Data Firehose + Glue:</b> Firehose y Glue no son necesarios para ingerir/entrenar en tiempo real desde Kinesis o S3, y no aportan el nucleo pedido (cifrado con claves gestionadas + control de acceso + monitoreo del modelo).</li>'
             '</ul>'
             '<div class="extra"><span class="h">Exam tip</span>Workflow ML seguro y observable: cifrado en reposo con claves gestionadas y auditables + control de acceso granular (IAM) + monitoreo de rendimiento del modelo (CloudWatch). CloudTrail audita API; Macie descubre PII; el cifrado gestionado por S3 solo no da control de claves del cliente.</div>'

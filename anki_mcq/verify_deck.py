@@ -56,22 +56,24 @@ BOLD_WARN_CLAUSES = 5   # MLA stem <b> max = 5; >5 is a coupling/stacking signal
 # Deck-level DISTRIBUTION targets (see DECK_STANDARDS.md section 10).
 #
 # The per-card hard errors above (stem>70, opt>32) are a safety net that only
-# catches extreme outliers. They are NOT enough: a deck where EVERY card sits
-# just under the ceiling (opt 26-32w) passes card-by-card yet is ~2x as dense
-# as the gold MLA deck and tiring to read. So we ALSO check the whole deck's
-# distribution against MLA-like shape. This lets an occasional long card exist
-# (some concepts need it) while catching a deck that is long ACROSS THE BOARD.
+# catches extreme outliers. They are NOT enough: a deck can pass card-by-card
+# yet be dense across the board and tiring to read. So we ALSO check the whole
+# deck's distribution. This lets an occasional long card exist (some concepts
+# need it) while catching a deck that is long ACROSS THE BOARD.
 #
-# Targets derived from MLA-C01 gold (measured): option p50=12 p90=20 p95=21,
-# 1% of options >25w; stem p50=30 p90=43, 6% of stems >45w. The deck ceilings
-# below sit a little above MLA's real p90/percentages so the gold deck itself
-# passes with margin, but a mostly-long deck (like AIP after pass 1: option
-# p90=31, 56% >25w) fails.
+# CONCISENESS TARGET (2026 update): the user asked for Anki cards ~55% of the
+# earlier length, applied as BEST EFFORT (a goal, not a hard wall). These are
+# the target percentiles that check_distribution reports against. They are
+# ADVISORY: a deck that does not fully reach them still builds. The only HARD
+# failures are the per-card caps (stem>70, opt>32). A few genuinely coupled
+# cards may exceed the targets and that is fine. Earlier AIP was option
+# p50=16/p90=22 and stem p50=41/p90=48; the 55% goal is option median ~9 and
+# stem median ~23, so targets below sit just above those goal medians' p90.
 # ---------------------------------------------------------------------------
-DIST_OPT_P90_MAX = 22       # MLA option p90 = 20
-DIST_OPT_OVER25_PCT_MAX = 15.0   # MLA has 1% of options >25w; allow up to 15%
-DIST_STEM_P90_MAX = 50      # MLA stem p90 = 43
-DIST_STEM_OVER45_PCT_MAX = 35.0  # MLA has 6% of stems >45w; allow up to 35%
+DIST_OPT_P90_MAX = 15       # 55% goal: most options ~9-12w; p90 <= 15 (advisory)
+DIST_OPT_OVER25_PCT_MAX = 5.0    # only a few coupled cards may exceed 25w
+DIST_STEM_P90_MAX = 32      # 55% goal: stem median ~23w; p90 <= 32 (advisory)
+DIST_STEM_OVER45_PCT_MAX = 8.0   # rare long stems only
 
 _TAGS = re.compile(r'<[^>]+>')
 
@@ -256,6 +258,33 @@ def verify_cards(cards, shuffle_seed_base=1):
     return problems
 
 
+def _shared_leading_token(options):
+    """If a meaningful token leads ALL options (a convergence cue), return it.
+
+    The 'cover-the-options test' (Haladyna & Downing): if an element appears in
+    every option, it belongs in the stem, not repeated in each option. We look
+    at the first non-stopword token of each option; if they are all the same,
+    that token is a shared leader worth flagging. Returns the token or None.
+    """
+    _skip = {"usar", "crear", "configurar", "implementar", "desplegar", "un",
+             "una", "el", "la", "los", "las", "con", "de", "para", "y", "o",
+             "elegir", "aplicar", "correr", "ejecutar", "montar", "definir",
+             "utilizar", "habilitar", "activar", "lanzar", "mediante", "via"}
+    leads = []
+    for o in options:
+        toks = _plain(o).split()
+        lead = None
+        for w in toks:
+            wl = w.lower().strip(".,;:()")
+            if wl and wl not in _skip:
+                lead = wl
+                break
+        leads.append(lead)
+    if len(options) >= 3 and leads and all(x is not None and x == leads[0] for x in leads):
+        return leads[0]
+    return None
+
+
 def warn_cards(cards):
     """Return advisory (non-fatal) length/atomicity warnings.
 
@@ -267,6 +296,15 @@ def warn_cards(cards):
         _, warnings = _length_problems(c)
         for w in warnings:
             out.append((i + 1, w))
+        # Cover-the-options test: a token leading every option is a convergence
+        # cue; that shared element belongs in the stem. Advisory only.
+        shared = _shared_leading_token(c.get("options", []))
+        if shared:
+            out.append((i + 1, (
+                f"posible convergence cue: todas las opciones empiezan con '{shared}'. "
+                f"Si un elemento aparece en TODAS las opciones, va en el enunciado; "
+                f"considera reenfocar (anki_mcq.refocus_deck)"
+            )))
     return out
 
 

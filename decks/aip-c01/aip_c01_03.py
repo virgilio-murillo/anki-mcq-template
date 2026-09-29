@@ -264,10 +264,10 @@ cards.append(card(
 cards.append(card(
     question="Un portal GenAI con Amazon Bedrock debe adaptar el estilo por audiencia, filtrar contenido toxico e informacion de salud protegida (PHI), <b>evitar hardcodear plantillas de prompt</b>, quitar scripts de post-procesamiento y <b>actualizar los filtros de seguridad sin redeployar</b>. &iquest;Que solucion tiene MENOR mantenimiento?",
     options=[
-        "Bedrock Prompt Management para plantillas reutilizables con variantes por departamento, y Bedrock Guardrails con filtros de contenido e informacion sensible",
-        "Bedrock Prompt Management y Guardrails, gestionando los cambios con una API interna propia",
-        "Bedrock Agents para inyectar instrucciones por departamento, reglas en DynamoDB, validacion con Step Functions y Guardrails solo como post-procesamiento",
-        "Bedrock Knowledge Bases para las plantillas, una Lambda que selecciona el prompt y otra Lambda que filtra con Amazon Comprehend",
+        "Prompt Management para plantillas con variantes por departamento y Guardrails con filtros de contenido y PHI",
+        "Prompt Management y Guardrails, pero gestionando los cambios con una API interna propia",
+        "Bedrock Agents que inyectan instrucciones por departamento, con Guardrails solo como post-procesamiento",
+        "Knowledge Bases para las plantillas y una Lambda que filtra la salida con Amazon Comprehend",
     ],
     correct=0,
     key="aip03-q30",
@@ -278,10 +278,10 @@ cards.append(card(
         '<p><b>Por que NO las otras, una por una:</b></p>'
         '<ul>'
         '<li><b>Prompt Management + Guardrails + API de administracion propia:</b> usa los servicios correctos pero a&ntilde;ade una API interna redundante; Guardrails ya expone APIs nativas para crear y actualizar guardrails, asi que esa capa extra solo suma mantenimiento.</li>'
-        '<li><b>Bedrock Agents + DynamoDB + Step Functions + Guardrails al final:</b> Agents es para orquestar tareas multi-paso, no para plantillas simples; DynamoDB y Step Functions exigen esquema y maquinas de estado a mantener; y aplicar Guardrails solo despues de generar deja que el contenido da&ntilde;ino se produzca antes de filtrarse.</li>'
-        '<li><b>Knowledge Bases + dos Lambdas + Comprehend:</b> Knowledge Bases es para RAG, no para almacenar plantillas; mantener dos Lambdas para seleccion de prompt y moderacion con Comprehend a&ntilde;ade codigo y tuning que el filtrado integrado de Guardrails ya evita.</li>'
+        '<li><b>Bedrock Agents + Guardrails al final:</b> Agents es para orquestar tareas multi-paso, no para plantillas simples; y aplicar Guardrails solo despues de generar deja que el contenido da&ntilde;ino se produzca antes de filtrarse.</li>'
+        '<li><b>Knowledge Bases + Lambda con Comprehend:</b> Knowledge Bases es para RAG, no para almacenar plantillas; y filtrar con una Lambda y Comprehend a&ntilde;ade codigo y tuning que el filtrado integrado de Guardrails ya evita.</li>'
         '</ul>'
-        '<div class="extra"><span class="h">Exam tip</span>Plantillas reutilizables gestionadas = Prompt Management. Filtrar toxicidad/PHI sin codigo y actualizable sin redeploy = Guardrails (aplicado en la generacion, no solo despues). Agents = orquestacion; Knowledge Bases = RAG.</div>'
+        '<div class="extra"><span class="h">Exam tip</span>Plantillas reutilizables gestionadas = Prompt Management. Filtrar toxicidad e informacion de salud protegida sin codigo y actualizable sin redeploy = Guardrails (aplicado en la generacion, no solo despues). Agents = orquestacion; Knowledge Bases = RAG.</div>'
         '<div class="links"><span class="h">Links</span>'
         '<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails.html">docs.aws Bedrock Guardrails</a></div>'
     ),

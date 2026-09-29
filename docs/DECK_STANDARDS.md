@@ -252,3 +252,57 @@ create(deck_name="SAA-C03::01", cards=new_cards, out_path="out/saa_01.apkg",
        ref_cards=load_gold_reference(), llm_shorten=llm_shorten)
 # create() normalizes, runs check_distribution as a hard gate, builds, verifies, imports.
 ```
+
+
+## 12. Refocus options onto the ROOT CONCEPT (convergence-cue fix)
+
+A card can pass every length check yet still be wrong in a subtler way: if the
+SAME service leads all four options (e.g. every option starts "BDA con ..."),
+the axis of decision is "which combo of auxiliary services", not the examinable
+concept. This is a "convergence cue" (Haladyna & Downing) and fails the
+"cover-the-options test": if an element appears in EVERY option, it belongs in
+the STEM, not repeated in each option.
+
+This is a DIFFERENT defect from length. `normalize_deck.py` only shortens; it
+does not refocus. `refocus_deck.py` handles this:
+
+- `needs_refocus(card)` detects it deterministically (no LLM): all options share
+  the same leader service AND the options stack several different auxiliary
+  services. This is a minority of cards (measured ~4% on AIP-C01), so refocus is
+  best effort and touches few cards. Legitimate single-service variation (four
+  SageMaker VPC modes, four Bedrock agent designs, temperature tuning) is NOT
+  flagged.
+- For each flagged card, one LLM call rewrites ONLY the options into COMPETING
+  concepts: the correct one stays the correct concept from the source, and the
+  three distractors become OTHER real, plausible services/approaches for the
+  same goal (never invented). The shared service moves to the stem. Auxiliary
+  detail moves to the back (`answer`), never deleted.
+- `_validate_refocus` enforces: key and correct unchanged, exactly 4 options,
+  no examinable concept dropped, and the convergence cue actually resolved. A
+  card that still looks wrong is reported for review (no retry).
+
+Good vs bad (real examples):
+- BAD (convergence cue): four options all "BDA con <different combo>". Axis =
+  auxiliary combo. Distracts from the root concept (BDA), long, teaches nothing.
+- GOOD (competing concepts): options lead with distinct approaches, e.g. "job de
+  model evaluation de Bedrock" / "Comprehend para similitud" / "Step Functions
+  con logica propia" / "Lambda con distancia de Levenshtein". One correct, short,
+  hard because of the concept.
+
+RUN ORDER: refocus BEFORE normalize (refocusing changes what the options are and
+usually shortens them; compress afterward). `create()` does both when you pass
+`refocus_llm` and `ref_cards`:
+
+```python
+from anki_mcq import create
+from anki_mcq.gold_reference import load_gold_reference
+from anki_mcq.llm_shorten import llm_shorten, set_backend
+set_backend(my_model_fn)
+create(deck_name="SAA-C03::01", cards=new_cards, out_path="out/saa_01.apkg",
+       refocus_llm=llm_shorten,                 # step 12: refocus options
+       ref_cards=load_gold_reference(), llm_shorten=llm_shorten)  # step 11: shorten
+```
+
+`verify_deck.warn_cards` also emits a non-blocking advisory (the cover-the-options
+test) whenever a token leads every option, so a future deck surfaces the issue
+even if refocus is not run.
