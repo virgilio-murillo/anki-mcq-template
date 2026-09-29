@@ -25,12 +25,12 @@ cards = [
     # Q3 - Instancias Trainium (Trn) para entrenar LLM
     # ============================================================
     card(
-        question="Una empresa de medios entrena (fine-tuning) un <b>LLM propio de cientos de miles de millones de parametros</b> sobre <b>terabytes</b> de datos con Amazon SageMaker AI. Necesita infraestructura <b>altamente optimizada y escalable</b> para minimizar tiempo y costo de entrenamiento. ¿Que tipo de instancia EC2 es el mas apropiado para el fine-tuning?",
+        question="Se hace fine-tuning de un <b>LLM propio de cientos de miles de millones de parametros</b> sobre <b>terabytes</b> de datos en Amazon SageMaker AI. Necesita minimizar tiempo y costo de entrenamiento. ¿Que tipo de instancia EC2 conviene?",
         options=[
-            "Instancias EC2 de la serie Trn (AWS Trainium), diseñadas a proposito para entrenamiento de alto rendimiento de LLM a gran escala",
-            "Instancias EC2 GPU de la serie P para entrenar el LLM y servirlo mediante endpoints de SageMaker AI",
-            "Instancias EC2 de proposito general de la serie M con SageMaker AI para entrenamiento distribuido",
-            "Instancias EC2 de computo acelerado de la serie G para desplegar una version mas pequeña del modelo tras preprocesar con Comprehend",
+            "Instancias EC2 serie Trn (AWS Trainium), construidas a proposito para entrenar a gran escala",
+            "Instancias EC2 GPU serie P, sirviendo el modelo con endpoints de SageMaker AI",
+            "Instancias EC2 de proposito general serie M con SageMaker AI distribuido",
+            "Instancias EC2 de computo acelerado serie G, preprocesando con Comprehend",
         ],
         correct=0,
         key="aip01-q3",
@@ -53,12 +53,12 @@ cards = [
     # Q4 - SageMaker ProductionVariant y traffic weights
     # ============================================================
     card(
-        question="Un modelo de deteccion de fraude ya esta desplegado en un endpoint de SageMaker AI. Se reentreno una nueva version y el equipo debe <b>evaluar su exactitud y latencia en produccion</b> con <b>trafico real</b>, <b>sin afectar el throughput del modelo actual</b>, con <b>minimo overhead operativo</b> y <b>sin cambiar como los clientes invocan el endpoint</b>. ¿Que opcion cumple?",
+        question="Un modelo de fraude ya corre en un endpoint de SageMaker AI. Hay que <b>evaluar una version nueva con trafico real</b> sin afectar el throughput actual, con <b>minimo overhead</b> y <b>sin cambiar como invocan los clientes</b>. ¿Que opcion cumple?",
         options=[
-            "Registrar la nueva version en SageMaker Model Registry y usar un trigger en AWS Lambda que cambie automaticamente el endpoint al nuevo modelo tras una validacion inicial",
-            "Desplegar el modelo nuevo y el actual en dos endpoints de SageMaker separados, enrutar manualmente parte del trafico al nuevo y comparar sus resultados en post-procesamiento con metricas de Amazon CloudWatch antes de decidir",
-            "Configurar un endpoint de Amazon API Gateway que reparta el trafico entre el endpoint de SageMaker actual y el nuevo para hacer pruebas A/B, y que los clientes invoquen ese endpoint de API Gateway en lugar del de SageMaker",
-            "Modificar la configuracion del endpoint agregando el nuevo modelo como un ProductionVariant (via la API de ProductionVariant) con un InitialVariantWeight pequeño frente al peso del modelo existente, para controlar el porcentaje de trafico enrutado a el",
+            "SageMaker Model Registry con un trigger de AWS Lambda que haga swap del endpoint",
+            "Dos endpoints de SageMaker separados, enrutando a mano y comparando en Amazon CloudWatch",
+            "Un Amazon API Gateway que reparta el trafico y que los clientes invoquen en vez del endpoint",
+            "Agregar el modelo nuevo como ProductionVariant en el mismo endpoint, con InitialVariantWeight pequeño",
         ],
         correct=3,
         key="aip01-q4",
@@ -81,12 +81,12 @@ cards = [
     # Q6 - Bedrock Agents multi-agent collaboration
     # ============================================================
     card(
-        question="Una empresa construye un asistente con <b>Amazon Bedrock Agents</b> que debe: recuperar datos de cuentas de sistemas internos, aplicar controles de cumplimiento, generar explicaciones al cliente y disparar acciones (abrir tickets, notificar, actualizar CRM). Cada paso requiere <b>permisos, herramientas, APIs y logica de razonamiento distintos</b>. Se busca un diseño <b>modular, escalable y facil de evolucionar</b>, minimizando codigo de orquestacion propio fuera de Bedrock. ¿Que diseño conviene?",
+        question="Un asistente con <b>Amazon Bedrock Agents</b> debe recuperar datos internos, aplicar cumplimiento, explicar al cliente y disparar acciones (tickets, notificar, CRM). Cada paso pide <b>permisos, herramientas, APIs y razonamiento distintos</b>. Se busca un diseño <b>modular y facil de evolucionar</b> con minima orquestacion propia. ¿Que diseño conviene?",
         options=[
-            "Crear un unico agente de Bedrock con un gran system prompt y un solo action group que maneje secuencialmente deteccion de intencion, recuperacion de datos, controles de cumplimiento y ejecucion del flujo",
-            "Crear varios foundation models en Bedrock e implementar logica de enrutamiento propia en la capa de aplicacion para pasar peticiones entre modelos, con seguimiento de coordinacion multi-agente para los handoffs",
-            "Crear una knowledge base de Bedrock y apoyarse principalmente en RAG (retrieval-augmented generation) para responder todas las peticiones de los usuarios",
-            "Crear una colaboracion multi-agente definiendo varios agentes de Bedrock, cada uno especializado en una responsabilidad y colaborando con los demas para completar la peticion de extremo a extremo",
+            "Crear un unico agente de Bedrock con un gran system prompt y un solo action group",
+            "Crear varios foundation models en Bedrock con enrutamiento propio en la aplicacion",
+            "Crear una knowledge base de Bedrock apoyada en RAG (retrieval-augmented generation)",
+            "Crear una colaboracion multi-agente: varios agentes de Bedrock, cada uno con una responsabilidad",
         ],
         correct=3,
         key="aip01-q6",
@@ -109,12 +109,12 @@ cards = [
     # Q7 - Bedrock AgentCore Runtime/Memory/Gateway/Observability
     # ============================================================
     card(
-        question="Un asistente de soporte procesa miles de consultas diarias, debe <b>preservar contexto entre turnos</b>, <b>recuperar documentacion de producto actualizada</b>, <b>ejecutar operaciones de pedidos via una API interna</b> y mantener <b>auditoria detallada</b> de que fuentes de conocimiento y herramientas contribuyeron a cada respuesta, con <b>minima orquestacion e infraestructura propia</b>. ¿Que enfoque cumple mejor?",
+        question="Un asistente de soporte debe <b>preservar contexto entre turnos</b>, recuperar documentacion, <b>ejecutar pedidos via una API interna</b> y dejar <b>auditoria</b> de que conocimiento y herramientas uso cada respuesta, con <b>minima orquestacion e infraestructura propia</b>. ¿Que enfoque cumple mejor?",
         options=[
-            "Coordinar la recuperacion de producto y las llamadas a la API de pedidos con AWS Step Functions, guardar el historial de conversacion en Amazon DynamoDB, construir la recuperacion de conocimiento aparte y enviar los logs de ejecucion del workflow a Amazon CloudWatch para la auditoria",
-            "Desplegar el agente con Amazon Bedrock AgentCore Runtime y usar AgentCore Memory para el contexto multi-turno; registrar la API REST de pedidos y una Knowledge Base como herramientas en AgentCore Gateway, y habilitar AgentCore Observability para trazar recuperacion, invocaciones de herramientas y respuestas",
-            "Desplegar el agente en AWS Lambda y guardar la sesion en Amazon ElastiCache; consultar las Bedrock Knowledge Bases por separado, invocar la API de pedidos via Amazon API Gateway desde logica de aplicacion propia y registrar cada paso para la auditoria",
-            "Usar Bedrock Knowledge Bases para responder consultas de producto y mantener el historial de conversacion en la aplicacion cliente; invocar la API de pedidos por separado con AWS Lambda y guardar las respuestas en Amazon S3 para conservar el rastro de auditoria",
+            "AWS Step Functions con historial en Amazon DynamoDB, recuperacion aparte y logs a Amazon CloudWatch",
+            "AgentCore: Runtime para el agente, Memory, Gateway (API de pedidos y Knowledge Base) y Observability",
+            "Agente en AWS Lambda, sesion en Amazon ElastiCache, Bedrock Knowledge Bases y Amazon API Gateway propios",
+            "Bedrock Knowledge Bases, historial en el cliente, pedidos con AWS Lambda y auditoria en Amazon S3",
         ],
         correct=1,
         key="aip01-q7",
@@ -137,12 +137,12 @@ cards = [
     # Q8 - Versionado y evaluacion de prompts
     # ============================================================
     card(
-        question="Un prompt de Amazon Bedrock genera resumenes de alta clinicos: funciona en casos rutinarios, pero en historiales complejos produce <b>inconsistencias</b> en completitud, terminologia y detalles clave. La empresa quiere <b>saber que cambios de prompt mejoran la calidad</b> en casos dificiles, <b>comparar versiones contra objetivos medibles</b> y <b>conservar el historial</b> de cambios y evaluaciones. ¿Que enfoque cumple mejor?",
+        question="Un prompt de Amazon Bedrock resume historiales clinicos: en casos complejos produce <b>inconsistencias</b> en completitud y terminologia. Se quiere <b>saber que cambios de prompt mejoran la calidad</b>, <b>comparar versiones contra objetivos medibles</b> y <b>conservar el historial</b>. ¿Que enfoque cumple mejor?",
         options=[
-            "Versionar los prompts en un repositorio bajo control de versiones y validar cada revision contra un conjunto benchmark de documentos clinicos complejos con criterios de evaluacion medibles; automatizar pruebas lado a lado para detectar regresiones, mejoras y patrones consistentes entre versiones",
-            "Refinar el prompt actual con una muestra pequeña de resumenes problematicos, revisar manualmente las salidas caso por caso y desplegar cada version actualizada a Bedrock cuando el revisor la apruebe, sin criterios de aceptacion definidos",
-            "Crear prompts separados para documentos simples y complejos y enrutar cada tipo al prompt correspondiente segun la longitud y la estructura del documento, sin medir la calidad ni registrar el desempeño de cada version",
-            "Hacer fine-tuning de un modelo con resumenes clinicos previamente aceptados, usar el modelo personalizado para los documentos complejos y mantener el prompt actual para los casos rutinarios, asumiendo que el problema es del modelo y no del prompt",
+            "Versionar los prompts y validar cada revision contra un benchmark fijo con criterios medibles",
+            "Refinar el prompt con una muestra pequeña y revisar salidas a mano, sin criterios de aceptacion",
+            "Crear prompts separados para documentos simples y complejos, sin medir calidad por version",
+            "Hacer fine-tuning con resumenes aceptados, asumiendo que el problema es del modelo y no del prompt",
         ],
         correct=0,
         key="aip01-q8",
@@ -165,12 +165,12 @@ cards = [
     # Q10 - Bedrock Prompt Management con governance
     # ============================================================
     card(
-        question="Varios equipos mantienen cientos de <b>plantillas de prompt reutilizables</b> y las despliegan a varias Regiones de AWS. Se requiere un proceso <b>centralizado de gobierno</b> que: preserve versiones, estandarice variables y configuraciones de inferencia, <b>impida que plantillas no aprobadas lleguen a produccion</b>, <b>notifique a los revisores</b> cuando hay algo pendiente y permita saber <b>que identidad creo, modifico, aprobo o desplego</b> cada prompt. ¿Que arquitectura conviene?",
+        question="Varios equipos mantienen cientos de <b>plantillas de prompt</b> desplegadas a varias Regiones. Se requiere <b>gobierno centralizado</b>: versiones, variables e inferencia estandarizadas, <b>impedir plantillas no aprobadas en produccion</b>, <b>notificar a revisores</b> y trazar <b>quien creo, modifico, aprobo o desplego</b> cada prompt. ¿Que arquitectura conviene?",
         options=[
-            "Construir la aprobacion con AWS Step Functions, guardar los prompts como objetos en Amazon S3 con object tags para versionar y usar Amazon EventBridge para notificar revisiones pendientes",
-            "Guardar las plantillas en Amazon S3 con Versioning; usar acciones de aprobacion manual de AWS CodePipeline con notificaciones Amazon SNS antes del despliegue; usar AWS CloudTrail para registrar la actividad de objetos S3 e IAM para controlar el acceso a los archivos",
-            "Gestionar plantillas parametrizadas con variables y versiones numeradas usando Bedrock Prompt Management; agregar una accion de aprobacion manual de AWS CodePipeline con notificaciones Amazon SNS antes del despliegue; usar IAM para separar responsabilidades y AWS CloudTrail para registrar la actividad de API",
-            "Desplegar las aplicaciones con Bedrock AgentCore Runtime; usar AgentCore Identity e IAM para el acceso de revisores, AgentCore Observability para el tracing de prompts y Amazon EventBridge para notificar; guardar las revisiones de prompt en AgentCore Memory",
+            "AWS Step Functions, prompts en Amazon S3 con object tags y Amazon EventBridge para notificar",
+            "Plantillas en Amazon S3 con Versioning, aprobacion de AWS CodePipeline con Amazon SNS, AWS CloudTrail e IAM",
+            "Bedrock Prompt Management, aprobacion de AWS CodePipeline con Amazon SNS, IAM y AWS CloudTrail",
+            "Bedrock AgentCore: Runtime, AgentCore Identity e IAM, Observability, Amazon EventBridge y AgentCore Memory",
         ],
         correct=2,
         key="aip01-q10",
@@ -193,12 +193,12 @@ cards = [
     # Q11 - IAM bedrock:GuardrailIdentifier enforcement
     # ============================================================
     card(
-        question="Una organizacion regulada exige que <b>todas las interacciones con foundation models</b> esten protegidas por guardrails de Amazon Bedrock. Los equipos llaman directamente a las APIs de Bedrock. Los arquitectos deben: <b>forzar el uso de guardrails</b> en todas las interacciones, cubrir <b>InvokeModel y Converse</b> y <b>evitar que cualquier peticion los omita</b>, con el <b>menor overhead operativo</b>. ¿Que solucion lo logra?",
+        question="Una organizacion regulada exige que <b>toda interaccion con foundation models</b> use guardrails de Amazon Bedrock. Los equipos llaman directo a las APIs. Hay que <b>forzar guardrails</b>, cubrir <b>InvokeModel y Converse</b> y <b>evitar que alguna peticion los omita</b>, con <b>minimo overhead</b>. ¿Que solucion lo logra?",
         options=[
-            "Aplicar politicas IAM sobre InvokeModel y Converse que exijan tanto la clave de condicion bedrock:GuardrailIdentifier como bedrock:PromptRouterArn, obligando a que todas las peticiones pasen por un prompt router que adjunte y valide guardrails",
-            "Desplegar un proxy con API Gateway y AWS Lambda que inyecte los guardrails en todas las peticiones InvokeModel y Converse antes de reenviarlas a Bedrock",
-            "Guardar el identificador de guardrail en AWS Secrets Manager y exigir que las aplicaciones lo recuperen antes de llamar a InvokeModel o Converse",
-            "Aplicar politicas IAM sobre InvokeModel y Converse que exijan la presencia de bedrock:GuardrailIdentifier, garantizando que toda peticion al foundation model incluya un guardrail adjunto",
+            "Politicas IAM sobre InvokeModel y Converse que exijan bedrock:GuardrailIdentifier y bedrock:PromptRouterArn",
+            "Desplegar un proxy con API Gateway y AWS Lambda que inyecte los guardrails antes de reenviar a Bedrock",
+            "Guardar el identificador de guardrail en AWS Secrets Manager y recuperarlo antes de llamar",
+            "Aplicar politicas IAM sobre InvokeModel y Converse que exijan la presencia de bedrock:GuardrailIdentifier",
         ],
         correct=3,
         key="aip01-q11",
@@ -221,12 +221,12 @@ cards = [
     # Q13 - Bedrock Provisioned Throughput baja latencia
     # ============================================================
     card(
-        question="Un asistente de coaching en vivo debe responder con <b>muy baja latencia</b> durante <b>picos subitos</b> (torneos, lanzamientos). La empresa quiere <b>capacidad de modelo predecible</b> durante demanda pico sostenida, dentro de un <b>presupuesto mensual fijo</b>, conservando <b>auto scaling</b> para que los componentes de la aplicacion escalen sin intervencion manual. ¿Que enfoque cumple?",
+        question="Un asistente en vivo debe responder con <b>muy baja latencia</b> durante <b>picos subitos</b>. Se quiere <b>capacidad de modelo predecible</b> en pico sostenido, con <b>presupuesto mensual fijo</b> y <b>auto scaling</b> de la aplicacion. ¿Que enfoque cumple?",
         options=[
-            "Usar inferencia on-demand en Amazon Bedrock y pedir aumentos de cuota de servicio para el pico; configurar auto scaling en los recursos de la aplicacion y monitorear el uso para mantenerse dentro del presupuesto",
-            "Elegir un modelo de Bedrock de baja latencia para cargas en tiempo real y asignar Provisioned Throughput para capacidad de modelo predecible; configurar auto scaling en los recursos de aplicacion para que se ajusten segun la demanda",
-            "Usar inferencia latency-optimized en Bedrock con cross-Region inference para distribuir peticiones entre Regiones, apoyandose en capacidad on-demand durante los picos y configurando auto scaling en la capa de aplicacion",
-            "Usar batch inference de Bedrock para procesar peticiones en grandes grupos durante los picos, escalar los recursos de aplicacion automaticamente y programar ventanas de procesamiento para controlar el costo mensual",
+            "Usar inferencia on-demand en Amazon Bedrock con aumentos de cuota y auto scaling de la app",
+            "Un modelo de Bedrock de baja latencia con Provisioned Throughput y auto scaling de la app",
+            "Inferencia latency-optimized en Bedrock con cross-Region inference y capacidad on-demand en picos",
+            "Batch inference de Bedrock con ventanas de procesamiento programadas y auto scaling de la app",
         ],
         correct=1,
         key="aip01-q13",
@@ -251,10 +251,10 @@ cards = [
     card(
         question="Un chatbot financiero en Amazon Bedrock debe: proteger en <b>capas</b> contra <b>prompt injection</b> avanzado, dejar <b>registros de auditoria detallados cuando una regla de seguridad interviene</b> (entrada o salida bloqueada/modificada) y soportar <b>resiliencia multi-Region</b> si una Region falla. ¿Que arquitectura cumple?",
         options=[
-            "Habilitar guardrails de Bedrock con filtros de contenido estrictos y adjuntar AWS WAF al endpoint de la API para inspeccionar las peticiones entrantes a nivel HTTP; registrar toda la actividad con AWS CloudTrail y confiar en el despliegue de la app para la resiliencia entre Regiones",
-            "Implementar clasificadores personalizados de Amazon Comprehend para detectar prompt injection antes de que las peticiones lleguen al modelo, usar validacion de peticiones de Amazon API Gateway y exportar los logs a Amazon CloudWatch Logs para su revision posterior",
-            "Configurar guardrails de Bedrock con filtros de palabras clave estrictos, habilitar el despliegue multi-Region de la aplicacion para tolerar la caida de una Region y auditar los logs de operaciones almacenados en AWS CloudTrail",
-            "Configurar guardrails de Bedrock con filtros de contenido en umbral alto para mitigar prompt injection, aplicar un guardrail profile para inferencia de guardrail cross-Region, y enviar logs detallados de intervencion del guardrail a Amazon CloudWatch Logs con metricas personalizadas",
+            "Guardrails de Bedrock, AWS WAF en el endpoint HTTP, AWS CloudTrail y el despliegue de la app",
+            "Clasificadores de Amazon Comprehend, validacion de Amazon API Gateway y logs a Amazon CloudWatch Logs",
+            "Guardrails de Bedrock con filtros de palabras clave, app multi-Region y AWS CloudTrail",
+            "Guardrails de Bedrock (umbral alto), un guardrail profile cross-Region y logs a Amazon CloudWatch Logs",
         ],
         correct=3,
         key="aip01-q14",
@@ -277,12 +277,12 @@ cards = [
     # Q19 - Model Context Protocol (MCP) como tools
     # ============================================================
     card(
-        question="Un asistente para analistas de riesgo debe permitir que el foundation model <b>consulte dinamicamente</b> varias fuentes (precios en vivo por Amazon Kinesis Data Streams, alertas de Amazon CloudWatch y embeddings de SageMaker) de forma <b>segura y consistente</b>, <b>sin incrustar llamadas a APIs, SQL ni credenciales en los prompts</b>. ¿Que diseño cumple mejor?",
+        question="Un asistente de riesgo debe dejar que el foundation model <b>consulte dinamicamente</b> varias fuentes (precios por Amazon Kinesis Data Streams, alertas de Amazon CloudWatch, embeddings de SageMaker) de forma segura, <b>sin incrustar APIs, SQL ni credenciales en los prompts</b>. ¿Que diseño cumple mejor?",
         options=[
-            "Implementar funciones Lambda que encapsulen la logica de API para Kinesis, CloudWatch y los embeddings de SageMaker, y que el foundation model genere en sus prompts la sintaxis de invocacion para llamar a cada funcion",
-            "Desplegar un unico servicio intermedio que exponga de forma segura Kinesis, CloudWatch y los embeddings de SageMaker como herramientas invocables mediante el Model Context Protocol (MCP), permitiendo a Bedrock consultar cada fuente dinamicamente",
-            "Usar solo los embeddings de SageMaker JumpStart y apoyarse en el conocimiento financiero general del foundation model para responder las consultas",
-            "Desplegar microservicios separados para cada fuente de datos y apoyarse en enrutamiento por prompt en Bedrock para seleccionar dinamicamente que servicio consultar",
+            "Funciones Lambda que encapsulen Kinesis, CloudWatch y embeddings de SageMaker, invocadas por sintaxis en el prompt",
+            "Un servicio intermedio que exponga esas fuentes como herramientas via Model Context Protocol (MCP)",
+            "Usar solo los embeddings de SageMaker JumpStart y el conocimiento general del foundation model",
+            "Desplegar microservicios separados por fuente y enrutamiento por prompt en Bedrock",
         ],
         correct=1,
         key="aip01-q19",
@@ -305,12 +305,12 @@ cards = [
     # Q21 - Bedrock cross-region inference profile (data residency)
     # ============================================================
     card(
-        question="Un chatbot en Amazon Bedrock usa server-sent events para hacer streaming de respuestas y un <b>cross-region inference profile</b> para optimizar throughput. Debe transmitir prompts y salidas de forma <b>segura entre Regiones</b>, con los <b>datos permaneciendo dentro de EE. UU.</b> (compliance), y mantenerse <b>escalable y responsivo</b> durante picos. ¿Que enfoque cumple?",
+        question="Un chatbot en Amazon Bedrock usa server-sent events y un <b>cross-region inference profile</b> para throughput. Debe transmitir prompts y salidas <b>seguros</b> con los <b>datos dentro de EE. UU.</b> (compliance) y escalar en picos. ¿Que enfoque cumple?",
         options=[
-            "Usar Bedrock con un inference profile cross-Region global que enrute a las mejores Regiones del mundo para maximizar throughput y rendimiento del modelo, y usar Amazon Kendra para la busqueda por consultas y asi mejorar la experiencia y la relevancia de las respuestas",
-            "Implementar un inference profile cross-Region ligado a la geografia de EE. UU. y enrutar a Regiones destino dentro de EE. UU.; usar SageMaker AI para manejar la inferencia en los picos habilitando Provisioned Throughput y sostener un rendimiento consistente durante las rafagas de trafico",
-            "Configurar Bedrock con un inference profile cross-Region ligado a EE. UU. y usar Amazon Comprehend para analizar y categorizar las consultas del cliente antes de enrutar la inferencia, procesando solo las relevantes para mejorar el throughput del sistema",
-            "Usar Bedrock con un inference profile cross-Region ligado a la geografia de EE. UU., de modo que las peticiones desde Regiones de EE. UU. se enruten a Regiones destino optimas dentro de EE. UU., manteniendo cifrados prompts y salidas en transito; ademas usar AWS Step Functions para gestionar picos y no exceder cuotas de servicio",
+            "Un inference profile cross-Region global (enruta al mundo), con Amazon Kendra para la busqueda",
+            "Un inference profile cross-Region ligado a EE. UU. mas SageMaker AI con Provisioned Throughput",
+            "Un inference profile cross-Region ligado a EE. UU. mas Amazon Comprehend para categorizar consultas",
+            "Un inference profile cross-Region ligado a EE. UU., cifrado en transito y AWS Step Functions para picos",
         ],
         correct=3,
         key="aip01-q21",
@@ -333,12 +333,12 @@ cards = [
     # Q24 - Bedrock InvokeModelWithResponseStream (streaming)
     # ============================================================
     card(
-        question="Un asistente de analisis de incidentes usa foundation models de Amazon Bedrock. Las peticiones complejas tardan varios segundos, y los analistas necesitan ver la <b>respuesta apareciendo de forma incremental</b> para empezar a leer de inmediato. La solucion debe manejar <b>miles de sesiones concurrentes</b> con <b>minima latencia</b> y sin esperar la respuesta completa. ¿Que arquitectura cumple mejor?",
+        question="Un asistente de incidentes usa foundation models de Amazon Bedrock. Las peticiones tardan segundos y los analistas necesitan ver la <b>respuesta incremental</b>, con <b>miles de sesiones concurrentes</b> y <b>minima latencia</b>. ¿Que arquitectura cumple mejor?",
         options=[
-            "Configurar una REST API en Amazon API Gateway con integracion AWS Lambda que invoque la API InvokeModel de Bedrock y devuelva la respuesta completa al cliente cuando termina la generacion",
-            "Configurar una WebSocket API en Amazon API Gateway integrada con AWS Lambda que invoque la API InvokeModelWithResponseStream de Bedrock y envie cada respuesta parcial a los clientes conectados por el WebSocket",
-            "Configurar una Lambda que invoque InvokeModelWithResponseStream y guarde las respuestas parciales en Amazon DynamoDB, y que los clientes hagan polling de la tabla via Amazon API Gateway para recuperar los segmentos nuevos",
-            "Configurar una REST API en Amazon API Gateway con integracion Lambda que invoque InvokeModelWithResponseStream pero acumule (buffer) la salida en la funcion y devuelva la respuesta completa en una sola respuesta HTTP",
+            "Configurar REST API en Amazon API Gateway con AWS Lambda e InvokeModel, devolviendo la respuesta al final",
+            "WebSocket API en Amazon API Gateway con AWS Lambda e InvokeModelWithResponseStream, enviando cada parcial",
+            "Lambda con InvokeModelWithResponseStream que guarda parciales en Amazon DynamoDB y clientes por polling",
+            "REST API en Amazon API Gateway e InvokeModelWithResponseStream, pero con buffer y una unica respuesta HTTP",
         ],
         correct=1,
         key="aip01-q24",
@@ -361,12 +361,12 @@ cards = [
     # Q25 - Amazon Augmented AI (A2I) human review
     # ============================================================
     card(
-        question="Una aseguradora procesa miles de documentos con Amazon Textract y Amazon Comprehend, pero <b>formatos inconsistentes y errores de OCR</b> hacen que ciertos documentos <b>fallen la validacion automatica</b> y requieran revision humana, creando cuellos de botella. Quiere <b>reducir la revision manual</b> manteniendo alta precision/recall y que los sistemas downstream consuman datos fiables. ¿Cual es la forma mas efectiva?",
+        question="Una aseguradora procesa documentos con Amazon Textract y Amazon Comprehend, pero <b>errores de OCR</b> hacen <b>fallar la validacion automatica</b> y forzar revision humana. Quiere <b>reducir la revision manual</b> manteniendo precision/recall. ¿Cual es la forma mas efectiva?",
         options=[
-            "Desplegar un modelo Claude de Amazon Bedrock para reanalizar el texto extraido de baja confianza y refinar las predicciones de validacion, y luego enrutar las salidas a revision manual",
-            "Usar Textract para marcar palabras de baja confianza y enviarlas a Amazon SageMaker Ground Truth para inspeccion manual antes de la validacion",
-            "Configurar Textract para reenviar las predicciones de baja confianza a Amazon Augmented AI (Amazon A2I) para verificacion antes de ejecutar los flujos de validacion",
-            "Automatizar mas la validacion enviando el texto extraido a un foundation model Amazon Titan para predecir errores sin revision humana",
+            "Desplegar Claude de Amazon Bedrock para reanalizar el texto de baja confianza y luego revisar a mano",
+            "Usar Textract para marcar palabras de baja confianza y enviarlas a Amazon SageMaker Ground Truth",
+            "Configurar Textract para reenviar las predicciones de baja confianza a Amazon Augmented AI (Amazon A2I)",
+            "Automatizar mas la validacion enviando el texto a un foundation model Amazon Titan, sin revision humana",
         ],
         correct=2,
         key="aip01-q25",
@@ -389,12 +389,12 @@ cards = [
     # Q26 - Bedrock Custom Model Import
     # ============================================================
     card(
-        question="Un sistema de recomendaciones con Amazon Bedrock AgentCore usara un <b>LLM ya fine-tuned en SageMaker AI</b>. La solucion debe garantizar <b>inferencia segura y escalable en tiempo real dentro del entorno de Bedrock</b>, monitorear latencia y metricas en Amazon CloudWatch, y <b>minimizar el overhead operativo</b>. ¿Que solucion cumple?",
+        question="Un sistema con Amazon Bedrock AgentCore usara un <b>LLM ya fine-tuned en SageMaker AI</b>. Debe dar <b>inferencia segura y escalable dentro de Bedrock</b>, monitorear metricas en Amazon CloudWatch y <b>minimizar el overhead operativo</b>. ¿Que solucion cumple?",
         options=[
-            "Desplegar el LLM fine-tuned en SageMaker AI, configurar una Lambda para invocar los endpoints de SageMaker y monitorear el rendimiento con metricas de CloudWatch",
-            "Importar el modelo fine-tuned directamente a Bedrock con Custom Model Import, asignar un rol de ejecucion gestionado por AgentCore y configurar CloudWatch para monitorear en tiempo real las metricas del modelo",
-            "Hospedar el LLM en una instancia Amazon EC2, conectarlo a Bedrock AgentCore via una REST API y usar CloudWatch Logs para monitorear las llamadas a la API",
-            "Guardar el modelo en Amazon S3, configurar Bedrock AgentCore para cargarlo en tiempo de ejecucion y usar CloudWatch para monitorear el rendimiento de la API",
+            "Desplegar el LLM fine-tuned en SageMaker AI, invocar sus endpoints con Lambda y monitorear en CloudWatch",
+            "Importar el modelo a Bedrock con Custom Model Import, con rol gestionado por AgentCore y CloudWatch",
+            "Hospedar el LLM en Amazon EC2, conectarlo a Bedrock AgentCore via REST API y usar CloudWatch Logs",
+            "Guardar el modelo en Amazon S3, que Bedrock AgentCore lo cargue en runtime y monitorear con CloudWatch",
         ],
         correct=1,
         key="aip01-q26",
@@ -419,10 +419,10 @@ cards = [
     card(
         question="Durante un pico internacional, un asistente de Amazon Bedrock recibe un <b>aumento subito e impredecible</b> de peticiones desde Europa y Asia Pacifico. El equipo debe mantener <b>respuestas de baja latencia globalmente</b> cumpliendo <b>data residency</b> con el <b>menor overhead operativo</b>. ¿Que solucion cumple?",
         options=[
-            "Desplegar endpoints de inferencia de SageMaker AI en varias Regiones y dirigir el trafico a la Region mas cercana con una politica de enrutamiento por latencia en Amazon Route 53",
-            "Usar procesamiento en tiempo real de Comprehend en una Region central y copiar los datos de interaccion a Regiones cercanas antes de la demanda prevista",
-            "Usar el inference profile cross-Region de Bedrock para que las llamadas de una Region se enruten automaticamente a otra Region con capacidad de computo disponible",
-            "Desplegar el foundation model elegido en cada Region de Europa y Asia Pacifico via Bedrock y gestionar la distribucion de trafico con un mecanismo de enrutamiento propio en el cliente",
+            "Endpoints de SageMaker AI en varias Regiones con enrutamiento por latencia en Amazon Route 53",
+            "Usar Comprehend en tiempo real en una Region central, copiando los datos a Regiones cercanas por adelantado",
+            "El inference profile cross-Region de Bedrock, que enruta a otra Region con capacidad disponible",
+            "Desplegar el foundation model en cada Region via Bedrock, con enrutamiento propio en el cliente",
         ],
         correct=2,
         key="aip01-q27",
@@ -445,12 +445,12 @@ cards = [
     # Q30 - SageMaker Asynchronous Inference endpoint
     # ============================================================
     card(
-        question="Una plataforma genera texto de accesibilidad para <b>imagenes de hasta 60 MB</b> subidas a Amazon S3, con <b>picos de trafico impredecibles</b>. El flujo (Rekognition, luego Bedrock para captions) <b>arranca automaticamente al subir una imagen</b>. Se necesita una solucion que <b>escale automaticamente</b>, mantenga alta disponibilidad en picos y opere con <b>minima gestion de infraestructura</b>. ¿Que solucion cumple?",
+        question="Una plataforma genera captions para <b>imagenes de hasta 60 MB</b> subidas a Amazon S3, con <b>picos impredecibles</b>. El flujo (Rekognition, luego Bedrock) <b>arranca al subir una imagen</b>. Debe <b>escalar solo</b>, tener alta disponibilidad y <b>minima gestion de infraestructura</b>. ¿Que solucion cumple?",
         options=[
-            "Construir un pipeline con Amazon ECS on Fargate que corra por schedule para procesar las imagenes e insertar los datos procesados en Amazon Aurora",
-            "Desplegar un endpoint de Amazon SageMaker Asynchronous Inference con una politica de escalado que ajuste la capacidad automaticamente y procese cada imagen del bucket S3",
-            "Lanzar un Amazon EC2 Auto Scaling group que hospede una app de inferencia que monitorea el bucket S3 y guarda los resultados en otro bucket",
-            "Usar Amazon SQS para encolar tareas y disparar funciones AWS Lambda que ejecuten Rekognition y Bedrock por cada imagen subida",
+            "Construir un pipeline con Amazon ECS on Fargate por schedule, guardando en Amazon Aurora",
+            "Desplegar un endpoint de Amazon SageMaker Asynchronous Inference con politica de escalado automatico",
+            "Lanzar un Amazon EC2 Auto Scaling group con una app que monitorea el bucket S3",
+            "Usar Amazon SQS para encolar y AWS Lambda que ejecuten Rekognition y Bedrock por imagen",
         ],
         correct=1,
         key="aip01-q30",
@@ -473,12 +473,12 @@ cards = [
     # Q32 - Bedrock model invocation logging (S3+CloudWatch)
     # ============================================================
     card(
-        question="Por compliance, un equipo debe tener <b>trazabilidad completa de cada invocacion</b> de Bedrock (prompt de entrada, respuesta, metadatos) y almacenarla para auditoria, consulta y retencion. La solucion debe: registrar <b>todas</b> las invocaciones (Converse, ConverseStream, InvokeModel, InvokeModelWithResponseStream), permitir <b>almacenar salidas binarias de imagen</b> y soportar <b>analitica consultable</b> posterior. ¿Que solucion cumple?",
+        question="Por compliance se necesita <b>trazabilidad completa de cada invocacion</b> de Bedrock (prompt, respuesta, metadatos) para todas las APIs (Converse, ConverseStream, InvokeModel, InvokeModelWithResponseStream), con <b>salidas binarias de imagen</b> y <b>analitica consultable</b>. ¿Que solucion cumple?",
         options=[
-            "Habilitar los model invocation logs de Bedrock y configurar como destinos tanto un bucket de Amazon S3 como un log group de Amazon CloudWatch Logs; almacenar datos de texto e imagen",
-            "Usar Amazon Data Firehose para capturar y hacer streaming de todos los logs de invocacion a Amazon S3 y Amazon OpenSearch Service para analitica",
-            "Habilitar los model invocation logs de Bedrock y configurar un bucket de Amazon S3 como unico destino; almacenar datos de texto e imagen",
-            "Usar AWS CloudTrail para capturar todas las invocaciones de Bedrock, almacenar los logs en Amazon S3 y ejecutar analitica con Amazon Athena",
+            "Habilitar model invocation logs de Bedrock hacia Amazon S3 y Amazon CloudWatch Logs; texto e imagen",
+            "Amazon Data Firehose para hacer streaming de los logs a Amazon S3 y Amazon OpenSearch Service",
+            "Model invocation logs de Bedrock con un bucket de Amazon S3 como unico destino; texto e imagen",
+            "AWS CloudTrail para capturar las invocaciones, logs en Amazon S3 y analitica con Amazon Athena",
         ],
         correct=0,
         key="aip01-q32",
@@ -501,12 +501,12 @@ cards = [
     # Q34 - Amazon Q Business ACL por grupo (acl.json)
     # ============================================================
     card(
-        question="Una firma usa Amazon Q Business sobre documentos en S3 con prefijos por departamento (Finanzas, Legal, RR. HH., Ingenieria). Los empleados se autentican con IAM Identity Center y cada departamento mapea a un grupo. Q Business debe <b>devolver solo informacion del prefijo del grupo del empleado</b> conectado, <b>sin mantener metadatos de control de acceso por cada documento</b> y con minimo esfuerzo administrativo. ¿Que solucion cumple?",
+        question="Amazon Q Business consulta documentos en S3 con prefijos por departamento (Finanzas, Legal, RR. HH., Ingenieria), autenticando con IAM Identity Center (un grupo por depto). Debe <b>devolver solo el prefijo del grupo del empleado</b>, <b>sin metadatos de acceso por documento</b> y con minimo esfuerzo. ¿Que solucion cumple?",
         options=[
-            "Crear data sources (conectores) de Q Business separados por cada prefijo de departamento, configurar un rol IAM distinto por departamento restringido a su prefijo de S3 y sincronizar cada conector de forma independiente cada vez que cambie el contenido de esa carpeta",
-            "Crear archivos de metadatos individuales para cada documento en el bucket con el grupo de IAM Identity Center apropiado y volver a sincronizar el data source cada vez que cambie la membresia de grupos de cualquier empleado",
-            "Crear un unico archivo acl.json en la raiz del bucket que defina, por departamento, el prefijo de S3, el grupo de IAM Identity Center y el permiso de acceso a nivel de grupo; luego habilitar control de acceso en el data source S3 de Q Business e indicar la ruta al acl.json para que Q Business aplique el mapeo prefijo-grupo durante la recuperacion",
-            "Aplicar bucket policies de S3 que den a cada grupo de IAM Identity Center acceso solo a su prefijo de departamento y configurar Q Business para rastrear todo el bucket, confiando en la bucket policy para filtrar las respuestas de cada usuario durante la recuperacion",
+            "Un data source de Q Business por prefijo, con un rol IAM distinto y sincronizacion por carpeta",
+            "Un archivo de metadatos por documento con el grupo de IAM Identity Center, resincronizando en cada cambio",
+            "Un unico acl.json en la raiz del bucket que mapee prefijo, grupo de IAM Identity Center y permiso",
+            "Bucket policies de S3 por grupo, con Q Business rastreando todo el bucket y confiando en la policy",
         ],
         correct=2,
         key="aip01-q34",
@@ -529,12 +529,12 @@ cards = [
     # Q35 - SageMaker Ground Truth Plus human-in-the-loop
     # ============================================================
     card(
-        question="Un sistema resume historiales medicos con un LLM fine-tuned en SageMaker. Antes del despliegue pleno, los <b>profesionales de salud deben revisar y corregir</b> los resumenes generados por su alto impacto. La solucion debe <b>escalar a grandes volumenes</b> e <b>integrarse con los pipelines de SageMaker</b> para reentrenamiento y despliegue fluidos. ¿Que enfoque cumple mejor?",
+        question="Un sistema resume historiales medicos con un LLM fine-tuned en SageMaker. Antes del despliegue, los <b>medicos deben revisar y corregir</b> los resumenes. Debe <b>escalar a grandes volumenes</b> e <b>integrarse con los pipelines de SageMaker</b> para reentrenar y desplegar. ¿Que enfoque cumple?",
         options=[
-            "Usar SageMaker Model Monitor para detectar y marcar resumenes de baja confianza para revision del medico y guardar los casos marcados en S3 para revision manual antes del despliegue",
-            "Aprovechar la knowledge base de Amazon Bedrock para enriquecer el dataset de entrenamiento con conocimiento externo y mejorar el rendimiento del modelo antes de desplegar",
-            "Implementar Amazon Augmented AI (A2I) para crear un proceso de revision humana y que los profesionales validen y refinen los resumenes antes del despliegue a escala",
-            "Usar SageMaker Ground Truth Plus para crear un flujo human-in-the-loop de validacion y correccion por expertos, e integrarlo con el pipeline de SageMaker existente para reentrenamiento y despliegue fluidos",
+            "Usar SageMaker Model Monitor para marcar resumenes de baja confianza y guardarlos en S3 antes del despliegue",
+            "Aprovechar la knowledge base de Amazon Bedrock para enriquecer el dataset con conocimiento externo",
+            "Implementar Amazon Augmented AI (A2I) para una revision humana que valide los resumenes a escala",
+            "SageMaker Ground Truth Plus: flujo human-in-the-loop por expertos, integrado con el pipeline de SageMaker",
         ],
         correct=3,
         key="aip01-q35",
@@ -557,12 +557,12 @@ cards = [
     # Q37 - Bedrock Knowledge Bases con citations y reranking
     # ============================================================
     card(
-        question="Un asistente de inteligencia regulatoria en Amazon Bedrock recupera de multiples fuentes internas. Cada afirmacion debe <b>citar la fuente</b> trazable al documento original, la recuperacion debe <b>priorizar solo el contenido mas relevante</b> y se debe <b>almacenar el razonamiento y las citas para auditoria</b> con el <b>MENOR esfuerzo operativo</b>. ¿Que arquitectura cumple mejor?",
+        question="Un asistente regulatorio en Amazon Bedrock recupera de varias fuentes internas. Cada afirmacion debe <b>citar la fuente</b>, la recuperacion debe <b>priorizar lo mas relevante</b> y hay que <b>guardar razonamiento y citas para auditoria</b> con el <b>MENOR esfuerzo</b>. ¿Que arquitectura cumple mejor?",
         options=[
-            "Usar Bedrock Knowledge Bases para recuperar documentos, invocar un modelo Claude directamente con el texto recuperado y que la propia aplicacion genere sus propios enlaces de fuente, arme las citas a mano y guarde las respuestas finales en Amazon DynamoDB para consultarlas despues",
-            "Usar Bedrock Knowledge Bases con RetrieveAndGenerate para generar respuestas con citas, devolviendo todos los chunks recuperados al modelo Claude sin reranking ni filtro de relevancia, y guardar solo la respuesta final en Amazon S3",
-            "Configurar Bedrock Knowledge Bases para recuperar documentos altamente relevantes y devolver citas al contenido de soporte, aplicar reranking para priorizar los resultados mas relevantes antes de enviar el contexto a un modelo Claude via la Messages API, y guardar el razonamiento y las citas en Amazon S3 para auditoria",
-            "Usar Bedrock Agents con una knowledge base para recuperar documentos, configurar las instrucciones del agente para explicar cada recomendacion y citar los documentos, y enviar la salida generada a Amazon CloudWatch Logs para auditoria",
+            "Bedrock Knowledge Bases, invocar Claude y que la aplicacion arme las citas a mano en Amazon DynamoDB",
+            "Bedrock Knowledge Bases con RetrieveAndGenerate sin reranking, guardando solo la respuesta en Amazon S3",
+            "Bedrock Knowledge Bases con citas y reranking, enviando a Claude via Messages API y auditoria en Amazon S3",
+            "Bedrock Agents con una knowledge base, instrucciones para citar y salida a Amazon CloudWatch Logs",
         ],
         correct=2,
         key="aip01-q37",
@@ -585,12 +585,12 @@ cards = [
     # Q40 - Bedrock Model Evaluations job
     # ============================================================
     card(
-        question="Un equipo quiere <b>evaluar sistematicamente distintas configuraciones</b> de modelos (variante, temperatura, estrategias de prompt) para medir <b>exactitud y robustez</b> ante un dataset de consultas de compliance, usando modelos out-of-the-box y personalizados de Amazon Bedrock. ¿Que solucion cumple este requisito?",
+        question="Un equipo quiere <b>evaluar sistematicamente configuraciones</b> de modelo (variante, temperatura, prompt) por <b>exactitud y robustez</b> sobre consultas de compliance, con modelos out-of-the-box y personalizados de Amazon Bedrock. ¿Que solucion cumple?",
         options=[
-            "Configurar un job de evaluacion con Bedrock Model Evaluations, especificar el task type Question and answer y seleccionar metricas como exactitud y robustez, con un prompt dataset personalizado",
-            "Usar Amazon CloudWatch Synthetics para simular consultas de usuario a los modelos de Bedrock y monitorear su rendimiento por tiempo de respuesta y disponibilidad",
-            "Configurar un job de evaluacion con Bedrock Model Evaluations, especificar el task type Question and answer y seleccionar metricas como exactitud y robustez, con un dataset predefinido",
-            "Usar SageMaker Debugger para analizar el rendimiento del modelo y comparar configuraciones inspeccionando salidas por capa y gradientes",
+            "Configurar un job de Bedrock Model Evaluations, task type Question and answer, con prompt dataset personalizado",
+            "Usar Amazon CloudWatch Synthetics para simular consultas y monitorear tiempo de respuesta y disponibilidad",
+            "Configurar un job de Bedrock Model Evaluations, task type Question and answer, con un dataset predefinido",
+            "Usar SageMaker Debugger para comparar configuraciones inspeccionando salidas por capa y gradientes",
         ],
         correct=0,
         key="aip01-q40",
@@ -613,12 +613,12 @@ cards = [
     # Q46 - MCP servers stateless en ECS autoescalado
     # ============================================================
     card(
-        question="Servidores MCP consumen la <b>AWS Cloud Control API</b> y sufren respuestas <b>lentas o incompletas</b> con inventarios grandes o multi-Region. Se necesita <b>latencia predecible</b> para los agentes LLM y servidores MCP <b>stateless</b> para escalabilidad horizontal y failover, mejorando <b>throughput, concurrencia y consistencia</b> al consultar la Cloud Control API. ¿Que enfoque cumple mejor?",
+        question="Servidores MCP consumen la <b>AWS Cloud Control API</b> y responden <b>lento o incompleto</b> con inventarios grandes o multi-Region. Se busca <b>latencia predecible</b> para los agentes LLM, servidores MCP <b>stateless</b> para escalar y failover, y mejor <b>throughput, concurrencia y consistencia</b>. ¿Que enfoque cumple mejor?",
         options=[
-            "Ejecutar servidores MCP stateless en una capa Amazon ECS autoescalada con batching y concurrencia controlados para las peticiones a la Cloud Control API, usando gestion de estado externa para coordinar entre instancias",
-            "Poner Amazon API Gateway delante de las llamadas de los servidores MCP a la Cloud Control API y habilitar throttling y cache de respuestas para absorber la concurrencia de los inventarios grandes o multi-Region",
-            "Usar Amazon EventBridge para que los servidores MCP invoquen las operaciones de la Cloud Control API de forma asincrona y escribir los resultados en Amazon S3 para que los agentes los lean despues del procesamiento",
-            "Agregar Amazon ElastiCache for Redis como capa de cache para las respuestas de la Cloud Control API que consumen los servidores MCP, sirviendo desde memoria los estados de recursos consultados con frecuencia",
+            "Ejecutar servidores MCP stateless en Amazon ECS autoescalado con batching y concurrencia, y estado externo",
+            "Amazon API Gateway delante de las llamadas MCP, con throttling y cache de respuestas",
+            "Amazon EventBridge para invocar la Cloud Control API de forma asincrona y escribir en Amazon S3",
+            "Agregar Amazon ElastiCache for Redis como cache de las respuestas de la Cloud Control API mas consultadas",
         ],
         correct=0,
         key="aip01-q46",
@@ -641,12 +641,12 @@ cards = [
     # Q47 - Generative AI Security Scoping Matrix (Scope 4)
     # ============================================================
     card(
-        question="Una empresa hace <b>fine-tuning de un foundation model de SageMaker JumpStart</b> con datos propios sensibles y lo despliega como endpoint en tiempo real, con una knowledge base en OpenSearch. Debe mapear correctamente la <b>Generative AI Security Scoping Matrix</b> e implementar los controles adecuados. ¿Cual describe mejor el scope y la responsabilidad de seguridad clave?",
+        question="Una empresa hace <b>fine-tuning de un foundation model de SageMaker JumpStart</b> con datos propios sensibles, lo despliega como endpoint real-time y usa una knowledge base en OpenSearch. Debe mapear la <b>Generative AI Security Scoping Matrix</b>. ¿Cual describe mejor el scope y su responsabilidad clave?",
         options=[
-            "Scope 3: Modelos preentrenados. La empresa es responsable de revisar la licencia y los terminos del FM para confirmar que el proveedor no use los datos propios para reentrenar",
-            "Scope 4: Modelos fine-tuned. La empresa debe clasificar y cifrar todos los datos de entrenamiento propios (en reposo y en transito), controlar estrictamente el acceso y mantener un rastro de auditoria de versiones del modelo, linaje de datos y procesos de fine-tuning",
-            "Scope 2: Aplicaciones empresariales. La responsabilidad principal es hacer cumplir terminos contractuales, SLAs y restricciones de uso de datos del proveedor, porque el modelo se accede solo via un servicio gestionado de terceros",
-            "Scope 5: Modelos entrenados desde cero. La empresa asume la propiedad total de la infraestructura del modelo, incluidos clusteres de GPU, pipelines de entrenamiento, configuraciones de seguridad y gobierno de release y versionado",
+            "Scope 3 (Modelos preentrenados): revisar licencia y terminos del FM para que el proveedor no reentrene",
+            "Scope 4 (modelos fine-tuned): clasificar y cifrar los datos propios y auditar versiones, linaje y fine-tuning",
+            "Scope 2 (aplicaciones empresariales): cumplir terminos contractuales y SLAs, porque el modelo es de terceros",
+            "Scope 5 (entrenados desde cero): propiedad total de la infraestructura, clusteres de GPU y versionado",
         ],
         correct=1,
         key="aip01-q47",
@@ -671,10 +671,10 @@ cards = [
     card(
         question="Un asistente financiero usa SageMaker (fine-tuning) y Amazon Kendra (busqueda semantica sobre documentos regulatorios). Debe implementar frameworks de <b>content safety</b> para <b>evitar consejos inexactos</b>, <b>no filtrar datos personales de inversores</b> y <b>defenderse de prompt injection</b>. ¿Que solucion cumple?",
         options=[
-            "Configurar Amazon Bedrock Guardrails con filtros de contenido y automated reasoning checks, y adjuntarlos tanto a los resultados de recuperacion de Kendra como a la salida del modelo de SageMaker",
-            "Configurar Kendra para aplicar filtros de busqueda semantica a los documentos regulatorios y usar SageMaker para refinar las respuestas y que cumplan la regulacion",
-            "Configurar SageMaker para monitorear y limitar las salidas del modelo con post-procesamiento, y usar los query filters de Kendra para prevenir prompt injection antes de pasar las consultas al modelo",
-            "Usar las funciones de compliance integradas de Amazon Bedrock para aplicar filtros regulatorios segun el contenido de la consulta y luego invocar el modelo de SageMaker solo cuando se confirme el cumplimiento",
+            "Configurar Amazon Bedrock Guardrails (contenido y automated reasoning) sobre Kendra y la salida de SageMaker",
+            "Configurar Kendra con filtros de busqueda semantica y SageMaker para refinar las respuestas",
+            "Configurar SageMaker con post-procesamiento y los query filters de Kendra contra prompt injection",
+            "Usar las funciones de compliance integradas de Amazon Bedrock, invocando SageMaker solo si se confirma",
         ],
         correct=0,
         key="aip01-q48",
@@ -699,10 +699,10 @@ cards = [
     card(
         question="Un agente de Amazon Bedrock da respuestas inconsistentes y alucinaciones. El equipo necesita observabilidad que exponga <b>como el agente interpreta prompts, razona y genera respuestas</b> (no solo la salida), <b>reducir alucinaciones</b>, medir la <b>tasa de alucinacion en el tiempo</b> y validar el comportamiento contra el razonamiento esperado. ¿Cual cumple?",
         options=[
-            "Configurar el agente con model invocation logs y muestreo de respuestas; analizar tendencias de exactitud y calcular la tasa de alucinacion comparando respuestas finales con un golden dataset",
-            "Habilitar GuardrailTrace y RoutingClassifierTrace y analizar ModelInvocationInput para evaluar el enrutamiento de prompts y las decisiones de seguridad; comparar respuestas muestreadas con un golden dataset para estimar la tasa de alucinacion",
-            "Habilitar PreProcessingTrace, OrchestrationTrace y PostProcessingTrace y validar continuamente el comportamiento del agente con un golden dataset para detectar desviaciones de razonamiento y alucinaciones",
-            "Habilitar prompt versioning y A/B testing del agente; medir la tasa de alucinacion siguiendo la consistencia de respuestas entre versiones y revisando las desviaciones frente a respuestas esperadas",
+            "Configurar model invocation logs y muestreo, calculando la tasa de alucinacion contra un golden dataset",
+            "Habilitar GuardrailTrace, RoutingClassifierTrace y ModelInvocationInput, comparando con un golden dataset",
+            "Habilitar PreProcessingTrace, OrchestrationTrace y PostProcessingTrace, validados contra un golden dataset",
+            "Prompt versioning y A/B testing, midiendo la tasa por consistencia entre versiones",
         ],
         correct=2,
         key="aip01-q52",
@@ -727,10 +727,10 @@ cards = [
     card(
         question="Un equipo quiere aplicar <b>transfer learning</b> con un modelo <b>BERT preentrenado</b> para clasificar correos como spam/no spam, usando varios miles de correos etiquetados en SageMaker AI, sin reentrenar todo desde cero. ¿Que enfoque <b>inicializa correctamente</b> el modelo BERT para lograrlo?",
         options=[
-            "Cargar los pesos preentrenados de cada capa y colocar un clasificador externo encima del vector de salida del modelo primario; entrenar el nuevo clasificador con el dataset etiquetado",
-            "Aplicar los parametros preentrenados en todas las capas, luego descartar la capa final existente, introducir un clasificador personalizado y entrenarlo con los datos etiquetados para deteccion de spam",
-            "Usar los pesos preentrenados en todas las capas transformer y adjuntar un segundo clasificador en paralelo a la capa de salida existente; entrenar solo ese clasificador adicional con el dataset etiquetado",
-            "Inicializar el modelo con pesos preentrenados, convertir la capa de salida en un clasificador multitarea que prediga varias clases de texto ademas de spam, y entrenar ese clasificador con el dataset etiquetado",
+            "Cargar los pesos de cada capa y poner un clasificador externo encima del vector de salida; entrenar solo ese",
+            "Aplicar los pesos en todas las capas, descartar la capa final, poner un clasificador nuevo y entrenarlo",
+            "Usar los pesos en las capas transformer y adjuntar un segundo clasificador en paralelo a la salida; entrenar solo ese",
+            "Inicializar con los pesos y convertir la capa de salida en un clasificador multitarea de varias clases",
         ],
         correct=1,
         key="aip01-q53",
@@ -753,12 +753,12 @@ cards = [
     # Q54 - Bedrock Data Automation (BDA) multimedia
     # ============================================================
     card(
-        question="Una editorial gestiona <b>PDFs, imagenes, audio y video</b> y quiere un asistente de investigacion generativo que responda consultas en lenguaje natural (por ejemplo, que articulo menciono cierto tema e incluyo imagenes aereas). Planea usar <b>Amazon Bedrock Data Automation (BDA)</b> para procesar el contenido no estructurado y <b>SageMaker AI</b> para hospedar el modelo generativo. ¿Que enfoque cumple mejor?",
+        question="Una editorial gestiona <b>PDFs, imagenes, audio y video</b> y quiere un asistente generativo que responda consultas en lenguaje natural. Planea <b>Amazon Bedrock Data Automation (BDA)</b> para el contenido no estructurado y <b>SageMaker AI</b> para el modelo generativo. ¿Que enfoque cumple mejor?",
         options=[
-            "Usar BDA para procesar los archivos, guardar el contenido crudo en Amazon S3 y desplegar una Lambda que cree tu propia base de datos de vectores fuera de Bedrock Knowledge Bases antes de pasarla a SageMaker AI",
-            "Aprovechar BDA para procesar documentos, imagenes, audio y video, indexar los resultados en Bedrock Knowledge Bases para busqueda semantica y luego pasar el contexto recuperado a un foundation model via SageMaker AI para generar la respuesta",
-            "Usar BDA para procesar los archivos, analizar el contenido estructurado con Amazon Comprehend para entidades y sentimiento, y luego enviar los resultados a un foundation model hospedado en Amazon EC2 para generar respuestas",
-            "Emplear BDA para procesar todos los tipos de medios y alimentar directamente la salida estructurada a un foundation model via SageMaker AI, omitiendo el uso de una knowledge base",
+            "BDA, contenido crudo en Amazon S3 y una Lambda que cree tu propia base de vectores fuera de Bedrock Knowledge Bases",
+            "BDA, indexar en Bedrock Knowledge Bases para busqueda semantica y pasar el contexto a un modelo via SageMaker AI",
+            "BDA, Amazon Comprehend para entidades y sentimiento, y un foundation model en Amazon EC2",
+            "Emplear BDA alimentando la salida estructurada a un modelo via SageMaker AI, omitiendo la knowledge base",
         ],
         correct=1,
         key="aip01-q54",
@@ -781,12 +781,12 @@ cards = [
     # Q55 - AppConfig routing dinamico de FMs + failover
     # ============================================================
     card(
-        question="Una app GenAI enruta cada tarea (traduccion, recomendaciones, descripciones) a un FM distinto. Debe: <b>dirigir la inferencia al FM correcto</b> segun tarea y configuracion del cliente, <b>cambiar el enrutamiento en runtime sin redeploy</b>, optimizar latencia/fiabilidad y operacion cross-Region, e implementar <b>failover</b> a un modelo o Region de respaldo. ¿Que enfoque cumple con el menor esfuerzo operativo?",
+        question="Una app GenAI enruta cada tarea a un FM distinto. Debe <b>dirigir la inferencia al FM correcto</b> por tarea/cliente, <b>cambiar el enrutamiento en runtime sin redeploy</b>, operar cross-Region y hacer <b>failover</b> a un modelo o Region de respaldo, con minimo esfuerzo. ¿Que enfoque cumple?",
         options=[
-            "Montar un router en Flask sobre Amazon ECS con datos de enrutamiento en Amazon Aurora; enrutar via API Gateway al Flask que selecciona e invoca el modelo con el SDK de Bedrock; usar alarmas de CloudWatch para monitorear errores y actualizar la tabla de enrutamiento",
-            "Configurar API Gateway para enrutar a una Lambda por tipo de tarea, guardar las configuraciones de modelo en Amazon S3, habilitar retry con backoff exponencial en la Lambda para las llamadas a Bedrock y usar Amazon Route 53 para failover regional; actualizar el enrutamiento modificando el archivo de S3 y redesplegando la Lambda",
-            "Crear una Lambda con la extension AppConfig Agent para obtener dinamicamente las reglas de enrutamiento desde AWS AppConfig; usar AWS Step Functions para gestionar los workflows por tarea con una estrategia de failover con circuit breaker; invocar los modelos usando endpoints regionales de Bedrock, reintentando en una Region secundaria si falla",
-            "Desplegar un router de Kubernetes en Amazon EKS con ConfigMaps para las reglas; reenviar de API Gateway a un Ingress controller que envie al router, que invoca el FM con el SDK de Bedrock; gestionar el failover actualizando ConfigMaps y reiniciando Pods cuando falla una Region o modelo",
+            "Router en Flask sobre Amazon ECS con reglas en Amazon Aurora, invocando con el SDK de Bedrock a mano",
+            "API Gateway a una Lambda por tarea, config en Amazon S3 y Amazon Route 53 para failover; requiere redeploy",
+            "Lambda con AppConfig Agent que lee reglas de AWS AppConfig en runtime, AWS Step Functions con circuit breaker y endpoints regionales de Bedrock",
+            "Router de Kubernetes en Amazon EKS con ConfigMaps, invocando el FM con el SDK de Bedrock y failover reiniciando Pods",
         ],
         correct=2,
         key="aip01-q55",
@@ -809,12 +809,12 @@ cards = [
     # Q57 - LoRA adapters como inference components
     # ============================================================
     card(
-        question="Un asistente tiene un <b>modelo base grande</b> desplegado como endpoint real-time de SageMaker AI. Se quiere <b>personalizarlo para cinco mercados</b> con <b>adaptadores LoRA</b> (adaptacion parameter-efficient) en lugar de reentrenar todo el modelo, manteniendo el base sin cambios e <b>invocando dinamicamente el adaptador correcto</b> en inferencia, <b>sin crear endpoints separados</b> por region. ¿Que solucion cumple?",
+        question="Un <b>modelo base grande</b> corre en un endpoint real-time de SageMaker AI. Se quiere <b>personalizarlo para cinco mercados</b> con <b>adaptadores LoRA</b> sin reentrenar el base, <b>invocando el adaptador correcto</b> en inferencia y <b>sin endpoints separados</b> por region. ¿Que solucion cumple?",
         options=[
-            "Desplegar el modelo base una vez en un endpoint real-time de SageMaker AI y, por cada region, usar un inference component de adaptador que contenga los artefactos LoRA de esa region, invocando el mismo endpoint y especificando el adaptador de la region",
-            "Aprovisionar un multi-model endpoint grande, cargar el adaptador LoRA de cada region como un artefacto de modelo separado y apoyarse en logica de enrutamiento a nivel de contenedor para seleccionar el adaptador en inferencia",
-            "Desplegar el modelo base una vez en un endpoint real-time y guardar los pesos LoRA de cada region en Amazon EFS, montando el filesystem para adjuntar dinamicamente el adaptador correcto en inferencia",
-            "Hospedar el modelo base en un endpoint real-time y usar una capa de pre-procesamiento en AWS Lambda que recupere los pesos del adaptador de cada region y los inyecte en el contenedor del modelo antes de reenviar la peticion",
+            "El modelo base y, por region, un inference component de adaptador LoRA, invocando el mismo endpoint",
+            "Un multi-model endpoint, cada adaptador LoRA como artefacto separado y enrutamiento a nivel de contenedor",
+            "Desplegar el modelo base y los pesos LoRA de cada region en Amazon EFS, montando el filesystem",
+            "El modelo base y una AWS Lambda que recupere los pesos del adaptador y los inyecte en el contenedor",
         ],
         correct=0,
         key="aip01-q57",
@@ -837,12 +837,12 @@ cards = [
     # Q61 - LangChain/LangGraph para orquestacion RAG con estado
     # ============================================================
     card(
-        question="Un asistente de asesoria de inversion necesita un framework que gestione el <b>ciclo RAG completo</b>, orqueste <b>workflows de agente con ejecucion en grafo</b>, mantenga <b>estado durable</b> y permita <b>rollback y replay controlados</b> en un entorno regulado (con memoria de largo plazo del cliente versionada para auditoria). Ya usa SageMaker Feature Store, MLflow y FMs de Bedrock. ¿Que framework es el mas adecuado?",
+        question="Un asistente de inversion necesita un framework que cubra el <b>ciclo RAG</b>, orqueste <b>workflows de agente en grafo</b>, mantenga <b>estado durable</b> y permita <b>rollback y replay</b> en un entorno regulado. Ya usa SageMaker Feature Store, MLflow y FMs de Bedrock. ¿Que framework conviene?",
         options=[
-            "Usar Amazon Kendra para busqueda semantica y AWS Glue DataBrew para preprocesar documentos, con el estado de memoria en Amazon ElastiCache for Redis",
-            "Usar LangChain para implementar el pipeline RAG y LangGraph para crear el agente con estado persistente, orquestacion basada en grafo y ejecucion con checkpoints",
-            "Usar SageMaker Pipelines para los workflows de recuperacion y Amazon EventBridge Pipes para gestionar las transiciones de estado del agente y las actualizaciones de memoria",
-            "Usar AWS Step Functions para la orquestacion multi-paso y Amazon OpenSearch Serverless como vector store para embeddings, con Map states de Step Functions para simular la memoria del agente",
+            "Usar Amazon Kendra para busqueda semantica, AWS Glue DataBrew para preprocesar y estado en Amazon ElastiCache for Redis",
+            "LangChain para el pipeline RAG y LangGraph para el agente con estado, grafo y checkpoints",
+            "SageMaker Pipelines para la recuperacion y Amazon EventBridge Pipes para el estado y la memoria",
+            "AWS Step Functions para la orquestacion y Amazon OpenSearch Serverless como vector store, con Map states",
         ],
         correct=1,
         key="aip01-q61",
@@ -865,12 +865,12 @@ cards = [
     # Q64 - Bedrock Prompt Management (plantillas versionadas)
     # ============================================================
     card(
-        question="Un asistente de salud usa Amazon Kendra (busqueda) y un FM en Amazon Bedrock. La organizacion requiere <b>plantillas de prompt estandarizadas, versionadas y reutilizables</b> entre flujos clinicos, y que parametros como <b>temperature y max_tokens sean ajustables</b> segun la complejidad de la consulta. ¿Que solucion es la mas apropiada para gestionar las plantillas de prompt?",
+        question="Un asistente de salud usa Amazon Kendra y un FM en Amazon Bedrock. Requiere <b>plantillas de prompt estandarizadas, versionadas y reutilizables</b> entre flujos, con <b>temperature y max_tokens ajustables</b> por consulta. ¿Que solucion conviene para gestionar las plantillas?",
         options=[
-            "Usar Bedrock Prompt Management para guardar plantillas reutilizables y versionadas, definir parametros de inferencia ajustables dentro de la configuracion del prompt e invocar el prompt via la InvokeModel API tras inyectar los resultados de Kendra",
-            "Incrustar el prompt completo y los parametros de inferencia directamente en una Lambda que hace las busquedas en Kendra y llama a la API de Bedrock; actualizar el codigo de la Lambda cada vez que cambien el texto o la configuracion en los distintos flujos",
-            "Subir archivos de texto de prompt a un bucket de Amazon S3, que la Lambda lea e interprete las preguntas del paciente y los resultados de Kendra, y enviar el archivo a Bedrock con CreateModelCustomizationJob para reutilizar los prompts",
-            "Crear un pipeline multi-paso de Bedrock Prompt Flows que encadene varios prompts y modelos, enrutando las consultas del paciente por pasos separados para la fase de busqueda y la de generacion de respuesta",
+            "Bedrock Prompt Management: plantillas versionadas con parametros ajustables, invocado via InvokeModel tras Kendra",
+            "Incrustar el prompt y los parametros en una Lambda, editando el codigo en cada cambio",
+            "Archivos de prompt en Amazon S3 que lee la Lambda, enviados a Bedrock con CreateModelCustomizationJob",
+            "Un pipeline de Bedrock Prompt Flows que encadene prompts y modelos, con busqueda y generacion separadas",
         ],
         correct=0,
         key="aip01-q64",
@@ -893,12 +893,12 @@ cards = [
     # Q65 - Bedrock provisioned model ARN en modelId
     # ============================================================
     card(
-        question="Una empresa compro Provisioned Throughput en Bedrock con CreateProvisionedModelThroughput, pero CloudWatch muestra el modelo provisionado <b>casi sin uso</b> mientras las peticiones <b>siguen con throttling</b>. La app aun pasa el <b>identificador del foundation model base</b> en el campo modelId. Debe hacer que todas las peticiones consuman la capacidad provisionada <b>sin cambiar prompts ni payloads</b>. ¿Que cambio de configuracion cumple?",
+        question="Se compro Provisioned Throughput en Bedrock con CreateProvisionedModelThroughput, pero CloudWatch lo muestra <b>casi sin uso</b> y las peticiones <b>siguen con throttling</b>: la app aun pasa el <b>ID del modelo base</b> en modelId. Debe consumir la capacidad provisionada <b>sin tocar prompts ni payloads</b>. ¿Que cambio cumple?",
         options=[
-            "Aumentar el numero de model units asignados al Provisioned Throughput existente y seguir usando el ID del modelo base en el parametro modelId",
-            "Usar el nombre del modelo provisionado devuelto durante la creacion como modelId en la peticion del runtime de Bedrock, manteniendo el payload de inferencia sin cambios",
-            "Actualizar el parametro modelId para usar el ARN del modelo provisionado devuelto por la API CreateProvisionedModelThroughput",
-            "Configurar la aplicacion para usar un inference profile cross-Region del foundation model y conservar el ID del modelo base como fallback cuando ocurra throttling",
+            "Aumentar los model units del Provisioned Throughput y seguir usando el ID del modelo base en modelId",
+            "Usar el nombre del modelo provisionado devuelto al crearlo como modelId, sin cambiar el payload",
+            "Actualizar modelId al ARN del modelo provisionado devuelto por CreateProvisionedModelThroughput",
+            "Configurar un inference profile cross-Region del foundation model, con el ID base como fallback ante throttling",
         ],
         correct=2,
         key="aip01-q65",
@@ -923,10 +923,10 @@ cards = [
     card(
         question="Un asistente de salud en Amazon Bedrock <b>nunca debe discutir diagnosticos medicos</b>, debe <b>bloquear contenido daniño</b>, <b>enmascarar PII</b>, preservar <b>auditoria</b> y filtrar <b>entrada y salida</b> segun sensibilidad, con <b>minimos falsos positivos</b> y <b>estrategias de manejo distintas</b> segun el tipo de contenido. ¿Que configuracion de guardrails cumple?",
         options=[
-            "Construir un guardrail y subir cada categoria de Content Filters al maximo; agregar diagnosticos medicos como denied topic con frases de ejemplo que disparen bloqueo; configurar Sensitive Information Filters para bloquear por completo todo tipo de PII detectado; adjuntarlo a cada peticion de inferencia",
-            "Usar Amazon Comprehend para detectar la PII en los mensajes del paciente antes de que lleguen a Bedrock y Amazon Macie para escanear los logs de conversacion almacenados; aplicar ademas un solo guardrail con Content Filters en alto unicamente para contenido daniño, sin abordar el topic de diagnosticos medicos",
-            "Fijar la fuerza de Content Filters en medio para contenido daniño; agregar diagnosticos medicos como denied topic con definicion clara y frases de ejemplo; configurar Sensitive Information Filters para enmascarar PII en las respuestas y bloquear detalles de seguros en las entradas; activar la evaluacion de entrada y salida con mensajes de bloqueo personalizados para auditoria",
-            "Construir tres guardrails separados (uno para contenido daniño, otro para el topic de diagnostico medico y otro para bloqueo de PII) y conectarlos en orden con un workflow de AWS Step Functions que enrute cada mensaje segun su clasificacion",
+            "Un guardrail con Content Filters al maximo, diagnosticos como denied topic y Sensitive Information Filters que bloqueen toda PII",
+            "Amazon Comprehend para PII y Amazon Macie sobre los logs, con un solo guardrail de Content Filters en alto, sin denied topic",
+            "Content Filters en medio, diagnosticos como denied topic, Sensitive Information Filters que enmascaren/bloqueen PII y evaluacion in/out",
+            "Tres guardrails separados (daniño, denied topic, PII) encadenados con un workflow de AWS Step Functions",
         ],
         correct=2,
         key="aip01-q66",
@@ -949,12 +949,12 @@ cards = [
     # Q71 - Bedrock AgentCore Observability (traces FM)
     # ============================================================
     card(
-        question="Una app integra un FM de Bedrock y sufre fallos intermitentes de invocacion, salidas malformadas y recomendaciones inconsistentes con las mismas entradas. CloudWatch Logs registra errores 400 y 500, pero sin metadatos suficientes para aislar las llamadas fallidas. Se necesita <b>observabilidad granular de toda la ruta de invocacion</b>: inspeccion request-response, tracing detallado y diagnosticos accionables. ¿Que solucion cumple?",
+        question="Una app con un FM de Bedrock sufre fallos intermitentes, salidas malformadas y respuestas inconsistentes. CloudWatch Logs registra errores 400 y 500 sin metadatos para aislar las llamadas. Se necesita <b>observabilidad granular de la ruta de invocacion</b>: request-response y tracing detallado. ¿Que solucion cumple?",
         options=[
-            "Usar Amazon SageMaker Inference Recommender para analizar perfiles de rendimiento del endpoint, evaluar patrones de throughput e identificar desajustes de configuracion que afecten el comportamiento upstream de la API",
-            "Implementar AWS Step Functions Distributed Map para orquestar reprocesamiento a gran escala, consolidar logs de diagnostico y analizar fallos repetidos entre lotes de ejecucion",
-            "Habilitar Bedrock AgentCore Observability para generar invocation traces, capturar registros estructurados de request-response y exponer errores de integracion del FM para flujos de troubleshooting detallado",
-            "Configurar metricas de invocacion de Bedrock con logica de retry mejorada para analizar latencia de invocacion, monitorear eventos de throttling e identificar anomalias a nivel de respuesta",
+            "Usar Amazon SageMaker Inference Recommender para analizar rendimiento del endpoint y throughput",
+            "Implementar AWS Step Functions Distributed Map para reprocesar a gran escala y analizar fallos entre lotes",
+            "Habilitar Bedrock AgentCore Observability para invocation traces y registros request-response del FM",
+            "Configurar metricas de invocacion de Bedrock con retry para latencia, throttling y anomalias de respuesta",
         ],
         correct=2,
         key="aip01-q71",
@@ -977,12 +977,12 @@ cards = [
     # Q2 - CloudWatch Application Insights + anomaly detection (observabilidad FM)
     # ============================================================
     card(
-        question="Una plataforma de recomendaciones de viaje corre en Amazon EC2 y llama a foundation models de Amazon Bedrock. A veces hay <b>recomendaciones de peor calidad</b>, <b>aumentos inesperados de consumo de tokens</b> y <b>respuestas mas lentas</b> para ciertos tipos de viaje y segmentos de cliente. Se necesita observabilidad <b>centralizada</b> que <b>correlacione la salud de la aplicacion con el comportamiento del modelo</b>, <b>detecte desviaciones respecto a patrones de desempeño establecidos</b> y <b>analice logs</b> para hallar causas recurrentes, con el <b>MENOR esfuerzo operativo</b>. ¿Que enfoque cumple?",
+        question="Una plataforma de recomendaciones sobre Amazon EC2 que llama a foundation models de Amazon Bedrock ve <b>peor calidad</b>, <b>picos de tokens</b> y <b>mas latencia</b> en ciertos segmentos. Necesita observabilidad <b>centralizada</b> que <b>correlacione app y modelo</b>, <b>detecte desviaciones</b> y <b>analice logs</b>, con el <b>MENOR esfuerzo</b>. ¿Que enfoque cumple?",
         options=[
-            "Configurar Amazon CloudWatch Application Insights para monitorear los recursos de la aplicacion, publicar metricas personalizadas de calidad de recomendacion, consumo de tokens y latencia con embedded metric format segmentadas por tipo de peticion y grupo de usuario, aplicar CloudWatch anomaly detection a las metricas del modelo y usar CloudWatch Logs Insights para identificar patrones recurrentes",
-            "Habilitar el logging de invocacion de modelos de Bedrock hacia Amazon CloudWatch Logs, crear metric filters para uso de tokens y latencia de respuesta segmentados por tipo de peticion, configurar alarmas estaticas de CloudWatch con umbrales fijos predefinidos por tipo de viaje y segmento, y construir dashboards para revisar manualmente las desviaciones de calidad cuando se disparen esas alarmas",
-            "Instalar el agente de Amazon CloudWatch en las instancias EC2 para recolectar CPU, memoria, disco y logs de aplicacion, crear dashboards de esas metricas de infraestructura por instancia y segmento, definir alarmas de host y revisar manualmente la latencia de la API de Bedrock y la calidad de las recomendaciones cada vez que la salida se degrade",
-            "Habilitar tracing con AWS X-Ray para la aplicacion y las llamadas a la API de Bedrock, usar las trazas para identificar peticiones lentas por tipo de viaje y segmento, publicar la latencia promedio y percentiles en Amazon CloudWatch, y configurar alarmas para peticiones que superen umbrales fijos de tiempo de respuesta predefinidos manualmente",
+            "CloudWatch Application Insights, metricas de calidad/tokens/latencia por segmento, anomaly detection y Logs Insights",
+            "Logging de Bedrock a CloudWatch Logs, metric filters, alarmas estaticas por segmento y dashboards manuales",
+            "Agente de CloudWatch en EC2 para CPU/memoria/disco, dashboards de infraestructura y revision manual",
+            "Tracing con AWS X-Ray de la app y Bedrock, percentiles en CloudWatch y alarmas con umbrales fijos a mano",
         ],
         correct=0,
         key="aip01-q2",
@@ -1006,12 +1006,12 @@ cards = [
     # Q59 - Parametros de inferencia: bajar temperature y top_k (determinismo)
     # ============================================================
     card(
-        question="Un chatbot de soporte usa Amazon Bedrock con un LLM Amazon Nova Pro y adjunta al prompt articulos recuperados con Amazon Kendra. Los usuarios reportan que ante <b>preguntas similares repetidas</b> a veces se devuelven <b>respuestas distintas</b>, aunque los resultados de Kendra <b>no cambien</b>. El desarrollador debe lograr respuestas <b>mas consistentes, deterministas y menos aleatorias</b>, <b>sin modificar el proceso de recuperacion de conocimiento</b>. ¿Que enfoque lo resuelve?",
+        question="Un chatbot usa Amazon Bedrock con un LLM Amazon Nova Pro y adjunta articulos de Amazon Kendra. Ante <b>preguntas repetidas</b> devuelve <b>respuestas distintas</b> aunque Kendra <b>no cambie</b>. Se quieren respuestas <b>mas deterministas</b>, <b>sin tocar la recuperacion</b>. ¿Que enfoque lo resuelve?",
         options=[
-            "Ajustar los parametros de inferencia bajando tanto el valor de temperature como el umbral de muestreo top_k para reducir la aleatoriedad de la eleccion de tokens",
-            "Ajustar los parametros de inferencia subiendo tanto el valor de temperature como el umbral de muestreo top_k para ampliar la diversidad de la eleccion de tokens",
-            "Ajustar los parametros de inferencia bajando el valor de temperature y subiendo el umbral de muestreo top_p para admitir mas candidatos de tokens por nucleo",
-            "Ajustar los parametros de inferencia bajando tanto el valor de temperature como el umbral de muestreo top_p para acotar la probabilidad acumulada de tokens",
+            "Ajustar la inferencia bajando temperature y bajando top_k para reducir la aleatoriedad de tokens",
+            "Subir temperature y subir top_k para ampliar la diversidad de la eleccion de tokens",
+            "Bajar temperature y subir top_p para admitir mas candidatos de tokens por nucleo",
+            "Bajar temperature y bajar top_p para acotar la probabilidad acumulada de tokens",
         ],
         correct=0,
         key="aip01-q59",
@@ -1038,12 +1038,12 @@ cards = [
     # Q16r - Titan Embeddings + OpenSearch, con SHARDING para escalar
     # ------------------------------------------------------------
     card(
-        question="Una editorial multinacional construye un asistente interno con agentes de Amazon Bedrock para recuperar, resumir y analizar documentos de investigacion, apoyandose en RAG. Necesita representar consultas y contenido como <b>embeddings semanticos</b>, con una solucion gestionada y escalable. Dado el <b>gran volumen de documentos</b>, tambien debe optimizar el rendimiento con una <b>estrategia de distribucion de datos y manejo de consultas</b>. ¿Que enfoque cumple mejor?",
+        question="Una editorial construye un asistente con agentes de Amazon Bedrock (RAG) para documentos de investigacion. Necesita <b>embeddings semanticos</b> gestionados. Dado el <b>gran volumen</b>, tambien una <b>estrategia de distribucion de datos y consultas</b>. ¿Que enfoque cumple mejor?",
         options=[
-            "Implementar Amazon Kendra para indexar los documentos, dar soporte a consultas en lenguaje natural y que los agentes recuperen resultados mediante la busqueda semantica y el ranking gestionados del servicio, ajustando relevancia y facetas para escalar el volumen de consultas",
-            "Desplegar SageMaker JumpStart para hacer fine-tuning y hospedar un modelo de lenguaje preentrenado de resumen y generacion, integrarlo con los agentes para el descubrimiento de contenido y replicar el endpoint en varios nodos para distribuir la carga de consultas",
-            "Usar Amazon Titan Text Embeddings en Bedrock para convertir texto en vectores semanticos y almacenarlos en Amazon OpenSearch Service; aplicar una estrategia de sharding para distribuir el indice vectorial entre nodos y lograr consultas paralelas y escalabilidad horizontal",
-            "Configurar SageMaker Data Wrangler para preprocesar el texto, extraer features mediante clustering y que los agentes analicen la similitud de documentos dentro de datasets estructurados, particionando los datos agrupados entre nodos para acelerar las consultas",
+            "Amazon Kendra para indexar y recuperar por busqueda semantica y ranking gestionados, ajustando facetas",
+            "SageMaker JumpStart para fine-tuning y hospedar un modelo de resumen, replicado en varios nodos",
+            "Amazon Titan Text Embeddings en Bedrock guardando vectores en Amazon OpenSearch Service, con sharding del indice",
+            "SageMaker Data Wrangler para features por clustering sobre datasets estructurados, particionados entre nodos",
         ],
         correct=2,
         key="aip01r-q16",
@@ -1067,7 +1067,7 @@ cards = [
     # Q20r - Comprehend TOXICITY DETECTION (feature especifica)
     # ------------------------------------------------------------
     card(
-        question="Una red social entrena modelos en Amazon SageMaker AI para moderar contenido y quiere <b>detectar en tiempo real lenguaje toxico o dañino</b> (discurso de odio, acoso, amenazas explicitas). La solucion debe <b>integrarse con el pipeline de inferencia de SageMaker</b>, manejar alto throughput y devolver <b>puntajes de confianza</b> por clasificacion para bloquear o revisar automaticamente. ¿Que solucion gestionada aporta clasificadores de seguridad para detectar toxicidad en texto?",
+        question="Una red social modera contenido con modelos en Amazon SageMaker AI y quiere <b>detectar en tiempo real lenguaje toxico</b> (odio, acoso, amenazas), <b>integrado al pipeline de inferencia de SageMaker</b>, con alto throughput y <b>puntajes de confianza</b>. ¿Que solucion gestionada aporta clasificadores de toxicidad en texto?",
         options=[
             "Usar el analisis de sentimiento de Amazon Comprehend para detectar comentarios negativos y bloquear el contenido automaticamente",
             "Usar Amazon Translate para convertir el texto a otro idioma antes de la moderacion y asi reducir el contenido ofensivo",
@@ -1095,12 +1095,12 @@ cards = [
     # Q23r - Endpoints privados (VPC) tanto SageMaker como S3
     # ------------------------------------------------------------
     card(
-        question="Una empresa minorista analiza reseñas de clientes con notebooks de Amazon SageMaker AI y Amazon Comprehend, con los datos en Amazon S3. Por sensibilidad, exige que <b>todos los recursos permanezcan dentro de una VPC</b> segura y que <b>toda la comunicacion ocurra sobre la red de AWS</b> (sin salir a internet). ¿Que solucion cumple?",
+        question="Una empresa analiza reseñas con notebooks de Amazon SageMaker AI y Amazon Comprehend, datos en Amazon S3. Exige que <b>todo permanezca en una VPC</b> y que <b>la comunicacion no salga a internet</b>. ¿Que solucion cumple?",
         options=[
-            "Desplegar el notebook de SageMaker AI en una subnet privada con ruta a un internet gateway y enrutar todas las solicitudes a S3 a traves de un proxy externo",
-            "Desplegar el notebook de SageMaker AI en una subnet privada dentro de una VPC y usar una conexion de VPC peering con otra VPC donde S3 sea accesible",
-            "Desplegar el notebook de SageMaker AI en una subnet privada dentro de una VPC y asegurar que la VPC tenga endpoints privados tanto para SageMaker AI como para S3",
-            "Desplegar el notebook de SageMaker AI en una subnet privada, usar un NAT gateway para dar salida a internet hacia S3 y restringir el acceso solo a buckets S3 especificos",
+            "Desplegar el notebook de SageMaker AI en subnet privada con internet gateway y un proxy externo hacia S3",
+            "Notebook de SageMaker AI en subnet privada con VPC peering a otra VPC donde S3 es accesible",
+            "Notebook de SageMaker AI en subnet privada con VPC endpoints privados para SageMaker AI y S3",
+            "Notebook de SageMaker AI en subnet privada con NAT gateway hacia S3, restringido a buckets especificos",
         ],
         correct=2,
         key="aip01r-q23",
@@ -1124,12 +1124,12 @@ cards = [
     # Q39r - Pinecone + Comprehend + Llama 2 en SageMaker endpoint
     # ------------------------------------------------------------
     card(
-        question="Un equipo construye un chatbot de soporte con arquitectura RAG: consulta una <b>base de datos vectorial Pinecone</b> para recuperar documentos relevantes, analiza el contexto con <b>Amazon Comprehend</b> (entidades y sentimiento) y luego alimenta ese contexto a un foundation model desplegado en un <b>endpoint de inferencia en tiempo real de Amazon SageMaker AI</b>. ¿Que solucion integra mejor Pinecone en este sistema RAG para dar contexto al modelo Llama 2?",
+        question="Un chatbot RAG consulta una <b>base vectorial Pinecone</b>, analiza el contexto con <b>Amazon Comprehend</b> y lo alimenta a un foundation model en un <b>endpoint real-time de Amazon SageMaker AI</b>. ¿Que solucion integra mejor Pinecone para dar contexto al modelo Llama 2?",
         options=[
-            "Usar Pinecone para indexar la documentacion, recuperar informacion relevante segun la consulta, analizar el contexto con Comprehend y pasar el contexto refinado a un modelo Llama 2 desplegado en un endpoint de inferencia en tiempo real de SageMaker AI para generar la respuesta",
-            "Usar Pinecone para busquedas de similitud sobre las consultas, recuperar el contexto, analizar el sentimiento con Comprehend y enviar la informacion al chatbot, que interactuara con un modelo Llama 2 hospedado y gestionado manualmente en instancias Amazon EC2",
-            "Usar Pinecone para busquedas de similitud sobre las consultas, reunir el contexto relevante y pasarlo a Amazon Lex para procesar la intencion del usuario antes de enviarlo al modelo Llama 2 para la generacion de la respuesta",
-            "Usar Pinecone para catalogar la documentacion, recuperar la informacion contextual relevante y traducirla con Amazon Translate antes de reenviarla al modelo Llama 2 para que genere la respuesta al cliente",
+            "Pinecone para recuperar, Comprehend para el contexto y pasarlo a Llama 2 en un endpoint real-time de SageMaker AI",
+            "Pinecone para similitud, Comprehend para sentimiento y Llama 2 gestionado a mano en instancias Amazon EC2",
+            "Pinecone para similitud, contexto a Amazon Lex para la intencion y luego a Llama 2 para responder",
+            "Usar Pinecone para catalogar y recuperar, traduciendo con Amazon Translate antes de reenviar a Llama 2",
         ],
         correct=0,
         key="aip01r-q39",
@@ -1153,12 +1153,12 @@ cards = [
     # Q41r - Grounding anti-alucinacion con Bedrock Knowledge Bases
     # ------------------------------------------------------------
     card(
-        question="Una organizacion de investigacion economica genera resumenes analiticos con IA a partir de reportes de resultados y documentos regulatorios. En pruebas tempranas aparecen <b>alucinaciones</b> sobre ingresos proyectados y exposicion al riesgo. Por compliance y auditoria necesita un mecanismo de verificacion que <b>detecte afirmaciones no respaldadas</b>, haga <b>cross-check a nivel de documento</b> y valide cada respuesta generada contra <b>fuentes empresariales confiables</b>. ¿Que solucion cumple mejor?",
+        question="Una firma economica genera resumenes con IA de reportes y documentos regulatorios y aparecen <b>alucinaciones</b>. Por compliance necesita verificacion que <b>detecte afirmaciones no respaldadas</b>, haga <b>cross-check por documento</b> y valide cada respuesta contra <b>fuentes confiables</b>. ¿Que solucion cumple mejor?",
         options=[
-            "Implementar un flujo de verificacion de exactitud basado en grounding con recuperacion (retrieval-augmented grounding) respaldado por Amazon Bedrock Knowledge Bases",
-            "Usar la clasificacion personalizada de Amazon Comprehend para categorizar las respuestas por tema financiero y enrutar las de baja confianza a un endpoint de SageMaker para evaluacion",
-            "Ejecutar validaciones SQL con Amazon Athena sobre los valores numericos de los resumenes y usar Amazon EventBridge para alertar cuando los resultados se desvien de patrones historicos",
-            "Desplegar un pipeline de SageMaker Model Monitor que compare embeddings de cada respuesta contra vectores historicos, alerte ante discrepancias y almacene metadatos en Amazon DynamoDB",
+            "Implementar un flujo de grounding con recuperacion (retrieval-augmented grounding) sobre Amazon Bedrock Knowledge Bases",
+            "Usar la clasificacion de Amazon Comprehend por tema, enrutando las de baja confianza a un endpoint de SageMaker",
+            "Ejecutar validaciones SQL con Amazon Athena sobre los numeros y Amazon EventBridge para alertar desviaciones",
+            "Desplegar un pipeline de SageMaker Model Monitor que compare embeddings contra vectores historicos, metadatos en Amazon DynamoDB",
         ],
         correct=0,
         key="aip01r-q41",
@@ -1181,12 +1181,12 @@ cards = [
     # Q42r - KMS (cifrado) + AWS Glue para REDACTAR PII
     # ------------------------------------------------------------
     card(
-        question="Una empresa de servicios financieros entrena en Amazon SageMaker AI un modelo de deteccion de fraude sobre datos historicos con informacion sensible (numeros de tarjeta) y usa Amazon Comprehend para extraer features del texto. Debe garantizar que todos los datos esten <b>cifrados</b> y que la <b>PII (incluidos numeros de tarjeta) se redacte</b> antes de usarse para entrenar. ¿Que solucion cumple el requisito?",
+        question="Una financiera entrena en Amazon SageMaker AI un modelo de fraude sobre datos sensibles (numeros de tarjeta) y usa Amazon Comprehend para features. Debe tener todo <b>cifrado</b> y la <b>PII redactada</b> antes de entrenar. ¿Que solucion cumple?",
         options=[
-            "Procesar los datos con SageMaker AI Data Wrangler aplicando cifrado con un algoritmo propio, automatizar la subida cifrada a Amazon S3 con AWS CLI y entrenar con el dataset cifrado",
-            "Detectar y redactar la PII con Comprehend, almacenar los datos redactados en Amazon S3 y entrenar con SageMaker AI, cifrando los datos con un algoritmo propio",
-            "Reducir la dimensionalidad de los datos con el algoritmo PCA de SageMaker AI antes de entrenar, eliminando la informacion sensible durante el proceso de PCA y guardando los datos en Amazon S3",
-            "Cifrar los datos con AWS KMS en Amazon S3 antes de importarlos a SageMaker AI y usar AWS Glue para redactar los numeros de tarjeta antes de usarlos en el entrenamiento",
+            "Procesar con SageMaker AI Data Wrangler y cifrado propio, subida cifrada a Amazon S3 con AWS CLI",
+            "Detectar y redactar la PII con Comprehend, guardar en Amazon S3 y entrenar en SageMaker AI, cifrando propio",
+            "Reducir dimensionalidad con el algoritmo PCA de SageMaker AI para eliminar lo sensible, guardando en Amazon S3",
+            "Cifrar con AWS KMS en Amazon S3 antes de SageMaker AI y usar AWS Glue para redactar los numeros de tarjeta",
         ],
         correct=3,
         key="aip01r-q42",
@@ -1210,12 +1210,12 @@ cards = [
     # Q43r - SageMaker DeepAR (algoritmo de forecasting)
     # ------------------------------------------------------------
     card(
-        question="Una empresa electrica gestiona consumo horario de 150 tipos de medidores en varias regiones, con 30 años de historico enriquecido (clima, precios, mantenimiento). El equipo ya usa SageMaker AI Data Wrangler y Canvas, y ahora quiere construir un modelo de ML propio para <b>pronosticar patrones futuros de consumo de todos los tipos de medidor</b>. ¿Que opcion cumple con el <b>MENOR overhead operativo</b>?",
+        question="Una electrica tiene consumo horario de 150 tipos de medidor, 30 años de historico enriquecido (clima, precios). Ya usa SageMaker AI Data Wrangler y Canvas y quiere un modelo de ML propio para <b>pronosticar el consumo de todos los medidores</b> con el <b>MENOR overhead</b>. ¿Que opcion cumple?",
         options=[
-            "Construir un unico modelo global de forecasting con el algoritmo SageMaker AI DeepAR, entrenado sobre todos los tipos de medidor para capturar patrones de consumo compartidos",
-            "Entrenar multiples modelos con el algoritmo SageMaker AI Prophet, uno por cada tipo de medidor, para capturar patrones estacionales de cada dispositivo",
-            "Usar SageMaker AI Autopilot para crear y ajustar automaticamente un unico modelo predictivo para todos los tipos de medidor con el dataset combinado",
-            "Crear un unico modelo global de forecasting con el algoritmo SageMaker AI XGBoost, entrenado sobre todos los tipos de medidor para predecir el consumo futuro",
+            "Construir un unico modelo global de forecasting con el algoritmo SageMaker AI DeepAR sobre todos los medidores",
+            "Entrenar multiples modelos con el algoritmo SageMaker AI Prophet, uno por tipo de medidor",
+            "Usar SageMaker AI Autopilot para crear y ajustar un unico modelo con el dataset combinado",
+            "Crear un unico modelo global de forecasting con el algoritmo SageMaker AI XGBoost sobre todos los medidores",
         ],
         correct=0,
         key="aip01r-q43",
@@ -1238,12 +1238,12 @@ cards = [
     # Q45r - Bedrock KB con API RetrieveAndGenerate + CITAS
     # ------------------------------------------------------------
     card(
-        question="Una red hospitalaria construye un asistente clinico con Amazon Bedrock que debe responder <b>solo con guias clinicas aprobadas</b> y <b>citar la fuente especifica</b> de cada recomendacion para que el medico la verifique. Quiere <b>reducir alucinaciones</b> y prefiere un enfoque gestionado con <b>minima logica de recuperacion propia</b>. ¿Que enfoque cumple minimizando el esfuerzo operativo?",
+        question="Un asistente clinico con Amazon Bedrock debe responder <b>solo con guias aprobadas</b> y <b>citar la fuente</b> de cada recomendacion. Quiere <b>reducir alucinaciones</b>, gestionado y con <b>minima recuperacion propia</b>. ¿Que enfoque cumple con menor esfuerzo?",
         options=[
-            "Guardar los documentos aprobados en Amazon S3 e incluir extractos seleccionados directamente en cada prompt de Bedrock, instruyendo al modelo para que cite los nombres de documento al generar recomendaciones",
-            "Hacer fine-tuning de un foundation model de Bedrock con la documentacion clinica aprobada y exigir al modelo que incluya referencias a la fuente en cada respuesta generada",
-            "Usar Amazon Kendra para indexar los documentos aprobados y recuperar pasajes, pasar el contenido recuperado a Bedrock mediante logica de aplicacion propia y generar las citas por separado en la aplicacion",
-            "Crear una Bedrock Knowledge Base con las referencias clinicas aprobadas como fuente e invocar la API RetrieveAndGenerate para anclar las respuestas en la evidencia recuperada e incluir citas que apunten a los documentos fuente",
+            "Guardar los documentos en Amazon S3 e incluir extractos en cada prompt, instruyendo al modelo a citar",
+            "Hacer fine-tuning de un foundation model de Bedrock con la documentacion aprobada, exigiendo referencias",
+            "Usar Amazon Kendra para indexar y recuperar pasajes, con logica de aplicacion propia y citas por separado",
+            "Una Bedrock Knowledge Base con las guias como fuente, invocando RetrieveAndGenerate con citas a los documentos",
         ],
         correct=3,
         key="aip01r-q45",
@@ -1266,12 +1266,12 @@ cards = [
     # Q49r - SageMaker network isolation mode + VPC endpoint Comprehend
     # ------------------------------------------------------------
     card(
-        question="Una empresa despliega un sistema de recomendacion con Amazon SageMaker AI (entrenamiento e inferencia en tiempo real) y usa Amazon Comprehend para NLP de reseñas. Por compliance, tanto el entrenamiento como la inferencia y los servicios asociados deben quedar dentro de una VPC segura, y la solucion debe <b>bloquear por completo todo acceso a internet o recursos externos</b>, con el <b>MENOR esfuerzo de desarrollo</b>. ¿Que solucion cumple?",
+        question="Un sistema con Amazon SageMaker AI (entrenamiento e inferencia real-time) usa Amazon Comprehend para NLP. Por compliance todo debe quedar en una VPC y hay que <b>bloquear todo acceso a internet</b> con el <b>MENOR esfuerzo</b>. ¿Que solucion cumple?",
         options=[
-            "Configurar SageMaker AI en modo VPC only y establecer una conexion de VPC peering para acceder a Comprehend en otra VPC",
-            "Desplegar SageMaker AI en modo VPC only y configurar un internet gateway con reglas restrictivas de security group para bloquear el acceso externo",
-            "Activar el network isolation mode de SageMaker AI para bloquear todo acceso externo y establecer un VPC endpoint para Comprehend dentro de la misma VPC",
-            "Usar modo VPC only para SageMaker AI, configurar una NACL para bloquear el acceso a internet y permitir el trafico hacia Comprehend",
+            "Configurar SageMaker AI en modo VPC only y VPC peering para acceder a Comprehend en otra VPC",
+            "Desplegar SageMaker AI en modo VPC only con un internet gateway y security groups restrictivos",
+            "Activar el network isolation mode de SageMaker AI y un VPC endpoint para Comprehend en la misma VPC",
+            "Usar SageMaker AI en modo VPC only con una NACL que bloquee internet y permita el trafico a Comprehend",
         ],
         correct=2,
         key="aip01r-q49",
@@ -1295,12 +1295,12 @@ cards = [
     # Q50r - XGBoost: BAJAR max_depth para reducir overfitting
     # ------------------------------------------------------------
     card(
-        question="Un modelo de prediccion de devoluciones con el algoritmo SageMaker XGBoost muestra un <b>AUC de entrenamiento muy alto pero cae mucho en validacion</b>. Los reportes de explicabilidad de SageMaker Clarify indican que el modelo es demasiado sensible a unas pocas features dominantes, señal de <b>overfitting</b>. El equipo decide ajustar hiperparametros para reducir la complejidad y mejorar la generalizacion. ¿Que modificacion de hiperparametro ayuda mejor a reducir el overfitting?",
+        question="Un modelo de devoluciones con el algoritmo SageMaker XGBoost tiene <b>AUC de entrenamiento alto pero cae en validacion</b>. SageMaker Clarify indica sensibilidad a pocas features dominantes (<b>overfitting</b>). ¿Que cambio de hiperparametro reduce mejor el overfitting?",
         options=[
-            "Aumentar el hiperparametro max_depth para permitir arboles mas profundos que capturen mejor las relaciones entre features poco frecuentes",
-            "Disminuir el parametro min_child_weight para que cada hoja se divida con mas facilidad y capture mayor complejidad del dataset",
-            "Aumentar el parametro colsample_bytree para que cada arbol use un subconjunto mayor de features y mejore la varianza del modelo",
-            "Disminuir el valor del hiperparametro max_depth para limitar la complejidad de los arboles y evitar el sobreajuste a los patrones dominantes del entrenamiento",
+            "Aumentar max_depth para arboles mas profundos que capturen relaciones poco frecuentes",
+            "Disminuir min_child_weight para que cada hoja se divida con mas facilidad y capture mas complejidad",
+            "Aumentar colsample_bytree para que cada arbol use mas features",
+            "Disminuir max_depth para limitar la complejidad de los arboles y evitar el sobreajuste",
         ],
         correct=3,
         key="aip01r-q50",
@@ -1323,12 +1323,12 @@ cards = [
     # Q56r - Metrica CloudWatch InvocationLatency de Bedrock (cross-region)
     # ------------------------------------------------------------
     card(
-        question="Una empresa de e-commerce hace fine-tuning de Amazon Titan Text en SageMaker AI y lo despliega en produccion via la API gestionada de Amazon Bedrock. Por compliance, los artefactos deben cifrarse con AWS KMS y las llamadas a Bedrock deben ser auditables. Ademas quiere <b>monitorear continuamente latencia y throughput del modelo entre regiones</b> para asegurar rendimiento consistente. ¿Que solucion aporta una arquitectura segura, auditable y observable?",
+        question="Una e-commerce hace Fine-tuning de Amazon Titan Text en SageMaker AI y lo sirve via Amazon Bedrock. Por compliance, artefactos cifrados con AWS KMS y llamadas auditables. Ademas quiere <b>monitorear latencia y throughput entre regiones</b>. ¿Que solucion es segura, auditable y observable?",
         options=[
-            "Hacer fine-tuning de Titan en SageMaker AI con datos en S3 cifrados con KMS, desplegar el modelo via Bedrock con una clave KMS del cliente, habilitar AWS CloudTrail para auditar la API y seguir la metrica InvocationLatency de Bedrock en CloudWatch por region",
-            "Hacer fine-tuning de Titan en SageMaker AI con datos cifrados con SSE-S3, desplegarlo tras un endpoint de API Gateway frente a Bedrock y usar Amazon Macie para monitorear eventos de exfiltracion de datos sensibles hacia el exterior",
-            "Desplegar Titan en Bedrock sin fine-tuning, restringir el acceso solo con roles de IAM y apoyarse unicamente en AWS CloudTrail para monitorear tanto las llamadas a la API como la latencia del modelo",
-            "Entrenar Titan por completo en SageMaker AI, exportarlo a un servidor de inferencia en Amazon EC2 con cifrado de volumenes Amazon EBS y usar AWS Config para el monitoreo continuo de cumplimiento y rendimiento",
+            "Titan con datos en S3 cifrados con KMS, Bedrock con clave KMS del cliente, AWS CloudTrail e InvocationLatency en CloudWatch por region",
+            "Titan con datos cifrados SSE-S3, un endpoint de API Gateway frente a Bedrock y Amazon Macie para exfiltracion",
+            "Titan en Bedrock sin fine-tuning, acceso con roles de IAM y solo AWS CloudTrail para API y latencia",
+            "Titan entrenado en SageMaker AI, exportado a un servidor en Amazon EC2 con volumenes EBS cifrados y AWS Config",
         ],
         correct=0,
         key="aip01r-q56",
@@ -1351,12 +1351,12 @@ cards = [
     # Q60r - Scheduled scaling policy (pre-escalar antes del evento)
     # ------------------------------------------------------------
     card(
-        question="Un endpoint de inferencia en tiempo real de Amazon SageMaker AI sirve recomendaciones. Ante <b>eventos de ventas planificados</b>, el equipo observa latencia alta por el aumento de actividad y quiere ajustar la politica de escalado para <b>garantizar capacidad antes de los picos conocidos</b> y evitar que la latencia afecte la experiencia. ¿Que solucion optimiza mejor el escalado del endpoint?",
+        question="Un endpoint real-time de Amazon SageMaker AI sirve recomendaciones. Ante <b>eventos de ventas planificados</b> hay latencia alta y se quiere <b>garantizar capacidad antes de los picos conocidos</b>. ¿Que solucion optimiza mejor el escalado?",
         options=[
-            "Configurar una scheduled scaling policy (politica de escalado programado) para aumentar la capacidad del endpoint de inferencia de SageMaker antes de que comiencen los eventos de ventas",
-            "Usar AWS Lambda para reiniciar periodicamente el endpoint de inferencia de SageMaker durante el trafico pico y asi refrescar el rendimiento de las instancias del endpoint",
-            "Implementar una step scaling policy para el endpoint de inferencia que escale segun metricas de utilizacion de recursos como el uso de CPU y de memoria de las instancias",
-            "Aumentar el tamaño de instancia del endpoint de inferencia a un tipo mas grande para soportar el mayor trafico esperado durante los eventos de ventas planificados",
+            "Configurar una scheduled scaling policy para aumentar la capacidad del endpoint de SageMaker antes de los eventos",
+            "Usar AWS Lambda para reiniciar el endpoint de SageMaker durante el pico y refrescar sus instancias",
+            "Implementar una step scaling policy que escale segun utilizacion de recursos como CPU y memoria",
+            "Aumentar el tamaño de instancia del endpoint a un tipo mas grande para el trafico esperado",
         ],
         correct=0,
         key="aip01r-q60",
@@ -1379,12 +1379,12 @@ cards = [
     # Q62r - Workflow ML seguro: SSE-KMS + IAM + CloudWatch
     # ------------------------------------------------------------
     card(
-        question="Una empresa financiera entrena en Amazon SageMaker AI un modelo de deteccion de fraude en tiempo real, con ingesta por Amazon Kinesis Data Streams, metadatos en Amazon DynamoDB e historico en Amazon S3. Debe cifrar los datos en transito y en reposo, controlar estrictamente el acceso a datos y resultados, y <b>rastrear el rendimiento del modelo en el tiempo</b>. ¿Que solucion asegura el flujo, controla el acceso y permite el monitoreo continuo del modelo?",
+        question="Una financiera entrena en SageMaker AI un modelo de fraude, con ingesta por Kinesis Data Streams, metadatos en DynamoDB e historico en S3. Debe cifrar en transito y reposo, controlar acceso y <b>rastrear el rendimiento en el tiempo</b>. ¿Que solucion asegura el flujo y el monitoreo continuo?",
         options=[
-            "Entrenar el modelo con datos de S3, habilitar el cifrado del lado del servidor SSE-KMS para los datos en reposo, configurar roles de IAM para controlar el acceso al modelo y a los datos, y usar Amazon CloudWatch para monitorear metricas de rendimiento y el logging del modelo",
-            "Entrenar el modelo con datos de S3, habilitar el cifrado del lado del servidor SSE-S3 para los datos en reposo, guardar los resultados del modelo en S3 con roles de IAM para el acceso y usar Amazon Macie para monitorear la exposicion de datos sensibles",
-            "Entrenar el modelo con datos de S3, almacenar el modelo y los metadatos en DynamoDB, configurar VPC endpoints entre SageMaker AI, DynamoDB y Kinesis, y usar AWS CloudTrail para monitorear el acceso y la actividad de la API a lo largo del tiempo",
-            "Entrenar el modelo con datos de S3, configurar Amazon Data Firehose para ingerir los datos hacia SageMaker AI, catalogar los datos de transacciones con AWS Glue y usar CloudWatch para el monitoreo junto con politicas de IAM para restringir el acceso",
+            "Datos en S3 con cifrado SSE-KMS, roles de IAM para el acceso y Amazon CloudWatch para metricas y logging",
+            "Datos en S3 con cifrado SSE-S3, resultados con roles de IAM y Amazon Macie para exposicion de datos",
+            "Datos en S3 y DynamoDB, VPC endpoints entre SageMaker AI, DynamoDB y Kinesis, y AWS CloudTrail para la API",
+            "Datos en S3, Amazon Data Firehose hacia SageMaker AI, AWS Glue para catalogar y CloudWatch mas IAM",
         ],
         correct=0,
         key="aip01r-q62",
@@ -1408,7 +1408,7 @@ cards = [
     # Q67r - Estrategia de tuning Hyperband (early stopping)
     # ------------------------------------------------------------
     card(
-        question="Un equipo optimiza hiperparametros con SageMaker AI Automatic Model Tuning (AMT). Durante el tuning, muchos jobs siguen corriendo aunque las validaciones tempranas indican mal desempeño, gastando GPU innecesariamente. La empresa quiere una estrategia de tuning que <b>detenga automaticamente los ensayos de bajo rendimiento y reasigne recursos</b> a las configuraciones prometedoras para reducir costo de computo. ¿Que estrategia usar?",
+        question="Un equipo usa SageMaker AI Automatic Model Tuning (AMT). Durante el tuning, muchos jobs de bajo rendimiento siguen corriendo y gastan GPU. Se quiere una estrategia que <b>detenga los ensayos debiles y reasigne recursos</b> a los prometedores. ¿Que estrategia usar?",
         options=[
             "Implementar optimizacion bayesiana para refinar iterativamente el espacio de busqueda de hiperparametros",
             "Utilizar la estrategia Hyperband en SageMaker AI para asignar recursos de forma eficiente y detener temprano (early stop) los ensayos debiles",
@@ -1436,12 +1436,12 @@ cards = [
     # Q68r - Rol IAM del notebook con s3:GetObject/PutObject/ListBucket
     # ------------------------------------------------------------
     card(
-        question="Un desarrollador entrena en Amazon SageMaker AI con datos en un bucket S3 y debe escribir artefactos, logs y resultados a un <b>bucket S3 distinto</b> al terminar. Necesita otorgar a la instancia de notebook de SageMaker los permisos adecuados para <b>leer de un bucket y escribir en otro</b> de forma segura. ¿Que enfoque conviene?",
+        question="Un desarrollador entrena en Amazon SageMaker AI leyendo de un bucket S3 y debe escribir resultados a un <b>bucket S3 distinto</b>. Necesita dar al notebook de SageMaker permiso para <b>leer de uno y escribir en otro</b> de forma segura. ¿Que enfoque conviene?",
         options=[
-            "Definir una bucket policy en el bucket S3 que permita a la instancia de notebook de SageMaker, por su ARN, ejecutar las acciones s3:GetObject, s3:PutObject y s3:ListBucket",
-            "Crear un S3 access point para la instancia de notebook, darle acceso a los datos necesarios y configurarlo para permitir solo las acciones s3:GetObject, s3:PutObject y s3:ListBucket",
-            "Adjuntar una politica al rol de IAM asociado a la instancia de notebook que le otorgue s3:GetObject, s3:PutObject y s3:ListBucket sobre los buckets S3 designados",
-            "Usar federacion de identidades de IAM para dar acceso temporal al bucket, configurando la instancia de notebook para asumir un rol federado que acceda a los datos",
+            "Definir una bucket policy que permita al notebook, por su ARN, s3:GetObject, s3:PutObject y s3:ListBucket",
+            "Crear un S3 access point para el notebook, permitiendo solo s3:GetObject, s3:PutObject y s3:ListBucket",
+            "Adjuntar una politica al rol de IAM del notebook con s3:GetObject, s3:PutObject y s3:ListBucket",
+            "Usar federacion de identidades de IAM para acceso temporal, con el notebook asumiendo un rol federado",
         ],
         correct=2,
         key="aip01r-q68",
@@ -1464,12 +1464,12 @@ cards = [
     # Q69r - SageMaker Canvas scatter plot (color = 3a dim, size = 4a dim)
     # ------------------------------------------------------------
     card(
-        question="Un desarrollador quiere visualizar recomendaciones en <b>cuatro dimensiones</b>: interes del usuario (eje X) contra tasa de conversion previa del producto (eje Y), la categoria del producto como <b>tercera dimension</b> y el numero de impresiones como <b>cuarta dimension</b>. El objetivo es detectar segmentos con alto interes y alta conversion pero bajas impresiones. ¿Que enfoque cumple mejor los requisitos?",
+        question="Un desarrollador quiere visualizar recomendaciones en <b>cuatro dimensiones</b>: interes (X) contra conversion previa (Y), categoria del producto como <b>tercera</b> y numero de impresiones como <b>cuarta</b>, para detectar alto interes y conversion con bajas impresiones. ¿Que enfoque cumple mejor?",
         options=[
-            "Visualizar con el scatter plot de SageMaker Data Wrangler y colorear los puntos por la tercera feature para representar las cuatro dimensiones",
-            "Usar la visualizacion Box Plot de SageMaker Canvas para comparar distribuciones y usar un patron de relleno para la tercera dimension",
-            "Usar la visualizacion Bar Chart de SageMaker Canvas para agrupar productos por categoria y aplicar color y altura de barra para representar interes y conversion",
-            "Usar el scatter plot de SageMaker Canvas y mapear la tercera dimension (categoria del producto) al color del punto y la cuarta dimension (numero de impresiones) al tamaño del punto",
+            "Visualizar con el scatter plot de SageMaker Data Wrangler, coloreando por la tercera feature",
+            "La visualizacion Box Plot de SageMaker Canvas con un patron de relleno para la tercera dimension",
+            "La visualizacion Bar Chart de SageMaker Canvas por categoria, con color y altura para interes y conversion",
+            "El scatter plot de SageMaker Canvas: la tercera dimension al color del punto y la cuarta al tamaño",
         ],
         correct=3,
         key="aip01r-q69",
@@ -1492,12 +1492,12 @@ cards = [
     # Q72r - Hybrid search (vector + keyword) en OpenSearch
     # ------------------------------------------------------------
     card(
-        question="Un asistente de troubleshooting con RAG indexa manuales e incidentes en Amazon OpenSearch Service y usa <b>busqueda por similitud vectorial</b>. Los ingenieros reportan que las busquedas devuelven documentos de significado similar pero <b>omiten registros con codigos de dispositivo, nombres de protocolo y acronimos exactos</b>. Hay que mejorar la precision preservando la relevancia semantica y ademas <b>coincidir con la terminologia precisa</b>, manteniendo baja latencia al crecer el repositorio. ¿Que solucion cumple mejor?",
+        question="Un asistente de troubleshooting con RAG usa <b>busqueda por similitud vectorial</b> en Amazon OpenSearch Service. Las busquedas traen documentos de significado similar pero <b>omiten codigos de dispositivo, protocolos y acronimos exactos</b>. Hay que preservar la relevancia semantica y a la vez <b>coincidir con la terminologia precisa</b>, con baja latencia. ¿Que solucion cumple mejor?",
         options=[
-            "Aumentar el numero de resultados de la busqueda vectorial y aplicar un umbral de similitud mas alto para descartar documentos no relacionados antes de pasarlos al flujo de RAG",
-            "Usar hybrid search para combinar la busqueda por similitud vectorial con la recuperacion basada en palabras clave, mejorando la relevancia semantica y a la vez coincidiendo con terminos y acronimos exactos",
-            "Usar busqueda solo por palabras clave con el algoritmo BM25 en OpenSearch Service para priorizar terminos tecnicos, codigos y acronimos exactos antes de enviar los documentos al modelo",
-            "Configurar busqueda semantica en OpenSearch Service con consultas neuronales para mejorar la comprension de la intencion y recuperar documentos por similitud contextual",
+            "Aumentar los resultados de la busqueda vectorial y subir el umbral de similitud para descartar lo no relacionado",
+            "Usar hybrid search: combinar similitud vectorial con recuperacion por palabras clave para terminos y acronimos exactos",
+            "Usar solo palabras clave con el algoritmo BM25 en OpenSearch Service para priorizar codigos y acronimos exactos",
+            "Configurar busqueda semantica en OpenSearch Service con consultas neuronales por similitud contextual",
         ],
         correct=1,
         key="aip01r-q72",
@@ -1520,12 +1520,12 @@ cards = [
     # Q73r - Pipeline Lambda+Comprehend -> metricas CloudWatch -> alarmas
     # ------------------------------------------------------------
     card(
-        question="Una plataforma de e-commerce monitorea feedback en redes sociales (posts en Amazon S3). Amazon Rekognition extrae sentimiento visual y Amazon Kendra recupera texto relevante. El grupo de analitica debe puntuar sentimiento sobre el contenido recuperado, generar visualizaciones de tendencia de largo plazo y, sobre todo, <b>configurar alarmas automaticas ante umbrales de sentimiento</b> para responder rapido a picos de sentimiento negativo durante el lanzamiento. ¿Que combinacion de servicios cumple mejor?",
+        question="Una e-commerce monitorea feedback social (posts en Amazon S3): Amazon Rekognition da sentimiento visual y Amazon Kendra recupera texto. Debe puntuar sentimiento, ver tendencias y, sobre todo, <b>alarmar automaticamente ante umbrales de sentimiento</b> para reaccionar a picos negativos. ¿Que combinacion cumple mejor?",
         options=[
-            "Ejecutar un job de AWS Glue cuando lleguen posts a S3 para preprocesar el texto y llamar a un job de SageMaker Processing que calcule los puntajes; guardar el sentimiento en Amazon DynamoDB y visualizar con dashboards manuales en Amazon QuickSight",
-            "Disparar una funcion AWS Lambda cuando S3 reciba un post nuevo y usar Amazon Comprehend para detectar sentimiento; guardar los resultados en S3, publicar los puntajes de sentimiento como metricas de Amazon CloudWatch y habilitar alarmas de CloudWatch para alertar automaticamente segun umbrales de sentimiento",
-            "Configurar una notificacion de evento de S3 hacia Amazon SQS al llegar posts, analizar sentimiento con Amazon Comprehend desde la cola, guardar resultados en otro bucket S3 y visualizar tendencias con dashboards y reportes periodicos en Amazon QuickSight",
-            "Crear un modelo de sentimiento basado en BlazingText en Amazon SageMaker AI y exponerlo con un endpoint; invocarlo con Lambda al llegar datos a S3, capturar resultados en Amazon DynamoDB y enviarlos a una metrica custom de CloudWatch para monitoreo y alertas",
+            "Un job de AWS Glue y uno de SageMaker Processing para los puntajes, sentimiento en Amazon DynamoDB y dashboards en Amazon QuickSight",
+            "AWS Lambda al llegar un post a S3 y Amazon Comprehend, publicando los puntajes como metricas de CloudWatch con alarmas por umbral",
+            "Notificacion de evento de S3 hacia Amazon SQS, Amazon Comprehend desde la cola y tendencias en Amazon QuickSight",
+            "Modelo BlazingText en SageMaker AI invocado por Lambda al llegar datos a S3, resultados en DynamoDB y metrica custom de CloudWatch",
         ],
         correct=1,
         key="aip01r-q73",

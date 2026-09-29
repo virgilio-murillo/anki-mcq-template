@@ -25,8 +25,110 @@ import tempfile
 import os
 import shutil
 import zipfile
+import html as _html
 
 from .engine import render_options, _LETTERS
+
+# ---------------------------------------------------------------------------
+# Length / atomicity thresholds (see DECK_STANDARDS.md section 10).
+#
+# Calibrated against the MLA-C01 gold-standard deck (224 cards). Verified to
+# produce ZERO false positives on MLA while flagging the verbose AIP-C01 cards:
+#   MLA stem max = 67w (mla02-q38); MLA option max = 29w (mla02-q23); MLA
+#   option char max = 182. ERRORs sit ~3w above those maxima so a healthy card
+#   never fails, but the ~2x-longer AIP cards do.
+#
+# WHY ONLY LENGTH IS A HARD ERROR: a card may legitimately couple dependent
+# concepts (e.g. InitialVariantWeight needs "an endpoint hosts several
+# ProductionVariants"). Counting concepts, bold clauses or services would
+# punish that. So bold-clause and service-stacking counts are WARNINGS only.
+# The real, measurable defect is verbose option "tails" (justification glued
+# onto the option that belongs on the back) and bloated stems.
+# ---------------------------------------------------------------------------
+STEM_WARN_WORDS = 45    # MLA stem p90 = 43
+STEM_ERROR_WORDS = 70   # MLA stem max = 67; NEVER lower to <= 67
+OPT_WARN_WORDS = 25     # MLA option p90 = 20
+OPT_ERROR_WORDS = 32    # MLA option max = 29
+OPT_WARN_CHARS = 200    # MLA option char max = 182 (density signal, WARNING only)
+BOLD_WARN_CLAUSES = 5   # MLA stem <b> max = 5; >5 is a coupling/stacking signal (WARNING only)
+
+# ---------------------------------------------------------------------------
+# Deck-level DISTRIBUTION targets (see DECK_STANDARDS.md section 10).
+#
+# The per-card hard errors above (stem>70, opt>32) are a safety net that only
+# catches extreme outliers. They are NOT enough: a deck where EVERY card sits
+# just under the ceiling (opt 26-32w) passes card-by-card yet is ~2x as dense
+# as the gold MLA deck and tiring to read. So we ALSO check the whole deck's
+# distribution against MLA-like shape. This lets an occasional long card exist
+# (some concepts need it) while catching a deck that is long ACROSS THE BOARD.
+#
+# Targets derived from MLA-C01 gold (measured): option p50=12 p90=20 p95=21,
+# 1% of options >25w; stem p50=30 p90=43, 6% of stems >45w. The deck ceilings
+# below sit a little above MLA's real p90/percentages so the gold deck itself
+# passes with margin, but a mostly-long deck (like AIP after pass 1: option
+# p90=31, 56% >25w) fails.
+# ---------------------------------------------------------------------------
+DIST_OPT_P90_MAX = 22       # MLA option p90 = 20
+DIST_OPT_OVER25_PCT_MAX = 15.0   # MLA has 1% of options >25w; allow up to 15%
+DIST_STEM_P90_MAX = 50      # MLA stem p90 = 43
+DIST_STEM_OVER45_PCT_MAX = 35.0  # MLA has 6% of stems >45w; allow up to 35%
+
+_TAGS = re.compile(r'<[^>]+>')
+
+
+def _plain(s):
+    """Strip HTML tags and unescape entities, collapse whitespace."""
+    s = _TAGS.sub(' ', s or '')
+    return re.sub(r'\s+', ' ', _html.unescape(s)).strip()
+
+
+def _words(s):
+    return len([w for w in _plain(s).split() if w])
+
+
+def _chars(s):
+    return len(_plain(s))
+
+
+def _length_problems(card):
+    """Return (errors, warnings) lists of strings for one card() dict.
+
+    Errors are hard failures (fail the gate). Warnings are advisory (do not
+    fail the gate) and cover legitimate-coupling signals plus soft length caps.
+    """
+    errors, warnings = [], []
+    q = card.get("question", "")
+    sw = _words(q)
+    if sw > STEM_ERROR_WORDS:
+        errors.append(
+            f"enunciado {sw} palabras (>{STEM_ERROR_WORDS}); destila a un nucleo "
+            f"examinable, corta requisitos no relacionados"
+        )
+    elif sw > STEM_WARN_WORDS:
+        warnings.append(f"enunciado {sw} palabras (>{STEM_WARN_WORDS} = objetivo); considera acortar")
+
+    nb = len(re.findall(r'<b\b', q, re.I))
+    if nb > BOLD_WARN_CLAUSES:
+        warnings.append(
+            f"{nb} clausulas <b> en el enunciado; revisa si es dependencia legitima "
+            f"(conservar) o apilamiento artificial (cortar). Test de borrado: si quitar "
+            f"la clausula no cambia la respuesta correcta, es relleno"
+        )
+
+    for oi, o in enumerate(card.get("options", [])):
+        ow = _words(o)
+        oc = _chars(o)
+        L = _LETTERS[oi] if oi < len(_LETTERS) else str(oi)
+        if ow > OPT_ERROR_WORDS:
+            errors.append(
+                f"opcion {L} tiene {ow} palabras (>{OPT_ERROR_WORDS}); la opcion NOMBRA "
+                f"el concepto, la justificacion va en el dorso"
+            )
+        elif ow > OPT_WARN_WORDS:
+            warnings.append(f"opcion {L}: {ow} palabras (>{OPT_WARN_WORDS} = objetivo)")
+        if ow <= OPT_ERROR_WORDS and oc > OPT_WARN_CHARS:
+            warnings.append(f"opcion {L}: {oc} caracteres (>{OPT_WARN_CHARS}); densa, revisa")
+    return errors, warnings
 
 _VERDICT_RE = re.compile(r'class="verdict">\s*(?:Correct|Correcta):\s*([A-D])\b')
 _MARKED_RE = re.compile(r'class="opt correct"><span class="k">([A-D])')
@@ -147,7 +249,130 @@ def verify_cards(cards, shuffle_seed_base=1):
         if key in seen_keys:
             problems.append((idx, f"key duplicada: {key!r}"))
         seen_keys.add(key)
+        # Length / atomicity HARD errors (see DECK_STANDARDS.md section 10).
+        length_errors, _ = _length_problems(c)
+        for e in length_errors:
+            problems.append((idx, e))
     return problems
+
+
+def warn_cards(cards):
+    """Return advisory (non-fatal) length/atomicity warnings.
+
+    Separate from verify_cards so warnings never fail the gate. Returns a list
+    of (index, warning) tuples.
+    """
+    out = []
+    for i, c in enumerate(cards):
+        _, warnings = _length_problems(c)
+        for w in warnings:
+            out.append((i + 1, w))
+    return out
+
+
+def _pctile(values, p):
+    if not values:
+        return 0
+    s = sorted(values)
+    i = min(len(s) - 1, int(round((p / 100.0) * (len(s) - 1))))
+    return s[i]
+
+
+def check_distribution(cards):
+    """Deck-level shape check against MLA-gold-like targets.
+
+    Per-card hard errors (stem>70, opt>32) only catch extreme outliers; a deck
+    can pass those yet be uniformly long (every option 26-32w). This checks the
+    WHOLE deck's percentiles so an occasional long card is fine but a deck that
+    is long across the board fails. Returns a list of problem strings (empty =
+    distribution resembles the gold deck).
+    """
+    if not cards:
+        return []
+    opt_words = [_words(o) for c in cards for o in c.get("options", [])]
+    stem_words = [_words(c.get("question", "")) for c in cards]
+    n_opt = len(opt_words) or 1
+    n_stem = len(stem_words) or 1
+    opt_p90 = _pctile(opt_words, 90)
+    stem_p90 = _pctile(stem_words, 90)
+    over25 = 100.0 * sum(1 for w in opt_words if w > 25) / n_opt
+    over45 = 100.0 * sum(1 for w in stem_words if w > 45) / n_stem
+    problems = []
+    if opt_p90 > DIST_OPT_P90_MAX:
+        problems.append(
+            f"distribucion: opcion p90={opt_p90}w (>{DIST_OPT_P90_MAX}); la baraja es densa "
+            f"en general, acerca la forma a MLA (p90 objetivo ~20w)"
+        )
+    if over25 > DIST_OPT_OVER25_PCT_MAX:
+        problems.append(
+            f"distribucion: {over25:.0f}% de opciones >25w (max {DIST_OPT_OVER25_PCT_MAX:.0f}%); "
+            f"MLA tiene ~1%. La mayoria de opciones deben ser cortas"
+        )
+    if stem_p90 > DIST_STEM_P90_MAX:
+        problems.append(
+            f"distribucion: enunciado p90={stem_p90}w (>{DIST_STEM_P90_MAX}); acerca la forma a MLA"
+        )
+    if over45 > DIST_STEM_OVER45_PCT_MAX:
+        problems.append(
+            f"distribucion: {over45:.0f}% de enunciados >45w (max {DIST_STEM_OVER45_PCT_MAX:.0f}%); "
+            f"MLA tiene ~6%"
+        )
+    return problems
+
+
+# Tokens that identify examinable content (services, APIs, CamelCase, acronyms,
+# code namespaces). Used to verify a rewrite did not DROP a concept the learner
+# must study. Reuses the salient-token idea from _extra_giveaway.
+_CONCEPT_RE = re.compile(
+    r'[A-Z][a-z]+[A-Z][A-Za-z]+'       # CamelCase e.g. ProductionVariant
+    r'|[a-z]+:[a-zA-Z]+'               # code ns e.g. bedrock:GuardrailIdentifier
+    r'|[A-Z][a-zA-Z]{3,}'              # Proper nouns e.g. Bedrock, Trainium
+    r'|[A-Z]{2,}'                      # Acronyms e.g. RAG, LLM, CRIS
+)
+_CONCEPT_STOP = {
+    "Amazon", "AWS", "The", "This", "That", "With", "For", "And", "Una", "Un",
+    "Que", "Los", "Las", "Por", "Para", "Con", "Del", "SQL", "API",
+    # Spanish verbs / generic prose words (capitalized at sentence/option start)
+    # are NOT examinable concepts. Without this, concepts_preserved fires on
+    # "Usar", "Debe", etc. and produces false positives on every rewrite.
+    "Usar", "Crear", "Desplegar", "Configurar", "Construir", "Implementar",
+    "Utilizar", "Aprovechar", "Emplear", "Aplicar", "Habilitar", "Activar",
+    "Adquirir", "Lanzar", "Integrar", "Generar", "Ejecutar", "Convertir",
+    "Definir", "Permitir", "Gestionar", "Gestiona", "Confirman", "Sospechan",
+    "Quiere", "Planea", "Entrenar", "Debe", "Durante", "Cuando", "Anadir",
+    "Anade", "Mantener", "Reducir", "Enviar", "Recuperar", "Almacenar",
+    "Procesar", "Procesa", "Analizar", "Monitorear", "Registrar", "Validar",
+    "Verificar", "Optimizar", "Escalar", "Automatizar", "Orquestar", "Necesita",
+    "Tiene", "Hospedara", "Preocupa", "Destilar", "Guardar", "Ingerir",
+    "Ademas", "Antes", "Dado", "Detectar", "Ajustar", "Agregar", "Este",
+    "Esta", "Cada", "Todos", "Todas", "Many", "Requests", "Load", "Balancer",
+    "Service", "Application", "Processing", "Control", "Manager", "Systems",
+    # Generic domain words that appear everywhere, not a specific examinable service
+    "IA", "ML", "AI", "FM", "LLM", "NLP", "JSON", "GenAI", "REST", "SDK",
+    "Modelos", "Funciones", "Lambdas", "Regiones", "MENOR", "MENORES",
+    "SALIDAS", "RRHH", "Europa", "Fine",
+}
+
+
+def concept_tokens(text):
+    """Salient examinable tokens (service/API/acronym names) in a text."""
+    plain = _plain(text)
+    return {t for t in _CONCEPT_RE.findall(plain) if t not in _CONCEPT_STOP}
+
+
+def concepts_preserved(old_card, new_card):
+    """Check no examinable concept was DROPPED when a card was rewritten.
+
+    Every salient token present ANYWHERE in the old card (question + options +
+    answer) must still appear SOMEWHERE in the new card (question + options +
+    answer). Moving a concept from an option to the back is fine; deleting it
+    entirely is not. Returns the set of dropped tokens (empty = safe).
+    """
+    def all_text(c):
+        return " ".join([c.get("question", "")] + list(c.get("options", [])) + [c.get("answer", "")])
+    old_tokens = concept_tokens(all_text(old_card))
+    new_tokens = concept_tokens(all_text(new_card))
+    return old_tokens - new_tokens
 
 
 def verify_apkg(apkg_path):
@@ -177,6 +402,19 @@ def verify_apkg(apkg_path):
                 problems.append((idx, f'{oq.count(chr(34)+"k"+chr(34))} opciones en el frente (se esperan 4)'))
             for iss in _check_answer_html(ans):
                 problems.append((idx, iss))
+            # Length / atomicity HARD errors on the built package (secondary net;
+            # the authoritative check runs on card() dicts before build).
+            sw = _words(q)
+            if sw > STEM_ERROR_WORDS:
+                problems.append((idx, f"enunciado {sw} palabras (>{STEM_ERROR_WORDS})"))
+            # Split the front options field into the 4 option bodies. Each option
+            # is: <span class="opt"><span class="k">X.</span>BODY</span>
+            parts = re.split(r'<span class="opt"><span class="k">[A-H]\.</span>', oq)
+            for body in parts[1:]:
+                body = body.rsplit('</span>', 1)[0]  # drop the closing opt span
+                ow = _words(body)
+                if ow > OPT_ERROR_WORDS:
+                    problems.append((idx, f"una opcion tiene {ow} palabras (>{OPT_ERROR_WORDS})"))
     finally:
         shutil.rmtree(d, ignore_errors=True)
     return problems

@@ -30,7 +30,7 @@ import os
 import urllib.request
 
 from .engine import build_deck
-from .verify_deck import verify_cards, verify_apkg
+from .verify_deck import verify_cards, verify_apkg, warn_cards
 
 ANKICONNECT = "http://localhost:8765"
 
@@ -55,6 +55,13 @@ def create(deck_name, cards, out_path, do_import=True, verbose=True):
     problems = verify_cards(cards)
     if problems:
         raise SystemExit(f"verify_cards failed ({len(problems)}): {problems}")
+
+    # 1b) Advisory warnings (do NOT fail the build).
+    warnings = warn_cards(cards)
+    if warnings and verbose:
+        print(f">> {len(warnings)} advertencia(s) (no bloquean):")
+        for idx, w in warnings:
+            print(f"   - card {idx}: {w}")
 
     # 2) Build the .apkg with the FULL subdeck name and a unique, stable deck id.
     build_deck(deck_name, cards, out_path, verbose=verbose)

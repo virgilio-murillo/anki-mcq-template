@@ -28,12 +28,12 @@ cards = []
 # Q1 - Gobernanza del dataset de fine-tuning (Glue Data Catalog + ETL)
 # ============================================================
 cards.append(card(
-    question="Servicios financieros - una empresa quiere hacer <b>fine-tuning</b> de un FM de Amazon Bedrock con transcripciones de chats de soporte guardadas en <b>formato no estructurado</b>. Por cumplimiento regulatorio debe <b>rastrear el origen</b> del dataset, <b>rastrear como se transformo</b> y asegurar que <b>solo se usen datos gobernados y aprobados</b>. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Servicios financieros - fine-tuning de un FM de Amazon Bedrock con chats de soporte no estructurados. Por cumplimiento hay que rastrear origen y transformaciones del dataset y usar solo datos aprobados. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
     options=[
-        "Bucket S3 con controles de gobernanza; consultar y curar los datos con Amazon Athena (SQL) y exportar el resultado al mismo bucket; lanzar el fine-tuning en Bedrock apuntando a los datos curados",
-        "Guardar las transcripciones crudas en un bucket S3 y referenciarlas directamente en el job de fine-tuning de Amazon Bedrock",
-        "Bucket S3 con gobernanza; catalogar con un crawler de AWS Glue en Glue Data Catalog; curar con jobs de AWS Glue ETL a JSONL (formato Converse API); lanzar el fine-tuning en Bedrock apuntando a los datos curados",
-        "Bucket S3 con gobernanza; catalogar con un crawler de AWS Glue en Glue Data Catalog; curar con Amazon EMR y Apache Spark a JSONL (formato Converse API); lanzar el fine-tuning en Bedrock apuntando a los datos curados",
+        "Bucket S3 gobernado; curar con Amazon Athena (SQL) al mismo bucket y fine-tuning en Bedrock",
+        "Guardar transcripciones crudas en S3, referenciadas directamente en el job de fine-tuning de Bedrock",
+        "S3 gobernado; crawler de AWS Glue en Glue Data Catalog; curar con Glue ETL a JSONL y fine-tuning en Bedrock",
+        "S3 gobernado; crawler de AWS Glue en Glue Data Catalog; curar con Amazon EMR y Apache Spark a JSONL y fine-tuning en Bedrock",
     ],
     correct=2,
     key="off2-q1",
@@ -58,7 +58,7 @@ cards.append(card(
 # Q3 - Parametros de salida: temperature 0.5 + top-p 0.8 + length penalty
 # ============================================================
 cards.append(card(
-    question="Amazon Bedrock - un generador de descripciones de producto debe ser <b>creativo pero controlado</b>: entre 50 y 100 palabras, coherente con las guias de marca pero con <b>algo de variacion de estilo</b>. &iquest;Que configuracion de parametros de salida logra ese equilibrio?",
+    question="Amazon Bedrock - un generador de descripciones de producto debe ser creativo pero controlado: 50 a 100 palabras, coherente con las guias de marca pero con algo de variacion de estilo. &iquest;Que parametros de salida logran ese equilibrio?",
     options=[
         "Temperature 0.5, top-p 0.8 y penalizaciones de longitud (length penalties) para respuestas que excedan las guias de marca",
         "Temperature 0.9, top-k 50 y sin ningun limite de longitud en la respuesta",
@@ -87,12 +87,12 @@ cards.append(card(
 # Q5 - Model cascading: modelo pequeno auto-evalua complejidad
 # ============================================================
 cards.append(card(
-    question="Amazon Bedrock - un asistente GenAI debe <b>enrutar segun la complejidad</b> de la consulta: las simples a un modelo pequeno (Meta Llama) y las complejas a uno grande (Anthropic Claude). Debe ser escalable y de <b>baja latencia</b>. &iquest;Que solucion cumple?",
+    question="Un asistente GenAI debe enrutar por complejidad: consultas simples a un modelo pequeno (Meta Llama) y complejas a uno grande (Anthropic Claude). Debe ser escalable y de baja latencia. &iquest;Que solucion cumple?",
     options=[
-        "Configurar un intelligent prompt router de Amazon Bedrock entre Llama y Claude, con modelo de fallback, e invocarlo desde una funcion Lambda con la consulta",
-        "Crear un knowledge base de Bedrock con patrones e indicadores de complejidad, y una Lambda que consulte el KB para decidir a que modelo enrutar",
-        "Con una Lambda, invocar primero un modelo pequeno de Bedrock cuyo system prompt le pida responder solo si la consulta es demasiado compleja; si lo es, invocar el modelo grande con la misma consulta",
-        "Un workflow de Step Functions que invoque una Lambda que analice longitud, palabras clave y complejidad estructural con regex, y enrute a Llama o Claude segun umbrales predefinidos",
+        "Configurar un intelligent prompt router de Amazon Bedrock entre Llama y Claude, invocado desde Lambda",
+        "Crear un knowledge base de Bedrock con indicadores de complejidad, consultado por Lambda para enrutar",
+        "Cascada de modelos via Lambda: el modelo pequeno de Bedrock evalua por system prompt y solo escala al grande si es compleja",
+        "Step Functions con Lambda que analiza longitud y complejidad con regex y enruta segun umbrales",
     ],
     correct=2,
     key="off2-q5",
@@ -116,12 +116,12 @@ cards.append(card(
 # Q6 - Comprehend entity recognition + normalizar + Bedrock reformatea
 # ============================================================
 cards.append(card(
-    question="Retail - hay que procesar datos de catalogo de productos de <b>varias fuentes</b> (descripciones, especificaciones y resenas en distintos formatos e idiomas) para mejorar la calidad de los datos y garantizar <b>entradas consistentes</b> a los FM. &iquest;Que solucion cumple?",
+    question="Retail - procesar datos de catalogo de varias fuentes (descripciones, especificaciones y resenas en distintos formatos e idiomas) para dar entradas consistentes a los FM. &iquest;Que solucion cumple?",
     options=[
-        "Extraer atributos con reconocimiento de entidades de Amazon Comprehend via Lambda, normalizar categorias y especificaciones, y usar Amazon Bedrock para reformatear las descripciones para el FM",
-        "Una Lambda que normalice formatos, clasificacion personalizada de Amazon Comprehend para categorizar productos y reglas de validacion propias que verifiquen consistencia antes de enviar a los FM de Bedrock",
-        "Un workflow de Step Functions que procese los datos con Amazon Comprehend para extraer entidades, una Lambda para validacion y filtrado propio, y luego enviar los datos validados a los FM de Bedrock",
-        "Procesar con Amazon Comprehend para extraer entidades y sentimiento, guardar las features en DynamoDB, monitorear calidad con CloudWatch y aplicar reglas de formato antes de enviar a los FM de Bedrock",
+        "Extraer entidades con Comprehend via Lambda, normalizar y Amazon Bedrock reformatea para el FM",
+        "Lambda de normalizacion, clasificacion personalizada de Comprehend y reglas de validacion propias antes de Bedrock",
+        "Step Functions: Comprehend extrae entidades, Lambda valida y filtra, y se envia a los FM de Bedrock",
+        "Procesar con Comprehend entidades y sentimiento, features en DynamoDB, calidad con CloudWatch y reglas de formato antes de Bedrock",
     ],
     correct=0,
     key="off2-q6",
@@ -146,12 +146,12 @@ cards.append(card(
 # Q10 - SCP forzando VPC endpoint para Bedrock
 # ============================================================
 cards.append(card(
-    question="AWS Organizations - una app GenAI usa Amazon Bedrock en cuentas de dev y de prod. El acceso a la API de Bedrock <b>desde las cuentas de produccion</b> NO debe pasar por internet publico, y la restriccion debe cumplirse <b>sin importar la configuracion de roles IAM ni el comportamiento de la app</b>. &iquest;Que solucion cumple?",
+    question="AWS Organizations - una app GenAI usa Amazon Bedrock en dev y prod. Desde produccion el acceso a la API de Bedrock no debe pasar por internet publico, y debe cumplirse sin importar los roles IAM ni la app. &iquest;Que solucion cumple?",
     options=[
-        "Crear un interface VPC endpoint para Bedrock en cada VPC de produccion y crear una SCP que niegue las acciones de Bedrock salvo que la peticion llegue por un VPC endpoint aprobado, adjunta a la OU de produccion",
-        "Crear un interface VPC endpoint para Bedrock en cada VPC de produccion y crear una politica IAM en cada cuenta que niegue Bedrock salvo por un VPC endpoint aprobado, adjunta a los roles IAM de la cuenta",
-        "Crear un NAT gateway con tipo de conectividad privada en cada VPC de produccion y actualizar las route tables de las subredes para enrutar el trafico de Bedrock hacia el NAT gateway",
-        "Crear un interface VPC endpoint para Bedrock en cada VPC de produccion y adjuntar endpoint policies que solo permitan el acceso desde la aplicacion aprobada",
+        "Interface VPC endpoint para Bedrock en cada VPC de prod, mas una SCP en la OU de prod que niega Bedrock salvo por endpoint aprobado",
+        "Interface VPC endpoint en cada VPC de prod, mas una politica IAM por cuenta que niega Bedrock salvo por endpoint aprobado",
+        "Crear un NAT gateway de conectividad privada en cada VPC de prod y route tables que enrutan el trafico de Bedrock al NAT gateway",
+        "Interface VPC endpoint para Bedrock en cada VPC de prod con endpoint policies que solo permiten la app aprobada",
     ],
     correct=0,
     key="off2-q10",
@@ -176,11 +176,11 @@ cards.append(card(
 # Q11 - Reranker + top-5 para reducir tokens sin perder accuracy
 # ============================================================
 cards.append(card(
-    question="Knowledge Bases (OpenSearch Serverless, hybrid search) - la busqueda tiene buen recall pero <b>no prioriza</b> los documentos mas relevantes, asi que se pasan 50 resultados al LLM y el <b>uso de tokens</b> se disparo. Se quiere <b>reducir tokens sin perder accuracy</b>, con el MENOR esfuerzo. &iquest;Que solucion cumple?",
+    question="Knowledge Bases (OpenSearch Serverless, hybrid search) - buen recall pero no prioriza los mas relevantes, asi que pasa 50 resultados al LLM y el uso de tokens se disparo. Reducir tokens sin perder accuracy, con el MENOR esfuerzo. &iquest;Que solucion cumple?",
     options=[
-        "Reconfigurar el chunking a semantico adaptativo con solapamiento y reducir el conjunto recuperado a los 10 primeros documentos para pasarlos al LLM",
+        "Reconfigurar el chunking a semantico adaptativo y reducir a los 10 primeros documentos para el LLM",
         "Configurar el knowledge base para usar semantic search como metodo de recuperacion",
-        "Configurar el knowledge base para invocar un modelo reranker y pasar al LLM solo los 5 documentos mejor rankeados",
+        "Configurar el knowledge base para invocar un modelo reranker y pasar al LLM solo los 5 mejor rankeados",
         "Limitar la ventana de contexto pasando al LLM solo los 5 primeros documentos recuperados",
     ],
     correct=2,
@@ -205,12 +205,12 @@ cards.append(card(
 # Q13 - CloudWatch dashboard + invocation logs para diagnosticar RAG
 # ============================================================
 cards.append(card(
-    question="RAG en produccion (Bedrock + OpenSearch Service) - los tiempos de respuesta son <b>inconsistentes</b>: algunas consultas tardan mucho mas. Hay que implementar un monitoreo que de <b>informacion diagnostica completa</b> para hallar la causa raiz con el MENOR esfuerzo operativo. &iquest;Que solucion conviene?",
+    question="RAG en produccion (Bedrock + OpenSearch Service) - tiempos de respuesta inconsistentes. Hay que implementar un monitoreo con diagnostico completo para hallar la causa raiz con el MENOR esfuerzo operativo. &iquest;Que solucion conviene?",
     options=[
-        "Crear metricas personalizadas de CloudWatch que combinen latencia de busqueda vectorial de OpenSearch y patrones de uso de tokens de Bedrock, con alarmas compuestas que correlacionen latencia, umbrales de similitud y consumo de tokens",
-        "Configurar monitoreo detallado en OpenSearch y Bedrock, usar expresiones metric math de CloudWatch para correlacionar rendimiento de busqueda vectorial e inferencia, y activar deteccion de anomalias sobre las metricas combinadas",
-        "Implementar trazado distribuido con AWS X-Ray enfocado en la latencia de consultas vectoriales de OpenSearch y los tiempos de respuesta del modelo, con subsegmentos personalizados para similitud vectorial y procesamiento de tokens",
-        "Crear un dashboard de CloudWatch que combine metricas de latencia de recuperacion de contexto con conteos de operaciones de OpenSearch, y analizar los invocation logs de Bedrock para ver que consultas al KB se degradan",
+        "Metricas custom de CloudWatch de latencia vectorial y tokens, con alarmas compuestas que correlacionen similitud y tokens",
+        "Configurar monitoreo detallado, metric math de CloudWatch para correlacionar busqueda vectorial e inferencia, y deteccion de anomalias",
+        "Implementar trazado distribuido con AWS X-Ray sobre latencia vectorial de OpenSearch y del modelo, con subsegmentos custom",
+        "Dashboard de CloudWatch con latencia de recuperacion y operaciones de OpenSearch, mas invocation logs de Bedrock",
     ],
     correct=3,
     key="off2-q13",
@@ -224,7 +224,7 @@ cards.append(card(
         '<li><b>Metric math + anomaly detection:</b> sobrecomplica el analisis; correlacionar busqueda vectorial e inferencia via metric math no dice claramente si el problema esta en la recuperacion o en el modelo, y la deteccion de anomalias puede dar falsos positivos por la complejidad del RAG.</li>'
         '<li><b>X-Ray con subsegmentos custom:</b> el trazado ayuda a visualizar el flujo, pero crear subsegmentos personalizados para operaciones vectoriales y tokens requiere esfuerzo operativo adicional para ese nivel de granularidad.</li>'
         '</ul>'
-        '<div class="extra"><span class="h">Exam tip</span>Diagnostico de RAG con minimo esfuerzo: dashboard con metricas integradas + invocation logs de Bedrock. Metricas custom, metric math con anomaly detection y subsegmentos de X-Ray suman trabajo de instrumentacion.</div>'
+        '<div class="extra"><span class="h">Exam tip</span>Diagnostico de RAG con minimo esfuerzo: dashboard con metricas integradas + los invocation logs del servicio de inferencia. Metricas custom, metric math con anomaly detection y subsegmentos de X-Ray suman trabajo de instrumentacion.</div>'
         '<div class="links"><span class="h">Links</span>'
         '<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-invocation-logging.html">docs.aws model invocation logging</a></div>'
     ),
@@ -234,12 +234,12 @@ cards.append(card(
 # Q15 - Bedrock Prompt Management (compare versions, sin deploy)
 # ============================================================
 cards.append(card(
-    question="Amazon Bedrock - hay que <b>catalogar y gestionar prompts</b> de resumen de documentos financieros. Los prompts deben ser <b>plantillas con variables</b> (nombre del cliente, contenido del documento) y la solucion debe dar <b>versionado, comparacion de versiones y pruebas antes de desplegar</b>, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
+    question="Catalogar y gestionar prompts de resumen de documentos financieros. Deben ser plantillas con variables (cliente, documento) y dar versionado, comparacion de versiones y pruebas antes de desplegar, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
     options=[
-        "Crear los prompts en Bedrock Prompt Management, con system instructions de rol de analista financiero y variables parametrizadas; usar la funcion compare versions para probar versiones sin desplegar y crear una version para ejecutar por API",
-        "Guardar los prompts como plantillas JSON en S3, usar Prompt Management para A/B testing, una Lambda propia para versionado y sustitucion de variables y CloudWatch para metricas de desempeno del prompt",
-        "Usar Prompt Management creando prompts separados por tipo de documento, con una convencion de nombres para versionar, compare versions para elegir el mejor por tipo y system prompts estaticos de analista financiero",
-        "Crear los prompts en Prompt Management con variables parametrizadas y system instructions; probar cada version desplegandola a un entorno de staging por API y elegir la de produccion tras probar",
+        "Bedrock Prompt Management con system instructions y variables; probar con compare versions sin desplegar y crear una version para API",
+        "Guardar los prompts como plantillas JSON en S3, Prompt Management para A/B testing, Lambda propia para versionado y CloudWatch para metricas",
+        "Usar Prompt Management con prompts separados por tipo, convencion de nombres para versionar, compare versions y system prompts estaticos",
+        "Crear los prompts en Prompt Management con variables y system instructions; probar cada version desplegandola a staging por API",
     ],
     correct=0,
     key="off2-q15",
@@ -263,12 +263,12 @@ cards.append(card(
 # Q19 - Multiples guardrails con tags + EventBridge por horario
 # ============================================================
 cards.append(card(
-    question="Amazon Bedrock Guardrails - un asistente sobre Nova Pro (logica en Lambda) usado por varios departamentos necesita <b>politicas mas estrictas en horario laboral</b> y <b>reglas de filtrado por departamento</b>, usando Guardrails. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Un asistente Bedrock sobre Nova Pro (logica en Lambda) usado por varios departamentos necesita politicas mas estrictas en horario laboral y filtrado por departamento, usando Guardrails. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
     options=[
-        "Un unico guardrail con restricciones maximas y un workflow de Step Functions que orqueste Lambdas para post-procesar respuestas segun horario y departamento, con reglas en Systems Manager Parameter Store",
-        "Crear varios guardrails con tags para los distintos contextos de horario y departamento, y una Lambda disparada por una regla de EventBridge que seleccione el guardrail adecuado segun la hora",
-        "Crear multiples guardrails estaticos para cada escenario y una funcion que elija el guardrail segun hora y departamento, con la logica de seleccion guardada en DynamoDB",
-        "Usar las APIs de guardrails para crear y actualizar guardrails dinamicamente por peticion, con una Lambda que revise hora y departamento y cachee configuraciones en ElastiCache (Redis OSS)",
+        "Un unico guardrail maximo y Step Functions que orquesta Lambdas para post-procesar por horario y departamento, con reglas en Systems Manager Parameter Store",
+        "Varios guardrails con tags por horario y departamento, y una Lambda disparada por EventBridge que elige el guardrail segun la hora",
+        "Multiples guardrails estaticos por escenario y una funcion que elige segun hora y departamento, con la logica en DynamoDB",
+        "Usar las APIs de guardrails para crear/actualizar dinamicamente por peticion, con una Lambda que cachea en ElastiCache (Redis OSS)",
     ],
     correct=1,
     key="off2-q19",
@@ -293,12 +293,12 @@ cards.append(card(
 # Q20 - RAG eval: dataset humano-validado + custom metrics (LLM judge)
 # ============================================================
 cards.append(card(
-    question="Bedrock model evaluation (RAG con LLM-as-a-judge) - un KB ingiere cientos de documentos al dia en varios departamentos. La evaluacion semanal debe medir correctness, relevance, <b>escala de formalidad</b> y <b>tono y estilo propios de la empresa</b>. &iquest;Que solucion cumple de la forma MAS costo-efectiva?",
+    question="Bedrock model evaluation (RAG con LLM-as-a-judge) - un KB ingiere cientos de documentos al dia. La evaluacion semanal debe medir correctness, relevance, escala de formalidad y tono y estilo propios. &iquest;Que solucion es la MAS costo-efectiva?",
     options=[
-        "Crear un dataset de evaluacion validado por humanos y definir custom metrics para escala de formalidad y para tono y estilo propios de la empresa",
-        "Crear un dataset validado por humanos y una evaluacion basada en humanos (human-based) para escala de formalidad y tono y estilo propios",
-        "Usar un dataset benchmark estandar de la industria y una evaluacion basada en humanos para escala de formalidad y tono y estilo propios",
-        "Usar un dataset benchmark estandar de la industria y definir custom metrics para escala de formalidad y tono y estilo propios",
+        "Crear un dataset de evaluacion validado por humanos y custom metrics para formalidad y para tono y estilo propios",
+        "Dataset validado por humanos y evaluacion basada en humanos para formalidad y tono y estilo propios",
+        "Dataset benchmark estandar de la industria y evaluacion basada en humanos para formalidad y tono y estilo propios",
+        "Dataset benchmark estandar de la industria y custom metrics para formalidad y tono y estilo propios",
     ],
     correct=0,
     key="off2-q20",
@@ -322,12 +322,12 @@ cards.append(card(
 # Q21 - Semantic chunking + optimizar max tokens (reducir costo retrieval)
 # ============================================================
 cards.append(card(
-    question="Knowledge Bases (informes financieros) - hoy se usa <b>chunking de tamano fijo</b> (segmentos de 1.000 tokens) sin respetar los limites del contenido, y muchos chunks quedan con informacion fragmentada. Los costos de recuperacion subieron por ineficiencia de tokens. Hay que <b>reducir costos manteniendo accuracy</b>. &iquest;Que solucion cumple?",
+    question="Knowledge Bases (informes financieros) - el chunking de tamano fijo (1.000 tokens) no respeta los limites del contenido y fragmenta la informacion, y los costos de recuperacion subieron. Reducir costos manteniendo accuracy. &iquest;Que solucion cumple?",
     options=[
-        "Usar Amazon Nova en Bedrock para el embedding y el preprocesamiento de chunks, y Anthropic Claude para la sumarizacion y el analisis complejo",
-        "Habilitar semantic chunking en Knowledge Bases para agrupar el contenido por limites naturales y optimizar el parametro de maximo de tokens",
+        "Usar Amazon Nova en Bedrock para embedding y preprocesamiento de chunks, y Anthropic Claude para sumarizacion y analisis complejo",
+        "Habilitar semantic chunking en Knowledge Bases (limites naturales) y optimizar el parametro de maximo de tokens",
         "Reducir el tamano de chunk en Knowledge Bases y usar Bedrock Agents con recuperacion automatica desde el knowledge base",
-        "Usar un modelo Claude con la ventana de contexto maxima e implementar sumarizacion recursiva antes de la ingesta para documentos largos",
+        "Un modelo Claude con ventana de contexto maxima y sumarizacion recursiva antes de la ingesta para documentos largos",
     ],
     correct=1,
     key="off2-q21",
@@ -351,12 +351,12 @@ cards.append(card(
 # Q22 - DynamoDB single-table + GSI + DAX + TTL para historial de chat
 # ============================================================
 cards.append(card(
-    question="Historial de conversaciones - una app de chat (Bedrock via Lambda, REST API) necesita: sesiones concurrentes con actualizaciones en tiempo real, reanudar desde cualquier punto, busqueda y filtrado por metadatos, <b>baja latencia</b> para las conversaciones recientes y borrado automatico al expirar. &iquest;Que implementacion es la MAS escalable?",
+    question="Historial de chat (Bedrock via Lambda, REST API) - sesiones concurrentes en tiempo real, reanudar desde cualquier punto, filtrado por metadatos, baja latencia en lo reciente y borrado al expirar. &iquest;Que implementacion es la MAS escalable?",
     options=[
-        "Guardar conversaciones en OpenSearch Service con metadatos y busqueda full-text, usar indices por tiempo y politicas ISM para borrar indices mas antiguos que la ventana de retencion",
-        "Crear una tabla DynamoDB con GSI por user ID y conversation ID, diseno single-table con sort keys jerarquicos para mensajes/metadatos/estado, DAX para cachear conversaciones recientes y TTL de DynamoDB para borrar las antiguas",
-        "DynamoDB con clave compuesta user ID + timestamp, DynamoDB Streams para mantener un cache en ElastiCache (Redis OSS) y TTL de DynamoDB para borrar conversaciones antiguas",
-        "Arquitectura hibrida: ElastiCache (Redis OSS) con persistencia y TTL por clave para conversaciones activas, y Aurora PostgreSQL con pgvector para historial y contexto, con pg_cron para borrados programados",
+        "Guardar en OpenSearch Service con metadatos y full-text, indices por tiempo y politicas ISM para borrar indices antiguos",
+        "DynamoDB single-table con GSI por user y conversation ID, sort keys jerarquicos, DAX para lo reciente y TTL para lo antiguo",
+        "DynamoDB con clave user ID + timestamp, DynamoDB Streams a un cache en ElastiCache (Redis OSS) y TTL para borrar lo antiguo",
+        "Arquitectura hibrida: ElastiCache (Redis OSS) con TTL para lo activo, y Aurora PostgreSQL con pgvector e pg_cron para historial",
     ],
     correct=1,
     key="off2-q22",
@@ -380,12 +380,12 @@ cards.append(card(
 # Q24 - RetrieveAndGenerate + Guardrails (citas + filtros)
 # ============================================================
 cards.append(card(
-    question="Analisis de contratos legales (Bedrock, KB con embeddings ya creado) - todas las respuestas deben venir de una <b>fuente legal autorizada y citarla</b>, evitar <b>consejo legal inapropiado</b> y filtrar informacion personal sensible. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Analisis de contratos legales (Bedrock, KB con embeddings) - las respuestas deben venir de una fuente legal autorizada y citarla, evitar consejo legal inapropiado y filtrar informacion sensible. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
     options=[
-        "Habilitar RAG con la RetrieveAndGenerate API y adjuntar politicas de Amazon Bedrock Guardrails al endpoint del FM, con content filters y topic restrictions",
-        "Habilitar la recuperacion de documentos con la Retrieve API e implementar la logica de filtrado de contenido en funciones Lambda adjuntas al endpoint del modelo",
-        "Habilitar RAG con la RetrieveAndGenerate API e implementar la logica de filtrado de contenido en funciones Lambda adjuntas al endpoint del modelo",
-        "Habilitar la recuperacion con la Retrieve API y adjuntar politicas de Amazon Bedrock Guardrails al endpoint del FM, con content filters y topic restrictions",
+        "Habilitar RAG con la RetrieveAndGenerate API y Guardrails de Bedrock en el FM, con content filters y topic restrictions",
+        "Recuperacion con la Retrieve API y filtrado de contenido con logica propia en Lambda en el endpoint del modelo",
+        "RAG con la RetrieveAndGenerate API y filtrado de contenido con logica propia en Lambda en el endpoint del modelo",
+        "Recuperacion con la Retrieve API y Guardrails de Bedrock en el FM, con content filters y topic restrictions",
     ],
     correct=0,
     key="off2-q24",
@@ -410,12 +410,12 @@ cards.append(card(
 # Q25 - Step Functions Standard orquestando FM largo (5-15 min)
 # ============================================================
 cards.append(card(
-    question="Procesamiento de documentos GenAI - solicitudes de hipoteca con datos sensibles que tardan <b>5 a 15 minutos</b> cada una y requieren varias llamadas al FM (extraccion, analisis, resumen). Debe manejar hasta 1.000 peticiones concurrentes en pico, dar <b>audit trails</b> de todas las interacciones y dejar los resultados disponibles. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Procesamiento de documentos GenAI - hipotecas con datos sensibles que tardan 5 a 15 minutos y requieren varias llamadas al FM. Debe manejar 1.000 peticiones concurrentes en pico, dar audit trails y dejar resultados disponibles, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
     options=[
-        "Guardar los documentos en S3, S3 Event Notifications invoca una Lambda que lanza un workflow Standard de Step Functions que orquesta las llamadas a Bedrock, con estado y resultados en DynamoDB",
-        "API Gateway con WebSocket APIs para mantener la conexion mientras Bedrock procesa, y una Lambda que envie actualizaciones de estado a los clientes conectados",
-        "Un stream de Kinesis para recibir documentos, Lambdas consumidoras que los procesen en paralelo con las APIs de Bedrock y resultados en OpenSearch Service",
-        "Una API de API Gateway con Lambdas que hagan llamadas sincronas a Bedrock para procesar el documento y guarden los resultados en DynamoDB tras procesar",
+        "Guardar en S3; S3 Event Notifications invoca una Lambda que lanza un workflow Standard de Step Functions que orquesta Bedrock, con estado en DynamoDB",
+        "API Gateway con WebSocket APIs para mantener la conexion mientras Bedrock procesa y una Lambda que envia estado a los clientes",
+        "Stream de Kinesis para recibir documentos, Lambdas consumidoras en paralelo con las APIs de Bedrock y resultados en OpenSearch Service",
+        "API Gateway con Lambdas que hacen llamadas sincronas a Bedrock y guardan los resultados en DynamoDB tras procesar",
     ],
     correct=0,
     key="off2-q25",
@@ -440,7 +440,7 @@ cards.append(card(
 # Q26 - Continued pre-training (datos no etiquetados de dominio)
 # ============================================================
 cards.append(card(
-    question="Amazon Bedrock (FM personalizable) - el modelo rinde mal en un <b>tema de nicho</b>. La empresa tiene <b>3 TB de datos NO etiquetados</b> (papers, documentacion tecnica, reportes) de ese dominio y quiere que el modelo desarrolle una <b>comprension profunda</b> de la terminologia, conceptos y relaciones del dominio. &iquest;Que solucion cumple?",
+    question="Amazon Bedrock (FM personalizable) - el modelo rinde mal en un tema de nicho. La empresa tiene 3 TB de datos NO etiquetados del dominio y quiere que el modelo desarrolle comprension profunda de su terminologia, conceptos y relaciones. &iquest;Que solucion cumple?",
     options=[
         "Usar los datos propios para hacer continued pre-training del modelo en Amazon Bedrock",
         "Usar los datos propios para hacer fine-tuning del modelo en Amazon Bedrock",
@@ -469,12 +469,12 @@ cards.append(card(
 # Q27 - SageMaker Clarify + FMEval (CrowS-Pairs) + CloudWatch (bias)
 # ============================================================
 cards.append(card(
-    question="Servicios financieros (app GenAI en SageMaker AI) - hay que implementar un framework <b>integral de fairness</b> que detecte sesgos sutiles en las respuestas del modelo <b>entre grupos socioeconomicos, rangos de edad y regiones geograficas</b>. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Servicios financieros (app GenAI en SageMaker AI) - implementar un framework integral de fairness que detecte sesgos sutiles entre grupos socioeconomicos, edades y regiones. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
     options=[
-        "Usar SageMaker Model Monitor para evaluar continuamente las predicciones ante bias drift, con alertas automaticas cuando las metricas de sesgo superen umbrales",
-        "Crear datasets de evaluacion propios por grupo demografico, ejecutar batch transform jobs para probar y configurar reentrenamiento automatico cuando se detecte sesgo",
-        "Desplegar monitoreo de desempeno en tiempo real con CloudWatch, aplicar RBAC y usar Amazon Comprehend para analisis de sentimiento de las salidas del modelo",
-        "Usar SageMaker Clarify para deteccion automatica de sesgo, FM evaluations (FMEval) con datasets CrowS-Pairs y metricas de CloudWatch para monitorear la disparidad demografica",
+        "Usar SageMaker Model Monitor para evaluar continuamente ante bias drift, con alertas cuando el sesgo supere umbrales",
+        "Crear datasets de evaluacion propios por grupo demografico, batch transform jobs para probar y reentrenamiento automatico al detectar sesgo",
+        "Desplegar monitoreo en tiempo real con CloudWatch, RBAC y Amazon Comprehend para analisis de sentimiento de las salidas",
+        "SageMaker Clarify para deteccion de sesgo, FM evaluations (FMEval) con datasets CrowS-Pairs y metricas de CloudWatch por disparidad demografica",
     ],
     correct=3,
     key="off2-q27",
@@ -498,7 +498,7 @@ cards.append(card(
 # Q30 - BDA transformation con custom type reutilizable
 # ============================================================
 cards.append(card(
-    question="Bedrock Data Automation (analisis de contratos) - un blueprint extrae campos como AuthorizedSigner (p.ej. \"Mr. John Allen Doe III, Senior Legal Counsel\") y hay que <b>separarlo</b> en TITLE, FIRST_NAME, MIDDLE_NAME, LAST_NAME, SUFFIX y JOB_TITLE, <b>reutilizando ese formato de nombre</b> en varios campos (AuthorizedSigner, WitnessName, ReviewerName). &iquest;Que capacidad de BDA cumple?",
+    question="Bedrock Data Automation (contratos) - un blueprint extrae AuthorizedSigner (p.ej. \"Mr. John Allen Doe III, Senior Legal Counsel\") y hay que separarlo en TITLE, FIRST_NAME, MIDDLE_NAME, LAST_NAME, SUFFIX y JOB_TITLE, reutilizando el formato en AuthorizedSigner, WitnessName y ReviewerName. &iquest;Que capacidad de BDA cumple?",
     options=[
         "Usar transformation con un custom type reutilizable para separar el campo AuthorizedSigner en subcomponentes",
         "Usar normalization para parsear y separar el valor mediante reemplazos basados en patrones",
@@ -527,12 +527,12 @@ cards.append(card(
 # Q35 - Amazon Comprehend custom classification para enrutar a FM
 # ============================================================
 cards.append(card(
-    question="Asistente multilingue (Bedrock) - hay varios FM ya afinados por tema (finanzas, diagnostico de producto, etc.). Los mensajes entran por API Gateway y se debe enrutar cada consulta al FM correcto <b>segun el tema</b>, con una solucion <b>event-driven</b> y escalable. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Asistente multilingue (Bedrock) - hay varios FM afinados por tema. Los mensajes entran por API Gateway y se debe enrutar cada consulta al FM correcto segun el tema, event-driven y escalable. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
     options=[
-        "API Gateway hacia una Lambda que use Amazon Comprehend para detectar el idioma dominante y enrutar al FM segun el idioma detectado",
-        "Entrenar y desplegar un modelo de clasificacion propio en un endpoint de SageMaker AI; la Lambda llama al endpoint para identificar el tema y enruta al FM segun el tema",
-        "Entrenar un modelo de clasificacion personalizada de Amazon Comprehend; la Lambda llama a Comprehend custom classification para identificar el tema y enruta al FM segun el tema",
-        "Hacer fine-tuning de un FM en Bedrock para clasificacion de temas; la Lambda invoca ese FM para determinar el tema y enruta al FM correcto segun el tema",
+        "API Gateway a una Lambda que use Amazon Comprehend para detectar el idioma dominante y enrutar segun idioma",
+        "Entrenar un modelo de clasificacion propio en un endpoint de SageMaker AI; la Lambda lo llama para identificar el tema y enruta",
+        "Modelo de clasificacion personalizada de Amazon Comprehend; la Lambda lo llama para identificar el tema y enruta",
+        "Hacer fine-tuning de un FM en Bedrock para clasificar temas; la Lambda lo invoca para determinar el tema y enruta",
     ],
     correct=2,
     key="off2-q35",
@@ -586,7 +586,7 @@ cards.append(card(
 # Q38 - SageMaker shadow test (metricas operativas sin afectar usuarios)
 # ============================================================
 cards.append(card(
-    question="SageMaker AI (endpoint real-time con un FM en produccion) - hay una nueva version del modelo y se deben evaluar sus <b>metricas operativas</b> (latencia, tasa de errores, uso de recursos) <b>bajo trafico real de produccion</b> pero <b>sin afectar a los usuarios finales</b>. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="SageMaker AI (endpoint real-time con un FM en produccion) - hay una nueva version del modelo y se deben evaluar sus metricas operativas (latencia, errores, recursos) bajo trafico real sin afectar a los usuarios. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
     options=[
         "Implementar A/B testing configurando los pesos de las production variants del endpoint de SageMaker AI",
         "Usar SageMaker Model Monitor para evaluar el desempeno del nuevo modelo",
@@ -615,12 +615,12 @@ cards.append(card(
 # Q39 - API Gateway REST non-proxy + mapping templates + Secrets Manager + cache
 # ============================================================
 cards.append(card(
-    question="Resumen de noticias multi-proveedor - hay que enrutar a distintos LLM (Bedrock y APIs de terceros) segun idioma y tipo de contenido, <b>cambiar de proveedor sin cambios de codigo</b>, guardar las API keys de forma segura, mantener un <b>formato de respuesta consistente</b> y optimizar costos con cache. &iquest;Que solucion cumple?",
+    question="Resumen de noticias multi-proveedor - enrutar a distintos LLM (Bedrock y terceros) por idioma y contenido, cambiar de proveedor sin cambios de codigo, API keys seguras, formato de respuesta consistente y cache para costos. &iquest;Que solucion cumple?",
     options=[
-        "Una sola REST API de API Gateway con integraciones non-proxy y mapping templates para transformar peticiones/respuestas por proveedor, enrutamiento por header con stage variables y API keys en AWS Secrets Manager",
-        "Desplegar todos los modelos en endpoints de SageMaker AI, una REST API con integracion a SageMaker, enrutamiento por path parameters, metadata para formato consistente y credenciales en la configuracion de SageMaker",
-        "Una sola REST API con integracion Lambda proxy que decida el modelo segun parametros de la peticion, con API keys en Secrets Manager que la funcion recupera",
-        "REST APIs separadas por proveedor con endpoints unicos, una app cliente que decida a que endpoint llamar segun idioma y tipo de contenido, API keys en el codigo cliente y cache en la capa cliente",
+        "REST API con integraciones non-proxy y mapping templates por proveedor, enrutamiento por header con stage variables y API keys en Secrets Manager",
+        "Desplegar todos los modelos en endpoints de SageMaker AI, REST API con integracion a SageMaker, enrutamiento por path y credenciales en SageMaker",
+        "REST API con integracion Lambda proxy que decide el modelo segun la peticion, con API keys en Secrets Manager",
+        "REST APIs separadas por proveedor; el cliente elige el endpoint, con API keys en el codigo cliente y cache en el cliente",
     ],
     correct=0,
     key="off2-q39",
@@ -644,12 +644,12 @@ cards.append(card(
 # Q40 - BDA: un proyecto con multiples blueprints (auto-seleccion)
 # ============================================================
 cards.append(card(
-    question="Extraccion de facturas (PDF) - se reciben facturas de electricidad, agua y gas, cada tipo con <b>formato y campos propios</b>. Al subir a S3, la solucion debe <b>identificar el tipo</b> y extraer los campos correspondientes, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
+    question="Extraccion de facturas (PDF) - electricidad, agua y gas, cada tipo con formato y campos propios. Al subir a S3, identificar el tipo y extraer los campos, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
     options=[
-        "Rekognition Custom Labels para identificar el tipo, tres proyectos BDA separados (uno por tipo) y una regla de EventBridge que dispare una Lambda que use Custom Labels y luego InvokeDataAutomationAsync con el proyecto correspondiente",
-        "Un unico proyecto BDA con multiples blueprints (uno por tipo, con descripcion y campos); una regla de EventBridge dispara una Lambda que invoca InvokeDataAutomationAsync y el proyecto autoselecciona el blueprint y extrae los campos",
-        "Rekognition Custom Labels para el tipo, una regla de EventBridge que dispare una Lambda que use Custom Labels, luego Textract AnalyzeDocument con queries y codigo Python propio para parsear y extraer los campos segun el tipo",
-        "Tres proyectos BDA separados (uno por tipo); una regla de EventBridge dispara una Lambda que invoca InvokeDataAutomationAsync para que autoseleccione el proyecto y extraiga los campos",
+        "Rekognition Custom Labels para el tipo y tres proyectos BDA; EventBridge dispara una Lambda que clasifica y llama a InvokeDataAutomationAsync",
+        "Un unico proyecto BDA con multiples blueprints (uno por tipo); EventBridge dispara una Lambda con InvokeDataAutomationAsync y el proyecto autoselecciona el blueprint",
+        "Rekognition Custom Labels y EventBridge que dispara una Lambda que clasifica y luego Textract AnalyzeDocument con codigo Python propio",
+        "Tres proyectos BDA separados; EventBridge dispara una Lambda con InvokeDataAutomationAsync para que autoseleccione el proyecto",
     ],
     correct=1,
     key="off2-q40",
@@ -673,12 +673,12 @@ cards.append(card(
 # Q41 - Guardrails + model cards en S3 + InvocationsIntervened + EventBridge
 # ============================================================
 cards.append(card(
-    question="Moderacion de contenido (FM en Bedrock) - hay que <b>detectar y bloquear</b> PII, desinformacion, discurso de odio y contenido inseguro (texto e imagen) <b>antes</b> de la revision editorial, documentar limitaciones y sesgos del FM con <b>control de versiones</b>, y disparar workflows de cumplimiento <b>en segundos</b> tras una intervencion del guardrail. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Moderacion de contenido (FM en Bedrock) - detectar y bloquear PII, desinformacion, odio y contenido inseguro (texto e imagen) antes de la revision editorial, documentar sesgos del FM con versionado y disparar cumplimiento en segundos tras una intervencion. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
     options=[
-        "Comprehend para PII y sentimiento, luego Bedrock; Guardrails con filtros para desinformacion/odio/contenido inseguro; gobierno de modelos con versionado automatico en DynamoDB con GSI; Lambda + EventBridge para monitoreo continuo y reportes",
-        "Guardrails con filtros para PII/desinformacion/odio/multimodal; integrar Rekognition content moderation con modelos entrenados propios; model cards con versionado en S3; Lambda + EventBridge para orquestar procesamiento en paralelo entre Bedrock y Rekognition",
-        "Guardrails con filtros para PII/desinformacion/odio/multimodal; model cards en S3 con lifecycle policies; reglas de EventBridge que invoquen Lambdas que parseen logs de CloudTrail buscando violaciones",
-        "Guardrails con filtros para PII/desinformacion/odio/multimodal; model cards con versionado habilitado en S3; una alarma de CloudWatch sobre la metrica InvocationsIntervened de Guardrails y una regla de EventBridge que invoque un workflow de cumplimiento en Lambda al dispararse la alarma",
+        "Comprehend para PII y Bedrock; Guardrails para el resto; versionado automatico en DynamoDB con GSI; Lambda + EventBridge para monitoreo continuo",
+        "Guardrails multimodal; Rekognition content moderation con modelos propios; model cards versionadas en S3; Lambda + EventBridge en paralelo entre Bedrock y Rekognition",
+        "Guardrails multimodal; model cards en S3 con lifecycle policies; EventBridge que invoca Lambdas que parsean logs de CloudTrail",
+        "Guardrails multimodal; model cards versionadas en S3; alarma de CloudWatch sobre InvocationsIntervened y EventBridge que invoca un workflow de cumplimiento en Lambda",
     ],
     correct=3,
     key="off2-q41",
@@ -702,12 +702,12 @@ cards.append(card(
 # Q42 - S3 metadata (system/user) + tags jerarquicos + OpenSearch con vectores
 # ============================================================
 cards.append(card(
-    question="Editorial academica - millones de papers en S3, con FMs en Bedrock. Hay que registrar fechas (publicacion, envio, actualizacion), guardar autoria (nombre y contacto), <b>clasificar por disciplinas/subdisciplinas/metodologias</b>, permitir busqueda/filtrado por criterios combinados y dar contexto rico a los FMs, con la <b>respuesta de consulta MAS rapida</b>. &iquest;Que diseno de metadatos cumple?",
+    question="Editorial academica - millones de papers en S3, con FMs en Bedrock. Registrar fechas, guardar autoria, clasificar por disciplinas/subdisciplinas/metodologias, filtrar por criterios combinados y dar contexto a los FMs, con la respuesta de consulta MAS rapida. &iquest;Que diseno de metadatos cumple?",
     options=[
-        "Timestamps como user-defined metadata de S3; autoria y clasificaciones en DynamoDB; object keys como partition keys; object tags para disciplinas; OpenSearch Service para indexado y busqueda",
-        "Timestamps como system-defined metadata de S3; autoria como user-defined metadata; una estructura jerarquica de object tags para las clasificaciones cientificas; OpenSearch Service enriquecido con document vectors de Bedrock para busqueda semantica",
-        "Todos los metadatos en DynamoDB con claves compuestas para varios patrones de acceso; papers en S3 con metadatos minimos; S3 Event Notifications para sincronizar; SageMaker Feature Store para preparar features de metadatos para los FMs",
-        "Timestamps como system-defined metadata de S3; autoria y clasificaciones en RDS for PostgreSQL vinculado a los object keys; Amazon Kendra con document attributes personalizados para la busqueda",
+        "Timestamps como user metadata de S3; autoria y clasificaciones en DynamoDB; object tags para disciplinas; OpenSearch Service para busqueda",
+        "Timestamps como system metadata de S3; autoria como user metadata; object tags jerarquicos para clasificaciones; OpenSearch Service con document vectors de Bedrock",
+        "Todos los metadatos en DynamoDB con claves compuestas; papers en S3 con metadatos minimos; S3 Event Notifications; SageMaker Feature Store",
+        "Timestamps como system metadata de S3; autoria y clasificaciones en RDS for PostgreSQL por object keys; Amazon Kendra con document attributes custom",
     ],
     correct=1,
     key="off2-q42",
@@ -732,12 +732,12 @@ cards.append(card(
 # Q45 - Hierarchical chunking para manuales tecnicos anidados
 # ============================================================
 cards.append(card(
-    question="RAG para manuales de reparacion de aviones - PDFs de miles de paginas con secciones <b>anidadas y con referencias cruzadas</b>. Hay que extraer procedimientos y repuestos con RAG y <b>alta precision de recuperacion</b>, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
+    question="RAG para manuales de reparacion de aviones - PDFs de miles de paginas con secciones anidadas y referencias cruzadas. Extraer procedimientos y repuestos con alta precision de recuperacion, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
     options=[
-        "S3 particionado por modelo y parte; Knowledge Bases con estrategia de hierarchical chunking; OpenSearch Serverless como vector store",
-        "S3 particionado por modelo y parte; Knowledge Bases con estrategia de semantic chunking; OpenSearch Serverless como vector store",
-        "Manuales en DocumentDB serverless con claves de busqueda por modelo y parte; OpenSearch Serverless con el neural plugin y una estrategia de hierarchical chunking",
-        "Manuales en DocumentDB serverless con claves por modelo y parte; Knowledge Bases con semantic chunking; DocumentDB serverless como vector store",
+        "S3 particionado por modelo y parte; Knowledge Bases con hierarchical chunking; OpenSearch Serverless como vector store",
+        "S3 particionado por modelo y parte; Knowledge Bases con semantic chunking; OpenSearch Serverless como vector store",
+        "Manuales en DocumentDB serverless por modelo y parte; OpenSearch Serverless con neural plugin y hierarchical chunking",
+        "Manuales en DocumentDB serverless por modelo y parte; Knowledge Bases con semantic chunking; DocumentDB como vector store",
     ],
     correct=0,
     key="off2-q45",
@@ -761,12 +761,12 @@ cards.append(card(
 # Q51 - Bedrock Prompt Management + Bedrock Flows (encadenar 3 LLM)
 # ============================================================
 cards.append(card(
-    question="Asistente de soporte - se deben <b>encadenar 3 llamadas a LLM</b> (clasificar sentimiento, resumir documentos del producto, crear la respuesta final), <b>versionar los prompts</b> y poder <b>hacer rollback rapido</b> si un prompt nuevo rinde peor, con el MENOR esfuerzo de desarrollo. &iquest;Que solucion cumple?",
+    question="Asistente de soporte - encadenar 3 llamadas a LLM (clasificar sentimiento, resumir el producto, crear la respuesta), versionar los prompts y hacer rollback rapido, con el MENOR esfuerzo de desarrollo. &iquest;Que solucion cumple?",
     options=[
-        "Un knowledge base de Bedrock para los documentos, los prompts en AWS Systems Manager Parameter Store y orquestar las 3 llamadas en secuencia con Amazon Bedrock Flows",
-        "Un knowledge base de Bedrock para los documentos, los prompts en Bedrock Prompt Management y orquestar las 3 llamadas en secuencia con AWS Step Functions",
-        "Un knowledge base de Bedrock para los documentos, los prompts en Bedrock Prompt Management y orquestar las 3 llamadas en secuencia con Amazon Bedrock Flows",
-        "Amazon Q Business para recuperar los documentos, los prompts en Bedrock Prompt Management y orquestar las 3 llamadas en secuencia con Amazon Bedrock Flows",
+        "Knowledge base de Bedrock, prompts en Systems Manager Parameter Store y orquestar las 3 llamadas con Amazon Bedrock Flows",
+        "Knowledge base de Bedrock, prompts en Bedrock Prompt Management y orquestar las 3 llamadas con AWS Step Functions",
+        "Knowledge base de Bedrock, prompts en Bedrock Prompt Management y orquestar las 3 llamadas con Amazon Bedrock Flows",
+        "Amazon Q Business para los documentos, prompts en Bedrock Prompt Management y orquestar las 3 llamadas con Amazon Bedrock Flows",
     ],
     correct=2,
     key="off2-q51",
@@ -790,12 +790,12 @@ cards.append(card(
 # Q53 - Strands Agents (agentes especialistas, dinamico)
 # ============================================================
 cards.append(card(
-    question="Asistente de soporte de streaming - resuelve consultas simples de un paso, pero <b>falla con consultas multi-paso</b> (\"cambia mi plan, aplica un codigo de descuento y actualiza el pago\"). Se quiere IA agentica que maneje lo complejo y <b>se ajuste dinamicamente ante fallos</b> (p.ej. si el codigo es invalido, pedir otro antes de seguir), con el MENOR esfuerzo de desarrollo. &iquest;Que enfoque de orquestacion cumple?",
+    question="Asistente de streaming - resuelve consultas de un paso pero falla en multi-paso (\"cambia mi plan, aplica un descuento y actualiza el pago\"). Se quiere IA agentica que se ajuste dinamicamente ante fallos, con el MENOR esfuerzo de desarrollo. &iquest;Que enfoque de orquestacion cumple?",
     options=[
-        "Usar el Strands Agents SDK: crear un agente especialista por tarea (p.ej. BillingAgent), desplegarlos como Lambdas, registrarlos en Strands y configurar el flujo para enrutar las peticiones por los agentes en la secuencia correcta",
-        "Usar EventBridge Pipes: un endpoint de API Gateway recibe la peticion, la enruta a una Lambda que usa un FM de Bedrock para entenderla y de ahi a una serie de Lambdas que manejan cada tarea",
-        "Usar AWS Step Functions con un estado choice inicial que decida el workflow segun la peticion, cada tarea como Lambda que llama a un modelo de Bedrock con su prompt, e incluir logica de reintentos",
-        "Crear un unico agente con Amazon Bedrock Agents: definir un esquema OpenAPI por tarea, Lambdas como tools (p.ej. BillingTool) y un prompt que defina la persona y las tools disponibles",
+        "Strands Agents SDK: un agente especialista por tarea (BillingAgent) como Lambda y registrado en Strands, con un flujo que enruta en secuencia",
+        "EventBridge Pipes: API Gateway recibe, una Lambda con un FM de Bedrock interpreta y pasa a una serie de Lambdas por tarea",
+        "AWS Step Functions con un estado choice inicial, cada tarea una Lambda que llama a Bedrock con su prompt y logica de reintentos",
+        "Crear un unico agente con Amazon Bedrock Agents: esquema OpenAPI por tarea, Lambdas como tools (BillingTool) y un prompt de persona",
     ],
     correct=0,
     key="off2-q53",
@@ -819,12 +819,12 @@ cards.append(card(
 # Q54 - AgentCore Runtime + Strands + prebuilt MCP server (Aurora)
 # ============================================================
 cards.append(card(
-    question="Reposicion de inventario - los empleados deben consultar existencias y enviar solicitudes en <b>lenguaje natural</b>, invocando procesos internos de supply chain con <b>minimo mantenimiento</b> y con <b>soporte MCP integrado</b>. El inventario esta en Amazon Aurora. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Reposicion de inventario - los empleados consultan existencias y envian solicitudes en lenguaje natural, invocando procesos de supply chain con minimo mantenimiento y soporte MCP integrado. El inventario esta en Amazon Aurora. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
     options=[
-        "Desplegar un agente con Amazon Bedrock AgentCore Runtime y Strands Agents, configurar un prebuilt MCP server que exponga los datos de Aurora como MCP tools e integrar el agente con un asistente de chat",
-        "Un asistente con Amazon Lex, una Lambda que parsee las solicitudes y las empuje a una cola SQS, y microservicios de supply chain en ECS sobre Fargate leyendo de la cola",
-        "Desarrollar y hospedar un MCP server propio en ECS sobre Fargate con MCP tools que conecten a Aurora e invoquen las APIs de supply chain, e integrarlo con un agente de Bedrock",
-        "Una REST API en API Gateway delante de una Lambda que consulte Aurora e invoque un workflow de Step Functions para las tareas de reposicion",
+        "Agente con Amazon Bedrock AgentCore Runtime y Strands Agents, con un prebuilt MCP server que expone Aurora como MCP tools",
+        "Asistente con Amazon Lex, una Lambda que empuja las solicitudes a SQS y microservicios de supply chain en ECS sobre Fargate",
+        "Desarrollar un MCP server propio en ECS sobre Fargate con MCP tools que conectan a Aurora e invocan las APIs de supply chain, con un agente de Bedrock",
+        "REST API en API Gateway delante de una Lambda que consulta Aurora e invoca un workflow de Step Functions para la reposicion",
     ],
     correct=0,
     key="off2-q54",
@@ -838,7 +838,7 @@ cards.append(card(
         '<li><b>MCP server propio en ECS/Fargate:</b> conecta a Aurora, pero hay que construir, desplegar y escalar un MCP containerizado propio; mas esfuerzo que el prebuilt MCP de AgentCore.</li>'
         '<li><b>API Gateway + Lambda + Step Functions:</b> requiere construir y mantener la arquitectura, no usa MCP y exige definiciones de API y coordinacion de workflow manuales.</li>'
         '</ul>'
-        '<div class="extra"><span class="h">Exam tip</span>Agente con MCP integrado y minimo mantenimiento: un runtime de agentes gestionado con un prebuilt MCP server que expone la base de datos como tools. Un MCP server propio en contenedores o soluciones sin MCP suman operacion.</div>'
+        '<div class="extra"><span class="h">Exam tip</span>Lenguaje natural con MCP integrado y minimo mantenimiento: un runtime de agentes gestionado con un prebuilt MCP server que expone la base de datos como tools. Un MCP server propio en contenedores o soluciones sin MCP suman operacion.</div>'
         '<div class="links"><span class="h">Links</span>'
         '<a href="https://docs.aws.amazon.com/bedrock-agentcore/latest/devguide/what-is-bedrock-agentcore.html">docs.aws Amazon Bedrock AgentCore</a></div>'
     ),
@@ -848,12 +848,12 @@ cards.append(card(
 # Q55 - CreateEvaluationJob con evaluator model + Spearman (Lambda)
 # ============================================================
 cards.append(card(
-    question="Bedrock - hay que evaluar varios FM para un asistente de servicio al cliente: calidad y utilidad de respuesta, metricas de IA responsable (seguridad), miles de escenarios, <b>juicio tipo humano</b> para aspectos matizados (tono, adecuacion contextual) y <b>validacion estadistica</b> de las diferencias entre modelos, usando evaluadores gestionados. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Bedrock - evaluar varios FM para un asistente de servicio al cliente: calidad, IA responsable (seguridad), miles de escenarios, juicio tipo humano para aspectos matizados (tono, contexto) y validacion estadistica de diferencias, con evaluadores gestionados. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
     options=[
-        "Pipeline con la CreateEvaluationJob API de Bedrock usando un evaluator model consistente para todos los FM candidatos, jobs gestionados que procesen escenarios en paralelo, resultados en S3 y Lambdas que hagan correlacion de rangos de Spearman entre pares de modelos",
-        "Batch inference de Bedrock para generar respuestas de todos los FM, luego mas batch inference con una evaluacion LLM-as-a-judge propia sobre las salidas, y Lambdas con correlacion de Spearman para comparar y ver la significancia",
-        "Batch inference de Bedrock con Guardrails habilitado por FM para generar respuestas filtradas, monitorear InvocationsIntervened con CloudWatch (dimensiones GuardrailPolicyType y GuardrailContentSource) y una Lambda que analice patrones de intervencion",
-        "Jobs programaticos con la CreateEvaluationJob API con task type question-answering por FM, datasets de pares pregunta-respuesta en JSONL y validacion estadistica con las metricas e intervalos de confianza del output en S3",
+        "CreateEvaluationJob API con un evaluator model consistente, jobs gestionados en paralelo, resultados en S3 y Lambdas con correlacion de Spearman",
+        "Batch inference de Bedrock para generar, luego batch inference con LLM-as-a-judge propio, y Lambdas con correlacion de Spearman",
+        "Batch inference con Guardrails por FM, monitorear InvocationsIntervened con CloudWatch (GuardrailPolicyType y GuardrailContentSource) y una Lambda de patrones",
+        "Jobs con la CreateEvaluationJob API con task type question-answering, datasets en JSONL y validacion estadistica con intervalos de confianza en S3",
     ],
     correct=0,
     key="off2-q55",
@@ -878,12 +878,12 @@ cards.append(card(
 # Q57 - Cuota de 1.000 prompts por dataset de evaluacion
 # ============================================================
 cards.append(card(
-    question="Bedrock automatic model evaluation - un dataset de prompts propio con <b>5.000 prompts</b> en JSONL en S3 hace que el job de evaluacion <b>no arranque</b>, con un error de configuracion del dataset. &iquest;Que enfoque resuelve el problema?",
+    question="Bedrock automatic model evaluation - un dataset propio de 5.000 prompts en JSONL en S3 hace que el job no arranque, con un error de configuracion del dataset. &iquest;Que enfoque resuelve el problema?",
     options=[
-        "Habilitar el versioning en el bucket S3 y actualizar la configuracion CORS del bucket para permitir el acceso del navegador desde la consola al crear el job de evaluacion",
-        "Dividir el dataset en varios datasets mas pequenos de maximo 1.000 prompts cada uno y correr jobs de evaluacion separados",
-        "Convertir el dataset de JSONL a CSV, volver a subirlo a S3 y reintentar el job apuntando al nuevo archivo con la extension actualizada",
-        "Comprimir el archivo del dataset con gzip, volver a subirlo a S3 y reintentar el job de evaluacion apuntando al archivo comprimido",
+        "Habilitar versioning en el bucket S3 y actualizar CORS para permitir el acceso del navegador desde la consola",
+        "Dividir el dataset en varios de maximo 1.000 prompts cada uno y correr jobs de evaluacion separados",
+        "Convertir el dataset de JSONL a CSV, volver a subirlo a S3 y reintentar apuntando al nuevo archivo",
+        "Comprimir el archivo con gzip, volver a subirlo a S3 y reintentar el job apuntando al archivo comprimido",
     ],
     correct=1,
     key="off2-q57",
@@ -907,12 +907,12 @@ cards.append(card(
 # Q61 - AWS Config custom rule (RDK) para SSE-KMS con CMK
 # ============================================================
 cards.append(card(
-    question="Servicios financieros (SageMaker training auto-disparado por uploads a S3) - hay que asegurar que todos los datasets de entrenamiento esten cifrados en reposo con <b>KMS customer managed keys</b>, rechazar los buckets con claves gestionadas por AWS o sin cifrar, y <b>validar continuamente</b> que los buckets existentes cumplen. &iquest;Que solucion cumple?",
+    question="Servicios financieros (SageMaker training disparado por uploads a S3) - asegurar que los datasets esten cifrados en reposo con KMS customer managed keys, rechazar buckets con claves de AWS o sin cifrar y validar continuamente los existentes. &iquest;Que solucion cumple?",
     options=[
-        "Usar Amazon Macie para escanear los datasets en S3 y marcar objetos no cifrados, generar reportes de los que no usan CMK y marcar como no conformes los buckets que Macie senale",
-        "Reglas de EventBridge para eventos PutObject en los buckets, un workflow de Step Functions con una Lambda que verifique el cifrado con CMK, un estado Choice y un tercer estado que lance el training o publique un SNS para saltar los no conformes",
-        "Crear una AWS Config custom rule con el AWS rule development kit (RDK) que verifique si los buckets de datos de entrenamiento usan SSE-KMS con una customer managed key, con remediacion automatica de los no conformes",
-        "Una Lambda en schedule de EventBridge que corra queries de Athena sobre logs de CloudTrail para hallar PutObject sin el header x-amz-server-side-encryption: aws:kms y marcar esos buckets como no conformes",
+        "Usar Amazon Macie para escanear los datasets en S3, marcar objetos no cifrados y reportar los que no usan CMK",
+        "EventBridge ante PutObject dispara Step Functions con una Lambda que verifica CMK, un Choice y notifica los no conformes por SNS",
+        "AWS Config custom rule con el rule development kit (RDK) que verifica SSE-KMS con customer managed key, con remediacion automatica",
+        "Lambda en schedule de EventBridge con queries de Athena sobre logs de CloudTrail para hallar PutObject sin aws:kms",
     ],
     correct=2,
     key="off2-q61",
@@ -938,10 +938,10 @@ cards.append(card(
 cards.append(card(
     question="Triage de tickets (Bedrock InvokeModel) - con un prompt bien estructurado (categorias, ejemplos, validacion) hay clasificaciones inesperadas <b>intermitentes</b>. Se necesita hallar la <b>causa raiz</b> de esas anomalias. &iquest;Que enfoque cumple?",
     options=[
-        "Usar CloudWatch Logs Insights para analizar los logs de la Lambda buscando patrones de error en el procesamiento de tickets y las respuestas del modelo",
-        "Crear una metrica custom de CloudWatch que rastree la distribucion de categorias clasificadas y una alarma ante picos inesperados o valores nulos",
-        "Habilitar el model invocation logging de Amazon Bedrock para inspeccionar los prompts crudos enviados y las respuestas recibidas del FM",
-        "Usar trazas de AWS X-Ray para ver si hay timeouts o throttling entre la Lambda y las llamadas a la API de Bedrock",
+        "Usar CloudWatch Logs Insights para analizar los logs de la Lambda buscando patrones de error y respuestas del modelo",
+        "Crear una metrica custom de CloudWatch que rastree la distribucion de categorias y una alarma ante picos o nulos",
+        "Habilitar el model invocation logging de Amazon Bedrock para inspeccionar los prompts crudos y las respuestas del FM",
+        "Trazas de AWS X-Ray para ver timeouts o throttling entre la Lambda y las llamadas a la API de Bedrock",
     ],
     correct=2,
     key="off2-q63",
@@ -965,12 +965,12 @@ cards.append(card(
 # Q64 - MCP server para estandarizar API legacy del CMS
 # ============================================================
 cards.append(card(
-    question="Automatizacion de contenido - varios agentes de IA fallan al interactuar con la API de un <b>CMS legacy</b> de endpoints inconsistentes y esquemas mal documentados. Se necesita estandarizar y reducir la complejidad, <b>mantener los endpoints existentes</b> para apps legacy y que sea <b>reutilizable</b> entre agentes, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
+    question="Automatizacion de contenido - varios agentes de IA fallan con la API de un CMS legacy de endpoints inconsistentes y esquemas mal documentados. Estandarizar, mantener los endpoints existentes y que sea reutilizable entre agentes, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
     options=[
-        "Crear una nueva capa REST de transformacion que estandarice las respuestas del CMS y publique documentacion OpenAPI, desplegada como servicio proxy entre los agentes y el CMS, y actualizar cada agente para que consuma esa capa proxy en lugar del CMS directamente",
-        "Refactorizar la API del CMS legacy para que siga principios REST modernos con esquemas de respuesta consistentes y documentacion completa, y actualizar todos los agentes existentes para que usen los nuevos endpoints estandarizados del CMS",
-        "Implementar un Model Context Protocol (MCP) server que ofrezca una interfaz estandar al CMS, con function schemas que manejen internamente las inconsistencias, y configurar AgentCore para interactuar con el CMS via esas funciones MCP",
-        "Desarrollar un middleware custom que transforme las peticiones y respuestas del CMS, desplegado como contenedor sidecar junto a cada agente de IA para manejar las inconsistencias y las interacciones con el CMS de forma local a cada agente",
+        "Nueva capa REST de transformacion que estandariza las respuestas y publica OpenAPI, como proxy entre los agentes y el CMS",
+        "Refactorizar la API del CMS legacy a REST moderno con esquemas consistentes y migrar todos los agentes a los nuevos endpoints",
+        "Un Model Context Protocol (MCP) server con interfaz estandar al CMS y function schemas que manejan las inconsistencias, con AgentCore",
+        "Middleware custom que transforma peticiones del CMS, como contenedor sidecar junto a cada agente para manejar las inconsistencias",
     ],
     correct=2,
     key="off2-q64",
@@ -994,12 +994,12 @@ cards.append(card(
 # Q67 - Semantic chunking + prompt chaining para resumir
 # ============================================================
 cards.append(card(
-    question="Resumen de documentos (Knowledge Bases) - con papers tecnicos largos, los resumenes <b>omiten secciones criticas</b> del medio o el final, aunque el texto se subio y tokenizo bien y no hay errores de API ni truncamiento. &iquest;Que solucion resuelve el problema?",
+    question="Resumen de documentos (Knowledge Bases) - con papers largos los resumenes omiten secciones criticas del medio o el final, aunque el texto se subio y tokenizo bien y no hay errores de API ni truncamiento. &iquest;Que solucion resuelve el problema?",
     options=[
-        "Elegir un FM con ventana de contexto mas grande para procesar el documento completo en una sola inferencia, con compresion de texto y prompts mas cortos cuando haga falta",
-        "Recuperar mas chunks del knowledge base, resumir cada chunk recuperado de forma independiente y combinar los resultados en un resumen final",
-        "Configurar semantic chunking en Bedrock, enviar cada segmento a Bedrock para resumir y usar prompt chaining para combinar los resumenes parciales en uno consolidado",
-        "Configurar standard chunking en Bedrock, dividir el documento en segmentos de igual tamano, resumir cada uno de forma independiente y combinar los resultados",
+        "Elegir un FM con ventana de contexto mas grande para procesar el documento completo en una inferencia, con compresion de texto",
+        "Recuperar mas chunks del knowledge base, resumir cada uno de forma independiente y combinar en un resumen final",
+        "Configurar semantic chunking en Bedrock, resumir cada segmento y usar prompt chaining para combinar los parciales en uno consolidado",
+        "Standard chunking en Bedrock, segmentos de igual tamano, resumir cada uno de forma independiente y combinar",
     ],
     correct=2,
     key="off2-q67",
@@ -1023,12 +1023,12 @@ cards.append(card(
 # Q68 - Custom chunking via Lambda + LangChain (jerarquia variable)
 # ============================================================
 cards.append(card(
-    question="RAG sobre HTML - articulos con headers y parrafos de longitud muy variable (de pocas frases a varias paginas) y estructura jerarquica compleja. Hay que <b>preservar la relacion articulo-parrafos</b> y minimizar respuestas irrelevantes o inexactas. &iquest;Que solucion cumple?",
+    question="RAG sobre HTML - articulos con parrafos de longitud muy variable y estructura jerarquica compleja. Preservar la relacion articulo-parrafos y minimizar respuestas irrelevantes o inexactas. &iquest;Que solucion cumple?",
     options=[
-        "Un knowledge base de Bedrock con los HTML usando el hierarchical chunking integrado, configurado con parent chunks y child chunks de tamanos estimados segun la longitud promedio observada",
-        "Amazon Textract para extraer el texto de los HTML, crear chunks por parrafo, subirlos a S3 y crear un knowledge base con la opcion no chunking",
-        "Una Lambda que implemente un hierarchical chunking custom usando LangChain para los HTML (desplegado como layer), y usar esa Lambda como configuracion de chunking custom del knowledge base",
-        "Un knowledge base de Bedrock con los HTML usando el semantic chunking integrado, dividiendo por significado y contenido en vez de por estructura sintactica",
+        "Knowledge base de Bedrock con hierarchical chunking integrado, con parent y child chunks de tamanos estimados por la longitud promedio",
+        "Amazon Textract para extraer el texto de los HTML, chunks por parrafo en S3 y un knowledge base con la opcion no chunking",
+        "Una Lambda que implementa hierarchical chunking custom con LangChain, usada como configuracion de chunking custom del knowledge base",
+        "Knowledge base de Bedrock con semantic chunking integrado, dividiendo por significado en vez de por estructura sintactica",
     ],
     correct=2,
     key="off2-q68",
@@ -1054,10 +1054,10 @@ cards.append(card(
 cards.append(card(
     question="App de video - los usuarios suben videos cortos y se quiere <b>resumir contenido, generar transcripciones, detectar objetos e identificar celebridades</b>, con el MENOR esfuerzo operativo. &iquest;Que solucion cumple?",
     options=[
-        "S3 presigned URL para subir; S3 Event Notification que invoque un blueprint de Bedrock Data Automation (BDA) para orquestar; Rekognition para objetos y celebridades; FMs de Bedrock para resumenes y transcripciones",
-        "S3 PutObject para subir; S3 Event Notification que invoque un state machine de Step Functions que orqueste Lambdas; Rekognition para objetos y celebridades; FM de Bedrock para resumen y transcripcion",
-        "S3 PutObject para subir; S3 Event Notification que invoque una Lambda que procese en paralelo; Step Functions para errores y reintentos; Rekognition para objetos y celebridades; FMs de Bedrock para resumenes y transcripciones",
-        "S3 presigned URL para subir; S3 envia eventos a EventBridge; una regla de EventBridge invoca un state machine de Step Functions que orquesta llamando directamente a las APIs de servicio; Rekognition para objetos y celebridades; FMs de Bedrock para resumenes y transcripciones",
+        "S3 presigned URL para subir; S3 Event Notification invoca un blueprint de Bedrock Data Automation (BDA); Rekognition para objetos y celebridades; FMs de Bedrock para resumen y transcripcion",
+        "S3 PutObject; S3 Event Notification invoca un state machine de Step Functions que orquesta Lambdas; Rekognition para objetos y celebridades; FM de Bedrock para resumen y transcripcion",
+        "S3 PutObject; S3 Event Notification invoca Lambdas en paralelo; Step Functions para reintentos; Rekognition para objetos/celebridades; FMs de Bedrock para resumen y transcripcion",
+        "Subida con S3 presigned URL; S3 envia eventos a EventBridge; una regla invoca Step Functions con integracion directa de servicios (Rekognition objetos/celebridades, FMs de Bedrock resumen/transcripcion)",
     ],
     correct=3,
     key="off2-q71",
@@ -1081,12 +1081,12 @@ cards.append(card(
 # Q72 - IAM Identity Center + Active Directory + failover regional
 # ============================================================
 cards.append(card(
-    question="Servicios financieros (entorno GenAI multi-cuenta con Bedrock) - los empleados deben autenticarse via <b>Microsoft Active Directory</b> y acceder a los FM segun su departamento, con <b>permisos consistentes entre cuentas</b>, control de que modelos usa cada departamento y <b>resiliencia regional</b> del servicio de autenticacion. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
+    question="Servicios financieros (GenAI multi-cuenta con Bedrock) - los empleados se autentican via Microsoft Active Directory y acceden a los FM por departamento, con permisos consistentes entre cuentas y resiliencia regional de la autenticacion. &iquest;Que solucion cumple con el MENOR esfuerzo operativo?",
     options=[
-        "Configurar federacion SAML 2.0 con IAM en cada cuenta, crear roles IAM con trust policies por departamento que incluyan el proveedor SAML y usar condition keys para restringir el acceso a modelos por atributos de departamento",
-        "Configurar AWS IAM Identity Center como servicio de federacion conectado a Active Directory, crear permission sets con politicas de acceso a modelos mapeadas a departamentos y configurar acceso multi-cuenta con failover regional",
-        "Configurar federacion entre Active Directory y Amazon Cognito, crear identity pools por departamento y usar AWS STS para asumir roles con permisos especificos de acceso a modelos de Bedrock en cada cuenta",
-        "Crear usuarios IAM en cada cuenta que coincidan con los usuarios de Active Directory y establecer roles cross-account con permisos por departamento y condition keys para el acceso a modelos de Bedrock",
+        "Federacion SAML 2.0 con IAM en cada cuenta, roles con trust policies por departamento y condition keys que restringen los modelos",
+        "Configurar AWS IAM Identity Center federado con Active Directory, permission sets de acceso a modelos por departamento y multi-cuenta con failover regional",
+        "Configurar federacion entre Active Directory y Amazon Cognito, identity pools por departamento y AWS STS para asumir roles de acceso a Bedrock",
+        "Crear usuarios IAM en cada cuenta que coinciden con Active Directory y roles cross-account por departamento con condition keys para Bedrock",
     ],
     correct=1,
     key="off2-q72",
