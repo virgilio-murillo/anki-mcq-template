@@ -544,11 +544,12 @@ cards.append(card(
         '<ul>'
         '<li><b>Detectar idioma con Comprehend:</b> identificar el idioma dominante no basta para determinar el tema ni la intencion de la consulta.</li>'
         '<li><b>Endpoint de clasificacion en SageMaker:</b> hay que entrenar el modelo y aprovisionar y mantener un inference endpoint; mas esfuerzo operativo.</li>'
-        '<li><b>Fine-tuning de un FM para clasificar:</b> introduce afinamiento innecesario y sube el esfuerzo; hospedar el FM afinado exige provisioned throughput, que agrega costo segun el throughput esperado.</li>'
+        '<li><b>Fine-tuning de un FM para clasificar:</b> introduce afinamiento innecesario y sube el esfuerzo; ademas hospedar el FM afinado agrega esfuerzo de despliegue e inferencia (Provisioned Throughput u on-demand custom model deployment de pago por uso), mas que un servicio de clasificacion gestionado.</li>'
         '</ul>'
-        '<div class="extra"><span class="h">Exam tip</span>Enrutar por tema con minimo esfuerzo: Comprehend custom classification (gestionado, sin hospedar modelos). Detectar idioma no da el tema; SageMaker o un FM afinado agregan endpoints/throughput que mantener.</div>'
+        '<div class="extra"><span class="h">Exam tip</span>Enrutar por tema con minimo esfuerzo: Comprehend custom classification (gestionado, sin hospedar modelos). Detectar idioma no da el tema; SageMaker o un FM afinado agregan despliegue e inferencia que mantener (el FM afinado puede servirse con Provisioned Throughput o con on-demand deployment; ninguna es obligatoria).</div>'
         '<div class="links"><span class="h">Links</span>'
-        '<a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html">docs.aws Comprehend custom classification</a></div>'
+        '<a href="https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html">docs.aws Comprehend custom classification</a>'
+        '<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-use.html">docs.aws usar un modelo afinado en Bedrock</a></div>'
     ),
 ))
 

@@ -148,26 +148,26 @@ cards.append(card(
 # Q5 - Provisioned throughput + geographic inference profile EU
 # ============================================================
 cards.append(card(
-    question="Una deteccion de fraude en Amazon Bedrock <b>necesita</b> 1000 tps sub-500 ms, <b>alta disponibilidad</b> ante cortes y datos europeos <b>solo en Regiones de Europa</b>. &iquest;Que solucion cumple?",
+    question="Una deteccion de fraude en Amazon Bedrock necesita <b>alta disponibilidad</b> ante cortes de Region y procesar <b>datos europeos solo en Regiones de Europa</b> (soberania), con alto throughput. &iquest;Que solucion cumple?",
     options=[
         "Usar Provisioned throughput por Region, un ALB custom y failover regional con EventBridge",
-        "Provisioned throughput mas geographic inference profile de Europa y failover cross-Region con EventBridge y Lambda",
+        "Geographic inference profile de Europa con failover cross-Region entre Regiones UE via EventBridge y Lambda",
         "InvokeModelWithResponseStream on-demand, API Gateway regional y roles IAM por Region",
         "Global inference profile en Lambda y EKS con failover por health checks de Route 53",
     ],
     correct=1,
     key="off1-q5",
     answer=(
-        '<div class="verdict">Correcta: {{L}} - provisioned throughput (EE.UU.) + geographic inference profile de Europa + failover con EventBridge/Lambda.</div>'
-        '<p><b>El problema:</b> rendimiento garantizado (1000 tps, sub-500 ms), alta disponibilidad ante cortes y <b>soberania de datos</b>: lo europeo solo en Regiones europeas. Un inference profile define en que Regiones se ejecuta el modelo.</p>'
-        '<p><b>Por que la respuesta sirve:</b> el <b>provisioned throughput</b> da capacidad dedicada para el rendimiento consistente que exigen los sub-500 ms a 1000 tps. Un <b>geographic inference profile de Europa</b> asegura que los datos europeos se procesen solo en Regiones de Europa (soberania). El auto scaling por utilizacion mas el failover cross-Region con <b>EventBridge y Lambda</b> cubren la alta disponibilidad ante cortes.</p>'
+        '<div class="verdict">Correcta: {{L}} - geographic inference profile de Europa con failover cross-Region dentro de la UE.</div>'
+        '<p><b>El problema:</b> alta disponibilidad ante cortes y <b>soberania de datos</b> (lo europeo solo en Regiones europeas), con alto throughput. Un inference profile define en que Regiones se ejecuta el modelo y reparte el trafico entre ellas.</p>'
+        '<p><b>Por que la respuesta sirve:</b> un <b>geographic inference profile de Europa</b> asegura que las peticiones se procesen solo en Regiones de la UE (soberania) y reparte carga entre esas Regiones, dando disponibilidad ante el corte de una Region; el failover cross-Region UE con <b>EventBridge y Lambda</b> reacciona a fallos. IMPORTANTE (doc de AWS): los inference profiles <b>NO soportan Provisioned Throughput</b>, son mecanismos mutuamente excluyentes; por eso la respuesta usa el perfil geografico (con capacidad on-demand y aumento de cuota), no PT.</p>'
         '<p><b>Por que NO las otras, una por una:</b></p>'
         '<ul>'
-        '<li><b>Provisioned throughput con InvokeModel por Region + Application Load Balancer (ALB) + EventBridge:</b> el failover con solo EventBridge enruta dentro de la misma Region, sin cross-Region inference profiles, asi que no reencamina dinamicamente el trafico durante un corte; falla la alta disponibilidad.</li>'
-        '<li><b>On-demand con InvokeModelWithResponseStream + API Gateway REST + roles IAM por Region:</b> el throughput on-demand sufre variabilidad y throttling en picos, dificil de garantizar sub-500 ms a 1000 tps; y los permisos IAM por Region no imponen la soberania de datos como un geographic inference profile.</li>'
-        '<li><b>Global inference profile en Lambda y EKS + Route 53 + alarmas de CloudWatch:</b> el perfil global enruta a cualquier Region del mundo por disponibilidad (aun corriendo un modelo Claude), lo que viola el requisito de procesar datos europeos solo en Europa.</li>'
+        '<li><b>Provisioned throughput por Region + ALB + EventBridge:</b> el failover con solo EventBridge enruta dentro de la misma Region; no reencamina cross-Region durante un corte, asi que no da la alta disponibilidad pedida.</li>'
+        '<li><b>On-demand con InvokeModelWithResponseStream + API Gateway REST + roles IAM por Region:</b> los permisos IAM por Region no imponen la soberania de datos como un geographic inference profile, que es el mecanismo disenado para restringir el procesamiento a Regiones UE.</li>'
+        '<li><b>Global inference profile + Route 53:</b> el perfil global enruta a cualquier Region del mundo por disponibilidad, lo que viola el requisito de procesar datos europeos solo en Europa.</li>'
         '</ul>'
-        '<div class="extra"><span class="h">Exam tip</span>Soberania de datos por region = geographic inference profile (no global, que enruta a cualquier lado). Rendimiento garantizado y estable = provisioned throughput (on-demand es variable). Failover real ante cortes = cross-Region, no solo dentro de la misma Region.</div>'
+        '<div class="extra"><span class="h">Exam tip</span>Soberania de datos por region = geographic inference profile (no global). Un inference profile NO se combina con Provisioned Throughput (excluyentes): si necesitas el perfil geografico, la capacidad es on-demand con aumento de cuota. Failover real ante cortes = cross-Region, no solo dentro de la misma Region.</div>'
         '<div class="links"><span class="h">Links</span>'
         '<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/cross-region-inference.html">docs.aws cross-Region inference profiles</a></div>'
     ),

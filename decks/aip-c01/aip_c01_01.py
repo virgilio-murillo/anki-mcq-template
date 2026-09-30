@@ -1464,28 +1464,28 @@ cards = [
     # Q69r - SageMaker Canvas scatter plot (color = 3a dim, size = 4a dim)
     # ------------------------------------------------------------
     card(
-        question="Un equipo necesita visualizar recomendaciones en <b>cuatro dimensiones</b> (interes X, conversion Y, categoria e impresiones) para detectar alto interes con bajas impresiones. ¿Que enfoque cumple mejor?",
+        question="Un equipo necesita visualizar recomendaciones en <b>cuatro dimensiones</b> (interes X, conversion Y, categoria por color, impresiones por grupo) para detectar alto interes con bajas impresiones. ¿Que enfoque cumple mejor?",
         options=[
-            "El scatter plot de SageMaker Data Wrangler que colorea la tercera feature, sin codificar la cuarta",
+            "El scatter plot de SageMaker Data Wrangler que colorea la tercera feature, sin separar por la cuarta",
             "El Box Plot de SageMaker Canvas con un patron de relleno para la tercera dimension",
             "El Bar Chart de SageMaker Canvas por categoria, con color y altura para dos features",
-            "El scatter plot de SageMaker Canvas que mapea la tercera dimension al color y la cuarta al tamaño",
+            "El scatter plot de SageMaker Canvas con Color by (categoria) y Group by (impresiones)",
         ],
         correct=3,
         key="aip01r-q69",
         answer=(
-            '<div class="verdict">Correcta: {{L}} - scatter plot de SageMaker Canvas: color = categoria, tamaño = impresiones.</div>'
+            '<div class="verdict">Correcta: {{L}} - scatter plot de SageMaker Canvas: Color by = categoria, Group by = impresiones.</div>'
             '<p><b>El problema:</b> representar cuatro dimensiones a la vez (X, Y, mas dos atributos) para hallar productos de alto interes y alta conversion con pocas impresiones.</p>'
-            '<p><b>Por que la respuesta sirve (detalle avanzado):</b> la feature exacta es el <b>scatter plot de SageMaker Canvas</b> con codificaciones adicionales: eje X e Y para las dos primeras dimensiones, <b>color</b> del punto para la tercera (categoria) y <b>tamaño</b> del punto para la cuarta (impresiones). Ese mapeo de color y tamaño es lo que permite ver las cuatro dimensiones en un solo grafico y localizar el segmento buscado. El matiz es usar ambas codificaciones (color y size), no solo una.</p>'
+            '<p><b>Por que la respuesta sirve (detalle avanzado):</b> segun la doc de AWS, el <b>scatter plot de SageMaker Canvas</b> usa eje X e Y (numericos) para las dos primeras dimensiones, <b>Color by</b> para una tercera feature (categoria) y <b>Group by</b> para una cuarta (genera un scatter separado por cada valor del grupo). Esas cuatro codificaciones cubren las cuatro dimensiones. Canvas NO ofrece codificar una feature por el <b>tamano</b> del punto.</p>'
             '<p><b>Por que NO las otras, una por una:</b></p>'
             '<ul>'
-            '<li><b>Scatter de Data Wrangler solo con color:</b> mapea la tercera dimension por color pero omite la cuarta (impresiones) al no usar el tamaño del punto, perdiendo una parte clave del analisis.</li>'
-            '<li><b>Box Plot:</b> muestra distribuciones estadisticas (mediana, cuartiles); no relaciona varias variables continuas ni codifica color/tamaño por punto como el scatter.</li>'
-            '<li><b>Bar Chart:</b> se limita a pocas dimensiones; no puede representar con claridad interes y conversion a la vez ni codificar impresiones como tamaño.</li>'
+            '<li><b>Scatter de Data Wrangler solo con color:</b> mapea la tercera dimension por color pero no separa por la cuarta (Group by), perdiendo una parte del analisis.</li>'
+            '<li><b>Box Plot:</b> muestra distribuciones estadisticas (mediana, cuartiles) y solo admite Group by; no relaciona dos variables continuas por punto como el scatter.</li>'
+            '<li><b>Bar Chart:</b> usa Group by y Stack by sobre barras; no representa interes y conversion como nube de puntos.</li>'
             '</ul>'
-            '<div class="extra"><span class="h">Exam tip</span>Cuatro dimensiones en un grafico: scatter plot con X, Y, color (3a dim) y tamaño de punto (4a dim). Box plot = distribuciones; bar chart = pocas dimensiones. Usar color solo cubre 3, faltaria el tamaño para la 4a.</div>'
+            '<div class="extra"><span class="h">Exam tip</span>Para 4 dimensiones usa el scatter plot de SageMaker Canvas: X, Y y dos codificaciones adicionales (una por color, otra por grupos separados). Canvas NO codifica por tamano de punto; una opcion que diga "tamano" es incorrecta.</div>'
             '<div class="links"><span class="h">Links</span>'
-            '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-explore-data.html">docs.aws visualizaciones en SageMaker Canvas</a></div>'
+            '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-explore-data-visualization.html">docs.aws visualizaciones en SageMaker Canvas</a></div>'
         ),
     ),
     # ------------------------------------------------------------

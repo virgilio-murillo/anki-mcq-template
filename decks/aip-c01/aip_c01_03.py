@@ -69,15 +69,15 @@ cards.append(card(
     answer=(
         '<div class="verdict">Correcta: {{L}} - Amazon Bedrock Data Automation con ingesta continua.</div>'
         '<p><b>Contexto:</b> los datos son de ventas y soporte en Amazon S3; el enriquecimiento usa Comprehend y SageMaker AI. La opcion B (Lambda) preprocesa y empuja a SageMaker AI; la C transforma y alimenta el reentrenamiento; la D corre training jobs aparte y dispara el reentrenamiento del FM en Bedrock a mano.</p>'
-        '<p><b>El problema:</b> se necesita un pipeline <b>continuo y de bajo mantenimiento</b> que ingiera datos de S3, los enriquezca con Comprehend y SageMaker AI, y los cargue de forma automatica al flujo del modelo fundacional, sin ETL manual constante.</p>'
-        '<p><b>Por que la respuesta sirve:</b> <b>Bedrock Data Automation</b> es un servicio gestionado que ingiere datos de forma continua, aplica preprocesamiento (incluida la extraccion de sentimiento y entidades) y entrega los datos enriquecidos a los pipelines de reentrenamiento. Al ser gestionado y continuo, cubre la frescura de datos y elimina el ETL manual con la menor sobrecarga operativa.</p>'
+        '<p><b>El problema:</b> se necesita un pipeline <b>de bajo mantenimiento</b> que procese datos de S3, los enriquezca con Comprehend y SageMaker AI, y produzca salidas listas para el flujo del modelo fundacional, sin ETL manual constante.</p>'
+        '<p><b>Por que la respuesta sirve:</b> <b>Bedrock Data Automation (BDA)</b> es un servicio gestionado que <b>extrae insights y transforma contenido no estructurado multimodal</b> (documentos, imagenes, video, audio) en <b>salidas estructuradas</b> mediante una API unificada. Al ser gestionado, elimina el ETL manual del enriquecimiento con la menor sobrecarga operativa, entregando datos estructurados listos para alimentar el flujo del FM. Es la unica opcion que automatiza el procesamiento del contenido no estructurado sin que el equipo mantenga la logica de transformacion.</p>'
         '<p><b>Por que NO las otras, una por una:</b></p>'
         '<ul>'
         '<li><b>EventBridge + Lambda:</b> orquestar preprocesamiento, Comprehend y reentrenamiento con Lambda a&ntilde;ade complejidad operativa; Lambda tiene limites de tiempo de ejecucion y de concurrencia, asi que resulta solo parcialmente automatizado y menos confiable para volumenes grandes y reentrenamiento continuo.</li>'
         '<li><b>Exportar a S3 cada semana + Notebook:</b> es un proceso periodico y manual (semanal); no da la disponibilidad continua de datos que necesita un asistente en produccion, por lo que los modelos quedan desactualizados.</li>'
         '<li><b>Data Wrangler + trigger manual:</b> automatiza parte de la transformacion, pero sigue dependiendo de ejecucion manual del entrenamiento y del reentrenamiento del FM; no es un flujo end-to-end automatizado y aumenta la carga operativa.</li>'
         '</ul>'
-        '<div class="extra"><span class="h">Exam tip</span>Ingesta continua y enriquecimiento gestionado para alimentar FMs con minimo ETL = el servicio gestionado de automatizacion de datos de Bedrock. Lambda tiene limite de tiempo y de concurrencia; los Notebooks y los triggers manuales o semanales no son "continuos".</div>'
+        '<div class="extra"><span class="h">Exam tip</span>Transformar contenido no estructurado multimodal en salidas estructuradas para alimentar FMs con minimo ETL = el servicio gestionado de automatizacion de datos de Bedrock (extrae insights via una API unificada, no es un orquestador de ingesta continua). Lambda tiene limite de tiempo y de concurrencia; los Notebooks y los triggers manuales o semanales agregan mantenimiento.</div>'
         '<div class="links"><span class="h">Links</span>'
         '<a href="https://docs.aws.amazon.com/bedrock/latest/userguide/bda.html">docs.aws Bedrock Data Automation</a></div>'
     ),
@@ -533,28 +533,28 @@ cards.append(card(
 # Q69 - SageMaker Canvas scatter plot 4 dimensiones
 # ============================================================
 cards.append(card(
-    question="Se quiere ver <b>cuatro dimensiones</b>: interest score (X), conversion (Y), categoria por <b>color</b> e impresiones por <b>tama&ntilde;o</b> del punto. &iquest;Que cumple mejor?",
+    question="Se quiere ver <b>cuatro dimensiones</b>: interest score (X), conversion (Y), categoria por <b>color</b> e impresiones por <b>grupo</b> (graficas separadas). &iquest;Que cumple mejor?",
     options=[
         "El scatter plot de SageMaker Data Wrangler coloreado por la tercera feature",
         "El Box Plot de SageMaker Canvas con relleno para la tercera dimension",
         "El Bar Chart de SageMaker Canvas por categoria con color y altura",
-        "El scatter plot de SageMaker Canvas con categoria al color e impresiones al tama&ntilde;o",
+        "El scatter plot de SageMaker Canvas con Color by (categoria) y Group by (impresiones)",
     ],
     correct=3,
     key="aip03-q69",
     answer=(
-        '<div class="verdict">Correcta: {{L}} - scatter plot de SageMaker Canvas (color + tama&ntilde;o).</div>'
-        '<p><b>El problema:</b> mostrar 4 dimensiones en una sola grafica: dos en los ejes (X e Y), una en color y una en tama&ntilde;o de punto. El grafico adecuado es un <b>scatter plot</b> que soporte codificar color y tama&ntilde;o por punto.</p>'
-        '<p><b>Por que la respuesta sirve:</b> el <b>scatter plot de SageMaker Canvas</b> ubica interest score (X) vs conversion (Y), y ademas mapea la tercera dimension (categoria) al <b>color</b> y la cuarta (impresiones) al <b>tama&ntilde;o</b> del punto. Asi las 4 dimensiones quedan en una vista y se detectan facil los productos de alto interes/alta conversion con pocas impresiones (puntos peque&ntilde;os en la zona alta).</p>'
+        '<div class="verdict">Correcta: {{L}} - scatter plot de SageMaker Canvas (Color by + Group by).</div>'
+        '<p><b>El problema:</b> mostrar 4 dimensiones: dos en los ejes (X e Y), una por color y una que separe los datos. El grafico adecuado es un <b>scatter plot</b> que soporte Color by y Group by.</p>'
+        '<p><b>Por que la respuesta sirve:</b> el <b>scatter plot de SageMaker Canvas</b> ubica interest score (X) vs conversion (Y), usa <b>Color by</b> para una tercera feature (categoria) y <b>Group by</b> para una cuarta (genera graficas separadas por grupo). Segun la doc de AWS, esas son las codificaciones que soporta el scatter de Canvas (ejes X/Y numericos, Color by y Group by). No existe codificar una feature por <b>tamano</b> de punto en Canvas.</p>'
         '<p><b>Por que NO las otras, una por una:</b></p>'
         '<ul>'
-        '<li><b>Scatter de Data Wrangler solo con color:</b> solo mapea la tercera dimension al color y no codifica la cuarta (impresiones) por tama&ntilde;o, asi que pierde una dimension clave del analisis.</li>'
-        '<li><b>Box Plot:</b> muestra distribuciones estadisticas (mediana, cuartiles), no relaciones entre varias variables continuas, y no mapea color/tama&ntilde;o por punto como un scatter.</li>'
-        '<li><b>Bar Chart:</b> los graficos de barras se limitan a pocas dimensiones; no representan interest score y conversion a la vez con claridad ni codifican impresiones como tama&ntilde;o.</li>'
+        '<li><b>Scatter de Data Wrangler solo con color:</b> mapea una tercera dimension al color pero no separa por una cuarta (Group by), asi que pierde una dimension del analisis.</li>'
+        '<li><b>Box Plot:</b> muestra distribuciones estadisticas (mediana, cuartiles) y solo admite Group by; no relaciona dos variables continuas por punto como un scatter.</li>'
+        '<li><b>Bar Chart:</b> usa Group by y Stack by sobre barras; no representa interest score y conversion como nube de puntos ni sirve para el patron pedido.</li>'
         '</ul>'
-        '<div class="extra"><span class="h">Exam tip</span>4 dimensiones en una grafica = scatter plot con ejes X/Y mas color y tama&ntilde;o de punto. Los box plots muestran distribuciones y los bar charts pocas dimensiones; codificar color y tama&ntilde;o por punto es propio del scatter.</div>'
+        '<div class="extra"><span class="h">Exam tip</span>Para 4 dimensiones usa el scatter plot de SageMaker Canvas: ejes X/Y numericos mas dos codificaciones adicionales (una por color, otra por grupos separados). Canvas NO codifica una feature por tamano de punto; si una opcion dice "tamano", es incorrecta.</div>'
         '<div class="links"><span class="h">Links</span>'
-        '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-visualize.html">docs.aws visualizaciones en SageMaker Canvas</a></div>'
+        '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/canvas-explore-data-visualization.html">docs.aws visualizaciones en SageMaker Canvas</a></div>'
     ),
 ))
 
