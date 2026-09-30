@@ -414,7 +414,7 @@ cards.append(card(
 # Q65 - Bedrock on-demand vs Provisioned Throughput routing
 # ============================================================
 cards.append(card(
-    question="Una plataforma con Kendra y Bedrock tiene muchas consultas simples y pocas complejas multi-paso. Hay que <b>optimizar costo y latencia consistente</b> a la vez. &iquest;Que arquitectura conviene?",
+    question="Una plataforma con Kendra y Bedrock atiende muchas consultas simples de alto volumen y una carga <b>sostenida</b> de consultas complejas multi-paso con <b>SLA de latencia estricto</b>. Hay que optimizar costo Y latencia garantizada a la vez. &iquest;Que arquitectura conviene?",
     options=[
         "Haiku on-demand (simples) + Sonnet con Provisioned Throughput, enrutando con Comprehend custom classification",
         "Un unico Sonnet con Provisioned Throughput a 3 MU y routing por sentimiento de Comprehend",
@@ -425,9 +425,9 @@ cards.append(card(
     key="aip03-q65",
     answer=(
         '<div class="verdict">Correcta: {{L}} - Haiku on-demand (simples) + Sonnet con Provisioned Throughput (complejas), enrutando con Comprehend custom classification.</div>'
-        '<p><b>Contexto:</b> la plataforma Maneja ~10,000 consultas simples diarias y 500 complejas de razonamiento multi-paso; se sigue el Well-Architected para GenAI. Los modelos son Claude Haiku y Claude Sonnet.</p>'
-        '<p><b>El problema:</b> dos cargas con perfiles distintos. Las simples son muchas y baratas por token; las complejas son pocas pero criticas y necesitan latencia/throughput consistentes. Hay que optimizar costo Y latencia a la vez.</p>'
-        '<p><b>Por que la respuesta sirve:</b> usar <b>Claude Haiku on-demand</b> para las consultas simples de alto volumen aprovecha su precio por token mucho menor y el pago por uso; usar <b>Claude Sonnet con Provisioned Throughput</b> para las pocas consultas complejas garantiza capacidad reservada y latencia consistente en la carga critica. El enrutamiento se hace con <b>custom classification</b> de Comprehend, que si sirve para clasificar el tipo/complejidad de la consulta. Encaja costo + latencia + Well-Architected.</p>'
+        '<p><b>Contexto:</b> la plataforma maneja alto volumen de consultas simples y una carga sostenida de consultas complejas de razonamiento multi-paso con un SLA de latencia estricto; se sigue el Well-Architected para GenAI. Los modelos son Claude Haiku y Claude Sonnet.</p>'
+        '<p><b>El problema:</b> dos cargas con perfiles distintos. Las simples son muchas y baratas por token; las complejas son criticas, sostenidas y con SLA de latencia. Hay que optimizar costo Y latencia garantizada a la vez.</p>'
+        '<p><b>Por que la respuesta sirve:</b> usar <b>Claude Haiku on-demand</b> para las consultas simples de alto volumen aprovecha su precio por token mucho menor y el pago por uso; usar <b>Claude Sonnet con Provisioned Throughput</b> para las complejas se justifica aqui porque son una carga sostenida con SLA de latencia (el caso en que PT amortiza su costo fijo al reservar capacidad y dar latencia consistente). El enrutamiento se hace con <b>custom classification</b> de Comprehend, que si sirve para clasificar el tipo/complejidad de la consulta. Encaja costo + latencia garantizada + Well-Architected. (Si el volumen complejo fuera bajo y sin SLA, on-demand seria lo sensato; PT solo conviene con volumen sostenido o SLA.)</p>'
         '<p><b>Por que NO las otras, una por una:</b></p>'
         '<ul>'
         '<li><b>Solo Sonnet a 3 MU + routing por sentimiento:</b> usar Sonnet para todo es costoso cuando Haiku basta para lo simple; y el <b>analisis de sentimiento</b> mide tono emocional, no clasifica complejidad ni sirve para enrutar.</li>'
@@ -630,26 +630,26 @@ cards.append(card(
 # Q18r - SageMaker network isolation mode + VPC endpoint Comprehend
 # ============================================================
 cards.append(card(
-    question="SageMaker AI con Comprehend corre en una VPC y debe <b>bloquear por completo el acceso a Internet</b>. &iquest;Que opcion cumple con MENOR esfuerzo?",
+    question="SageMaker AI en una VPC debe <b>bloquear el acceso a Internet</b> pero seguir llamando a <b>Comprehend</b> de forma privada, con el MENOR esfuerzo. &iquest;Que opcion cumple?",
     options=[
-        "El network isolation mode de SageMaker AI mas un VPC endpoint para Comprehend",
-        "SageMaker AI en modo VPC only con VPC peering hacia Comprehend",
+        "SageMaker AI en modo VPC (subred privada, sin IGW) con VPC interface endpoint a Comprehend",
+        "SageMaker AI en modo VPC only con VPC peering entre VPCs hacia el servicio Comprehend",
         "SageMaker AI en modo VPC only con un internet gateway y security groups",
-        "SageMaker AI en modo VPC only con una network ACL (NACL)",
+        "SageMaker AI con network isolation mode mas un VPC endpoint para Comprehend",
     ],
     correct=0,
     key="aip03r-q18",
     answer=(
-        '<div class="verdict">Correcta: {{L}} - network isolation mode + VPC endpoint para Comprehend.</div>'
-        '<p><b>El problema:</b> aislamiento total (cero salida a Internet) para entrenamiento e inferencia, y que aun asi SageMaker pueda hablar con Comprehend de forma privada, con el menor esfuerzo. El detalle avanzado es que el modo VPC-only no es lo mismo que el <b>network isolation</b>.</p>'
-        '<p><b>Por que la respuesta sirve:</b> el <b>network isolation mode</b> de SageMaker corta <b>toda</b> conectividad de red del contenedor (no hay ruta a Internet ni a servicios externos), cumpliendo el bloqueo total. Para que Comprehend siga siendo accesible sin salir a Internet, un <b>VPC endpoint</b> (PrivateLink) en la misma VPC lleva el trafico por la red de AWS. Es la combinacion mas directa y de menor esfuerzo.</p>'
+        '<div class="verdict">Correcta: {{L}} - modo VPC en subred privada + VPC interface endpoint para Comprehend.</div>'
+        '<p><b>El problema:</b> sin salida a Internet pero con acceso PRIVADO a Comprehend, al menor esfuerzo. La clave es que <b>network isolation NO es lo mismo</b> que el modo VPC.</p>'
+        '<p><b>Por que la respuesta sirve:</b> desplegar SageMaker en <b>modo VPC</b> en una subred privada (sin internet gateway ni NAT) bloquea la salida a Internet, y un <b>VPC interface endpoint</b> (PrivateLink) hacia Comprehend lleva ese trafico por la red de AWS, sin pasar por Internet. Asi se cumple el bloqueo y se conserva el acceso privado a Comprehend con configuracion minima.</p>'
         '<p><b>Por que NO las otras, una por una:</b></p>'
         '<ul>'
-        '<li><b>VPC only + VPC peering:</b> el peering agrega ruteo, security groups y mantenimiento; es facil dejar sin querer una via de acceso, y no equivale al aislamiento de red completo.</li>'
-        '<li><b>VPC only + internet gateway:</b> tener un internet gateway contradice el requisito de bloquear todo acceso a Internet; los security groups por si solos no garantizan aislamiento total.</li>'
-        '<li><b>VPC only + NACL:</b> las NACL no aislan por completo (el trafico puede fluir por otras rutas) y esta opcion no usa un VPC endpoint para llegar a Comprehend de forma privada.</li>'
+        '<li><b>Network isolation + VPC endpoint:</b> segun la doc de AWS, con network isolation el contenedor <b>no puede hacer NINGUNA llamada de red saliente a ningun servicio</b> (ni por un VPC endpoint). Bloquea Internet, pero tambien impediria llamar a Comprehend, asi que NO cumple el requisito de seguir usandolo.</li>'
+        '<li><b>VPC only + VPC peering:</b> el peering conecta VPCs entre si; agrega ruteo y mantenimiento y no es la via directa para un servicio gestionado como Comprehend (que se alcanza por interface endpoint).</li>'
+        '<li><b>VPC only + internet gateway:</b> un internet gateway contradice el requisito de bloquear el acceso a Internet.</li>'
         '</ul>'
-        '<div class="extra"><span class="h">Exam tip</span>"Bloquear por completo todo acceso externo" = modo de aislamiento de red (corta toda la red), que es mas fuerte que el modo solo-VPC. Para servicios AWS sin Internet, usa un endpoint de VPC; peering, IGW o NACL no dan aislamiento total.</div>'
+        '<div class="extra"><span class="h">Exam tip</span>Cuidado: <b>network isolation</b> corta TODA la red saliente (ni siquiera un VPC endpoint funciona), asi que sirve para aislamiento total pero NO si el contenedor debe llamar a otro servicio AWS. Para "sin Internet pero con acceso privado a un servicio AWS" = modo VPC en subred privada + VPC interface endpoint (PrivateLink).</div>'
         '<div class="links"><span class="h">Links</span>'
         '<a href="https://docs.aws.amazon.com/sagemaker/latest/dg/mkt-algo-model-internet-free.html">docs.aws SageMaker network isolation</a></div>'
     ),
